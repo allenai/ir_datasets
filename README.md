@@ -23,7 +23,7 @@ request!
 Install via pip using:
 
 ```
-pip install ir_datasets.
+pip install ir_datasets
 ```
 
 or locally with:
