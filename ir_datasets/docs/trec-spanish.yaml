@@ -1,0 +1,46 @@
+_:
+  desc: '
+<p>
+A collection of news articles in Spanish, used for multi-lingual evaluation in TREC 3 and TREC 4.
+</p>
+'
+  bibtex: |
+    @misc{LDC2000T51,
+      title={TREC Spanish LDC2000T51},
+      author={Rogers, Willie},
+      year={2000},
+      url={https://catalog.ldc.upenn.edu/LDC2000T51},
+      publisher={Linguistic Data Consortium}
+    }
+
+trec3:
+  desc: '
+<p>
+Spanish benchmark from TREC 3.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec3/papers/overview.pdf">Task Overview Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{harman1994trec3,
+      title={Overview of the Third Text REtrieval Conference (TREC-3)},
+      author={Donna Harman},
+      booktitle={TREC},
+      year={1994}
+    }
+
+trec4:
+  desc: '
+<p>
+Spanish benchmark from TREC 4.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec4/overview.ps.gz">Task Overview Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{harman1995trec4,
+      title={Overview of the Fourth Text REtrieval Conference (TREC-4)},
+      author={Donna Harman},
+      booktitle={TREC},
+      year={1995}
+    }

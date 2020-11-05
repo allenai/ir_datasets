@@ -1,0 +1,71 @@
+_:
+  desc: '
+<p>
+An ad-hoc passage retrieval collection, constructed from Wikipedia and used as the basis of the
+TREC Complex Answer Retrieval (CAR) task.
+</p>
+<p>
+Version 1.5 is used for year 1 (2017) of the shared task.
+</p>
+'
+  bibtex: |
+    @article{Dietz2017,
+      title={{TREC CAR}: A Data Set for Complex Answer Retrieval},
+      author={Laura Dietz and Ben Gamari},
+      year={2017},
+      note={Version 1.5},
+      url={http://trec-car.cs.unh.edu}
+    }
+
+trec-y1:
+  desc: '
+<p>
+Official test set of TREC CAR 2017 (year 1).
+</p>
+'
+  bibtex: |
+    @inproceedings{dietz2017trec,
+      title={TREC Complex Answer Retrieval Overview.},
+      author={Dietz, Laura and Verma, Manisha and Radlinski, Filip and Craswell, Nick},
+      booktitle={TREC},
+      year={2017}
+    }
+
+
+trec-y1/manual:
+  desc: '
+<p>
+Official test set of TREC CAR 2017 (year 1), using manual graded relevance judgments.
+</p>
+'
+
+trec-y1/auto:
+  desc: '
+<p>
+Official test set of TREC CAR 2017 (year 1), using automatic relevance judgments (assumed from
+hierarchical structure of pages, i.e., paragraphs under a header are assumed relevant.)
+</p>
+'
+
+test200:
+  desc: '
+<p>
+Un-official test set consisting of manually-selected articles. Sometimes used as a validation set.
+</p>
+'
+  bibtex: |
+    @inproceedings{nanni2017benchmark,
+      title={Benchmark for complex answer retrieval},
+      author={Nanni, Federico and Mitra, Bhaskar and Magnusson, Matt and Dietz, Laura},
+      booktitle={ICTIR},
+      year={2017}
+    }
+
+
+train/fold0:
+  desc: '
+<p>
+Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+pages (i.e., paragraphs under a header are assumed relevant.)
+</p>
+'

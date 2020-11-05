@@ -1,0 +1,286 @@
+antique:
+  docs:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/antique-collection.txt'
+    expected_md5: '684f7015aff377062a758e478476aac8'
+    cache_path: 'collection.tsv'
+  train/qrels:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/antique-train.qrel'
+    expected_md5: 'bac76531a3313a2d1debf5f1602d88ab'
+    cache_path: 'train/qrels'
+  train/queries:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/antique-train-queries.txt'
+    expected_md5: '7684bd977d2682177b559d8da714f45a'
+    cache_path: 'train/queries.txt'
+  test/qrels:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/antique-test.qrel'
+    expected_md5: 'c93ab0f0ce7937c84270c1eef172db4e'
+    cache_path: 'test/qrels'
+  test/queries:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/antique-test-queries.txt'
+    expected_md5: 'd09c5d9ad14368c23c853f6be81e7f2e'
+    cache_path: 'test/queries.txt'
+  disallow_list:
+    url: 'https://ciir.cs.umass.edu/downloads/Antique/test-queries-blacklist.txt'
+    expected_md5: '4ca64485dabf26221b90cf96ae2997f9'
+    cache_path: 'test-disallow-list.txt'
+
+
+car-v1.5:
+  docs:
+    url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz'
+    expected_md5: '4d006dd67cbc11541ed7f87b875cb990'
+    cache_path: 'docs.tar.xz'
+  trec-y1/queries:
+    url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/benchmarkY1test.public-v1.5.tar.xz'
+    expected_md5: '6ab490517accd2a2cb4848c0f160bc8d'
+    cache_path: 'trec-y1/qrels.tar.xz'
+  trec-y1/qrels:
+    url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/trec-car-2017-qrels.tar.gz'
+    expected_md5: '1ab7cf01c341757af1bb3db2aedd020f'
+    cache_path: 'trec-y1/qrels.tar.gz'
+  test200:
+    url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/test200-v1.5.tar.xz'
+    expected_md5: 'a7d8ea41f933b2ef49f06d782e908d13'
+    cache_path: 'test200.tar.xz'
+  train:
+    url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/train-v1.5.tar.xz'
+    expected_md5: '70eb3cf1d9358614f9d96dcd2565dc2b'
+    cache_path: 'train.tar.xz'
+
+
+cord19:
+  docs/2020-07-16:
+    url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz'
+    expected_md5: '018c4bc4d76d4ae072a26ac28c8b456b'
+    cache_path: '2020-07-16.tar.gz'
+  trec-covid/queries:
+    url: 'https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml'
+    cache_path: 'trec-covid/queries.xml'
+  trec-covid/qrels:
+    url: 'https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt'
+    expected_md5: '8138424a59daea0aba751c8a891e5f54'
+    cache_path: 'trec-covid/qrels'
+
+
+msmarco-document:
+  docs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz'
+    expected_md5:  'd4863e4f342982b51b9a8fc668b2d0c0'
+    cache_path: 'collection.tsv.gz'
+  train/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-queries.tsv.gz'
+    expected_md5:  '4086d31a9cf2d7b69c4932609058111d'
+    cache_path: 'train/queries.tsv.gz'
+  train/qrels:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-qrels.tsv.gz'
+    expected_md5:  '9d1609e240113b0504fd2e61cb36d924'
+    cache_path: 'train/qrels.gz'
+  train/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-top100.gz'
+    expected_md5:  'be32fa12eb71e93014c84775d7465976'
+    cache_path: 'train/ms.run.gz'
+  dev/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-queries.tsv.gz'
+    expected_md5:  'ac20593d71b9c32ab2633230f9cdf10d'
+    cache_path: 'dev/queries.tsv.gz'
+  dev/qrels:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-qrels.tsv.gz'
+    expected_md5:  '5eeafaeb4960979a62e7fed93273254e'
+    cache_path: 'dev/qrels.gz'
+  dev/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-top100.gz'
+    expected_md5:  'ac10255edf321821b0ccd0f123037780'
+    cache_path: 'dev/ms.run.gz'
+  eval/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/docleaderboard-queries.tsv.gz'
+    expected_md5:  '50fe4285d64444c9ffc933b66a79f775'
+    cache_path: 'eval/queries.tsv.gz'
+  eval/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/docleaderboard-top100.tsv.gz'
+    expected_md5:  'a039a00356c09606962f3c07c68d02ef'
+    cache_path: 'eval/ms.run.gz'
+  trec-dl-2019/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2019-queries.tsv.gz'
+    expected_md5:  'eda71eccbe4d251af83150abe065368c'
+    cache_path: 'trec-dl-2019/queries.tsv.gz'
+  trec-dl-2019/qrels:
+    url: 'https://trec.nist.gov/data/deep/2019qrels-docs.txt'
+    expected_md5:  'd7ef53b995ef7e01676ea85d7ec01dda'
+    cache_path: 'trec-dl-2019/qrels'
+  trec-dl-2019/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctest2019-top100.gz'
+    expected_md5:  '91071b89dd52124057a87d53cd22028d'
+    cache_path: 'trec-dl-2019/ms.run.gz'
+  trec-dl-2020/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz'
+    expected_md5:  '00a406fb0d14ed3752d70d1e4eb98600'
+    cache_path: 'trec-dl-2020/queries.tsv.gz'
+  trec-dl-2020/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctest2020-top100.gz'
+    expected_md5:  '96f39dae3443736bd6393bd09a5a0a20'
+    cache_path: 'trec-dl-2020/ms.run.gz'
+  orcas/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-queries.tsv.gz'
+    expected_md5:  '519c5f522294406e3b0574d7d53cf233'
+    cache_path: 'orcas/queries.tsv.gz'
+  orcas/qrels:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-qrels.tsv.gz'
+    expected_md5:  '3f94db106374be649782022c3018acd0'
+    cache_path: 'orcas/qrels.gz'
+  orcas/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-top100.gz'
+    expected_md5:  '118d0884638fd405e111157a124ef0b2'
+    cache_path: 'orcas/ms.run.gz'
+
+
+msmarco-passage:
+  docs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/collection.tar.gz'
+    expected_md5: "87dd01826da3e2ad45447ba5af577628"
+  queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz'
+    expected_md5: "c177b2795d5f2dcc524cf00fcd973be1"
+    cache_path: 'queries.tar.gz'
+  medmarco_ids: 
+    url: 'https://raw.githubusercontent.com/Georgetown-IR-Lab/covid-neural-ir/master/med-msmarco-train.txt'
+    expected_md5: 'dc5199de7d4a872c361f89f08b1163ef'
+    cache_path: 'medmarco.qids'
+  train/qrels:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/qrels.train.tsv'
+    expected_md5: '733fb9fe12d93e497f7289409316eccf'
+    cache_path: 'train/qrels'
+  train/docpairs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.tsv.gz'
+    expected_md5: '215a5204288820672f5e9451d9e202c5'
+    cache_path: 'train/docpairs.tsv.gz'
+  train/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/top1000.train.tar.gz'
+    expected_md5: 'd99fdbd5b2ea84af8aa23194a3263052'
+  dev/qrels:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/qrels.dev.tsv'
+    expected_md5: "9157ccaeaa8227f91722ba5770787b16"
+    cache_path: 'dev/qrels'
+  dev/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/top1000.dev.tar.gz'
+    expected_md5: '8c140662bdf123a98fbfe3bb174c5831'
+  eval/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/top1000.eval.tar.gz'
+    expected_md5: '73778cd99f6e0632d12d0b5731b20a02'
+  trec-dl-2019/qrels:
+    url: 'https://trec.nist.gov/data/deep/2019qrels-pass.txt'
+    expected_md5: '2f4be390198da108f6845c822e5ada14'
+    cache_path: 'trec-dl-2019/qrels'
+  trec-dl-2019/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2019-queries.tsv.gz'
+    expected_md5: 'eda71eccbe4d251af83150abe065368c'
+  trec-dl-2019/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2019-top1000.tsv.gz'
+    expected_md5: 'ec9e012746aa9763c7ff10b3336a3ce1'
+  trec-dl-2020/queries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz'
+    cache_path: 'trec-dl-2020/queries.tsv.gz'
+  trec-dl-2020/scoreddocs:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2020-top1000.tsv.gz'
+    expected_md5: 'aa6fbc51d66bd1dc745964c0e140a727'
+
+
+nyt:
+  source:
+    instructions: 'The New York Times Annotated Corpus. It is available from the LDC via:
+<https://catalog.ldc.upenn.edu/LDC2008T19>.
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: '67a1bcf200c448424bf0fba34cef17b0'
+    cache_path: nyt.tgz
+
+trec-arabic:
+  docs:
+    instructions: 'The dataset is based on the Arabic Newswire corpus. It is available from the LDC
+via: <https://catalog.ldc.upenn.edu/LDC2001T55>
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "b17f34a51dca8d19fae66c338c9ed73a"
+  ar2001/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/arabic_topics.txt'
+    expected_md5: 'a3d78c379056a080fe40a59a341496b8'
+    cache_path: 'ar2001/queries'
+  ar2001/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/xlingual_t10qrels.txt'
+    expected_md5: '5951e2f0bf72df9f93fc32b93e3a7fde'
+    cache_path: 'ar2001/qrels'
+  ar2002/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/CL.topics.arabic.trec11.txt'
+    expected_md5: 'f75a6164d794bab66509f1e818612363'
+    cache_path: 'ar2002/queries'
+  ar2002/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/qrels.trec11.xlingual.txt'
+    expected_md5: '40f25e1e98101e27d081685cbdc390ef'
+    cache_path: 'ar2002/qrels'
+
+
+trec-mandarin:
+  docs:
+    instructions: 'The dataset is based on the TREC Mandarin corpus. It is available from the LDC
+via: <https://catalog.ldc.upenn.edu/LDC2000T52>
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "a847fa029a1356b8f396aa642c449e38"
+  trec5/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/topics.CH1-CH28.chinese.english.gz'
+    expected_md5: '9ce885d36e8642d4114f40e7008e5b8a'
+    cache_path: 'trec5/queries.gz'
+  trec5/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/qrels.1-28.chinese.gz'
+    expected_md5: '73693083d75ef323fca2a218604b41ac'
+    cache_path: 'trec5/qrels.gz'
+  trec6/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/topics.CH29-CH54.chinese.english.gz'
+    expected_md5: 'c3a58ec59e55c162fdc3e3a9c5e9b8a7'
+    cache_path: 'trec6/queries.gz'
+  trec6/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/qrels.trec6.29-54.chinese.gz'
+    expected_md5: '675ab2f14fad9017d646d052c0b35c46'
+    cache_path: 'trec6/qrels.gz'
+
+
+trec-spanish:
+  docs:
+    instructions: 'The dataset is based on the TREC Spanish corpus. It is available from the LDC
+via: <https://catalog.ldc.upenn.edu/LDC2000T51>
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "4b8583c03149cf0c06c090fd230b33c6"
+  trec3/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/topics.SP1-SP25.spanish.english.gz'
+    expected_md5: '22eea4a5c131db9cc4a431235f6a0573'
+    cache_path: 'trec3/queries.gz'
+  trec3/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/qrels.1-25.spanish.gz'
+    expected_md5: 'e1703487f43fb7ea30b87a0f14ccb5ce'
+    cache_path: 'trec3/qrels.gz'
+  trec4/queries:
+    url: 'https://trec.nist.gov/data/topics_noneng/topics.SP26-SP50.spanish.english.gz'
+    expected_md5: 'dfd9685cce559e33ab397c1878a6a1f8'
+    cache_path: 'trec4/querie.gz'
+  trec4/qrels:
+    url: 'https://trec.nist.gov/data/qrels_noneng/qrels.26-50.spanish.gz'
+    expected_md5: 'f2540f9fb83433ca8ef9503671136498'
+    cache_path: 'trec4/qrels.gz'
+
+
+trec-robust04:
+  docs:
+    instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the
+copyrighted nature of the  documents, this collection is for resaerch use only, which requires
+agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
+
+Once completed, place the uncompressed source here: {path}'
+    cache_path: 'trec45'
+  queries:
+    url: 'https://trec.nist.gov/data/robust/04.testset.gz'
+    expected_md5: "5eac3d774a2f87da61c08a94f945beff"
+    cache_path: 'queries.gz'
+  qrels:
+    url: 'https://trec.nist.gov/data/robust/qrels.robust2004.txt'
+    expected_md5: "123c2a0ba2ec31178cb1050995dcfdfa"
+    cache_path: 'qrels'

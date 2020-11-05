@@ -1,0 +1,2 @@
+include ir_datasets/docs/*.yaml
+include ir_datasets/etc/*.yaml

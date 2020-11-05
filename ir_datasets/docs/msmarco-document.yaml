@@ -1,0 +1,111 @@
+_:
+  desc: '
+  <p>
+"Based the questions in the [MS-MARCO] Question Answering Dataset and the documents which answered
+the questions a document ranking task was formulated. There are 3.2 million documents and the goal
+is to rank based on their relevance. Relevance labels are derived from what passages was marked as
+having the answer in the QnA dataset."
+</p>
+<ul>
+  <li>See also: <a class="ds-ref">msmarco-passage</a></li>
+  <li>Documents: Text extracted from web pages</li>
+  <li>Queries: Natural language questions (from query log)</li>
+  <li><a href="https://microsoft.github.io/msmarco/#docranking">Leaderboard</a></li>
+  <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+
+
+dev:
+  desc: '
+<p>
+Official dev set. All queries have exactly 1 (positive) relevance judgment.
+</p>
+<p>
+scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
+</p>
+'
+
+
+eval:
+  desc: '
+<p>
+Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden.
+</p>
+<p>
+scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
+</p>
+'
+
+
+orcas:
+  desc: '
+<p>
+"ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries."
+</p>
+<ul>
+<li>Queries: From query log</li>
+<li>Relevance Data: User clicks</li>
+<li>Scored docs: Indri Query Likelihood model</li>
+<li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li>
+</ul>
+'
+  bibtex: |
+    @article{craswell2020orcas,
+      title={ORCAS: 18 Million Clicked Query-Document Pairs for Analyzing Search},
+      author={Craswell, Nick and Campos, Daniel and Mitra, Bhaskar and Yilmaz, Emine and Billerbeck, Bodo},
+      journal={arXiv preprint arXiv:2006.05324},
+      year={2020}
+    }
+
+
+train:
+  desc: '
+<p>
+Official train set. All queries have exactly 1 (positive) relevance judgment.
+</p>
+<p>
+scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
+</p>
+'
+
+
+trec-dl-2019:
+  desc: '
+<p>
+Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from
+<a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors,
+(filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>).
+</p>
+'
+  bibtex: |
+    @inproceedings{Craswell2020OverviewOT,
+      title={Overview of the TREC 2019 deep learning track},
+      author={Nick Craswell and Bhaskar Mitra and E. Yilmaz and Daniel Fernando Campos and E. Voorhees},
+      booktitle={TREC 2019},
+      year={2019}
+    }
+
+
+trec-dl-2019/judged:
+  desc: '
+<p>
+Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels.
+</p>
+'
+
+
+trec-dl-2020:
+  desc: '
+<p>
+Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from
+<a class="ds-ref">msmarco-document/eval</a>. Relevance judgments from NIST assessors to be made
+available in the future.
+</p>
+'

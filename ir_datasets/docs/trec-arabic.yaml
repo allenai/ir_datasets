@@ -1,0 +1,47 @@
+_:
+  desc: '
+<p>
+A collection of news articles in Arabic, used for multi-lingual evaluation in TREC 2001 and TREC
+2002.
+</p>
+'
+  bibtex: |
+    @misc{LDC2001T55,
+      title={TREC Mandarin LDC2001T55},
+      author={Graff, David, and Walker, Kevin},
+      year={2001},
+      url={https://catalog.ldc.upenn.edu/LDC2001T55},
+      publisher={Linguistic Data Consortium}
+    }
+
+ar2001:
+  desc: '
+<p>
+Arabic benchmark from TREC 2001.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec10/papers/clirtrack.pdf">Task Overview Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{gey2001arabic,
+      title={The TREC-2001 Cross-Language Information Retrieval Track: Searching Arabic using English, French or Arabic Queries},
+      author={Fredric Gey and Douglas Oard},
+      booktitle={TREC},
+      year={2001}
+    }
+
+ar2002:
+  desc: '
+<p>
+Arabic benchmark from TREC 2002.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec11/papers/OVERVIEW.gey.ps.gz">Task Overview Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{gey2002arabic,
+      title={The TREC-2002 Arabic/English CLIR Track},
+      author={Fredric Gey and Douglas Oard},
+      booktitle={TREC},
+      year={2002}
+    }

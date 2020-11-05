@@ -1,0 +1,39 @@
+_:
+  desc: '
+<p>
+The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by
+focusing on poorly performing topics."
+</p>
+<ul>
+<li>Documents: News articles</li>
+<li>Queries: keyword queries, descriptions, narratives</li>
+<li>Relevance: Deep judgments</li>
+<li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{Voorhees2004OverviewRobust,
+      title={Overview of the TREC 2004 Robust Retrieval Track},
+      author={Ellen Voorhees},
+      booktitle={TREC},
+      year={2004}
+    }
+
+fold1:
+  desc: '
+<p>Fold 1 used in various works</p>'
+
+fold2:
+  desc: '
+<p>Fold 2 used in various works</p>'
+
+fold3:
+  desc: '
+<p>Fold 3 used in various works</p>'
+
+fold4:
+  desc: '
+<p>Fold 4 used in various works</p>'
+
+fold5:
+  desc: '
+<p>Fold 5 used in various works</p>'
