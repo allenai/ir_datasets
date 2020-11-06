@@ -34,7 +34,7 @@ Tested with python versions 3.6 and 3.7
 ## Python Interface
 
 Load a dataset, such as the [MS-MARCO passage ranking datset](https://microsoft.github.io/msmarco/), using:
-```
+```python
 import ir_datasets
 dataset = ir_datasets.load('msmarco-passage/train')
 ```
@@ -78,7 +78,7 @@ doc_store.get("16")
 
 If you want to use your own dataset, you can construct an object with the same interface as the
 standard benchmarks by:
-```
+```python
 import ir_datasets
 dataset = ir_datasets.create_dataset(
   docs_tsv="path/to/docs.tsv",
