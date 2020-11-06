@@ -1,4 +1,5 @@
 import io
+import codecs
 import re
 import ir_datasets
 from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig
@@ -63,7 +64,7 @@ class FixEncoding:
 
         with self._streamer.stream() as stream, \
              _logger.pbar_raw(desc='fixing encoding', unit='B', unit_scale=True) as pbar:
-            stream = io.TextIOWrapper(stream)
+            stream = codecs.getreader('utf8')(stream)
             for line in stream:
                 pbar.update(len(line.encode()))
                 pos = 0
@@ -177,7 +178,7 @@ def _init():
     # Medical subset
     def train_med():
         with dlc['medmarco_ids'].stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = codecs.getreader('utf8')(stream)
             return {l.rstrip() for l in stream}
     train_med = Lazy(train_med)
     subsets['train/medical'] = Dataset(

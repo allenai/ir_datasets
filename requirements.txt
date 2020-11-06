@@ -1,6 +1,7 @@
 beautifulsoup4>=4.4.1
 lxml>=4.5.2
 numpy>=1.18.1
+pyyaml>=5.3.1
+requests>=2.22.0
 tqdm>=4.38.0
-pylibyaml>=0.1.0
-git+https://github.com/TREMA-UNH/trec-car-tools.git#subdirectory=python3
+trec-car-tools @ git+https://github.com/TREMA-UNH/trec-car-tools.git#subdirectory=python3

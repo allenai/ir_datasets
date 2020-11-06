@@ -15,35 +15,66 @@ allow quick lookups of documents by ID.
 
 A command line interface is also available.
 
-Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull
-request! 
+You can find a list of datasets and their features [here](https://macavaney.us/misc/datasets.html).
+Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull request! 
 
 ## Getting Started
 
-Install via pip using:
+Install locally with:
 
 ```
-pip install ir_datasets
+$ git clone https://github.com/allenai/ir_datasets
+$ cd ir_datasets
+$ python setup.py bdist_wheel
+$ pip install dist/ir_datasets-*.whl
 ```
 
-or locally with:
-
-```
-python setup.py bdist_wheel
-pip install dist/ir_datasets-*.whl
-```
+Tested with python versions 3.6 and 3.7
 
 ## Python Interface
 
-Load a dataset using:
+Load a dataset, such as the [MS-MARCO passage ranking datset](https://microsoft.github.io/msmarco/), using:
 ```
 import ir_datasets
-dataset = ir_datasets.load('dataset-id')
+dataset = ir_datasets.load('msmarco-passage/train')
 ```
 
 A dataset object lets you iterate through supported properties like docs (`dataset.docs_iter()`),
 queries (`dataset.queries_iter()`), and relevance judgments (`dataset.qrels_iter()`). Each iterator
 yields namedtuples, with fields based on the available data.
+
+```python
+# Documents
+for doc in dataset.docs_iter():
+    print(doc)
+# GenericDoc(doc_id='0', text='The presence of communication amid scientific minds was equa...
+# GenericDoc(doc_id='1', text='The Manhattan Project and its atomic bomb helped bring an en...
+# ...
+
+# Queries
+for query in dataset.queries_iter():
+    print(query)
+# GenericQuery(query_id='121352', text='define extreme')                                          
+# GenericQuery(query_id='634306', text='what does chattel mean on credit history')
+# ...
+
+# Query relevance judgments (qrels)
+for qrel in dataset.qrels_iter():
+    print(qrels)
+# TrecQrel(query_id='1185869', doc_id='0', relevance=1, iteration='0')
+# TrecQrel(query_id='1185868', doc_id='16', relevance=1, iteration='0')
+# ...
+
+# Look up queries and documents by ID
+queries_store = dataset.queries_store()
+queries_store.get("1185868")
+# GenericQuery(query_id='1185868', text='_________ justice is designed to repair the harm to victim, the comm...
+
+dataset = ir_datasets.wrappers.DocstoreWrapper(dataset)
+doc_store = dataset.docs_store()
+doc_store.get("16")
+# GenericDoc(doc_id='16', text='The approach is based on a theory of justice that considers crime and wrongdoi...
+```
 
 If you want to use your own dataset, you can construct an object with the same interface as the
 standard benchmarks by:
@@ -65,7 +96,15 @@ relevance judgments are provided in the standard TREC format:
 
 Export data in various formats:
 ```
-ir_datasets export [dataset-id] [docs/queries/qrels/scoreddocs]
+$ ir_datasets export [dataset-id] [docs/queries/qrels/scoreddocs/docpairs]
+
+$ ir_datasets export msmarco-passage/train docs | head -n2
+0	The presence of communication amid scientific minds was equally important to the success of the Manh...
+1	The Manhattan Project and its atomic bomb helped bring an end to World War II. Its legacy of peacefu...
+
+$ ir_datasets export msmarco-passage/train docs --format jsonl | head -n2
+{"doc_id": "0", "text": "The presence of communication amid scientific minds was equally important to the su...
+{"doc_id": "1", "text": "The Manhattan Project and its atomic bomb helped bring an end to World War II. Its ...
 ```
 
 `--format` specifies the output format (e.g., tsv or jsonl). `--fields` specifies which fields to
@@ -76,7 +115,7 @@ markup.
 Look up documents and queries by ID:
 
 ```
-ir_datasets lookup [dataset-id] [--qid] [ids...]
+$ ir_datasets lookup [dataset-id] [--qid] [ids...]
 ```
 
 `--format` and `--fields` also work here. `--qid` indicates that queries should be looked up instead
@@ -99,13 +138,13 @@ Available datasets include (each of which containing subsets):
  - `trec-robust04`
  - `trec-spanish`
 
-See the [datasets documentation page](ir_datasets/docs/datasets.html) for details about each
+See the [datasets documentation page](https://macavaney.us/misc/datasets.html) for details about each
 dataset, its available subsets, and what data they provide.
 
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](ir_datasets/docs/datasets.html), or in the python
+can be found on the [datasets documentation page](https://macavaney.us/misc/datasets.html), or in the python
 interface via `dataset.bibtex()` (when available).
 
 The `ir_datasets` package was released as part of [ABNIRML](https://arxiv.org/abs/2011.00696), so
