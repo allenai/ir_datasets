@@ -9,7 +9,7 @@ etc.) when available from public sources. Instructions on how to obtain datasets
 they are not publicly available.
 
 `ir_datasets` provides a common iterator format to allow them to be easily used in python. It
-attempts provides the data in an untainted form (i.e., keeping all fields and markup), while
+attempts to provide the data in an unaltered form (i.e., keeping all fields and markup), while
 handling differences in file formats, encoding, etc. Adapters provide extra functionality, e.g., to
 allow quick lookups of documents by ID.
 
