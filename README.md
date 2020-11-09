@@ -15,7 +15,7 @@ allow quick lookups of documents by ID.
 
 A command line interface is also available.
 
-You can find a list of datasets and their features [here](https://macavaney.us/misc/datasets.html).
+You can find a list of datasets and their features [here](https://allenai.github.io/ir_datasets/datasets.html).
 Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull request! 
 
 ## Getting Started
@@ -138,13 +138,13 @@ Available datasets include (each of which containing subsets):
  - `trec-robust04`
  - `trec-spanish`
 
-See the [datasets documentation page](https://macavaney.us/misc/datasets.html) for details about each
+See the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html) for details about each
 dataset, its available subsets, and what data they provide.
 
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](https://macavaney.us/misc/datasets.html), or in the python
+can be found on the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html), or in the python
 interface via `dataset.bibtex()` (when available).
 
 The `ir_datasets` package was released as part of [ABNIRML](https://arxiv.org/abs/2011.00696), so
