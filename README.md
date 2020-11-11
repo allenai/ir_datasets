@@ -20,7 +20,13 @@ Want a new dataset, added functionality, or a bug fixed? Feel free to post an is
 
 ## Getting Started
 
-Install locally with:
+Install via pip:
+
+```
+pip install ir_datasets
+```
+
+If you want to build from source, use:
 
 ```
 $ git clone https://github.com/allenai/ir_datasets

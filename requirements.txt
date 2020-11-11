@@ -4,4 +4,4 @@ numpy>=1.18.1
 pyyaml>=5.3.1
 requests>=2.22.0
 tqdm>=4.38.0
-trec-car-tools @ git+https://github.com/TREMA-UNH/trec-car-tools.git#subdirectory=python3
+trec-car-tools>=2.5.3

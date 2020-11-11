@@ -5,7 +5,7 @@ import ir_datasets
 
 def main(args):
     parser = argparse.ArgumentParser(prog='ir_datasets documentation', description='Generates documentation files.')
-    parser.add_argument('--out_dir', default='./ir_datasets/docs')
+    parser.add_argument('--out_dir', default='./docs')
     args = parser.parse_args(args)
     out_dir = args.out_dir
     out = open(f'{out_dir}/datasets.html', 'wt')
@@ -241,6 +241,9 @@ $(document).ready(function() {
 <div class="page">
 <h1><code>ir_datasets</code></h1>
 <p>
+View on GitHub: <a href="https://github.com/allenai/ir_datasets/">allenai/ir_datasets</a>
+</p>
+<p>
 <code>ir_datasets</code> is a python package that provides a common interface to many IR ad-hoc
 ranking benchmarks, training datasets, etc. It was built as a fork of
 <a href="https://OpenNIR.net/">OpenNIR</a> to allow easier integration with other systems.
@@ -261,8 +264,9 @@ extra functionality, e.g., to strip markup, index documents, etc. A command line
 available.
 </p>
 <p>
-Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull
-request!
+Want a new dataset, added functionality, or a bug fixed? Feel free to
+<a href="https://github.com/allenai/ir_datasets/issues">post an issue</a> or
+<a href="https://github.com/allenai/ir_datasets/pulls">make a pull request</a>!
 </p>
 <hr/>
 
