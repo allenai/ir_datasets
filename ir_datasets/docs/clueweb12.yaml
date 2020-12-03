@@ -1,0 +1,114 @@
+_:
+  desc: '
+<p>
+ClueWeb 2012 web document collection. Contains 733M web pages.
+</p>
+<p>
+The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information
+is provided <a href="https://lemurproject.org/clueweb12/">here</a>.
+</p>
+<ul>
+<li><a href="https://lemurproject.org/clueweb12/">Document collection site</a></li>
+<li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Wang2020CORD19TC,
+      title={CORD-19: The Covid-19 Open Research Dataset},
+      author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
+      journal={ArXiv},
+      year={2020}
+    }
+
+b13:
+  desc: '
+<p>
+Official subset of the ClueWeb12 datasets with 52M web pages.
+</p>
+'
+
+trec-web-2013:
+  desc: '
+<p>
+The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web2013.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Voorhees2020TRECCOVIDCA,
+      title={TREC 2013 Web Track Overview},
+      author={Kevyn Collins-Thompson and Paul Bennett and Fernando Diaz and Charles L. A. Clarke and Ellen M. Voorhees},
+      booktitle={TREC},
+      year={2013}
+    }
+
+trec-web-2014:
+  desc: '
+<p>
+The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li>
+<li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Voorhees2020TRECCOVIDCA,
+      title={TREC 2014 Web Track Overview},
+      author={Kevyn Collins-Thompson and Craig Macdonald and Paul Bennett and Fernando Diaz and Ellen M. Voorhees},
+      booktitle={TREC},
+      year={2014}
+    }
+
+ntcir-www-1:
+  desc: '
+<p>
+The NTCIR-13 We Want Web (WWW) 1 ad-hoc ranking benchmark. Contains 100 queries with deep relevance judgments
+(avg 255 per query). Judgments aggregated from two assessors. Note that the qrels contain additional judgments
+from the NTCIR-14 CENTRE track.
+</p>
+<ul>
+<li><a href="http://www.thuir.cn/ntcirwww/">Shared task site</a></li>
+<li><a href="http://www.thuir.cn/ntcirwww/files/ntcir13wwwov.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Luo2017OverviewNtcirWww1,
+      title={Overview of the NTCIR-13 We Want Web Task},
+      author={Cheng Luo and Tetsuya Sakai and Yiqun Liu and Zhicheng Dou and Chenyan Xiong and Jingfang Xu},
+      booktitle={NTCIR},
+      year={2017}
+    }
+
+ntcir-www-2:
+  desc: '
+<p>
+The NTCIR-14 We Want Web (WWW) 2 ad-hoc ranking benchmark. Contains 80 queries with deep relevance judgments
+(avg 345 per query). Judgments aggregated from two assessors.
+</p>
+<ul>
+<li><a href="http://www.thuir.cn/ntcirwww2/">Shared task site</a></li>
+<li><a href="http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings14/pdf/ntcir/01-NTCIR14-OV-WWW-MaoJ.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Mao2018OverviewNtcirWww2,
+      title={Overview of the NTCIR-14 We Want Web Task},
+      author={Jiaxin Mao and Tetsuya Sakai and Cheng Luo and Peng Xiao and Yiqun Liu and Zhicheng Dou},
+      booktitle={NTCIR},
+      year={2018}
+    }
+
+ntcir-www-3:
+  desc: '
+<p>
+The NTCIR-15 We Want Web (WWW) 3 ad-hoc ranking benchmark. Contains 160 queries with deep relevance judgments
+(to be released). 80 of the queries are from <a class="ds-ref">clueweb12/b13/ntcir-www-2</a>.
+</p>
+<ul>
+<li><a href="http://sakailab.com/www3/">Shared task site</a></li>
+</ul>
+'

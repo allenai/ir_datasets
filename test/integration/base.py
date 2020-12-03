@@ -18,6 +18,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(doc, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -35,6 +37,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(query, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -52,6 +56,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(qrel, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -69,6 +75,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(scoreddoc, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -86,23 +94,28 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(docpair, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
 
             self.assertEqual(0, len(items))
 
-    def _build_test_docs(self, dataset_name):
+    def _build_test_docs(self, dataset_name, include_count=True):
         items = {}
         count = 0
         for i, doc in enumerate(_logger.pbar(ir_datasets.load(dataset_name).docs_iter(), f'{dataset_name} docs')):
             count += 1
             if i in (0, 9):
                 items[i] = doc
+            if not include_count and i == 1000:
+                break
         items[count-1] = doc
         items = {k: self._replace_regex_namedtuple(v) for k, v in items.items()}
+        count = f', count={count} ' if include_count else ''
         _logger.info(f'''
-self._test_docs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
+self._test_docs({repr(dataset_name)}, {count}items={self._repr_namedtuples(items)})
 ''')
 
     def _build_test_queries(self, dataset_name):

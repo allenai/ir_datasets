@@ -42,3 +42,15 @@ def trec_car():
         import trec_car.read_data
         _cache['trec_car'] = trec_car
     return _cache['trec_car']
+
+def warc():
+    if 'warc' not in _cache:
+        import warc
+        _cache['warc'] = warc
+    return _cache['warc']
+
+def lz4_block():
+    if 'lz4_block' not in _cache:
+        import lz4.block
+        _cache['lz4_block'] = lz4
+    return _cache['lz4_block']

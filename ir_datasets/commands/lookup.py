@@ -25,7 +25,8 @@ def did_lookup(dataset, args):
     assert hasattr(dataset, 'docs_handler')
     exporter = DEFAULT_EXPORTERS[args.format]
     exporter = exporter(dataset.docs_cls(), args.out, args.fields)
-    dataset = ir_datasets.wrappers.DocstoreWrapper(dataset)
+    if not hasattr(dataset, 'docs_store'):
+        dataset = ir_datasets.wrappers.DocstoreWrapper(dataset)
     store = dataset.docs_store()
     for did in args.ids:
         try:

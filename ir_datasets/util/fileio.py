@@ -6,6 +6,7 @@ from fnmatch import fnmatch
 import tempfile
 import tarfile
 import gzip
+import bz2
 import io
 from zipfile import ZipFile
 import ir_datasets
@@ -140,6 +141,19 @@ class GzipExtract:
     def stream(self):
         with self._streamer.stream() as stream:
             yield gzip.GzipFile(fileobj=stream)
+
+
+class Bz2Extract:
+    def __init__(self, streamer):
+        self._streamer = streamer
+
+    def __getattr__(self, attr):
+        return getattr(self._streamer, attr)
+
+    @contextlib.contextmanager
+    def stream(self):
+        with self._streamer.stream() as stream:
+            yield bz2.BZ2File(stream)
 
 
 class ZipExtract:

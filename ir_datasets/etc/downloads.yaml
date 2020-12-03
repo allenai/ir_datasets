@@ -48,6 +48,52 @@ car-v1.5:
     cache_path: 'train.tar.xz'
 
 
+clueweb12:
+  docs:
+    instructions: 'Link the ClueWeb12 source files here: {path}
+
+Should contain ClueWeb12_00--19 directories'
+    cache_path: 'corpus'
+  cw12b-info:
+    url: 'http://lemurproject.org/clueweb12/ClueWeb12-CreateB13.tgz'
+    expected_md5: '8175ce74a97e46be80c2127d965da200'
+    cache_path: 'ClueWeb12-CreateB13.tgz'
+  trec-web-2013/queries:
+    url: 'https://trec.nist.gov/data/web/2013/trec2013-topics.xml'
+    expected_md5: '4c0ecdddc8632d3fa8fecb507f19801d'
+    cache_path: 'trec-web-2013/queries.xml'
+  trec-web-2013/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/2013/qrels.adhoc.txt'
+    expected_md5: '44aa6300f9df4a77f7205c574afb9c2d'
+    cache_path: 'trec-web-2013/qrels.adhoc'
+  trec-web-2014/queries:
+    url: 'https://trec.nist.gov/data/web/2014/trec2014-topics.xml'
+    expected_md5: 'b1bf5c7aa9f6e7026e1558686330744f'
+    cache_path: 'trec-web-2014/queries.xml'
+  trec-web-2014/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/2014/qrels.adhoc.txt'
+    expected_md5: 'afa1db71680acf71283adc7846282a44'
+    cache_path: 'trec-web-2014/qrels.adhoc'
+  ntcir-www-1/queries:
+    url: 'http://www.thuir.cn/ntcirwww/files/eng.queries.xml.zip'
+    expected_md5: 'ed43ba82791bb20776c049421525a055'
+  ntcir-www-1/qrels:
+    url: 'https://macavaney.us/misc/ntcir-www-1.qrels'
+    expected_md5: '634464456437bf378725958822910242'
+    cache_path: 'ntcir-www-1/qrels'
+  ntcir-www-2/queries:
+    url: 'http://www.thuir.cn/ntcirwww2/qEng.zip'
+    expected_md5: 'd4b108b52b2e2c8bedc2e12540414735'
+  ntcir-www-2/qrels:
+    url: 'http://www.thuir.cn/ntcirwww3/www2e.qrels'
+    expected_md5: '155b515dd9fc05e1aeb9c116c9147bb0'
+    cache_path: 'ntcir-www-2/qrels'
+  ntcir-www-3/queries:
+    url: 'http://www.thuir.cn/ntcirwww3/www2www3topics-E.xml'
+    expected_md5: '1ecd1380b20894014a54eb6cb8064587'
+    cache_path: 'ntcir-www-3/queries.xml'
+
+
 cord19:
   docs/2020-07-16:
     url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz'

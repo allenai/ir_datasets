@@ -2,7 +2,7 @@ import os
 from contextlib import contextmanager
 from threading import Lock
 from pathlib import Path
-from .fileio import IterStream, Cache, TarExtract, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar
+from .fileio import IterStream, Cache, TarExtract, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract
 from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload
 from .hash import HashVerificationError, HashVerifier, HashStream
 from .registry import Registry

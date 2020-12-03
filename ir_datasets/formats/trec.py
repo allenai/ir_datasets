@@ -13,6 +13,7 @@ from .base import GenericDoc, GenericScoredDoc, BaseDocs, BaseQueries, BaseScore
 
 TrecDoc = namedtuple('TrecDoc', ['doc_id', 'text', 'marked_up_doc'])
 TrecQuery = namedtuple('TrecQuery', ['query_id', 'title', 'description', 'narrative'])
+TrecSubtopic = namedtuple('TrecSubtopic', ['number', 'text', 'type'])
 TrecQrel = namedtuple('TrecQrel', ['query_id', 'doc_id', 'relevance', 'iteration'])
 
 # Default content tags from Anserini's TrecCollection
@@ -162,11 +163,12 @@ class TrecQueries(BaseQueries):
 
 
 class TrecXmlQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, subtopics_key='subtopics'):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or {f: f for f in qtype._fields}
         self._encoding = encoding
+        self._subtopics_key = subtopics_key
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -176,12 +178,24 @@ class TrecXmlQueries(BaseQueries):
             f = codecs.getreader(self._encoding or 'utf8')(f)
             for topic_el in ET.fromstring(f.read()):
                 item = [None for _ in self._qtype._fields]
-                item[self._qtype._fields.index('query_id')] = topic_el.attrib['number']
+                if 'number' in topic_el.attrib:
+                    item[self._qtype._fields.index('query_id')] = topic_el.attrib['number']
+                subtopics = []
+                for attr in topic_el.attrib:
+                    if attr in self._qtype_map:
+                        text = topic_el.attrib[attr]
+                        field = self._qtype_map[attr]
+                        item[self._qtype._fields.index(field)] = text
                 for field_el in topic_el:
                     if field_el.tag in self._qtype_map:
                         text = ''.join(field_el.itertext())
                         field = self._qtype_map[field_el.tag]
                         item[self._qtype._fields.index(field)] = text
+                    if field_el.tag == 'subtopic':
+                        text = ''.join(field_el.itertext())
+                        subtopics.append(TrecSubtopic(field_el.attrib['number'], text, field_el.attrib['type']))
+                if self._subtopics_key in self._qtype._fields:
+                    item[self._qtype._fields.index('subtopics')] = tuple(subtopics)
                 yield self._qtype(*item)
 
     def queries_cls(self):
