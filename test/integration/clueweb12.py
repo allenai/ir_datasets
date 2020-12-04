@@ -1,6 +1,6 @@
 import re
 import unittest
-from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, WarcHtmlDoc
+from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, WarcHtmlDoc, MisinfoQrel, MisinfoQuery
 from ir_datasets.formats import TrecQrel, TrecSubtopic, GenericDoc, GenericQuery
 from .base import DatasetIntegrationTest
 
@@ -44,6 +44,11 @@ class TestClueWeb12(DatasetIntegrationTest):
             9: NtcirQuery('0010', 'career plan', 'You are an undergraduate student who is about to graduate. You want to search some information about how to plan your career.'),
             159: NtcirQuery('0180', 'quincy jones productions', 'You want a list of famous records produced by Quincy Jones.'),
         })
+        self._test_queries('clueweb12/b13/trec-misinfo-2019', count=51, items={
+            0: MisinfoQuery('1', 'cranberries urinary tract infections', '10.1002/14651858.CD001321.pub5', 'Can cranberries prevent urinary tract infections?', 'Symptoms of a urinary tract infection (UTI) include burning while urinating and a persistent urge to urinate. Relevant documents should discuss the effectiveness of consuming cranberries or cranberry juice for prevention of UTIs.  This topic is specifically about prevention rather than treatment of an existing infection.'),
+            9: MisinfoQuery('10', 'gene therapy sickle cell', '10.1002/14651858.CD007652.pub6', 'Can gene therapy prevent complications caused by sickle cell disease?', 'Sickle cell disease (SCD) is an inherited blood disorder that affects the development of healthy red blood cells and causes red blood cells to change their form from a normal round shape to a crescent and rigid shape. People with sickle cell disease have fewer healthy blood cells, which can affect their oxygen carrying capacity and lead to serious or life-threatening complications. Gene therapy, as a newly advanced field, is claimed to be helpful for this disease. A relevant document discusses using gene therapy for preventing the symptoms and complications of SCD.'),
+            50: MisinfoQuery('51', 'dehumidifiers asthma', '10.1002/14651858.CD003563.pub2', 'Can dehumidifiers be used to control asthma?', 'Dehumidification homes might improve lives of people with asthma. Dehumidifiers are electronic devices to control the level of humidity of environment which is suggested to contribute to factors that might affect asthma. A relevant document should discuss whether or not dehumidifiers can be used to control asthma symptoms or can improve lives of people with asthma.'),
+        })
 
     def test_clueweb12_qrels(self):
         self._test_qrels('clueweb12/trec-web-2013', count=14474, items={
@@ -65,6 +70,11 @@ class TestClueWeb12(DatasetIntegrationTest):
             0: TrecQrel('0001', 'clueweb12-0000wb-83-31594', 0, '0'),
             9: TrecQrel('0001', 'clueweb12-0003wb-36-30766', 0, '0'),
             27626: TrecQrel('0080', 'clueweb12-1910wb-52-19011', 0, '0'),
+        })
+        self._test_qrels('clueweb12/b13/trec-misinfo-2019', count=22859, items={
+            0: MisinfoQrel('1', 'clueweb12-0000wb-03-01030', 1, 2, 0),
+            9: MisinfoQrel('1', 'clueweb12-0002wb-45-16639', 0, -1, -1),
+            22858: MisinfoQrel('51', 'clueweb12-1913wb-78-31232', 0, -1, -1),
         })
 
 

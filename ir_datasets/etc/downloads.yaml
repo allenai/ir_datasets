@@ -92,6 +92,14 @@ Should contain ClueWeb12_00--19 directories'
     url: 'http://www.thuir.cn/ntcirwww3/www2www3topics-E.xml'
     expected_md5: '1ecd1380b20894014a54eb6cb8064587'
     cache_path: 'ntcir-www-3/queries.xml'
+  trec-misinfo-2019/queries:
+    url: 'https://trec.nist.gov/data/misinfo/2019topics.xml'
+    expected_md5: 'e46bb8ff3058bbcc1bd73a0ecbda1621'
+    cache_path: 'trec-misinfo-2019/queries.xml'
+  trec-misinfo-2019/qrels:
+    url: 'https://trec.nist.gov/data/misinfo/2019qrels_raw.txt'
+    expected_md5: 'faf86b2ac5fcca52b189a3ad408fd019'
+    cache_path: 'trec-misinfo-2019/qrels'
 
 
 cord19:

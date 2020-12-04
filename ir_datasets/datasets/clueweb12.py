@@ -30,11 +30,20 @@ NTCIR_QREL_DEFS = {
     4: 'Two annotators rated as highly relevant',
 }
 
+MISINFO_QREL_DEFS = {
+    0: 'Not relevant',
+    1: 'Relevant',
+    2: 'Highly relevant',
+}
+
 WarcInfo = namedtuple('WarcInfo', ['doc_id', 'url', 'date', 'http_response'])
 TrecWebTrackQuery = namedtuple('TrecWebTrackQuery', ['query_id', 'query', 'description', 'type', 'subtopics'])
 WarcHtmlDoc = namedtuple('WarcHtmlDoc', ['doc_id', 'url', 'date', 'html'])
 NtcirQuery = namedtuple('NtcirQuery', ['query_id', 'title', 'description'])
 ntcir_map = {'qid': 'query_id', 'content': 'title', 'description': 'description'}
+MisinfoQuery = namedtuple('MisinfoQuery', ['query_id', 'title', 'cochranedoi', 'description', 'narrative'])
+misinfo_map = {'number': 'query_id', 'query': 'title', 'cochranedoi': 'cochranedoi', 'description': 'description', 'narrative': 'narrative'}
+MisinfoQrel = namedtuple('MisinfoQrel', ['query_id', 'doc_id', 'relevance', 'effectiveness', 'credibility'])
 
 
 def decode(s, encodings=('iso-8859-1', 'ascii', 'utf8', 'latin1')):
@@ -71,6 +80,23 @@ class ClueWebDocStore(Docstore):
                     doc_ids = doc_ids[1:]
                     if not doc_ids:
                         break # file finished
+
+
+class MsinfoQrels(TrecQrels):
+    def qrels_iter(self):
+        with self._qrels_dlc.stream() as f:
+            f = codecs.getreader('utf8')(f)
+            for line in f:
+                if line == '\n':
+                    continue # ignore blank lines
+                cols = line.rstrip().split()
+                if len(cols) != 6:
+                    raise RuntimeError(f'expected 6 columns, got {len(cols)}')
+                qid, it, did, rel, eff, cred = cols
+                yield MisinfoQrel(qid, did, int(rel), int(eff), int(cred))
+
+    def qrels_cls(self):
+        return MisinfoQrel
 
 
 class WarcDocs(BaseDocs):
@@ -212,6 +238,12 @@ def _init():
         collection_b13,
         TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map),
         documentation('ntcir-www-3'))
+
+    subsets['b13/trec-misinfo-2019'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map),
+        MsinfoQrels(dlc['trec-misinfo-2019/qrels'], MISINFO_QREL_DEFS),
+        documentation('trec-misinfo-2019'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
