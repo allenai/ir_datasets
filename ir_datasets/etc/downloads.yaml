@@ -48,6 +48,46 @@ car-v1.5:
     cache_path: 'train.tar.xz'
 
 
+clueweb09:
+  docs:
+    instructions: 'Link the ClueWeb09 source files here: {path}
+
+Should contain directoreis like ClueWeb09_English_1'
+    cache_path: 'corpus'
+  trec-web-2009/queries:
+    url: 'https://trec.nist.gov/data/web/09/wt09.topics.full.xml'
+    expected_md5: '52e4a03d32718fa11290286e8e8dff47'
+    cache_path: 'trec-web-2009/queries.xml'
+  trec-web-2009/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/09/prels.1-50.gz'
+    expected_md5: '3afdef86adf3211629182e3380f9e751'
+    cache_path: 'trec-web-2009/prels.gz'
+  trec-web-2010/queries:
+    url: 'https://trec.nist.gov/data/web/10/wt2010-topics.xml'
+    expected_md5: '8f084cc90c13e4cd66192d3a9585235e'
+    cache_path: 'trec-web-2010/queries.xml'
+  trec-web-2010/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/10/10.adhoc-qrels.final'
+    expected_md5: '8a22083b0370d6ac799e1e779110de06'
+    cache_path: 'trec-web-2010/qrels'
+  trec-web-2011/queries:
+    url: 'https://trec.nist.gov/data/web/11/full-topics.xml'
+    expected_md5: '23914875d80a5d24571d4f458a83c7fa'
+    cache_path: 'trec-web-2011/queries.xml'
+  trec-web-2011/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/11/qrels.adhoc'
+    expected_md5: '7844c8a9cc3a4b6f740d45e56013693d'
+    cache_path: 'trec-web-2011/qrels'
+  trec-web-2012/queries:
+    url: 'https://trec.nist.gov/data/web/12/full-topics.xml'
+    expected_md5: 'a0b8ee33da312a284fda379582b0bc2a'
+    cache_path: 'trec-web-2012/queries.xml'
+  trec-web-2012/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/12/qrels.adhoc'
+    expected_md5: '079723ba3e955269f0de6254c4bec180'
+    cache_path: 'trec-web-2012/qrels'
+
+
 clueweb12:
   docs:
     instructions: 'Link the ClueWeb12 source files here: {path}

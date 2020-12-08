@@ -22,3 +22,7 @@ class CacheDocstore(Docstore):
                 for doc in self.full_store.get_many_iter(doc_ids_remaining):
                     yield doc
                     trans.add(doc)
+
+    def clear_cache(self):
+        self.cache.clear()
+        self.full_store.clear_cache()

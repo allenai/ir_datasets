@@ -1,8 +1,12 @@
 import re
 import unittest
+import ir_datasets
 from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, WarcHtmlDoc, MisinfoQrel, MisinfoQuery
 from ir_datasets.formats import TrecQrel, TrecSubtopic, GenericDoc, GenericQuery
 from .base import DatasetIntegrationTest
+
+
+_logger = ir_datasets.log.easy()
 
 
 class TestClueWeb12(DatasetIntegrationTest):
@@ -17,6 +21,23 @@ class TestClueWeb12(DatasetIntegrationTest):
             9: WarcHtmlDoc('clueweb12-0000tw-00-00139', 'http://data-protection.safenet-inc.com/social-media/', '2012-02-10T21:56:06Z', re.compile('^<!DOCTYPE html>\n<!\\-\\-\\[if IE 6\\]>\n<html id="ie6" dir="ltr" lang="en\\-US">\n<!\\[endif\\]\\-\\->\n<!\\-\\-\\[if IE 7\\]>\n<h.{13818}cs\\.com/ga\\.js";\n    s\\.parentNode\\.insertBefore\\(g,s\\)\\}\\(document,"script"\\)\\);\n  </script>\n\\\t</body>\n</html>$', flags=48)),
             1000: WarcHtmlDoc('clueweb12-0000tw-00-14061', 'http://opinionator.blogs.nytimes.com/2006/01/12/this-wont-hurt-a-bit/', '2012-02-10T22:24:09Z', re.compile('^<!DOCTYPE html PUBLIC "\\-//W3C//DTD XHTML 1\\.0 Transitional//EN" "http://www\\.w3\\.org/TR/xhtml1/DTD/xhtm.{105686},Spon3,ADX_CLIENTSIDE,SponLink2\\&pos=Bottom8\\&query=qstring\\&keywords=\\?"></a></noscript></body>\n</html>$', flags=48)),
         })
+
+    def test_clueweb12_docstore(self):
+        docstore = ir_datasets.load('clueweb12').docs_store()
+        docstore.clear_cache()
+        with _logger.duration('cold fetch'):
+            docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
+        with _logger.duration('warm fetch'):
+            docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
+        docstore = ir_datasets.load('clueweb12').docs_store()
+        with _logger.duration('warm fetch (new docstore)'):
+            docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
+        with _logger.duration('cold fetch (nearby)'):
+            docstore.get_many(['clueweb12-0000tw-05-00020', 'clueweb12-0000tw-05-12201', 'clueweb12-0106wb-18-19412'])
+        with _logger.duration('cold fetch (earlier)'):
+            docstore.get_many(['clueweb12-0000tw-05-00001', 'clueweb12-0106wb-18-08131'])
+
+
 
     def test_clueweb12_queries(self):
         self._test_queries('clueweb12/trec-web-2013', count=50, items={

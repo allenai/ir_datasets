@@ -24,3 +24,6 @@ class Docstore:
 
     def get_many_iter(self, doc_ids):
         raise NotImplementedError()
+
+    def clear_cache(self):
+        pass

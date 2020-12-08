@@ -1,7 +1,9 @@
 import re
+import gzip
 import codecs
 import os
 from collections import namedtuple
+from contextlib import contextmanager
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
@@ -74,12 +76,13 @@ class ClueWebDocStore(Docstore):
             files_to_search[source_file].append(doc_id)
         for source_file, doc_ids in files_to_search.items():
             doc_ids = sorted(doc_ids)
-            for doc in self.warc_docs._iter_warc(source_file):
-                if doc_ids[0] == doc.doc_id:
-                    yield self.warc_docs._parse_warc(doc)
-                    doc_ids = doc_ids[1:]
-                    if not doc_ids:
-                        break # file finished
+            with self.warc_docs._iter_warc(source_file) as doc_it:
+                for doc in doc_it:
+                    if doc_ids[0] == doc.doc_id:
+                        yield self.warc_docs._parse_warc(doc)
+                        doc_ids = doc_ids[1:]
+                        if not doc_ids:
+                            break # file finished
 
 
 class MsinfoQrels(TrecQrels):
@@ -103,15 +106,19 @@ class WarcDocs(BaseDocs):
     def __init__(self, id_header):
         self.id_header = id_header
 
+    @contextmanager
     def _iter_warc(self, warcf):
         warc = ir_datasets.lazy_libs.warc()
-        with warc.open(warcf) as f:
-            for doc in filter(lambda d: d.type == 'response', f):
-                did = doc[self.id_header]
-                url = doc['WARC-Target-URI']
-                date = doc['WARC-Date']
-                http_response = doc.payload.read()
-                yield WarcInfo(did, url, date, http_response)
+        with gzip.open(warcf, 'rb') as f:
+            with warc.WARCFile(fileobj=f) as f:
+                def it():
+                    for doc in filter(lambda d: d.type == 'response', f):
+                        did = doc[self.id_header]
+                        url = doc['WARC-Target-URI']
+                        date = doc['WARC-Date']
+                        http_response = doc.payload.read()
+                        yield WarcInfo(did, url, date, http_response)
+                yield it()
 
     def _parse_warc(self, doc):
         # Doing this here allows for both http headers and <meta http-equiv>
@@ -137,8 +144,8 @@ class ClueWeb12Docs(WarcDocs):
 
     def docs_iter(self):
         for source_file in self._iter_sources():
-            doc_iter = self._iter_warc(source_file)
-            yield from map(self._parse_warc, doc_iter)
+            with self._iter_warc(source_file) as doc_iter:
+                yield from map(self._parse_warc, doc_iter)
 
     def _iter_sources(self):
         for source_dir in sorted(glob(os.path.join(self.docs_dlc.path(), 'ClueWeb12_*', '*'))):
@@ -165,14 +172,15 @@ class ClueWeb12b13Docs(ClueWeb12Docs):
         did_iter = self._iter_b13ids()
         current_did = next(did_iter, None)
         for source_file in self._iter_sources():
-            for doc in self._iter_warc(source_file):
-                if doc.doc_id == current_did:
-                    yield doc
-                    next_did = next(did_iter, None)
-                    advance_file = next_did is None or current_did.split('-')[:-1] != next_did.split('-')[:-1]
-                    current_did = next_did
-                    if advance_file:
-                        break
+            with self._iter_warc(source_file) as doc_iter:
+                for doc in doc_iter:
+                    if doc.doc_id == current_did:
+                        yield doc
+                        next_did = next(did_iter, None)
+                        advance_file = next_did is None or current_did.split('-')[:-1] != next_did.split('-')[:-1]
+                        current_did = next_did
+                        if advance_file:
+                            break
 
     def docs_iter(self):
         doc_iter = self._iter_docs()

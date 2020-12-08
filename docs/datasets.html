@@ -328,7 +328,7 @@ indexes the documents/queries by ID.
 <hr/>
 
 <h2>Datasets</h2>
-<p>Jump to: <code class="jumpto"><a href="#antique" class="str">'antique'</a></code> <code class="jumpto"><a href="#car-v1.5" class="str">'car-v1.5'</a></code> <code class="jumpto"><a href="#clueweb12" class="str">'clueweb12'</a></code> <code class="jumpto"><a href="#cord19" class="str">'cord19'</a></code> <code class="jumpto"><a href="#msmarco-document" class="str">'msmarco-document'</a></code> <code class="jumpto"><a href="#msmarco-passage" class="str">'msmarco-passage'</a></code> <code class="jumpto"><a href="#nyt" class="str">'nyt'</a></code> <code class="jumpto"><a href="#trec-arabic" class="str">'trec-arabic'</a></code> <code class="jumpto"><a href="#trec-mandarin" class="str">'trec-mandarin'</a></code> <code class="jumpto"><a href="#trec-robust04" class="str">'trec-robust04'</a></code> <code class="jumpto"><a href="#trec-spanish" class="str">'trec-spanish'</a></code></p>
+<p>Jump to: <code class="jumpto"><a href="#antique" class="str">'antique'</a></code> <code class="jumpto"><a href="#car-v1.5" class="str">'car-v1.5'</a></code> <code class="jumpto"><a href="#clueweb09" class="str">'clueweb09'</a></code> <code class="jumpto"><a href="#clueweb12" class="str">'clueweb12'</a></code> <code class="jumpto"><a href="#cord19" class="str">'cord19'</a></code> <code class="jumpto"><a href="#msmarco-document" class="str">'msmarco-document'</a></code> <code class="jumpto"><a href="#msmarco-passage" class="str">'msmarco-passage'</a></code> <code class="jumpto"><a href="#nyt" class="str">'nyt'</a></code> <code class="jumpto"><a href="#trec-arabic" class="str">'trec-arabic'</a></code> <code class="jumpto"><a href="#trec-mandarin" class="str">'trec-mandarin'</a></code> <code class="jumpto"><a href="#trec-robust04" class="str">'trec-robust04'</a></code> <code class="jumpto"><a href="#trec-spanish" class="str">'trec-spanish'</a></code></p>
 <span class="showhide shown all">all subsets</span>
 
 <hr />
@@ -489,18 +489,91 @@ indexes the documents/queries by ID.
 </div>
 
 <hr />
+<div class="dataset" id="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span></div>
+<div class="desc">
+ <p> ClueWeb 2009 web document collection. Contains over 1B web pages, in 10 languages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb09/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb09/">Document collection site</a></li> </ul> 
+
+</div>
+<span class="showhide shown">subsets</span>
+</div>
+
+
+<div class="dataset" id="clueweb09/trec-web-2009" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/trec-web-2009'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="desc">
+ <p> The TREC Web Track 2009 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web09.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec18/papers/WEB09.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+<cite class="select">@inproceedings{Clarke2009TrecWeb,
+  title={Overview of the TREC 2009 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
+  booktitle={TREC},
+  year={2009}
+}
+</cite>
+</div>
+
+</div>
+
+
+<div class="dataset" id="clueweb09/trec-web-2010" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/trec-web-2010'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="desc">
+ <p> The TREC Web Track 2010 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web10.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
+<cite class="select">@inproceedings{Clarke2010TrecWeb,
+  title={Overview of the TREC 2010 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
+  booktitle={TREC},
+  year={2010}
+}
+</cite>
+</div>
+
+</div>
+
+
+<div class="dataset" id="clueweb09/trec-web-2011" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/trec-web-2011'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="desc">
+ <p> The TREC Web Track 2011 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/pubs/trec20/papers/WEB.OVERVIEW.pdf">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
+<cite class="select">@inproceedings{Clarke2011TrecWeb,
+  title={Overview of the TREC 2011 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2011}
+}
+</cite>
+</div>
+
+</div>
+
+
+<div class="dataset" id="clueweb09/trec-web-2012" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/trec-web-2012'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="desc">
+ <p> The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2012.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec21/papers/WEB12.overview.pdf">Shared task paper</a></li> </ul> 
+<cite class="select">@inproceedings{Clarke2012TrecWeb,
+  title={Overview of the TREC 2012 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2012}
+}
+</cite>
+</div>
+
+</div>
+
+<hr />
 <div class="dataset" id="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12'</span></code>
 <div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span></div>
 <div class="desc">
  <p> ClueWeb 2012 web document collection. Contains 733M web pages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb12/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb12/">Document collection site</a></li> <li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li> </ul> 
-<cite class="select">@article{Wang2020CORD19TC,
-  title={CORD-19: The Covid-19 Open Research Dataset},
-  author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
-  journal={ArXiv},
-  year={2020}
-}
-</cite>
+
 </div>
 <span class="showhide shown">subsets</span>
 </div>
@@ -562,12 +635,23 @@ indexes the documents/queries by ID.
 </div>
 
 
+<div class="dataset" id="clueweb12/b13/trec-misinfo-2019" data-parent="clueweb12">
+<code class="ds-name select"><span class="str">'clueweb12/b13/trec-misinfo-2019'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, title, cochranedoi, description, narrative">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, effectiveness, credibility">qrels</span></div>
+<div class="desc">
+<p><i>(no description provided)</i></p>
+
+</div>
+
+</div>
+
+
 <div class="dataset" id="clueweb12/trec-web-2013" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/trec-web-2013'</span></code>
 <div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2013.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
-<cite class="select">@inproceedings{Voorhees2020TRECCOVIDCA,
+<cite class="select">@inproceedings{CollinsThompson2013TrecWeb,
   title={TREC 2013 Web Track Overview},
   author={Kevyn Collins-Thompson and Paul Bennett and Fernando Diaz and Charles L. A. Clarke and Ellen M. Voorhees},
   booktitle={TREC},
@@ -584,7 +668,7 @@ indexes the documents/queries by ID.
 <div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
-<cite class="select">@inproceedings{Voorhees2020TRECCOVIDCA,
+<cite class="select">@inproceedings{CollinsThompson2014TrecWeb,
   title={TREC 2014 Web Track Overview},
   author={Kevyn Collins-Thompson and Craig Macdonald and Paul Bennett and Fernando Diaz and Ellen M. Voorhees},
   booktitle={TREC},

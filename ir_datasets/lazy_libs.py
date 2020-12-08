@@ -49,8 +49,26 @@ def warc():
         _cache['warc'] = warc
     return _cache['warc']
 
+def warc_clueweb09():
+    if 'warc_clueweb09' not in _cache:
+        import warc3_wet_clueweb09
+        _cache['warc_clueweb09'] = warc3_wet_clueweb09
+    return _cache['warc_clueweb09']
+
 def lz4_block():
     if 'lz4_block' not in _cache:
         import lz4.block
         _cache['lz4_block'] = lz4
     return _cache['lz4_block']
+
+def lz4_frame():
+    if 'lz4_frame' not in _cache:
+        import lz4.frame
+        _cache['lz4_frame'] = lz4
+    return _cache['lz4_frame']
+
+def zlib_state():
+    if 'zlib_state' not in _cache:
+        import zlib_state
+        _cache['zlib_state'] = zlib_state
+    return _cache['zlib_state']

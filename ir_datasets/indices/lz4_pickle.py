@@ -12,18 +12,20 @@ class Lz4PickleLookup:
         self._key_field = key_field
         self._key_idx = doc_cls._fields.index(key_field)
         self._doc_cls = doc_cls
+        os.makedirs(self._path, exist_ok=True)
         self._idx = None
+        self._idx_path = os.path.join(self._path, 'idx.' + "".join(x for x in self._key_field if x.isalnum() or x == '_'))
         self._bin = None
+        self._bin_path = os.path.join(self._path, 'bin')
 
     def idx(self):
         if self._idx is None:
-            file_name = "".join(x for x in self._key_field if x.isalnum() or x == '_')
-            self._idx = NumpySortedIndex(os.path.join(self._path, f'idx.{file_name}'))
+            self._idx = NumpySortedIndex(self._idx_path)
         return self._idx
 
     def bin(self):
         if self._bin is None:
-            self._bin = open(os.path.join(self._path, 'bin'), 'rb')
+            self._bin = open(self._bin_path, 'rb')
         return self._bin
 
     def close(self):
@@ -34,12 +36,17 @@ class Lz4PickleLookup:
             self._bin.close()
             self._bin = None
 
+    def clear(self):
+        self.close()
+        if os.path.exists(self._bin_path):
+            os.remove(self._bin_path)
+        NumpySortedIndex(self._idx_path).clear()
+
     def __del__(self):
         self.close()
 
     @contextmanager
     def transaction(self):
-        os.makedirs(self._path, exist_ok=True)
         with Lz4PickleTransaction(self) as trans:
             yield trans
 

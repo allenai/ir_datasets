@@ -74,6 +74,13 @@ class NumpySortedIndex:
             self.mmap_poss = None
         self.data = None
 
+    def clear(self):
+        self.close()
+        for file in ['meta', 'key', 'pos']:
+            path = f'{self.path}.{file}'
+            if os.path.exists(path):
+                os.remove(path)
+
     def __del__(self):
         self.close()
 

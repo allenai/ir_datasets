@@ -1,6 +1,7 @@
 from . import base
 from . import antique
 from . import car
+from . import clueweb09
 from . import clueweb12
 from . import cord19
 from . import msmarco_passage

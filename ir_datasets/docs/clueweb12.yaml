@@ -12,13 +12,6 @@ is provided <a href="https://lemurproject.org/clueweb12/">here</a>.
 <li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li>
 </ul>
 '
-  bibtex: |
-    @article{Wang2020CORD19TC,
-      title={CORD-19: The Covid-19 Open Research Dataset},
-      author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
-      journal={ArXiv},
-      year={2020}
-    }
 
 b13:
   desc: '
@@ -38,7 +31,7 @@ The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   bibtex: |
-    @inproceedings{Voorhees2020TRECCOVIDCA,
+    @inproceedings{CollinsThompson2013TrecWeb,
       title={TREC 2013 Web Track Overview},
       author={Kevyn Collins-Thompson and Paul Bennett and Fernando Diaz and Charles L. A. Clarke and Ellen M. Voorhees},
       booktitle={TREC},
@@ -56,7 +49,7 @@ The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   bibtex: |
-    @inproceedings{Voorhees2020TRECCOVIDCA,
+    @inproceedings{CollinsThompson2014TrecWeb,
       title={TREC 2014 Web Track Overview},
       author={Kevyn Collins-Thompson and Craig Macdonald and Paul Bennett and Fernando Diaz and Ellen M. Voorhees},
       booktitle={TREC},
