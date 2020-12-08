@@ -1,12 +1,10 @@
-import re
-import gzip
 import codecs
 import os
 from collections import namedtuple
-from contextlib import contextmanager
 from glob import glob
+from pathlib import Path
 import ir_datasets
-from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
+from ir_datasets.util import DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
@@ -64,9 +62,10 @@ class MsinfoQrels(TrecQrels):
 
 
 class ClueWeb12Docs(WarcDocs):
-    def __init__(self, docs_dlc):
+    def __init__(self, docs_dlc, chk_dlc):
         super().__init__()
         self.docs_dlc = docs_dlc
+        self.chk_dlc = chk_dlc
 
     def docs_path(self):
         return self.docs_dlc.path()
@@ -85,10 +84,19 @@ class ClueWeb12Docs(WarcDocs):
             return None
         return os.path.join(self.docs_dlc.path(), f'ClueWeb12_{sec[:2]}', sec, f'{sec}-{part}.warc.gz')
 
+    def _docs_source_file_to_checkpoint(self, source_file):
+        source_prefix = Path(self.docs_dlc.path())
+        source_file = Path(source_file)
+        index_prefix = Path(self.chk_dlc.path())
+        result = index_prefix / source_file.relative_to(source_prefix)
+        if result == source_file:
+            return None
+        return f'{result}.chk.lz2' 
+
 
 class ClueWeb12b13Docs(ClueWeb12Docs):
-    def __init__(self, docs_dlc, b13_dlc):
-        super().__init__(docs_dlc)
+    def __init__(self, docs_dlc, chk_dlc, b13_dlc):
+        super().__init__(docs_dlc, chk_dlc)
         self.b13_dlc = b13_dlc
 
     def _iter_b13ids(self):
@@ -118,10 +126,11 @@ def _init():
     subsets = {}
 
     docs_dlc = dlc['docs']
+    docs_chk_dlc = dlc['docs.chk']
     b13_dlc = Bz2Extract(Cache(TarExtract(dlc['cw12b-info'], 'ClueWeb12-CreateB13/ClueWeb12_B13_DocID_To_URL.txt.bz2'), base_path/'ClueWeb12_B13_DocID_To_URL.txt.bz2'))
 
-    collection = ClueWeb12Docs(docs_dlc)
-    collection_b13 = ClueWeb12b13Docs(docs_dlc, b13_dlc)
+    collection = ClueWeb12Docs(docs_dlc, docs_chk_dlc)
+    collection_b13 = ClueWeb12b13Docs(docs_dlc, docs_chk_dlc, b13_dlc)
 
     base = Dataset(collection, documentation('_'))
 

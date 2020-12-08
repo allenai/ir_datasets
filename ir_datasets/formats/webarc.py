@@ -1,6 +1,6 @@
 import gzip
 import re
-from contextlib import contextmanager
+from contextlib import contextmanager, ExitStack
 from collections import namedtuple
 import ir_datasets
 from ir_datasets.formats import BaseDocs
@@ -27,28 +27,30 @@ class WarcDocs(BaseDocs):
         else:
             warc = ir_datasets.lazy_libs.warc()
 
-        with gzip.open(warcf, 'rb') as f:
-            with warc.WARCFile(fileobj=f) as f:
-                def it():
-                    for doc in filter(lambda d: d.type == 'response', f):
-                        did = doc[self.id_header]
-                        url = doc['WARC-Target-URI']
-                        date = doc['WARC-Date']
-                        payload = doc.payload.read()
-                        split = re.split(b'\r?\n\r?\n', payload, maxsplit=1)
-                        if len(split) == 1:
-                            http_headers, body = split[0], b''
-                        else:
-                            http_headers, body = split
-                        content_type = re.search(b'Content-Type:(.*)', http_headers, flags=re.IGNORECASE)
-                        if content_type:
-                            content_type = content_type.group(1).decode().strip()
-                            content_type = content_type.split(';')
-                            content_type = content_type[0]
-                        else:
-                            content_type = ''
-                        yield WarcDoc(did, url, date, content_type, http_headers, body)
-                yield it()
+        with ExitStack() as stack:
+            if isinstance(warcf, str):
+                warcf = stack.enter_context(gzip.open(warcf, 'rb'))
+            f = stack.enter_context(warc.WARCFile(fileobj=warcf))
+            def it():
+                for doc in filter(lambda d: d.type == 'response', f):
+                    did = doc[self.id_header]
+                    url = doc['WARC-Target-URI']
+                    date = doc['WARC-Date']
+                    payload = doc.payload.read()
+                    split = re.split(b'\r?\n\r?\n', payload, maxsplit=1)
+                    if len(split) == 1:
+                        http_headers, body = split[0], b''
+                    else:
+                        http_headers, body = split
+                    content_type = re.search(b'Content-Type:(.*)', http_headers, flags=re.IGNORECASE)
+                    if content_type:
+                        content_type = content_type.group(1).decode().strip()
+                        content_type = content_type.split(';')
+                        content_type = content_type[0]
+                    else:
+                        content_type = ''
+                    yield WarcDoc(did, url, date, content_type, http_headers, body)
+            yield it()
 
     def docs_path(self):
         raise NotImplementedError
@@ -59,6 +61,10 @@ class WarcDocs(BaseDocs):
     def _docs_id_to_source_file(self, doc_id):
         # For Warc Docstore lookups
         raise NotImplementedError
+
+    def _docs_source_file_to_checkpoint(self, source_file):
+        # For Warc Docstore lookups
+        return None
 
     def docs_store(self):
         docstore = ir_datasets.indices.ClueWebWarcDocstore(self)

@@ -94,6 +94,11 @@ clueweb12:
 
 Should contain ClueWeb12_00--19 directories'
     cache_path: 'corpus'
+  docs.chk:
+    instructions: 'Link the ClueWeb12 checkpoint files here: {path}
+
+Should contain directoreis like ClueWeb09_English_1'
+    cache_path: 'corpus.chk'
   cw12b-info:
     url: 'http://lemurproject.org/clueweb12/ClueWeb12-CreateB13.tgz'
     expected_md5: '8175ce74a97e46be80c2127d965da200'

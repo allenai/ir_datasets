@@ -27,6 +27,9 @@ class TestClueWeb12(DatasetIntegrationTest):
         docstore.clear_cache()
         with _logger.duration('cold fetch'):
             docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
+        docstore.clear_cache()
+        with _logger.duration('cold fetch (cleared)'):
+            docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
         with _logger.duration('warm fetch'):
             docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
         docstore = ir_datasets.load('clueweb12').docs_store()
@@ -35,6 +38,9 @@ class TestClueWeb12(DatasetIntegrationTest):
         with _logger.duration('cold fetch (nearby)'):
             docstore.get_many(['clueweb12-0000tw-05-00020', 'clueweb12-0000tw-05-12201', 'clueweb12-0106wb-18-19412'])
         with _logger.duration('cold fetch (earlier)'):
+            docstore.get_many(['clueweb12-0000tw-05-00001', 'clueweb12-0106wb-18-08131'])
+        docstore.clear_cache()
+        with _logger.duration('cold fetch (earlier, cleared)'):
             docstore.get_many(['clueweb12-0000tw-05-00001', 'clueweb12-0106wb-18-08131'])
 
 

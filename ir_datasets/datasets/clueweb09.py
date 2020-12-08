@@ -1,10 +1,5 @@
-import re
-import gzip
-import indexed_gzip
-import codecs
 import os
 from collections import namedtuple
-from contextlib import contextmanager
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract

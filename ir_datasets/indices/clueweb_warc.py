@@ -1,5 +1,6 @@
 import os
 import gzip
+from contextlib import ExitStack
 import ir_datasets
 from . import Docstore
 
@@ -8,6 +9,7 @@ class WarcIndexFile:
         lz4 = ir_datasets.lazy_libs.lz4_frame()
         self.fileobj = lz4.frame.open(fileobj, mode, compression_level=lz4.frame.COMPRESSIONLEVEL_MAX)
         self.doc_id_size = doc_id_size
+        self.pos = 0
 
     def write(self, doc_id, state, pos, out_offset):
         zdict, bits, byte = state
@@ -23,21 +25,25 @@ class WarcIndexFile:
 
     def read(self):
         ldid = self.doc_id_size
-        chunk = f_chk.read(ldid + 4 + 1 + 1 + (32 * 1024) + 4)
+        chunk = self.fileobj.read(ldid + 4 + 1 + 1 + (32 * 1024) + 4)
         if not chunk:
             raise EOFError()
-        did = chunk[:ldid].decode()
-        pos = int.from_bytes(chunk[ldid:ldid+4], 'little')
+        doc_id = chunk[:ldid].decode()
+        pos = self.pos + int.from_bytes(chunk[ldid:ldid+4], 'little')
         bits = int.from_bytes(chunk[ldid+4:ldid+4+1], 'little')
         byte = int.from_bytes(chunk[ldid+4+1:ldid+4+1+1], 'little')
         zdict = chunk[ldid+4+1+1:ldid+4+1+1+(32 * 1024)]
         out_offset = int.from_bytes(chunk[-4:], 'little')
         state = (zdict, bits, byte)
+        self.pos = pos
         return (doc_id, state, pos, out_offset)
+
+    def peek_doc_id(self):
+        return self.fileobj.peek(self.doc_id_size)[:self.doc_id_size].decode()
 
     def __bool__(self):
         # TODO: a better way? Does lz4 handle peeks okay?
-        return self.peek(1) != b''
+        return self.fileobj.peek(1) != b''
 
     def __enter__(self):
         return self
@@ -81,6 +87,33 @@ class ClueWebWarcIndex:
     def built(self):
         return os.path.exists(self.index_path)
 
+    def get_many_iter(self, doc_ids, docs_obj):
+        doc_ids = sorted(set(doc_ids))
+        with ExitStack() as stack:
+            f = stack.enter_context(self.zlib_state.GzipStateFile(self.source_path))
+            f_chk = stack.enter_context(WarcIndexFile(self.index_path, 'rb'))
+            state, pos, out_offset = None, None, None
+            while doc_ids and f_chk:
+                next_doc_id = f_chk.peek_doc_id()
+                if doc_ids[0] < next_doc_id:
+                    if state is not None:
+                        f.zseek(pos, state)
+                        f.read(out_offset)
+                    doc_iter = stack.enter_context(docs_obj._docs_ctxt_iter_warc(f))
+                    for doc in doc_iter:
+                        brk = False
+                        while doc.doc_id >= doc_ids[0]:
+                            if doc.doc_id == doc_ids[0]:
+                                yield doc
+                            doc_ids = doc_ids[1:] # pop -- either not found or found
+                            if not doc_ids or doc_ids[0] >= next_doc_id:
+                                brk = True
+                                break
+                        if brk:
+                            break
+                doc_id, state, pos, out_offset = f_chk.read()
+
+
 
 class ClueWebWarcDocstore(Docstore):
     def __init__(self, warc_docs):
@@ -88,7 +121,6 @@ class ClueWebWarcDocstore(Docstore):
         self.warc_docs = warc_docs
 
     def get_many_iter(self, doc_ids):
-        warc = ir_datasets.lazy_libs.warc()
         result = {}
         files_to_search = {}
         for doc_id in doc_ids:
@@ -99,10 +131,15 @@ class ClueWebWarcDocstore(Docstore):
                 files_to_search[source_file].append(doc_id)
         for source_file, doc_ids in files_to_search.items():
             doc_ids = sorted(doc_ids)
-            with self.warc_docs._docs_ctxt_iter_warc(source_file) as doc_it:
-                for doc in doc_it:
-                    if doc_ids[0] == doc.doc_id:
-                        yield doc
-                        doc_ids = doc_ids[1:]
-                        if not doc_ids:
-                            break # file finished
+            checkpoint_file = self.warc_docs._docs_source_file_to_checkpoint(source_file)
+            if checkpoint_file:
+                index = ClueWebWarcIndex(source_file, checkpoint_file)
+                yield from index.get_many_iter(doc_ids, self.warc_docs)
+            else:
+                with self.warc_docs._docs_ctxt_iter_warc(source_file) as doc_it:
+                    for doc in doc_it:
+                        if doc_ids[0] == doc.doc_id:
+                            yield doc
+                            doc_ids = doc_ids[1:]
+                            if not doc_ids:
+                                break # file finished
