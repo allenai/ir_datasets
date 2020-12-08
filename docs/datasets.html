@@ -491,7 +491,7 @@ indexes the documents/queries by ID.
 <hr />
 <div class="dataset" id="clueweb09">
 <code class="ds-name select"><span class="str">'clueweb09'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span></div>
 <div class="desc">
  <p> ClueWeb 2009 web document collection. Contains over 1B web pages, in 10 languages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb09/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb09/">Document collection site</a></li> </ul> 
 
@@ -500,9 +500,20 @@ indexes the documents/queries by ID.
 </div>
 
 
-<div class="dataset" id="clueweb09/trec-web-2009" data-parent="clueweb09">
-<code class="ds-name select"><span class="str">'clueweb09/trec-web-2009'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="dataset" id="clueweb09/en" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/en'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span></div>
+<div class="desc">
+ <p> Subset of ClueWeb 2009 with only English-language documents. </p> 
+
+</div>
+
+</div>
+
+
+<div class="dataset" id="clueweb09/en/trec-web-2009" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/en/trec-web-2009'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2009 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web09.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec18/papers/WEB09.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Clarke2009TrecWeb,
@@ -517,9 +528,9 @@ indexes the documents/queries by ID.
 </div>
 
 
-<div class="dataset" id="clueweb09/trec-web-2010" data-parent="clueweb09">
-<code class="ds-name select"><span class="str">'clueweb09/trec-web-2010'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="dataset" id="clueweb09/en/trec-web-2010" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/en/trec-web-2010'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2010 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web10.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Clarke2010TrecWeb,
@@ -534,9 +545,9 @@ indexes the documents/queries by ID.
 </div>
 
 
-<div class="dataset" id="clueweb09/trec-web-2011" data-parent="clueweb09">
-<code class="ds-name select"><span class="str">'clueweb09/trec-web-2011'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="dataset" id="clueweb09/en/trec-web-2011" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/en/trec-web-2011'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2011 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/pubs/trec20/papers/WEB.OVERVIEW.pdf">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Clarke2011TrecWeb,
@@ -551,9 +562,9 @@ indexes the documents/queries by ID.
 </div>
 
 
-<div class="dataset" id="clueweb09/trec-web-2012" data-parent="clueweb09">
-<code class="ds-name select"><span class="str">'clueweb09/trec-web-2012'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div class="dataset" id="clueweb09/en/trec-web-2012" data-parent="clueweb09">
+<code class="ds-name select"><span class="str">'clueweb09/en/trec-web-2012'</span></code>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2012.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec21/papers/WEB12.overview.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Clarke2012TrecWeb,
@@ -570,7 +581,7 @@ indexes the documents/queries by ID.
 <hr />
 <div class="dataset" id="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span></div>
 <div class="desc">
  <p> ClueWeb 2012 web document collection. Contains 733M web pages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb12/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb12/">Document collection site</a></li> <li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li> </ul> 
 
@@ -581,7 +592,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/b13" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/b13'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span></div>
 <div class="desc">
  <p> Official subset of the ClueWeb12 datasets with 52M web pages. </p> 
 
@@ -592,7 +603,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/b13/ntcir-www-1" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/b13/ntcir-www-1'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, text">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, text">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The NTCIR-13 We Want Web (WWW) 1 ad-hoc ranking benchmark. Contains 100 queries with deep relevance judgments (avg 255 per query). Judgments aggregated from two assessors. Note that the qrels contain additional judgments from the NTCIR-14 CENTRE track. </p> <ul> <li><a href="http://www.thuir.cn/ntcirwww/">Shared task site</a></li> <li><a href="http://www.thuir.cn/ntcirwww/files/ntcir13wwwov.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Luo2017OverviewNtcirWww1,
@@ -609,7 +620,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/b13/ntcir-www-2" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/b13/ntcir-www-2'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, title, description">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, title, description">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The NTCIR-14 We Want Web (WWW) 2 ad-hoc ranking benchmark. Contains 80 queries with deep relevance judgments (avg 345 per query). Judgments aggregated from two assessors. </p> <ul> <li><a href="http://www.thuir.cn/ntcirwww2/">Shared task site</a></li> <li><a href="http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings14/pdf/ntcir/01-NTCIR14-OV-WWW-MaoJ.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{Mao2018OverviewNtcirWww2,
@@ -626,7 +637,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/b13/ntcir-www-3" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/b13/ntcir-www-3'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, title, description">queries</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, title, description">queries</span></div>
 <div class="desc">
  <p> The NTCIR-15 We Want Web (WWW) 3 ad-hoc ranking benchmark. Contains 160 queries with deep relevance judgments (to be released). 80 of the queries are from <a class="ds-ref">clueweb12/b13/ntcir-www-2</a>. </p> <ul> <li><a href="http://sakailab.com/www3/">Shared task site</a></li> </ul> 
 
@@ -637,7 +648,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/b13/trec-misinfo-2019" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/b13/trec-misinfo-2019'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, title, cochranedoi, description, narrative">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, effectiveness, credibility">qrels</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, title, cochranedoi, description, narrative">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, effectiveness, credibility">qrels</span></div>
 <div class="desc">
 <p><i>(no description provided)</i></p>
 
@@ -648,7 +659,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/trec-web-2013" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/trec-web-2013'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2013.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{CollinsThompson2013TrecWeb,
@@ -665,7 +676,7 @@ indexes the documents/queries by ID.
 
 <div class="dataset" id="clueweb12/trec-web-2014" data-parent="clueweb12">
 <code class="ds-name select"><span class="str">'clueweb12/trec-web-2014'</span></code>
-<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, html">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
+<div>Provides: <span class="tag tag-docs" data-fields="doc_id, url, date, content_type, http_headers, body">docs</span> <span class="tag tag-queries" data-fields="query_id, query, description, type, subtopics">queries</span> <span class="tag tag-qrels" data-fields="query_id, doc_id, relevance, iteration">qrels</span></div>
 <div class="desc">
  <p> The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
 <cite class="select">@inproceedings{CollinsThompson2014TrecWeb,

@@ -12,6 +12,13 @@ is provided <a href="https://lemurproject.org/clueweb09/">here</a>.
 </ul>
 '
 
+en:
+  desc: '
+<p>
+Subset of ClueWeb 2009 with only English-language documents.
+</p>
+'
+
 trec-web-2009:
   desc: '
 <p>

@@ -1,6 +1,7 @@
 import os
 import gzip
 import ir_datasets
+from . import Docstore
 
 class WarcIndexFile:
     def __init__(self, fileobj, mode, doc_id_size=25):
@@ -79,3 +80,29 @@ class ClueWebWarcIndex:
 
     def built(self):
         return os.path.exists(self.index_path)
+
+
+class ClueWebWarcDocstore(Docstore):
+    def __init__(self, warc_docs):
+        super().__init__(warc_docs.docs_cls(), 'doc_id')
+        self.warc_docs = warc_docs
+
+    def get_many_iter(self, doc_ids):
+        warc = ir_datasets.lazy_libs.warc()
+        result = {}
+        files_to_search = {}
+        for doc_id in doc_ids:
+            source_file = self.warc_docs._docs_id_to_source_file(doc_id)
+            if source_file is not None:
+                if source_file not in files_to_search:
+                    files_to_search[source_file] = []
+                files_to_search[source_file].append(doc_id)
+        for source_file, doc_ids in files_to_search.items():
+            doc_ids = sorted(doc_ids)
+            with self.warc_docs._docs_ctxt_iter_warc(source_file) as doc_it:
+                for doc in doc_it:
+                    if doc_ids[0] == doc.doc_id:
+                        yield doc
+                        doc_ids = doc_ids[1:]
+                        if not doc_ids:
+                            break # file finished

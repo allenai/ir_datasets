@@ -7,7 +7,7 @@ from contextlib import contextmanager
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, BaseDocs, GenericDoc, GenericQuery, TrecQrel
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -38,51 +38,12 @@ MISINFO_QREL_DEFS = {
     2: 'Highly relevant',
 }
 
-WarcInfo = namedtuple('WarcInfo', ['doc_id', 'url', 'date', 'http_response'])
 TrecWebTrackQuery = namedtuple('TrecWebTrackQuery', ['query_id', 'query', 'description', 'type', 'subtopics'])
-WarcHtmlDoc = namedtuple('WarcHtmlDoc', ['doc_id', 'url', 'date', 'html'])
 NtcirQuery = namedtuple('NtcirQuery', ['query_id', 'title', 'description'])
 ntcir_map = {'qid': 'query_id', 'content': 'title', 'description': 'description'}
 MisinfoQuery = namedtuple('MisinfoQuery', ['query_id', 'title', 'cochranedoi', 'description', 'narrative'])
 misinfo_map = {'number': 'query_id', 'query': 'title', 'cochranedoi': 'cochranedoi', 'description': 'description', 'narrative': 'narrative'}
 MisinfoQrel = namedtuple('MisinfoQrel', ['query_id', 'doc_id', 'relevance', 'effectiveness', 'credibility'])
-
-
-def decode(s, encodings=('iso-8859-1', 'ascii', 'utf8', 'latin1')):
-    for encoding in encodings:
-        try:
-            return s.decode(encoding)
-        except UnicodeDecodeError:
-            pass
-        except LookupError:
-            pass
-
-
-class ClueWebDocStore(Docstore):
-    def __init__(self, warc_docs):
-        super().__init__(WarcHtmlDoc, 'doc_id')
-        self.warc_docs = warc_docs
-
-    def get_many_iter(self, doc_ids):
-        warc = ir_datasets.lazy_libs.warc()
-        result = {}
-        files_to_search = {}
-        for doc_id in doc_ids:
-            ds, sec, part, doc = doc_id.split('-')
-            assert ds == 'clueweb12'
-            source_file = os.path.join(self.warc_docs.docs_dlc.path(), f'ClueWeb12_{sec[:2]}', sec, f'{sec}-{part}.warc.gz')
-            if source_file not in files_to_search:
-                files_to_search[source_file] = []
-            files_to_search[source_file].append(doc_id)
-        for source_file, doc_ids in files_to_search.items():
-            doc_ids = sorted(doc_ids)
-            with self.warc_docs._iter_warc(source_file) as doc_it:
-                for doc in doc_it:
-                    if doc_ids[0] == doc.doc_id:
-                        yield self.warc_docs._parse_warc(doc)
-                        doc_ids = doc_ids[1:]
-                        if not doc_ids:
-                            break # file finished
 
 
 class MsinfoQrels(TrecQrels):
@@ -102,58 +63,27 @@ class MsinfoQrels(TrecQrels):
         return MisinfoQrel
 
 
-class WarcDocs(BaseDocs):
-    def __init__(self, id_header):
-        self.id_header = id_header
-
-    @contextmanager
-    def _iter_warc(self, warcf):
-        warc = ir_datasets.lazy_libs.warc()
-        with gzip.open(warcf, 'rb') as f:
-            with warc.WARCFile(fileobj=f) as f:
-                def it():
-                    for doc in filter(lambda d: d.type == 'response', f):
-                        did = doc[self.id_header]
-                        url = doc['WARC-Target-URI']
-                        date = doc['WARC-Date']
-                        http_response = doc.payload.read()
-                        yield WarcInfo(did, url, date, http_response)
-                yield it()
-
-    def _parse_warc(self, doc):
-        # Doing this here allows for both http headers and <meta http-equiv>
-        encoding = re.search(b'charset=([a-zA-Z0-9-_]+)', doc.http_response)
-        if encoding:
-            encoding = (encoding.group(1).decode(), 'utf8', 'latin1')
-        else:
-            encoding = ('utf8', 'latin1')
-        try:
-            headers, html = doc.http_response.split(b'\r\n\r\n', 1)
-        except ValueError:
-            headers, html = doc.http_response.split(b'\n\n', 1)
-        html = decode(html, encoding)
-        return WarcHtmlDoc(doc.doc_id, doc.url, doc.date, html)
-
-    def docs_cls(self):
-        return WarcHtmlDoc
-
 class ClueWeb12Docs(WarcDocs):
     def __init__(self, docs_dlc):
-        super().__init__('WARC-TREC-ID')
+        super().__init__()
         self.docs_dlc = docs_dlc
 
-    def docs_iter(self):
-        for source_file in self._iter_sources():
-            with self._iter_warc(source_file) as doc_iter:
-                yield from map(self._parse_warc, doc_iter)
+    def docs_path(self):
+        return self.docs_dlc.path()
 
-    def _iter_sources(self):
+    def _docs_iter_source_files(self):
         for source_dir in sorted(glob(os.path.join(self.docs_dlc.path(), 'ClueWeb12_*', '*'))):
             for source_file in sorted(glob(os.path.join(source_dir, '*.gz'))):
                 yield source_file
 
-    def docs_store(self):
-        return CacheDocstore(ClueWebDocStore(self), f'{self.docs_dlc.path()}.cache')
+    def _docs_id_to_source_file(self, doc_id):
+        parts = doc_id.split('-')
+        if len(parts) != 4:
+            return None
+        dataset, sec, part, doc = parts
+        if dataset != 'clueweb12':
+            return None
+        return os.path.join(self.docs_dlc.path(), f'ClueWeb12_{sec[:2]}', sec, f'{sec}-{part}.warc.gz')
 
 
 class ClueWeb12b13Docs(ClueWeb12Docs):
@@ -168,38 +98,17 @@ class ClueWeb12b13Docs(ClueWeb12Docs):
                 did, _ = line.split(',', 1)
                 yield did
 
-    def _iter_docs(self):
+    def docs_iter(self):
         did_iter = self._iter_b13ids()
         current_did = next(did_iter, None)
-        for source_file in self._iter_sources():
-            with self._iter_warc(source_file) as doc_iter:
-                for doc in doc_iter:
-                    if doc.doc_id == current_did:
-                        yield doc
-                        next_did = next(did_iter, None)
-                        advance_file = next_did is None or current_did.split('-')[:-1] != next_did.split('-')[:-1]
-                        current_did = next_did
-                        if advance_file:
-                            break
-
-    def docs_iter(self):
-        doc_iter = self._iter_docs()
-        yield from map(self._parse_warc, doc_iter)
-
-
-class NtcirQrels(TrecQrels):
-    def qrels_iter(self):
-        with self._qrels_dlc.stream() as f:
-            f = codecs.getreader('utf8')(f)
-            for line in f:
-                if line == '\n':
-                    continue # ignore blank lines
-                cols = line.rstrip().split()
-                if len(cols) != 3:
-                    raise RuntimeError(f'expected 3 columns, got {len(cols)}')
-                qid, did, score = cols
-                score = score[1:]
-                yield TrecQrel(qid, did, int(score), '0')
+        for doc in super().docs_iter():
+            if doc.doc_id == current_did:
+                yield doc
+                next_did = next(did_iter, None)
+                advance_file = next_did is None or current_did.split('-')[:-1] != next_did.split('-')[:-1]
+                current_did = next_did
+                if advance_file:
+                    break
 
 
 def _init():

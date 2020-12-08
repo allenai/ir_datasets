@@ -185,6 +185,10 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
                 count = len(value) - maxlen
                 pattern = '^' + re.escape(value[:maxlen//2]) + (r'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + '$'
                 result.append(re.compile(pattern, re.DOTALL))
+            elif isinstance(value, bytes) and len(value) > maxlen:
+                count = len(value) - maxlen
+                pattern = b'^' + re.escape(value[:maxlen//2]) + (b'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + b'$'
+                result.append(re.compile(pattern, re.DOTALL))
             else:
                 result.append(value)
         return type(tup)(*result)
@@ -195,7 +199,10 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
             result += f'    {repr(key)}: {type(value).__name__}('
             for item in value:
                 if isinstance(item, re.Pattern):
-                    pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
+                    if isinstance(item.pattern, str):
+                        pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
+                    else:
+                        pattern = item.pattern.replace(b'\\ ', b' ').replace(b'\\\n', b'\n') # don't want these escaped
                     result += f're.compile({repr(pattern)}, flags={item.flags}), '
                 else:
                     result += f'{repr(item)}, '
