@@ -5,7 +5,8 @@ import contextlib
 import os
 import shutil
 import tarfile
-from collections import namedtuple, defaultdict
+from collections import defaultdict
+from typing import NamedTuple
 from pathlib import Path
 import ir_datasets
 from ir_datasets.wrappers import DocstoreWrapper
@@ -19,7 +20,14 @@ NAME = 'cord19'
 _logger = ir_datasets.log.easy()
 
 
-Cord19Doc = namedtuple('Cord19Doc', ['doc_id', 'title', 'doi', 'date', 'abstract', 'text'])
+class Cord19Doc(NamedTuple):
+    doc_id: str
+    title: str
+    doi: str
+    date: str
+    abstract: str
+    text: str
+
 
 QRELS_DEFS = {
     2: 'Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.',

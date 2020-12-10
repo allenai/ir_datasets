@@ -6,15 +6,32 @@ import gzip
 import xml.etree.ElementTree as ET
 from fnmatch import fnmatch
 from pathlib import Path
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from .base import GenericDoc, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
 
 
-TrecDoc = namedtuple('TrecDoc', ['doc_id', 'text', 'marked_up_doc'])
-TrecQuery = namedtuple('TrecQuery', ['query_id', 'title', 'description', 'narrative'])
-TrecSubtopic = namedtuple('TrecSubtopic', ['number', 'text', 'type'])
-TrecQrel = namedtuple('TrecQrel', ['query_id', 'doc_id', 'relevance', 'iteration'])
+class TrecDoc(NamedTuple):
+    doc_id: str
+    text: str
+    marked_up_doc: str
+
+class TrecQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+    narrative: str
+
+class TrecSubtopic(NamedTuple):
+    number: str
+    text: str
+    type: str
+
+class TrecQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    iteration: str
 
 # Default content tags from Anserini's TrecCollection
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()

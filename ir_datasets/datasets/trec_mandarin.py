@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import GzipExtract, DownloadConfig
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries
@@ -7,7 +7,16 @@ from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 NAME = 'trec-mandarin'
 
-TrecMandarinQuery = namedtuple('TrecMandarinQuery', ['query_id', 'title_en', 'title_zh', 'description_en', 'description_zh', 'narrative_en', 'narrative_zh'])
+
+class TrecMandarinQuery(NamedTuple):
+    query_id: str
+    title_en: str
+    title_zh: str
+    description_en: str
+    description_zh: str
+    narrative_en: str
+    narrative_zh: str
+
 
 QREL_DEFS = {
     1: 'relevant',

@@ -1,12 +1,18 @@
 import gzip
 import re
 from contextlib import contextmanager, ExitStack
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.formats import BaseDocs
 
 
-WarcDoc = namedtuple('WarcDoc', ['doc_id', 'url', 'date', 'content_type', 'http_headers', 'body'])
+class WarcDoc(NamedTuple):
+    doc_id: str
+    url: str
+    date: str
+    content_type: str
+    http_headers: str
+    body: bytes
 
 
 class WarcDocs(BaseDocs):

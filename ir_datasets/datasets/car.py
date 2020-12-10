@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple, Tuple
 import ir_datasets
 from ir_datasets.util import DownloadConfig, TarExtract, ReTar
 from ir_datasets.formats import TrecQrels, BaseDocs, BaseQueries, GenericDoc
@@ -23,8 +23,11 @@ MANUAL_QRELS = {
 }
 
 
-CarQuery = namedtuple('CarQuery', ['query_id', 'text', 'title', 'headings'])
-
+class CarQuery(NamedTuple):
+    query_id: str
+    text: str
+    title: str
+    headings: Tuple[str, ...]
 
 
 class CarDocs(BaseDocs):

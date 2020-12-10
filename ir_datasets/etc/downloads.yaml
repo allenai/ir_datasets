@@ -152,6 +152,7 @@ cord19:
     cache_path: '2020-07-16.tar.gz'
   trec-covid/queries:
     url: 'https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml'
+    expected_md5: '0307a37b6b9f1a5f233340a769d538ea'
     cache_path: 'trec-covid/queries.xml'
   trec-covid/qrels:
     url: 'https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt'

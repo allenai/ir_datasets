@@ -1,13 +1,30 @@
 import hashlib
 import json
 import types
-from collections import namedtuple
+from typing import NamedTuple
 
-GenericDoc = namedtuple('GenericDoc', ['doc_id', 'text'])
-GenericQuery = namedtuple('GenericQuery', ['query_id', 'text'])
-GenericQrel = namedtuple('GenericQrel', ['query_id', 'doc_id', 'relevance'])
-GenericScoredDoc = namedtuple('GenericScoredDoc', ['query_id', 'doc_id', 'score'])
-GenericDocPair = namedtuple('GenericDocPair', ['query_id', 'doc_id_a', 'doc_id_b'])
+class GenericDoc(NamedTuple):
+    doc_id: str
+    text: str
+
+class GenericQuery(NamedTuple):
+    query_id: str
+    text: str
+
+class GenericQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+
+class GenericScoredDoc(NamedTuple):
+    query_id: str
+    doc_id: str
+    score: float
+
+class GenericDocPair(NamedTuple):
+    query_id: str
+    doc_id_a: str
+    doc_id_b: str
 
 
 class BaseDocs:

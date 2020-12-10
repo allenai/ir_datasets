@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import GzipExtract, DownloadConfig
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries
@@ -7,10 +7,25 @@ from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 NAME = 'trec-spanish'
 
-TrecDescOnlyQuery = namedtuple('_TrecDescOnlyQuery', ['query_id', 'description'])
+class TrecDescOnlyQuery(NamedTuple):
+    query_id: str
+    description: str
 
-TrecSpanish3Query = namedtuple('TrecSpanish3Query', ['query_id', 'title_es', 'title_en', 'description_es', 'description_en', 'narrative_es', 'narrative_en'])
-TrecSpanish4Query = namedtuple('TrecSpanish4Query', ['query_id', 'description_es1', 'description_en1', 'description_es2', 'description_en2'])
+class TrecSpanish3Query(NamedTuple):
+    query_id: str
+    title_es: str
+    title_en: str
+    description_es: str
+    description_en: str
+    narrative_es: str
+    narrative_en: str
+
+class TrecSpanish4Query(NamedTuple):
+    query_id: str
+    description_es1: str
+    description_en1: str
+    description_es2: str
+    description_en2: str
 
 QREL_DEFS = {
     1: 'relevant',

@@ -1,10 +1,10 @@
 import os
 import codecs
-from collections import namedtuple
+from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -27,8 +27,21 @@ QREL_DEFS_09 = {
     0: 'not relevant',
 }
 
-TrecWebTrackQuery = namedtuple('TrecWebTrackQuery', ['query_id', 'query', 'description', 'type', 'subtopics'])
-TrecPrel = namedtuple('TrecPrel', ['query_id', 'doc_id', 'relevance', 'method', 'iprob'])
+
+class TrecWebTrackQuery(NamedTuple):
+    query_id: str
+    query: str
+    description: str
+    type: str
+    subtopics: Tuple[TrecSubtopic, ...]
+
+
+class TrecPrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    method: int
+    iprob: float
 
 
 class ClueWeb09Docs(WarcDocs):

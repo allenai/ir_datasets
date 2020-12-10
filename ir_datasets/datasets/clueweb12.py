@@ -1,11 +1,11 @@
 import codecs
 import os
-from collections import namedtuple
+from typing import NamedTuple, Tuple
 from glob import glob
 from pathlib import Path
 import ir_datasets
 from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, Bz2Extract, ZipExtract
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -36,12 +36,39 @@ MISINFO_QREL_DEFS = {
     2: 'Highly relevant',
 }
 
-TrecWebTrackQuery = namedtuple('TrecWebTrackQuery', ['query_id', 'query', 'description', 'type', 'subtopics'])
-NtcirQuery = namedtuple('NtcirQuery', ['query_id', 'title', 'description'])
+
 ntcir_map = {'qid': 'query_id', 'content': 'title', 'description': 'description'}
-MisinfoQuery = namedtuple('MisinfoQuery', ['query_id', 'title', 'cochranedoi', 'description', 'narrative'])
 misinfo_map = {'number': 'query_id', 'query': 'title', 'cochranedoi': 'cochranedoi', 'description': 'description', 'narrative': 'narrative'}
-MisinfoQrel = namedtuple('MisinfoQrel', ['query_id', 'doc_id', 'relevance', 'effectiveness', 'credibility'])
+
+
+class TrecWebTrackQuery(NamedTuple):
+    query_id: str
+    query: str
+    description: str
+    type: str
+    subtopics: Tuple[TrecSubtopic, ...]
+
+
+class NtcirQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+
+
+class MisinfoQuery(NamedTuple):
+    query_id: str
+    title: str
+    cochranedoi: str
+    description: str
+    narrative: str
+
+
+class MisinfoQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    effectiveness: int
+    redibility: int
 
 
 class MsinfoQrels(TrecQrels):

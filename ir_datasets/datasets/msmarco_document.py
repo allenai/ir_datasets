@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, Lazy
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
@@ -19,7 +19,11 @@ ORCAS_QLRES_DEFS = {
     1: "User click",
 }
 
-MsMarcoDocument = namedtuple('MsMarcoDocument', ['doc_id', 'url', 'title', 'body'])
+class MsMarcoDocument(NamedTuple):
+    doc_id: str
+    url: str
+    title: str
+    body: str
 
 
 # Use the TREC-formatted docs so we get all the available formatting (namely, line breaks)
