@@ -13,7 +13,7 @@ import ir_datasets
 from ir_datasets import util
 
 
-__all__ = ['IterStream', 'Cache', 'TarExtract', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
+__all__ = ['IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
 
 
 _logger = ir_datasets.log.easy()
@@ -103,6 +103,27 @@ class TarExtract:
             else:
                 raise RuntimeError(f'{self._tar_path} not found in tar file')
             yield result
+
+
+class TarExtractAll:
+    def __init__(self, streamer, extract_path, compression='gz'):
+        self._streamer = streamer
+        self._extract_path = extract_path
+        self._compression = compression
+
+    def path(self):
+        if not os.path.exists(self._extract_path):
+            try:
+                with self._streamer.stream() as stream, tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}') as tarf:
+                    tarf.extractall(self._extract_path)
+            except:
+                if os.path.exists(self._extract_path):
+                    shutil.rmtree(self._extract_path)
+                raise
+        return self._extract_path
+
+    def stream(self):
+        raise NotImplementedError()
 
 
 class ReTar:

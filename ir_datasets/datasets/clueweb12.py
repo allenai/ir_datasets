@@ -4,7 +4,7 @@ from collections import namedtuple
 from glob import glob
 from pathlib import Path
 import ir_datasets
-from ir_datasets.util import DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
+from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, Bz2Extract, ZipExtract
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
@@ -126,7 +126,7 @@ def _init():
     subsets = {}
 
     docs_dlc = dlc['docs']
-    docs_chk_dlc = dlc['docs.chk']
+    docs_chk_dlc = TarExtractAll(dlc['docs.chk'], base_path/'corpus.chk')
     b13_dlc = Bz2Extract(Cache(TarExtract(dlc['cw12b-info'], 'ClueWeb12-CreateB13/ClueWeb12_B13_DocID_To_URL.txt.bz2'), base_path/'ClueWeb12_B13_DocID_To_URL.txt.bz2'))
 
     collection = ClueWeb12Docs(docs_dlc, docs_chk_dlc)
