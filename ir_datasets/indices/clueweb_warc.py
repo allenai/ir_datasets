@@ -56,14 +56,15 @@ class WarcIndexFile:
 
 
 class ClueWebWarcIndex:
-    def __init__(self, source_path, index_path, id_field='WARC-TREC-ID'):
+    def __init__(self, source_path, index_path, id_field='WARC-TREC-ID', warc_cw09=False):
         self.source_path = source_path
         self.index_path = index_path
         self.zlib_state = ir_datasets.lazy_libs.zlib_state()
         self.id_field = id_field
+        self.warc_cw09 = warc_cw09
 
     def build(self, checkpoint_freq=8*1024*1024):
-        warc = ir_datasets.lazy_libs.warc()
+        warc = ir_datasets.lazy_libs.warc() if self.warc_cw09 else ir_datasets.lazy_libs.warc_clueweb09()
         next_checkpoint = None
         last_chekpoint_pos = 0
         with self.zlib_state.GzipStateFile(self.source_path, keep_last_state=True) as f, \

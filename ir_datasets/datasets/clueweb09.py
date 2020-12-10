@@ -1,4 +1,5 @@
 import os
+import codecs
 from collections import namedtuple
 from glob import glob
 import ir_datasets
