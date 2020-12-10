@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'NYT'
   desc: '
   <p>
 The New York Times Annotated Corpus. Consists of articles published between 1987 and 2007. It is

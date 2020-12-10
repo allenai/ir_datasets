@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'TREC CAR'
   desc: '
 <p>
 An ad-hoc passage retrieval collection, constructed from Wikipedia and used as the basis of the

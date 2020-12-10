@@ -1,0 +1,97 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>CORD-19 - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: CORD-19</h1>
+<h3><kbd class="select"><span class="str">"cord19"</kdb></h3>
+
+<div class="desc">
+ <p> Collection of scientific articles related to COVID-19. </p> <p> Uses the 2020-07-16 version of the dataset, corresponding to the "complete" collection used for TREC COVID. </p> <ul> <li><a href="https://www.semanticscholar.org/cord19">Document collection site</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19__docs">docs</a>
+<div id="cord19__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, title, doi, date, abstract, text</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract, text&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@article{Wang2020CORD19TC,
+  title={CORD-19: The Covid-19 Open Research Dataset},
+  author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
+  journal={ArXiv},
+  year={2020}
+}
+</cite>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC COVID collection. Queries related to COVID-19, including deep relevance judgments. </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid__queries">queries</a>
+<div id="cord19/trec-covid__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid__docs">docs</a>
+<div id="cord19/trec-covid__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, title, doi, date, abstract, text</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid__qrels">qrels</a>
+<div id="cord19/trec-covid__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+
+</div>
+</body>
+</html>

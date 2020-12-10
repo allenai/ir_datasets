@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'MSMARCO (passage)'
   desc: '
 <p>
 A passage ranking benchmark with a collection of 8.8 million passages and question queries. Most

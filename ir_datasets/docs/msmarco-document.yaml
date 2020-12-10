@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'MSMARCO (document)'
   desc: '
   <p>
 "Based the questions in the [MS-MARCO] Question Answering Dataset and the documents which answered

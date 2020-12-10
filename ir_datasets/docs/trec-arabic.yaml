@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'TREC Arabic'
   desc: '
 <p>
 A collection of news articles in Arabic, used for multi-lingual evaluation in TREC 2001 and TREC

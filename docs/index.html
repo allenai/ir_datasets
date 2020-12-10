@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>ir_datasets</title>
+<body>
+<div id="Backdrop"></div>
+<div id="Popup">
+<div id="ClosePopup">✖</div>
+<div id="CodeSample"></div>
+</div>
+<div class="page">
+<h1><code>ir_datasets</code></h1>
+<p>
+View on GitHub: <a href="https://github.com/allenai/ir_datasets/">allenai/ir_datasets</a>
+</p>
+<p>
+<code>ir_datasets</code> is a python package that provides a common interface to many IR ad-hoc
+ranking benchmarks, training datasets, etc. It was built as a fork of
+<a href="https://OpenNIR.net/">OpenNIR</a> to allow easier integration with other systems.
+</p>
+<p>
+Install using <code class="select">pip install ir_datasets</code>.
+</p>
+<p>
+The package takes care of downloading datasets (including documents, queries, relevance judgments,
+etc.) when available from public sources. Instructions on how to obtain datasets are provided when
+they are not publicly available.
+</p>
+<p>
+<code>ir_datasets</code> processes datasets into a common iterator format to allow them to be easily
+used in python. It attempts to provide the data in an unaltered form (i.e., keeping all fields and
+markup), while handling differences in file formats, encoding, etc. <code>adapter</code>s provide
+extra functionality, e.g., to strip markup, index documents, etc. A command line interface is also
+available.
+</p>
+<p>
+Want a new dataset, added functionality, or a bug fixed? Feel free to
+<a href="https://github.com/allenai/ir_datasets/issues">post an issue</a> or
+<a href="https://github.com/allenai/ir_datasets/pulls">make a pull request</a>!
+</p>
+<hr/>
+
+<h2>Python Interface</h2>
+
+<p>
+Load a dataset using:
+</p>
+<code class="select">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dataset-id'</span>)</div>
+</code>
+
+<p>
+A dataset object lets you iterate through supported properties like docs
+(<code>dataset.docs_iter()</code>), queries (<code>dataset.queries_iter()</code>), and relevance
+judgments (<code>dataset.qrels_iter()</code>). Each iterator yields <code>namedtuple</code>s, with
+fields based on the available data.
+</p>
+
+<p>
+If you want to use your own dataset, you can construct an object with the same interface as the
+standard benchmarks by:
+</p>
+
+<code class="select">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.create_dataset(</div>
+<div>&nbsp;&nbsp;docs_tsv=<span class="str">"path/to/docs.tsv"</span>,</div>
+<div>&nbsp;&nbsp;queries_tsv=<span class="str">"path/to/queries.tsv"</span>,</div>
+<div>&nbsp;&nbsp;qrels_trec=<span class="str">"path/to/qrels.trec"</span></div>
+<div>)</div>
+</code>
+
+<p>
+Here, documents and queries are represented in TSV format with format <code>[id]\t[text]</code>.
+Query relevance judgments are provided in the standard TREC format: <code>[query_id] [iteration] [doc_id] [rel]</code>.
+</p>
+
+<hr/>
+
+<h2>Command Line Interface</h2>
+
+<p>
+<b>Export data in various formats:</b>
+</p>
+<code class="select">
+<div>ir_datasets export [dataset-id] [docs/queries/qrels/scoreddocs]</div>
+</code>
+<p>
+<code>--format</code> specifies the output format (e.g., <code>tsv</code> or <code>jsonl</code>).
+<code>--fields</code> specifies which fields to include (dataset-dependent).
+</p>
+
+<p>
+<b>Look up documents and queries by ID:</b>
+</p>
+<code class="select">
+<div>ir_datasets lookup [dataset-id] [--qid] [ids...]</div>
+</code>
+<p>
+<code>--format</code> and <code>--fields</code> also work here. <code>--qid</code> indicates that
+queries should be looked up instead of documents (default).
+</p>
+<p>
+This is much faster than using <code>ir_datasets export ... | grep</code> (or similar) because it
+indexes the documents/queries by ID.
+</p>
+
+<hr/>
+
+<h2>Datasets</h2>
+<ul>
+
+<li>
+<a href="antique.html">ANTIQUE</a>
+</li>
+
+<li>
+<a href="car-v1.5.html">TREC CAR</a>
+</li>
+
+<li>
+<a href="clueweb09.html">ClueWeb09</a>
+</li>
+
+<li>
+<a href="clueweb12.html">ClueWeb12</a>
+</li>
+
+<li>
+<a href="cord19.html">CORD-19</a>
+</li>
+
+<li>
+<a href="msmarco-document.html">MSMARCO (document)</a>
+</li>
+
+<li>
+<a href="msmarco-passage.html">MSMARCO (passage)</a>
+</li>
+
+<li>
+<a href="nyt.html">NYT</a>
+</li>
+
+<li>
+<a href="trec-arabic.html">TREC Arabic</a>
+</li>
+
+<li>
+<a href="trec-mandarin.html">TREC Mandarin</a>
+</li>
+
+<li>
+<a href="trec-robust04.html">TREC Robust 2004</a>
+</li>
+
+<li>
+<a href="trec-spanish.html">TREC Spanish</a>
+</li>
+
+</ul>
+</body>
+</html>

@@ -133,16 +133,18 @@ documents/queries by ID.
 ## Datasets
 
 Available datasets include (each of which containing subsets):
- - `antique`
- - `car-v1.5`
- - `cord19`
- - `msmarco-document`
- - `msmarco-passage`
- - `nyt`
- - `trec-arabic`
- - `trec-mandarin`
- - `trec-robust04`
- - `trec-spanish`
+ - [ANTIQUE](https://allenai.github.io/ir_datasets/antique.html)
+ - [TREC CAR](https://allenai.github.io/ir_datasets/car-v1.5.html)
+ - [ClueWeb09](https://allenai.github.io/ir_datasets/clueweb09.html)
+ - [ClueWeb12](https://allenai.github.io/ir_datasets/clueweb12.html)
+ - [CORD-19](https://allenai.github.io/ir_datasets/cord19.html)
+ - [MSMARCO (document)](https://allenai.github.io/ir_datasets/msmarco-document.html)
+ - [MSMARCO (passage)](https://allenai.github.io/ir_datasets/msmarco-passage.html)
+ - [NYT](https://allenai.github.io/ir_datasets/nyt.html)
+ - [TREC Arabic](https://allenai.github.io/ir_datasets/trec-arabic.html)
+ - [TREC Mandarin](https://allenai.github.io/ir_datasets/trec-mandarin.html)
+ - [TREC Robust 2004](https://allenai.github.io/ir_datasets/trec-robust04.html)
+ - [TREC Spanish](https://allenai.github.io/ir_datasets/trec-spanish.html)
 
 See the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html) for details about each
 dataset, its available subsets, and what data they provide.

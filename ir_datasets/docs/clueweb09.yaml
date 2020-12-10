@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'ClueWeb09'
   desc: '
 <p>
 ClueWeb 2009 web document collection. Contains over 1B web pages, in 10 languages.

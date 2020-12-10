@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'TREC Robust 2004'
   desc: '
 <p>
 The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by

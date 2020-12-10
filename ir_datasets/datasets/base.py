@@ -163,24 +163,16 @@ class YamlDocumentation:
         return self._contents.get(key)
 
 
-def _wrapped(value):
-    def _wrapper():
-        return value
-    return _wrapper
-
-
 class YamlDocumentationProvider:
     def __init__(self, documentation, key):
         self._documentation = documentation
         self._key = key
 
-    def __getattr__(self, attr):
-        if attr not in ('desc', 'bibtex'):
-            raise AttributeError(attr)
-        documentation = self._documentation.get_key(self._key)
-        if documentation and attr in documentation:
-            return _wrapped(documentation[attr])
-        raise AttributeError(attr)
+    def documentation(self):
+        docs = self._documentation.get_key(self._key)
+        if self._documentation.get_key(self._key):
+            return dict(docs.items())
+        return {}
 
 
 class ExpectedFile:

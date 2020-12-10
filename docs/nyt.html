@@ -1,0 +1,145 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>NYT - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: NYT</h1>
+<h3><kbd class="select"><span class="str">"nyt"</kdb></h3>
+
+<div class="desc">
+ <p> The New York Times Annotated Corpus. Consists of articles published between 1987 and 2007. It is useful for transferring relevance signals in cases where training data is in short supply. </p> <p> Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>. </p>
+</div>
+<div class="tabs">
+<a class="tab" target="nyt__docs">docs</a>
+<div id="nyt__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@article{sandhaus2008nyt,
+  title={The new york times annotated corpus},
+  author={Sandhaus, Evan},
+  journal={Linguistic Data Consortium, Philadelphia},
+  volume={6},
+  number={12},
+  pages={e26752},
+  year={2008}
+}
+</cite>
+
+<hr />
+<div class="dataset" id="nyt/train" data-parent="nyt">
+<h3><kbd class="ds-name select"><span class="str">"nyt/train"</kdb></h3>
+
+<div class="desc">
+ <p> Training set (without held-out <a class="ds-ref">nyt/valid</a>) for transferring relevance signals from NYT corpus. </p> <ul> <li>Queries: Headlines</li> <li>Relevance: Assumed headline is relevant to article</li> <li><a href="https://arxiv.org/abs/1707.00189">Paper</a></li> <ul>
+</div>
+<div class="tabs">
+<a class="tab" target="nyt/train__queries">queries</a>
+<div id="nyt/train__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, text</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nyt/train__docs">docs</a>
+<div id="nyt/train__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nyt/train__qrels">qrels</a>
+<div id="nyt/train__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{macavaney:sigir2019-nyt,
+  author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
+  title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
+  booktitle = {SIGIR},
+  year = {2019}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="nyt/valid" data-parent="nyt">
+<h3><kbd class="ds-name select"><span class="str">"nyt/valid"</kdb></h3>
+
+<div class="desc">
+ <p> Held-out validation set for transferring relevance signals from NYT corpus (see <a class="ds-ref">nyt/train</a>). </p>
+</div>
+<div class="tabs">
+<a class="tab" target="nyt/valid__queries">queries</a>
+<div id="nyt/valid__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, text</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/valid')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nyt/valid__docs">docs</a>
+<div id="nyt/valid__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/valid')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nyt/valid__qrels">qrels</a>
+<div id="nyt/valid__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nyt/valid')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

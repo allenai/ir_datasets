@@ -1,0 +1,348 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>ClueWeb12 - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: ClueWeb12</h1>
+<h3><kbd class="select"><span class="str">"clueweb12"</kdb></h3>
+
+<div class="desc">
+ <p> ClueWeb 2012 web document collection. Contains 733M web pages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb12/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb12/">Document collection site</a></li> <li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12__docs">docs</a>
+<div id="clueweb12__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/b13" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/b13"</kdb></h3>
+
+<div class="desc">
+ <p> Official subset of the ClueWeb12 datasets with 52M web pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/b13__docs">docs</a>
+<div id="clueweb12/b13__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/b13/ntcir-www-1" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/b13/ntcir-www-1"</kdb></h3>
+
+<div class="desc">
+ <p> The NTCIR-13 We Want Web (WWW) 1 ad-hoc ranking benchmark. Contains 100 queries with deep relevance judgments (avg 255 per query). Judgments aggregated from two assessors. Note that the qrels contain additional judgments from the NTCIR-14 CENTRE track. </p> <ul> <li><a href="http://www.thuir.cn/ntcirwww/">Shared task site</a></li> <li><a href="http://www.thuir.cn/ntcirwww/files/ntcir13wwwov.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/b13/ntcir-www-1__queries">queries</a>
+<div id="clueweb12/b13/ntcir-www-1__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, text</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-1')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/ntcir-www-1__docs">docs</a>
+<div id="clueweb12/b13/ntcir-www-1__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-1')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/ntcir-www-1__qrels">qrels</a>
+<div id="clueweb12/b13/ntcir-www-1__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-1')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Luo2017OverviewNtcirWww1,
+  title={Overview of the NTCIR-13 We Want Web Task},
+  author={Cheng Luo and Tetsuya Sakai and Yiqun Liu and Zhicheng Dou and Chenyan Xiong and Jingfang Xu},
+  booktitle={NTCIR},
+  year={2017}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/b13/ntcir-www-2" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/b13/ntcir-www-2"</kdb></h3>
+
+<div class="desc">
+ <p> The NTCIR-14 We Want Web (WWW) 2 ad-hoc ranking benchmark. Contains 80 queries with deep relevance judgments (avg 345 per query). Judgments aggregated from two assessors. </p> <ul> <li><a href="http://www.thuir.cn/ntcirwww2/">Shared task site</a></li> <li><a href="http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings14/pdf/ntcir/01-NTCIR14-OV-WWW-MaoJ.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/b13/ntcir-www-2__queries">queries</a>
+<div id="clueweb12/b13/ntcir-www-2__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, title, description</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-2')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/ntcir-www-2__docs">docs</a>
+<div id="clueweb12/b13/ntcir-www-2__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-2')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/ntcir-www-2__qrels">qrels</a>
+<div id="clueweb12/b13/ntcir-www-2__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-2')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Mao2018OverviewNtcirWww2,
+  title={Overview of the NTCIR-14 We Want Web Task},
+  author={Jiaxin Mao and Tetsuya Sakai and Cheng Luo and Peng Xiao and Yiqun Liu and Zhicheng Dou},
+  booktitle={NTCIR},
+  year={2018}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/b13/ntcir-www-3" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/b13/ntcir-www-3"</kdb></h3>
+
+<div class="desc">
+ <p> The NTCIR-15 We Want Web (WWW) 3 ad-hoc ranking benchmark. Contains 160 queries with deep relevance judgments (to be released). 80 of the queries are from <a class="ds-ref">clueweb12/b13/ntcir-www-2</a>. </p> <ul> <li><a href="http://sakailab.com/www3/">Shared task site</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/b13/ntcir-www-3__queries">queries</a>
+<div id="clueweb12/b13/ntcir-www-3__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, title, description</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-3')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/ntcir-www-3__docs">docs</a>
+<div id="clueweb12/b13/ntcir-www-3__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-3')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/b13/trec-misinfo-2019" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/b13/trec-misinfo-2019"</kdb></h3>
+
+<div class="desc">
+<p><i>(no description provided)</i></p>
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/b13/trec-misinfo-2019__queries">queries</a>
+<div id="clueweb12/b13/trec-misinfo-2019__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, title, cochranedoi, description, narrative</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/trec-misinfo-2019')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, cochranedoi, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/trec-misinfo-2019__docs">docs</a>
+<div id="clueweb12/b13/trec-misinfo-2019__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/trec-misinfo-2019')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/b13/trec-misinfo-2019__qrels">qrels</a>
+<div id="clueweb12/b13/trec-misinfo-2019__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, effectiveness, credibility</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/trec-misinfo-2019')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, effectiveness, credibility&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/trec-web-2013" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/trec-web-2013"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2013.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/trec-web-2013__queries">queries</a>
+<div id="clueweb12/trec-web-2013__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2013')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/trec-web-2013__docs">docs</a>
+<div id="clueweb12/trec-web-2013__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2013')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/trec-web-2013__qrels">qrels</a>
+<div id="clueweb12/trec-web-2013__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2013')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{CollinsThompson2013TrecWeb,
+  title={TREC 2013 Web Track Overview},
+  author={Kevyn Collins-Thompson and Paul Bennett and Fernando Diaz and Charles L. A. Clarke and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2013}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb12/trec-web-2014" data-parent="clueweb12">
+<h3><kbd class="ds-name select"><span class="str">"clueweb12/trec-web-2014"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb12/trec-web-2014__queries">queries</a>
+<div id="clueweb12/trec-web-2014__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2014')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/trec-web-2014__docs">docs</a>
+<div id="clueweb12/trec-web-2014__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2014')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb12/trec-web-2014__qrels">qrels</a>
+<div id="clueweb12/trec-web-2014__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2014')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{CollinsThompson2014TrecWeb,
+  title={TREC 2014 Web Track Overview},
+  author={Kevyn Collins-Thompson and Craig Macdonald and Paul Bennett and Fernando Diaz and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2014}
+}
+</cite>
+</div>
+
+</div>
+</body>
+</html>

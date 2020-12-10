@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>ClueWeb09 - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: ClueWeb09</h1>
+<h3><kbd class="select"><span class="str">"clueweb09"</kdb></h3>
+
+<div class="desc">
+ <p> ClueWeb 2009 web document collection. Contains over 1B web pages, in 10 languages. </p> <p> The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information is provided <a href="https://lemurproject.org/clueweb09/">here</a>. </p> <ul> <li><a href="https://lemurproject.org/clueweb09/">Document collection site</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09__docs">docs</a>
+<div id="clueweb09__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/en" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/en"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb 2009 with only English-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/en__docs">docs</a>
+<div id="clueweb09/en__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/en/trec-web-2009" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/en/trec-web-2009"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2009 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web09.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec18/papers/WEB09.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/en/trec-web-2009__queries">queries</a>
+<div id="clueweb09/en/trec-web-2009__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2009')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2009__docs">docs</a>
+<div id="clueweb09/en/trec-web-2009__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2009')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2009__qrels">qrels</a>
+<div id="clueweb09/en/trec-web-2009__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2009')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2009TrecWeb,
+  title={Overview of the TREC 2009 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
+  booktitle={TREC},
+  year={2009}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/en/trec-web-2010" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/en/trec-web-2010"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2010 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web10.html">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/en/trec-web-2010__queries">queries</a>
+<div id="clueweb09/en/trec-web-2010__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2010')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2010__docs">docs</a>
+<div id="clueweb09/en/trec-web-2010__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2010')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2010__qrels">qrels</a>
+<div id="clueweb09/en/trec-web-2010__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2010')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2010TrecWeb,
+  title={Overview of the TREC 2010 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
+  booktitle={TREC},
+  year={2010}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/en/trec-web-2011" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/en/trec-web-2011"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2011 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/pubs/trec20/papers/WEB.OVERVIEW.pdf">Shared task site</a></li> <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/en/trec-web-2011__queries">queries</a>
+<div id="clueweb09/en/trec-web-2011__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2011')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2011__docs">docs</a>
+<div id="clueweb09/en/trec-web-2011__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2011')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2011__qrels">qrels</a>
+<div id="clueweb09/en/trec-web-2011__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2011')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2011TrecWeb,
+  title={Overview of the TREC 2011 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2011}
+}
+</cite>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/en/trec-web-2012" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/en/trec-web-2012"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/web2012.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec21/papers/WEB12.overview.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/en/trec-web-2012__queries">queries</a>
+<div id="clueweb09/en/trec-web-2012__queries" class="tab-content">
+<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2012')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, query, description, type, subtopics&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2012__docs">docs</a>
+<div id="clueweb09/en/trec-web-2012__docs" class="tab-content">
+<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2012')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/en/trec-web-2012__qrels">qrels</a>
+<div id="clueweb09/en/trec-web-2012__qrels" class="tab-content">
+<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2012')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2012TrecWeb,
+  title={Overview of the TREC 2012 Web Track},
+  author={Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2012}
+}
+</cite>
+</div>
+
+</div>
+</body>
+</html>

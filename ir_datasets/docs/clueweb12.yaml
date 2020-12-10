@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'ClueWeb12'
   desc: '
 <p>
 ClueWeb 2012 web document collection. Contains 733M web pages.
