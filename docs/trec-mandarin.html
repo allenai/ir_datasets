@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="trec-mandarin__docs">docs</a>
 <div id="trec-mandarin__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,7 +37,11 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@misc{LDC2000T52,
+
+<a class="tab" target="trec-mandarin__citation">Citation</a>
+<div id="trec-mandarin__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{LDC2000T52,
   title={TREC Mandarin LDC2000T52},
   author={Rogers, Willie},
   year={2000},
@@ -39,6 +49,8 @@
   publisher={Linguistic Data Consortium}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="trec-mandarin/trec5" data-parent="trec-mandarin">
@@ -50,7 +62,13 @@
 <div class="tabs">
 <a class="tab" target="trec-mandarin/trec5__queries">queries</a>
 <div id="trec-mandarin/trec5__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title_en, title_zh, description_en, description_zh, narrative_en, narrative_zh</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecMandarinQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title_zh</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">description_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">description_zh</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">narrative_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="6"><span class="">narrative_zh</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -62,7 +80,13 @@
 
 <a class="tab" target="trec-mandarin/trec5__docs">docs</a>
 <div id="trec-mandarin/trec5__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -74,7 +98,13 @@
 
 <a class="tab" target="trec-mandarin/trec5__qrels">qrels</a>
 <div id="trec-mandarin/trec5__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -83,13 +113,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{harman1997chinese,
+
+<a class="tab" target="trec-mandarin/trec5__citation">Citation</a>
+<div id="trec-mandarin/trec5__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{harman1997chinese,
   title={Spanish and Chinese Document Retrieval in TREC􏰁􏰂-5},
   author={Alan Smeaton and Ross Wilkinson},
   booktitle={TREC},
   year={1996}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -102,7 +138,13 @@
 <div class="tabs">
 <a class="tab" target="trec-mandarin/trec6__queries">queries</a>
 <div id="trec-mandarin/trec6__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title_en, title_zh, description_en, description_zh, narrative_en, narrative_zh</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecMandarinQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title_zh</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">description_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">description_zh</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">narrative_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="6"><span class="">narrative_zh</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -114,7 +156,13 @@
 
 <a class="tab" target="trec-mandarin/trec6__docs">docs</a>
 <div id="trec-mandarin/trec6__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -126,7 +174,13 @@
 
 <a class="tab" target="trec-mandarin/trec6__qrels">qrels</a>
 <div id="trec-mandarin/trec6__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -135,13 +189,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{wilkinson1998chinese,
+
+<a class="tab" target="trec-mandarin/trec6__citation">Citation</a>
+<div id="trec-mandarin/trec6__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{wilkinson1998chinese,
   title={Chinese Document Retrieval at TREC􏰁􏰏-6},
   author={Ross Wilkinson},
   booktitle={TREC},
   year={1997}
 }
 </cite>
+</div>
+</div>
 </div>
 
 </div>

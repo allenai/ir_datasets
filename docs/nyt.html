@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="nyt__docs">docs</a>
 <div id="nyt__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NytDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">metadata_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">headline</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">lead_paragraph_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">fulltext_html</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,7 +37,11 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@article{sandhaus2008nyt,
+
+<a class="tab" target="nyt__citation">Citation</a>
+<div id="nyt__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{sandhaus2008nyt,
   title={The new york times annotated corpus},
   author={Sandhaus, Evan},
   journal={Linguistic Data Consortium, Philadelphia},
@@ -41,6 +51,8 @@
   year={2008}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="nyt/train" data-parent="nyt">
@@ -52,7 +64,13 @@
 <div class="tabs">
 <a class="tab" target="nyt/train__queries">queries</a>
 <div id="nyt/train__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -64,7 +82,13 @@
 
 <a class="tab" target="nyt/train__docs">docs</a>
 <div id="nyt/train__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NytDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">metadata_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">headline</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">lead_paragraph_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">fulltext_html</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -76,7 +100,13 @@
 
 <a class="tab" target="nyt/train__qrels">qrels</a>
 <div id="nyt/train__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">GenericQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -85,13 +115,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{macavaney:sigir2019-nyt,
+
+<a class="tab" target="nyt/train__citation">Citation</a>
+<div id="nyt/train__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{macavaney:sigir2019-nyt,
   author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
   title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
   booktitle = {SIGIR},
   year = {2019}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -104,7 +140,13 @@
 <div class="tabs">
 <a class="tab" target="nyt/valid__queries">queries</a>
 <div id="nyt/valid__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -116,7 +158,13 @@
 
 <a class="tab" target="nyt/valid__docs">docs</a>
 <div id="nyt/valid__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, metadata_html, headline, lead_paragraph_html, fulltext_html</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NytDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">metadata_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">headline</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">lead_paragraph_html</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">fulltext_html</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -128,7 +176,13 @@
 
 <a class="tab" target="nyt/valid__qrels">qrels</a>
 <div id="nyt/valid__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">GenericQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>

@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04__queries">queries</a>
 <div id="trec-robust04__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -34,7 +40,13 @@
 
 <a class="tab" target="trec-robust04__docs">docs</a>
 <div id="trec-robust04__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -46,7 +58,13 @@
 
 <a class="tab" target="trec-robust04__qrels">qrels</a>
 <div id="trec-robust04__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -55,13 +73,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Voorhees2004OverviewRobust,
+
+<a class="tab" target="trec-robust04__citation">Citation</a>
+<div id="trec-robust04__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Voorhees2004OverviewRobust,
   title={Overview of the TREC 2004 Robust Retrieval Track},
   author={Ellen Voorhees},
   booktitle={TREC},
   year={2004}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="trec-robust04/fold1" data-parent="trec-robust04">
@@ -73,7 +97,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04/fold1__queries">queries</a>
 <div id="trec-robust04/fold1__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -85,7 +115,13 @@
 
 <a class="tab" target="trec-robust04/fold1__docs">docs</a>
 <div id="trec-robust04/fold1__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -97,7 +133,13 @@
 
 <a class="tab" target="trec-robust04/fold1__qrels">qrels</a>
 <div id="trec-robust04/fold1__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -119,7 +161,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04/fold2__queries">queries</a>
 <div id="trec-robust04/fold2__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -131,7 +179,13 @@
 
 <a class="tab" target="trec-robust04/fold2__docs">docs</a>
 <div id="trec-robust04/fold2__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -143,7 +197,13 @@
 
 <a class="tab" target="trec-robust04/fold2__qrels">qrels</a>
 <div id="trec-robust04/fold2__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -165,7 +225,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04/fold3__queries">queries</a>
 <div id="trec-robust04/fold3__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -177,7 +243,13 @@
 
 <a class="tab" target="trec-robust04/fold3__docs">docs</a>
 <div id="trec-robust04/fold3__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -189,7 +261,13 @@
 
 <a class="tab" target="trec-robust04/fold3__qrels">qrels</a>
 <div id="trec-robust04/fold3__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -211,7 +289,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04/fold4__queries">queries</a>
 <div id="trec-robust04/fold4__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -223,7 +307,13 @@
 
 <a class="tab" target="trec-robust04/fold4__docs">docs</a>
 <div id="trec-robust04/fold4__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -235,7 +325,13 @@
 
 <a class="tab" target="trec-robust04/fold4__qrels">qrels</a>
 <div id="trec-robust04/fold4__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -257,7 +353,13 @@
 <div class="tabs">
 <a class="tab" target="trec-robust04/fold5__queries">queries</a>
 <div id="trec-robust04/fold5__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -269,7 +371,13 @@
 
 <a class="tab" target="trec-robust04/fold5__docs">docs</a>
 <div id="trec-robust04/fold5__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -281,7 +389,13 @@
 
 <a class="tab" target="trec-robust04/fold5__qrels">qrels</a>
 <div id="trec-robust04/fold5__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>

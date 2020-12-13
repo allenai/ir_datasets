@@ -1,5 +1,6 @@
 import io
 import sys
+import typing
 import argparse
 import ir_datasets
 
@@ -216,7 +217,7 @@ def generate_dataset(dataset, dataset_id):
 {desc}
 </div>
 ''')
-        has_any = dataset.has_docs() or dataset.has_queries() or dataset.has_qrels() or dataset.has_docpairs() or dataset.has_scoreddocs()
+        has_any = dataset.has_docs() or dataset.has_queries() or dataset.has_qrels() or dataset.has_docpairs() or dataset.has_scoreddocs() or 'bibtex' in documentation
         if has_any:
             out.write('<div class="tabs">')
         if dataset.has_queries():
@@ -224,7 +225,8 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__queries">queries</a>
 <div id="{dataset_id}__queries" class="tab-content">
-<p>Query fields: <kbd>{fields}</kbd></p>
+<div>Query type:</div>
+{generate_data_format(dataset.queries_cls())}
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -239,7 +241,8 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__docs">docs</a>
 <div id="{dataset_id}__docs" class="tab-content">
-<p>Document fields: <kbd>{fields}</kdb></p>
+<div>Document type:</div>
+{generate_data_format(dataset.docs_cls())}
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -254,7 +257,8 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__qrels">qrels</a>
 <div id="{dataset_id}__qrels" class="tab-content">
-<p>Qrel fields: <kbd>{fields}</kdb></p>
+<div>Query relevance judgment type:</div>
+{generate_data_format(dataset.qrels_cls())}
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -268,7 +272,8 @@ def generate_dataset(dataset, dataset_id):
             fields = ", ".join(dataset.scoreddocs_cls()._fields)
             out.write(f'''
 <a class="tab" target="{dataset_id}__scoreddocs">scoreddocs</a>
-<div id="{dataset_id}__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+{generate_data_format(dataset.scoreddocs_cls())}
 <p>Scored Document fields: <kbd>{fields}</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -284,6 +289,8 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__docpairs">docpairs</a>
 <div id="{dataset_id}__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+{generate_data_format(dataset.docpairs_cls())}
 <p>Document Pair fields: <kbd>{fields}</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -294,12 +301,46 @@ def generate_dataset(dataset, dataset_id):
 </code>
 </div>
 ''')
+        if 'bibtex' in documentation:
+            out.write(f'''
+<a class="tab" target="{dataset_id}__citation">Citation</a>
+<div id="{dataset_id}__citation" class="tab-content">
+bibtex:
+<cite class="select">{documentation["bibtex"]}</cite>
+</div>
+''')
         if has_any:
             out.write('</div>')
-        if 'bibtex' in documentation:
-            out.write(f'<p>Citation:</p><cite class="select">{documentation["bibtex"]}</cite>')
         out.seek(0)
         return out.read()
+
+def generate_data_format(cls):
+    if cls in (str, int, float, bytes):
+        return f'<span class="kwd">{cls.__name__}</span>'
+    elif isinstance(cls, typing._GenericAlias):
+        args = []
+        for arg in cls.__args__:
+            if arg is Ellipsis:
+                args.append(' ...')
+            else:
+                args.append(generate_data_format(arg))
+        if cls._name in ('Tuple', 'List'):
+            return f'<span class="kwd">{cls._name}</span>[{",".join(args)}]'
+    elif tuple in cls.__bases__ and hasattr(cls, '_fields'):
+        fields = []
+        for i, field in enumerate(cls._fields):
+            f_type = 'UNKNOWN'
+            if hasattr(cls, '__annotations__'):
+                f_type = generate_data_format(cls.__annotations__[field])
+            fields.append(f'<li data-tuple-idx="{i}"><span class="">{field}</span>: {f_type}</li>')
+        return f"""
+<div class="type">
+<div class="type-name">{cls.__name__}: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+{"".join(fields)}
+</ol>
+</div>""".strip()
+    raise RuntimeError(f"uknown class {cls}")
 
 
 if __name__ == '__main__':

@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5__docs">docs</a>
 <div id="car-v1.5__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,7 +37,11 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@article{Dietz2017,
+
+<a class="tab" target="car-v1.5__citation">Citation</a>
+<div id="car-v1.5__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Dietz2017,
   title={{TREC CAR}: A Data Set for Complex Answer Retrieval},
   author={Laura Dietz and Ben Gamari},
   year={2017},
@@ -39,6 +49,8 @@
   url={http://trec-car.cs.unh.edu}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="car-v1.5/test200" data-parent="car-v1.5">
@@ -50,7 +62,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5/test200__queries">queries</a>
 <div id="car-v1.5/test200__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -62,7 +80,13 @@
 
 <a class="tab" target="car-v1.5/test200__docs">docs</a>
 <div id="car-v1.5/test200__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -74,7 +98,13 @@
 
 <a class="tab" target="car-v1.5/test200__qrels">qrels</a>
 <div id="car-v1.5/test200__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -83,13 +113,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{nanni2017benchmark,
+
+<a class="tab" target="car-v1.5/test200__citation">Citation</a>
+<div id="car-v1.5/test200__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{nanni2017benchmark,
   title={Benchmark for complex answer retrieval},
   author={Nanni, Federico and Mitra, Bhaskar and Magnusson, Matt and Dietz, Laura},
   booktitle={ICTIR},
   year={2017}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -102,7 +138,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5/train/fold0__queries">queries</a>
 <div id="car-v1.5/train/fold0__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -114,7 +156,13 @@
 
 <a class="tab" target="car-v1.5/train/fold0__docs">docs</a>
 <div id="car-v1.5/train/fold0__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -126,7 +174,13 @@
 
 <a class="tab" target="car-v1.5/train/fold0__qrels">qrels</a>
 <div id="car-v1.5/train/fold0__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -148,7 +202,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5/trec-y1__queries">queries</a>
 <div id="car-v1.5/trec-y1__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -160,7 +220,13 @@
 
 <a class="tab" target="car-v1.5/trec-y1__docs">docs</a>
 <div id="car-v1.5/trec-y1__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -169,13 +235,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{dietz2017trec,
+
+<a class="tab" target="car-v1.5/trec-y1__citation">Citation</a>
+<div id="car-v1.5/trec-y1__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{dietz2017trec,
   title={TREC Complex Answer Retrieval Overview.},
   author={Dietz, Laura and Verma, Manisha and Radlinski, Filip and Craswell, Nick},
   booktitle={TREC},
   year={2017}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -188,7 +260,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5/trec-y1/auto__queries">queries</a>
 <div id="car-v1.5/trec-y1/auto__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -200,7 +278,13 @@
 
 <a class="tab" target="car-v1.5/trec-y1/auto__docs">docs</a>
 <div id="car-v1.5/trec-y1/auto__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -212,7 +296,13 @@
 
 <a class="tab" target="car-v1.5/trec-y1/auto__qrels">qrels</a>
 <div id="car-v1.5/trec-y1/auto__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -234,7 +324,13 @@
 <div class="tabs">
 <a class="tab" target="car-v1.5/trec-y1/manual__queries">queries</a>
 <div id="car-v1.5/trec-y1/manual__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -246,7 +342,13 @@
 
 <a class="tab" target="car-v1.5/trec-y1/manual__docs">docs</a>
 <div id="car-v1.5/trec-y1/manual__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -258,7 +360,13 @@
 
 <a class="tab" target="car-v1.5/trec-y1/manual__qrels">qrels</a>
 <div id="car-v1.5/trec-y1/manual__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>

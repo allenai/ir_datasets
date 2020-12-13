@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="trec-spanish__docs">docs</a>
 <div id="trec-spanish__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,7 +37,11 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@misc{LDC2000T51,
+
+<a class="tab" target="trec-spanish__citation">Citation</a>
+<div id="trec-spanish__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{LDC2000T51,
   title={TREC Spanish LDC2000T51},
   author={Rogers, Willie},
   year={2000},
@@ -39,6 +49,8 @@
   publisher={Linguistic Data Consortium}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="trec-spanish/trec3" data-parent="trec-spanish">
@@ -50,7 +62,13 @@
 <div class="tabs">
 <a class="tab" target="trec-spanish/trec3__queries">queries</a>
 <div id="trec-spanish/trec3__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title_es, title_en, description_es, description_en, narrative_es, narrative_en</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecSpanish3Query: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title_es</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">description_es</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">description_en</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">narrative_es</span>: <span class="kwd">str</span></li><li data-tuple-idx="6"><span class="">narrative_en</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -62,7 +80,13 @@
 
 <a class="tab" target="trec-spanish/trec3__docs">docs</a>
 <div id="trec-spanish/trec3__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -74,7 +98,13 @@
 
 <a class="tab" target="trec-spanish/trec3__qrels">qrels</a>
 <div id="trec-spanish/trec3__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -83,13 +113,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{harman1994trec3,
+
+<a class="tab" target="trec-spanish/trec3__citation">Citation</a>
+<div id="trec-spanish/trec3__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{harman1994trec3,
   title={Overview of the Third Text REtrieval Conference (TREC-3)},
   author={Donna Harman},
   booktitle={TREC},
   year={1994}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -102,7 +138,13 @@
 <div class="tabs">
 <a class="tab" target="trec-spanish/trec4__queries">queries</a>
 <div id="trec-spanish/trec4__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, description_es1, description_en1, description_es2, description_en2</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecSpanish4Query: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">description_es1</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description_en1</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">description_es2</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">description_en2</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -114,7 +156,13 @@
 
 <a class="tab" target="trec-spanish/trec4__docs">docs</a>
 <div id="trec-spanish/trec4__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text, marked_up_doc</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -126,7 +174,13 @@
 
 <a class="tab" target="trec-spanish/trec4__qrels">qrels</a>
 <div id="trec-spanish/trec4__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -135,13 +189,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{harman1995trec4,
+
+<a class="tab" target="trec-spanish/trec4__citation">Citation</a>
+<div id="trec-spanish/trec4__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{harman1995trec4,
   title={Overview of the Fourth Text REtrieval Conference (TREC-4)},
   author={Donna Harman},
   booktitle={TREC},
   year={1995}
 }
 </cite>
+</div>
+</div>
 </div>
 
 </div>

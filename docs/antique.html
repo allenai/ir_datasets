@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="antique__docs">docs</a>
 <div id="antique__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,13 +37,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Bajaj2016MSMA,
+
+<a class="tab" target="antique__citation">Citation</a>
+<div id="antique__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Bajaj2016MSMA,
   title={ANTIQUE: A Non-Factoid Question Answering Benchmark},
   author={Helia Hashemi, Mohammad Aliannejadi, Hamed Zamani, Bruce Croft},
   booktitle={ECIR},
   year={2016}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="antique/test" data-parent="antique">
@@ -49,7 +61,13 @@
 <div class="tabs">
 <a class="tab" target="antique/test__queries">queries</a>
 <div id="antique/test__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -61,7 +79,13 @@
 
 <a class="tab" target="antique/test__docs">docs</a>
 <div id="antique/test__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -73,7 +97,13 @@
 
 <a class="tab" target="antique/test__qrels">qrels</a>
 <div id="antique/test__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -95,7 +125,13 @@
 <div class="tabs">
 <a class="tab" target="antique/test/non-offensive__queries">queries</a>
 <div id="antique/test/non-offensive__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -107,7 +143,13 @@
 
 <a class="tab" target="antique/test/non-offensive__docs">docs</a>
 <div id="antique/test/non-offensive__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -119,7 +161,13 @@
 
 <a class="tab" target="antique/test/non-offensive__qrels">qrels</a>
 <div id="antique/test/non-offensive__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -141,7 +189,13 @@
 <div class="tabs">
 <a class="tab" target="antique/train__queries">queries</a>
 <div id="antique/train__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -153,7 +207,13 @@
 
 <a class="tab" target="antique/train__docs">docs</a>
 <div id="antique/train__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -165,7 +225,13 @@
 
 <a class="tab" target="antique/train__qrels">qrels</a>
 <div id="antique/train__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -187,7 +253,13 @@
 <div class="tabs">
 <a class="tab" target="antique/train/split200-train__queries">queries</a>
 <div id="antique/train/split200-train__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -199,7 +271,13 @@
 
 <a class="tab" target="antique/train/split200-train__docs">docs</a>
 <div id="antique/train/split200-train__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -211,7 +289,13 @@
 
 <a class="tab" target="antique/train/split200-train__qrels">qrels</a>
 <div id="antique/train/split200-train__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -233,7 +317,13 @@
 <div class="tabs">
 <a class="tab" target="antique/train/split200-valid__queries">queries</a>
 <div id="antique/train/split200-valid__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -245,7 +335,13 @@
 
 <a class="tab" target="antique/train/split200-valid__docs">docs</a>
 <div id="antique/train/split200-valid__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -257,7 +353,13 @@
 
 <a class="tab" target="antique/train/split200-valid__qrels">qrels</a>
 <div id="antique/train/split200-valid__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>

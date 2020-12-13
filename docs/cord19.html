@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="cord19__docs">docs</a>
 <div id="cord19__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, title, doi, date, abstract, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,13 +37,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract, text&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@article{Wang2020CORD19TC,
+
+<a class="tab" target="cord19__citation">Citation</a>
+<div id="cord19__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Wang2020CORD19TC,
   title={CORD-19: The Covid-19 Open Research Dataset},
   author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
   journal={ArXiv},
   year={2020}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="cord19/trec-covid" data-parent="cord19">
@@ -49,7 +61,13 @@
 <div class="tabs">
 <a class="tab" target="cord19/trec-covid__queries">queries</a>
 <div id="cord19/trec-covid__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, title, description, narrative</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -61,7 +79,13 @@
 
 <a class="tab" target="cord19/trec-covid__docs">docs</a>
 <div id="cord19/trec-covid__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, title, doi, date, abstract, text</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -73,7 +97,13 @@
 
 <a class="tab" target="cord19/trec-covid__qrels">qrels</a>
 <div id="cord19/trec-covid__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -82,7 +112,11 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@article{Voorhees2020TRECCOVIDCA,
+
+<a class="tab" target="cord19/trec-covid__citation">Citation</a>
+<div id="cord19/trec-covid__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
   title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
   author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
   journal={ArXiv},
@@ -90,6 +124,8 @@
   volume={abs/2005.04474}
 }
 </cite>
+</div>
+</div>
 </div>
 
 </div>

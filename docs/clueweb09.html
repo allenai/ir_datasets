@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="clueweb09__docs">docs</a>
 <div id="clueweb09__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -43,7 +49,13 @@
 <div class="tabs">
 <a class="tab" target="clueweb09/en__docs">docs</a>
 <div id="clueweb09/en__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -65,7 +77,18 @@
 <div class="tabs">
 <a class="tab" target="clueweb09/en/trec-web-2009__queries">queries</a>
 <div id="clueweb09/en/trec-web-2009__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecWebTrackQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">query</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">subtopics</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">TrecSubtopic: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">number</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -77,7 +100,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2009__docs">docs</a>
 <div id="clueweb09/en/trec-web-2009__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -89,7 +118,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2009__qrels">qrels</a>
 <div id="clueweb09/en/trec-web-2009__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -98,13 +133,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2009TrecWeb,
+
+<a class="tab" target="clueweb09/en/trec-web-2009__citation">Citation</a>
+<div id="clueweb09/en/trec-web-2009__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Clarke2009TrecWeb,
   title={Overview of the TREC 2009 Web Track},
   author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
   booktitle={TREC},
   year={2009}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -117,7 +158,18 @@
 <div class="tabs">
 <a class="tab" target="clueweb09/en/trec-web-2010__queries">queries</a>
 <div id="clueweb09/en/trec-web-2010__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecWebTrackQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">query</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">subtopics</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">TrecSubtopic: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">number</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -129,7 +181,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2010__docs">docs</a>
 <div id="clueweb09/en/trec-web-2010__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -141,7 +199,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2010__qrels">qrels</a>
 <div id="clueweb09/en/trec-web-2010__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -150,13 +214,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2010TrecWeb,
+
+<a class="tab" target="clueweb09/en/trec-web-2010__citation">Citation</a>
+<div id="clueweb09/en/trec-web-2010__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Clarke2010TrecWeb,
   title={Overview of the TREC 2010 Web Track},
   author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
   booktitle={TREC},
   year={2010}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -169,7 +239,18 @@
 <div class="tabs">
 <a class="tab" target="clueweb09/en/trec-web-2011__queries">queries</a>
 <div id="clueweb09/en/trec-web-2011__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecWebTrackQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">query</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">subtopics</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">TrecSubtopic: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">number</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -181,7 +262,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2011__docs">docs</a>
 <div id="clueweb09/en/trec-web-2011__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -193,7 +280,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2011__qrels">qrels</a>
 <div id="clueweb09/en/trec-web-2011__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -202,13 +295,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2011TrecWeb,
+
+<a class="tab" target="clueweb09/en/trec-web-2011__citation">Citation</a>
+<div id="clueweb09/en/trec-web-2011__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Clarke2011TrecWeb,
   title={Overview of the TREC 2011 Web Track},
   author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
   booktitle={TREC},
   year={2011}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -221,7 +320,18 @@
 <div class="tabs">
 <a class="tab" target="clueweb09/en/trec-web-2012__queries">queries</a>
 <div id="clueweb09/en/trec-web-2012__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, query, description, type, subtopics</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecWebTrackQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">query</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">subtopics</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">TrecSubtopic: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">number</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -233,7 +343,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2012__docs">docs</a>
 <div id="clueweb09/en/trec-web-2012__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, date, content_type, http_headers, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -245,7 +361,13 @@
 
 <a class="tab" target="clueweb09/en/trec-web-2012__qrels">qrels</a>
 <div id="clueweb09/en/trec-web-2012__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -254,13 +376,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Clarke2012TrecWeb,
+
+<a class="tab" target="clueweb09/en/trec-web-2012__citation">Citation</a>
+<div id="clueweb09/en/trec-web-2012__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Clarke2012TrecWeb,
   title={Overview of the TREC 2012 Web Track},
   author={Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
   booktitle={TREC},
   year={2012}
 }
 </cite>
+</div>
+</div>
 </div>
 
 </div>

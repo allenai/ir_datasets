@@ -32,7 +32,7 @@ body {
   font-weight: bold;
 }
 .comment {
-  color: #32a852;
+  color: #288642;
 }
 .tag {
   border-radius: 10px;
@@ -184,4 +184,30 @@ code.example {
   border-left: 4px solid #4287f5;
   padding-left: 6px;
   margin-left: 4px;
+}
+
+.type {
+  border: 1px solid black;
+  font-family: monospace;
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin: 4px;
+  background-color: rgba(66, 135, 245, 0.1);
+  vertical-align: middle;
+}
+
+.type-name {
+  font-weight: bold;
+}
+
+.type-fields {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.type-fields > li::before {
+  content: "[" attr(data-tuple-idx) "] ";
+  margin-left: 2px;
 }

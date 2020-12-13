@@ -30,7 +30,7 @@ def main(args):
     all_source_files = sorted(all_source_files)
     process_args = [(source_dir/f, output_dir/f'{f}.chk.lz2', args.cw09) for f in all_source_files]
     process_args = [a for a in process_args if not a[1].exists()]
-    with _logger.pbar_raw(total=len(all_source_files)) as pbar:
+    with _logger.pbar_raw(total=len(process_args)) as pbar:
         if args.processes == 1:
             for src in map(process, process_args):
                 pbar.update(1)

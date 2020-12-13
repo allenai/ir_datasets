@@ -22,7 +22,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document__docs">docs</a>
 <div id="msmarco-document__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -31,13 +37,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Bajaj2016MSMA,
+
+<a class="tab" target="msmarco-document__citation">Citation</a>
+<div id="msmarco-document__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Bajaj2016MSMA,
   title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
   author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
   booktitle={InCoCo@NIPS},
   year={2016}
 }
 </cite>
+</div>
+</div>
 
 <hr />
 <div class="dataset" id="msmarco-document/dev" data-parent="msmarco-document">
@@ -49,7 +61,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/dev__queries">queries</a>
 <div id="msmarco-document/dev__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -61,7 +79,13 @@
 
 <a class="tab" target="msmarco-document/dev__docs">docs</a>
 <div id="msmarco-document/dev__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -73,7 +97,13 @@
 
 <a class="tab" target="msmarco-document/dev__qrels">qrels</a>
 <div id="msmarco-document/dev__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -84,7 +114,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/dev__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/dev__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -107,7 +143,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/eval__queries">queries</a>
 <div id="msmarco-document/eval__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -119,7 +161,13 @@
 
 <a class="tab" target="msmarco-document/eval__docs">docs</a>
 <div id="msmarco-document/eval__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -130,7 +178,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/eval__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/eval__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -153,7 +207,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/orcas__queries">queries</a>
 <div id="msmarco-document/orcas__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -165,7 +225,13 @@
 
 <a class="tab" target="msmarco-document/orcas__docs">docs</a>
 <div id="msmarco-document/orcas__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -177,7 +243,13 @@
 
 <a class="tab" target="msmarco-document/orcas__qrels">qrels</a>
 <div id="msmarco-document/orcas__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -188,7 +260,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/orcas__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/orcas__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -198,13 +276,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@article{craswell2020orcas,
+
+<a class="tab" target="msmarco-document/orcas__citation">Citation</a>
+<div id="msmarco-document/orcas__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{craswell2020orcas,
   title={ORCAS: 18 Million Clicked Query-Document Pairs for Analyzing Search},
   author={Craswell, Nick and Campos, Daniel and Mitra, Bhaskar and Yilmaz, Emine and Billerbeck, Bodo},
   journal={arXiv preprint arXiv:2006.05324},
   year={2020}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -217,7 +301,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/train__queries">queries</a>
 <div id="msmarco-document/train__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -229,7 +319,13 @@
 
 <a class="tab" target="msmarco-document/train__docs">docs</a>
 <div id="msmarco-document/train__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -241,7 +337,13 @@
 
 <a class="tab" target="msmarco-document/train__qrels">qrels</a>
 <div id="msmarco-document/train__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -252,7 +354,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/train__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/train__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -275,7 +383,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019__queries">queries</a>
 <div id="msmarco-document/trec-dl-2019__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -287,7 +401,13 @@
 
 <a class="tab" target="msmarco-document/trec-dl-2019__docs">docs</a>
 <div id="msmarco-document/trec-dl-2019__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -299,7 +419,13 @@
 
 <a class="tab" target="msmarco-document/trec-dl-2019__qrels">qrels</a>
 <div id="msmarco-document/trec-dl-2019__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -310,7 +436,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/trec-dl-2019__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -320,13 +452,19 @@
 <div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
 </code>
 </div>
-</div><p>Citation:</p><cite class="select">@inproceedings{Craswell2020OverviewOT,
+
+<a class="tab" target="msmarco-document/trec-dl-2019__citation">Citation</a>
+<div id="msmarco-document/trec-dl-2019__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Craswell2020OverviewOT,
   title={Overview of the TREC 2019 deep learning track},
   author={Nick Craswell and Bhaskar Mitra and E. Yilmaz and Daniel Fernando Campos and E. Voorhees},
   booktitle={TREC 2019},
   year={2019}
 }
 </cite>
+</div>
+</div>
 </div>
 
 <hr />
@@ -339,7 +477,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__queries">queries</a>
 <div id="msmarco-document/trec-dl-2019/judged__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -351,7 +495,13 @@
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__docs">docs</a>
 <div id="msmarco-document/trec-dl-2019/judged__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -363,7 +513,13 @@
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__qrels">qrels</a>
 <div id="msmarco-document/trec-dl-2019/judged__qrels" class="tab-content">
-<p>Qrel fields: <kbd>query_id, doc_id, relevance, iteration</kdb></p>
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -374,7 +530,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/trec-dl-2019/judged__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
@@ -397,7 +559,13 @@
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2020__queries">queries</a>
 <div id="msmarco-document/trec-dl-2020__queries" class="tab-content">
-<p>Query fields: <kbd>query_id, text</kbd></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -409,7 +577,13 @@
 
 <a class="tab" target="msmarco-document/trec-dl-2020__docs">docs</a>
 <div id="msmarco-document/trec-dl-2020__docs" class="tab-content">
-<p>Document fields: <kbd>doc_id, url, title, body</kdb></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -420,7 +594,13 @@
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020__scoreddocs">scoreddocs</a>
-<div id="msmarco-document/trec-dl-2020__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
 <p>Scored Document fields: <kbd>query_id, doc_id, score</kdb></p>
 <p>Example</p>
 <code class="example">
