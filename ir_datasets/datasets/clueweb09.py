@@ -45,19 +45,19 @@ class TrecPrel(NamedTuple):
 
 
 class ClueWeb09Docs(WarcDocs):
-    def __init__(self, docs_dlc, langs=None):
+    def __init__(self, docs_dlc, dirs=None):
         super().__init__(warc_cw09=True)
         self.docs_dlc = docs_dlc
         # All available languages
-        self.langs = langs or ['Arabic', 'Chinese', 'English', 'French', 'German', 'Italian', 'Japanese', 'Korean', 'Portuguese', 'Spanish']
+        self.dirs = dirs or ['ClueWeb09_Arabic_1', 'ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4', 'ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10', 'ClueWeb09_French_1', 'ClueWeb09_German_1', 'ClueWeb09_Italian_1', 'ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2', 'ClueWeb09_Korean_1', 'ClueWeb09_Portuguese_1', 'ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2']
 
     def docs_path(self):
         return self.docs_dlc.path()
 
     def _docs_iter_source_files(self):
         files = []
-        for lang in self.langs:
-            files += sorted(glob(os.path.join(self.docs_dlc.path(), f'ClueWeb09_{lang}_*', '*')))
+        for d in self.dirs:
+            files += sorted(glob(os.path.join(self.docs_dlc.path(), d, '*')))
         for source_dir in files:
             for source_file in sorted(glob(os.path.join(source_dir, '*.gz'))):
                 yield source_file
@@ -92,6 +92,24 @@ class TrecPrels(TrecQrels):
                 yield TrecPrel(qid, did, int(rel), int(method), float(iprob))
 
 
+class CatBQrelFilter:
+    def __init__(self, qrels_handler):
+        self._qrels_handler = qrels_handler
+
+    def __getattr__(self, attr):
+        return getattr(self._qrels_handler, attr)
+
+    def qrels_iter(self):
+        catb_segs = {'en0000','en0001','en0002','en0003','en0004','en0005','en0006','en0007','en0008','en0009','en0010','en0011','enwp00','enwp01','enwp02','enwp03'}
+        for qrel in self._qrels_handler.qrels_iter():
+            _, seg_id, _, _ = qrel.doc_id.split('-')
+            if seg_id in catb_segs:
+                yield qrel
+
+    def qrels_handler(self):
+        return self
+
+
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.cache_path()/NAME
@@ -100,10 +118,30 @@ def _init():
 
     docs_dlc = dlc['docs']
     collection = ClueWeb09Docs(docs_dlc)
-    collection_en = ClueWeb09Docs(docs_dlc, langs=['English'])
+    collection_ar = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Arabic_1'])
+    collection_zh = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4'])
+    collection_en = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10'])
+    collection_fr = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_French_1'])
+    collection_de = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_German_1'])
+    collection_it = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Italian_1'])
+    collection_ja = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2'])
+    collection_ko = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Korean_1'])
+    collection_pt = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Portuguese_1'])
+    collection_es = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2'])
+    collection_catb = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_English_1'])
     base = Dataset(collection, documentation('_'))
 
+    subsets['ar'] = Dataset(collection_ar, documentation('ar'))
+    subsets['zh'] = Dataset(collection_zh, documentation('zh'))
     subsets['en'] = Dataset(collection_en, documentation('en'))
+    subsets['fr'] = Dataset(collection_fr, documentation('fr'))
+    subsets['de'] = Dataset(collection_de, documentation('de'))
+    subsets['it'] = Dataset(collection_it, documentation('it'))
+    subsets['ja'] = Dataset(collection_ja, documentation('ja'))
+    subsets['ko'] = Dataset(collection_ko, documentation('ko'))
+    subsets['pt'] = Dataset(collection_pt, documentation('pt'))
+    subsets['es'] = Dataset(collection_es, documentation('es'))
+    subsets['catb'] = Dataset(collection_catb, documentation('catb'))
 
     subsets['en/trec-web-2009'] = Dataset(
         collection_en,
@@ -127,6 +165,30 @@ def _init():
         collection_en,
         TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery),
         TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS),
+        documentation('trec-web-2012'))
+
+    subsets['catb/trec-web-2009'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery),
+        CatBQrelFilter(TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09)),
+        documentation('trec-web-2009'))
+
+    subsets['catb/trec-web-2010'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery),
+        CatBQrelFilter(TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS)),
+        documentation('trec-web-2010'))
+
+    subsets['catb/trec-web-2011'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery),
+        CatBQrelFilter(TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS)),
+        documentation('trec-web-2011'))
+
+    subsets['catb/trec-web-2012'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery),
+        CatBQrelFilter(TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2012'))
 
     ir_datasets.registry.register(NAME, base)

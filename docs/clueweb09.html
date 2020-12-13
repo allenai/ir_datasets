@@ -40,11 +40,95 @@
 </div>
 
 <hr />
+<div class="dataset" id="clueweb09/ar" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/ar"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Arabic-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/ar__docs">docs</a>
+<div id="clueweb09/ar__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/ar')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/catb" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/catb"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with the first ~50 million English-language documents. Used as a smaller collection for TREC Web Track tasks. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/catb__docs">docs</a>
+<div id="clueweb09/catb__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/catb')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/de" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/de"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only German-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/de__docs">docs</a>
+<div id="clueweb09/de__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/de')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
 <div class="dataset" id="clueweb09/en" data-parent="clueweb09">
 <h3><kbd class="ds-name select"><span class="str">"clueweb09/en"</kdb></h3>
 
 <div class="desc">
- <p> Subset of ClueWeb 2009 with only English-language documents. </p> 
+ <p> Subset of ClueWeb09 with only English-language documents. </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="clueweb09/en__docs">docs</a>
@@ -387,6 +471,202 @@ bibtex:
   year={2012}
 }
 </cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/es" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/es"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Spanish-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/es__docs">docs</a>
+<div id="clueweb09/es__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/es')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/fr" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/fr"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only French-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/fr__docs">docs</a>
+<div id="clueweb09/fr__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/fr')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/it" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/it"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Italian-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/it__docs">docs</a>
+<div id="clueweb09/it__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/it')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/ja" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/ja"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Japanese-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/ja__docs">docs</a>
+<div id="clueweb09/ja__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/ja')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/ko" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/ko"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Korean-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/ko__docs">docs</a>
+<div id="clueweb09/ko__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/ko')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/pt" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/pt"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Portuguese-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/pt__docs">docs</a>
+<div id="clueweb09/pt__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/pt')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/zh" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/zh"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of ClueWeb09 with only Chinese-language documents. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/zh__docs">docs</a>
+<div id="clueweb09/zh__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/zh')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+</code>
 </div>
 </div>
 </div>

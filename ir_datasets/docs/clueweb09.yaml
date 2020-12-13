@@ -13,10 +13,72 @@ is provided <a href="https://lemurproject.org/clueweb09/">here</a>.
 </ul>
 '
 
+ar:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Arabic-language documents.
+</p>
+'
+zh:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Chinese-language documents.
+</p>
+'
 en:
   desc: '
 <p>
-Subset of ClueWeb 2009 with only English-language documents.
+Subset of ClueWeb09 with only English-language documents.
+</p>
+'
+fr:
+  desc: '
+<p>
+Subset of ClueWeb09 with only French-language documents.
+</p>
+'
+de:
+  desc: '
+<p>
+Subset of ClueWeb09 with only German-language documents.
+</p>
+'
+it:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Italian-language documents.
+</p>
+'
+ja:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Japanese-language documents.
+</p>
+'
+ko:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Korean-language documents.
+</p>
+'
+pt:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Portuguese-language documents.
+</p>
+'
+es:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Spanish-language documents.
+</p>
+'
+
+catb:
+  desc: '
+<p>
+Subset of ClueWeb09 with the first ~50 million English-language documents.
+Used as a smaller collection for TREC Web Track tasks.
 </p>
 '
 
