@@ -10,9 +10,9 @@ class WarcDoc(NamedTuple):
     doc_id: str
     url: str
     date: str
-    content_type: str
     http_headers: str
     body: bytes
+    body_content_type: str
 
 
 class WarcDocs(BaseDocs):
@@ -55,7 +55,7 @@ class WarcDocs(BaseDocs):
                         content_type = content_type[0]
                     else:
                         content_type = ''
-                    yield WarcDoc(did, url, date, content_type, http_headers, body)
+                    yield WarcDoc(did, url, date, http_headers, body, content_type)
             yield it()
 
     def docs_path(self):

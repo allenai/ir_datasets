@@ -9,7 +9,10 @@ _logger = ir_datasets.log.easy()
 class DatasetIntegrationTest(unittest.TestCase):
     def _test_docs(self, dataset_name, count=None, items=None):
         with self.subTest('docs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -28,7 +31,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_queries(self, dataset_name, count=None, items=None):
         with self.subTest('queries', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -47,7 +53,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_qrels(self, dataset_name, count=None, items=None):
         with self.subTest('qrels', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -66,7 +75,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_scoreddocs(self, dataset_name, count=None, items=None):
         with self.subTest('scoreddocs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -85,7 +97,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_docpairs(self, dataset_name, count=None, items=None):
         with self.subTest('docpairs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -105,7 +120,11 @@ class DatasetIntegrationTest(unittest.TestCase):
     def _build_test_docs(self, dataset_name, include_count=True):
         items = {}
         count = 0
-        for i, doc in enumerate(_logger.pbar(ir_datasets.load(dataset_name).docs_iter(), f'{dataset_name} docs')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs')):
             count += 1
             if i in (0, 9):
                 items[i] = doc
@@ -121,7 +140,11 @@ self._test_docs({repr(dataset_name)}, {count}items={self._repr_namedtuples(items
     def _build_test_queries(self, dataset_name):
         items = {}
         count = 0
-        for i, query in enumerate(_logger.pbar(ir_datasets.load(dataset_name).queries_iter(), f'{dataset_name} queries')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries')):
             count += 1
             if i in (0, 9):
                 items[i] = query
@@ -133,7 +156,11 @@ self._test_queries({repr(dataset_name)}, count={count}, items={self._repr_namedt
     def _build_test_qrels(self, dataset_name):
         items = {}
         count = 0
-        for i, qrel in enumerate(_logger.pbar(ir_datasets.load(dataset_name).qrels_iter(), f'{dataset_name} qrels')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels')):
             count += 1
             if i in (0, 9):
                 items[i] = qrel
@@ -145,7 +172,11 @@ self._test_qrels({repr(dataset_name)}, count={count}, items={self._repr_namedtup
     def _build_test_scoreddocs(self, dataset_name):
         items = {}
         count = 0
-        for i, scoreddoc in enumerate(_logger.pbar(ir_datasets.load(dataset_name).scoreddocs_iter(), f'{dataset_name} scoreddocs')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs')):
             count += 1
             if i in (0, 9):
                 items[i] = scoreddoc
