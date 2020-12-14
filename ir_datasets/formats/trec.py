@@ -8,7 +8,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
-from .base import GenericDoc, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
+from .base import GenericDoc, GenericQuery, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
 
 
 class TrecDoc(NamedTuple):
@@ -217,6 +217,25 @@ class TrecXmlQueries(BaseQueries):
 
     def queries_cls(self):
         return self._qtype
+
+
+class TrecColonQueries(BaseQueries):
+    def __init__(self, queries_dlc, encoding=None):
+        self._queries_dlc = queries_dlc
+        self._encoding = encoding
+
+    def queries_iter(self):
+        with self._queries_dlc.stream() as f:
+            f = codecs.getreader(self._encoding or 'utf8')(f)
+            for line in f:
+                query_id, text = line.split(':', 1)
+                yield GenericQuery(query_id, text)
+
+    def queries_path(self):
+        return self._queries_dlc.path()
+
+    def queries_cls(self):
+        return GenericQuery
 
 
 class TrecQrels(BaseQrels):

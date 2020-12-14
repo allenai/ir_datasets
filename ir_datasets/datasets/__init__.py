@@ -4,6 +4,7 @@ from . import car
 from . import clueweb09
 from . import clueweb12
 from . import cord19
+from . import gov2
 from . import msmarco_passage
 from . import msmarco_document
 from . import trec_robust04

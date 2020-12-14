@@ -26,7 +26,7 @@
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -34,7 +34,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 </div>
@@ -53,7 +53,7 @@
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -61,7 +61,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 </div>
@@ -99,7 +99,7 @@
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -107,7 +107,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-1')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 
@@ -175,7 +175,7 @@ bibtex:
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -183,7 +183,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-2')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 
@@ -251,7 +251,7 @@ bibtex:
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -259,7 +259,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/ntcir-www-3')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 </div>
@@ -297,7 +297,7 @@ bibtex:
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -305,7 +305,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/b13/trec-misinfo-2019')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 
@@ -366,7 +366,7 @@ bibtex:
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -374,7 +374,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2013')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 
@@ -447,7 +447,7 @@ bibtex:
 <div class="type">
 <div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">content_type</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">bytes</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -455,7 +455,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb12/trec-web-2014')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, content_type, http_headers, body&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
 </div>
 
