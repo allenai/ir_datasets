@@ -272,9 +272,9 @@ def generate_dataset(dataset, dataset_id):
             fields = ", ".join(dataset.scoreddocs_cls()._fields)
             out.write(f'''
 <a class="tab" target="{dataset_id}__scoreddocs">scoreddocs</a>
+<div id="{dataset_id}__scoreddocs" class="tab-content">
 <div>Scored Document type:</div>
 {generate_data_format(dataset.scoreddocs_cls())}
-<p>Scored Document fields: <kbd>{fields}</kdb></p>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -291,7 +291,6 @@ def generate_dataset(dataset, dataset_id):
 <div id="{dataset_id}__docpairs" class="tab-content">
 <div>Document Pair type:</div>
 {generate_data_format(dataset.docpairs_cls())}
-<p>Document Pair fields: <kbd>{fields}</kdb></p>
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
