@@ -104,7 +104,7 @@ hr {
 cite {
   border: 1px dotted #444;
   white-space: pre;
-  overflow: scroll;
+  overflow: auto;
   font-family: monospace;
   font-style: normal;
   display: block;
