@@ -175,6 +175,7 @@ indexes the documents/queries by ID.
         dataset = ir_datasets.registry[top_level]
         with open(f'{out_dir}/{top_level}.html', 'wt') as out:
             documentation = dataset.documentation() if hasattr(dataset, 'documentation') else {}
+            index = '\n'.join(f'<li><a href="#{name}"><kbd><span class="prefix">{top_level}</span>{name[len(top_level):]}</kbd></a></li>' for name, ds in top_level_map[top_level])
             out.write(f'''
 <!DOCTYPE html>
 <html>
@@ -186,8 +187,18 @@ indexes the documents/queries by ID.
 <div class="page">
 <div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
 <h1><kbd>ir_datasets</kbd>: {documentation.get('pretty_name', top_level)}</h1>
+<div>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#{top_level}"><kbd>{top_level}</kbd></a></li>
+{index}
+</ol>
+</div>
+<hr />
+<div class="dataset" id="{top_level}">
 <h3><kbd class="select"><span class="str">"{top_level}"</kdb></h3>
 {generate_dataset(dataset, top_level)}
+</div>
 ''')
             for name, dataset in top_level_map[top_level]:
                 out.write(f'''

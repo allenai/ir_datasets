@@ -211,3 +211,22 @@ code.example {
   content: "[" attr(data-tuple-idx) "] ";
   margin-left: 2px;
 }
+
+.index {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  padding-left: 8px;
+}
+
+.prefix {
+  color: #777;
+}
+
+.index a {
+  text-decoration: none;
+}
+
+.index a:hover {
+  text-decoration: underline;
+}
