@@ -98,7 +98,7 @@ def _init():
     documentation = YamlDocumentation('docs/msmarco-passage.yaml')
     base_path = ir_datasets.util.cache_path()/'msmarco-passage'
     dlc = DownloadConfig.context('msmarco-passage', base_path, dua=DUA)
-    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['docs'], 'collection.tsv')), base_path/'collection.tsv'))
+    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'))
     subsets = {}
 
     subsets['train'] = Dataset(
@@ -116,10 +116,21 @@ def _init():
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['dev/scoreddocs'], 'top1000.dev')), base_path/'dev/ms.run')),
     )
 
+    subsets['dev/small'] = Dataset(
+        collection,
+        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.dev.small.tsv'), base_path/'dev/small/queries.tsv')),
+        TrecQrels(Cache(TarExtract(dlc['collectionandqueries'], 'qrels.dev.small.tsv'), base_path/'dev/small/qrels'), QRELS_DEFS),
+    )
+
     subsets['eval'] = Dataset(
         collection,
         TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.eval.tsv'), base_path/'eval/queries.tsv')),
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['eval/scoreddocs'], 'top1000.eval')), base_path/'eval/ms.run')),
+    )
+
+    subsets['eval/small'] = Dataset(
+        collection,
+        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.eval.small.tsv'), base_path/'eval/small/queries.tsv')),
     )
 
     subsets['trec-dl-2019'] = Dataset(

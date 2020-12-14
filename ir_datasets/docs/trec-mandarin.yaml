@@ -42,7 +42,7 @@ Mandarin Chinese benchmark from TREC 6.
 </ul>'
   bibtex: |
     @inproceedings{wilkinson1998chinese,
-      title={Chinese Document Retrieval at TREC􏰁􏰏-6},
+      title={Chinese Document Retrieval at TREC-6},
       author={Ross Wilkinson},
       booktitle={TREC},
       year={1997}

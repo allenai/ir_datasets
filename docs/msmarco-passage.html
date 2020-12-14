@@ -20,7 +20,9 @@
 <li><a href="#msmarco-passage"><kbd>msmarco-passage</kbd></a></li>
 <li><a href="#msmarco-passage/dev"><kbd><span class="prefix">msmarco-passage</span>/dev</kbd></a></li>
 <li><a href="#msmarco-passage/dev/judged"><kbd><span class="prefix">msmarco-passage</span>/dev/judged</kbd></a></li>
+<li><a href="#msmarco-passage/dev/small"><kbd><span class="prefix">msmarco-passage</span>/dev/small</kbd></a></li>
 <li><a href="#msmarco-passage/eval"><kbd><span class="prefix">msmarco-passage</span>/eval</kbd></a></li>
+<li><a href="#msmarco-passage/eval/small"><kbd><span class="prefix">msmarco-passage</span>/eval/small</kbd></a></li>
 <li><a href="#msmarco-passage/train"><kbd><span class="prefix">msmarco-passage</span>/train</kbd></a></li>
 <li><a href="#msmarco-passage/train/judged"><kbd><span class="prefix">msmarco-passage</span>/train/judged</kbd></a></li>
 <li><a href="#msmarco-passage/train/medical"><kbd><span class="prefix">msmarco-passage</span>/train/medical</kbd></a></li>
@@ -236,6 +238,70 @@ bibtex:
 </div>
 
 <hr />
+<div class="dataset" id="msmarco-passage/dev/small" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/dev/small"</kdb></h3>
+
+<div class="desc">
+ <p> Official "small" version of the dev set, consisting of 6,980 queries (6.9% of the full dev set). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/dev/small__queries">queries</a>
+<div id="msmarco-passage/dev/small__queries" class="tab-content">
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/small__docs">docs</a>
+<div id="msmarco-passage/dev/small__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/small__qrels">qrels</a>
+<div id="msmarco-passage/dev/small__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
 <div class="dataset" id="msmarco-passage/eval" data-parent="msmarco-passage">
 <h3><kbd class="ds-name select"><span class="str">"msmarco-passage/eval"</kdb></h3>
 
@@ -294,6 +360,52 @@ bibtex:
 <div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval')</div>
 <div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/eval/small" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/eval/small"</kdb></h3>
+
+<div class="desc">
+ <p> Official "small" version of the eval set, consisting of 6,837 queries (6.8% of the full eval set). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/eval/small__queries">queries</a>
+<div id="msmarco-passage/eval/small__queries" class="tab-content">
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval/small')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/eval/small__docs">docs</a>
+<div id="msmarco-passage/eval/small__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval/small')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
 </div>

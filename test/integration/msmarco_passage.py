@@ -45,6 +45,11 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: GenericQuery(query_id='1048587', text='what is patron'),
             101092: GenericQuery(query_id='524285', text='treadmill incline meaning')
         })
+        self._test_queries('msmarco-passage/dev/small', count=6980, items={
+            0: GenericQuery('1048585', "what is paula deen's brother"),
+            9: GenericQuery('524699', 'tricare service number'),
+            6979: GenericQuery('1048565', 'who plays sebastian michaelis'),
+        })
         self._test_queries('msmarco-passage/dev/judged', count=55578, items={
             0: GenericQuery(query_id='1048578', text='cost of endless pools/swim spa'),
             9: GenericQuery(query_id='1048601', text='what is pastoral medicine'),
@@ -54,6 +59,11 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             0: GenericQuery(query_id='786436', text='what is prescribed to treat thyroid storm'),
             9: GenericQuery(query_id='1048619', text='who plays stitch'),
             101091: GenericQuery(query_id='786430', text='what is prescribed for pelvic inflammatory disease?')
+        })
+        self._test_queries('msmarco-passage/eval/small', count=6837, items={
+            0: GenericQuery('57', ' term service agreement definition'),
+            9: GenericQuery('262636', 'how long is a moment'),
+            6836: GenericQuery('567976', 'what are the causes of unemployment'),
         })
         self._test_queries('msmarco-passage/trec-dl-2019', count=200, items={
             0: GenericQuery(query_id='1108939', text='what slows down the flow of blood'),
@@ -91,6 +101,11 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             0: TrecQrel(query_id='1102432', doc_id='2026790', relevance=1, iteration='0'),
             9: TrecQrel(query_id='300674', doc_id='7067032', relevance=1, iteration='0'),
             59272: TrecQrel(query_id='371455', doc_id='8009476', relevance=1, iteration='0')
+        })
+        self._test_qrels('msmarco-passage/dev/small', count=7437, items={
+            0: TrecQrel('300674', '7067032', 1, '0'),
+            9: TrecQrel('54544', '7068203', 1, '0'),
+            7436: TrecQrel('195199', '8009377', 1, '0'),
         })
         self._test_qrels('msmarco-passage/dev/judged', count=59273, items={
             0: TrecQrel(query_id='1102432', doc_id='2026790', relevance=1, iteration='0'),

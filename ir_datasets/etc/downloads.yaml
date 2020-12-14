@@ -280,9 +280,10 @@ msmarco-document:
 
 
 msmarco-passage:
-  docs:
-    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/collection.tar.gz'
-    expected_md5: "87dd01826da3e2ad45447ba5af577628"
+  collectionandqueries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz'
+    expected_md5: '31644046b18952c1386cd4564ba2ae69'
+    cache_path: 'collectionandqueries.tar.gz'
   queries:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz'
     expected_md5: "c177b2795d5f2dcc524cf00fcd973be1"
@@ -324,6 +325,7 @@ msmarco-passage:
     expected_md5: 'ec9e012746aa9763c7ff10b3336a3ce1'
   trec-dl-2020/queries:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz'
+    expected_md5: '00a406fb0d14ed3752d70d1e4eb98600'
     cache_path: 'trec-dl-2020/queries.tsv.gz'
   trec-dl-2020/scoreddocs:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2020-top1000.tsv.gz'
