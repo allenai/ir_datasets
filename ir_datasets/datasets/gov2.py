@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import NamedTuple
 from glob import glob
 import ir_datasets
-from ir_datasets.util import DownloadConfig
-from ir_datasets.formats import TrecQrels, TrecQueries, TrecColonQueries, BaseDocs, GenericQuery
+from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract
+from ir_datasets.formats import TrecQrels, TrecQueries, TrecColonQueries, BaseDocs, GenericQuery, BaseQrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import Docstore
 
@@ -22,14 +22,17 @@ QREL_DEFS = {
 }
 
 NAMED_PAGE_QREL_DEFS = {
-    1: '',
-    0: '',
+    1: 'Relevant',
+    0: 'Not Relevant',
 }
 
 NAMED_PAGE_QTYPE_MAP = {
     '<num> *(Number:)? *NP': 'query_id', # Remove NP prefix from QIDs
     '<title> *(Topic:)?': 'text',
 }
+
+EFF_MAP_05 = {'751': '1192', '752': '1330', '753': '5956', '754': '6303', '755': '6939', '756': '7553', '757': '8784', '758': '9121', '759': '9266', '760': '10359', '761': '10406', '762': '11597', '763': '12750', '764': '15502', '765': '16895', '766': '17279', '767': '17615', '768': '18050', '769': '18678', '770': '19280', '771': '19963', '772': '20766', '773': '21329', '774': '21513', '775': '23212', '776': '24289', '777': '24781', '778': '24813', '779': '26593', '780': '27428', '781': '28120', '782': '28627', '783': '29561', '784': '33379', '785': '33820', '786': '34135', '787': '35192', '788': '36242', '789': '36530', '790': '36616', '791': '36738', '792': '37111', '793': '41088', '794': '41192', '795': '41506', '796': '44506', '797': '45081', '798': '47993', '799': '48890', '800': '49462'}
+EFF_MAP_06 = {'801': '62937', '802': '63569', '803': '63582', '804': '63641', '805': '64227', '806': '64266', '807': '64310', '808': '64642', '809': '64687', '810': '64704', '811': '64723', '812': '64741', '813': '64752', '814': '64938', '815': '65024', '816': '65070', '817': '65222', '818': '65335', '819': '65486', '820': '65504', '821': '65599', '822': '65821', '823': '65826', '824': '65950', '825': '66084', '826': '66409', '827': '66725', '828': '67326', '829': '67531', '830': '67550', '831': '67782', '832': '67961', '833': '68322', '834': '68492', '835': '68967', '836': '69028', '837': '69127', '838': '69401', '839': '69552', '840': '69564', '841': '69935', '842': '70033', '843': '70041', '844': '70285', '845': '70579', '846': '70707', '847': '70751', '848': '70815', '849': '70935', '850': '71136'}
 
 class Gov2Doc(NamedTuple):
     doc_id: str
@@ -152,6 +155,28 @@ class Gov2Docstore(Docstore):
                             break # file finished
 
 
+class RewriteQids(BaseQrels):
+    def __init__(self, base_qrels, qid_map):
+        self._base_qrels = base_qrels
+        self._qid_map = qid_map
+
+    def qrels_iter(self):
+        cls = self.qrels_cls()
+        for qrel in self._base_qrels.qrels_iter():
+            if qrel.query_id in self._qid_map:
+                qrel = cls(self._qid_map[qrel.query_id], *qrel[1:])
+            yield qrel
+
+    def qrels_defs(self):
+        return self._base_qrels.qrels_defs()
+
+    def qrels_path(self):
+        return self._base_qrels.qrels_path()
+
+    def qrels_cls(self):
+        return self._base_qrels.qrels_cls()
+
+
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.cache_path()/NAME
@@ -180,6 +205,12 @@ def _init():
         TrecQrels(dlc['trec-tb-2005/named-page/qrels'], NAMED_PAGE_QREL_DEFS),
         documentation('trec-tb-2005/named-page')
     )
+    subsets['trec-tb-2005/efficiency'] = Dataset(
+        collection,
+        TrecColonQueries(GzipExtract(dlc['trec-tb-2005/efficiency/queries']), encoding='latin1'),
+        RewriteQids(TrecQrels(dlc['trec-tb-2005/qrels'], QREL_DEFS), EFF_MAP_05),
+        documentation('trec-tb-2005/efficiency')
+    )
     subsets['trec-tb-2006'] = Dataset(
         collection,
         TrecQueries(dlc['trec-tb-2006/queries']),
@@ -191,6 +222,38 @@ def _init():
         TrecQueries(dlc['trec-tb-2006/named-page/queries'], qtype=GenericQuery, qtype_map=NAMED_PAGE_QTYPE_MAP),
         TrecQrels(dlc['trec-tb-2006/named-page/qrels'], NAMED_PAGE_QREL_DEFS),
         documentation('trec-tb-2006/named-page')
+    )
+    subsets['trec-tb-2006/efficiency'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.all'), encoding='latin1'),
+        RewriteQids(TrecQrels(dlc['trec-tb-2006/qrels'], QREL_DEFS), EFF_MAP_06),
+        documentation('trec-tb-2006/efficiency')
+    )
+    subsets['trec-tb-2006/efficiency/10k'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.10k'), encoding='latin1'),
+        documentation('trec-tb-2006/efficiency/10k')
+    )
+    subsets['trec-tb-2006/efficiency/stream1'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-1'), encoding='latin1'),
+        documentation('trec-tb-2006/efficiency/stream1')
+    )
+    subsets['trec-tb-2006/efficiency/stream2'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-2'), encoding='latin1'),
+        documentation('trec-tb-2006/efficiency/stream2')
+    )
+    subsets['trec-tb-2006/efficiency/stream3'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-3'), encoding='latin1'),
+        RewriteQids(TrecQrels(dlc['trec-tb-2006/qrels'], QREL_DEFS), EFF_MAP_06),
+        documentation('trec-tb-2006/efficiency/stream3')
+    )
+    subsets['trec-tb-2006/efficiency/stream4'] = Dataset(
+        collection,
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-4'), encoding='latin1'),
+        documentation('trec-tb-2006/efficiency/stream4')
     )
 
     ir_datasets.registry.register(NAME, base)

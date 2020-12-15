@@ -193,6 +193,10 @@ Should contain GOV2_data'
     url: 'https://trec.nist.gov/data/terabyte/05/05.np_qrels'
     expected_md5: '0b0f73650d1297a7e5572576a4b93d28'
     cache_path: 'trec-tb-2005/named-page/qrels.txt'
+  trec-tb-2005/efficiency/queries:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.efficiency_topics.gz'
+    expected_md5: '034a21c9dd956f3b7fb4f162782c9909'
+    cache_path: 'trec-tb-2005/efficiency/queries.txt.gz'
   trec-tb-2006/queries:
     url: 'https://trec.nist.gov/data/terabyte/06/06.topics.801-850.txt'
     expected_md5: '6e23a748c060ef5be64dbcc65245072f'
@@ -209,6 +213,10 @@ Should contain GOV2_data'
     url: 'https://trec.nist.gov/data/terabyte/06/qrels.tb06.np'
     expected_md5: 'f9f7d07de3070eafc08989dd98d1fab8'
     cache_path: 'trec-tb-2006/named-page/qrels.txt'
+  trec-tb-2006/efficiency/queries:
+    url: 'https://trec.nist.gov/data/terabyte/06/06.efficiency_topics.tar.gz'
+    expected_md5: 'e8599a08af5b3f036c203957f5b82de8'
+    cache_path: 'trec-tb-2006/efficiency/queries.tar.gz'
 
 
 msmarco-document:

@@ -53,10 +53,45 @@ class TestGov2(DatasetIntegrationTest):
             9: GenericQuery('610', 'united states vs david j. kaiser transcript court appeal'),
             251: GenericQuery('872', 'medical advisory committee memorandum a rule to exclude idet'),
         })
+        self._test_queries('gov2/trec-tb-2005/efficiency', count=50000, items={
+            0: GenericQuery('1', 'pierson s twin lakes marina'),
+            9: GenericQuery('10', 'hotel meistertrunk'),
+            49999: GenericQuery('50000', 'senator durbin'),
+        })
         self._test_queries('gov2/trec-tb-2006/named-page', count=181, items={
             0: GenericQuery('901', 'CCAP advance case search'),
             9: GenericQuery('910', 'HS project "It\'s not easy being green"'),
             180: GenericQuery('1081', 'Colleges in PA'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency', count=100000, items={
+            0: GenericQuery('1', 'commissioner of revenue orange county virginia'),
+            9: GenericQuery('10', 'terrorism policies in history'),
+            99999: GenericQuery('100000', 'cervical flexion extension injury'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency/10k', count=10000, items={
+            0: GenericQuery('1', 'commissioner of revenue orange county virginia'),
+            9: GenericQuery('10', 'terrorism policies in history'),
+            9999: GenericQuery('10000', 'gdp of international business in bermuda'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency/stream1', count=25000, items={
+            0: GenericQuery('1', 'commissioner of revenue orange county virginia'),
+            9: GenericQuery('10', 'terrorism policies in history'),
+            24999: GenericQuery('25000', 'organized crime in columbus ohio'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency/stream2', count=25000, items={
+            0: GenericQuery('25001', 'pea ridge national park'),
+            9: GenericQuery('25010', 'nylon concrete'),
+            24999: GenericQuery('50000', 'mark wallace bush and u.n.'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency/stream3', count=25000, items={
+            0: GenericQuery('50001', "dept veteran's affairs connecticut"),
+            9: GenericQuery('50010', 'nuclear & missile cold war'),
+            24999: GenericQuery('75000', 'the role and responsibilities of the u.s. senate'),
+        })
+        self._test_queries('gov2/trec-tb-2006/efficiency/stream4', count=25000, items={
+            0: GenericQuery('75001', 'united states office of personel management'),
+            9: GenericQuery('75010', 'percentage of youth tobacco smokers'),
+            24999: GenericQuery('100000', 'cervical flexion extension injury'),
         })
 
     def test_gov2_qrels(self):
@@ -80,10 +115,25 @@ class TestGov2(DatasetIntegrationTest):
             9: TrecQrel('606', 'GX001-80-15356704', 1, '0'),
             11728: TrecQrel('872', 'GX270-03-12329248', 1, '0'),
         })
+        self._test_qrels('gov2/trec-tb-2005/efficiency', count=45291, items={
+            0: TrecQrel('1192', 'GX000-00-13125308', 0, '0'),
+            9: TrecQrel('1192', 'GX000-47-11993633', 0, '0'),
+            45290: TrecQrel('49462', 'GX272-48-8680401', 1, '0'),
+        })
         self._test_qrels('gov2/trec-tb-2006/named-page', count=2361, items={
             0: TrecQrel('901', 'GX123-98-3885901', 1, '0'),
             9: TrecQrel('902', 'GX078-80-12349004', 1, '1'),
             2360: TrecQrel('1081', 'GX136-71-9506712', 1, '0'),
+        })
+        self._test_qrels('gov2/trec-tb-2006/efficiency', count=31984, items={
+            0: TrecQrel('62937', 'GX000-01-2722311', 0, '0'),
+            9: TrecQrel('62937', 'GX001-46-11521081', 1, '0'),
+            31983: TrecQrel('71136', 'GX272-67-14117174', 0, '0'),
+        })
+        self._test_qrels('gov2/trec-tb-2006/efficiency/stream3', count=31984, items={
+            0: TrecQrel('62937', 'GX000-01-2722311', 0, '0'),
+            9: TrecQrel('62937', 'GX001-46-11521081', 1, '0'),
+            31983: TrecQrel('71136', 'GX272-67-14117174', 0, '0'),
         })
 
 

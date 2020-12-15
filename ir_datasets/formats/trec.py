@@ -229,6 +229,7 @@ class TrecColonQueries(BaseQueries):
             f = codecs.getreader(self._encoding or 'utf8')(f)
             for line in f:
                 query_id, text = line.split(':', 1)
+                text = text.rstrip('\n')
                 yield GenericQuery(query_id, text)
 
     def queries_path(self):
