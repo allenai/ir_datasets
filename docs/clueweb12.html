@@ -136,6 +136,17 @@
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Two annotators rated as non-relevant</td></tr>
+<tr><td class="relScore">1</td><td>One annotator rated as relevant, one as non-relevant</td></tr>
+<tr><td class="relScore">2</td><td>Two annotators rated as relevant, OR one rates as highly relevant and one as non-relevant</td></tr>
+<tr><td class="relScore">3</td><td>One annotator rated as highly relevant, one as relevant</td></tr>
+<tr><td class="relScore">4</td><td>Two annotators rated as highly relevant</td></tr>
+</table>
+
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -212,6 +223,17 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Two annotators rated as non-relevant</td></tr>
+<tr><td class="relScore">1</td><td>One annotator rated as relevant, one as non-relevant</td></tr>
+<tr><td class="relScore">2</td><td>Two annotators rated as relevant, OR one rates as highly relevant and one as non-relevant</td></tr>
+<tr><td class="relScore">3</td><td>One annotator rated as highly relevant, one as relevant</td></tr>
+<tr><td class="relScore">4</td><td>Two annotators rated as highly relevant</td></tr>
+</table>
+
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -334,6 +356,15 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">effectiveness</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">redibility</span>: <span class="kwd">int</span></li>
 </ol>
 </div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not relevant</td></tr>
+<tr><td class="relScore">1</td><td>Relevant</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant</td></tr>
+</table>
+
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -403,6 +434,18 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">-2</td><td>Junk: This page does not appear to be useful for any reasonable purpose; it may be spam or junk</td></tr>
+<tr><td class="relScore">0</td><td>Non: The content of this page does not provide useful information on the topic, but may provide useful information on other topics, including other interpretations of the same query.</td></tr>
+<tr><td class="relScore">1</td><td>Rel: The content of this page provides some information on the topic, which may be minimal; the relevant information must be on that page, not just promising-looking anchor text pointing to a possibly useful page.</td></tr>
+<tr><td class="relScore">2</td><td>HRel: The content of this page provides substantial information on the topic.</td></tr>
+<tr><td class="relScore">3</td><td>Key: This page or site is dedicated to the topic; authoritative and comprehensive, it is worthy of being a top result in a web search engine.</td></tr>
+<tr><td class="relScore">4</td><td>Nav: This page represents a home page of an entity directly named by the query; the user may be searching for this specific page or site.</td></tr>
+</table>
+
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -484,6 +527,18 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">-2</td><td>Junk: This page does not appear to be useful for any reasonable purpose; it may be spam or junk</td></tr>
+<tr><td class="relScore">0</td><td>Non: The content of this page does not provide useful information on the topic, but may provide useful information on other topics, including other interpretations of the same query.</td></tr>
+<tr><td class="relScore">1</td><td>Rel: The content of this page provides some information on the topic, which may be minimal; the relevant information must be on that page, not just promising-looking anchor text pointing to a possibly useful page.</td></tr>
+<tr><td class="relScore">2</td><td>HRel: The content of this page provides substantial information on the topic.</td></tr>
+<tr><td class="relScore">3</td><td>Key: This page or site is dedicated to the topic; authoritative and comprehensive, it is worthy of being a top result in a web search engine.</td></tr>
+<tr><td class="relScore">4</td><td>Nav: This page represents a home page of an entity directly named by the query; the user may be searching for this specific page or site.</td></tr>
+</table>
+
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>

@@ -270,6 +270,8 @@ def generate_dataset(dataset, dataset_id):
 <div id="{dataset_id}__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 {generate_data_format(dataset.qrels_cls())}
+<p>Relevance levels</p>
+{generate_qrel_defs_table(dataset.qrels_defs())}
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
@@ -351,6 +353,19 @@ def generate_data_format(cls):
 </ol>
 </div>""".strip()
     raise RuntimeError(f"uknown class {cls}")
+
+
+def generate_qrel_defs_table(defs):
+    rows = []
+    for score, desc in sorted(defs.items()):
+        rows.append(f'<tr><td class="relScore">{score}</td><td>{desc}</td></tr>')
+    rows = "\n".join(rows)
+    return f'''
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+{rows}
+</table>
+'''
 
 
 if __name__ == '__main__':

@@ -230,3 +230,24 @@ code.example {
 .index a:hover {
   text-decoration: underline;
 }
+
+td, th {
+  text-align: left;
+  padding: 0 8px;
+}
+
+th {
+  background-color: #4287f5;
+  color: white;
+  text-align: left;
+  padding: 0 8px;
+}
+
+tr:nth-child(2n+1) {
+  background-color: #EEE;
+}
+
+.relScore {
+  font-family: monospace;
+  text-align: center;
+}
