@@ -76,16 +76,21 @@ class TestClueWeb09(DatasetIntegrationTest):
         docstore = ir_datasets.load('clueweb09').docs_store()
         docstore.clear_cache()
         with _logger.duration('cold fetch'):
-            docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35581', 'clueweb09-ar0000-48-02342'])
+            result = docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35154', 'clueweb09-ar0000-48-02342'])
+            self.assertEqual(len(result), 3)
         with _logger.duration('warm fetch'):
-            docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35581', 'clueweb09-ar0000-48-02342'])
+            result = docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35154', 'clueweb09-ar0000-48-02342'])
+            self.assertEqual(len(result), 3)
         docstore = ir_datasets.load('clueweb09').docs_store()
         with _logger.duration('warm fetch (new docstore)'):
-            docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35581', 'clueweb09-ar0000-48-02342'])
+            result = docstore.get_many(['clueweb09-en0000-00-00003', 'clueweb09-en0000-00-35154', 'clueweb09-ar0000-48-02342'])
+            self.assertEqual(len(result), 3)
         with _logger.duration('cold fetch (nearby)'):
-            docstore.get_many(['clueweb09-en0000-00-00023', 'clueweb09-en0000-00-35570', 'clueweb09-ar0000-48-02348'])
+            result = docstore.get_many(['clueweb09-en0000-00-00023', 'clueweb09-en0000-00-35167', 'clueweb09-ar0000-48-02348'])
+            self.assertEqual(len(result), 3)
         with _logger.duration('cold fetch (earlier)'):
-            docstore.get_many(['clueweb09-en0000-00-00001', 'clueweb09-ar0000-48-00009'])
+            result = docstore.get_many(['clueweb09-en0000-00-00001', 'clueweb09-ar0000-48-00009'])
+            self.assertEqual(len(result), 2)
 
 
     def test_clueweb09_queries(self):

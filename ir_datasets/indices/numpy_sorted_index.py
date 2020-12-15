@@ -19,6 +19,8 @@ class NumpySortedIndex:
 
     def commit(self):
         self._lazy_load()
+        if self.transaction is None:
+            return
         transaction = sorted(self.transaction.items())
         transaction = [(x[0].encode('utf8'), x[1]) for x in transaction]
         if self._exists():

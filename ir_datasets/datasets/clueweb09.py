@@ -1,9 +1,10 @@
 import os
 import codecs
+from pathlib import Path
 from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
-from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract
+from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract, TarExtractAll
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
@@ -45,9 +46,10 @@ class TrecPrel(NamedTuple):
 
 
 class ClueWeb09Docs(WarcDocs):
-    def __init__(self, docs_dlc, dirs=None):
+    def __init__(self, docs_dlc, chk_dlc, dirs=None):
         super().__init__(warc_cw09=True)
         self.docs_dlc = docs_dlc
+        self.chk_dlc = chk_dlc
         # All available languages
         self.dirs = dirs or ['ClueWeb09_Arabic_1', 'ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4', 'ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10', 'ClueWeb09_French_1', 'ClueWeb09_German_1', 'ClueWeb09_Italian_1', 'ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2', 'ClueWeb09_Korean_1', 'ClueWeb09_Portuguese_1', 'ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2']
 
@@ -77,6 +79,14 @@ class ClueWeb09Docs(WarcDocs):
             raise ValueError(f'doc_id {doc_id} found in multiple files: {source_file}')
         return source_file[0]
 
+    def _docs_source_file_to_checkpoint(self, source_file):
+        source_prefix = Path(self.docs_dlc.path())
+        source_file = Path(source_file)
+        index_prefix = Path(self.chk_dlc.path())
+        result = index_prefix / source_file.relative_to(source_prefix)
+        if result == source_file:
+            return None
+        return f'{result}.chk.lz2' 
 
 class TrecPrels(TrecQrels):
     def qrels_iter(self):
@@ -117,18 +127,19 @@ def _init():
     subsets = {}
 
     docs_dlc = dlc['docs']
-    collection = ClueWeb09Docs(docs_dlc)
-    collection_ar = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Arabic_1'])
-    collection_zh = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4'])
-    collection_en = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10'])
-    collection_fr = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_French_1'])
-    collection_de = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_German_1'])
-    collection_it = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Italian_1'])
-    collection_ja = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2'])
-    collection_ko = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Korean_1'])
-    collection_pt = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Portuguese_1'])
-    collection_es = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2'])
-    collection_catb = ClueWeb09Docs(docs_dlc, dirs=['ClueWeb09_English_1'])
+    chk_dlc = TarExtractAll(dlc['docs.chk'], base_path/'corpus.chk')
+    collection = ClueWeb09Docs(docs_dlc, chk_dlc)
+    collection_ar = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Arabic_1'])
+    collection_zh = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4'])
+    collection_en = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10'])
+    collection_fr = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_French_1'])
+    collection_de = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_German_1'])
+    collection_it = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Italian_1'])
+    collection_ja = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2'])
+    collection_ko = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Korean_1'])
+    collection_pt = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Portuguese_1'])
+    collection_es = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2'])
+    collection_catb = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1'])
     base = Dataset(collection, documentation('_'))
 
     subsets['ar'] = Dataset(collection_ar, documentation('ar'))

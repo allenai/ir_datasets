@@ -54,6 +54,9 @@ clueweb09:
 
 Should contain directories like ClueWeb09_English_1'
     cache_path: 'corpus'
+  docs.chk:
+    url: 'https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb09/clueweb09-source-chk.tar.gz'
+    expected_md5: '504d0a340e13cf5a913188845dba3bc4'
   trec-web-2009/queries:
     url: 'https://trec.nist.gov/data/web/09/wt09.topics.full.xml'
     expected_md5: '52e4a03d32718fa11290286e8e8dff47'
