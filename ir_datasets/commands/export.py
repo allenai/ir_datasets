@@ -53,8 +53,13 @@ class TsvExporter:
         if fields is None:
             fields = data_cls._fields
             if len(fields) > 2:
-                # This message is only really needed if there's more than 1 field
-                _logger.info(f'No fields supplied. Exporting all fields: {fields}')
+                # This message is only really needed if there's more than 2 fields
+                _logger.info(f'No fields supplied. Using all fields: {fields}')
+        field_conflicts = [f for f in fields if data_cls.__annotations__[f] not in (str, int, float)]
+        if len(field_conflicts) > 0:
+            fields = [f for f in fields if f not in field_conflicts]
+            field_conflicts = ', '.join([repr((f, data_cls.__annotations__[f])) for f in field_conflicts])
+            _logger.info(f'Skipping the following fields due to unsupported data types: {field_conflicts}')
         self.idxs = []
         for field in fields:
             assert field in data_cls._fields
@@ -71,14 +76,25 @@ class JsonlExporter:
     def __init__(self, data_cls, out, fields=None):
         self.data_cls = data_cls
         self.out = out
-        self.fields = fields or data_cls._fields
+        fields = fields or data_cls._fields
+        if fields is None:
+            fields = data_cls._fields
+            if len(fields) > 2:
+                # This message is only really needed if there's more than 2 fields
+                _logger.info(f'No fields supplied. Using all fields: {fields}')
+        field_conflicts = [f for f in fields if data_cls.__annotations__[f] not in (str, int, float)]
+        if len(field_conflicts) > 0:
+            fields = [f for f in fields if f not in field_conflicts]
+            field_conflicts = ', '.join([repr((f, data_cls.__annotations__[f])) for f in field_conflicts])
+            _logger.info(f'Skipping the following fields due to unsupported data types: {field_conflicts}')
+        self.fields = fields
         self.idxs = []
         for field in self.fields:
             assert field in data_cls._fields
             self.idxs.append(data_cls._fields.index(field))
 
     def next(self, record):
-        json.dump({self.fields[i]: record[i] for i in self.idxs}, self.out)
+        json.dump({f: record[i] for f, i in zip(self.fields, self.idxs)}, self.out)
         self.out.write('\n')
 
 

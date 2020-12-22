@@ -10,7 +10,7 @@ class WarcDoc(NamedTuple):
     doc_id: str
     url: str
     date: str
-    http_headers: str
+    http_headers: bytes
     body: bytes
     body_content_type: str
 
