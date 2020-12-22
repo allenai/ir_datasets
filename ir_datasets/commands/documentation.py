@@ -189,7 +189,7 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
 <html>
 <head>
 {COMMON_HEAD}
-<title>{documentation.get('pretty_name', top_level)} - ir_datasets</title>
+<title>Datasets and Subsets - ir_datasets</title>
 </head>
 <body>
 <div class="page">
