@@ -50,7 +50,9 @@ car-v1.5:
 
 clueweb09:
   docs:
-    instructions: 'Link the ClueWeb09 source files here: {path}
+    instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>
+
+Link the ClueWeb09 source files here: {path}
 
 Should contain directories like ClueWeb09_English_1'
     cache_path: 'corpus'
@@ -93,7 +95,9 @@ Should contain directories like ClueWeb09_English_1'
 
 clueweb12:
   docs:
-    instructions: 'Link the ClueWeb12 source files here: {path}
+    instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>
+
+Link the ClueWeb12 source files here: {path}
 
 Should contain ClueWeb12_00--19 directories'
     cache_path: 'corpus'
@@ -165,7 +169,9 @@ cord19:
 
 gov2:
   docs:
-    instructions: 'Link the GOV2 source files here: {path}
+    instructions: 'GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>
+
+Link the GOV2 source files here: {path}
 
 Should contain GOV2_data'
     cache_path: 'corpus'
@@ -430,7 +436,7 @@ To proceed, symlink the source file here: {path}'
 trec-robust04:
   docs:
     instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the
-copyrighted nature of the  documents, this collection is for resaerch use only, which requires
+copyrighted nature of the  documents, this collection is for research use only, which requires
 agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
 
 Once completed, place the uncompressed source here: {path}'

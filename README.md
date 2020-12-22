@@ -130,30 +130,101 @@ of documents (default).
 This is much faster than using `ir_datasets export ... | grep` (or similar) because it indexes the
 documents/queries by ID.
 
+## Features
+
+**Automatically downloads source files** (when available). Will download and verify the source
+files for queries, documents, qrels, etc. when they are publicly available, as they are needed.
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('msmarco-passage/train')
+for doc in dataset.docs_iter(): # Will download and extract MS-MARCO's collection.tar.gz the first time
+    ...
+for query in dataset.queries_iter(): # Will download and extract MS-MARCO's queries.tar.gz the first time
+    ...
+```
+
+**Instructions for dataset access** (when not publicly available). Provides instructions on how
+to get a copy of the data when it is not publicly available online (e.g., when it requires a
+data usage agreement).
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('trec-arabic')
+for doc in dataset.docs_iter():
+    ...
+# Provides the following instructions:
+# The dataset is based on the Arabic Newswire corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2001T55>
+# To proceed, symlink the source file here: [gives path]
+```
+
+**Support for datasets big and small**. By using iterators, supports large datasets that may
+not fit into system memory, such as ClueWeb.
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('clueweb09')
+for doc in dataset.docs_iter():
+    ... # will iterate through all ~1B documents
+```
+
+**Fixes known dataset issues**. For instance, automatically corrects the document UTF-8 encoding
+problem in the MS-MARCO passage collection.
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('msmarco-passage')
+docstore = dataset.docs_store()
+docstore.get('243').text
+# "John Maynard Keynes, 1st Baron Keynes, CB, FBA (/ˈkeɪnz/ KAYNZ; 5 June 1883 – 21 April [SNIP]"
+# Naïve UTF-8 decoding yields double-encoding artifacts like:
+# "John Maynard Keynes, 1st Baron Keynes, CB, FBA (/Ë\x88keÉªnz/ KAYNZ; 5 June 1883 â\x80\x93 21 April [SNIP]"
+#                                                  ~~~~~~  ~~                       ~~~~~~~~~
+```
+
+**Fast Random Document Access.** Builds data structures that allow fast and efficient lookup of
+document content. For large datasets, such as ClueWeb, uses
+[checkpoint files](https://ir-datasets.com/clueweb_warc_checkpoints.md) to load documents from
+source 40x faster than normal. Results are cached for even faster subsequent accesses.
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('clueweb12')
+docstore = dataset.docs_store()
+docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'clueweb12-0106wb-18-19516'])
+# {'clueweb12-0000tw-05-00014': ..., 'clueweb12-0000tw-05-12119': ..., 'clueweb12-0106wb-18-19516': ...}
+```
+
 ## Datasets
 
-Available datasets include (each of which containing subsets):
- - [ANTIQUE](https://allenai.github.io/ir_datasets/antique.html)
- - [TREC CAR](https://allenai.github.io/ir_datasets/car-v1.5.html)
- - [ClueWeb09](https://allenai.github.io/ir_datasets/clueweb09.html)
- - [ClueWeb12](https://allenai.github.io/ir_datasets/clueweb12.html)
- - [CORD-19](https://allenai.github.io/ir_datasets/cord19.html)
- - [MSMARCO (document)](https://allenai.github.io/ir_datasets/msmarco-document.html)
- - [MSMARCO (passage)](https://allenai.github.io/ir_datasets/msmarco-passage.html)
- - [NYT](https://allenai.github.io/ir_datasets/nyt.html)
- - [TREC Arabic](https://allenai.github.io/ir_datasets/trec-arabic.html)
- - [TREC Mandarin](https://allenai.github.io/ir_datasets/trec-mandarin.html)
- - [TREC Robust 2004](https://allenai.github.io/ir_datasets/trec-robust04.html)
- - [TREC Spanish](https://allenai.github.io/ir_datasets/trec-spanish.html)
+Available datasets include:
+ - [ANTIQUE](https://ir-datasets.com/antique.html)
+ - [TREC CAR](https://ir-datasets.com/car-v1.5.html)
+ - [ClueWeb09](https://ir-datasets.com/clueweb09.html)
+ - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
+ - [CORD-19](https://ir-datasets.com/cord19.html)
+ - [GOV2](https://ir-datasets.com/gov2.html)
+ - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)
+ - [MSMARCO (passage)](https://ir-datasets.com/msmarco-passage.html)
+ - [NYT](https://ir-datasets.com/nyt.html)
+ - [TREC Arabic](https://ir-datasets.com/trec-arabic.html)
+ - [TREC Mandarin](hhttps://ir-datasets.com/trec-mandarin.html)
+ - [TREC Robust 2004](https://ir-datasets.com/trec-robust04.html)
+ - [TREC Spanish](https://ir-datasets.com/trec-spanish.html)
 
-See the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html) for details about each
+There are "subsets" under each dataset. For instance, `clueweb12/b13/trec-misinfo-2019` provides the
+queries and judgments from the [2019 TREC misinformation track](https://trec.nist.gov/data/misinfo2019.html),
+and `msmarco-document/orcas` provides the [ORCAS dataset](https://microsoft.github.io/msmarco/ORCAS). They
+tend to be organized with the document collection at the top level.
+
+See the ir_dataets docs ([ir_datasets.com](https://ir-datasets.com/)) for details about each
 dataset, its available subsets, and what data they provide.
 
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html), or in the python
-interface via `dataset.bibtex()` (when available).
+can be found on the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html),
+or in the python interface via `dataset.documentation()['bibtex']` (when available).
 
 The `ir_datasets` package was released as part of [ABNIRML](https://arxiv.org/abs/2011.00696), so
 please cite the following if you use this package:
