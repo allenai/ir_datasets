@@ -218,7 +218,7 @@ and `msmarco-document/orcas` provides the [ORCAS dataset](https://microsoft.gith
 tend to be organized with the document collection at the top level.
 
 See the ir_dataets docs ([ir_datasets.com](https://ir-datasets.com/)) for details about each
-dataset, its available subsets, and what data they provide.
+dataset, its available subsets, and what data they provide. [full list](https://ir-datasets.com/all.html)
 
 ## Citing
 

@@ -165,11 +165,46 @@ indexes the documents/queries by ID.
 ''')
     out.write(f'''
 </ul>
+<p>
+See <a href="all.html">here</a> for a complete list of datasets and their subsets.
+</p>
 </body>
 </html>
 ''')
     out.flush()
     out.close()
+
+    with open(f'{out_dir}/all.html', 'wt') as out:
+        index = []
+        for name in sorted(ir_datasets.registry):
+            dataset = ir_datasets.registry[name]
+            parent = name.split('/')[0]
+            if parent != name:
+                index.append(f'<li><a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a></li>')
+            else:
+                index.append(f'<li style="font-weight: bold; margin-top: 12px;"><a href="{parent}.html"><kbd>{parent}</kbd></a></li>')
+        index = '\n'.join(index)
+        out.write(f'''
+<!DOCTYPE html>
+<html>
+<head>
+{COMMON_HEAD}
+<title>{documentation.get('pretty_name', top_level)} - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: Datasets and Subsets</h1>
+<div>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+{index}
+</ol>
+</div>
+</div>
+</body>
+</html>
+''')
 
     for top_level in sorted(top_level_map):
         dataset = ir_datasets.registry[top_level]
