@@ -1,3 +1,4 @@
+import io
 import os
 import gzip
 from contextlib import ExitStack
@@ -11,10 +12,11 @@ class WarcIndexFile:
         self.doc_id_size = doc_id_size
         self.pos = 0
 
-    def write(self, doc_id, state, pos, out_offset):
+    def write(self, doc_id, doc_idx, state, pos, out_offset):
         zdict, bits, byte = state
         assert len(doc_id.encode()) == self.doc_id_size
         out = doc_id.encode() + \
+              doc_idx.to_bytes(4, 'little') + \
               pos.to_bytes(4, 'little') + \
               bits.to_bytes(1, 'little') + \
               byte.to_bytes(1, 'little') + \
@@ -25,18 +27,20 @@ class WarcIndexFile:
 
     def read(self):
         ldid = self.doc_id_size
-        chunk = self.fileobj.read(ldid + 4 + 1 + 1 + (32 * 1024) + 4)
+        chunk = self.fileobj.read(ldid + 4 + 4 + 1 + 1 + (32 * 1024) + 4)
         if not chunk:
             raise EOFError()
-        doc_id = chunk[:ldid].decode()
-        pos = self.pos + int.from_bytes(chunk[ldid:ldid+4], 'little')
-        bits = int.from_bytes(chunk[ldid+4:ldid+4+1], 'little')
-        byte = int.from_bytes(chunk[ldid+4+1:ldid+4+1+1], 'little')
-        zdict = chunk[ldid+4+1+1:ldid+4+1+1+(32 * 1024)]
-        out_offset = int.from_bytes(chunk[-4:], 'little')
+        chunk = io.BytesIO(chunk)
+        doc_id = chunk.read(ldid).decode()
+        doc_idx = int.from_bytes(chunk.read(4), 'little')
+        pos = self.pos + int.from_bytes(chunk.read(4), 'little')
+        bits = int.from_bytes(chunk.read(1), 'little')
+        byte = int.from_bytes(chunk.read(1), 'little')
+        zdict = chunk.read(32 * 1024)
+        out_offset = int.from_bytes(chunk.read(4), 'little')
         state = (zdict, bits, byte)
         self.pos = pos
-        return (doc_id, state, pos, out_offset)
+        return (doc_id, doc_idx, state, pos, out_offset)
 
     def peek_doc_id(self):
         return self.fileobj.peek(self.doc_id_size)[:self.doc_id_size].decode()
@@ -64,19 +68,20 @@ class ClueWebWarcIndex:
         self.warc_cw09 = warc_cw09
 
     def build(self, checkpoint_freq=8*1024*1024):
-        warc = ir_datasets.lazy_libs.warc() if self.warc_cw09 else ir_datasets.lazy_libs.warc_clueweb09()
+        warc = ir_datasets.lazy_libs.warc_clueweb09() if self.warc_cw09 else ir_datasets.lazy_libs.warc()
         next_checkpoint = None
         last_chekpoint_pos = 0
         with self.zlib_state.GzipStateFile(self.source_path, keep_last_state=True) as f, \
              warc.WARCFile(fileobj=f) as f_warc, \
              ir_datasets.util.finialized_file(self.index_path, 'wb') as f_tmp, \
              WarcIndexFile(f_tmp, 'wb') as f_chk:
+            doc_idx = 0
             for doc in f_warc:
                 if doc.type == 'warcinfo':
                     continue
                 if next_checkpoint:
                     state, pos, out_offset = next_checkpoint
-                    f_chk.write(doc[self.id_field], state, pos - last_chekpoint_pos, out_offset)
+                    f_chk.write(doc[self.id_field], doc_idx, state, pos - last_chekpoint_pos, out_offset)
                     last_chekpoint_pos = pos
                     next_checkpoint = None
                 if f.last_state_pos and (f.last_state_pos >= last_chekpoint_pos + checkpoint_freq):
@@ -84,6 +89,7 @@ class ClueWebWarcIndex:
                     next_checkpoint = (f.last_state, f.last_state_pos, f.output_pos - f.last_state_output_pos + 4) # +4 for \r\n\r\n
                     if next_checkpoint[2] < 0:
                         next_checkpoint = None # split part way through the header... Skip this doc (will checkpoint in next iteration)
+                doc_idx += 1
 
     def built(self):
         return os.path.exists(self.index_path)
@@ -112,7 +118,7 @@ class ClueWebWarcIndex:
                                 break
                         if brk:
                             break
-                doc_id, state, pos, out_offset = f_chk.read()
+                doc_id, doc_idx, state, pos, out_offset = f_chk.read()
 
 
 

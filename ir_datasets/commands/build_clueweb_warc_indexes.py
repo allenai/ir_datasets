@@ -28,7 +28,7 @@ def main(args):
     output_dir = Path(args.output_dir)
     all_source_files = [f.relative_to(source_dir) for f in source_dir.rglob('*.warc.gz')]
     all_source_files = sorted(all_source_files)
-    process_args = [(source_dir/f, output_dir/f'{f}.chk.lz2', args.cw09) for f in all_source_files]
+    process_args = [(source_dir/f, output_dir/f'{f}.chk.lz4', args.cw09) for f in all_source_files]
     process_args = [a for a in process_args if not a[1].exists()]
     with _logger.pbar_raw(total=len(process_args)) as pbar:
         if args.processes == 1:

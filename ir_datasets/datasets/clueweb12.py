@@ -118,7 +118,7 @@ class ClueWeb12Docs(WarcDocs):
         result = index_prefix / source_file.relative_to(source_prefix)
         if result == source_file:
             return None
-        return f'{result}.chk.lz2' 
+        return f'{result}.chk.lz4'
 
 
 class ClueWeb12b13Docs(ClueWeb12Docs):

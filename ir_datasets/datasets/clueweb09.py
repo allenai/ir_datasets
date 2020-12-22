@@ -86,7 +86,7 @@ class ClueWeb09Docs(WarcDocs):
         result = index_prefix / source_file.relative_to(source_prefix)
         if result == source_file:
             return None
-        return f'{result}.chk.lz2' 
+        return f'{result}.chk.lz4'
 
 class TrecPrels(TrecQrels):
     def qrels_iter(self):
