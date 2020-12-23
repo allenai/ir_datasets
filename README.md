@@ -206,6 +206,7 @@ Available datasets include:
  - [GOV2](https://ir-datasets.com/gov2.html)
  - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)
  - [MSMARCO (passage)](https://ir-datasets.com/msmarco-passage.html)
+ - [NFCorpus (NutritionFacts)](https://ir-datasets.com/nfcorpus.html)
  - [NYT](https://ir-datasets.com/nyt.html)
  - [TREC Arabic](https://ir-datasets.com/trec-arabic.html)
  - [TREC Mandarin](hhttps://ir-datasets.com/trec-mandarin.html)

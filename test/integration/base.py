@@ -134,7 +134,7 @@ class DatasetIntegrationTest(unittest.TestCase):
         items = {k: self._replace_regex_namedtuple(v) for k, v in items.items()}
         count = f', count={count} ' if include_count else ''
         _logger.info(f'''
-self._test_docs({repr(dataset_name)}, {count}items={self._repr_namedtuples(items)})
+self._test_docs({repr(dataset_name)}{count}, items={self._repr_namedtuples(items)})
 ''')
 
     def _build_test_queries(self, dataset_name):

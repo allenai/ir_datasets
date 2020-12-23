@@ -349,6 +349,13 @@ msmarco-passage:
     expected_md5: 'aa6fbc51d66bd1dc745964c0e140a727'
 
 
+nfcorpus:
+  main:
+    url: 'https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz'
+    expected_md5: '49c061fbadc52ba4d35d0e42e2d742fd'
+    cache_path: 'nfcorpus.tar.gz'
+
+
 nyt:
   source:
     instructions: 'The New York Times Annotated Corpus. It is available from the LDC via:

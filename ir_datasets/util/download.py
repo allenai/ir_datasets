@@ -37,7 +37,7 @@ class RequestsDownload(BaseDownload):
 
         fmt = '{desc}: {percentage:3.1f}%{r_bar}'
         with _logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt) as pbar:
-            for data in response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE):
+            for data in response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False):
                 pbar.update(len(data))
                 yield data
             pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'

@@ -1,0 +1,86 @@
+_:
+  pretty_name: 'NFCorpus (NutritionFacts)'
+  desc: '
+<p>
+"NFCorpus is a full-text English retrieval data set for Medical Information Retrieval. It contains
+a total of 3,244 natural language queries (written in non-technical English, harvested from the
+NutritionFacts.org site) with 169,756 automatically extracted relevance judgments for 9,964 medical
+documents (written in a complex terminology-heavy language), mostly from PubMed."
+</p>
+<ul>
+<li><a href="https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/">Dataset website</p></li>
+<li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{boteva16full,
+      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+      location = "Padova, Italy",
+      publisher = "Springer"
+      year = 2016,
+    }
+
+train:
+  desc: '
+<p>
+Official train set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
+</p>
+'
+
+train/nontopic:
+  desc: '
+<p>
+Official train set, filtered to exclude queries from topic pages.
+</p>
+'
+
+train/video:
+  desc: '
+<p>
+Official train set, filtered to only include queries from video pages.
+</p>
+'
+
+dev:
+  desc: '
+<p>
+Official dev set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
+</p>
+'
+
+dev/nontopic:
+  desc: '
+<p>
+Official dev set, filtered to exclude queries from topic pages.
+</p>
+'
+
+dev/video:
+  desc: '
+<p>
+Official dev set, filtered to only include queries from video pages.
+</p>
+'
+
+test:
+  desc: '
+<p>
+Official test set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
+</p>
+'
+
+test/nontopic:
+  desc: '
+<p>
+Official test set, filtered to exclude queries from topic pages.
+</p>
+'
+
+test/video:
+  desc: '
+<p>
+Official test set, filtered to only include queries from video pages.
+</p>
+'
