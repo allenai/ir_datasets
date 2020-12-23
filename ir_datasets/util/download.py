@@ -37,7 +37,16 @@ class RequestsDownload(BaseDownload):
 
         fmt = '{desc}: {percentage:3.1f}%{r_bar}'
         with _logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt) as pbar:
-            for data in response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False):
+            # Some web servers (which?) annoyingly set the content-encoding to gzip when the file itself is
+            # gzipped. This will transparently decompress the stream here, and would mean that hash verification
+            # would fail. So instead, detect this situation and use the raw stream in that case here. Note that
+            # we DO normally want this transparent decompression.
+            # An example is NFCorpus: <https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz>
+            if self.url.endswith('.gz') and response.headers.get('content-encoding') == 'gzip':
+                data_iter = response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False)
+            else:
+                data_iter = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+            for data in data_iter:
                 pbar.update(len(data))
                 yield data
             pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
@@ -78,9 +87,8 @@ def _cleanup_tmp(file):
 class Download:
     _dua_ctxt = deque([None])
 
-    def __init__(self, *mirrors, cache_path=None, expected_md5=None, dua=None):
-        self.mirrors = list(*mirrors)
-        # self.url = url
+    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None):
+        self.mirrors = list(mirrors)
         self.expected_md5 = expected_md5
         self.dua = dua or self._dua_ctxt[-1]
         self._cache_path = cache_path
