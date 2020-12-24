@@ -13,6 +13,7 @@ is provided <a href="https://lemurproject.org/clueweb12/">here</a>.
 <li><a href="http://boston.lti.cs.cmu.edu/clueweb12/">Dataset construction details</a></li>
 </ul>
 '
+  docs_instructions: &inst "docs available from CMU"
 
 b13:
   desc: '
@@ -20,6 +21,7 @@ b13:
 Official subset of the ClueWeb12 datasets with 52M web pages.
 </p>
 '
+  docs_instructions: *inst
 
 trec-web-2013:
   desc: '
@@ -31,6 +33,7 @@ The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep 
 <li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
 </ul>
 '
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{CollinsThompson2013TrecWeb,
       title={TREC 2013 Web Track Overview},
@@ -49,6 +52,7 @@ The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep 
 <li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li>
 </ul>
 '
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{CollinsThompson2014TrecWeb,
       title={TREC 2014 Web Track Overview},
@@ -69,6 +73,7 @@ from the NTCIR-14 CENTRE track.
 <li><a href="http://www.thuir.cn/ntcirwww/files/ntcir13wwwov.pdf">Shared task paper</a></li>
 </ul>
 '
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{Luo2017OverviewNtcirWww1,
       title={Overview of the NTCIR-13 We Want Web Task},
@@ -88,6 +93,7 @@ The NTCIR-14 We Want Web (WWW) 2 ad-hoc ranking benchmark. Contains 80 queries w
 <li><a href="http://research.nii.ac.jp/ntcir/workshop/OnlineProceedings14/pdf/ntcir/01-NTCIR14-OV-WWW-MaoJ.pdf">Shared task paper</a></li>
 </ul>
 '
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{Mao2018OverviewNtcirWww2,
       title={Overview of the NTCIR-14 We Want Web Task},
@@ -106,3 +112,23 @@ The NTCIR-15 We Want Web (WWW) 3 ad-hoc ranking benchmark. Contains 160 queries 
 <li><a href="http://sakailab.com/www3/">Shared task site</a></li>
 </ul>
 '
+  docs_instructions: *inst
+
+trec-misinfo-2019:
+  desc: '
+<p>
+The TREC Medical Misinformation 2019 dataset.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/misinfo2019.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec28/papers/OVERVIEW.D.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Abualsaud2019OverviewTrec2019Decision,
+      title={Overview of the TREC 2019 Decision Track},
+      author={Mustafa Abualsaud and Christina Lioma and Maria Maistro and Mark D. Smucker and Guido Zuccon},
+      booktitle={TREC},
+      year={2019}
+    }

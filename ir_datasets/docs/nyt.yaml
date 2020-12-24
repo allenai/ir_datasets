@@ -8,6 +8,7 @@ useful for transferring relevance signals in cases where training data is in sho
 <p>
 Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>.
 </p>'
+  docs_instructions: &inst "docs available from LDC"
   bibtex: |
     @article{sandhaus2008nyt,
       title={The new york times annotated corpus},
@@ -30,6 +31,7 @@ from NYT corpus.
 <li>Relevance: Assumed headline is relevant to article</li>
 <li><a href="https://arxiv.org/abs/1707.00189">Paper</a></li>
 <ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{macavaney:sigir2019-nyt,
       author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
@@ -44,3 +46,4 @@ valid:
 Held-out validation set for transferring relevance signals from NYT corpus (see 
 <a class="ds-ref">nyt/train</a>).
 </p>'
+  docs_instructions: *inst

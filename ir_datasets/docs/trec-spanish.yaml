@@ -4,7 +4,11 @@ _:
 <p>
 A collection of news articles in Spanish, used for multi-lingual evaluation in TREC 3 and TREC 4.
 </p>
+<p>
+Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2000T51">LDC2000T51</a>.
+</p>
 '
+  docs_instructions: &inst "docs available from LDC"
   bibtex: |
     @misc{LDC2000T51,
       title={TREC Spanish LDC2000T51},
@@ -22,6 +26,7 @@ Spanish benchmark from TREC 3.
 <ul>
 <li><a href="https://trec.nist.gov/pubs/trec3/papers/overview.pdf">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{harman1994trec3,
       title={Overview of the Third Text REtrieval Conference (TREC-3)},
@@ -38,6 +43,7 @@ Spanish benchmark from TREC 4.
 <ul>
 <li><a href="https://trec.nist.gov/pubs/trec4/overview.ps.gz">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{harman1995trec4,
       title={Overview of the Fourth Text REtrieval Conference (TREC-4)},

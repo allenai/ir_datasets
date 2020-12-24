@@ -180,9 +180,12 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
             dataset = ir_datasets.registry[name]
             parent = name.split('/')[0]
             if parent != name:
-                index.append(f'<li><a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a></li>')
+                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a>'
+                tbody = ''
             else:
-                index.append(f'<li style="font-weight: bold; margin-top: 12px;"><a href="{parent}.html"><kbd>{parent}</kbd></a></li>')
+                ds_name = f'<a style="font-weight: bold;" href="{parent}.html"><kbd>{parent}</kbd></a></li>'
+                tbody = '</tbody><tbody>'
+            index.append(f'{tbody}<tr><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center">{emoji(dataset, "scoreddocs")}</td><td class="center">{emoji(dataset, "docpairs")}</td></tr>')
         index = '\n'.join(index)
         out.write(f'''
 <!DOCTYPE html>
@@ -197,9 +200,19 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
 <h1><kbd>ir_datasets</kbd>: Datasets and Subsets</h1>
 <div>
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
-<ol class="index">
+<table>
+<tbody>
+<tr>
+<th>Dataset</th>
+<th>docs</th>
+<th>queries</th>
+<th>qrels</th>
+<th>scoreddocs</th>
+<th>docpairs</th>
+</tr>
 {index}
-</ol>
+</tbody>
+</table>
 </div>
 </div>
 </body>
@@ -401,6 +414,15 @@ def generate_qrel_defs_table(defs):
 {rows}
 </table>
 '''
+
+def emoji(ds, arg):
+    has = getattr(ds, f'has_{arg}')()
+    if has:
+        instructions = hasattr(ds, f'documentation') and ds.documentation().get(f'{arg}_instructions')
+        if instructions:
+            return f'<span style="cursor: help;" title="{instructions}">⚠️</span>'
+        return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
+    return ''
 
 
 if __name__ == '__main__':

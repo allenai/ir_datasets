@@ -247,7 +247,31 @@ tr:nth-child(2n+1) {
   background-color: #EEE;
 }
 
+tbody tr:nth-child(2n + 1) {
+  background-color: #FFF;
+}
+
+tbody tr:nth-child(2n) {
+  background-color: #EEE;
+}
+
+tbody tr:first-child td {
+    padding-top: 12px;
+}
+
+tbody tr:last-child td {
+    border-bottom: 2px solid #333;
+}
+
 .relScore {
   font-family: monospace;
   text-align: center;
+}
+
+.center {
+  text-align: center;
+}
+
+.sep {
+  border-top: 3px solid #333;
 }
