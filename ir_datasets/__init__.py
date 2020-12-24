@@ -40,3 +40,5 @@ def main(args):
 def main_cli():
     import sys
     main(sys.argv[1:])
+
+__version__ = "0.0.1" # NOTE: keep this in sync with setup.py

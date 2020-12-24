@@ -30,26 +30,37 @@ class RequestsDownload(BaseDownload):
             yield stream
 
     def __iter__(self):
-        response = ir_datasets.lazy_libs.requests().get(self.url, stream=True)
-        dlen = response.headers.get('content-length')
-        if dlen is not None:
-            dlen = int(dlen)
+        get_args = {
+            'url': self.url,
+            'stream': True, # return the response as a stream, rather than loading it all into memory
+            'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
+            'timeout': 60., # raise error if 60 seconds pass without any data from the socket
+        }
+        with ir_datasets.lazy_libs.requests().get(**get_args) as response:
+            dlen = response.headers.get('content-length')
+            if dlen is not None:
+                dlen = int(dlen)
 
-        fmt = '{desc}: {percentage:3.1f}%{r_bar}'
-        with _logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt) as pbar:
-            # Some web servers (which?) annoyingly set the content-encoding to gzip when the file itself is
-            # gzipped. This will transparently decompress the stream here, and would mean that hash verification
-            # would fail. So instead, detect this situation and use the raw stream in that case here. Note that
-            # we DO normally want this transparent decompression.
-            # An example is NFCorpus: <https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz>
-            if self.url.endswith('.gz') and response.headers.get('content-encoding') == 'gzip':
-                data_iter = response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False)
-            else:
-                data_iter = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
-            for data in data_iter:
-                pbar.update(len(data))
-                yield data
-            pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
+            fmt = '{desc}: {percentage:3.1f}%{r_bar}'
+            with _logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt) as pbar:
+                # Some web servers (which?) annoyingly set the content-encoding to gzip when the file itself is
+                # gzipped. This will transparently decompress the stream here, and would mean that hash verification
+                # would fail. So instead, detect this situation and use the raw stream in that case here. Note that
+                # we DO normally want this transparent decompression.
+                # An example is NFCorpus: <https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz>
+                if self.url.endswith('.gz') and response.headers.get('content-encoding') == 'gzip':
+                    data_iter = response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False)
+                else:
+                    data_iter = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+                for data in data_iter:
+                    # Update the pbar from the position in the raw output stream. This handles both situations
+                    # in which the response stream is compressed and when it's not.
+                    pbar.update(response.raw.tell() - pbar.n)
+                    yield data
+                    if dlen:
+                        if pbar.n >= dlen:
+                            break # always stop when we get to the end of the stream (is this really needed?)
+                pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
 
     def __repr__(self):
         return f'RequestsDownload({repr(self.url)})'
@@ -117,17 +128,21 @@ class Download:
         Path(download_path).parent.mkdir(parents=True, exist_ok=True)
 
         for mirror in self.mirrors:
-            try:
-                with util.finialized_file(download_path, 'wb') as f:
+            with util.finialized_file(download_path, 'wb') as f:
+                try:
                     with mirror.stream() as stream:
                         stream = util.HashStream(stream, self.expected_md5, algo='md5')
                         shutil.copyfileobj(stream, f)
                         break
-            except Exception as e:
-                errors.append((mirror, e))
-                if not isinstance(mirror, LocalDownload):
-                    _logger.warn(f'Download failed: {e}')
+                except Exception as e:
+                    errors.append((mirror, e))
+                    if not isinstance(mirror, LocalDownload):
+                        _logger.warn(f'Download failed: {e}')
         else:
+            if len(self.mirrors) == 1:
+                raise errors[0][1]
+            if len(self.mirrors) == 2 and isinstance(self.mirrors[0], LocalDownload):
+                raise errors[1][1]
             raise RuntimeError('All download sources failed', errors)
         self._path = download_path
         return self._path

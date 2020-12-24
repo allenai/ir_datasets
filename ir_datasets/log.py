@@ -59,7 +59,7 @@ class Logger:
         self.logger().info(text, **kwargs)
 
     def warn(self, text, **kwargs):
-        self.logger().warn(text, **kwargs)
+        self.logger().warning(text, **kwargs)
 
     def error(self, text, **kwargs):
         self.logger().error(text, **kwargs)
