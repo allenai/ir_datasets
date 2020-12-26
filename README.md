@@ -209,7 +209,7 @@ Available datasets include:
  - [NFCorpus (NutritionFacts)](https://ir-datasets.com/nfcorpus.html)
  - [NYT](https://ir-datasets.com/nyt.html)
  - [TREC Arabic](https://ir-datasets.com/trec-arabic.html)
- - [TREC Mandarin](hhttps://ir-datasets.com/trec-mandarin.html)
+ - [TREC Mandarin](https://ir-datasets.com/trec-mandarin.html)
  - [TREC Robust 2004](https://ir-datasets.com/trec-robust04.html)
  - [TREC Spanish](https://ir-datasets.com/trec-spanish.html)
 
