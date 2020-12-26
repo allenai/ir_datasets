@@ -1,0 +1,12 @@
+_:
+  pretty_name: 'Vaswani'
+  desc: '
+<p>
+A small corpus of roughly 11,000 scientific abstracts.
+</p>
+<ul>
+  <li>Documents: Scientific abstracts</li>
+  <li>Queries: Natural language keywords</li>
+  <li><a href="http://ir.dcs.gla.ac.uk/resources/test_collections/npl/">Dataset Information</a></li>
+</ul>
+'

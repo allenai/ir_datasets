@@ -456,3 +456,10 @@ Once completed, place the uncompressed source here: {path}'
     url: 'https://trec.nist.gov/data/robust/qrels.robust2004.txt'
     expected_md5: "123c2a0ba2ec31178cb1050995dcfdfa"
     cache_path: 'qrels'
+
+
+vaswani:
+  main:
+    url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz'
+    expected_md5: '23e5607081191b153738e81fbd834680'
+    cache_path: 'npl.tar.gz'

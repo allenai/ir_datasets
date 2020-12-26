@@ -13,3 +13,4 @@ from . import nyt
 from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish
+from . import vaswani
