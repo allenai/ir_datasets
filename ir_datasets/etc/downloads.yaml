@@ -58,7 +58,7 @@ Should contain directories like ClueWeb09_English_1'
     cache_path: 'corpus'
   docs.chk:
     url: 'https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb09/clueweb09-source-chk.tar.gz'
-    expected_md5: '504d0a340e13cf5a913188845dba3bc4'
+    expected_md5: '74328d9c743c52ddef434ce41a4e6dc1'
   trec-web-2009/queries:
     url: 'https://trec.nist.gov/data/web/09/wt09.topics.full.xml'
     expected_md5: '52e4a03d32718fa11290286e8e8dff47'
@@ -103,7 +103,7 @@ Should contain ClueWeb12_00--19 directories'
     cache_path: 'corpus'
   docs.chk:
     url: 'https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb12/clueweb12-source-chk.tar.gz'
-    expected_md5: '6b0d96685874abf2ca6ffd16e92dc6db'
+    expected_md5: 'fb92d1f8ed1436839313d2eb47f628a5'
   cw12b-info:
     url: 'http://lemurproject.org/clueweb12/ClueWeb12-CreateB13.tgz'
     expected_md5: '8175ce74a97e46be80c2127d965da200'
