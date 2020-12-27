@@ -202,6 +202,7 @@ Available datasets include:
  - [TREC CAR](https://ir-datasets.com/car-v1.5.html)
  - [ClueWeb09](https://ir-datasets.com/clueweb09.html)
  - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
+ - [CodeSearchNet](https://ir-datasets.com/codesearchnet.html)
  - [CORD-19](https://ir-datasets.com/cord19.html)
  - [GOV2](https://ir-datasets.com/gov2.html)
  - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)

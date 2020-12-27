@@ -152,6 +152,35 @@ Should contain ClueWeb12_00--19 directories'
     cache_path: 'trec-misinfo-2019/qrels'
 
 
+codesearchnet:
+  python:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip'
+    expected_md5: '07b49dd01fbac894fbdae22da6462e4f'
+  java:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip'
+    expected_md5: 'fea180077275d8f98f42a3386f492837'
+  go:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/go.zip'
+    expected_md5: 'c0288db91f067c95bb952577949e7b13'
+  php:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/php.zip'
+    expected_md5: '62373f85cfae2f5d7422dc1e55fbbb50'
+  ruby:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/ruby.zip'
+    expected_md5: '6847c0149666334cc937909b0e2297ae'
+  javascript:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/javascript.zip'
+    expected_md5: '7649178a02f7b5c8fbccb64abe7946b6'
+  challenge/queries:
+    url: 'https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/queries.csv'
+    expected_md5: '6041a0c32dff4286859ca76d420d76f4'
+    cache_path: 'queries.csv'
+  challenge/qrels:
+    url: 'https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/annotationStore.csv'
+    expected_md5: '9e0a57ae90b3dd0144d59064d0751abd'
+    cache_path: 'qrels.csv'
+
+
 cord19:
   docs/2020-07-16:
     url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz'
