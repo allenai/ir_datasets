@@ -3,7 +3,6 @@ import contextlib
 import shutil
 from pathlib import Path
 from fnmatch import fnmatch
-import tempfile
 import tarfile
 import gzip
 import bz2

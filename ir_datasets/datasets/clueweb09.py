@@ -52,6 +52,7 @@ class ClueWeb09Docs(WarcDocs):
         self.chk_dlc = chk_dlc
         # All available languages
         self.dirs = dirs or ['ClueWeb09_Arabic_1', 'ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4', 'ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10', 'ClueWeb09_French_1', 'ClueWeb09_German_1', 'ClueWeb09_Italian_1', 'ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2', 'ClueWeb09_Korean_1', 'ClueWeb09_Portuguese_1', 'ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2']
+        self._docs_warc_file_counts_cache = None
 
     def docs_path(self):
         return self.docs_dlc.path()
@@ -88,6 +89,23 @@ class ClueWeb09Docs(WarcDocs):
             return None
         return f'{result}.chk.lz4'
 
+    def _docs_warc_file_counts(self):
+        if self._docs_warc_file_counts_cache is None:
+            result = {}
+            for d in self.dirs:
+                counts_file = os.path.join(self.docs_dlc.path(), f'record_counts/{d}_counts.txt')
+                with open(counts_file, 'rt') as f:
+                    for line in f:
+                        file, count = line.strip().split()
+                        file = os.path.join(self.docs_dlc.path(), d, file[3:])
+                        result[file] = int(count)
+            self._docs_warc_file_counts_cache = result
+        return self._docs_warc_file_counts_cache
+
+    def docs_count(self):
+        return sum(self._docs_warc_file_counts().values())
+
+
 class TrecPrels(TrecQrels):
     def qrels_iter(self):
         with self._qrels_dlc.stream() as f:
@@ -122,7 +140,7 @@ class CatBQrelFilter:
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 

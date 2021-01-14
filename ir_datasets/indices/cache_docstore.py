@@ -9,7 +9,7 @@ class CacheDocstore(Docstore):
         super().__init__(full_store._doc_cls, full_store._id_field)
         self.full_store = full_store
         self._path = path
-        self.cache = cache_cls(path, self._doc_cls, self._id_field)
+        self.cache = cache_cls(path, self._doc_cls, self._id_field, [self._id_field])
 
     def get_many_iter(self, doc_ids):
         doc_ids_remaining = set(doc_ids)

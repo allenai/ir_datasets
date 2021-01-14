@@ -6,7 +6,7 @@ from .base import DatasetIntegrationTest
 
 class TestVaswani(DatasetIntegrationTest):
     def test_vaswani_docs(self):
-        self._test_docs('vaswani', count=11429 , items={
+        self._test_docs('vaswani', count=11429, items={
             0: GenericDoc('1', 'compact memories have flexible capacities  a digital data storage\nsystem with capacity up to bits and random and or sequential access\nis described\n'),
             9: GenericDoc('10', 'highspeed microwave switching of semiconductors part\n'),
             11428: GenericDoc('11429', re.compile('^pattern detection and recognition  both processes have been carried\nout on an ibm computer which was.{56} tested included the recognition process for\nreading handlettered sansserif alphanumeric characters\n$', flags=48)),

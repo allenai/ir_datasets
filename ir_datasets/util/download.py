@@ -21,8 +21,9 @@ class BaseDownload:
 
 
 class RequestsDownload(BaseDownload):
-    def __init__(self, url):
+    def __init__(self, url, tries=None):
         self.url = url
+        self.tries = tries
 
     @contextlib.contextmanager
     def stream(self):
@@ -30,40 +31,76 @@ class RequestsDownload(BaseDownload):
             yield stream
 
     def __iter__(self):
-        get_args = {
+        requests = ir_datasets.lazy_libs.requests()
+        http_args = {
             'url': self.url,
             'stream': True, # return the response as a stream, rather than loading it all into memory
             'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
-            'timeout': 60., # raise error if 60 seconds pass without any data from the socket
+            'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
         }
-        with ir_datasets.lazy_libs.requests().get(**get_args) as response:
-            dlen = response.headers.get('content-length')
-            if dlen is not None:
-                dlen = int(dlen)
-
-            fmt = '{desc}: {percentage:3.1f}%{r_bar}'
-            with _logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt) as pbar:
-                # Some web servers (which?) annoyingly set the content-encoding to gzip when the file itself is
-                # gzipped. This will transparently decompress the stream here, and would mean that hash verification
-                # would fail. So instead, detect this situation and use the raw stream in that case here. Note that
-                # we DO normally want this transparent decompression.
-                # An example is NFCorpus: <https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz>
-                if self.url.endswith('.gz') and response.headers.get('content-encoding') == 'gzip':
-                    data_iter = response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False)
+        done = False
+        pbar = None
+        skip = 0
+        remaining_tries = self.tries if self.tries is not None else int(os.environ.get('IR_DATASETS_DL_TRIES', '3'))
+        with contextlib.ExitStack() as stack:
+            while not done:
+                try:
+                    response = stack.enter_context(requests.get(**http_args))
+                    if pbar is None:
+                        dlen = response.headers.get('content-length')
+                        if dlen is not None:
+                            dlen = int(dlen)
+                        fmt = '{desc}: {percentage:3.1f}%{r_bar}'
+                        pbar = stack.enter_context(_logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt))
+                    for data in self._iter_response_data(response, http_args, skip):
+                        pbar.update(len(data))
+                        yield data
+                except requests.exceptions.RequestException as ex:
+                    remaining_tries -= 1
+                    if remaining_tries <= 0:
+                        raise # no more tries
+                    if response.headers.get('accept-ranges') == 'bytes':
+                        # woo hoo! We can issue a range request, so we don't need to download all the data again,
+                        # just pick up from where we left off.
+                        _logger.info(f'download error: {ex}. Retrying range "{pbar.n}-" [{remaining_tries} attempts left]')
+                        http_args['headers']['Range'] = f'bytes={pbar.n}-'
+                        skip = 0
+                    else:
+                        # The server doesn't accept range requests, so we'll need to re-download the file up to
+                        # where we got, and then start up again from there
+                        _logger.info(f'download error: {ex}. Retrying from start (skipping {pbar.n} bytes) because server doesn\'t accept range requests [{remaining_tries} attempts left]')
+                        if 'Range' in http_args['headers']:
+                            del http_args['headers']['Range']
+                        skip = pbar.n
                 else:
-                    data_iter = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
-                for data in data_iter:
-                    # Update the pbar from the position in the raw output stream. This handles both situations
-                    # in which the response stream is compressed and when it's not.
-                    pbar.update(response.raw.tell() - pbar.n)
+                    done = True
+            pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
+
+    def _iter_response_data(self, response, http_args, skip):
+        with contextlib.ExitStack() as stack:
+            skip_pbar = None
+            if skip > 0:
+                fmt = '{desc}: {percentage:3.1f}%{r_bar}'
+                skip_pbar = stack.enter_context(_logger.pbar_raw(desc=f'skipping ahead to {skip}', total=skip, unit='B', unit_scale=True, bar_format=fmt))
+            # Some web servers (which?) annoyingly set the content-encoding to gzip when the file itself is
+            # gzipped. This will transparently decompress the stream here, and would mean that hash verification
+            # would fail. So instead, detect this situation and use the raw stream in that case here. Note that
+            # we DO normally want this transparent decompression.
+            # An example is NFCorpus: <https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz>
+            if http_args['url'].endswith('.gz') and response.headers.get('content-encoding') == 'gzip':
+                data_iter = response.raw.stream(io.DEFAULT_BUFFER_SIZE, decode_content=False)
+            else:
+                data_iter = response.iter_content(chunk_size=io.DEFAULT_BUFFER_SIZE)
+            for data in data_iter:
+                if skip > 0:
+                    data, skipped = data[skip:], len(data[:skip])
+                    skip -= skipped
+                    skip_pbar.update(skipped)
+                if data:
                     yield data
-                    if dlen:
-                        if pbar.n >= dlen:
-                            break # always stop when we get to the end of the stream (is this really needed?)
-                pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
 
     def __repr__(self):
-        return f'RequestsDownload({repr(self.url)})'
+        return f'RequestsDownload({repr(self.url)}, tries={self.tries})'
 
 
 class LocalDownload(BaseDownload):
@@ -111,11 +148,11 @@ class Download:
 
         if self._cache_path is not None:
             download_path = self._cache_path
-            if os.path.exists(download_path):
+            if os.path.exists(download_path) and download_path != os.devnull:
                 self._path = download_path
                 return self._path
         else:
-            tmpfile = tempfile.NamedTemporaryFile(delete=False)
+            tmpfile = tempfile.NamedTemporaryFile(delete=False, dir=util.tmp_path())
             atexit.register(_cleanup_tmp, tmpfile)
             download_path = tmpfile.name
 
@@ -189,7 +226,7 @@ class _DownloadConfig:
                 cache_path = dlc['cache_path']
         if 'url' in dlc:
             if not dlc.get('skip_local') and dlc.get('expected_md5'):
-                local_path = Path(util.cache_path()) / 'downloads' / dlc['expected_md5']
+                local_path = Path(util.home_path()) / 'downloads' / dlc['expected_md5']
                 local_path.parent.mkdir(parents=True, exist_ok=True)
                 local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it here '
                              f'to avoid downloading it again: {local_path}')
@@ -199,7 +236,7 @@ class _DownloadConfig:
             if 'cache_path' in dlc:
                 local_path = Path(cache_path)
             else:
-                local_path = Path(util.cache_path()) / 'downloads' / dlc['expected_md5']
+                local_path = Path(util.home_path()) / 'downloads' / dlc['expected_md5']
             sources.append(LocalDownload(local_path, dlc['instructions'].format(path=local_path)))
         else:
             raise RuntimeError('Must either provide url or instructions')

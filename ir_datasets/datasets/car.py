@@ -62,7 +62,7 @@ class CarQueries(BaseQueries):
 
 def _init():
     subsets = {}
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 

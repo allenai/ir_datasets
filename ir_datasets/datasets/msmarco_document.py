@@ -31,19 +31,25 @@ class MsMarcoTrecDocs(TrecDocs):
     def __init__(self, docs_dlc):
         super().__init__(docs_dlc, parser='text')
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         for doc in super().docs_iter():
-            # The first two lines are the URL and page title
-            url, title, *body = doc.text.lstrip('\n').split('\n', 2)
-            body = body[0] if body else ''
-            yield MsMarcoDocument(doc.doc_id, url, title, body)
+            if isinstance(doc, MsMarcoDocument):
+                # It's coming from the docstore
+                yield doc
+            else:
+                # It's coming from the TredDocs parser... Do a little more reformatting:
+                # The first two lines are the URL and page title
+                url, title, *body = doc.text.lstrip('\n').split('\n', 2)
+                body = body[0] if body else ''
+                yield MsMarcoDocument(doc.doc_id, url, title, body)
 
     def docs_cls(self):
         return MsMarcoDocument
 
 
 def _init():
-    base_path = ir_datasets.util.cache_path()/'msmarco-document'
+    base_path = ir_datasets.util.home_path()/'msmarco-document'
     documentation = YamlDocumentation('docs/msmarco-document.yaml')
     dlc = DownloadConfig.context('msmarco-document', base_path, dua=DUA)
     subsets = {}

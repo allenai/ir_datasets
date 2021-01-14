@@ -195,6 +195,23 @@ docstore.get_many(['clueweb12-0000tw-05-00014', 'clueweb12-0000tw-05-12119', 'cl
 # {'clueweb12-0000tw-05-00014': ..., 'clueweb12-0000tw-05-12119': ..., 'clueweb12-0106wb-18-19516': ...}
 ```
 
+**Fancy Iter Slicing.** Sometimes it's helpful to be able to select ranges of data (e.g., for processing
+document collections in parallel on multiple devices). Efficient implementations of slicing operations
+allow for much faster dataset partitioning than using `itertools.slice`.
+
+```python
+import ir_datasets
+dataset = ir_datasets.load('clueweb12')
+dataset.docs_iter()[500:1000] # normal slicing behavior
+# WarcDoc(doc_id='clueweb12-0000tw-00-00502', ...), WarcDoc(doc_id='clueweb12-0000tw-00-00503', ...), ...
+dataset.docs_iter()[-10:-8] # includes negative indexing
+# WarcDoc(doc_id='clueweb12-1914wb-28-24245', ...), WarcDoc(doc_id='clueweb12-1914wb-28-24246', ...)
+dataset.docs_iter()[::100] # includes support for skip (only positive values)
+# WarcDoc(doc_id='clueweb12-0000tw-00-00000', ...), WarcDoc(doc_id='clueweb12-0000tw-00-00100', ...), ...
+dataset.docs_iter()[1/3:2/3] # supports proportional slicing (this takes the middle third of the collection)
+# WarcDoc(doc_id='clueweb12-0605wb-28-12714', ...), WarcDoc(doc_id='clueweb12-0605wb-28-12715', ...), ...
+```
+
 ## Datasets
 
 Available datasets include:
@@ -222,6 +239,16 @@ tend to be organized with the document collection at the top level.
 
 See the ir_dataets docs ([ir_datasets.com](https://ir-datasets.com/)) for details about each
 dataset, its available subsets, and what data they provide. [full list](https://ir-datasets.com/all.html)
+
+## Environment variables
+
+ - `IR_DATASETS_HOME`: Home directory for ir_datasets data (default `~/.ir_datasets/`). Contains directories
+   for each top-level dataset.
+ - `IR_DATASETS_TMP`: Temporary working directory (default `/tmp/ir_datasets/`).
+ - `IR_DATASETS_DL_TIMEOUT`: Download stream read timeout, in seconds (default `15`). If no data is received
+   within this duration, the connection will be assumed to be dead, and another download may be attempted.
+ - `IR_DATASETS_DL_TRIES`: Default number of download attempts before exception is thrown (default `3`).
+   When the server accepts Range requests, uses them. Otherwise, will download the entire file again
 
 ## Citing
 

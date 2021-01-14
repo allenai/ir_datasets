@@ -9,6 +9,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig, TarExtract, ZipExtractCache
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
 from ir_datasets.formats import GenericDoc, GenericQuery, TrecQrel
+from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -49,6 +50,7 @@ class CodeSearchNetDocs(BaseDocs):
         super().__init__()
         self.docs_dlcs = docs_dlcs
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         for dlc in self.docs_dlcs:
             base_path = Path(dlc.path())
@@ -67,6 +69,15 @@ class CodeSearchNetDocs(BaseDocs):
 
     def docs_cls(self):
         return CodeSearchNetDoc
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
 
 
 class CodeSearchNetQueries(BaseQueries):
@@ -167,7 +178,7 @@ class CodeSearchNetChallengeQrels(BaseQrels):
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 

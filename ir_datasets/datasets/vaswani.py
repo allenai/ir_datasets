@@ -4,6 +4,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig, TarExtract, Cache
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
 from ir_datasets.formats import GenericDoc, GenericQuery, TrecQrel
+from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -29,6 +30,7 @@ class VaswaniDocs(BaseDocs):
     def docs_path(self):
         return self.docs_dlc.path()
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         with self.docs_dlc.stream() as stream:
             stream = io.TextIOWrapper(stream)
@@ -39,6 +41,15 @@ class VaswaniDocs(BaseDocs):
 
     def docs_cls(self):
         return GenericDoc
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
 
 
 class VaswaniQueries(BaseQueries):
@@ -86,7 +97,7 @@ class VaswaniQrels(BaseQrels):
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 

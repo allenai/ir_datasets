@@ -96,7 +96,7 @@ class FixEncoding:
 
 def _init():
     documentation = YamlDocumentation('docs/msmarco-passage.yaml')
-    base_path = ir_datasets.util.cache_path()/'msmarco-passage'
+    base_path = ir_datasets.util.home_path()/'msmarco-passage'
     dlc = DownloadConfig.context('msmarco-passage', base_path, dua=DUA)
     collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'))
     subsets = {}

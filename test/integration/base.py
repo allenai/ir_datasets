@@ -7,7 +7,8 @@ _logger = ir_datasets.log.easy()
 
 
 class DatasetIntegrationTest(unittest.TestCase):
-    def _test_docs(self, dataset_name, count=None, items=None):
+    def _test_docs(self, dataset_name, count=None, items=None, test_docstore=True, test_iter_split=True):
+        orig_items = dict(items)
         with self.subTest('docs', dataset=dataset_name):
             if isinstance(dataset_name, str):
                 dataset = ir_datasets.load(dataset_name)
@@ -28,6 +29,22 @@ class DatasetIntegrationTest(unittest.TestCase):
                 self.assertEqual(expected_count, count)
 
             self.assertEqual(0, len(items))
+
+        if test_iter_split:
+            with self.subTest('docs_iter split', dataset=dataset_name):
+                it = dataset.docs_iter()
+                with _logger.duration('doc lookups by index'):
+                    for idx, doc in orig_items.items():
+                        self._assert_namedtuple(next(it[idx:idx+1]), doc)
+                        self._assert_namedtuple(it[idx], doc)
+
+        if test_docstore:
+            with self.subTest('docs_store', dataset=dataset_name):
+                doc_store = dataset.docs_store()
+                with _logger.duration('doc lookups by doc_id'):
+                    for doc in orig_items.values():
+                        ret_doc = doc_store.get(doc.doc_id)
+                        self._assert_namedtuple(doc, ret_doc)
 
     def _test_queries(self, dataset_name, count=None, items=None):
         with self.subTest('queries', dataset=dataset_name):
@@ -132,7 +149,7 @@ class DatasetIntegrationTest(unittest.TestCase):
                 break
         items[count-1] = doc
         items = {k: self._replace_regex_namedtuple(v) for k, v in items.items()}
-        count = f', count={count} ' if include_count else ''
+        count = f', count={count}' if include_count else ''
         _logger.info(f'''
 self._test_docs({repr(dataset_name)}{count}, items={self._repr_namedtuples(items)})
 ''')

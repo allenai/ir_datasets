@@ -401,6 +401,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2001T55>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "b17f34a51dca8d19fae66c338c9ed73a"
+    cache_path: 'corpus.tgz'
   ar2001/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/arabic_topics.txt'
     expected_md5: 'a3d78c379056a080fe40a59a341496b8'
@@ -426,6 +427,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2000T52>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "a847fa029a1356b8f396aa642c449e38"
+    cache_path: 'corpus.tgz'
   trec5/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/topics.CH1-CH28.chinese.english.gz'
     expected_md5: '9ce885d36e8642d4114f40e7008e5b8a'
@@ -451,6 +453,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2000T51>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "4b8583c03149cf0c06c090fd230b33c6"
+    cache_path: 'corpus.tgz'
   trec3/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/topics.SP1-SP25.spanish.english.gz'
     expected_md5: '22eea4a5c131db9cc4a431235f6a0573'

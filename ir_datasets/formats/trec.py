@@ -8,6 +8,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
+from ir_datasets.indices import PickleLz4FullStore
 from .base import GenericDoc, GenericQuery, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
 
 
@@ -54,11 +55,12 @@ class TrecDocs(BaseDocs):
     def docs_path(self):
         return self._docs_dlc.path()
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         if Path(self._docs_dlc.path()).is_dir():
             if self._path_globs:
                 for glob in sorted(self._path_globs):
-                    for path in Path(self._docs_dlc.path()).glob(glob):
+                    for path in sorted(Path(self._docs_dlc.path()).glob(glob)):
                         yield from self._docs_iter(path)
             else:
                 yield from self._docs_iter(self._docs_dlc.path())
@@ -137,6 +139,14 @@ class TrecDocs(BaseDocs):
     def docs_cls(self):
         return self._doc
 
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{self.docs_path()}.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
 
 
 DEFAULT_QTYPE_MAP = {

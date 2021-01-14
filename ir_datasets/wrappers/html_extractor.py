@@ -1,6 +1,7 @@
 import math
 import os
 import multiprocessing
+from threading import Semaphore
 import ir_datasets
 
 
@@ -16,6 +17,25 @@ def bs4_extract(html):
         if t.parent.name not in ignore and not isinstance(t, bs4.element.Comment):
             output += '{} '.format(t)
     return output
+
+
+class HtmlDocIter:
+    def __init__(self, it, extractor):
+        self.it = it
+        self.extractor = extractor
+        self.mapped_it = _doc_map_it(it, self.extractor)
+
+    def __next__(self):
+        return next(self.mapped_it)
+
+    def __iter__(self):
+        return self
+
+    def __getitem__(self, key):
+        if isinstance(key, int):
+            doc = self.it[key]
+            return _doc_map((doc, self.extractor._field_content_type, self.extractor._extractor, self.extractor._dataset.docs_cls()))
+        return HtmlDocIter(self.it[key], self.extractor)
 
 
 class HtmlDocExtractor:
@@ -45,14 +65,55 @@ class HtmlDocExtractor:
         return getattr(self._dataset, attr)
 
     def docs_iter(self):
-        docs_cls = self._dataset.docs_cls()
-        arg_iter = ((doc, self._field_content_type, self._extractor, docs_cls) for doc in self._dataset.docs_iter())
+        return HtmlDocIter(self._dataset.docs_iter(), self)
 
-        if self._parallel == 1:
-            yield from map(_doc_map, arg_iter)
-        else:
-            with multiprocessing.Pool(self._parallel) as pool:
-                yield from pool.imap(_doc_map, arg_iter)
+    def docs_store(self):
+        return HtmlDocExtractorDocStoreWrapper(self._dataset.docs_store(), self)
+
+
+class HtmlDocExtractorDocStoreWrapper(ir_datasets.indices.Docstore):
+    def __init__(self, docstore, extractor):
+        self.docstore = docstore
+        self.extractor = extractor
+
+    def get_many_iter(self, doc_ids):
+        return _doc_map_it(self.docstore.get_many_iter(doc_ids), self.extractor)
+
+    def clear_cache(self):
+        self.docstore.clear_cache()
+
+
+
+def _doc_map_it(it, extractor):
+    docs_cls = extractor._dataset.docs_cls()
+    arg_iter = ((doc, extractor._field_content_type, extractor._extractor, docs_cls) for doc in it)
+
+    if extractor._parallel == 1:
+        return map(_doc_map, arg_iter)
+
+    # By default, pool.imap is super greedy and will read in as much of it as possible.
+    # This could mean loading too much into memory, or simply doing extra work. So instead,
+    # we do two things:
+    #  1) Wait until the first call to next() before sending *anything* to the pool, and
+    #  2) Limit the imap buffer to a maximum size by only releasing data from the source iter
+    #     when the buffer has space.
+    semaphore = Semaphore(extractor._parallel)
+    def it_in():
+        while semaphore.acquire():
+            result = next(arg_iter, StopIteration)
+            if result is StopIteration:
+                break
+            yield result
+
+    def it_out():
+        # thi will only start with the first call to next()
+        with multiprocessing.Pool(extractor._parallel) as pool:
+            for result in pool.imap(_doc_map, it_in()):
+                semaphore.release() # allow next item to begin processing
+                yield result
+
+    return it_out()
+
 
 def _doc_map(args):
     doc, field_content_type, extractor, docs_cls = args

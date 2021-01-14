@@ -29,7 +29,7 @@ VALIDATION_QIDS = {'1158088', '4032777', '1583099', '263783', '4237144', '109787
 
 def _init():
     documentation = YamlDocumentation('docs/antique.yaml')
-    base_path = ir_datasets.util.cache_path() / 'antique'
+    base_path = ir_datasets.util.home_path() / 'antique'
     dlc = DownloadConfig.context('antique', base_path, dua=DUA)
     collection = TsvDocs(dlc['docs'])
 

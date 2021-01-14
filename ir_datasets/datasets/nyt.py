@@ -2,7 +2,7 @@ import io
 import tarfile
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.wrappers import DocstoreWrapper
+from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Lazy, DownloadConfig
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels, GenericQuery, GenericQrel
@@ -38,6 +38,9 @@ class NytDocs(BaseDocs):
         return NytDoc
 
     def docs_iter(self):
+        return iter(self.docs_store())
+
+    def _docs_iter(self):
         BeautifulSoup = ir_datasets.lazy_libs.bs4().BeautifulSoup
         with self._dlc.stream() as stream:
             with tarfile.open(fileobj=stream, mode='r|gz') as tgz_outer:
@@ -61,6 +64,15 @@ class NytDocs(BaseDocs):
                             full_text = soup.find('block', {'class': 'full_text'})
                             full_text = full_text.decode_contents().strip() if full_text else ''
                             yield NytDoc(did, metadata, headline, lead_paragraph, full_text)
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{self.docs_path()}.pklz4',
+            init_iter_fn=self._docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
 
 
 class NytQueries(BaseQueries):
@@ -86,12 +98,10 @@ class NytQrels(BaseQrels):
 
 def _init():
     subsets = {}
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     collection = NytDocs(dlc['source'])
-    # Because it's expensive to parse NytDocs, wrap it in DocstoreWrapper.
-    collection = DocstoreWrapper(collection)
 
     base = Dataset(collection, documentation('_'))
 

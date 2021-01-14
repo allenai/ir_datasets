@@ -45,6 +45,12 @@ class WarcIndexFile:
     def peek_doc_id(self):
         return self.fileobj.peek(self.doc_id_size)[:self.doc_id_size].decode()
 
+    def peek_doc_idx(self):
+        int_bytes = self.fileobj.peek(self.doc_id_size + 4)[self.doc_id_size:self.doc_id_size+4]
+        if int_bytes == b'':
+            return None
+        return int.from_bytes(int_bytes, 'little')
+
     def __bool__(self):
         # TODO: a better way? Does lz4 handle peeks okay?
         return self.fileobj.peek(1) != b''
@@ -106,7 +112,7 @@ class ClueWebWarcIndex:
                     if state is not None:
                         f.zseek(pos, state)
                         f.read(out_offset)
-                    doc_iter = stack.enter_context(docs_obj._docs_ctxt_iter_warc(f))
+                    doc_iter = docs_obj._docs_ctxt_iter_warc(f)
                     for doc in doc_iter:
                         brk = False
                         while doc.doc_id >= doc_ids[0]:
@@ -143,10 +149,102 @@ class ClueWebWarcDocstore(Docstore):
                 index = ClueWebWarcIndex(source_file, checkpoint_file)
                 yield from index.get_many_iter(doc_ids, self.warc_docs)
             else:
-                with self.warc_docs._docs_ctxt_iter_warc(source_file) as doc_it:
-                    for doc in doc_it:
-                        if doc_ids[0] == doc.doc_id:
-                            yield doc
-                            doc_ids = doc_ids[1:]
-                            if not doc_ids:
-                                break # file finished
+                for doc in self.warc_docs._docs_ctxt_iter_warc(source_file):
+                    if doc_ids[0] == doc.doc_id:
+                        yield doc
+                        doc_ids = doc_ids[1:]
+                        if not doc_ids:
+                            break # file finished
+
+class WarcIter:
+    def __init__(self, warc_docs, slice):
+        self.next_index = 0
+        self.warc_docs = warc_docs
+        self.slice = slice
+        self.current_file = None
+        self.current_file_source = None
+        self.current_file_start_idx = 0
+        self.current_file_end_idx = 0
+        self.current_chk = None
+        self.file_iter = warc_docs._docs_iter_source_files()
+
+    def __next__(self):
+        if self.slice.start >= self.slice.stop:
+            raise StopIteration
+        while self.next_index != self.slice.start or self.current_file is None:
+            if self.current_file is None or self.current_file_end_idx < self.slice.start:
+                # First iteration or no docs remaining in this file
+                if self.current_file is not None:
+                    self.current_file.close()
+                    self.current_file_source.close()
+                    self.current_file = None
+                    self.current_file_source = None
+                if self.current_chk:
+                    self.current_chk.close()
+                    self.current_chk = None
+                # jump ahead to the file that contains the desired index
+                first = True
+                while first or self.current_file_end_idx < self.slice.start:
+                    source_file = next(self.file_iter)
+                    self.next_index = self.current_file_end_idx
+                    self.current_file_start_idx = self.current_file_end_idx
+                    self.current_file_end_idx = self.current_file_start_idx + self.warc_docs._docs_warc_file_counts()[source_file]
+                    first = False
+                self.current_file_source = ir_datasets.lazy_libs.zlib_state().GzipStateFile(source_file)
+                self.current_file = self.warc_docs._docs_ctxt_iter_warc(self.current_file_source)
+                checkpoint_file = self.warc_docs._docs_source_file_to_checkpoint(source_file)
+                if checkpoint_file:
+                    self.current_chk = WarcIndexFile(checkpoint_file, 'rb')
+            elif self.current_chk and self.current_file_start_idx + self.current_chk.peek_doc_idx() < self.slice.start:
+                # We have a checkpoint file and the next block starts after this checkpoint.
+                # So we can use zseek to jump ahead to it.
+                while self.current_chk and self.current_file_start_idx + self.current_chk.peek_doc_idx() < self.slice.start:
+                    doc_id, doc_idx, state, pos, out_offset = self.current_chk.read()
+                self.current_file_source.zseek(pos, state)
+                self.current_file_source.read(out_offset)
+                self.next_index = self.current_file_start_idx + doc_idx
+            else:
+                # No checkpoint file available or as far as we can get with checkpoint; do slow read ahead
+                # import pdb; pdb.set_trace()
+                for _ in zip(range(self.slice.start - self.next_index), self.current_file):
+                    # The zip here will stop at after either as many docs we must advance, or however
+                    # many docs remain in the file. In the latter case, we'll just drop out into the
+                    # next iteration of the while loop and pick up the next file.
+                    self.next_index += 1
+        result = next(self.current_file)
+        self.next_index += 1
+        self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
+        return result
+
+    def close(self):
+        if self.current_file_source is not None:
+            self.current_file_source.close()
+            self.current_file_source = None
+        if self.current_file is not None:
+            self.current_file.close()
+            self.current_file = None
+        if self.current_chk:
+            self.current_chk.close()
+            self.current_chk = None
+        self.file_iter = None
+
+    def __iter__(self):
+        return self
+
+    def __del__(self):
+        self.close()
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            # it[start:stop:step]
+            new_slice = ir_datasets.util.apply_sub_slice(self.slice, key)
+            return WarcIter(self.warc_docs, new_slice)
+        elif isinstance(key, int):
+            # it[index]
+            new_slice = ir_datasets.util.apply_sub_slice(self.slice, slice(key, key+1))
+            new_it = WarcIter(self.warc_docs, new_slice)
+            try:
+                return next(new_it)
+            except StopIteration as e:
+                raise IndexError((self.slice, slice(key, key+1), new_slice))
+        raise TypeError('key must be int or slice')

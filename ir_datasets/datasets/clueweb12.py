@@ -1,5 +1,7 @@
 import codecs
 import os
+import gzip
+import contextlib
 from typing import NamedTuple, Tuple
 from glob import glob
 from pathlib import Path
@@ -8,6 +10,9 @@ from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, B
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
+
+
+_logger = ir_datasets.log.easy()
 
 
 NAME = 'clueweb12'
@@ -89,10 +94,11 @@ class MsinfoQrels(TrecQrels):
 
 
 class ClueWeb12Docs(WarcDocs):
-    def __init__(self, docs_dlc, chk_dlc):
+    def __init__(self, docs_dlc, chk_dlc=None):
         super().__init__()
         self.docs_dlc = docs_dlc
         self.chk_dlc = chk_dlc
+        self._docs_warc_file_counts_cache = None
 
     def docs_path(self):
         return self.docs_dlc.path()
@@ -112,6 +118,8 @@ class ClueWeb12Docs(WarcDocs):
         return os.path.join(self.docs_dlc.path(), f'ClueWeb12_{sec[:2]}', sec, f'{sec}-{part}.warc.gz')
 
     def _docs_source_file_to_checkpoint(self, source_file):
+        if self.chk_dlc is None:
+            return None
         source_prefix = Path(self.docs_dlc.path())
         source_file = Path(source_file)
         index_prefix = Path(self.chk_dlc.path())
@@ -120,44 +128,79 @@ class ClueWeb12Docs(WarcDocs):
             return None
         return f'{result}.chk.lz4'
 
+    def _docs_warc_file_counts(self):
+        if self._docs_warc_file_counts_cache is None:
+            result = {}
+            for counts_file in glob(os.path.join(self.docs_dlc.path(), 'recordcounts', '*.txt')):
+                d = os.path.basename(counts_file)[:-len('_counts.txt')]
+                with open(counts_file, 'rt') as f:
+                    for line in f:
+                        file, count = line.strip().split()
+                        file = os.path.join(self.docs_dlc.path(), d, file[2:])
+                        result[file] = int(count)
+            self._docs_warc_file_counts_cache = result
+        return self._docs_warc_file_counts_cache
 
-class ClueWeb12b13Docs(ClueWeb12Docs):
-    def __init__(self, docs_dlc, chk_dlc, b13_dlc):
-        super().__init__(docs_dlc, chk_dlc)
-        self.b13_dlc = b13_dlc
+    def docs_count(self):
+        return sum(self._docs_warc_file_counts().values())
 
-    def _iter_b13ids(self):
-        with self.b13_dlc.stream() as stream:
-            for line in stream:
-                line = line.decode()
-                did, _ = line.split(',', 1)
-                yield did
 
-    def docs_iter(self):
-        did_iter = self._iter_b13ids()
-        current_did = next(did_iter, None)
-        for doc in super().docs_iter():
-            if doc.doc_id == current_did:
-                yield doc
-                next_did = next(did_iter, None)
-                advance_file = next_did is None or current_did.split('-')[:-1] != next_did.split('-')[:-1]
-                current_did = next_did
-                if advance_file:
-                    break
+class ClueWeb12b13Extractor:
+    def __init__(self, docs_dlc, extract_jar_dlc):
+        self.docs_dlc = docs_dlc
+        self.extract_jar_dlc = extract_jar_dlc
+
+    def path(self):
+        source_path = self.docs_dlc.path()
+        path = f'{source_path}-b13'
+        if os.path.exists(path):
+            self._create_record_counts_if_needed(path)
+            return path
+        extract_path = self.extract_jar_dlc.path()
+        message = f'''clueweb12-b13 docs not found. Please either:
+(1) Link docs to {path} if b13 subset already built, or
+(2) Run the following command to build the b13 subset:
+java -j {extract_path} {source_path}/ {path}/
+'''
+        _logger.info(message)
+        raise RuntimeError(message)
+
+    def _create_record_counts_if_needed(self, path):
+        # The official JAR doesn't build up the recordcounts files that we use for jumping ahead.
+        # So we will build them ourselves the first time. Luckily, the header of each WARC file
+        # in CW12 contains a warc-number-of-documents header, which we can use (avoids reading)
+        # the entire file. It still takes a little time, but not super long.
+        rc_dir = os.path.join(path, 'recordcounts')
+        if len(os.listdir(rc_dir)) != 0:
+            return
+        warc = ir_datasets.lazy_libs.warc()
+        with contextlib.ExitStack() as stack, _logger.pbar_raw(desc='building b13 document count cache') as pbar:
+            for d in glob(os.path.join(path, 'ClueWeb12_??')):
+                d = os.path.basename(d)
+                out = stack.enter_context(ir_datasets.util.finialized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))
+                for file in sorted(glob(os.path.join(path, d, '*', '*.warc.gz'))):
+                    shortf = file[-24:]
+                    with gzip.open(file, 'rb') as f, warc.WARCFile(fileobj=f) as warcf:
+                        num_docs = next(iter(warcf)).header['warc-number-of-documents']
+                        out.write(f'./{shortf} {num_docs}\n')
+                    pbar.update(1)
+
+    def stream(self):
+        raise NotImplementedError
 
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 
     docs_dlc = dlc['docs']
     docs_chk_dlc = TarExtractAll(dlc['docs.chk'], base_path/'corpus.chk')
-    b13_dlc = Bz2Extract(Cache(TarExtract(dlc['cw12b-info'], 'ClueWeb12-CreateB13/ClueWeb12_B13_DocID_To_URL.txt.bz2'), base_path/'ClueWeb12_B13_DocID_To_URL.txt.bz2'))
+    b13_dlc = Bz2Extract(Cache(TarExtract(dlc['cw12b-info'], 'ClueWeb12-CreateB13/software/CreateClueWeb12B13Dataset.jar'), base_path/'CreateClueWeb12B13Dataset.jar'))
 
     collection = ClueWeb12Docs(docs_dlc, docs_chk_dlc)
-    collection_b13 = ClueWeb12b13Docs(docs_dlc, docs_chk_dlc, b13_dlc)
+    collection_b13 = ClueWeb12Docs(ClueWeb12b13Extractor(docs_dlc, b13_dlc))
 
     base = Dataset(collection, documentation('_'))
 

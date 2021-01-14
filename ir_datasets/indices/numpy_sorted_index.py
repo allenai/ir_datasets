@@ -99,3 +99,79 @@ class NumpySortedIndex:
         if self._exists():
             return self.doccount
         return 0
+
+
+class NumpyPosIndex:
+    def __init__(self, path):
+        self.path = path
+        self.transaction = None
+        self.mmap = None
+        self.np = None
+
+    def add(self, idx):
+        if self.transaction is None:
+            self.transaction = []
+        self.transaction.append(idx)
+
+    def commit(self):
+        self._lazy_load()
+        if self.transaction is None:
+            return
+        if self.mmap is not None:
+            del self.mmap
+            self.mmap = None
+        if os.path.exists(self.path):
+            current_count = os.stat(self.path).st_size // 8
+            mmap = self.np.memmap(self.path, dtype='int64', mode='r+', shape=(current_count + len(self.transaction),))
+        else:
+            mmap = self.np.memmap(self.path, dtype='int64', mode='w+', shape=(len(self.transaction),))
+        mmap[-len(self.transaction):] = self.np.array(self.transaction, dtype='int64')
+        del mmap
+        self.transaction = None
+
+    def _exists(self):
+        return os.path.exists(self.path)
+
+    def _lazy_load(self):
+        if self.np is None:
+            self.np = ir_datasets.lazy_libs.numpy()
+        if self.mmap is None and self._exists():
+            current_count = os.stat(self.path).st_size // 8
+            self.mmap = self.np.memmap(self.path, dtype='int64', mode='r', shape=(current_count,))
+
+    def __getitem__(self, idxs):
+        self._lazy_load()
+        if isinstance(idxs, int):
+            idxs = (idxs,)
+        if not self._exists():
+            return [-1 for _ in idxs]
+        idxs = self.np.array(idxs)
+        mask = idxs > 0 & idxs < self.mmap.shape[0]
+        return ((self.mmap[idxs] * mask) + (~mask * -1)).tolist()
+
+    def close(self):
+        if self.mmap is not None:
+            del self.mmap
+            self.mmap = None
+
+    def clear(self):
+        self.close()
+        if os.path.exists(self.path):
+            os.remove(self.path)
+
+    def __del__(self):
+        self.close()
+
+    def __iter__(self):
+        # iterates keys
+        self._lazy_load()
+        if self._exists():
+            for i in range(len(self)):
+                yield self.mmap[i]
+
+    def __len__(self):
+        # number of keys
+        self._lazy_load()
+        if self._exists():
+            return self.mmap.shape[0]
+        return 0
