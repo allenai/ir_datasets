@@ -1,7 +1,10 @@
 import io
 import os
 import pickle
-import fcntl
+try:
+    import fcntl
+except:
+    fcntl = None # not available on Windows :shrug:
 from contextlib import contextmanager
 import ir_datasets
 from . import Docstore, NumpySortedIndex, NumpyPosIndex
@@ -194,7 +197,8 @@ class Lz4PickleTransaction:
 
     def __enter__(self):
         self.bin = open(self.lookup._bin_path, 'ab')
-        fcntl.lockf(self.bin, fcntl.LOCK_EX)
+        if fcntl:
+            fcntl.lockf(self.bin, fcntl.LOCK_EX)
         self.start_pos = self.bin.tell() # for rolling back
         self.pos = NumpyPosIndex(self.lookup._pos_path)
         self.idxs = []
@@ -217,13 +221,15 @@ class Lz4PickleTransaction:
             idx.commit()
         self.idxs = None
         self.bin.flush()
-        fcntl.lockf(self.bin, fcntl.LOCK_UN)
+        if fcntl:
+            fcntl.lockf(self.bin, fcntl.LOCK_UN)
         self.bin.close()
         self.bin = None
 
     def rollback(self):
         self.bin.truncate(self.start_pos) # remove appended content
-        fcntl.lockf(self.bin, fcntl.LOCK_UN)
+        if fcntl:
+            fcntl.lockf(self.bin, fcntl.LOCK_UN)
         self.bin.close()
         self.bin = None
         self.pos.close()
