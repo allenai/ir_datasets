@@ -45,18 +45,12 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOs-latest'
       run: |
         pip install pytest
-        pytest test/util.py
-        pytest test/integration/dummy.py
-        pytest test/integration/vaswani.py
-        pytest test/formats/
+        pytest test/util.py test/integration/dummy.py test/integration/vaswani.py test/formats/
     - name: Test-windows with pytest
       if: matrix.os == 'windows-latest'
       shell: cmd
       run: |
         pip install pytest
-        pytest test\util.py
-        pytest test\integration\dummy.py
-        pytest test\integration\vaswani.py
-        pytest test\formats\
+        pytest test\util.py test\integration\dummy.py test\integration\vaswani.py test\formats\
       env:
         PATH: 'C:/Program Files/zlib/bin/'
