@@ -140,12 +140,12 @@ class DocstoreSplitter:
 
 def use_docstore(fn):
     # For use as an @annotation
+    # use docs_store if it's already built, otherwise only use it if the user
+    # specifies a split (docs_it[split])
     @functools.wraps(fn)
     def wrapper(self):
         docs_store = self.docs_store()
-        # use docs_store if it's already built, otherwise only use it if the user
-        # specifies a split (docs_it[split])
         if docs_store.built():
-            return iter(docs_store)
-        return DocstoreSplitter(fn(self), docs_store)
+            return iter(docs_store) # iterate from the docstore -- really fast
+        return DocstoreSplitter(fn(self), docs_store) # avoid building docstore if not needed
     return wrapper

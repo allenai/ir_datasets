@@ -38,7 +38,7 @@ class TrecQrel(NamedTuple):
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()
 
 class TrecDocs(BaseDocs):
-    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4'):
+    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None):
         self._docs_dlc = docs_dlc
         self._encoding = encoding
         self._path_globs = path_globs
@@ -51,6 +51,7 @@ class TrecDocs(BaseDocs):
             'BS4': TrecDoc,
             'text': GenericDoc,
         }[parser]
+        self._docs_namespace = namespace
 
     def docs_path(self):
         return self._docs_dlc.path()
@@ -148,6 +149,12 @@ class TrecDocs(BaseDocs):
             index_fields=['doc_id'],
         )
 
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return self._docs_namespace
+
 
 DEFAULT_QTYPE_MAP = {
     '<num> *(Number:)?': 'query_id',
@@ -156,11 +163,12 @@ DEFAULT_QTYPE_MAP = {
     '<narr> *(Narrative:)?': 'narrative'
 }
 class TrecQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, namespace=None):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or DEFAULT_QTYPE_MAP
         self._encoding = encoding
+        self._queries_namespace = namespace
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -188,14 +196,18 @@ class TrecQueries(BaseQueries):
     def queries_cls(self):
         return self._qtype
 
+    def queries_namespace(self):
+        return self._queries_namespace
+
 
 class TrecXmlQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, subtopics_key='subtopics'):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, subtopics_key='subtopics', namespace=None):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or {f: f for f in qtype._fields}
         self._encoding = encoding
         self._subtopics_key = subtopics_key
+        self._queries_namespace = namespace
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -228,11 +240,15 @@ class TrecXmlQueries(BaseQueries):
     def queries_cls(self):
         return self._qtype
 
+    def queries_namespace(self):
+        return self._queries_namespace
+
 
 class TrecColonQueries(BaseQueries):
-    def __init__(self, queries_dlc, encoding=None):
+    def __init__(self, queries_dlc, encoding=None, namespace=None):
         self._queries_dlc = queries_dlc
         self._encoding = encoding
+        self._queries_namespace = namespace
 
     def queries_iter(self):
         with self._queries_dlc.stream() as f:
@@ -247,6 +263,9 @@ class TrecColonQueries(BaseQueries):
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return self._queries_namespace
 
 
 class TrecQrels(BaseQrels):

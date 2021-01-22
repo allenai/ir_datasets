@@ -23,9 +23,6 @@ class WarcDocs(BaseDocs):
 
     def docs_iter(self):
         return ir_datasets.indices.WarcIter(self, slice(0, self.docs_count()))
-        # for source_file in self._docs_iter_source_files():
-        #     with self._docs_ctxt_iter_warc(source_file) as doc_iter:
-        #         yield from doc_iter
 
     def _docs_warc_lib(self):
         if self.warc_cw09:
@@ -79,3 +76,6 @@ class WarcDocs(BaseDocs):
 
     def docs_cls(self):
         return WarcDoc
+
+    def docs_count(self):
+        return sum(self._docs_warc_file_counts().values())

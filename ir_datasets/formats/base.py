@@ -40,11 +40,18 @@ class BaseDocs:
     def docs_iter(self):
         raise NotImplementedError()
 
+    def docs_count(self):
+        raise NotImplementedError()
+
     def docs_handler(self):
         return self
 
     def docs_cls(self):
         return GenericDoc
+
+    def docs_namespace(self):
+        return None # No namespace defined
+
 
 class BaseQueries:
     PREFIX = 'queries_'
@@ -64,6 +71,9 @@ class BaseQueries:
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return None # No namespace defined
 
 
 class BaseQrels:

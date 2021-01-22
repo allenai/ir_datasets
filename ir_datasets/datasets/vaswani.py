@@ -51,6 +51,12 @@ class VaswaniDocs(BaseDocs):
             index_fields=['doc_id'],
         )
 
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace():
+        return NAME
+
 
 class VaswaniQueries(BaseQueries):
     def __init__(self, queries_dlc):
@@ -70,6 +76,9 @@ class VaswaniQueries(BaseQueries):
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return NAME
 
 
 class VaswaniQrels(BaseQrels):

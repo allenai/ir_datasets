@@ -7,6 +7,8 @@ from .base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 __all__ = ['collection', 'subsets']
 _logger = ir_datasets.log.easy()
 
+NAME = 'antique'
+
 
 DUA = ("Please confirm you agree to the authors' data usage agreement found at "
        "<https://ciir.cs.umass.edu/downloads/Antique/readme.txt>")
@@ -29,14 +31,14 @@ VALIDATION_QIDS = {'1158088', '4032777', '1583099', '263783', '4237144', '109787
 
 def _init():
     documentation = YamlDocumentation('docs/antique.yaml')
-    base_path = ir_datasets.util.home_path() / 'antique'
-    dlc = DownloadConfig.context('antique', base_path, dua=DUA)
-    collection = TsvDocs(dlc['docs'])
+    base_path = ir_datasets.util.home_path() / NAME
+    dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
+    collection = TsvDocs(dlc['docs'], namespace=NAME)
 
     subsets = {}
     for subset in ('train', 'test'):
         qrels = TrecQrels(dlc[f'{subset}/qrels'], QREL_DEFS)
-        queries = TsvQueries(dlc[f'{subset}/queries'])
+        queries = TsvQueries(dlc[f'{subset}/queries'], namespace=NAME)
         subsets[subset] = Dataset(collection, queries, qrels)
 
     # Split the training data into training and validation data
@@ -62,10 +64,10 @@ def _init():
         FilteredQrels(subsets['test'].qrels_handler(), disllow_qids, mode='exclude'),
         subsets['test'])
 
-    ir_datasets.registry.register('antique', Dataset(collection, documentation('_')))
+    ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
 
     for s in sorted(subsets):
-        ir_datasets.registry.register(f'antique/{s}', Dataset(subsets[s], documentation(s)))
+        ir_datasets.registry.register(f'{NAME}/{s}', Dataset(subsets[s], documentation(s)))
 
     return collection, subsets
 

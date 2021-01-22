@@ -25,18 +25,18 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['arabic_newswire_a/transcripts/*/*.sgm.gz'])
+    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['arabic_newswire_a/transcripts/*/*.sgm.gz'], namespace=NAME)
 
     base = Dataset(collection, documentation('_'))
 
     subsets['ar2001'] = Dataset(
-        TrecQueries(dlc['ar2001/queries'], qtype_map=QTYPE_MAP, encoding='ISO-8859-6'),
+        TrecQueries(dlc['ar2001/queries'], qtype_map=QTYPE_MAP, encoding='ISO-8859-6', namespace=NAME),
         TrecQrels(dlc['ar2001/qrels'], QREL_DEFS),
         collection,
         documentation('ar2001'))
 
     subsets['ar2002'] = Dataset(
-        TrecQueries(dlc['ar2002/queries'], qtype_map=QTYPE_MAP, encoding='ISO-8859-6'),
+        TrecQueries(dlc['ar2002/queries'], qtype_map=QTYPE_MAP, encoding='ISO-8859-6', namespace=NAME),
         TrecQrels(dlc['ar2002/qrels'], QREL_DEFS),
         collection,
         documentation('ar2002'))

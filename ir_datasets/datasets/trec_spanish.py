@@ -84,18 +84,18 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'])
+    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'], namespace=NAME)
 
     base = Dataset(collection, documentation('_'))
 
     subsets['trec3'] = Dataset(
-        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec3/queries']), qtype_map=QTYPE_MAP_3, encoding='ISO-8859-1'), TrecSpanish3Query),
+        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec3/queries']), qtype_map=QTYPE_MAP_3, encoding='ISO-8859-1', namespace=NAME), TrecSpanish3Query),
         TrecQrels(GzipExtract(dlc['trec3/qrels']), QREL_DEFS),
         collection,
         documentation('trec3'))
 
     subsets['trec4'] = Dataset(
-        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec4/queries']), qtype=TrecDescOnlyQuery, qtype_map=QTYPE_MAP_4, encoding='ISO-8859-1'), TrecSpanish4Query),
+        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec4/queries']), qtype=TrecDescOnlyQuery, qtype_map=QTYPE_MAP_4, encoding='ISO-8859-1', namespace=NAME), TrecSpanish4Query),
         TrecQrels(GzipExtract(dlc['trec4/qrels']), QREL_DEFS),
         collection,
         documentation('trec4'))

@@ -47,6 +47,9 @@ class MsMarcoTrecDocs(TrecDocs):
     def docs_cls(self):
         return MsMarcoDocument
 
+    def docs_namespace(self):
+        return NAME
+
 
 def _init():
     base_path = ir_datasets.util.home_path()/'msmarco-document'
@@ -57,40 +60,40 @@ def _init():
 
     subsets['train'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['train/queries'])),
+        TsvQueries(GzipExtract(dlc['train/queries']), namespace='msmarco'),
         TrecQrels(GzipExtract(dlc['train/qrels']), QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['train/scoreddocs'])),
     )
 
     subsets['dev'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['dev/queries'])),
+        TsvQueries(GzipExtract(dlc['dev/queries']), namespace='msmarco'),
         TrecQrels(GzipExtract(dlc['dev/qrels']), QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['dev/scoreddocs'])),
     )
 
     subsets['eval'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['eval/queries'])),
+        TsvQueries(GzipExtract(dlc['eval/queries']), namespace='msmarco'),
         TrecScoredDocs(GzipExtract(dlc['eval/scoreddocs'])),
     )
 
     subsets['trec-dl-2019'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['trec-dl-2019/queries'])),
+        TsvQueries(GzipExtract(dlc['trec-dl-2019/queries']), namespace='msmarco'),
         TrecQrels(dlc['trec-dl-2019/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2019/scoreddocs'])),
     )
 
     subsets['trec-dl-2020'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries'])),
+        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries']), namespace='msmarco'),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2020/scoreddocs'])),
     )
 
     subsets['orcas'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['orcas/queries'])),
+        TsvQueries(GzipExtract(dlc['orcas/queries']), namespace='orcas'),
         TrecQrels(GzipExtract(dlc['orcas/qrels']), ORCAS_QLRES_DEFS),
         TrecScoredDocs(GzipExtract(dlc['orcas/scoreddocs'])),
     )

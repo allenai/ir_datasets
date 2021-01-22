@@ -267,3 +267,7 @@ class PickleLz4FullStore(Docstore):
     def __iter__(self):
         self.build()
         return iter(self.lookup)
+
+    def count(self):
+        self.build()
+        return len(self.lookup)

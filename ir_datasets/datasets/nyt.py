@@ -74,6 +74,12 @@ class NytDocs(BaseDocs):
             index_fields=['doc_id'],
         )
 
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
+
 
 class NytQueries(BaseQueries):
     def __init__(self, collection):
@@ -82,6 +88,9 @@ class NytQueries(BaseQueries):
     def queries_iter(self):
         for doc in self._collection.docs_iter():
             yield GenericQuery(doc.doc_id, doc.headline)
+
+    def queries_namespace(self):
+        return NAME
 
 
 class NytQrels(BaseQrels):

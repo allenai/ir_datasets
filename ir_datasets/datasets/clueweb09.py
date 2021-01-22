@@ -106,8 +106,8 @@ class ClueWeb09Docs(WarcDocs):
             self._docs_warc_file_counts_cache = result
         return self._docs_warc_file_counts_cache
 
-    def docs_count(self):
-        return sum(self._docs_warc_file_counts().values())
+    def docs_namespace(self):
+        return NAME
 
 
 class TrecPrels(TrecQrels):
@@ -178,49 +178,49 @@ def _init():
 
     subsets['en/trec-web-2009'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09),
         documentation('trec-web-2009'))
 
     subsets['en/trec-web-2010'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2010'))
 
     subsets['en/trec-web-2011'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2011'))
 
     subsets['en/trec-web-2012'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2012'))
 
     subsets['catb/trec-web-2009'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         CatBQrelFilter(TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09)),
         documentation('trec-web-2009'))
 
     subsets['catb/trec-web-2010'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2010'))
 
     subsets['catb/trec-web-2011'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2011'))
 
     subsets['catb/trec-web-2012'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2012'))
 

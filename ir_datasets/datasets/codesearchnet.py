@@ -79,6 +79,12 @@ class CodeSearchNetDocs(BaseDocs):
             index_fields=['doc_id'],
         )
 
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
+
 
 class CodeSearchNetQueries(BaseQueries):
     def __init__(self, queries_dlcs, split):
@@ -100,6 +106,9 @@ class CodeSearchNetQueries(BaseQueries):
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return NAME
 
 
 class CodeSearchNetQrels(BaseQrels):
@@ -147,6 +156,9 @@ class CodeSearchNetChallengeQueries(BaseQueries):
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return NAME
 
 
 class CodeSearchNetChallengeQrels(BaseQrels):

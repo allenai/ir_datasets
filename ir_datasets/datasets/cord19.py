@@ -113,6 +113,12 @@ class Cord19Docs(BaseDocs):
             index_fields=['doc_id'],
         )
 
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
+
 
 def _init():
     subsets = {}
@@ -124,7 +130,7 @@ def _init():
     base = Dataset(collection, documentation('_'))
 
     subsets['trec-covid'] = Dataset(
-        TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}),
+        TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME),
         TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS),
         collection,
         documentation('trec-covid'))

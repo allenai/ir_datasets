@@ -98,12 +98,12 @@ def _init():
     documentation = YamlDocumentation('docs/msmarco-passage.yaml')
     base_path = ir_datasets.util.home_path()/'msmarco-passage'
     dlc = DownloadConfig.context('msmarco-passage', base_path, dua=DUA)
-    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'))
+    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco')
     subsets = {}
 
     subsets['train'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.train.tsv'), base_path/'train/queries.tsv')),
+        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.train.tsv'), base_path/'train/queries.tsv'), namespace='msmarco'),
         TrecQrels(dlc['train/qrels'], QRELS_DEFS),
         TsvDocPairs(GzipExtract(dlc['train/docpairs'])),
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['train/scoreddocs'], 'top1000.train.txt')), base_path/'train/ms.run')),
@@ -111,38 +111,38 @@ def _init():
 
     subsets['dev'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.dev.tsv'), base_path/'dev/queries.tsv')),
+        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.dev.tsv'), base_path/'dev/queries.tsv'), namespace='msmarco'),
         TrecQrels(dlc['dev/qrels'], QRELS_DEFS),
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['dev/scoreddocs'], 'top1000.dev')), base_path/'dev/ms.run')),
     )
 
     subsets['dev/small'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.dev.small.tsv'), base_path/'dev/small/queries.tsv')),
+        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.dev.small.tsv'), base_path/'dev/small/queries.tsv'), namespace='msmarco'),
         TrecQrels(Cache(TarExtract(dlc['collectionandqueries'], 'qrels.dev.small.tsv'), base_path/'dev/small/qrels'), QRELS_DEFS),
     )
 
     subsets['eval'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.eval.tsv'), base_path/'eval/queries.tsv')),
+        TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.eval.tsv'), base_path/'eval/queries.tsv'), namespace='msmarco'),
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['eval/scoreddocs'], 'top1000.eval')), base_path/'eval/ms.run')),
     )
 
     subsets['eval/small'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.eval.small.tsv'), base_path/'eval/small/queries.tsv')),
+        TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.eval.small.tsv'), base_path/'eval/small/queries.tsv'), namespace='msmarco'),
     )
 
     subsets['trec-dl-2019'] = Dataset(
         collection,
         TrecQrels(dlc['trec-dl-2019/qrels'], TREC_DL_QRELS_DEFS),
-        TsvQueries(Cache(GzipExtract(dlc['trec-dl-2019/queries']), base_path/'trec-dl-2019/queries.tsv')),
+        TsvQueries(Cache(GzipExtract(dlc['trec-dl-2019/queries']), base_path/'trec-dl-2019/queries.tsv'), namespace='msmarco'),
         TrecScoredDocs(Cache(ExtractQidPid(GzipExtract(dlc['trec-dl-2019/scoreddocs'])), base_path/'trec-dl-2019/ms.run')),
     )
 
     subsets['trec-dl-2020'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries'])),
+        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries']), namespace='msmarco'),
         TrecScoredDocs(Cache(ExtractQidPid(GzipExtract(dlc['trec-dl-2020/scoreddocs'])), base_path/'trec-dl-2020/ms.run')),
     )
 

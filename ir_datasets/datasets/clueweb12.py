@@ -141,8 +141,8 @@ class ClueWeb12Docs(WarcDocs):
             self._docs_warc_file_counts_cache = result
         return self._docs_warc_file_counts_cache
 
-    def docs_count(self):
-        return sum(self._docs_warc_file_counts().values())
+    def docs_namespace(self):
+        return NAME
 
 
 class ClueWeb12b13Extractor:
@@ -208,36 +208,36 @@ def _init():
 
     subsets['trec-web-2013'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecQrels(dlc['trec-web-2013/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2013'))
 
     subsets['trec-web-2014'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery),
+        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
         TrecQrels(dlc['trec-web-2014/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2014'))
 
     subsets['b13/ntcir-www-1'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}, namespace=NAME),
         NtcirQrels(dlc['ntcir-www-1/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-1'))
 
     subsets['b13/ntcir-www-2'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map, namespace=NAME),
         NtcirQrels(dlc['ntcir-www-2/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-2'))
 
     subsets['b13/ntcir-www-3'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map),
+        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map, namespace=NAME),
         documentation('ntcir-www-3'))
 
     subsets['b13/trec-misinfo-2019'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map),
+        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace=NAME),
         MsinfoQrels(dlc['trec-misinfo-2019/qrels'], MISINFO_QREL_DEFS),
         documentation('trec-misinfo-2019'))
 

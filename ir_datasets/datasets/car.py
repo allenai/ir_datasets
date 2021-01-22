@@ -35,6 +35,7 @@ class CarDocs(BaseDocs):
         super().__init__()
         self._streamer = streamer
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         trec_car = ir_datasets.lazy_libs.trec_car()
         with self._streamer.stream() as stream:
@@ -42,6 +43,23 @@ class CarDocs(BaseDocs):
             for p in paras:
                 yield GenericDoc(p.para_id, p.get_text())
 
+    def docs_cls(self):
+        return GenericDoc
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
+
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
 
 class CarQueries(BaseQueries):
     def __init__(self, streamer):
@@ -59,6 +77,8 @@ class CarQueries(BaseQueries):
                     text = ' '.join((title,) + headings)
                     yield CarQuery(qid, text, title, headings)
 
+    def queries_namespace(self):
+        return NAME
 
 def _init():
     subsets = {}

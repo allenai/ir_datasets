@@ -104,9 +104,10 @@ class _TsvBase:
 
 
 class TsvDocs(_TsvBase, BaseDocs):
-    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None):
+    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None):
         super().__init__(docs_dlc, doc_cls, "docs")
         self._doc_store_index_fields = doc_store_index_fields
+        self._docs_namespace = namespace
 
     def docs_path(self):
         return self._path()
@@ -128,10 +129,17 @@ class TsvDocs(_TsvBase, BaseDocs):
             index_fields=fields,
         )
 
+    def docs_namespace(self):
+        return self._docs_namespace
+
+    def docs_count(self):
+        return self.docs_store().count()
+
 
 class TsvQueries(_TsvBase, BaseQueries):
-    def __init__(self, queries_dlc, query_cls=GenericQuery):
+    def __init__(self, queries_dlc, query_cls=GenericQuery, namespace=None):
         super().__init__(queries_dlc, query_cls, "queries")
+        self._queries_namespace = namespace
 
     def queries_path(self):
         return self._path()
@@ -141,6 +149,9 @@ class TsvQueries(_TsvBase, BaseQueries):
 
     def queries_cls(self):
         return self._cls
+
+    def queries_namespace(self):
+        return self._queries_namespace
 
 
 class TsvDocPairs(_TsvBase, BaseDocPairs):
