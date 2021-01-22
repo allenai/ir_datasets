@@ -5,8 +5,12 @@ _:
 An ad-hoc passage retrieval collection, constructed from Wikipedia and used as the basis of the
 TREC Complex Answer Retrieval (CAR) task.
 </p>
+'
+
+v1.5:
+  desc: '
 <p>
-Version 1.5 is used for year 1 (2017) of the shared task.
+Version 1.5 of the TREC dataset. This version is used for year 1 (2017) of the TREC CAR shared task.
 </p>
 '
   bibtex: |

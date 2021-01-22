@@ -6,12 +6,12 @@ from .base import DatasetIntegrationTest
 
 
 class TestCar(DatasetIntegrationTest):
-    # def test_car_docs(self):
-    #     self._test_docs('car/v1.5', count=29678367, items={
-    #         0: GenericDoc('0000000e7e72cafb61a9f356b7dceb25c5e028db', re.compile("^Ukraine was one of the most dangerous places for journalists in the world during the euromaidan demo.{311}ened in Donetsk in April 2014\\. In July 2014 a firebomb was thrown at the TV channel ''112 Ukraine''\\.$", flags=48)),
-    #         9: GenericDoc('000006d5c22f4efbb6b963ea819e976a4b28600b', re.compile('^To mark the 40th anniversary of "Bohemian Rhapsody", the song was released on a limited edition 12" .{174}on CD, DVD \\& Blu\\-ray\\. This includes the first ever live recorded performance of "Bohemian Rhapsody"\\.$', flags=48)),
-    #         29678366: GenericDoc('ffffffb9eec6224bef5da06e829eef59a37748c6', re.compile('^Fisher recommended Louis as First Sea Lord: "He is the most capable administrator in the Admiralty\'s.{472}that would prepare the navy\'s plans in case of war\\. He was promoted to full admiral on 13 July 1912\\.$', flags=48)),
-    #     })
+    def test_car_docs(self):
+        self._test_docs('car/v1.5', count=29678367, items={
+            0: GenericDoc('0000000e7e72cafb61a9f356b7dceb25c5e028db', re.compile("^Ukraine was one of the most dangerous places for journalists in the world during the euromaidan demo.{311}ened in Donetsk in April 2014\\. In July 2014 a firebomb was thrown at the TV channel ''112 Ukraine''\\.$", flags=48)),
+            9: GenericDoc('000006d5c22f4efbb6b963ea819e976a4b28600b', re.compile('^To mark the 40th anniversary of "Bohemian Rhapsody", the song was released on a limited edition 12" .{174}on CD, DVD \\& Blu\\-ray\\. This includes the first ever live recorded performance of "Bohemian Rhapsody"\\.$', flags=48)),
+            29678366: GenericDoc('ffffffb9eec6224bef5da06e829eef59a37748c6', re.compile('^Fisher recommended Louis as First Sea Lord: "He is the most capable administrator in the Admiralty\'s.{472}that would prepare the navy\'s plans in case of war\\. He was promoted to full admiral on 13 July 1912\\.$', flags=48)),
+        })
 
     def test_car_queries(self):
         self._test_queries('car/v1.5/trec-y1', count=2287, items={
@@ -27,7 +27,7 @@ class TestCar(DatasetIntegrationTest):
         self._test_queries('car/v1.5/train/fold0', count=467946, items={
             0: CarQuery('Kindertotenlieder/Text%20and%20music', 'Kindertotenlieder Text and music', 'Kindertotenlieder', ('Text and music',)),
             9: CarQuery('Northrop%20YB-35/Variants', 'Northrop YB-35 Variants', 'Northrop YB-35', ('Variants',)),
-            467945: CarQuery('1987%E2%80%9388%20Greek%20Cup/Final', '1987-88 Greek Cup Final', '1987–88 Greek Cup', ('Final',)),
+            467945: CarQuery('1987%E2%80%9388%20Greek%20Cup/Final', '1987–88 Greek Cup Final', '1987–88 Greek Cup', ('Final',)),
         })
 
     def test_car_qrels(self):
