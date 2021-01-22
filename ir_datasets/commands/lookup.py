@@ -11,7 +11,6 @@ def qid_lookup(dataset, args):
     assert hasattr(dataset, 'queries_handler')
     exporter = DEFAULT_EXPORTERS[args.format]
     exporter = exporter(dataset.queries_cls(), args.out, args.fields)
-    dataset = ir_datasets.wrappers.DocstoreWrapper(dataset)
     store = dataset.queries_store()
     for qid in args.ids:
         try:
@@ -25,7 +24,6 @@ def did_lookup(dataset, args):
     assert hasattr(dataset, 'docs_handler')
     exporter = DEFAULT_EXPORTERS[args.format]
     exporter = exporter(dataset.docs_cls(), args.out, args.fields)
-    dataset = ir_datasets.wrappers.DocstoreWrapper(dataset)
     store = dataset.docs_store()
     for did in args.ids:
         try:
@@ -37,7 +35,7 @@ def did_lookup(dataset, args):
 
 def main(args):
     parser = argparse.ArgumentParser(prog='ir_datasets lookup', description='Provides fast lookups of documents and queries '
-        'using DocstoreWrapper. Unlike using the exporter and grep (or similar), this tool builds '
+        'using docs_store. Unlike using the exporter and grep (or similar), this tool builds '
         'an index for O(log(n)) lookups.')
     parser.add_argument('dataset')
     parser.set_defaults(out=sys.stdout)

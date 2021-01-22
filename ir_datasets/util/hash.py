@@ -1,4 +1,5 @@
 import io
+from tqdm import tqdm
 import hashlib
 import ir_datasets
 

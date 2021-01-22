@@ -25,7 +25,7 @@ antique:
     cache_path: 'test-disallow-list.txt'
 
 
-car-v1.5:
+car:
   docs:
     url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz'
     expected_md5: '4d006dd67cbc11541ed7f87b875cb990'
@@ -48,6 +48,139 @@ car-v1.5:
     cache_path: 'train.tar.xz'
 
 
+clueweb09:
+  docs:
+    instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>
+
+Link the ClueWeb09 source files here: {path}
+
+Should contain directories like ClueWeb09_English_1'
+    cache_path: 'corpus'
+  docs.chk:
+    url: 'https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb09/clueweb09-source-chk.tar.gz'
+    expected_md5: '74328d9c743c52ddef434ce41a4e6dc1'
+  trec-web-2009/queries:
+    url: 'https://trec.nist.gov/data/web/09/wt09.topics.full.xml'
+    expected_md5: '52e4a03d32718fa11290286e8e8dff47'
+    cache_path: 'trec-web-2009/queries.xml'
+  trec-web-2009/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/09/prels.1-50.gz'
+    expected_md5: '3afdef86adf3211629182e3380f9e751'
+    cache_path: 'trec-web-2009/prels.gz'
+  trec-web-2010/queries:
+    url: 'https://trec.nist.gov/data/web/10/wt2010-topics.xml'
+    expected_md5: '8f084cc90c13e4cd66192d3a9585235e'
+    cache_path: 'trec-web-2010/queries.xml'
+  trec-web-2010/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/10/10.adhoc-qrels.final'
+    expected_md5: '8a22083b0370d6ac799e1e779110de06'
+    cache_path: 'trec-web-2010/qrels'
+  trec-web-2011/queries:
+    url: 'https://trec.nist.gov/data/web/11/full-topics.xml'
+    expected_md5: '23914875d80a5d24571d4f458a83c7fa'
+    cache_path: 'trec-web-2011/queries.xml'
+  trec-web-2011/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/11/qrels.adhoc'
+    expected_md5: '7844c8a9cc3a4b6f740d45e56013693d'
+    cache_path: 'trec-web-2011/qrels'
+  trec-web-2012/queries:
+    url: 'https://trec.nist.gov/data/web/12/full-topics.xml'
+    expected_md5: 'a0b8ee33da312a284fda379582b0bc2a'
+    cache_path: 'trec-web-2012/queries.xml'
+  trec-web-2012/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/12/qrels.adhoc'
+    expected_md5: '079723ba3e955269f0de6254c4bec180'
+    cache_path: 'trec-web-2012/qrels'
+
+
+clueweb12:
+  docs:
+    instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>
+
+Link the ClueWeb12 source files here: {path}
+
+Should contain ClueWeb12_00--19 directories'
+    cache_path: 'corpus'
+  docs.chk:
+    url: 'https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb12/clueweb12-source-chk.tar.gz'
+    expected_md5: 'fb92d1f8ed1436839313d2eb47f628a5'
+  cw12b-info:
+    url: 'http://lemurproject.org/clueweb12/ClueWeb12-CreateB13.tgz'
+    expected_md5: '8175ce74a97e46be80c2127d965da200'
+    cache_path: 'ClueWeb12-CreateB13.tgz'
+  trec-web-2013/queries:
+    url: 'https://trec.nist.gov/data/web/2013/trec2013-topics.xml'
+    expected_md5: '4c0ecdddc8632d3fa8fecb507f19801d'
+    cache_path: 'trec-web-2013/queries.xml'
+  trec-web-2013/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/2013/qrels.adhoc.txt'
+    expected_md5: '44aa6300f9df4a77f7205c574afb9c2d'
+    cache_path: 'trec-web-2013/qrels.adhoc'
+  trec-web-2014/queries:
+    url: 'https://trec.nist.gov/data/web/2014/trec2014-topics.xml'
+    expected_md5: 'b1bf5c7aa9f6e7026e1558686330744f'
+    cache_path: 'trec-web-2014/queries.xml'
+  trec-web-2014/qrels.adhoc:
+    url: 'https://trec.nist.gov/data/web/2014/qrels.adhoc.txt'
+    expected_md5: 'afa1db71680acf71283adc7846282a44'
+    cache_path: 'trec-web-2014/qrels.adhoc'
+  ntcir-www-1/queries:
+    url: 'http://www.thuir.cn/ntcirwww/files/eng.queries.xml.zip'
+    expected_md5: 'ed43ba82791bb20776c049421525a055'
+  ntcir-www-1/qrels:
+    url: 'https://macavaney.us/misc/ntcir-www-1.qrels'
+    expected_md5: '634464456437bf378725958822910242'
+    cache_path: 'ntcir-www-1/qrels'
+  ntcir-www-2/queries:
+    url: 'http://www.thuir.cn/ntcirwww2/qEng.zip'
+    expected_md5: 'd4b108b52b2e2c8bedc2e12540414735'
+  ntcir-www-2/qrels:
+    url: 'http://www.thuir.cn/ntcirwww3/www2e.qrels'
+    expected_md5: '155b515dd9fc05e1aeb9c116c9147bb0'
+    cache_path: 'ntcir-www-2/qrels'
+  ntcir-www-3/queries:
+    url: 'http://www.thuir.cn/ntcirwww3/www2www3topics-E.xml'
+    expected_md5: '1ecd1380b20894014a54eb6cb8064587'
+    cache_path: 'ntcir-www-3/queries.xml'
+  trec-misinfo-2019/queries:
+    url: 'https://trec.nist.gov/data/misinfo/2019topics.xml'
+    expected_md5: 'e46bb8ff3058bbcc1bd73a0ecbda1621'
+    cache_path: 'trec-misinfo-2019/queries.xml'
+  trec-misinfo-2019/qrels:
+    url: 'https://trec.nist.gov/data/misinfo/2019qrels_raw.txt'
+    expected_md5: 'faf86b2ac5fcca52b189a3ad408fd019'
+    cache_path: 'trec-misinfo-2019/qrels'
+
+
+codesearchnet:
+  python:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip'
+    expected_md5: '07b49dd01fbac894fbdae22da6462e4f'
+  java:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip'
+    expected_md5: 'fea180077275d8f98f42a3386f492837'
+  go:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/go.zip'
+    expected_md5: 'c0288db91f067c95bb952577949e7b13'
+  php:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/php.zip'
+    expected_md5: '62373f85cfae2f5d7422dc1e55fbbb50'
+  ruby:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/ruby.zip'
+    expected_md5: '6847c0149666334cc937909b0e2297ae'
+  javascript:
+    url: 'https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/javascript.zip'
+    expected_md5: '7649178a02f7b5c8fbccb64abe7946b6'
+  challenge/queries:
+    url: 'https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/queries.csv'
+    expected_md5: '6041a0c32dff4286859ca76d420d76f4'
+    cache_path: 'queries.csv'
+  challenge/qrels:
+    url: 'https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/annotationStore.csv'
+    expected_md5: '9e0a57ae90b3dd0144d59064d0751abd'
+    cache_path: 'qrels.csv'
+
+
 cord19:
   docs/2020-07-16:
     url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz'
@@ -55,11 +188,70 @@ cord19:
     cache_path: '2020-07-16.tar.gz'
   trec-covid/queries:
     url: 'https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml'
+    expected_md5: '0307a37b6b9f1a5f233340a769d538ea'
     cache_path: 'trec-covid/queries.xml'
   trec-covid/qrels:
     url: 'https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt'
     expected_md5: '8138424a59daea0aba751c8a891e5f54'
     cache_path: 'trec-covid/qrels'
+
+
+gov2:
+  docs:
+    instructions: 'GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>
+
+Link the GOV2 source files here: {path}
+
+Should contain GOV2_data'
+    cache_path: 'corpus'
+  trec-tb-2004/queries:
+    url: 'https://trec.nist.gov/data/terabyte/04/04topics.701-750.txt'
+    expected_md5: '18b390335e440d099f3d64bef81708be'
+    cache_path: 'trec-tb-2004/queries.txt'
+  trec-tb-2004/qrels:
+    url: 'https://trec.nist.gov/data/terabyte/04/04.qrels.12-Nov-04'
+    expected_md5: '228e4b0c466b1778a01b3337f8774fb6'
+    cache_path: 'trec-tb-2004/qrels.txt'
+  trec-tb-2005/queries:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.topics.751-800.txt'
+    expected_md5: 'f0fb2603c7d89425965e5aaa104ddca6'
+    cache_path: 'trec-tb-2005/queries.txt'
+  trec-tb-2005/qrels:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.adhoc_qrels'
+    expected_md5: '87f2af26215f092c948249771c8607f6'
+    cache_path: 'trec-tb-2005/qrels.txt'
+  trec-tb-2005/named-page/queries:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.np_topics.601-872.final.txt'
+    expected_md5: '266444c58e3567250f56df5c6a79670d'
+    cache_path: 'trec-tb-2005/named-page/queries.txt'
+  trec-tb-2005/named-page/qrels:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.np_qrels'
+    expected_md5: '0b0f73650d1297a7e5572576a4b93d28'
+    cache_path: 'trec-tb-2005/named-page/qrels.txt'
+  trec-tb-2005/efficiency/queries:
+    url: 'https://trec.nist.gov/data/terabyte/05/05.efficiency_topics.gz'
+    expected_md5: '034a21c9dd956f3b7fb4f162782c9909'
+    cache_path: 'trec-tb-2005/efficiency/queries.txt.gz'
+  trec-tb-2006/queries:
+    url: 'https://trec.nist.gov/data/terabyte/06/06.topics.801-850.txt'
+    expected_md5: '6e23a748c060ef5be64dbcc65245072f'
+    cache_path: 'trec-tb-2006/queries.txt'
+  trec-tb-2006/qrels:
+    url: 'https://trec.nist.gov/data/terabyte/06/qrels.tb06.top50'
+    expected_md5: '1b1dfd769ff00d9e8ec4530c64221543'
+    cache_path: 'trec-tb-2006/qrels.txt'
+  trec-tb-2006/named-page/queries:
+    url: 'https://trec.nist.gov/data/terabyte/06/06.np_topics.901-1081.txt'
+    expected_md5: '811a53107b4445a9955e7376d90a1eec'
+    cache_path: 'trec-tb-2006/named-page/queries.txt'
+  trec-tb-2006/named-page/qrels:
+    url: 'https://trec.nist.gov/data/terabyte/06/qrels.tb06.np'
+    expected_md5: 'f9f7d07de3070eafc08989dd98d1fab8'
+    cache_path: 'trec-tb-2006/named-page/qrels.txt'
+  trec-tb-2006/efficiency/queries:
+    url: 'https://trec.nist.gov/data/terabyte/06/06.efficiency_topics.tar.gz'
+    expected_md5: 'e8599a08af5b3f036c203957f5b82de8'
+    cache_path: 'trec-tb-2006/efficiency/queries.tar.gz'
 
 
 msmarco-document:
@@ -134,9 +326,10 @@ msmarco-document:
 
 
 msmarco-passage:
-  docs:
-    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/collection.tar.gz'
-    expected_md5: "87dd01826da3e2ad45447ba5af577628"
+  collectionandqueries:
+    url: 'https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz'
+    expected_md5: '31644046b18952c1386cd4564ba2ae69'
+    cache_path: 'collectionandqueries.tar.gz'
   queries:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz'
     expected_md5: "c177b2795d5f2dcc524cf00fcd973be1"
@@ -178,10 +371,18 @@ msmarco-passage:
     expected_md5: 'ec9e012746aa9763c7ff10b3336a3ce1'
   trec-dl-2020/queries:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz'
+    expected_md5: '00a406fb0d14ed3752d70d1e4eb98600'
     cache_path: 'trec-dl-2020/queries.tsv.gz'
   trec-dl-2020/scoreddocs:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2020-top1000.tsv.gz'
     expected_md5: 'aa6fbc51d66bd1dc745964c0e140a727'
+
+
+nfcorpus:
+  main:
+    url: 'https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz'
+    expected_md5: '49c061fbadc52ba4d35d0e42e2d742fd'
+    cache_path: 'nfcorpus.tar.gz'
 
 
 nyt:
@@ -200,6 +401,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2001T55>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "b17f34a51dca8d19fae66c338c9ed73a"
+    cache_path: 'corpus.tgz'
   ar2001/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/arabic_topics.txt'
     expected_md5: 'a3d78c379056a080fe40a59a341496b8'
@@ -225,6 +427,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2000T52>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "a847fa029a1356b8f396aa642c449e38"
+    cache_path: 'corpus.tgz'
   trec5/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/topics.CH1-CH28.chinese.english.gz'
     expected_md5: '9ce885d36e8642d4114f40e7008e5b8a'
@@ -250,6 +453,7 @@ via: <https://catalog.ldc.upenn.edu/LDC2000T51>
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "4b8583c03149cf0c06c090fd230b33c6"
+    cache_path: 'corpus.tgz'
   trec3/queries:
     url: 'https://trec.nist.gov/data/topics_noneng/topics.SP1-SP25.spanish.english.gz'
     expected_md5: '22eea4a5c131db9cc4a431235f6a0573'
@@ -271,7 +475,7 @@ To proceed, symlink the source file here: {path}'
 trec-robust04:
   docs:
     instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the
-copyrighted nature of the  documents, this collection is for resaerch use only, which requires
+copyrighted nature of the  documents, this collection is for research use only, which requires
 agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
 
 Once completed, place the uncompressed source here: {path}'
@@ -284,3 +488,10 @@ Once completed, place the uncompressed source here: {path}'
     url: 'https://trec.nist.gov/data/robust/qrels.robust2004.txt'
     expected_md5: "123c2a0ba2ec31178cb1050995dcfdfa"
     cache_path: 'qrels'
+
+
+vaswani:
+  main:
+    url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz'
+    expected_md5: '23e5607081191b153738e81fbd834680'
+    cache_path: 'npl.tar.gz'

@@ -59,7 +59,7 @@ class Logger:
         self.logger().info(text, **kwargs)
 
     def warn(self, text, **kwargs):
-        self.logger().warn(text, **kwargs)
+        self.logger().warning(text, **kwargs)
 
     def error(self, text, **kwargs):
         self.logger().error(text, **kwargs)
@@ -87,10 +87,17 @@ class Logger:
         if 'smoothing' not in kwargs:
             kwargs['smoothing'] = 0. # disable smoothing by default; mean over entire life of pbar
         pbar = ir_datasets.lazy_libs.tqdm().tqdm(it, *args, **kwargs)
-        yield from pbar
-        if not quiet:
-            pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
-            self.log(level, '[finished] ' + str(pbar))
+        try:
+            yield from pbar
+        except:
+            if not quiet:
+                pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
+                self.log(level, '[error] ' + str(pbar))
+            raise
+        else:
+            if not quiet:
+                pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
+                self.log(level, '[finished] ' + str(pbar))
 
     @contextmanager
     def pbar_raw(self, *args, **kwargs):
@@ -114,18 +121,31 @@ class Logger:
         if 'smoothing' not in kwargs:
             kwargs['smoothing'] = 0. # disable smoothing by default; mean over entire life of pbar
         with ir_datasets.lazy_libs.tqdm().tqdm(*args, **kwargs) as pbar:
-            yield pbar
-            if not quiet:
-                pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
-                self.log(level, '[finished] ' + str(pbar))
+            try:
+                yield pbar
+            except:
+                if not quiet:
+                    pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
+                    self.log(level, '[error] ' + str(pbar))
+                raise
+            else:
+                if not quiet:
+                    pbar.bar_format = '{desc}: [{elapsed}] [{n_fmt}{unit}] [{rate_fmt}]'
+                    self.log(level, '[finished] ' + str(pbar))
 
     @contextmanager
     def duration(self, message, level='INFO'):
         t = time()
         self.logger().log(LOGGER_LEVELS[level], f'[starting] {message}')
-        yield
-        output_duration = format_interval(time() - t)
-        self.logger().log(LOGGER_LEVELS[level], f'[finished] {message} [{output_duration}]')
+        try:
+            yield
+        except:
+            output_duration = format_interval(time() - t)
+            self.logger().log(LOGGER_LEVELS[level], f'[error] {message} [{output_duration}]')
+            raise
+        else:
+            output_duration = format_interval(time() - t)
+            self.logger().log(LOGGER_LEVELS[level], f'[finished] {message} [{output_duration}]')
 
 
 def easy(name=None):

@@ -1,3 +1,5 @@
+import os
+import shutil
 from collections import namedtuple
 import unittest
 from ir_datasets.formats import TsvDocs, TsvQueries, TsvDocPairs
@@ -7,7 +9,7 @@ from ir_datasets.util import StringFile
 class TestTsv(unittest.TestCase):
 
     def test_core(self):
-        data_type = namedtuple('data_type', ['some_id', 'field1', 'field2'])
+        data_type = namedtuple('data_type', ['doc_id', 'field1', 'field2'])
         mock_file = StringFile('''
 123\tsome field\tanother field
 123\t  repeated  entry \tshouldn't filter
@@ -34,7 +36,7 @@ class TestTsv(unittest.TestCase):
 
 
     def test_too_many_columns(self):
-        data_type = namedtuple('data_type', ['some_id', 'field1', 'field2'])
+        data_type = namedtuple('data_type', ['doc_id', 'field1', 'field2'])
         mock_file = StringFile('''
 123\tsome field\tanother field
 123\trepeated entry\tshouldn't filter\ttoo many columns
@@ -56,7 +58,7 @@ class TestTsv(unittest.TestCase):
 
 
     def test_too_few_columns(self):
-        data_type = namedtuple('data_type', ['some_id', 'field1', 'field2'])
+        data_type = namedtuple('data_type', ['doc_id', 'field1', 'field2'])
         mock_file = StringFile('''
 123\tsome field\tanother field
 123\ttoo few fields
@@ -75,6 +77,10 @@ class TestTsv(unittest.TestCase):
         docpairs = TsvDocPairs(mock_file, data_type)
         with self.assertRaises(RuntimeError):
             list(docpairs.docpairs_iter())
+
+    def tearDown(self):
+        if os.path.exists('MOCK.pklz4'):
+            shutil.rmtree('MOCK.pklz4')
 
 
 if __name__ == '__main__':

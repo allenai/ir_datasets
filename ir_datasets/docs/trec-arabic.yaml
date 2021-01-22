@@ -1,10 +1,15 @@
 _:
+  pretty_name: 'TREC Arabic'
   desc: '
 <p>
 A collection of news articles in Arabic, used for multi-lingual evaluation in TREC 2001 and TREC
 2002.
 </p>
+<p>
+Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2001T55">LDC2001T55</a>.
+</p>
 '
+  docs_instructions: &inst "docs available from LDC"
   bibtex: |
     @misc{LDC2001T55,
       title={TREC Mandarin LDC2001T55},
@@ -22,6 +27,7 @@ Arabic benchmark from TREC 2001.
 <ul>
 <li><a href="https://trec.nist.gov/pubs/trec10/papers/clirtrack.pdf">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{gey2001arabic,
       title={The TREC-2001 Cross-Language Information Retrieval Track: Searching Arabic using English, French or Arabic Queries},
@@ -38,6 +44,7 @@ Arabic benchmark from TREC 2002.
 <ul>
 <li><a href="https://trec.nist.gov/pubs/trec11/papers/OVERVIEW.gey.ps.gz">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{gey2002arabic,
       title={The TREC-2002 Arabic/English CLIR Track},

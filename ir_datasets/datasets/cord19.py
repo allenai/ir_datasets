@@ -5,13 +5,14 @@ import contextlib
 import os
 import shutil
 import tarfile
-from collections import namedtuple, defaultdict
+from collections import defaultdict
+from typing import NamedTuple
 from pathlib import Path
 import ir_datasets
-from ir_datasets.wrappers import DocstoreWrapper
 from ir_datasets.util import Lazy, DownloadConfig
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.formats import BaseDocs, TrecXmlQueries, TrecQrels, GenericQuery, GenericQrel
+from ir_datasets.indices import PickleLz4FullStore
 
 
 NAME = 'cord19'
@@ -19,7 +20,14 @@ NAME = 'cord19'
 _logger = ir_datasets.log.easy()
 
 
-Cord19Doc = namedtuple('Cord19Doc', ['doc_id', 'title', 'doi', 'date', 'abstract', 'text'])
+class Cord19Doc(NamedTuple):
+    doc_id: str
+    title: str
+    doi: str
+    date: str
+    abstract: str
+    text: str
+
 
 QRELS_DEFS = {
     2: 'Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.',
@@ -41,6 +49,9 @@ class Cord19Docs(BaseDocs):
         return Cord19Doc
 
     def docs_iter(self):
+        return iter(self.docs_store())
+
+    def _docs_iter(self):
         if not os.path.exists(self._extr_path):
             try:
                 with self._streamer.stream() as stream:
@@ -93,20 +104,33 @@ class Cord19Docs(BaseDocs):
                 text = f'{title}\n\n{abstract}\n\n{body}'
                 yield Cord19Doc(did, title, doi, date, abstract, text)
 
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{self.docs_path()}.pklz4',
+            init_iter_fn=self._docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
+
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
+
 
 def _init():
     subsets = {}
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16')
-    # Because it's expensive to parse Cord19 docs, wrap it in DocstoreWrapper.
-    collection = DocstoreWrapper(collection)
 
     base = Dataset(collection, documentation('_'))
 
     subsets['trec-covid'] = Dataset(
-        TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}),
+        TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME),
         TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS),
         collection,
         documentation('trec-covid'))

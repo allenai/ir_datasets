@@ -1,0 +1,171 @@
+_:
+  pretty_name: 'ClueWeb09'
+  desc: '
+<p>
+ClueWeb 2009 web document collection. Contains over 1B web pages, in 10 languages.
+</p>
+<p>
+The dataset is obtained for a fee from CMU, and is shipped as hard drives. More information
+is provided <a href="https://lemurproject.org/clueweb09/">here</a>.
+</p>
+<ul>
+<li><a href="https://lemurproject.org/clueweb09/">Document collection site</a></li>
+</ul>
+'
+  docs_instructions: &inst "docs available from CMU"
+
+ar:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Arabic-language documents.
+</p>
+'
+  docs_instructions: *inst
+zh:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Chinese-language documents.
+</p>
+'
+  docs_instructions: *inst
+en:
+  desc: '
+<p>
+Subset of ClueWeb09 with only English-language documents.
+</p>
+'
+  docs_instructions: *inst
+fr:
+  desc: '
+<p>
+Subset of ClueWeb09 with only French-language documents.
+</p>
+'
+  docs_instructions: *inst
+de:
+  desc: '
+<p>
+Subset of ClueWeb09 with only German-language documents.
+</p>
+'
+  docs_instructions: *inst
+it:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Italian-language documents.
+</p>
+'
+  docs_instructions: *inst
+ja:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Japanese-language documents.
+</p>
+'
+  docs_instructions: *inst
+ko:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Korean-language documents.
+</p>
+'
+  docs_instructions: *inst
+pt:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Portuguese-language documents.
+</p>
+'
+  docs_instructions: *inst
+es:
+  desc: '
+<p>
+Subset of ClueWeb09 with only Spanish-language documents.
+</p>
+'
+  docs_instructions: *inst
+
+catb:
+  desc: '
+<p>
+Subset of ClueWeb09 with the first ~50 million English-language documents.
+Used as a smaller collection for TREC Web Track tasks.
+</p>
+'
+  docs_instructions: *inst
+
+trec-web-2009:
+  desc: '
+<p>
+The TREC Web Track 2009 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web09.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec18/papers/WEB09.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={Overview of the TREC 2009 Web Track},
+      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
+      booktitle={TREC},
+      year={2009}
+    }
+
+trec-web-2010:
+  desc: '
+<p>
+The TREC Web Track 2010 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web10.html">Shared task site</a></li>
+<li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2010TrecWeb,
+      title={Overview of the TREC 2010 Web Track},
+      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
+      booktitle={TREC},
+      year={2010}
+    }
+
+trec-web-2011:
+  desc: '
+<p>
+The TREC Web Track 2011 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec20/papers/WEB.OVERVIEW.pdf">Shared task site</a></li>
+<li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2011TrecWeb,
+      title={Overview of the TREC 2011 Web Track},
+      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
+      booktitle={TREC},
+      year={2011}
+    }
+
+trec-web-2012:
+  desc: '
+<p>
+The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web2012.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec21/papers/WEB12.overview.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2012TrecWeb,
+      title={Overview of the TREC 2012 Web Track},
+      author={Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
+      booktitle={TREC},
+      year={2012}
+    }

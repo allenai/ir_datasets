@@ -6,20 +6,39 @@ import gzip
 import xml.etree.ElementTree as ET
 from fnmatch import fnmatch
 from pathlib import Path
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
-from .base import GenericDoc, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
+from ir_datasets.indices import PickleLz4FullStore
+from .base import GenericDoc, GenericQuery, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
 
 
-TrecDoc = namedtuple('TrecDoc', ['doc_id', 'text', 'marked_up_doc'])
-TrecQuery = namedtuple('TrecQuery', ['query_id', 'title', 'description', 'narrative'])
-TrecQrel = namedtuple('TrecQrel', ['query_id', 'doc_id', 'relevance', 'iteration'])
+class TrecDoc(NamedTuple):
+    doc_id: str
+    text: str
+    marked_up_doc: str
+
+class TrecQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+    narrative: str
+
+class TrecSubtopic(NamedTuple):
+    number: str
+    text: str
+    type: str
+
+class TrecQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    iteration: str
 
 # Default content tags from Anserini's TrecCollection
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()
 
 class TrecDocs(BaseDocs):
-    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4'):
+    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None):
         self._docs_dlc = docs_dlc
         self._encoding = encoding
         self._path_globs = path_globs
@@ -32,19 +51,21 @@ class TrecDocs(BaseDocs):
             'BS4': TrecDoc,
             'text': GenericDoc,
         }[parser]
+        self._docs_namespace = namespace
 
     def docs_path(self):
         return self._docs_dlc.path()
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         if Path(self._docs_dlc.path()).is_dir():
             if self._path_globs:
                 for glob in sorted(self._path_globs):
-                    for path in Path(self._docs_dlc.path()).glob(glob):
+                    for path in sorted(Path(self._docs_dlc.path()).glob(glob)):
                         yield from self._docs_iter(path)
             else:
                 yield from self._docs_iter(self._docs_dlc.path())
-        elif Path(self._docs_dlc.path()).is_file():
+        else:
             if self._path_globs:
                 # tarfile, find globs, open in streaming mode (r|)
                 with self._docs_dlc.stream() as stream:
@@ -119,6 +140,20 @@ class TrecDocs(BaseDocs):
     def docs_cls(self):
         return self._doc
 
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{self.docs_path()}.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+        )
+
+    def docs_count(self):
+        return self.docs_store().count()
+
+    def docs_namespace(self):
+        return self._docs_namespace
 
 
 DEFAULT_QTYPE_MAP = {
@@ -128,11 +163,12 @@ DEFAULT_QTYPE_MAP = {
     '<narr> *(Narrative:)?': 'narrative'
 }
 class TrecQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, namespace=None):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or DEFAULT_QTYPE_MAP
         self._encoding = encoding
+        self._queries_namespace = namespace
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -160,13 +196,18 @@ class TrecQueries(BaseQueries):
     def queries_cls(self):
         return self._qtype
 
+    def queries_namespace(self):
+        return self._queries_namespace
+
 
 class TrecXmlQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, subtopics_key='subtopics', namespace=None):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or {f: f for f in qtype._fields}
         self._encoding = encoding
+        self._subtopics_key = subtopics_key
+        self._queries_namespace = namespace
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -176,16 +217,55 @@ class TrecXmlQueries(BaseQueries):
             f = codecs.getreader(self._encoding or 'utf8')(f)
             for topic_el in ET.fromstring(f.read()):
                 item = [None for _ in self._qtype._fields]
-                item[self._qtype._fields.index('query_id')] = topic_el.attrib['number']
+                if 'number' in topic_el.attrib:
+                    item[self._qtype._fields.index('query_id')] = topic_el.attrib['number']
+                subtopics = []
+                for attr in topic_el.attrib:
+                    if attr in self._qtype_map:
+                        text = topic_el.attrib[attr]
+                        field = self._qtype_map[attr]
+                        item[self._qtype._fields.index(field)] = text
                 for field_el in topic_el:
                     if field_el.tag in self._qtype_map:
                         text = ''.join(field_el.itertext())
                         field = self._qtype_map[field_el.tag]
                         item[self._qtype._fields.index(field)] = text
+                    if field_el.tag == 'subtopic':
+                        text = ''.join(field_el.itertext())
+                        subtopics.append(TrecSubtopic(field_el.attrib['number'], text, field_el.attrib['type']))
+                if self._subtopics_key in self._qtype._fields:
+                    item[self._qtype._fields.index('subtopics')] = tuple(subtopics)
                 yield self._qtype(*item)
 
     def queries_cls(self):
         return self._qtype
+
+    def queries_namespace(self):
+        return self._queries_namespace
+
+
+class TrecColonQueries(BaseQueries):
+    def __init__(self, queries_dlc, encoding=None, namespace=None):
+        self._queries_dlc = queries_dlc
+        self._encoding = encoding
+        self._queries_namespace = namespace
+
+    def queries_iter(self):
+        with self._queries_dlc.stream() as f:
+            f = codecs.getreader(self._encoding or 'utf8')(f)
+            for line in f:
+                query_id, text = line.split(':', 1)
+                text = text.rstrip('\n')
+                yield GenericQuery(query_id, text)
+
+    def queries_path(self):
+        return self._queries_dlc.path()
+
+    def queries_cls(self):
+        return GenericQuery
+
+    def queries_namespace(self):
+        return self._queries_namespace
 
 
 class TrecQrels(BaseQrels):

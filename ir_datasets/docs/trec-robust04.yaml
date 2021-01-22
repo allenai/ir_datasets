@@ -1,8 +1,14 @@
 _:
+  pretty_name: 'TREC Robust 2004'
   desc: '
 <p>
 The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by
 focusing on poorly performing topics."
+</p>
+<p>
+The TREC Robust document collection is from TREC disks 4 and 5. Due to the
+copyrighted nature of the  documents, this collection is for research use only, which requires
+agreements to be filed with NIST. See details <a href="https://trec.nist.gov/data/cd45/index.html">here</a>.
 </p>
 <ul>
 <li>Documents: News articles</li>
@@ -10,6 +16,7 @@ focusing on poorly performing topics."
 <li>Relevance: Deep judgments</li>
 <li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: &inst "docs available from NIST"
   bibtex: |
     @inproceedings{Voorhees2004OverviewRobust,
       title={Overview of the TREC 2004 Robust Retrieval Track},
@@ -21,19 +28,24 @@ focusing on poorly performing topics."
 fold1:
   desc: '
 <p>Fold 1 used in various works</p>'
+  docs_instructions: *inst
 
 fold2:
   desc: '
 <p>Fold 2 used in various works</p>'
+  docs_instructions: *inst
 
 fold3:
   desc: '
 <p>Fold 3 used in various works</p>'
+  docs_instructions: *inst
 
 fold4:
   desc: '
 <p>Fold 4 used in various works</p>'
+  docs_instructions: *inst
 
 fold5:
   desc: '
 <p>Fold 5 used in various works</p>'
+  docs_instructions: *inst

@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'CORD-19'
   desc: '
 <p>
 Collection of scientific articles related to COVID-19.

@@ -1,0 +1,56 @@
+# This workflow will install Python dependencies, and runs tests with a variety of Python versions
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: [3.6, 3.7, 3.8, 3.9]
+        os: ['ubuntu-latest', 'windows-latest', 'macOs-latest']
+        architecture: ['x64']
+
+    runs-on: ${{ matrix.os }}
+    steps:
+
+    - uses: actions/checkout@v2
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    - name: Install Python dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: install-windows
+      if: matrix.os == 'windows-latest'
+      run: |
+        python setup.py bdist
+        pip install --timeout=120 -vv .
+    - name: install-unix
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOs-latest'
+      run: |
+        python setup.py bdist
+        pip install --timeout=120 .
+    - name: Test-unix with pytest
+      if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOs-latest'
+      run: |
+        pip install pytest
+        pytest test/util.py test/integration/dummy.py test/integration/vaswani.py test/formats/
+    - name: Test-windows with pytest
+      if: matrix.os == 'windows-latest'
+      shell: cmd
+      run: |
+        pip install pytest
+        pytest test\util.py test\integration\dummy.py test\integration\vaswani.py test\formats\
+      env:
+        PATH: 'C:/Program Files/zlib/bin/'

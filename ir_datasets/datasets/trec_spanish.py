@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import GzipExtract, DownloadConfig
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries
@@ -7,10 +7,25 @@ from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 NAME = 'trec-spanish'
 
-TrecDescOnlyQuery = namedtuple('_TrecDescOnlyQuery', ['query_id', 'description'])
+class TrecDescOnlyQuery(NamedTuple):
+    query_id: str
+    description: str
 
-TrecSpanish3Query = namedtuple('TrecSpanish3Query', ['query_id', 'title_es', 'title_en', 'description_es', 'description_en', 'narrative_es', 'narrative_en'])
-TrecSpanish4Query = namedtuple('TrecSpanish4Query', ['query_id', 'description_es1', 'description_en1', 'description_es2', 'description_en2'])
+class TrecSpanish3Query(NamedTuple):
+    query_id: str
+    title_es: str
+    title_en: str
+    description_es: str
+    description_en: str
+    narrative_es: str
+    narrative_en: str
+
+class TrecSpanish4Query(NamedTuple):
+    query_id: str
+    description_es1: str
+    description_en1: str
+    description_es2: str
+    description_en2: str
 
 QREL_DEFS = {
     1: 'relevant',
@@ -65,22 +80,22 @@ class TrecSpanishTranslateQueries:
 
 def _init():
     subsets = {}
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'])
+    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'], namespace=NAME)
 
     base = Dataset(collection, documentation('_'))
 
     subsets['trec3'] = Dataset(
-        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec3/queries']), qtype_map=QTYPE_MAP_3, encoding='ISO-8859-1'), TrecSpanish3Query),
+        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec3/queries']), qtype_map=QTYPE_MAP_3, encoding='ISO-8859-1', namespace=NAME), TrecSpanish3Query),
         TrecQrels(GzipExtract(dlc['trec3/qrels']), QREL_DEFS),
         collection,
         documentation('trec3'))
 
     subsets['trec4'] = Dataset(
-        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec4/queries']), qtype=TrecDescOnlyQuery, qtype_map=QTYPE_MAP_4, encoding='ISO-8859-1'), TrecSpanish4Query),
+        TrecSpanishTranslateQueries(TrecQueries(GzipExtract(dlc['trec4/queries']), qtype=TrecDescOnlyQuery, qtype_map=QTYPE_MAP_4, encoding='ISO-8859-1', namespace=NAME), TrecSpanish4Query),
         TrecQrels(GzipExtract(dlc['trec4/qrels']), QREL_DEFS),
         collection,
         documentation('trec4'))

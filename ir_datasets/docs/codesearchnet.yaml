@@ -1,0 +1,48 @@
+_:
+  pretty_name: 'CodeSearchNet'
+  desc: '
+<p>
+A benchmark for semantic code search. Uses 
+</p>
+<ul>
+  <li>Documents: Code functions in python, java, go, php, ruby, and javascript</li>
+  <li>Queries: Inferred from docstrings, or </li>
+  <li><a href="https://arxiv.org/pdf/1909.09436.pdf">Dataset Paper</a></li>
+  <li><a href="https://wandb.ai/github/codesearchnet/benchmark/leaderboard">Challenge Task Leaderboard</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Husain2019CodeSearchNet,
+      title={CodeSearchNet Challenge: Evaluating the State of Semantic Code Search},
+      author={Hamel Husain and Ho-Hsiang Wu and Tiferet Gazit and Miltiadis Allamanis and Marc Brockschmidt},
+      journal={ArXiv},
+      year={2019}
+    }
+
+train:
+  desc: '
+<p>
+Official train set, using queries inferred from docstrings.
+</p>
+'
+
+valid:
+  desc: '
+<p>
+Official validation set, using queries inferred from docstrings.
+</p>
+'
+
+test:
+  desc: '
+<p>
+Official test set, using queries inferred from docstrings.
+</p>
+'
+
+challenge:
+  desc: '
+<p>
+Official challenge set, with keyword queries and deep relevance assessments.
+</p>
+'

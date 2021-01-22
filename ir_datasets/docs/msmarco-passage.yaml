@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'MSMARCO (passage)'
   desc: '
 <p>
 A passage ranking benchmark with a collection of 8.8 million passages and question queries. Most
@@ -33,6 +34,13 @@ for faster evaluation. The BM25 scores from scoreddocs are not available (all ha
 </p>
 '
 
+dev/small:
+  desc: '
+<p>
+Official "small" version of the dev set, consisting of 6,980 queries (6.9% of the full dev set).
+</p>
+'
+
 
 dev/judged:
   desc: '
@@ -52,6 +60,13 @@ Official eval set for submission to MS MARCO leaderboard. Relevance judgments ar
 scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note
 that these are sub-sampled to about 1/8 of the total avaialable eval queries by the MSMARCO authors
 for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0).
+</p>
+'
+
+eval/small:
+  desc: '
+<p>
+Official "small" version of the eval set, consisting of 6,837 queries (6.8% of the full eval set).
 </p>
 '
 

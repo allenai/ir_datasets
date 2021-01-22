@@ -7,9 +7,13 @@ _logger = ir_datasets.log.easy()
 
 
 class DatasetIntegrationTest(unittest.TestCase):
-    def _test_docs(self, dataset_name, count=None, items=None):
+    def _test_docs(self, dataset_name, count=None, items=None, test_docstore=True, test_iter_split=True):
+        orig_items = dict(items)
         with self.subTest('docs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -18,15 +22,36 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(doc, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
 
-            self.assertEqual(0, len(items))
+            self.assertEqual({}, items)
+
+        if test_iter_split:
+            with self.subTest('docs_iter split', dataset=dataset_name):
+                it = dataset.docs_iter()
+                with _logger.duration('doc lookups by index'):
+                    for idx, doc in orig_items.items():
+                        self._assert_namedtuple(next(it[idx:idx+1]), doc)
+                        self._assert_namedtuple(it[idx], doc)
+
+        if test_docstore:
+            with self.subTest('docs_store', dataset=dataset_name):
+                doc_store = dataset.docs_store()
+                with _logger.duration('doc lookups by doc_id'):
+                    for doc in orig_items.values():
+                        ret_doc = doc_store.get(doc.doc_id)
+                        self._assert_namedtuple(doc, ret_doc)
 
     def _test_queries(self, dataset_name, count=None, items=None):
         with self.subTest('queries', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -35,6 +60,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(query, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -43,7 +70,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_qrels(self, dataset_name, count=None, items=None):
         with self.subTest('qrels', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -52,6 +82,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(qrel, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -60,7 +92,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_scoreddocs(self, dataset_name, count=None, items=None):
         with self.subTest('scoreddocs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -69,6 +104,8 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(scoreddoc, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
@@ -77,7 +114,10 @@ class DatasetIntegrationTest(unittest.TestCase):
 
     def _test_docpairs(self, dataset_name, count=None, items=None):
         with self.subTest('docpairs', dataset=dataset_name):
-            dataset = ir_datasets.load(dataset_name)
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
             expected_count = count
             items = items or {}
             count = 0
@@ -86,29 +126,42 @@ class DatasetIntegrationTest(unittest.TestCase):
                 if i in items:
                     self._assert_namedtuple(docpair, items[i])
                     del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
 
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
 
             self.assertEqual(0, len(items))
 
-    def _build_test_docs(self, dataset_name):
+    def _build_test_docs(self, dataset_name, include_count=True):
         items = {}
         count = 0
-        for i, doc in enumerate(_logger.pbar(ir_datasets.load(dataset_name).docs_iter(), f'{dataset_name} docs')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs')):
             count += 1
             if i in (0, 9):
                 items[i] = doc
+            if not include_count and i == 1000:
+                break
         items[count-1] = doc
         items = {k: self._replace_regex_namedtuple(v) for k, v in items.items()}
+        count = f', count={count}' if include_count else ''
         _logger.info(f'''
-self._test_docs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
+self._test_docs({repr(dataset_name)}{count}, items={self._repr_namedtuples(items)})
 ''')
 
     def _build_test_queries(self, dataset_name):
         items = {}
         count = 0
-        for i, query in enumerate(_logger.pbar(ir_datasets.load(dataset_name).queries_iter(), f'{dataset_name} queries')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries')):
             count += 1
             if i in (0, 9):
                 items[i] = query
@@ -120,7 +173,11 @@ self._test_queries({repr(dataset_name)}, count={count}, items={self._repr_namedt
     def _build_test_qrels(self, dataset_name):
         items = {}
         count = 0
-        for i, qrel in enumerate(_logger.pbar(ir_datasets.load(dataset_name).qrels_iter(), f'{dataset_name} qrels')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels')):
             count += 1
             if i in (0, 9):
                 items[i] = qrel
@@ -132,7 +189,11 @@ self._test_qrels({repr(dataset_name)}, count={count}, items={self._repr_namedtup
     def _build_test_scoreddocs(self, dataset_name):
         items = {}
         count = 0
-        for i, scoreddoc in enumerate(_logger.pbar(ir_datasets.load(dataset_name).scoreddocs_iter(), f'{dataset_name} scoreddocs')):
+        if isinstance(dataset_name, str):
+            dataset = ir_datasets.load(dataset_name)
+        else:
+            dataset = dataset_name
+        for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs')):
             count += 1
             if i in (0, 9):
                 items[i] = scoreddoc
@@ -154,13 +215,15 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
 ''')
 
     def _assert_namedtuple(self, a, b):
+        # needed because python <= 3.6 doesn't expose re.Pattern class
+        Pattern = re.Pattern if hasattr(re, 'Pattern') else type(re.compile(''))
         self.assertEqual(type(a).__name__, type(b).__name__)
         self.assertEqual(type(a)._fields, type(b)._fields)
         for v_a, v_b in zip(a, b):
             # support compiled regex for matching (e.g., for long documents)
-            if isinstance(v_b, re.Pattern):
+            if isinstance(v_b, Pattern):
                 self.assertRegex(v_a, v_b)
-            elif isinstance(v_a, re.Pattern):
+            elif isinstance(v_a, Pattern):
                 self.assertRegex(v_b, v_a)
             else:
                 self.assertEqual(v_a, v_b)
@@ -172,6 +235,10 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
                 count = len(value) - maxlen
                 pattern = '^' + re.escape(value[:maxlen//2]) + (r'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + '$'
                 result.append(re.compile(pattern, re.DOTALL))
+            elif isinstance(value, bytes) and len(value) > maxlen:
+                count = len(value) - maxlen
+                pattern = b'^' + re.escape(value[:maxlen//2]) + (b'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + b'$'
+                result.append(re.compile(pattern, re.DOTALL))
             else:
                 result.append(value)
         return type(tup)(*result)
@@ -182,7 +249,10 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
             result += f'    {repr(key)}: {type(value).__name__}('
             for item in value:
                 if isinstance(item, re.Pattern):
-                    pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
+                    if isinstance(item.pattern, str):
+                        pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
+                    else:
+                        pattern = item.pattern.replace(b'\\ ', b' ').replace(b'\\\n', b'\n') # don't want these escaped
                     result += f're.compile({repr(pattern)}, flags={item.flags}), '
                 else:
                     result += f'{repr(item)}, '

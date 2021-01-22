@@ -1,13 +1,30 @@
 import hashlib
 import json
 import types
-from collections import namedtuple
+from typing import NamedTuple
 
-GenericDoc = namedtuple('GenericDoc', ['doc_id', 'text'])
-GenericQuery = namedtuple('GenericQuery', ['query_id', 'text'])
-GenericQrel = namedtuple('GenericQrel', ['query_id', 'doc_id', 'relevance'])
-GenericScoredDoc = namedtuple('GenericScoredDoc', ['query_id', 'doc_id', 'score'])
-GenericDocPair = namedtuple('GenericDocPair', ['query_id', 'doc_id_a', 'doc_id_b'])
+class GenericDoc(NamedTuple):
+    doc_id: str
+    text: str
+
+class GenericQuery(NamedTuple):
+    query_id: str
+    text: str
+
+class GenericQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+
+class GenericScoredDoc(NamedTuple):
+    query_id: str
+    doc_id: str
+    score: float
+
+class GenericDocPair(NamedTuple):
+    query_id: str
+    doc_id_a: str
+    doc_id_b: str
 
 
 class BaseDocs:
@@ -23,11 +40,18 @@ class BaseDocs:
     def docs_iter(self):
         raise NotImplementedError()
 
+    def docs_count(self):
+        raise NotImplementedError()
+
     def docs_handler(self):
         return self
 
     def docs_cls(self):
         return GenericDoc
+
+    def docs_namespace(self):
+        return None # No namespace defined
+
 
 class BaseQueries:
     PREFIX = 'queries_'
@@ -47,6 +71,9 @@ class BaseQueries:
 
     def queries_cls(self):
         return GenericQuery
+
+    def queries_namespace(self):
+        return None # No namespace defined
 
 
 class BaseQrels:

@@ -1,10 +1,15 @@
 _:
+  pretty_name: 'TREC Mandarin'
   desc: '
 <p>
 A collection of news articles in Mandarin Chinese, used for multi-lingual evaluation in TREC 5 and
 TREC 6.
 </p>
+<p>
+Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2000T52">LDC2000T52</a>.
+</p>
 '
+  docs_instructions: &inst "docs available from LDC"
   bibtex: |
     @misc{LDC2000T52,
       title={TREC Mandarin LDC2000T52},
@@ -23,6 +28,7 @@ Mandarin Chinese benchmark from TREC 5.
 <li><a href="https://trec.nist.gov/pubs/trec5/papers/multilingual_track.ps.gz">Task Overview Paper</a></li>
 </ul>
 '
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{harman1997chinese,
       title={Spanish and Chinese Document Retrieval in TREC􏰁􏰂-5},
@@ -39,9 +45,10 @@ Mandarin Chinese benchmark from TREC 6.
 <ul>
 <li><a href="https://trec.nist.gov/pubs/trec6/papers/csiro.chinese.ps.gz">Task Overview Paper</a></li>
 </ul>'
+  docs_instructions: *inst
   bibtex: |
     @inproceedings{wilkinson1998chinese,
-      title={Chinese Document Retrieval at TREC􏰁􏰏-6},
+      title={Chinese Document Retrieval at TREC-6},
       author={Ross Wilkinson},
       booktitle={TREC},
       year={1997}

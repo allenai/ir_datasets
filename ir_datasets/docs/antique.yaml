@@ -1,4 +1,5 @@
 _:
+  pretty_name: 'ANTIQUE'
   desc: '
 <p>
 "ANTIQUE is a non-factoid quesiton answering dataset based on the questions and answers of Yahoo!
@@ -48,7 +49,7 @@ Official test set of the ANTIQUE dataset.
 </p>'
 
 
-train/test/non-offensive:
+test/non-offensive:
   desc: '
 <p>
 <a class="ds-ref">antique/test</a> without a set of queries deemed by the authors of ANTIQUE to be

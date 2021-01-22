@@ -1,4 +1,4 @@
-from collections import namedtuple
+from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, Lazy
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
@@ -19,7 +19,11 @@ ORCAS_QLRES_DEFS = {
     1: "User click",
 }
 
-MsMarcoDocument = namedtuple('MsMarcoDocument', ['doc_id', 'url', 'title', 'body'])
+class MsMarcoDocument(NamedTuple):
+    doc_id: str
+    url: str
+    title: str
+    body: str
 
 
 # Use the TREC-formatted docs so we get all the available formatting (namely, line breaks)
@@ -27,19 +31,28 @@ class MsMarcoTrecDocs(TrecDocs):
     def __init__(self, docs_dlc):
         super().__init__(docs_dlc, parser='text')
 
+    @ir_datasets.util.use_docstore
     def docs_iter(self):
         for doc in super().docs_iter():
-            # The first two lines are the URL and page title
-            url, title, *body = doc.text.lstrip('\n').split('\n', 2)
-            body = body[0] if body else ''
-            yield MsMarcoDocument(doc.doc_id, url, title, body)
+            if isinstance(doc, MsMarcoDocument):
+                # It's coming from the docstore
+                yield doc
+            else:
+                # It's coming from the TredDocs parser... Do a little more reformatting:
+                # The first two lines are the URL and page title
+                url, title, *body = doc.text.lstrip('\n').split('\n', 2)
+                body = body[0] if body else ''
+                yield MsMarcoDocument(doc.doc_id, url, title, body)
 
     def docs_cls(self):
         return MsMarcoDocument
 
+    def docs_namespace(self):
+        return NAME
+
 
 def _init():
-    base_path = ir_datasets.util.cache_path()/'msmarco-document'
+    base_path = ir_datasets.util.home_path()/'msmarco-document'
     documentation = YamlDocumentation('docs/msmarco-document.yaml')
     dlc = DownloadConfig.context('msmarco-document', base_path, dua=DUA)
     subsets = {}
@@ -47,40 +60,40 @@ def _init():
 
     subsets['train'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['train/queries'])),
+        TsvQueries(GzipExtract(dlc['train/queries']), namespace='msmarco'),
         TrecQrels(GzipExtract(dlc['train/qrels']), QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['train/scoreddocs'])),
     )
 
     subsets['dev'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['dev/queries'])),
+        TsvQueries(GzipExtract(dlc['dev/queries']), namespace='msmarco'),
         TrecQrels(GzipExtract(dlc['dev/qrels']), QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['dev/scoreddocs'])),
     )
 
     subsets['eval'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['eval/queries'])),
+        TsvQueries(GzipExtract(dlc['eval/queries']), namespace='msmarco'),
         TrecScoredDocs(GzipExtract(dlc['eval/scoreddocs'])),
     )
 
     subsets['trec-dl-2019'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['trec-dl-2019/queries'])),
+        TsvQueries(GzipExtract(dlc['trec-dl-2019/queries']), namespace='msmarco'),
         TrecQrels(dlc['trec-dl-2019/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2019/scoreddocs'])),
     )
 
     subsets['trec-dl-2020'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries'])),
+        TsvQueries(GzipExtract(dlc['trec-dl-2020/queries']), namespace='msmarco'),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2020/scoreddocs'])),
     )
 
     subsets['orcas'] = Dataset(
         collection,
-        TsvQueries(GzipExtract(dlc['orcas/queries'])),
+        TsvQueries(GzipExtract(dlc['orcas/queries']), namespace='orcas'),
         TrecQrels(GzipExtract(dlc['orcas/qrels']), ORCAS_QLRES_DEFS),
         TrecScoredDocs(GzipExtract(dlc['orcas/scoreddocs'])),
     )

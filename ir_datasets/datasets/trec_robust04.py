@@ -29,13 +29,13 @@ FOLDS = {
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    base_path = ir_datasets.util.cache_path()/NAME
+    base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     subsets = {}
 
-    collection = TrecDocs(dlc['docs'], path_globs=['**/FBIS/FB*.gz', '**/FR94/*/FR*.gz', '**/FT/*/FT*.gz', '**/LATIMES/LA*.gz'])
+    collection = TrecDocs(dlc['docs'], path_globs=['**/FBIS/FB*.gz', '**/FR94/*/FR*.gz', '**/FT/*/FT*.gz', '**/LATIMES/LA*.gz'], namespace=NAME)
 
-    queries = TrecQueries(GzipExtract(dlc['queries']))
+    queries = TrecQueries(GzipExtract(dlc['queries']), namespace=NAME)
     qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
 
     base = Dataset(collection, queries, qrels, documentation('_'))

@@ -1,0 +1,193 @@
+_:
+  pretty_name: 'GOV2'
+  desc: '
+<p>
+GOV2 web document collection. Used for the TREC Terabyte Track.
+</p>
+<p>
+The dataset is obtained for a fee from UoG, and is shipped as a hard drive. More information
+is provided <a href="http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html">here</a>.
+</p>
+<ul>
+<li><a href="http://ir.dcs.gla.ac.uk/test_collections/gov2-summary.htm">Document collection site</a></li>
+</ul>
+'
+  docs_instructions: &inst "docs available from UoG"
+
+trec-tb-2004:
+  desc: '
+<p>
+The TREC Terabyte Track 2004 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte04.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec13/papers/TERA.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2004TrecTerabyte,
+      title={Overview of the TREC 2004 Terabyte Track},
+      author={Charles Clarke and Nick Craswell and Ian Soboroff},
+      booktitle={TREC},
+      year={2004}
+    }
+
+trec-tb-2005:
+  desc: '
+<p>
+The TREC Terabyte Track 2005 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2005 Terabyte Track},
+      author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
+      booktitle={TREC},
+      year={2005}
+    }
+
+trec-tb-2005/named-page:
+  desc: '
+<p>
+The TREC Terabyte Track 2005 named page ranking benchmark. Contains 252 queries with titles that
+resemble bookmark labels. Relevance judgments include near-duplicate pages and other pages that
+may satisfy the bookmark label.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2005 Terabyte Track},
+      author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
+      booktitle={TREC},
+      year={2005}
+    }
+
+trec-tb-2005/efficiency:
+  desc: '
+<p>
+The TREC Terabyte Track 2005 efficiency ranking benchmark. Contains 50,000 queries from a search engine,
+including the 50 topics from <a class="ds-ref">gov2/trec-tb-2005</a>. Only the 50 topics have judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2005 Terabyte Track},
+      author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
+      booktitle={TREC},
+      year={2005}
+    }
+
+trec-tb-2006:
+  desc: '
+<p>
+The TREC Terabyte Track 2006 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte06.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec15/papers/TERA06.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2006 Terabyte Track},
+      author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
+      booktitle={TREC},
+      year={2006}
+    }
+
+trec-tb-2006/named-page:
+  desc: '
+<p>
+The TREC Terabyte Track 2006 named page ranking benchmark. Contains 181 queries with titles that
+resemble bookmark labels. Relevance judgments include near-duplicate pages and other pages that
+may satisfy the bookmark label.</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte06.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec15/papers/TERA06.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2006 Terabyte Track},
+      author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
+      booktitle={TREC},
+      year={2006}
+    }
+
+trec-tb-2006/efficiency:
+  desc: '
+<p>
+The TREC Terabyte Track 2006 efficiency ranking benchmark. Contains 100,000 queries from a search engine,
+including the 50 topics from <a class="ds-ref">gov2/trec-tb-2006</a>. Only the 50 topics have judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Clarke2009TrecWeb,
+      title={The TREC 2006 Terabyte Track},
+      author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
+      booktitle={TREC},
+      year={2006}
+    }
+
+trec-tb-2006/efficiency/10k:
+  desc: '
+<p>
+Small stream from <a class="ds-ref">gov2/trec-tb-2006/efficiency</a>, with 10,000 queries.
+</p>
+'
+  docs_instructions: *inst
+
+trec-tb-2006/efficiency/stream1:
+  desc: '
+<p>
+Stream 1 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries).
+</p>
+'
+  docs_instructions: *inst
+
+trec-tb-2006/efficiency/stream2:
+  desc: '
+<p>
+Stream 2 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries).
+</p>
+'
+  docs_instructions: *inst
+
+trec-tb-2006/efficiency/stream3:
+  desc: '
+<p>
+Stream 3 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries).
+</p>
+'
+  docs_instructions: *inst
+
+trec-tb-2006/efficiency/stream4:
+  desc: '
+<p>
+Stream 4 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries).
+</p>
+'
+  docs_instructions: *inst
