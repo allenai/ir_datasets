@@ -165,16 +165,16 @@ class Download:
         Path(download_path).parent.mkdir(parents=True, exist_ok=True)
 
         for mirror in self.mirrors:
-            with util.finialized_file(download_path, 'wb') as f:
-                try:
+            try:
+                with util.finialized_file(download_path, 'wb') as f:
                     with mirror.stream() as stream:
                         stream = util.HashStream(stream, self.expected_md5, algo='md5')
                         shutil.copyfileobj(stream, f)
                         break
-                except Exception as e:
-                    errors.append((mirror, e))
-                    if not isinstance(mirror, LocalDownload):
-                        _logger.warn(f'Download failed: {e}')
+            except Exception as e:
+                errors.append((mirror, e))
+                if not isinstance(mirror, LocalDownload):
+                    _logger.warn(f'Download failed: {e}')
         else:
             if len(self.mirrors) == 1:
                 raise errors[0][1]
