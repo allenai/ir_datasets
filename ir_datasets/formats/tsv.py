@@ -133,7 +133,9 @@ class TsvDocs(_TsvBase, BaseDocs):
         return self._docs_namespace
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
+        return None
 
 
 class TsvQueries(_TsvBase, BaseQueries):
