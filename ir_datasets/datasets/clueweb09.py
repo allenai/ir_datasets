@@ -97,7 +97,11 @@ class ClueWeb09Docs(WarcDocs):
                 with open(counts_file, 'rt') as f:
                     for line in f:
                         file, count = line.strip().split()
-                        file = os.path.join(self.docs_dlc.path(), d, file[3:])
+                        # Fixing bug in record_counts: en0054 is under ClueWeb09_English_4, not _5
+                        if d == 'ClueWeb09_English_5' and 'en0054' in file:
+                            file = os.path.join(self.docs_dlc.path(), 'ClueWeb09_English_4', file[3:])
+                        else:
+                            file = os.path.join(self.docs_dlc.path(), d, file[3:])
                         result[file] = int(count)
             self._docs_warc_file_counts_cache = result
         return self._docs_warc_file_counts_cache

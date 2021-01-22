@@ -1,6 +1,8 @@
 import io
 import os
 import gzip
+import codecs
+from collections import Counter
 from contextlib import contextmanager, ExitStack
 from pathlib import Path
 from typing import NamedTuple
@@ -10,6 +12,9 @@ from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract
 from ir_datasets.formats import TrecQrels, TrecQueries, TrecColonQueries, BaseDocs, GenericQuery, BaseQrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import Docstore
+
+
+_logger = ir_datasets.log.easy()
 
 
 NAME = 'gov2'
@@ -42,10 +47,77 @@ class Gov2Doc(NamedTuple):
     body_content_type: str
 
 
+
+class Gov2DocIter:
+    def __init__(self, gov2_docs, slice):
+        self.gov2_docs = gov2_docs
+        self.slice = slice
+        self.next_index = 0
+        self.file_iter = gov2_docs._docs_iter_source_files()
+        self.current_file = None
+        self.current_file_start_idx = 0
+        self.current_file_end_idx = 0
+
+    def __next__(self):
+        if self.slice.start >= self.slice.stop:
+            raise StopIteration
+        while self.next_index != self.slice.start or self.current_file is None or self.current_file_end_idx <= self.slice.start:
+            if self.current_file is None or self.current_file_end_idx <= self.slice.start:
+                # First iteration or no docs remaining in this file
+                if self.current_file is not None:
+                    self.current_file.close()
+                    self.current_file = None
+                # jump ahead to the file that contains the desired index
+                first = True
+                while first or self.current_file_end_idx < self.slice.start:
+                    source_file = next(self.file_iter)
+                    self.next_index = self.current_file_end_idx
+                    self.current_file_start_idx = self.current_file_end_idx
+                    self.current_file_end_idx = self.current_file_start_idx + self.gov2_docs._docs_file_counts()[source_file]
+                    first = False
+                self.current_file = self.gov2_docs._docs_ctxt_iter_gov2(source_file)
+            else:
+                for _ in zip(range(self.slice.start - self.next_index), self.current_file):
+                    # The zip here will stop at after either as many docs we must advance, or however
+                    # many docs remain in the file. In the latter case, we'll just drop out into the
+                    # next iteration of the while loop and pick up the next file.
+                    self.next_index += 1
+        result = next(self.current_file)
+        self.next_index += 1
+        self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
+        return result
+
+    def close(self):
+        self.file_iter = None
+
+    def __iter__(self):
+        return self
+
+    def __del__(self):
+        self.close()
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            # it[start:stop:step]
+            new_slice = ir_datasets.util.apply_sub_slice(self.slice, key)
+            return Gov2DocIter(self.gov2_docs, new_slice)
+        elif isinstance(key, int):
+            # it[index]
+            new_slice = ir_datasets.util.slice_idx(self.slice, key)
+            new_it = Gov2DocIter(self.gov2_docs, new_slice)
+            try:
+                return next(new_it)
+            except StopIteration as e:
+                raise IndexError((self.slice, slice(key, key+1), new_slice))
+        raise TypeError('key must be int or slice')
+
+
 class Gov2Docs(BaseDocs):
-    def __init__(self, docs_dlc):
+    def __init__(self, docs_dlc, doccount_dlc):
         super().__init__()
         self.docs_dlc = docs_dlc
+        self._doccount_dlc = doccount_dlc
+        self._docs_file_counts_cache = None
 
     def docs_path(self):
         return self.docs_dlc.path()
@@ -54,34 +126,29 @@ class Gov2Docs(BaseDocs):
         dirs = sorted((Path(self.docs_dlc.path()) / 'GOV2_data').glob('GX???'))
         for source_dir in dirs:
             for source_file in sorted(source_dir.glob('*.gz')):
-                yield source_file
+                yield str(source_file)
 
     def docs_iter(self):
-        for source_file in self._docs_iter_source_files():
-            with self._docs_ctxt_iter_gov2(source_file) as doc_iter:
-                yield from doc_iter
+        total_count = sum(self._docs_file_counts().values())
+        return Gov2DocIter(self, slice(0, total_count))
 
     def docs_cls(self):
         return Gov2Doc
 
-    @contextmanager
     def _docs_ctxt_iter_gov2(self, gov2f):
-        with ExitStack() as stack:
-            if isinstance(gov2f, (str, Path)):
-                gov2f = stack.enter_context(gzip.open(gov2f, 'rb'))
-            def it():
+        if isinstance(gov2f, (str, Path)):
+            gov2f = gzip.open(gov2f, 'rb')
+        doc = None
+        for line in gov2f:
+            if line == b'<DOC>\n':
+                assert doc is None
+                doc = line
+            elif line == b'</DOC>\n':
+                doc += line
+                yield self._process_gov2_doc(doc)
                 doc = None
-                for line in gov2f:
-                    if line == b'<DOC>\n':
-                        assert doc is None
-                        doc = line
-                    elif line == b'</DOC>\n':
-                        doc += line
-                        yield self._process_gov2_doc(doc)
-                        doc = None
-                    elif doc is not None:
-                        doc += line
-            yield it()
+            elif doc is not None:
+                doc += line
 
     def _process_gov2_doc(self, raw_doc):
         state = 'DOCNO'
@@ -125,6 +192,18 @@ class Gov2Docs(BaseDocs):
         source_file = os.path.join(self.docs_dlc.path(), 'GOV2_data', s_dir, f'{file}.gz')
         return source_file
 
+    def _docs_file_counts(self):
+        if self._docs_file_counts_cache is None:
+            result = {}
+            with self._doccount_dlc.stream() as f:
+                f = codecs.getreader('utf8')(f)
+                for line in f:
+                    path, count = line.strip().split()
+                    file = os.path.join(self.docs_dlc.path(), 'GOV2_data', path)
+                    result[file] = int(count)
+            self._docs_file_counts_cache = result
+        return self._docs_file_counts_cache
+
     def docs_store(self):
         docstore = Gov2Docstore(self)
         return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path()}.cache')
@@ -146,13 +225,12 @@ class Gov2Docstore(Docstore):
                 files_to_search[source_file].append(doc_id)
         for source_file, doc_ids in files_to_search.items():
             doc_ids = sorted(doc_ids)
-            with self.gov2_docs._docs_ctxt_iter_gov2(source_file) as doc_it:
-                for doc in doc_it:
-                    if doc_ids[0] == doc.doc_id:
-                        yield doc
-                        doc_ids = doc_ids[1:]
-                        if not doc_ids:
-                            break # file finished
+            for doc in self.gov2_docs._docs_ctxt_iter_gov2(source_file):
+                if doc_ids[0] == doc.doc_id:
+                    yield doc
+                    doc_ids = doc_ids[1:]
+                    if not doc_ids:
+                        break # file finished
 
 
 class RewriteQids(BaseQrels):
@@ -177,6 +255,33 @@ class RewriteQids(BaseQrels):
         return self._base_qrels.qrels_cls()
 
 
+class Gov2DocCountFile:
+    def __init__(self, path, docs_dlc):
+        self._path = path
+        self._docs_dlc = docs_dlc
+
+    def path(self):
+        if not os.path.exists(self._path):
+            docs_urls_path = os.path.join(self._docs_dlc.path(), 'GOV2_extras/url2id.gz')
+            result = Counter()
+            with _logger.pbar_raw(desc='building doccounts file', total=25205179) as pbar:
+                with gzip.open(docs_urls_path, 'rt') as fin:
+                    for line in fin:
+                        url, doc_id = line.rstrip().split()
+                        d, f, i = doc_id.split('-') # formatted like: GX024-52-0546388
+                        file = f'{d}/{f}.gz'
+                        result[file] += 1
+                        pbar.update()
+                with ir_datasets.util.finialized_file(self._path, 'wt') as fout:
+                    for file in sorted(result):
+                        fout.write(f'{file}\t{result[file]}\n')
+        return self._path
+
+    @contextmanager
+    def stream(self):
+        with open(self.path(), 'rb') as f:
+            yield f
+
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.home_path()/NAME
@@ -184,7 +289,8 @@ def _init():
     subsets = {}
 
     docs_dlc = dlc['docs']
-    collection = Gov2Docs(docs_dlc)
+    doccount_dlc = Gov2DocCountFile(os.path.join(base_path, 'corpus.doccounts'), docs_dlc)
+    collection = Gov2Docs(docs_dlc, doccount_dlc)
     base = Dataset(collection, documentation('_'))
 
     subsets['trec-tb-2004'] = Dataset(

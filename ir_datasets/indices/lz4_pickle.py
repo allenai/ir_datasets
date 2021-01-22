@@ -81,7 +81,7 @@ class Lz4PickleIter:
             return Lz4PickleIter(self.lookup, new_slice)
         elif isinstance(key, int):
             # it[index]
-            new_slice = ir_datasets.util.apply_sub_slice(self.slice, slice(key, key+1))
+            new_slice = ir_datasets.util.slice_idx(self.slice, key)
             new_it = Lz4PickleIter(self.lookup, new_slice)
             try:
                 return next(new_it)

@@ -171,8 +171,8 @@ class WarcIter:
     def __next__(self):
         if self.slice.start >= self.slice.stop:
             raise StopIteration
-        while self.next_index != self.slice.start or self.current_file is None:
-            if self.current_file is None or self.current_file_end_idx < self.slice.start:
+        while self.next_index != self.slice.start or self.current_file is None or self.current_file_end_idx <= self.slice.start:
+            if self.current_file is None or self.current_file_end_idx <= self.slice.start:
                 # First iteration or no docs remaining in this file
                 if self.current_file is not None:
                     self.current_file.close()
@@ -205,7 +205,6 @@ class WarcIter:
                 self.next_index = self.current_file_start_idx + doc_idx
             else:
                 # No checkpoint file available or as far as we can get with checkpoint; do slow read ahead
-                # import pdb; pdb.set_trace()
                 for _ in zip(range(self.slice.start - self.next_index), self.current_file):
                     # The zip here will stop at after either as many docs we must advance, or however
                     # many docs remain in the file. In the latter case, we'll just drop out into the
@@ -241,7 +240,7 @@ class WarcIter:
             return WarcIter(self.warc_docs, new_slice)
         elif isinstance(key, int):
             # it[index]
-            new_slice = ir_datasets.util.apply_sub_slice(self.slice, slice(key, key+1))
+            new_slice = ir_datasets.util.slice_idx(self.slice, key)
             new_it = WarcIter(self.warc_docs, new_slice)
             try:
                 return next(new_it)

@@ -115,6 +115,13 @@ def apply_sub_slice(orig_slice: slice, new_slice: slice):
         step = orig_slice.step
     return slice(start, stop, step)
 
+def slice_idx(orig_slice: slice, index: int):
+    if index >= 0:
+        index = orig_slice.start + index
+    else:
+        index = orig_slice.stop + index
+    return slice(index, min(index + 1, orig_slice.stop))
+
 
 class DocstoreSplitter:
     def __init__(self, it, docs_store):

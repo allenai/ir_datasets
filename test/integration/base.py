@@ -28,7 +28,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             if expected_count is not None:
                 self.assertEqual(expected_count, count)
 
-            self.assertEqual(0, len(items))
+            self.assertEqual({}, items)
 
         if test_iter_split:
             with self.subTest('docs_iter split', dataset=dataset_name):
