@@ -67,6 +67,7 @@ class Cache:
                 try:
                     with self._streamer.stream() as stream:
                         shutil.copyfileobj(stream, f)
+                    f.close() # close file before move... Needed because of Windows
                     shutil.move(f.name, self._path)
                 finally:
                     if Path(f.name).exists():
