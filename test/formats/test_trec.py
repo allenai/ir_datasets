@@ -1,3 +1,5 @@
+import os
+import shutil
 import unittest
 from ir_datasets.formats import TrecQrel, TrecQrels, TrecQuery, TrecQueries, TrecDoc, TrecDocs
 from ir_datasets.util import StringFile
@@ -125,6 +127,9 @@ More body text
         self.assertEqual(docs.docs_path(), 'MOCK')
         self.assertEqual(list(docs.docs_iter()), expected_results)
 
+    def tearDown(self):
+        if os.path.exists('MOCK.pklz4'):
+            shutil.rmtree('MOCK.pklz4')
 
 if __name__ == '__main__':
     unittest.main()

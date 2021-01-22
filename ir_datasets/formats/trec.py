@@ -65,7 +65,7 @@ class TrecDocs(BaseDocs):
                         yield from self._docs_iter(path)
             else:
                 yield from self._docs_iter(self._docs_dlc.path())
-        elif Path(self._docs_dlc.path()).is_file():
+        else:
             if self._path_globs:
                 # tarfile, find globs, open in streaming mode (r|)
                 with self._docs_dlc.stream() as stream:
