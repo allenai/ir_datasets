@@ -15,7 +15,7 @@ jobs:
       fail-fast: false
       matrix:
         python-version: [3.5, 3.6, 3.7, 3.8, 3.9]
-        os: ['ubuntu-latest', 'windows-latest', 'macOs-latest']
+        os: ['ubuntu-latest', 'macOs-latest']
         architecture: ['x64']
 
     runs-on: ${{ matrix.os }}
