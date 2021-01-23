@@ -1,0 +1,53 @@
+_:
+  pretty_name: 'Highwire (TREC Genomics 06-07)'
+  desc: '
+<p>
+Medical document collection from <a href="https://www.highwirepress.com/">Highwire Press</a>.
+Includes 162,259 scientific articles from 49 journals.
+</p>
+<p>
+This dataset is used for the TREC 2006-07 TREC Genomics track.
+</p>
+<p>
+Note that these documents are split into passages based on paragraph tags in the HTML.
+</p>
+<ul>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html#docs">Information about document collection</a></li>
+</ul>
+'
+
+trec-genomics-2006:
+  desc: '
+<p>
+The TREC Genomics Track 2006 benchmark. Contains 28 queries with passage-level relevance judgments.
+</p>
+<ul>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html">Shared task data site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec15/papers/GEO06.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Hersh2006TrecGenomics,
+      title={TREC 2006 Genomics Track Overview},
+      author={William Hersh and Aaron M. Cohen and Phoebe Roberts and Hari Krishna Rekapalli},
+      booktitle={TREC},
+      year={2006}
+    }
+
+trec-genomics-2007:
+  desc: '
+<p>
+The TREC Genomics Track 2007 benchmark. Contains 36 queries with passage-level relevance judgments.
+</p>
+<ul>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2007data.html">Shared task data site</a></li>
+<li><a href="https://dmice.ohsu.edu/hersh/trec-07-genomics.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Hersh2007TrecGenomics,
+      title={TREC 2007 Genomics Track Overview},
+      author={William Hersh and Aaron Cohen and Lynn Ruslen and Phoebe Roberts},
+      booktitle={TREC},
+      year={2007}
+    }
