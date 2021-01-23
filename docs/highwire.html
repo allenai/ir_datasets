@@ -27,7 +27,7 @@
 <h3><kbd class="select"><span class="str">"highwire"</kdb></h3>
 
 <div class="desc">
- <p> Medical document collection from <a href="https://www.highwirepress.com/">Highwire Press</a>. Includes 162,259 scientific articles from 49 journals. </p> <p> This dataset is used for the TREC 2006-07 TREC Genomics track. </p> <p> Note that these documents are split into passages based on paragraph tags in the HTML. </p> <ul> <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html#docs">Information about document collection</a></li> </ul> 
+ <p> Medical document collection from <a href="https://www.highwirepress.com/">Highwire Press</a>. Includes 162,259 scientific articles from 49 journals. </p> <p> This dataset is used for the TREC 2006-07 TREC Genomics track. </p> <p> Note that these documents are split into passages based on paragraph tags in the HTML. </p> <ul> <li>Documents: Biomedical journal articles</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html#docs">Information about document collection</a></li> </ul> 
 </div>
 <div class="tabs">
 <a class="tab" target="highwire__docs">docs</a>
@@ -36,7 +36,7 @@
 <div class="type">
 <div class="type-name">HighwireDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">journal</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
 <div class="type-name">HighwireSpan: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
 <li data-tuple-idx="0"><span class="">start</span>: <span class="kwd">int</span></li><li data-tuple-idx="1"><span class="">length</span>: <span class="kwd">int</span></li><li data-tuple-idx="2"><span class="">text</span>: <span class="kwd">str</span></li>
@@ -49,7 +49,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'highwire')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, spans&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, journal, title, spans&gt;</span></div>
 </code>
 </div>
 </div>
@@ -60,7 +60,7 @@
 <h3><kbd class="ds-name select"><span class="str">"highwire/trec-genomics-2006"</kdb></h3>
 
 <div class="desc">
- <p> The TREC Genomics Track 2006 benchmark. Contains 28 queries with passage-level relevance judgments. </p> <ul> <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html">Shared task data site</a></li> <li><a href="https://trec.nist.gov/pubs/trec15/papers/GEO06.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+ <p> The TREC Genomics Track 2006 benchmark. Contains 28 queries with passage-level relevance judgments. </p> <ul> <li>Documents: Biomedical journal articles</li> <li>Queries: Natural language questions</li> <li>Qrels: deep, by passage</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html">Shared task data site</a></li> <li><a href="https://trec.nist.gov/pubs/trec15/papers/GEO06.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
 </div>
 <div class="tabs">
 <a class="tab" target="highwire/trec-genomics-2006__queries">queries</a>
@@ -87,7 +87,7 @@
 <div class="type">
 <div class="type-name">HighwireDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">journal</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
 <div class="type-name">HighwireSpan: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
 <li data-tuple-idx="0"><span class="">start</span>: <span class="kwd">int</span></li><li data-tuple-idx="1"><span class="">length</span>: <span class="kwd">int</span></li><li data-tuple-idx="2"><span class="">text</span>: <span class="kwd">str</span></li>
@@ -100,7 +100,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'highwire/trec-genomics-2006')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, spans&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, journal, title, spans&gt;</span></div>
 </code>
 </div>
 
@@ -150,7 +150,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"highwire/trec-genomics-2007"</kdb></h3>
 
 <div class="desc">
- <p> The TREC Genomics Track 2007 benchmark. Contains 36 queries with passage-level relevance judgments. </p> <ul> <li><a href="https://dmice.ohsu.edu/trec-gen/2007data.html">Shared task data site</a></li> <li><a href="https://dmice.ohsu.edu/hersh/trec-07-genomics.pdf">Shared task paper</a></li> </ul> 
+ <p> The TREC Genomics Track 2007 benchmark. Contains 36 queries with passage-level relevance judgments. </p> <ul> <li>Documents: Biomedical journal articles</li> <li>Queries: Natural language questions</li> <li>Qrels: deep, by passage</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2007data.html">Shared task data site</a></li> <li><a href="https://dmice.ohsu.edu/hersh/trec-07-genomics.pdf">Shared task paper</a></li> </ul> 
 </div>
 <div class="tabs">
 <a class="tab" target="highwire/trec-genomics-2007__queries">queries</a>
@@ -177,7 +177,7 @@ bibtex:
 <div class="type">
 <div class="type-name">HighwireDoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">journal</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">spans</span>: <span class="kwd">Tuple</span>[<div class="type">
 <div class="type-name">HighwireSpan: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
 <li data-tuple-idx="0"><span class="">start</span>: <span class="kwd">int</span></li><li data-tuple-idx="1"><span class="">length</span>: <span class="kwd">int</span></li><li data-tuple-idx="2"><span class="">text</span>: <span class="kwd">str</span></li>
@@ -190,7 +190,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'highwire/trec-genomics-2007')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, spans&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, journal, title, spans&gt;</span></div>
 </code>
 </div>
 

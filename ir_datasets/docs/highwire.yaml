@@ -12,6 +12,7 @@ This dataset is used for the TREC 2006-07 TREC Genomics track.
 Note that these documents are split into passages based on paragraph tags in the HTML.
 </p>
 <ul>
+<li>Documents: Biomedical journal articles</li>
 <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html#docs">Information about document collection</a></li>
 </ul>
 '
@@ -22,6 +23,9 @@ trec-genomics-2006:
 The TREC Genomics Track 2006 benchmark. Contains 28 queries with passage-level relevance judgments.
 </p>
 <ul>
+<li>Documents: Biomedical journal articles</li>
+<li>Queries: Natural language questions</li>
+<li>Qrels: deep, by passage</li>
 <li><a href="https://dmice.ohsu.edu/trec-gen/2006data.html">Shared task data site</a></li>
 <li><a href="https://trec.nist.gov/pubs/trec15/papers/GEO06.OVERVIEW.pdf">Shared task paper</a></li>
 </ul>
@@ -40,6 +44,9 @@ trec-genomics-2007:
 The TREC Genomics Track 2007 benchmark. Contains 36 queries with passage-level relevance judgments.
 </p>
 <ul>
+<li>Documents: Biomedical journal articles</li>
+<li>Queries: Natural language questions</li>
+<li>Qrels: deep, by passage</li>
 <li><a href="https://dmice.ohsu.edu/trec-gen/2007data.html">Shared task data site</a></li>
 <li><a href="https://dmice.ohsu.edu/hersh/trec-07-genomics.pdf">Shared task paper</a></li>
 </ul>
