@@ -254,6 +254,266 @@ Should contain GOV2_data'
     cache_path: 'trec-tb-2006/efficiency/queries.tar.gz'
 
 
+highwire:
+  ajepidem:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajepidem.zip'
+    expected_md5: 'd7db27233b28245724f3212a5b3cd659'
+    cache_path: 'corpus/ajepidem.zip'
+  ajpcell:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpcell.zip'
+    expected_md5: '5d5cdc8e6cdaeeb924bc5af603e4478e'
+    cache_path: 'corpus/ajpcell.zip'
+  ajpendometa:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpendometa.zip'
+    expected_md5: '2ce8f78e813e60e424136f010f9e0af0'
+    cache_path: 'corpus/ajpendometa.zip'
+  ajpgastro:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpgastro.zip'
+    expected_md5: '0fe9e5091ac4f3adcc2325ed6d881964'
+    cache_path: 'corpus/ajpgastro.zip'
+  ajpheart:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpheart.zip'
+    expected_md5: '4152b0904cc66e95f953a5c097d7ad77'
+    cache_path: 'corpus/ajpheart.zip'
+  ajplung:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajplung.zip'
+    expected_md5: 'ca5a42357e4d8413ac32ffc21cc7a25f'
+    cache_path: 'corpus/ajplung.zip'
+  ajprenal:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajprenal.zip'
+    expected_md5: '6c21485c1858eda002766ec364af576a'
+    cache_path: 'corpus/ajprenal.zip'
+  alcohol:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/alcohol.zip'
+    expected_md5: 'ca34997e36b919e64b99e12606c511cc'
+    cache_path: 'corpus/alcohol.zip'
+  andrology:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/andrology.zip'
+    expected_md5: 'd715933ff1c96689e9647bbecdaaf599'
+    cache_path: 'corpus/andrology.zip'
+  annonc:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/annonc.zip'
+    expected_md5: '32234a3d00ea71b923006dd1f90c2dd5'
+    cache_path: 'corpus/annonc.zip'
+  bjanast:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/bjanast.zip'
+    expected_md5: '5a9c47c19d6bd33b8e30c27be9e41d25'
+    cache_path: 'corpus/bjanast.zip'
+  bjp:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/bjp.zip'
+    expected_md5: '93707a10817b15773e67bf1a2d3b2e24'
+    cache_path: 'corpus/bjp.zip'
+  blood:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/blood.zip'
+    expected_md5: '2216234fc6d66445026cc38c9c714855'
+    cache_path: 'corpus/blood.zip'
+  carcinogenesis:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/carcinogenesis.zip'
+    expected_md5: '7f4d797e2b779c9490eb9e523ebf628f'
+    cache_path: 'corpus/carcinogenesis.zip'
+  cercor:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/cercor.zip'
+    expected_md5: '60cfd9eebf42e1602cd69805de409e04'
+    cache_path: 'corpus/cercor.zip'
+  development:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/development.zip'
+    expected_md5: 'f71ca283a55848a51a53c73a5af7db3c'
+    cache_path: 'corpus/development.zip'
+  diabetes:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/diabetes.zip'
+    expected_md5: 'e6fcc28d779833b5b07fc8f2d2b4077e'
+    cache_path: 'corpus/diabetes.zip'
+  endocrinology:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/endocrinology.zip'
+    expected_md5: '85cf5f2870ccf333114e59ce1ab4d1db'
+    cache_path: 'corpus/endocrinology.zip'
+  euroheartj:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/euroheartj.zip'
+    expected_md5: '099dd344c7a98e3b6d3dbed2cdb17fb7'
+    cache_path: 'corpus/euroheartj.zip'
+  glycobiology:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/glycobiology.zip'
+    expected_md5: '4e390a903cbf2381c2eb530a3e7b3b68'
+    cache_path: 'corpus/glycobiology.zip'
+  humanrep:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/humanrep.zip'
+    expected_md5: 'b30e1d36c8c551f33c0a8cf4cc09dfce'
+    cache_path: 'corpus/humanrep.zip'
+  humolgen:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/humolgen.zip'
+    expected_md5: '81ae00345d24ec20a542e9c151181c93'
+    cache_path: 'corpus/humolgen.zip'
+  ijepidem:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/ijepidem.zip'
+    expected_md5: 'd9e1ea6aaabcc04fb57f26a756a49b40'
+    cache_path: 'corpus/ijepidem.zip'
+  intimm:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/intimm.zip'
+    expected_md5: '17ebda5809cd22a23ac92310a103fb9c'
+    cache_path: 'corpus/intimm.zip'
+  jantichemo:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jantichemo.zip'
+    expected_md5: 'e8b6088e655078ff40647af9a3cbd30f'
+    cache_path: 'corpus/jantichemo.zip'
+  jappliedphysio:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jappliedphysio.zip'
+    expected_md5: '7a5406c65b0385a5cc493fede1424b27'
+    cache_path: 'corpus/jappliedphysio.zip'
+  jbc-1995:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1995.zip'
+    expected_md5: '690f25229a7040627d32be56bdcf4556'
+    cache_path: 'corpus/jbc-1995.zip'
+  jbc-1996:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1996.zip'
+    expected_md5: '646a254c22f40861966fccacea0b1b5b'
+    cache_path: 'corpus/jbc-1996.zip'
+  jbc-1997:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1997.zip'
+    expected_md5: '5dfb2a85548e3da5305bd5d7e051c2fa'
+    cache_path: 'corpus/jbc-1997.zip'
+  jbc-1998:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1998.zip'
+    expected_md5: '43cc8a9797700d99d17cd14596a08028'
+    cache_path: 'corpus/jbc-1998.zip'
+  jbc-1999:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1999.zip'
+    expected_md5: 'd5972b628653f5719a7ca3d04d238c10'
+    cache_path: 'corpus/jbc-1999.zip'
+  jbc-2000:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2000.zip'
+    expected_md5: 'd00f5eb17beb680752fa1711c6fe2cb8'
+    cache_path: 'corpus/jbc-2000.zip'
+  jbc-2001:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2001.zip'
+    expected_md5: 'a8e8e08a530754a5c2de9197c1d4259c'
+    cache_path: 'corpus/jbc-2001.zip'
+  jbc-2002:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2002.zip'
+    expected_md5: '93e8ae6565afc20affcf785fb6a34646'
+    cache_path: 'corpus/jbc-2002.zip'
+  jbc-2003:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2003.zip'
+    expected_md5: '7ddf90fede68fc0a94a674557e457063'
+    cache_path: 'corpus/jbc-2003.zip'
+  jbc-2004:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2004.zip'
+    expected_md5: 'd50a6264161f1aed2545737ace31ad32'
+    cache_path: 'corpus/jbc-2004.zip'
+  jbc-2005:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2005.zip'
+    expected_md5: '4bac0f72d3845b6266a5bdf448d215b4'
+    cache_path: 'corpus/jbc-2005.zip'
+  jcb:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jcb.zip'
+    expected_md5: 'dba03aa0b7c8e1b72817afc880f5ff6c'
+    cache_path: 'corpus/jcb.zip'
+  jclinicalendometa:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jclinicalendometa.zip'
+    expected_md5: 'fdc5a8b41be0b58beabc822dc28660e2'
+    cache_path: 'corpus/jclinicalendometa.zip'
+  jcs:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jcs.zip'
+    expected_md5: 'cd506b2d653c41916450f7f46a78d402'
+    cache_path: 'corpus/jcs.zip'
+  jexpbio:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jexpbio.zip'
+    expected_md5: '2072dad39b3fcdc58cb5a522c35f1b59'
+    cache_path: 'corpus/jexpbio.zip'
+  jexpmed:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jexpmed.zip'
+    expected_md5: '6a6b6fd5d883c99be91d84e8663b6293'
+    cache_path: 'corpus/jexpmed.zip'
+  jgenphysio:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jgenphysio.zip'
+    expected_md5: '4cb4bbb2c979e992e2668c0a6585d9b4'
+    cache_path: 'corpus/jgenphysio.zip'
+  jgenviro:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jgenviro.zip'
+    expected_md5: 'ba0fa54e2b8e7101c2c5008cb89f4c47'
+    cache_path: 'corpus/jgenviro.zip'
+  jhistocyto:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jhistocyto.zip'
+    expected_md5: 'def37c9b86e4ddbffd6a845c642ef009'
+    cache_path: 'corpus/jhistocyto.zip'
+  jnci:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jnci.zip'
+    expected_md5: '649621e050ab0f0e73eb626002cf2a91'
+    cache_path: 'corpus/jnci.zip'
+  jneuro:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/jneuro.zip'
+    expected_md5: 'cfd69effb5d2e0eb845173095e21888c'
+    cache_path: 'corpus/jneuro.zip'
+  mcp:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/mcp.zip'
+    expected_md5: '198e85d2c65d3c3964195e955660409d'
+    cache_path: 'corpus/mcp.zip'
+  microbio:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/microbio.zip'
+    expected_md5: '06840bddca76f1c7d8644ca989189368'
+    cache_path: 'corpus/microbio.zip'
+  molbiolevol:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/molbiolevol.zip'
+    expected_md5: '8b1eb9eceaea7da237f177d235a058a5'
+    cache_path: 'corpus/molbiolevol.zip'
+  molendo:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/molendo.zip'
+    expected_md5: 'a2f55efa0e3bffe5d736316585540b62'
+    cache_path: 'corpus/molendo.zip'
+  molhumanrep:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/molhumanrep.zip'
+    expected_md5: '125a49b8f11ad1a78eda3ce03f867ef4'
+    cache_path: 'corpus/molhumanrep.zip'
+  nar:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/nar.zip'
+    expected_md5: '63c34a05440cd0259b06aef3edb22ea3'
+    cache_path: 'corpus/nar.zip'
+  nephrodiatransp:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/nephrodiatransp.zip'
+    expected_md5: '914e51d8ac94e85d2bbdc8afb9206731'
+    cache_path: 'corpus/nephrodiatransp.zip'
+  peds:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/peds.zip'
+    expected_md5: 'db8266c186e902715beb511f12bcd16a'
+    cache_path: 'corpus/peds.zip'
+  physiogenomics:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/physiogenomics.zip'
+    expected_md5: 'eeda5cc0b14ad36402cdc6ffd964e3c1'
+    cache_path: 'corpus/physiogenomics.zip'
+  rheumatolgy:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/rheumatolgy.zip'
+    expected_md5: '3e840dfb598dbefe630cdb1b412f3c57'
+    cache_path: 'corpus/rheumatolgy.zip'
+  rna:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/rna.zip'
+    expected_md5: 'f48dd7fe09ae06609d6a8dc5e77aae2f'
+    cache_path: 'corpus/rna.zip'
+  toxsci:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/toxsci.zip'
+    expected_md5: '0093349b4f41e5431b1d832d13738010'
+    cache_path: 'corpus/toxsci.zip'
+
+  legalspans:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/documents/legalspans.txt'
+    expected_md5: '24c7bbed8eb3bdd2daf3f3ab2c1963b2'
+    cache_path: 'legalspans.txt'
+  trec-genomics-2006/queries:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/topics/2006topics.txt'
+    expected_md5: 'fd458f5398350e59831745e51854b2b0'
+    cache_path: 'trec-genomics-2006/queries.txt'
+  trec-genomics-2006/qrels:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2006/trec2006.raw.relevance.tsv.txt'
+    expected_md5: 'a133e38bcd03c8b6509f46506cae753b'
+    cache_path: 'trec-genomics-2006/qrels'
+  trec-genomics-2007/queries:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2007/2007topics.txt'
+    expected_md5: 'be5fc2d4e984003da6aa9dfab9eb67a3'
+    cache_path: 'trec-genomics-2007/queries.txt'
+  trec-genomics-2007/qrels:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2007/trecgen2007.all.judgments.tsv.txt'
+    expected_md5: '5be6b6eea10d8ec0dac25bbe21af38a0'
+    cache_path: 'trec-genomics-2007/qrels'
+
+
 msmarco-document:
   docs:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz'
