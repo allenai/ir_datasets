@@ -275,3 +275,25 @@ tbody tr:last-child td {
 .sep {
   border-top: 3px solid #333;
 }
+@media screen and (max-width: 420px){
+  .page {
+    padding: 6px;
+    margin: 0;
+    border: 0;
+  }
+  h1 {
+    margin-bottom: 2px;
+  }
+  h3 {
+    margin-bottom: 4px;
+  }
+  hr {
+    margin: 8px -6px;
+  }
+  .dataset {
+    margin: 6px 0;
+  }
+  .screen-small-hide {
+    display: none;
+  }
+}

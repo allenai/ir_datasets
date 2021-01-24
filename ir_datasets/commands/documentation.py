@@ -10,6 +10,7 @@ COMMON_HEAD = '''
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
 <script src="main.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 '''
 
 
@@ -44,7 +45,9 @@ def main(args):
 <div id="ClosePopup">✖</div>
 <div id="CodeSample"></div>
 </div>
+
 <div class="page">
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/">allenai/ir_datasets</a></div>
 <h1><code>ir_datasets</code></h1>
 <p>
 View on GitHub: <a href="https://github.com/allenai/ir_datasets/">allenai/ir_datasets</a>
@@ -222,7 +225,7 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
             else:
                 ds_name = f'<a style="font-weight: bold;" href="{parent}.html"><kbd>{parent}</kbd></a></li>'
                 tbody = '</tbody><tbody>'
-            index.append(f'{tbody}<tr><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center">{emoji(dataset, "scoreddocs")}</td><td class="center">{emoji(dataset, "docpairs")}</td></tr>')
+            index.append(f'{tbody}<tr><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
         index = '\n'.join(index)
         out.write(f'''
 <!DOCTYPE html>
@@ -234,6 +237,7 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
 <body>
 <div class="page">
 <div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<div style="position: absolute; top: 4px; right: 4px;"><span class="screen-small-hide">Github: </span><a href="https://github.com/allenai/ir_datasets/">allenai/ir_datasets</a></div>
 <h1><kbd>ir_datasets</kbd>: Datasets and Subsets</h1>
 <div>
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
@@ -244,8 +248,8 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
 <th>docs</th>
 <th>queries</th>
 <th>qrels</th>
-<th>scoreddocs</th>
-<th>docpairs</th>
+<th class="screen-small-hide">scoreddocs</th>
+<th class="screen-small-hide">docpairs</th>
 </tr>
 {index}
 </tbody>
@@ -270,8 +274,9 @@ See <a href="all.html">here</a> for a complete list of datasets and their subset
 </head>
 <body>
 <div class="page">
-<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
-<h1><kbd>ir_datasets</kbd>: {documentation.get('pretty_name', top_level)}</h1>
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets<span class="screen-small-hide"> home</span></a></div>
+<div style="position: absolute; top: 4px; right: 4px;"><span class="screen-small-hide">Github: </span><a href="https://github.com/allenai/ir_datasets/blob/master/ir_datasets/datasets/{top_level.replace('-', '_')}.py">ir_datasets/{top_level.replace('-', '_')}.py</a></div>
+<h1><span class="screen-small-hide"><kbd>ir_datasets</kbd>: </span>{documentation.get('pretty_name', top_level)}</h1>
 <div>
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
 <ol class="index">
