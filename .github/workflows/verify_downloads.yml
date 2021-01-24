@@ -1,10 +1,15 @@
-name: Test access to downloadable content
+name: Downloadable Content
 
 
 on:
   schedule:
-    - cron:  '0 11 * * 0' # run every sunday at 11:00am UTC
-
+    - cron:  '0 8 * * 0' # run every sunday at (around) 8:00am UTC
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'reason'
+        required: true
+        default: ''
 
 jobs:
   build:
@@ -20,5 +25,7 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt
     - name: Test
+      env:
+        IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
         python -m test.downloads

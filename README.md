@@ -249,6 +249,8 @@ dataset, its available subsets, and what data they provide. [full list](https://
    within this duration, the connection will be assumed to be dead, and another download may be attempted.
  - `IR_DATASETS_DL_TRIES`: Default number of download attempts before exception is thrown (default `3`).
    When the server accepts Range requests, uses them. Otherwise, will download the entire file again
+ - `IR_DATASETS_DL_DISABLE_PBAR`: Set to `true` to disable the progress bar for downloads. Useful in settings
+   where an interactive console is not available.
 
 ## Citing
 

@@ -51,7 +51,11 @@ class RequestsDownload(BaseDownload):
                         if dlen is not None:
                             dlen = int(dlen)
                         fmt = '{desc}: {percentage:3.1f}%{r_bar}'
-                        pbar = stack.enter_context(_logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt))
+                        if os.environ.get('IR_DATASETS_DL_DISABLE_PBAR', '').lower() == 'true':
+                            pbar_f = stack.enter_context(open(os.devnull, 'w')) # still maintain the pbar, but write to /dev/null
+                        else:
+                            pbar_f = None # defaults to stderr
+                        pbar = stack.enter_context(_logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt, file=pbar_f))
                     for data in self._iter_response_data(response, http_args, skip):
                         pbar.update(len(data))
                         yield data
