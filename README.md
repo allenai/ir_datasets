@@ -134,6 +134,8 @@ documents/queries by ID.
 
 **Automatically downloads source files** (when available). Will download and verify the source
 files for queries, documents, qrels, etc. when they are publicly available, as they are needed.
+A CI build checks weekly to ensure that all the downloadable content is available and correct:
+![Downloadable Content](https://github.com/allenai/ir_datasets/workflows/Downloadable%20Content/badge.svg)
 
 ```python
 import ir_datasets
@@ -222,6 +224,8 @@ Available datasets include:
  - [CodeSearchNet](https://ir-datasets.com/codesearchnet.html)
  - [CORD-19](https://ir-datasets.com/cord19.html)
  - [GOV2](https://ir-datasets.com/gov2.html)
+ - [Highwire (TREC Genomics 2006-07)](https://ir-datasets.com/highwire.html)
+ - [Medline (TREC Genomics 2004-05)](https://ir-datasets.com/medline.html)
  - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)
  - [MSMARCO (passage)](https://ir-datasets.com/msmarco-passage.html)
  - [NFCorpus (NutritionFacts)](https://ir-datasets.com/nfcorpus.html)
