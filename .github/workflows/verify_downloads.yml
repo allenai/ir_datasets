@@ -3,7 +3,7 @@ name: Test access to downloadable content
 
 on:
   schedule:
-    - cron:  '0 8 * * 0' # run every sunday at 8:00am UTC
+    - cron:  '0 11 * * 0' # run every sunday at 11:00am UTC
 
 
 jobs:

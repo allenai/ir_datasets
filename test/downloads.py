@@ -12,7 +12,7 @@ import ir_datasets
 def tmp_environ(**kwargs):
     orig_values = {}
     for key, value in kwargs.items():
-        orig_values[key] = os.environ[key]
+        orig_values[key] = os.environ.get(key)
         os.environ[key] = value
     try:
         yield
