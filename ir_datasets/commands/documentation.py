@@ -150,6 +150,43 @@ indexes the documents/queries by ID.
 <h2>Datasets</h2>
 <ul>
 ''')
+    with open('.github/workflows/verify_downloads.yml', 'wt') as f_ghdl:
+        f_ghdl.write(f'''
+name: Downloadable Content
+
+on:
+  schedule:
+    - cron: '0 8 * * 0' # run every sunday at (around) 8:00am UTC
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: 'reason'
+        required: true
+        default: ''
+
+jobs:
+''')
+        for top in top_level:
+            f_ghdl.write(f'''
+  {top}:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test
+      env:
+        IR_DATASETS_DL_DISABLE_PBAR: 'true'
+      run: |
+        python -m test.downloads --filter "^{top}/"
+''')
+
     top_level_map = {t: [] for t in top_level}
     for name in sorted(ir_datasets.registry):
         dataset = ir_datasets.registry[name]
