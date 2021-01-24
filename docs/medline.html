@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+
+<title>Medline (TREC Genomics 2004-05) - ir_datasets</title>
+</head>
+<body>
+<div class="page">
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; ir_datasets home</a></div>
+<h1><kbd>ir_datasets</kbd>: Medline (TREC Genomics 2004-05)</h1>
+<div>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#medline"><kbd>medline</kbd></a></li>
+<li><a href="#medline/trec-genomics-2004"><kbd><span class="prefix">medline</span>/trec-genomics-2004</kbd></a></li>
+<li><a href="#medline/trec-genomics-2005"><kbd><span class="prefix">medline</span>/trec-genomics-2005</kbd></a></li>
+</ol>
+</div>
+<hr />
+<div class="dataset" id="medline">
+<h3><kbd class="select"><span class="str">"medline"</kdb></h3>
+
+<div class="desc">
+ <p> Medical articles from <a href="https://www.nlm.nih.gov/bsd/medline.html">Medline</a>. Includes over 3m articles including titles and abstracts. </p> <p> This dataset is used for the TREC 2004-05 TREC Genomics track. </p> <ul> <li>Documents: Biomedical article titles and abstracts</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2004data.html">Information about document collection</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="medline__docs">docs</a>
+<div id="medline__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MedlineDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, abstract&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="medline/trec-genomics-2004" data-parent="medline">
+<h3><kbd class="ds-name select"><span class="str">"medline/trec-genomics-2004"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Genomics Track 2004 benchmark. Contains 50 queries with article-level relevance judgments. </p> <ul> <li>Documents: Biomedical article titles and abstracts</li> <li>Queries: Natural language questions</li> <li>Qrels: deep, graded</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2004data.html">Shared task data site</a></li> <li><a href="https://trec.nist.gov/pubs/trec13/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="medline/trec-genomics-2004__queries">queries</a>
+<div id="medline/trec-genomics-2004__queries" class="tab-content">
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecGenomicsQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">need</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">context</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2004')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, need, context&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2004__docs">docs</a>
+<div id="medline/trec-genomics-2004__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MedlineDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2004')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2004__qrels">qrels</a>
+<div id="medline/trec-genomics-2004__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>possibly relevant</td></tr>
+<tr><td class="relScore">2</td><td>definitely relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2004')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2004__citation">Citation</a>
+<div id="medline/trec-genomics-2004__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Hersh2004TrecGenomics,
+  title={TREC 2004 Genomics Track Overview},
+  author={William R. Hersh and Ravi Teja Bhuptiraju and Laura Ross and Phoebe Johnson and Aaron M. Cohen and Dale F. Kraemer},
+  booktitle={TREC},
+  year={2004}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="medline/trec-genomics-2005" data-parent="medline">
+<h3><kbd class="ds-name select"><span class="str">"medline/trec-genomics-2005"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Genomics Track 2005 benchmark. Contains 36 queries with passage-level relevance judgments. </p> <ul> <li>Documents: Biomedical article titles and abstracts</li> <li>Queries: Natural language questions</li> <li>Qrels: deep, graded</li> <li><a href="https://dmice.ohsu.edu/trec-gen/2005data.html">Shared task data site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="medline/trec-genomics-2005__queries">queries</a>
+<div id="medline/trec-genomics-2005__queries" class="tab-content">
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2005')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2005__docs">docs</a>
+<div id="medline/trec-genomics-2005__docs" class="tab-content">
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MedlineDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2005')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2005__qrels">qrels</a>
+<div id="medline/trec-genomics-2005__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>possibly relevant</td></tr>
+<tr><td class="relScore">2</td><td>definitely relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'medline/trec-genomics-2005')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="medline/trec-genomics-2005__citation">Citation</a>
+<div id="medline/trec-genomics-2005__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Hersh2005TrecGenomics,
+  title={TREC 2005 Genomics Track Overview},
+  author={William Hersh and Aaron Cohen and Jianji Yang and Ravi Teja Bhupatiraju and Phoebe Roberts and Marti Hearst},
+  booktitle={TREC},
+  year={2007}
+}
+</cite>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

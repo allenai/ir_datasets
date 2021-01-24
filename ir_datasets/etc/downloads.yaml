@@ -514,6 +514,41 @@ highwire:
     cache_path: 'trec-genomics-2007/qrels'
 
 
+medline:
+  docs/a:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_A.gz'
+    expected_md5: '7858e5b908c25b88e30965b770e9780f'
+    cache_path: 'corpus/2004_TREC_XML_MEDLINE_A.gz'
+  docs/b:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_B.gz'
+    expected_md5: 'd4f8b510716d71612dc84129b7bc86a8'
+    cache_path: 'corpus/2004_TREC_XML_MEDLINE_B.gz'
+  docs/c:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_C.gz'
+    expected_md5: '155c77b6f75b549a810863dae03058d1'
+    cache_path: 'corpus/2004_TREC_XML_MEDLINE_C.gz'
+  docs/d:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_D.gz'
+    expected_md5: 'cb1570f0212f8b737c757b6177788f36'
+    cache_path: 'corpus/2004_TREC_XML_MEDLINE_D.gz'
+  trec-genomics-2004/queries:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/rest.zip'
+    expected_md5: '3f252c59774fe8e74337637d73f8afc6'
+    cache_path: 'trec-genomics-2004/rest.zip'
+  trec-genomics-2004/qrels:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2004/04.qrels.txt'
+    expected_md5: '1cb017045d7909102476bcb17fb19878'
+    cache_path: 'trec-genomics-2004/qrels'
+  trec-genomics-2005/queries:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2005/adhoc2005narrative.txt'
+    expected_md5: '71e8044cb65458731f4496fdc2aad94a'
+    cache_path: 'trec-genomics-2005/queries.txt'
+  trec-genomics-2005/qrels:
+    url: 'https://dmice.ohsu.edu/trec-gen/data/2005/genomics.qrels.large.txt'
+    expected_md5: 'fd6ac71dcd337c0c0cddf0ffc0528cc6'
+    cache_path: 'trec-genomics-2005/qrels'
+
+
 msmarco-document:
   docs:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz'

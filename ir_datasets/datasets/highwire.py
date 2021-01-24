@@ -115,13 +115,15 @@ class HighwireDocs(BaseDocs):
         return self.docs_store().count()
 
 
-class HighwireQueries(BaseQueries):
+class TrecGenomicsQueries(BaseQueries):
     def __init__(self, queries_dlc):
         self._queries_dlc = queries_dlc
 
     def queries_iter(self):
         with self._queries_dlc.stream() as f:
             for line in codecs.getreader('cp1252')(f):
+                if line.strip() == '':
+                    continue
                 doc_id, text = line[1:4], line[5:].rstrip()
                 text = text.replace('[ANTIBODIES]', 'antibodies').replace('[BIOLOGICAL SUBSTANCES]', 'biological substances').replace('[CELL OR TISSUE TYPES]', 'cell or tissue types').replace('[DISEASES]', 'diseases').replace('[DRUGS]', 'drugs').replace('[GENES]', 'genes').replace('[MOLECULAR FUNCTIONS]', 'molecular functions').replace('[MUTATIONS]', 'mutations').replace('[PATHWAYS]', 'pathways').replace('[PROTEINS]', 'proteins').replace('[SIGNS OR SYMPTOMS]', 'signs or symptoms').replace('[STRAINS]', 'strains').replace('[TOXICITIES]', 'toxicities').replace('[TUMOR TYPES]', 'tumor types')
                 yield GenericQuery(doc_id, text)
@@ -130,7 +132,7 @@ class HighwireQueries(BaseQueries):
         return GenericQuery
 
     def queries_namespace(self):
-        return NAME
+        return 'trec-genomics'
 
 
 class HighwireQrels(BaseQrels):
@@ -174,13 +176,13 @@ def _init():
 
     subsets['trec-genomics-2006'] = Dataset(
         collection,
-        HighwireQueries(dlc['trec-genomics-2006/queries']),
+        TrecGenomicsQueries(dlc['trec-genomics-2006/queries']),
         HighwireQrels(dlc['trec-genomics-2006/qrels'], QREL_DEFS_06),
         documentation('trec-genomics-2006'),
     )
     subsets['trec-genomics-2007'] = Dataset(
         collection,
-        HighwireQueries(dlc['trec-genomics-2007/queries']),
+        TrecGenomicsQueries(dlc['trec-genomics-2007/queries']),
         HighwireQrels(dlc['trec-genomics-2007/qrels'], QREL_DEFS_07),
         documentation('trec-genomics-2007'),
     )

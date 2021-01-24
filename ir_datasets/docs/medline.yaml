@@ -1,0 +1,57 @@
+_:
+  pretty_name: 'Medline (TREC Genomics 2004-05)'
+  desc: '
+<p>
+Medical articles from <a href="https://www.nlm.nih.gov/bsd/medline.html">Medline</a>.
+Includes over 3m articles including titles and abstracts.
+</p>
+<p>
+This dataset is used for the TREC 2004-05 TREC Genomics track.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2004data.html">Information about document collection</a></li>
+</ul>
+'
+
+trec-genomics-2004:
+  desc: '
+<p>
+The TREC Genomics Track 2004 benchmark. Contains 50 queries with article-level relevance judgments.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li>Queries: Natural language questions</li>
+<li>Qrels: deep, graded</li>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2004data.html">Shared task data site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec13/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Hersh2004TrecGenomics,
+      title={TREC 2004 Genomics Track Overview},
+      author={William R. Hersh and Ravi Teja Bhuptiraju and Laura Ross and Phoebe Johnson and Aaron M. Cohen and Dale F. Kraemer},
+      booktitle={TREC},
+      year={2004}
+    }
+
+trec-genomics-2005:
+  desc: '
+<p>
+The TREC Genomics Track 2005 benchmark. Contains 36 queries with passage-level relevance judgments.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li>Queries: Natural language questions</li>
+<li>Qrels: deep, graded</li>
+<li><a href="https://dmice.ohsu.edu/trec-gen/2005data.html">Shared task data site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Hersh2005TrecGenomics,
+      title={TREC 2005 Genomics Track Overview},
+      author={William Hersh and Aaron Cohen and Jianji Yang and Ravi Teja Bhupatiraju and Phoebe Roberts and Marti Hearst},
+      booktitle={TREC},
+      year={2007}
+    }

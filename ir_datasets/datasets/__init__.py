@@ -7,6 +7,7 @@ from . import cord19
 from . import codesearchnet
 from . import gov2
 from . import highwire
+from . import medline
 from . import msmarco_passage
 from . import msmarco_document
 from . import nfcorpus
