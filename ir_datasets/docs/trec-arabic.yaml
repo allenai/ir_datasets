@@ -12,7 +12,7 @@ Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2001T55">LDC2
   docs_instructions: &inst "docs available from LDC"
   bibtex: |
     @misc{LDC2001T55,
-      title={TREC Mandarin LDC2001T55},
+      title={Arabic Newswire Part 1 LDC2001T55},
       author={Graff, David, and Walker, Kevin},
       year={2001},
       url={https://catalog.ldc.upenn.edu/LDC2001T55},

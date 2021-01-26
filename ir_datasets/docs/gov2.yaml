@@ -45,7 +45,7 @@ The TREC Terabyte Track 2005 ad-hoc ranking benchmark. Contains 50 queries with 
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Clarke2005TrecTerabyte,
       title={The TREC 2005 Terabyte Track},
       author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
       booktitle={TREC},
@@ -66,7 +66,7 @@ may satisfy the bookmark label.
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Clarke2005TrecTerabyte,
       title={The TREC 2005 Terabyte Track},
       author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
       booktitle={TREC},
@@ -86,7 +86,7 @@ including the 50 topics from <a class="ds-ref">gov2/trec-tb-2005</a>. Only the 5
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Clarke2005TrecTerabyte,
       title={The TREC 2005 Terabyte Track},
       author={Charles L. A. Clark and Falk Scholer and Ian Soboroff},
       booktitle={TREC},
@@ -105,7 +105,7 @@ The TREC Terabyte Track 2006 ad-hoc ranking benchmark. Contains 50 queries with 
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Buttcher2006TrecTerabyte,
       title={The TREC 2006 Terabyte Track},
       author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
       booktitle={TREC},
@@ -125,7 +125,7 @@ may satisfy the bookmark label.</p>
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Buttcher2006TrecTerabyte,
       title={The TREC 2006 Terabyte Track},
       author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
       booktitle={TREC},
@@ -145,7 +145,7 @@ including the 50 topics from <a class="ds-ref">gov2/trec-tb-2006</a>. Only the 5
 '
   docs_instructions: *inst
   bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
+    @inproceedings{Buttcher2006TrecTerabyte,
       title={The TREC 2006 Terabyte Track},
       author={Stefan B\"uttcher and Charles L. A. Clarke and Ian Soboroff},
       booktitle={TREC},

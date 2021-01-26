@@ -31,7 +31,7 @@ Mandarin Chinese benchmark from TREC 5.
   docs_instructions: *inst
   bibtex: |
     @inproceedings{harman1997chinese,
-      title={Spanish and Chinese Document Retrieval in TREC􏰁􏰂-5},
+      title={Spanish and Chinese Document Retrieval in TREC-5},
       author={Alan Smeaton and Ross Wilkinson},
       booktitle={TREC},
       year={1996}

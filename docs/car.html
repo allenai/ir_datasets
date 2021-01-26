@@ -84,7 +84,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/test200"</kdb></h3>
 
 <div class="desc">
-<p><i>(no description provided)</i></p>
+ <p> Un-official test set consisting of manually-selected articles. Sometimes used as a validation set. </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/test200__queries">queries</a>
@@ -147,6 +147,18 @@ bibtex:
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
 </div>
+
+<a class="tab" target="car/v1.5/test200__citation">Citation</a>
+<div id="car/v1.5/test200__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{nanni2017benchmark,
+  title={Benchmark for complex answer retrieval},
+  author={Nanni, Federico and Mitra, Bhaskar and Magnusson, Matt and Dietz, Laura},
+  booktitle={ICTIR},
+  year={2017}
+}
+</cite>
+</div>
 </div>
 </div>
 
@@ -155,7 +167,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold0"</kdb></h3>
 
 <div class="desc">
-<p><i>(no description provided)</i></p>
+ <p> Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/train/fold0__queries">queries</a>
@@ -226,7 +238,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1"</kdb></h3>
 
 <div class="desc">
-<p><i>(no description provided)</i></p>
+ <p> Official test set of TREC CAR 2017 (year 1). </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/trec-y1__queries">queries</a>
@@ -264,6 +276,18 @@ bibtex:
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
+
+<a class="tab" target="car/v1.5/trec-y1__citation">Citation</a>
+<div id="car/v1.5/trec-y1__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{dietz2017trec,
+  title={TREC Complex Answer Retrieval Overview.},
+  author={Dietz, Laura and Verma, Manisha and Radlinski, Filip and Craswell, Nick},
+  booktitle={TREC},
+  year={2017}
+}
+</cite>
+</div>
 </div>
 </div>
 
@@ -272,7 +296,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1/auto"</kdb></h3>
 
 <div class="desc">
-<p><i>(no description provided)</i></p>
+ <p> Official test set of TREC CAR 2017 (year 1), using automatic relevance judgments (assumed from hierarchical structure of pages, i.e., paragraphs under a header are assumed relevant.) </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/trec-y1/auto__queries">queries</a>
@@ -343,7 +367,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1/manual"</kdb></h3>
 
 <div class="desc">
-<p><i>(no description provided)</i></p>
+ <p> Official test set of TREC CAR 2017 (year 1), using manual graded relevance judgments. </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/trec-y1/manual__queries">queries</a>

@@ -22,7 +22,7 @@ Version 1.5 of the TREC dataset. This version is used for year 1 (2017) of the T
       url={http://trec-car.cs.unh.edu}
     }
 
-trec-y1:
+v1.5/trec-y1:
   desc: '
 <p>
 Official test set of TREC CAR 2017 (year 1).
@@ -37,14 +37,14 @@ Official test set of TREC CAR 2017 (year 1).
     }
 
 
-trec-y1/manual:
+v1.5/trec-y1/manual:
   desc: '
 <p>
 Official test set of TREC CAR 2017 (year 1), using manual graded relevance judgments.
 </p>
 '
 
-trec-y1/auto:
+v1.5/trec-y1/auto:
   desc: '
 <p>
 Official test set of TREC CAR 2017 (year 1), using automatic relevance judgments (assumed from
@@ -52,7 +52,7 @@ hierarchical structure of pages, i.e., paragraphs under a header are assumed rel
 </p>
 '
 
-test200:
+v1.5/test200:
   desc: '
 <p>
 Un-official test set consisting of manually-selected articles. Sometimes used as a validation set.
@@ -67,7 +67,7 @@ Un-official test set consisting of manually-selected articles. Sometimes used as
     }
 
 
-train/fold0:
+v1.5/train/fold0:
   desc: '
 <p>
 Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
