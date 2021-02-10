@@ -1,0 +1,78 @@
+_:
+  pretty_name: 'PubMed Central (TREC CDS)'
+  desc: '
+<p>
+Bio-medical articles from <a href="https://www.ncbi.nlm.nih.gov/pmc/">PubMed Central</a>.
+Right now, only includes subsets used for the TREC Clinical Decision Support (CDS) 2014-16 tasks.
+</p>'
+
+v1:
+  desc: '
+<p>
+Subset of PMC articles used for the TREC 2014 and 2015 tasks (v1). Inclues titles, abstracts, full
+text. Collected from the open access segment on January 21, 2014.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2014.html#documents">Information on documents</a></li>
+<ul>'
+
+v2:
+  desc: '
+<p>
+Subset of PMC articles used for the TREC 2016 task (v2). Inclues titles, abstracts, full
+text. Collected from the open access segment on  March 28, 2016.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2016.html#documents">Information on documents</a></li>
+<ul>'
+
+v1/trec-cds-2014:
+  desc: '
+<p>
+The TREC Clinical Decision Support (CDS) track from 2014.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2014.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec23/papers/overview-clinical.pdf">Task Overview Paper</a></li>
+<ul>'
+  bibtex: |
+    @inproceedings{Simpson2014TrecCds,
+      title={Overview of the TREC 2014 Clinical Decision Support Track},
+      author={Matthew S. Simpson and Ellen M. Voorhees and William Hersh},
+      booktitle={TREC},
+      year={2014}
+    }
+
+v1/trec-cds-2015:
+  desc: '
+<p>
+The TREC Clinical Decision Support (CDS) track from 2015.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2015.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec24/papers/Overview-CL.pdf">Task Overview Paper</a></li>
+<ul>'
+  bibtex: |
+    @inproceedings{Roberts2015TrecCds,
+      title={Overview of the TREC 2015 Clinical Decision Support Track},
+      author={Kirk Roberts and Matthew S. Simpson and Ellen Voorhees and William R. Hersh},
+      booktitle={TREC},
+      year={2015}
+    }
+
+v2/trec-cds-2016:
+  desc: '
+<p>
+The TREC Clinical Decision Support (CDS) track from 2016.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2016.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec25/papers/Overview-CL.pdf">Task Overview Paper</a></li>
+<ul>'
+  bibtex: |
+    @inproceedings{Roberts2016TrecCds,
+      title={Overview of the TREC 2016 Clinical Decision Support Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen M. Voorhees and William R. Hersh},
+      booktitle={TREC},
+      year={2016}
+    }

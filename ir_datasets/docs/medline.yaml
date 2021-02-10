@@ -1,12 +1,17 @@
 _:
-  pretty_name: 'Medline (TREC Genomics 2004-05)'
+  pretty_name: 'Medline'
   desc: '
 <p>
 Medical articles from <a href="https://www.nlm.nih.gov/bsd/medline.html">Medline</a>.
-Includes over 3m articles including titles and abstracts.
+This collection was used by TREC Genomics 2004-05 (2004 version of dataset) and by
+TREC Precision Medicine 2017-18 (2017 version).
 </p>
+'
+
+2004:
+  desc: '
 <p>
-This dataset is used for the TREC 2004-05 TREC Genomics track.
+3M Medline articles including titles and abstracts, used for the TREC 2004-05 Genomics track.
 </p>
 <ul>
 <li>Documents: Biomedical article titles and abstracts</li>
@@ -54,4 +59,58 @@ The TREC Genomics Track 2005 benchmark. Contains 36 queries with passage-level r
       author={William Hersh and Aaron Cohen and Jianji Yang and Ravi Teja Bhupatiraju and Phoebe Roberts and Marti Hearst},
       booktitle={TREC},
       year={2007}
+    }
+
+2017:
+  desc: '
+<p>
+26M Medline and AACR/ASCO Proceedings articles including titles and abstracts. This collection is used for
+the TREC 2017-18 TREC Precision Medicine track.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li><a href="http://www.trec-cds.org/2017.html">Information about document collection</a></li>
+</ul>
+'
+
+trec-pm-2017:
+  desc: '
+<p>
+The TREC Precision Medicine (PM) Track 2017 benchmark. Contains 30 queries containing disease, gene, and target demographic information.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li>Queries: Specific to TREC PM information need</li>
+<li>Qrels: deep, graded</li>
+<li><a href="http://www.trec-cds.org/2017.html">Shared task data site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-PM.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Roberts2017TrecPm,
+      title={Overview of the TREC 2017 Precision Medicine Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen M. Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar and Shubham Pant},
+      booktitle={TREC},
+      year={2017}
+    }
+
+trec-pm-2018:
+  desc: '
+<p>
+The TREC Precision Medicine (PM) Track 2018 benchmark. Contains 50 queries containing disease, gene, and target demographic information.
+</p>
+<ul>
+<li>Documents: Biomedical article titles and abstracts</li>
+<li>Queries: Specific to TREC PM information need</li>
+<li>Qrels: deep, graded</li>
+<li><a href="http://www.trec-cds.org/2018.html">Shared task data site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-PM.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Roberts2018TrecPm,
+      title={Overview of the TREC 2018 Precision Medicine Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen M. Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar},
+      booktitle={TREC},
+      year={2018}
     }

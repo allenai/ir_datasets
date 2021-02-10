@@ -2,7 +2,7 @@ _:
   pretty_name: 'TREC Mandarin'
   desc: '
 <p>
-A collection of news articles in Mandarin Chinese, used for multi-lingual evaluation in TREC 5 and
+A collection of news articles in Mandarin in Simplified Chinese, used for multi-lingual evaluation in TREC 5 and
 TREC 6.
 </p>
 <p>

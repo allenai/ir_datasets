@@ -13,6 +13,7 @@ from . import msmarco_document
 from . import nfcorpus
 from . import trec_robust04
 from . import nyt
+from . import pmc
 from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish

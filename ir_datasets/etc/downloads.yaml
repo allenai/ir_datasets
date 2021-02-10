@@ -515,22 +515,22 @@ highwire:
 
 
 medline:
-  docs/a:
+  2004/a:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_A.gz'
     expected_md5: '7858e5b908c25b88e30965b770e9780f'
-    cache_path: 'corpus/2004_TREC_XML_MEDLINE_A.gz'
-  docs/b:
+    cache_path: '2004/2004_TREC_XML_MEDLINE_A.gz'
+  2004/b:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_B.gz'
     expected_md5: 'd4f8b510716d71612dc84129b7bc86a8'
-    cache_path: 'corpus/2004_TREC_XML_MEDLINE_B.gz'
-  docs/c:
+    cache_path: '2004/2004_TREC_XML_MEDLINE_B.gz'
+  2004/c:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_C.gz'
     expected_md5: '155c77b6f75b549a810863dae03058d1'
-    cache_path: 'corpus/2004_TREC_XML_MEDLINE_C.gz'
-  docs/d:
+    cache_path: '2004/2004_TREC_XML_MEDLINE_C.gz'
+  2004/d:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_D.gz'
     expected_md5: 'cb1570f0212f8b737c757b6177788f36'
-    cache_path: 'corpus/2004_TREC_XML_MEDLINE_D.gz'
+    cache_path: '2004/2004_TREC_XML_MEDLINE_D.gz'
   trec-genomics-2004/queries:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2004/rest.zip'
     expected_md5: '3f252c59774fe8e74337637d73f8afc6'
@@ -547,6 +547,47 @@ medline:
     url: 'https://dmice.ohsu.edu/trec-gen/data/2005/genomics.qrels.large.txt'
     expected_md5: 'fd6ac71dcd337c0c0cddf0ffc0528cc6'
     cache_path: 'trec-genomics-2005/qrels'
+
+  2017/part1:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part1.tar.gz'
+    expected_md5: '04d14a46af586faf9306580291758c29'
+    cache_path: '2017/part1.tar.gz'
+  2017/part2:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part2.tar.gz'
+    expected_md5: '19740bcde4e5e3bcfc583b347cd59d17'
+    cache_path: '2017/part2.tar.gz'
+  2017/part3:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part3.tar.gz'
+    expected_md5: '7e7d3cfb452c6e4260704f0a6cc7932e'
+    cache_path: '2017/part3.tar.gz'
+  2017/part4:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part4.tar.gz'
+    expected_md5: '1b22d0932d319d127be326358435c5e5'
+    cache_path: '2017/part4.tar.gz'
+  2017/part5:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part5.tar.gz'
+    expected_md5: 'd71b9bb9e11d017f3f77ffe47dbf8aa9'
+    cache_path: '2017/part5.tar.gz'
+  2017/aacr_asco_extra:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/extra_abstracts.tar.gz'
+    expected_md5: 'd91bb4ca9b50cbbd5986bb5c43082afb'
+    cache_path: '2017/extra_abstracts.tar.gz'
+  trec-pm-2017/queries:
+    url: 'https://trec.nist.gov/data/precmed/topics2017.xml'
+    expected_md5: '16d69bf9119aaaf4b8545c24dde4156d'
+    cache_path: 'trec-pm-2017/queries.xml'
+  trec-pm-2017/qrels:
+    url: 'https://trec.nist.gov/data/precmed/qrels-final-abstracts.txt'
+    expected_md5: '0a302cb9cd580709d9e3db9881a25d47'
+    cache_path: 'trec-pm-2017/qrels'
+  trec-pm-2018/queries:
+    url: 'http://www.trec-cds.org/topics2018.xml'
+    expected_md5: '6c59de8eaf3bd9925a567c50dfab6936'
+    cache_path: 'trec-pm-2018/queries.xml'
+  trec-pm-2018/qrels:
+    url: 'https://trec.nist.gov/data/precmed/qrels-treceval-abstracts-2018-v2.txt'
+    expected_md5: 'a09754dec58ee90458ff8e0e7f2cb934'
+    cache_path: 'trec-pm-2018/qrels'
 
 
 msmarco-document:
@@ -688,6 +729,78 @@ nyt:
 To proceed, symlink the source file here: {path}'
     expected_md5: '67a1bcf200c448424bf0fba34cef17b0'
     cache_path: nyt.tgz
+
+
+pmc:
+  v1/source0:
+    url: 'https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-00.tar.gz'
+    expected_md5: '3448bc2967913dd46c771d55b3b3ccae'
+    cache_path: 'v1/pmc-text-00.tar.gz'
+  v1/source1:
+    url: 'https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-01.tar.gz'
+    expected_md5: '6f4bee841dcf307ce1f4cd137f65e822'
+    cache_path: 'v1/pmc-text-01.tar.gz'
+  v1/source2:
+    url: 'https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-02.tar.gz'
+    expected_md5: '03375c91a74220c59071c7aa5f78deee'
+    cache_path: 'v1/pmc-text-02.tar.gz'
+  v1/source3:
+    url: 'https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-03.tar.gz'
+    expected_md5: '270648367547f746cf1e2e4323a46aa9'
+    cache_path: 'v1/pmc-text-03.tar.gz'
+  v1/dup1:
+    url: 'http://www.trec-cds.org/duplicates-1.txt'
+    expected_md5: '7a93656ca21c1749bf0b71a03be01cf3'
+    cache_path: 'v1/duplicates-1.txt'
+  v1/dup2:
+    url: 'http://www.trec-cds.org/duplicates-2.txt'
+    expected_md5: '8d5f1004ea4d00cfd5a96b40c6419be1'
+    cache_path: 'v1/duplicates-2.txt'
+  v2/source0:
+    url: 'https://ceb.nlm.nih.gov/~robertske/pmc-00.tar.gz'
+    expected_md5: 'd66f2e243cb697138753e622f0a1867a'
+    cache_path: 'v2/pmc-text-00.tar.gz'
+  v2/source1:
+    url: 'https://ceb.nlm.nih.gov/~robertske/pmc-01.tar.gz'
+    expected_md5: 'e59422e5d21ef7e1be307a0de61626f7'
+    cache_path: 'v2/pmc-text-01.tar.gz'
+  v2/source2:
+    url: 'https://ceb.nlm.nih.gov/~robertske/pmc-02.tar.gz'
+    expected_md5: '145d194643818ea09a4947ba6b1c91c7'
+    cache_path: 'v2/pmc-text-02.tar.gz'
+  v2/source3:
+    url: 'https://ceb.nlm.nih.gov/~robertske/pmc-03.tar.gz'
+    expected_md5: '231de843bb5334c3c885d75f2ca3240b'
+    cache_path: 'v2/pmc-text-03.tar.gz'
+  trec-cds-2014/queries:
+    url: 'http://www.trec-cds.org/topics2014.xml'
+    expected_md5: '4924e2a3bb539feac6cbb967f4875926'
+    cache_path: 'trec-cds-2014/queries.xml'
+  trec-cds-2014/qrels:
+    url: 'https://trec.nist.gov/data/clinical/qrels-treceval-2014.txt'
+    # url: 'http://www.trec-cds.org/qrels2014.txt'
+    expected_md5: '07c8f85a7b7bcfd4211301ecaa3b4769'
+    cache_path: 'trec-cds-2014/qrels'
+  trec-cds-2015/queries:
+    url: 'https://trec.nist.gov/data/clinical/topics-2015-A.xml'
+    # url: 'http://www.trec-cds.org/topics2015B.xml'
+    expected_md5: '462d9804257e7ad0128f16324c9ec06d'
+    cache_path: 'trec-cds-2015/queries.xml'
+  trec-cds-2015/qrels:
+    url: 'https://trec.nist.gov/data/clinical/qrels-treceval-2015.txt'
+    # url: 'http://www.trec-cds.org/qrels-treceval-2015.txt'
+    expected_md5: '7bbe901cfa36df56dd13cce0275c1a2b'
+    cache_path: 'trec-cds-2015/qrels'
+  trec-cds-2016/queries:
+    url: 'https://trec.nist.gov/data/clinical/topics2016.xml'
+    # url: 'http://www.trec-cds.org/topics2016.xml'
+    expected_md5: '22ccb3412931efe1ea084330737e41bc'
+    cache_path: 'trec-cds-2016/queries.xml'
+  trec-cds-2016/qrels:
+    url: 'https://trec.nist.gov/data/clinical/qrels-treceval-2016.txt'
+    expected_md5: '1a450d38137082e214c1201a3023a6d1'
+    cache_path: 'trec-cds-2016/qrels'
+
 
 trec-arabic:
   docs:

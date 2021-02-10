@@ -12,6 +12,12 @@ class Dataset:
     def __init__(self, *constituents):
         self._constituents = constituents
 
+    def __getstate__(self):
+        return self._constituents
+
+    def __setstate__(self, state):
+        self._constituents = state
+
     def __getattr__(self, attr):
         for cons in self._constituents:
             if hasattr(cons, attr):

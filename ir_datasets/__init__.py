@@ -8,6 +8,8 @@ from . import indices
 from . import wrappers
 from . import commands
 
+Dataset = datasets.base.Dataset
+
 
 def load(name):
     return registry[name]
