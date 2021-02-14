@@ -8,11 +8,15 @@ Collection of scientific articles related to COVID-19.
 Uses the 2020-07-16 version of the dataset, corresponding to the "complete" collection used for
 TREC COVID.
 </p>
+<p>
+Note that this version of the document collection only provides article meta-data. To get the full
+text, use <a class="ds-ref">cord19/fulltext</a>.
+</p>
 <ul>
 <li><a href="https://www.semanticscholar.org/cord19">Document collection site</a></li>
 </ul>
 '
-  bibtex: |
+  bibtex: &collection |
     @article{Wang2020CORD19TC,
       title={CORD-19: The Covid-19 Open Research Dataset},
       author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
@@ -31,7 +35,7 @@ The TREC COVID collection. Queries related to COVID-19, including deep relevance
 <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
+  bibtex: &treccovid |
     @article{Voorhees2020TRECCOVIDCA,
       title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
       author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
@@ -39,3 +43,25 @@ The TREC COVID collection. Queries related to COVID-19, including deep relevance
       year={2020},
       volume={abs/2005.04474}
     }
+
+fulltext:
+  desc: '
+<p>
+Version of <a class="ds-ref">cord19</a> dataset that includes article full texts.
+This dataset takes longer to load than the version that only includes article meata-data.
+</p>
+'
+  bibtex: *collection
+
+fulltext/trec-covid:
+  desc: '
+<p>
+Version of <a class="ds-ref">cord19/trec-covid</a> dataset that includes article full texts.
+This dataset takes longer to load than the version that only includes article meata-data.
+</p>
+<p>
+Queries and qrels are the same as <a class="ds-ref">cord19/trec-covid</a>; it just uses the
+extended documents from <a class="ds-ref">cord19/fulltext</a>.
+</p>
+'
+  bibtex: *treccovid

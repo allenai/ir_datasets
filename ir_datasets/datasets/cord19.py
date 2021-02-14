@@ -6,7 +6,7 @@ import os
 import shutil
 import tarfile
 from collections import defaultdict
-from typing import NamedTuple
+from typing import NamedTuple, Tuple
 from pathlib import Path
 import ir_datasets
 from ir_datasets.util import Lazy, DownloadConfig
@@ -26,7 +26,21 @@ class Cord19Doc(NamedTuple):
     doi: str
     date: str
     abstract: str
+
+
+class Cord19FullTextSection(NamedTuple):
+    title: str
     text: str
+
+
+class Cord19FullTextDoc(NamedTuple):
+    doc_id: str
+    title: str
+    doi: str
+    date: str
+    abstract: str
+    body: Tuple[Cord19FullTextSection, ...]
+
 
 
 QRELS_DEFS = {
@@ -37,16 +51,20 @@ QRELS_DEFS = {
 
 
 class Cord19Docs(BaseDocs):
-    def __init__(self, streamer, extr_path, date):
+    def __init__(self, streamer, extr_path, date, include_fulltext):
         self._streamer = streamer
         self._extr_path = Path(extr_path)
         self._date = date
+        self._include_fulltext = include_fulltext
 
     def docs_path(self):
-        return self._streamer.path()
+        result = self._streamer.path()
+        if self._include_fulltext:
+            return f'{result}.fulltext'
+        return result
 
     def docs_cls(self):
-        return Cord19Doc
+        return Cord19FullTextDoc if self._include_fulltext else Cord19Doc
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -64,16 +82,18 @@ class Cord19Docs(BaseDocs):
 
         with contextlib.ExitStack() as ctxt:
             # Sometiems the document parses are in a single big file, sometimes in separate.
-            bigfile = self._extr_path/self._date/'document_parses.tar.gz'
-            if bigfile.exists():
-                fulltexts = tarfile.open(fileobj=ctxt.push(bigfile.open('rb')))
-            else:
-                fulltexts = {
-                    'biorxiv_medrxiv': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'biorxiv_medrxiv.tar.gz').open('rb'))),
-                    'comm_use_subset': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'comm_use_subset.tar.gz').open('rb'))),
-                    'noncomm_use_subset': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'noncomm_use_subset.tar.gz').open('rb'))),
-                    'custom_license': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'custom_license.tar.gz').open('rb'))),
-                }
+            fulltexts = None
+            if self._include_fulltext:
+                bigfile = self._extr_path/self._date/'document_parses.tar.gz'
+                if bigfile.exists():
+                    fulltexts = tarfile.open(fileobj=ctxt.push(bigfile.open('rb')))
+                else:
+                    fulltexts = {
+                        'biorxiv_medrxiv': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'biorxiv_medrxiv.tar.gz').open('rb'))),
+                        'comm_use_subset': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'comm_use_subset.tar.gz').open('rb'))),
+                        'noncomm_use_subset': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'noncomm_use_subset.tar.gz').open('rb'))),
+                        'custom_license': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'custom_license.tar.gz').open('rb'))),
+                    }
             csv_reader = ctxt.push((self._extr_path/self._date/'metadata.csv').open('rt'))
             csv_reader = csv.DictReader(csv_reader)
             for record in csv_reader:
@@ -82,27 +102,32 @@ class Cord19Docs(BaseDocs):
                 doi = record['doi']
                 abstract = record['abstract']
                 date = record['publish_time']
-                body = ''
-                data = None
-                # Sometiems the document parses are in a single big file, sometimes in separate.
-                # The metadata format is also different in these cases.
-                if isinstance(fulltexts, dict):
-                    if record['has_pmc_xml_parse']:
-                        path = os.path.join(record['full_text_file'], 'pmc_json', record['pmcid'] + '.xml.json')
-                        data = json.load(fulltexts[record['full_text_file']].extractfile(path))
-                    elif record['has_pdf_parse']:
-                        path = os.path.join(record['full_text_file'], 'pdf_json', record['sha'].split(';')[0].strip() + '.json')
-                        data = json.load(fulltexts[record['full_text_file']].extractfile(path))
+                if self._include_fulltext:
+                    body = None
+                    # Sometiems the document parses are in a single big file, sometimes in separate.
+                    # The metadata format is also different in these cases.
+                    if isinstance(fulltexts, dict):
+                        if record['has_pmc_xml_parse']:
+                            path = os.path.join(record['full_text_file'], 'pmc_json', record['pmcid'] + '.xml.json')
+                            body = json.load(fulltexts[record['full_text_file']].extractfile(path))
+                        elif record['has_pdf_parse']:
+                            path = os.path.join(record['full_text_file'], 'pdf_json', record['sha'].split(';')[0].strip() + '.json')
+                            body = json.load(fulltexts[record['full_text_file']].extractfile(path))
+                    elif fulltexts is not None:
+                        if record['pmc_json_files']:
+                            body = json.load(fulltexts.extractfile(record['pmc_json_files'].split(';')[0]))
+                        elif record['pdf_json_files']:
+                            body = json.load(fulltexts.extractfile(record['pdf_json_files'].split(';')[0]))
+                    if body is not None:
+                        if 'body_text' in body:
+                            body = tuple(Cord19FullTextSection(b['section'], b['text']) for b in body['body_text'])
+                        else:
+                            body = tuple() # no body available
+                    else:
+                        body = tuple() # no body available
+                    yield Cord19FullTextDoc(did, title, doi, date, abstract, body)
                 else:
-                    if record['pmc_json_files']:
-                        data = json.load(fulltexts.extractfile(record['pmc_json_files'].split(';')[0]))
-                    elif record['pdf_json_files']:
-                        data = json.load(fulltexts.extractfile(record['pdf_json_files'].split(';')[0]))
-                if data is not None:
-                    if 'body_text' in data:
-                        body = '\n\n'.join(b['section'] + '\n' + b['text'] for b in data['body_text'])
-                text = f'{title}\n\n{abstract}\n\n{body}'
-                yield Cord19Doc(did, title, doi, date, abstract, text)
+                    yield Cord19Doc(did, title, doi, date, abstract)
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
@@ -125,15 +150,17 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16')
+    collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=False)
+    collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True)
+
+    queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME)
+    qrels = TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS)
 
     base = Dataset(collection, documentation('_'))
 
-    subsets['trec-covid'] = Dataset(
-        TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME),
-        TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS),
-        collection,
-        documentation('trec-covid'))
+    subsets['trec-covid'] = Dataset(queries, qrels, collection, documentation('trec-covid'))
+    subsets['fulltext'] = Dataset(collection_ft, documentation('fulltext'))
+    subsets['fulltext/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('fulltext/trec-covid'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
