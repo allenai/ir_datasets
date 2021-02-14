@@ -40,6 +40,7 @@ class RequestsDownload(BaseDownload):
         }
         done = False
         pbar = None
+        response = None
         skip = 0
         remaining_tries = self.tries if self.tries is not None else int(os.environ.get('IR_DATASETS_DL_TRIES', '3'))
         with contextlib.ExitStack() as stack:
@@ -63,19 +64,25 @@ class RequestsDownload(BaseDownload):
                     remaining_tries -= 1
                     if remaining_tries <= 0:
                         raise # no more tries
-                    if response.headers.get('accept-ranges') == 'bytes':
+                    if response is not None and response.headers.get('accept-ranges') == 'bytes':
                         # woo hoo! We can issue a range request, so we don't need to download all the data again,
                         # just pick up from where we left off.
                         _logger.info(f'download error: {ex}. Retrying range "{pbar.n}-" [{remaining_tries} attempts left]')
                         http_args['headers']['Range'] = f'bytes={pbar.n}-'
                         skip = 0
-                    else:
+                    elif pbar is not None:
                         # The server doesn't accept range requests, so we'll need to re-download the file up to
                         # where we got, and then start up again from there
                         _logger.info(f'download error: {ex}. Retrying from start (skipping {pbar.n} bytes) because server doesn\'t accept range requests [{remaining_tries} attempts left]')
                         if 'Range' in http_args['headers']:
                             del http_args['headers']['Range']
                         skip = pbar.n
+                    else:
+                        # We didn't get any data, start from the start
+                        _logger.info(f'download error: {ex}. Retrying from start.')
+                        if 'Range' in http_args['headers']:
+                            del http_args['headers']['Range']
+                        skip = 0
                 else:
                     done = True
             pbar.bar_format = '{desc} [{elapsed}] [{n_fmt}] [{rate_fmt}]'
