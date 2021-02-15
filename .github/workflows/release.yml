@@ -45,4 +45,4 @@ jobs:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        twine upload wheelhouse/wheelhouse/ir_datasets-*-py3-none-any.whl
+        twine upload wheelhouse/ir_datasets-*-py3-none-any.whl
