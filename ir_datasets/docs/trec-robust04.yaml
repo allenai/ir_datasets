@@ -15,6 +15,7 @@ agreements to be filed with NIST. See details <a href="https://trec.nist.gov/dat
 <li>Queries: keyword queries, descriptions, narratives</li>
 <li>Relevance: Deep judgments</li>
 <li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li>
+<li>See also: <a class="ds-ref">aquaint/trec-robust-2005</a></li>
 </ul>'
   docs_instructions: &inst "docs available from NIST"
   bibtex: |

@@ -25,6 +25,24 @@ antique:
     cache_path: 'test-disallow-list.txt'
 
 
+aquaint:
+  docs:
+    instructions: 'The AQUAINT corpus is available from the LDC via:
+<https://catalog.ldc.upenn.edu/LDC2002T31>.
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: 'ac623257d8dd35326c9d500d5f6834e5'
+    cache_path: 'aquaint_comp_LDC2002T31.tgz'
+  trec-robust-2005/queries:
+    url: 'https://trec.nist.gov/data/robust/05/05.50.topics.txt'
+    expected_md5: 'c2e722e6bdfd00f088c6f6517db564ce'
+    cache_path: 'trec-robust-2005/queries'
+  trec-robust-2005/qrels:
+    url: 'https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt'
+    expected_md5: '9186021c74090464c50f577d4826e2e2'
+    cache_path: 'trec-robust-2005/qrels'
+
+
 car:
   docs:
     url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz'

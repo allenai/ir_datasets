@@ -1,0 +1,45 @@
+_:
+  pretty_name: 'AQUAINT'
+  desc: '
+<p>
+A document collection of about 1M English newswire text. Sources are the Xinhua News
+Service (People''s Republic of China), the New York Times News Service, and the
+Associated Press Worldstream News Service.
+</p>
+<ul>
+<li><a href="https://catalog.ldc.upenn.edu/LDC2002T31">Dataset details</a></li>
+</ul>
+'
+  docs_instructions: &inst "docs available from LDC"
+  bibtex: |
+    @misc{LDC2001T55,
+      title={The AQUAINT Corpus of English News Text},
+      author={David Graff},
+      year={2002},
+      url={https://catalog.ldc.upenn.edu/LDC2002T31},
+      publisher={Linguistic Data Consortium}
+    }
+
+trec-robust-2005:
+  desc: '
+<p>
+The TREC Robust 2005 dataset. Contains a subset of 50 "hard" queries from
+<a class="ds-ref">trec-robust04</a>.
+</p>
+<ul>
+<li>Documents: News articles</li>
+<li>Queries: keyword queries, descriptions, narratives</li>
+<li>Relevance: Deep judgments</li>
+<li><a href="https://trec.nist.gov/data/robust/05/05.guidelines.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec14/papers/ROBUST.OVERVIEW.pdf">Task overview paper</a></li>
+<li>See also: <a class="ds-ref">trec-robust04</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Voorhees2005Robust,
+      title={Overview of the TREC 2005 Robust Retrieval Track},
+      author={Ellen M. Voorhees},
+      booktitle={TREC},
+      year={2005}
+    }
