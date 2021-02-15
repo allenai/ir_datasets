@@ -26,7 +26,7 @@ jobs:
       run: |
         twine upload dist/*
 
-  deploy-bdist-manylinux:
+  deploy-bdist:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -36,15 +36,13 @@ jobs:
     - name: install-deps
       run: |
         python -m pip install --upgrade pip
-        pip install setuptools wheel twine cibuildwheel==1.7.4
+        pip install setuptools wheel twine
     - name: build
-      env:
-        CIBW_SKIP: "cp27-* pp27-* cp35-*"  # skip Python 2.7 and 3.5
       run: |
-        python -m cibuildwheel --output-dir wheelhouse
+        pip wheel -w wheelhouse/ ir_datasets
     - name: upload
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
         TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
       run: |
-        twine upload wheelhouse/*
+        twine upload wheelhouse/wheelhouse/ir_datasets-*-py3-none-any.whl
