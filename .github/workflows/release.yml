@@ -39,7 +39,7 @@ jobs:
         pip install setuptools wheel twine cibuildwheel==1.7.4
     - name: build
       env:
-        CIBW_SKIP: "cp27-* pp27-*"  # skip Python 2.7 wheels
+        CIBW_SKIP: "cp27-* pp27-* cp35-*"  # skip Python 2.7 and 3.5
       run: |
         python -m cibuildwheel --output-dir wheelhouse
     - name: upload
