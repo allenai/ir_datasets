@@ -1,7 +1,7 @@
 import re
 import unittest
 import ir_datasets
-from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, MisinfoQrel, MisinfoQuery
+from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, MisinfoQrel, MisinfoQuery, EhealthQrel
 from ir_datasets.formats import TrecQrel, TrecSubtopic, GenericDoc, GenericQuery, WarcDoc
 from .base import DatasetIntegrationTest
 
@@ -83,6 +83,42 @@ class TestClueWeb12(DatasetIntegrationTest):
             9: MisinfoQuery('10', 'gene therapy sickle cell', '10.1002/14651858.CD007652.pub6', 'Can gene therapy prevent complications caused by sickle cell disease?', 'Sickle cell disease (SCD) is an inherited blood disorder that affects the development of healthy red blood cells and causes red blood cells to change their form from a normal round shape to a crescent and rigid shape. People with sickle cell disease have fewer healthy blood cells, which can affect their oxygen carrying capacity and lead to serious or life-threatening complications. Gene therapy, as a newly advanced field, is claimed to be helpful for this disease. A relevant document discusses using gene therapy for preventing the symptoms and complications of SCD.'),
             50: MisinfoQuery('51', 'dehumidifiers asthma', '10.1002/14651858.CD003563.pub2', 'Can dehumidifiers be used to control asthma?', 'Dehumidification homes might improve lives of people with asthma. Dehumidifiers are electronic devices to control the level of humidity of environment which is suggested to contribute to factors that might affect asthma. A relevant document should discuss whether or not dehumidifiers can be used to control asthma symptoms or can improve lives of people with asthma.'),
         })
+        self._test_queries('clueweb12/b13/clef-ehealth', count=300, items={
+            0: GenericQuery('101001', 'inguinal hernia repair laproscopic mesh benefits risks'),
+            9: GenericQuery('102004', '"anal" skin tags removal or treatments "recovery"'),
+            299: GenericQuery('150006', 'what causes painful erections after have a foley catheter'),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/cs', count=300, items={
+            0: GenericQuery('101001-cs', 'korekce inguinální hernie laparoskopická síťka přínosy rizika'),
+            9: GenericQuery('102004-cs', 'odstranění kožních výrůstků v oblasti konečníku nebo zotavení se z léčby'),
+            299: GenericQuery('150006-cs', 'co způsobuje bolestivou erekci po zavedení Foleyova katétru'),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/de', count=300, items={
+            0: GenericQuery('101001-de', 'Leistenbruch Reparatur laparoskopisch Netz Vorteile Risiken'),
+            9: GenericQuery('102004-de', 'anal "Hautauswuchs Entfernung oder Behandlungen" Heilung'),
+            299: GenericQuery('150006-de', 'was verursacht schmerzhafte Erektion nach einem Foley-Katheter'),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/fr', count=300, items={
+            0: GenericQuery('101001-fr', 'avantages et risques du traitement des hernies inguinales par laparoscopie à maillage '),
+            9: GenericQuery('102004-fr', 'l\'élimination des balises anales de peau ou "la rémission" après les traitements'),
+            299: GenericQuery('150006-fr', 'quelle est la cause des érections douloureuses après avoir eu la sonde de Foley sur place'),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/hu', count=300, items={
+            0: GenericQuery('101001-hu', 'lágyéksérv helyreállítás laparoszkópiás háló előnyök kockázatok'),
+            9: GenericQuery('102004-hu', 'anális" bőrfüggelékek eltávolítás or kezelések "gyógyulás'),
+            299: GenericQuery('150006-hu', 'mi okozza a fájdalmas erekciót foley katéterezést követően'),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/pl', count=300, items={
+            0: GenericQuery('101001-pl', 'operacja laparoskopowa przepukliny pachwinowej z użyciem siatki korzyści ryzyko'),
+            9: GenericQuery('102004-pl', 'odbytowy "usunięcie brodawek miękkich skóry lub leczenie" powrót do zdrowia'),
+            299: GenericQuery('150006-pl', "co powoduje bolesne erekcje po cewnikowaniu cewnikiem Foley'a"),
+        })
+        self._test_queries('clueweb12/b13/clef-ehealth/sv', count=300, items={
+            0: GenericQuery('101001-sv', 'ljumskbråck reparation laparoskopisk nät fördelar risker'),
+            9: GenericQuery('102004-sv', 'anal" hudflikar borttagning eller behandlingar "återhämtning'),
+            299: GenericQuery('150006-sv', 'vad som orsakar smärtsamma erektioner efter att ha haft en Foley-kateter'),
+        })
+
 
     def test_clueweb12_qrels(self):
         self._test_qrels('clueweb12/trec-web-2013', count=14474, items={
@@ -109,6 +145,41 @@ class TestClueWeb12(DatasetIntegrationTest):
             0: MisinfoQrel('1', 'clueweb12-0000wb-03-01030', 1, 2, 0),
             9: MisinfoQrel('1', 'clueweb12-0002wb-45-16639', 0, -1, -1),
             22858: MisinfoQrel('51', 'clueweb12-1913wb-78-31232', 0, -1, -1),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth', count=269232, items={
+            0: EhealthQrel('101001', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/cs', count=269232, items={
+            0: EhealthQrel('101001-cs', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-cs', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-cs', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/de', count=269232, items={
+            0: EhealthQrel('101001-de', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-de', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-de', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/fr', count=269232, items={
+            0: EhealthQrel('101001-fr', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-fr', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-fr', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/hu', count=269232, items={
+            0: EhealthQrel('101001-hu', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-hu', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-hu', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/pl', count=269232, items={
+            0: EhealthQrel('101001-pl', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-pl', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-pl', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
+        })
+        self._test_qrels('clueweb12/b13/clef-ehealth/sv', count=269232, items={
+            0: EhealthQrel('101001-sv', 'clueweb12-0000tw-08-16795', 0, 0, 95, '0'),
+            9: EhealthQrel('101004-sv', 'clueweb12-0000wb-06-29427', 0, 50, 99, '0'),
+            269231: EhealthQrel('150006-sv', 'clueweb12-0504wb-17-23016', 0, 70, 80, '1'),
         })
 
 

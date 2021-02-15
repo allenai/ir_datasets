@@ -235,6 +235,8 @@ class TrecXmlQueries(BaseQueries):
                         subtopics.append(TrecSubtopic(field_el.attrib['number'], text, field_el.attrib['type']))
                 if self._subtopics_key in self._qtype._fields:
                     item[self._qtype._fields.index('subtopics')] = tuple(subtopics)
+                qid_field = self._qtype._fields.index('query_id')
+                item[qid_field] = item[qid_field].strip() # remove whitespace from query_ids
                 yield self._qtype(*item)
 
     def queries_cls(self):

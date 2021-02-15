@@ -150,6 +150,58 @@ Should contain ClueWeb12_00--19 directories'
     url: 'https://trec.nist.gov/data/misinfo/2019qrels_raw.txt'
     expected_md5: 'faf86b2ac5fcca52b189a3ad408fd019'
     cache_path: 'trec-misinfo-2019/qrels'
+  clef-ehealth/queries:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/eng_queries/queries2016_with_url.xml'
+    expected_md5: 'ed0289056e21643baa07dfc7bee9574b'
+    cache_path: 'clef-ehealth/queries.xml'
+  clef-ehealth/queries/cs:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016cs.xml'
+    expected_md5: 'f7940a8961fae713742b935c83b6118d'
+    cache_path: 'clef-ehealth/queries.cs.xml'
+  clef-ehealth/queries/de:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016de.xml'
+    expected_md5: 'f59e000328a8cbe357ff94d5d5e82474'
+    cache_path: 'clef-ehealth/queries.de.xml'
+  clef-ehealth/queries/fr:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016fr.xml'
+    expected_md5: '7362ccb451a606af7a47e359894f524c'
+    cache_path: 'clef-ehealth/queries.fr.xml'
+  clef-ehealth/queries/hu:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016hu.xml'
+    expected_md5: '17603aecae72eeb70ada73700956ab3f'
+    cache_path: 'clef-ehealth/queries.hu.xml'
+  clef-ehealth/queries/pl:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016pl.xml'
+    expected_md5: 'e6d442846786793c235bf927289af4c3'
+    cache_path: 'clef-ehealth/queries.pl.xml'
+  clef-ehealth/queries/sv:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016sv.xml'
+    expected_md5: 'bc9066f128a391c9f5c282dbcca3e44f'
+    cache_path: 'clef-ehealth/queries.sv.xml'
+  clef-ehealth/2016.qrels:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qrels'
+    expected_md5: '5392a6f7cdbb0cab56c34656ab100684'
+    cache_path: 'clef-ehealth-2016/2016.qrels'
+  clef-ehealth/2016.qtrust:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qtrust'
+    expected_md5: '14cf266961f686b49d8430b802064ac6'
+    cache_path: 'clef-ehealth/2016.qtrust'
+  clef-ehealth/2016.qunder:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qunder'
+    expected_md5: '4314d1a0db76a50204e5e900ffa2d4e3'
+    cache_path: 'clef-ehealth/2016.qunder'
+  clef-ehealth/2017.qrels:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qrels.txt'
+    expected_md5: 'b9909f2fa7f2a0ceca1033fc92729482'
+    cache_path: 'clef-ehealth/2017.qrels'
+  clef-ehealth/2017.qtrust:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qtrust.txt'
+    expected_md5: '3a43cc9a49a781b13f0b8438bceed2f5'
+    cache_path: 'clef-ehealth/2017.qtrust'
+  clef-ehealth/2017.qreads:
+    url: 'https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qreads.txt'
+    expected_md5: '75302c012adf0126ab93e330ffb6aaab'
+    cache_path: 'clef-ehealth/2017.qureads'
 
 
 codesearchnet:

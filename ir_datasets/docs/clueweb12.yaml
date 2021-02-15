@@ -132,3 +132,97 @@ The TREC Medical Misinformation 2019 dataset.
       booktitle={TREC},
       year={2019}
     }
+
+clef-ehealth:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset. Contains consumer health queries and judgments
+containing trustworthiness and understandability scores, in addition to the normal
+relevance assessments.
+</p>
+<p>
+This dataset contains the combined 2016 and 2017 relevance judgments, since the same
+queries were used in the two year. The assessment year can be distinguished using
+iteration (2016 is iteration 0, 2017 is iteration 1).
+</p>
+<ul>
+<li><a href="https://sites.google.com/site/clefehealth2016/task-3">2016 shared task site</a></li>
+<li><a href="https://sites.google.com/site/clefehealth2017/task-3">2017 shared task site</a></li>
+<li><a href="http://ceur-ws.org/Vol-1609/16090015.pdf">2016 shared task paper</a></li>
+<li><a href="http://ceur-ws.org/Vol-1866/invited_paper_16.pdf">2017 shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: &clefehealth |
+    @inproceedings{Zuccon2016TheIT,
+      title={The IR Task at the CLEF eHealth Evaluation Lab 2016: User-centred Health Information Retrieval},
+      author={Guido Zuccon and Joao Palotti and Lorraine Goeuriot and Liadh Kelly and Mihai Lupu and Pavel Pecina and Henning M{\"u}ller and Julie Budaher and Anthony Deacon},
+      booktitle={CLEF},
+      year={2016}
+    }
+    @inproceedings{Palotti2017CLEF,
+      title={CLEF 2017 Task Overview: The IR Task at the eHealth Evaluation Lab - Evaluating Retrieval Methods for Consumer Health Search},
+      author={Joao Palotti and Guido Zuccon and Jimmy and Pavel Pecina and Mihai Lupu and Lorraine Goeuriot and Liadh Kelly and Allan Hanbury},
+      booktitle={CLEF},
+      year={2017}
+    }
+
+clef-ehealth/cs:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to Czech. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth
+
+clef-ehealth/de:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to German. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth
+
+clef-ehealth/fr:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to French. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth
+
+clef-ehealth/hu:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to Hungarian. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth
+
+clef-ehealth/pl:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to Polish. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth
+
+clef-ehealth/sv:
+  desc: '
+<p>
+The CLEF eHealth 2016-17 IR dataset, with queries professionally translataed to Swedish. See
+<a class="ds-ref">clueweb12/b13/clef-ehealth</a> for more details.
+</p>
+'
+  docs_instructions: *inst
+  bibtex: *clefehealth

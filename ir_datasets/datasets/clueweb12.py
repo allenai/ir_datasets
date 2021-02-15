@@ -1,4 +1,5 @@
 import codecs
+import io
 import os
 import gzip
 import contextlib
@@ -6,7 +7,7 @@ from typing import NamedTuple, Tuple
 from glob import glob
 from pathlib import Path
 import ir_datasets
-from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, Bz2Extract, ZipExtract
+from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, Bz2Extract, ZipExtract, IterStream
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
@@ -41,9 +42,16 @@ MISINFO_QREL_DEFS = {
     2: 'Highly relevant',
 }
 
+EHEALTH_QREL_DEFS = {
+    0: 'Not relevant',
+    1: 'Somewhat relevant',
+    2: 'Highly relevant',
+}
+
 
 ntcir_map = {'qid': 'query_id', 'content': 'title', 'description': 'description'}
 misinfo_map = {'number': 'query_id', 'query': 'title', 'cochranedoi': 'cochranedoi', 'description': 'description', 'narrative': 'narrative'}
+ehealth_map = {'id': 'query_id', 'title': 'text'}
 
 
 class TrecWebTrackQuery(NamedTuple):
@@ -76,6 +84,15 @@ class MisinfoQrel(NamedTuple):
     redibility: int
 
 
+class EhealthQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    trustworthiness: int
+    understandability: int
+    iteration: str
+
+
 class MsinfoQrels(TrecQrels):
     def qrels_iter(self):
         with self._qrels_dlc.stream() as f:
@@ -91,6 +108,49 @@ class MsinfoQrels(TrecQrels):
 
     def qrels_cls(self):
         return MisinfoQrel
+
+
+class EhealthQrels(TrecQrels):
+    def __init__(self, qrels_dlcs, qtrust_dlcs, qunder_dlcs, qrels_defs, query_id_suffix=''):
+        super().__init__(None, qrels_defs)
+        self._qrels_dlcs = qrels_dlcs
+        self._qtrust_dlcs = qtrust_dlcs
+        self._qunder_dlcs = qunder_dlcs
+        self._query_id_suffix = query_id_suffix
+
+    def qrels_iter(self):
+        for i, (qrel_dlc, qtrust_dlc, qunder_dlc) in enumerate(zip(self._qrels_dlcs, self._qtrust_dlcs, self._qunder_dlcs)):
+            with qrel_dlc.stream() as frel, \
+                 qtrust_dlc.stream() as ftrust, \
+                 qunder_dlc.stream() as funder:
+                frel = codecs.getreader('utf8')(frel)
+                ftrust = codecs.getreader('utf8')(ftrust)
+                funder = codecs.getreader('utf8')(funder)
+                for lrel, ltrust, lunder in zip(frel, ftrust, funder):
+                    cols_rel = lrel.rstrip().split()
+                    cols_trust = ltrust.rstrip().split()
+                    cols_under = lunder.rstrip().split()
+                    assert len(cols_rel) == 4 and len(cols_trust) == 4 and len(cols_under) == 4
+                    assert cols_rel[0] == cols_trust[0] and cols_trust[0] == cols_under[0] # qid
+                    assert cols_rel[2] == cols_trust[2] and cols_trust[2] == cols_under[2] # did
+                    qid, did = cols_rel[0], cols_rel[2]
+                    yield EhealthQrel(qid + self._query_id_suffix, did, int(cols_rel[3]), int(cols_trust[3]), int(cols_under[3]), str(i))
+
+    def qrels_cls(self):
+        return EhealthQrel
+
+
+class FixAmp:
+    def __init__(self, streamer):
+        self._streamer = streamer
+
+    def stream(self):
+        return io.BufferedReader(IterStream(iter(self)), buffer_size=io.DEFAULT_BUFFER_SIZE)
+
+    def __iter__(self):
+        with self._streamer.stream() as stream:
+            for line in stream:
+                yield line.replace(b' & ', b' &amp; ')
 
 
 class ClueWeb12Docs(WarcDocs):
@@ -208,38 +268,108 @@ def _init():
 
     subsets['trec-web-2013'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace='trec-web'),
         TrecQrels(dlc['trec-web-2013/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2013'))
 
     subsets['trec-web-2014'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace='trec-web'),
         TrecQrels(dlc['trec-web-2014/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2014'))
 
     subsets['b13/ntcir-www-1'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}, namespace=NAME),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}, namespace='ntcir-www'),
         NtcirQrels(dlc['ntcir-www-1/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-1'))
 
     subsets['b13/ntcir-www-2'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map, namespace=NAME),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www'),
         NtcirQrels(dlc['ntcir-www-2/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-2'))
 
     subsets['b13/ntcir-www-3'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map, namespace=NAME),
+        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www'),
         documentation('ntcir-www-3'))
 
     subsets['b13/trec-misinfo-2019'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace=NAME),
+        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace='trec-misinfo-2019'),
         MsinfoQrels(dlc['trec-misinfo-2019/qrels'], MISINFO_QREL_DEFS),
         documentation('trec-misinfo-2019'))
+
+    subsets['b13/clef-ehealth'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS),
+        documentation('clef-ehealth'))
+
+    subsets['b13/clef-ehealth/cs'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/cs']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-cs'),
+        documentation('clef-ehealth/cs'))
+
+    subsets['b13/clef-ehealth/de'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/de']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-de'),
+        documentation('clef-ehealth/de'))
+
+    subsets['b13/clef-ehealth/fr'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/fr']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-fr'),
+        documentation('clef-ehealth/fr'))
+
+    subsets['b13/clef-ehealth/hu'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/hu']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-hu'),
+        documentation('clef-ehealth/hu'))
+
+    subsets['b13/clef-ehealth/pl'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/pl']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-pl'),
+        documentation('clef-ehealth/pl'))
+
+    subsets['b13/clef-ehealth/sv'] = Dataset(
+        collection_b13,
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/sv']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        EhealthQrels(
+            [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
+            [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
+            [dlc['clef-ehealth/2016.qunder'], dlc['clef-ehealth/2017.qreads']],
+            EHEALTH_QREL_DEFS, query_id_suffix='-sv'),
+        documentation('clef-ehealth/sv'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
