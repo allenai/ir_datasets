@@ -39,7 +39,7 @@ jobs:
         pip install setuptools wheel twine
     - name: build
       run: |
-        pip wheel -w wheelhouse/ ir_datasets
+        python setup.py bdist_wheel
     - name: upload
       env:
         TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
