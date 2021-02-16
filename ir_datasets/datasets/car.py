@@ -62,6 +62,9 @@ class CarDocs(BaseDocs):
     def docs_namespace(self):
         return NAME
 
+    def docs_lang(self):
+        return 'en'
+
 class CarQueries(BaseQueries):
     def __init__(self, streamer):
         super().__init__()
@@ -80,6 +83,9 @@ class CarQueries(BaseQueries):
 
     def queries_namespace(self):
         return NAME
+
+    def queries_lang(self):
+        return 'en'
 
 def _init():
     subsets = {}

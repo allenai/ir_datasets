@@ -26,12 +26,12 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['aquaint_comp/apw/*/*.gz', 'aquaint_comp/nyt/*/*.gz', 'aquaint_comp/xie/*/*.gz'], namespace=NAME)
+    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['aquaint_comp/apw/*/*.gz', 'aquaint_comp/nyt/*/*.gz', 'aquaint_comp/xie/*/*.gz'], namespace=NAME, lang='en')
 
     base = Dataset(collection, documentation('_'))
 
     subsets['trec-robust-2005'] = Dataset(
-        TrecQueries(dlc['trec-robust-2005/queries'], qtype_map=QTYPE_MAP, namespace='trec-robust'),
+        TrecQueries(dlc['trec-robust-2005/queries'], qtype_map=QTYPE_MAP, namespace='trec-robust', lang='en'),
         TrecQrels(dlc['trec-robust-2005/qrels'], QREL_DEFS),
         collection,
         documentation('trec-robust-2005'))

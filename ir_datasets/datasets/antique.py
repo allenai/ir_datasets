@@ -33,12 +33,12 @@ def _init():
     documentation = YamlDocumentation('docs/antique.yaml')
     base_path = ir_datasets.util.home_path() / NAME
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
-    collection = TsvDocs(dlc['docs'], namespace=NAME)
+    collection = TsvDocs(dlc['docs'], namespace=NAME, lang='en')
 
     subsets = {}
     for subset in ('train', 'test'):
         qrels = TrecQrels(dlc[f'{subset}/qrels'], QREL_DEFS)
-        queries = TsvQueries(dlc[f'{subset}/queries'], namespace=NAME)
+        queries = TsvQueries(dlc[f'{subset}/queries'], namespace=NAME, lang='en')
         subsets[subset] = Dataset(collection, queries, qrels)
 
     # Split the training data into training and validation data

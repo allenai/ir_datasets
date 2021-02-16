@@ -52,6 +52,9 @@ class BaseDocs:
     def docs_namespace(self):
         return None # No namespace defined
 
+    def docs_lang(self):
+        return None # ISO 639-1 language code, or None for multiple/other/unknown
+
 
 class BaseQueries:
     PREFIX = 'queries_'
@@ -74,6 +77,9 @@ class BaseQueries:
 
     def queries_namespace(self):
         return None # No namespace defined
+
+    def queries_lang(self):
+        return None # ISO 639-1 language code, or None for multiple/other/unknown
 
 
 class BaseQrels:

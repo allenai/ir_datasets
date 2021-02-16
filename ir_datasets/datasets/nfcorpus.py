@@ -48,10 +48,13 @@ class ZipQueries(BaseQueries):
         return self._qtype
 
     def queries_path(self):
-        return self._queries.queries_path()
+        return self._queries[0].queries_path()
 
     def queries_namespace(self):
         return NAME
+
+    def queries_lang(self):
+        return self._queries[0].queries_lang()
 
 
 def _init():
@@ -60,7 +63,7 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     main_dlc = dlc['main']
 
-    collection = TsvDocs(Cache(TarExtract(main_dlc, 'nfcorpus/raw/doc_dump.txt'), base_path/'collection.tsv'), doc_cls=NfCorpusDoc, namespace=NAME)
+    collection = TsvDocs(Cache(TarExtract(main_dlc, 'nfcorpus/raw/doc_dump.txt'), base_path/'collection.tsv'), doc_cls=NfCorpusDoc, namespace=NAME, lang='en')
     subsets = {}
 
     def read_lines(file):

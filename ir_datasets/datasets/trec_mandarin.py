@@ -40,18 +40,18 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
 
-    collection = TrecDocs(dlc['docs'], encoding='GB18030', path_globs=['**/xinhua/x*', '**/peoples-daily/pd*'], namespace=NAME)
+    collection = TrecDocs(dlc['docs'], encoding='GB18030', path_globs=['**/xinhua/x*', '**/peoples-daily/pd*'], namespace=NAME, lang='zh')
 
     base = Dataset(collection, documentation('_'))
 
     subsets['trec5'] = Dataset(
-        TrecQueries(GzipExtract(dlc['trec5/queries']), qtype=TrecMandarinQuery, qtype_map=QTYPE_MAP, encoding='GBK', namespace=NAME),
+        TrecQueries(GzipExtract(dlc['trec5/queries']), qtype=TrecMandarinQuery, qtype_map=QTYPE_MAP, encoding='GBK', namespace=NAME, lang=None), # queries have multiple languages
         TrecQrels(GzipExtract(dlc['trec5/qrels']), QREL_DEFS),
         collection,
         documentation('trec5'))
 
     subsets['trec6'] = Dataset(
-        TrecQueries(GzipExtract(dlc['trec6/queries']), qtype=TrecMandarinQuery, qtype_map=QTYPE_MAP, encoding='GBK', namespace=NAME),
+        TrecQueries(GzipExtract(dlc['trec6/queries']), qtype=TrecMandarinQuery, qtype_map=QTYPE_MAP, encoding='GBK', namespace=NAME, lang=None), # queries have multiple languages
         TrecQrels(GzipExtract(dlc['trec6/qrels']), QREL_DEFS),
         collection,
         documentation('trec6'))

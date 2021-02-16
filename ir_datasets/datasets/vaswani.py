@@ -57,6 +57,9 @@ class VaswaniDocs(BaseDocs):
     def docs_namespace():
         return NAME
 
+    def docs_lang(self):
+        return 'en'
+
 
 class VaswaniQueries(BaseQueries):
     def __init__(self, queries_dlc):
@@ -79,6 +82,9 @@ class VaswaniQueries(BaseQueries):
 
     def queries_namespace(self):
         return NAME
+
+    def queries_lang(self):
+        return 'en'
 
 
 class VaswaniQrels(BaseQrels):

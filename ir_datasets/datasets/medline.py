@@ -138,6 +138,9 @@ class MedlineDocs(BaseDocs):
     def docs_count(self):
         return self.docs_store().count()
 
+    def docs_lang(self):
+        return 'en'
+
 
 class AacrAscoDocs(BaseDocs):
     def __init__(self, dlc):
@@ -184,6 +187,9 @@ class AacrAscoDocs(BaseDocs):
     def docs_count(self):
         return self.docs_store().count()
 
+    def docs_lang(self):
+        return 'en'
+
 
 class ConcatDocs(BaseDocs):
     def __init__(self, docs):
@@ -215,6 +221,9 @@ class ConcatDocs(BaseDocs):
     def docs_namespace(self):
         return self._docs[0].docs_namespace()
 
+    def docs_lang(self):
+        return self._docs[0].docs_lang()
+
     def docs_count(self):
         return self.docs_store().count()
 
@@ -233,7 +242,7 @@ def _init():
 
     subsets['2004/trec-genomics-2004'] = Dataset(
         collection04,
-        TrecXmlQueries(ZipExtract(dlc['trec-genomics-2004/queries'], 'Official.xml'), qtype=TrecGenomicsQuery, qtype_map=TREC04_XML_MAP, namespace='trec-genomics'),
+        TrecXmlQueries(ZipExtract(dlc['trec-genomics-2004/queries'], 'Official.xml'), qtype=TrecGenomicsQuery, qtype_map=TREC04_XML_MAP, namespace='trec-genomics', lang='en'),
         TrecQrels(dlc['trec-genomics-2004/qrels'], QREL_DEFS),
         documentation('trec-genomics-2004'),
     )
@@ -252,13 +261,13 @@ def _init():
 
     subsets['2017/trec-pm-2017'] = Dataset(
         collection17,
-        TrecXmlQueries(dlc['trec-pm-2017/queries'], qtype=TrecPm2017Query, namespace='trec-pm-2017'),
+        TrecXmlQueries(dlc['trec-pm-2017/queries'], qtype=TrecPm2017Query, namespace='trec-pm-2017', lang='en'),
         TrecQrels(dlc['trec-pm-2017/qrels'], QREL_DEFS),
         documentation('trec-pm-2017'),
     )
     subsets['2017/trec-pm-2018'] = Dataset(
         collection17,
-        TrecXmlQueries(dlc['trec-pm-2018/queries'], qtype=TrecPmQuery, namespace='trec-pm-2018'),
+        TrecXmlQueries(dlc['trec-pm-2018/queries'], qtype=TrecPmQuery, namespace='trec-pm-2018', lang='en'),
         TrecQrels(dlc['trec-pm-2018/qrels'], QREL_DEFS),
         documentation('trec-pm-2018'),
     )

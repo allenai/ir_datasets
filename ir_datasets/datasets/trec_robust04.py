@@ -33,9 +33,9 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     subsets = {}
 
-    collection = TrecDocs(dlc['docs'], path_globs=['**/FBIS/FB*.gz', '**/FR94/*/FR*.gz', '**/FT/*/FT*.gz', '**/LATIMES/LA*.gz'], namespace=NAME)
+    collection = TrecDocs(dlc['docs'], path_globs=['**/FBIS/FB*.gz', '**/FR94/*/FR*.gz', '**/FT/*/FT*.gz', '**/LATIMES/LA*.gz'], namespace=NAME, lang='en')
 
-    queries = TrecQueries(GzipExtract(dlc['queries']), namespace=NAME)
+    queries = TrecQueries(GzipExtract(dlc['queries']), namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
 
     base = Dataset(collection, queries, qrels, documentation('_'))

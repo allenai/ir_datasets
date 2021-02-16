@@ -114,6 +114,9 @@ class HighwireDocs(BaseDocs):
     def docs_count(self):
         return self.docs_store().count()
 
+    def docs_lang(self):
+        return 'en'
+
 
 class TrecGenomicsQueries(BaseQueries):
     def __init__(self, queries_dlc):
@@ -133,6 +136,9 @@ class TrecGenomicsQueries(BaseQueries):
 
     def queries_namespace(self):
         return 'trec-genomics'
+
+    def queries_lang(self):
+        return 'en'
 
 
 class HighwireQrels(BaseQrels):

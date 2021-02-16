@@ -155,7 +155,7 @@ class FixAmp:
 
 class ClueWeb12Docs(WarcDocs):
     def __init__(self, docs_dlc, chk_dlc=None):
-        super().__init__()
+        super().__init__(lang='en') # all CW12 are english
         self.docs_dlc = docs_dlc
         self.chk_dlc = chk_dlc
         self._docs_warc_file_counts_cache = None
@@ -268,42 +268,42 @@ def _init():
 
     subsets['trec-web-2013'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace='trec-web'),
+        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
         TrecQrels(dlc['trec-web-2013/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2013'))
 
     subsets['trec-web-2014'] = Dataset(
         collection,
-        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace='trec-web'),
+        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
         TrecQrels(dlc['trec-web-2014/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2014'))
 
     subsets['b13/ntcir-www-1'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}, namespace='ntcir-www'),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-1/queries'], 'eng.queries.xml'), base_path/'ntcir-www-1'/'queries.xml'), qtype=GenericQuery, qtype_map={'qid': 'query_id', 'content': 'text'}, namespace='ntcir-www', lang='en'),
         NtcirQrels(dlc['ntcir-www-1/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-1'))
 
     subsets['b13/ntcir-www-2'] = Dataset(
         collection_b13,
-        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www'),
+        TrecXmlQueries(Cache(ZipExtract(dlc['ntcir-www-2/queries'], 'qEng.xml'), base_path/'ntcir-www-2'/'queries.xml'), qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www', lang='en'),
         NtcirQrels(dlc['ntcir-www-2/qrels'], NTCIR_QREL_DEFS),
         documentation('ntcir-www-2'))
 
     subsets['b13/ntcir-www-3'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www'),
+        TrecXmlQueries(dlc['ntcir-www-3/queries'], qtype=NtcirQuery, qtype_map=ntcir_map, namespace='ntcir-www', lang='en'),
         documentation('ntcir-www-3'))
 
     subsets['b13/trec-misinfo-2019'] = Dataset(
         collection_b13,
-        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace='trec-misinfo-2019'),
+        TrecXmlQueries(dlc['trec-misinfo-2019/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace='trec-misinfo-2019', lang='en'),
         MsinfoQrels(dlc['trec-misinfo-2019/qrels'], MISINFO_QREL_DEFS),
         documentation('trec-misinfo-2019'))
 
     subsets['b13/clef-ehealth'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='en'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -313,7 +313,7 @@ def _init():
 
     subsets['b13/clef-ehealth/cs'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/cs']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/cs']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='cs'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -323,7 +323,7 @@ def _init():
 
     subsets['b13/clef-ehealth/de'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/de']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/de']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='de'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -333,7 +333,7 @@ def _init():
 
     subsets['b13/clef-ehealth/fr'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/fr']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/fr']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='fr'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -343,7 +343,7 @@ def _init():
 
     subsets['b13/clef-ehealth/hu'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/hu']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/hu']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='hu'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -353,7 +353,7 @@ def _init():
 
     subsets['b13/clef-ehealth/pl'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/pl']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/pl']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='pl'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],
@@ -363,7 +363,7 @@ def _init():
 
     subsets['b13/clef-ehealth/sv'] = Dataset(
         collection_b13,
-        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/sv']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth'),
+        TrecXmlQueries(FixAmp(dlc['clef-ehealth/queries/sv']), qtype=GenericQuery, qtype_map=ehealth_map, namespace='clef-ehealth', lang='sv'),
         EhealthQrels(
             [dlc['clef-ehealth/2016.qrels'], dlc['clef-ehealth/2017.qrels']],
             [dlc['clef-ehealth/2016.qtrust'], dlc['clef-ehealth/2017.qtrust']],

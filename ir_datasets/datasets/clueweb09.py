@@ -46,8 +46,8 @@ class TrecPrel(NamedTuple):
 
 
 class ClueWeb09Docs(WarcDocs):
-    def __init__(self, docs_dlc, chk_dlc, dirs=None):
-        super().__init__(warc_cw09=True)
+    def __init__(self, docs_dlc, chk_dlc, dirs=None, lang=None):
+        super().__init__(warc_cw09=True, lang=lang)
         self.docs_dlc = docs_dlc
         self.chk_dlc = chk_dlc
         # All available languages
@@ -150,18 +150,18 @@ def _init():
 
     docs_dlc = dlc['docs']
     chk_dlc = TarExtractAll(dlc['docs.chk'], base_path/'corpus.chk')
-    collection = ClueWeb09Docs(docs_dlc, chk_dlc)
-    collection_ar = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Arabic_1'])
-    collection_zh = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4'])
-    collection_en = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10'])
-    collection_fr = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_French_1'])
-    collection_de = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_German_1'])
-    collection_it = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Italian_1'])
-    collection_ja = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2'])
-    collection_ko = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Korean_1'])
-    collection_pt = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Portuguese_1'])
-    collection_es = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2'])
-    collection_catb = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1'])
+    collection = ClueWeb09Docs(docs_dlc, chk_dlc, lang=None) # multiple langs
+    collection_ar = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Arabic_1'], lang='ar')
+    collection_zh = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4'], lang='zh')
+    collection_en = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10'], lang='en')
+    collection_fr = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_French_1'], lang='fr')
+    collection_de = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_German_1'], lang='de')
+    collection_it = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Italian_1'], lang='it')
+    collection_ja = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2'], lang='ja')
+    collection_ko = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Korean_1'], lang='ko')
+    collection_pt = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Portuguese_1'], lang='pt')
+    collection_es = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2'], lang='es')
+    collection_catb = ClueWeb09Docs(docs_dlc, chk_dlc, dirs=['ClueWeb09_English_1'], lang='en')
     base = Dataset(collection, documentation('_'))
 
     subsets['ar'] = Dataset(collection_ar, documentation('ar'))
@@ -178,49 +178,49 @@ def _init():
 
     subsets['en/trec-web-2009'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09),
         documentation('trec-web-2009'))
 
     subsets['en/trec-web-2010'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2010'))
 
     subsets['en/trec-web-2011'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2011'))
 
     subsets['en/trec-web-2012'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2012'))
 
     subsets['catb/trec-web-2009'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09)),
         documentation('trec-web-2009'))
 
     subsets['catb/trec-web-2010'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2010'))
 
     subsets['catb/trec-web-2011'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2011'))
 
     subsets['catb/trec-web-2012'] = Dataset(
         collection_en,
-        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME),
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2012'))
 

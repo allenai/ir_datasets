@@ -144,6 +144,9 @@ class Cord19Docs(BaseDocs):
     def docs_namespace(self):
         return NAME
 
+    def docs_lang(self):
+        return 'en'
+
 
 def _init():
     subsets = {}
@@ -153,7 +156,7 @@ def _init():
     collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=False)
     collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True)
 
-    queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME)
+    queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS)
 
     base = Dataset(collection, documentation('_'))

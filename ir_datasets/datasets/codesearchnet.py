@@ -85,6 +85,9 @@ class CodeSearchNetDocs(BaseDocs):
     def docs_namespace(self):
         return NAME
 
+    def docs_lang(self):
+        return None # not natural languages
+
 
 class CodeSearchNetQueries(BaseQueries):
     def __init__(self, queries_dlcs, split):
@@ -109,6 +112,9 @@ class CodeSearchNetQueries(BaseQueries):
 
     def queries_namespace(self):
         return NAME
+
+    def queries_lang(self):
+        return 'en'
 
 
 class CodeSearchNetQrels(BaseQrels):
@@ -136,6 +142,9 @@ class CodeSearchNetQrels(BaseQrels):
 
     def qrels_defs(self):
         return QREL_DEFS
+
+    def queries_lang(self):
+        return 'en'
 
 
 class CodeSearchNetChallengeQueries(BaseQueries):

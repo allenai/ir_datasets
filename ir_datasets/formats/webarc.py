@@ -16,10 +16,11 @@ class WarcDoc(NamedTuple):
 
 
 class WarcDocs(BaseDocs):
-    def __init__(self, id_header='WARC-TREC-ID', warc_cw09=False):
+    def __init__(self, id_header='WARC-TREC-ID', warc_cw09=False, lang=None):
         super().__init__()
         self.id_header = id_header
         self.warc_cw09 = warc_cw09
+        self._docs_lang = lang
 
     def docs_iter(self):
         return ir_datasets.indices.WarcIter(self, slice(0, self.docs_count()))
@@ -79,3 +80,6 @@ class WarcDocs(BaseDocs):
 
     def docs_count(self):
         return sum(self._docs_warc_file_counts().values())
+
+    def docs_lang(self):
+        return self._docs_lang

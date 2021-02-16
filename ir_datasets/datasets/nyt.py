@@ -80,6 +80,8 @@ class NytDocs(BaseDocs):
     def docs_namespace(self):
         return NAME
 
+    def docs_lang(self):
+        return 'en'
 
 class NytQueries(BaseQueries):
     def __init__(self, collection):
@@ -91,6 +93,9 @@ class NytQueries(BaseQueries):
 
     def queries_namespace(self):
         return NAME
+
+    def queries_lang(self):
+        return 'en'
 
 
 class NytQrels(BaseQrels):

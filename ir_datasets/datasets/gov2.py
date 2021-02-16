@@ -213,6 +213,9 @@ class Gov2Docs(BaseDocs):
     def docs_namespace(self):
         return NAME
 
+    def docs_lang(self):
+        return 'en'
+
 
 class Gov2Docstore(Docstore):
     def __init__(self, gov2_docs):
@@ -300,70 +303,70 @@ def _init():
 
     subsets['trec-tb-2004'] = Dataset(
         collection,
-        TrecQueries(dlc['trec-tb-2004/queries'], namespace=NAME),
+        TrecQueries(dlc['trec-tb-2004/queries'], namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-tb-2004/qrels'], QREL_DEFS),
         documentation('trec-tb-2004')
     )
     subsets['trec-tb-2005'] = Dataset(
         collection,
-        TrecQueries(dlc['trec-tb-2005/queries'], namespace=NAME),
+        TrecQueries(dlc['trec-tb-2005/queries'], namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-tb-2005/qrels'], QREL_DEFS),
         documentation('trec-tb-2005')
     )
     subsets['trec-tb-2005/named-page'] = Dataset(
         collection,
-        TrecQueries(dlc['trec-tb-2005/named-page/queries'], qtype=GenericQuery, qtype_map=NAMED_PAGE_QTYPE_MAP, namespace=NAME),
+        TrecQueries(dlc['trec-tb-2005/named-page/queries'], qtype=GenericQuery, qtype_map=NAMED_PAGE_QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-tb-2005/named-page/qrels'], NAMED_PAGE_QREL_DEFS),
         documentation('trec-tb-2005/named-page')
     )
     subsets['trec-tb-2005/efficiency'] = Dataset(
         collection,
-        TrecColonQueries(GzipExtract(dlc['trec-tb-2005/efficiency/queries']), encoding='latin1', namespace=NAME),
+        TrecColonQueries(GzipExtract(dlc['trec-tb-2005/efficiency/queries']), encoding='latin1', namespace=NAME, lang='en'),
         RewriteQids(TrecQrels(dlc['trec-tb-2005/qrels'], QREL_DEFS), EFF_MAP_05),
         documentation('trec-tb-2005/efficiency')
     )
     subsets['trec-tb-2006'] = Dataset(
         collection,
-        TrecQueries(dlc['trec-tb-2006/queries'], namespace=NAME),
+        TrecQueries(dlc['trec-tb-2006/queries'], namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-tb-2006/qrels'], QREL_DEFS),
         documentation('trec-tb-2006')
     )
     subsets['trec-tb-2006/named-page'] = Dataset(
         collection,
-        TrecQueries(dlc['trec-tb-2006/named-page/queries'], qtype=GenericQuery, qtype_map=NAMED_PAGE_QTYPE_MAP, namespace=NAME),
+        TrecQueries(dlc['trec-tb-2006/named-page/queries'], qtype=GenericQuery, qtype_map=NAMED_PAGE_QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-tb-2006/named-page/qrels'], NAMED_PAGE_QREL_DEFS),
         documentation('trec-tb-2006/named-page')
     )
     subsets['trec-tb-2006/efficiency'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.all'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.all'), encoding='latin1', namespace=NAME, lang='en'),
         RewriteQids(TrecQrels(dlc['trec-tb-2006/qrels'], QREL_DEFS), EFF_MAP_06),
         documentation('trec-tb-2006/efficiency')
     )
     subsets['trec-tb-2006/efficiency/10k'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.10k'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.10k'), encoding='latin1', namespace=NAME, lang='en'),
         documentation('trec-tb-2006/efficiency/10k')
     )
     subsets['trec-tb-2006/efficiency/stream1'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-1'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-1'), encoding='latin1', namespace=NAME, lang='en'),
         documentation('trec-tb-2006/efficiency/stream1')
     )
     subsets['trec-tb-2006/efficiency/stream2'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-2'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-2'), encoding='latin1', namespace=NAME, lang='en'),
         documentation('trec-tb-2006/efficiency/stream2')
     )
     subsets['trec-tb-2006/efficiency/stream3'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-3'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-3'), encoding='latin1', namespace=NAME, lang='en'),
         RewriteQids(TrecQrels(dlc['trec-tb-2006/qrels'], QREL_DEFS), EFF_MAP_06),
         documentation('trec-tb-2006/efficiency/stream3')
     )
     subsets['trec-tb-2006/efficiency/stream4'] = Dataset(
         collection,
-        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-4'), encoding='latin1', namespace=NAME),
+        TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-4'), encoding='latin1', namespace=NAME, lang='en'),
         documentation('trec-tb-2006/efficiency/stream4')
     )
 

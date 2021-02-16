@@ -118,6 +118,9 @@ class PmcDocs(BaseDocs):
     def docs_count(self):
         return self.docs_store().count()
 
+    def docs_lang(self):
+        return 'en'
+
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
@@ -134,21 +137,21 @@ def _init():
 
     subsets['v1/trec-cds-2014'] = Dataset(
         v1_collection,
-        TrecXmlQueries(dlc['trec-cds-2014/queries'], TrecCdsQuery, QUERY_FILE_MAP, namespace='trec-cds-2014'),
+        TrecXmlQueries(dlc['trec-cds-2014/queries'], TrecCdsQuery, QUERY_FILE_MAP, namespace='trec-cds-2014', lang='en'),
         TrecQrels(dlc['trec-cds-2014/qrels'], QREL_DEFS),
         documentation('v1/trec-cds-2014'),
     )
 
     subsets['v1/trec-cds-2015'] = Dataset(
         v1_collection,
-        TrecXmlQueries(dlc['trec-cds-2015/queries'], TrecCdsQuery, QUERY_FILE_MAP, namespace='trec-cds-2015'),
+        TrecXmlQueries(dlc['trec-cds-2015/queries'], TrecCdsQuery, QUERY_FILE_MAP, namespace='trec-cds-2015', lang='en'),
         TrecQrels(dlc['trec-cds-2015/qrels'], QREL_DEFS),
         documentation('v1/trec-cds-2015'),
     )
 
     subsets['v2/trec-cds-2016'] = Dataset(
         v2_collection,
-        TrecXmlQueries(dlc['trec-cds-2016/queries'], TrecCds2016Query, QUERY_FILE_MAP, namespace='trec-cds-2016'),
+        TrecXmlQueries(dlc['trec-cds-2016/queries'], TrecCds2016Query, QUERY_FILE_MAP, namespace='trec-cds-2016', lang='en'),
         TrecQrels(dlc['trec-cds-2016/qrels'], QREL_DEFS),
         documentation('v2/trec-cds-2016'),
     )
