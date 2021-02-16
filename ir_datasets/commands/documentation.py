@@ -326,6 +326,7 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__queries">queries</a>
 <div id="{dataset_id}__queries" class="tab-content">
+<p>Language: {_lang(dataset.queries_lang())}</p>
 <div>Query type:</div>
 {generate_data_format(dataset.queries_cls())}
 <p>Example</p>
@@ -342,6 +343,7 @@ def generate_dataset(dataset, dataset_id):
             out.write(f'''
 <a class="tab" target="{dataset_id}__docs">docs</a>
 <div id="{dataset_id}__docs" class="tab-content">
+<p>Language: {_lang(dataset.docs_lang())}</p>
 <div>Document type:</div>
 {generate_data_format(dataset.docs_cls())}
 <p>Example</p>
@@ -465,6 +467,12 @@ def emoji(ds, arg):
             return f'<span style="cursor: help;" title="{instructions}">⚠️</span>'
         return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
     return ''
+
+
+def _lang(lang_code):
+    if lang_code is None:
+        return '<em>multiple/other/unknown</em>'
+    return f'<span class="lang-code">{lang_code}</span>'
 
 
 if __name__ == '__main__':

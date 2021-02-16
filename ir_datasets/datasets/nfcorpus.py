@@ -77,8 +77,8 @@ def _init():
     subsets['train'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.titles.queries'), base_path/'train/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.all.queries'), base_path/'train/queries.all.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.titles.queries'), base_path/'train/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.all.queries'), base_path/'train/queries.all.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusQuery),
         TrecQrels(Cache(TarExtract(main_dlc, 'nfcorpus/train.3-2-1.qrel'), base_path/'train/qrels'), QRELS_DEFS),
         documentation('train'),
@@ -86,7 +86,7 @@ def _init():
 
     subsets['train/nontopic'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.nontopic-titles.queries'), base_path/'train/nontopic/queries.tsv'), namespace=NAME),
+        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.nontopic-titles.queries'), base_path/'train/nontopic/queries.tsv'), namespace=NAME, lang='en'),
         FilteredQrels(subsets['train'].qrels_handler(), nontopic_qid_filter, mode='include'),
         documentation('train/nontopic'),
     )
@@ -94,10 +94,9 @@ def _init():
     subsets['train/video'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.vid-titles.queries'), base_path/'train/video/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.vid-desc.queries'), base_path/'train/video/queries.desc.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.vid-titles.queries'), base_path/'train/video/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.vid-desc.queries'), base_path/'train/video/queries.desc.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusVideoQuery),
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/train.nontopic-titles.queries'), base_path/'train/video/queries.tsv'), NfCorpusVideoQuery, namespace=NAME),
         FilteredQrels(subsets['train'].qrels_handler(), video_qid_filter, mode='include'),
         documentation('train/video'),
     )
@@ -105,8 +104,8 @@ def _init():
     subsets['dev'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.titles.queries'), base_path/'dev/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.all.queries'), base_path/'dev/queries.all.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.titles.queries'), base_path/'dev/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.all.queries'), base_path/'dev/queries.all.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusQuery),
         TrecQrels(Cache(TarExtract(main_dlc, 'nfcorpus/dev.3-2-1.qrel'), base_path/'dev/qrels'), QRELS_DEFS),
         documentation('dev'),
@@ -114,7 +113,7 @@ def _init():
 
     subsets['dev/nontopic'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.nontopic-titles.queries'), base_path/'dev/nontopic/queries.tsv'), namespace=NAME),
+        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.nontopic-titles.queries'), base_path/'dev/nontopic/queries.tsv'), namespace=NAME, lang='en'),
         FilteredQrels(subsets['dev'].qrels_handler(), nontopic_qid_filter, mode='include'),
         documentation('dev/nontopic'),
     )
@@ -122,10 +121,9 @@ def _init():
     subsets['dev/video'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.vid-titles.queries'), base_path/'dev/video/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.vid-desc.queries'), base_path/'dev/video/queries.desc.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.vid-titles.queries'), base_path/'dev/video/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.vid-desc.queries'), base_path/'dev/video/queries.desc.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusVideoQuery),
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/dev.nontopic-titles.queries'), base_path/'dev/video/queries.tsv'), NfCorpusVideoQuery, namespace=NAME),
         FilteredQrels(subsets['dev'].qrels_handler(), video_qid_filter, mode='include'),
         documentation('dev/video'),
     )
@@ -133,8 +131,8 @@ def _init():
     subsets['test'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.titles.queries'), base_path/'test/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.all.queries'), base_path/'test/queries.all.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.titles.queries'), base_path/'test/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.all.queries'), base_path/'test/queries.all.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusQuery),
         TrecQrels(Cache(TarExtract(main_dlc, 'nfcorpus/test.3-2-1.qrel'), base_path/'test/qrels'), QRELS_DEFS),
         documentation('test'),
@@ -142,7 +140,7 @@ def _init():
 
     subsets['test/nontopic'] = Dataset(
         collection,
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.nontopic-titles.queries'), base_path/'test/nontopic/queries.tsv'), namespace=NAME),
+        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.nontopic-titles.queries'), base_path/'test/nontopic/queries.tsv'), namespace=NAME, lang='en'),
         FilteredQrels(subsets['test'].qrels_handler(), nontopic_qid_filter, mode='include'),
         documentation('test/nontopic'),
     )
@@ -150,10 +148,9 @@ def _init():
     subsets['test/video'] = Dataset(
         collection,
         ZipQueries([
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.vid-titles.queries'), base_path/'test/video/queries.titles.tsv'), namespace=NAME),
-            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.vid-desc.queries'), base_path/'test/video/queries.desc.tsv'), namespace=NAME),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.vid-titles.queries'), base_path/'test/video/queries.titles.tsv'), namespace=NAME, lang='en'),
+            TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.vid-desc.queries'), base_path/'test/video/queries.desc.tsv'), namespace=NAME, lang='en'),
         ], [(0, 0), (0, 1), (1, 1)], NfCorpusVideoQuery),
-        TsvQueries(Cache(TarExtract(main_dlc, 'nfcorpus/test.nontopic-titles.queries'), base_path/'test/video/queries.tsv'), NfCorpusVideoQuery, namespace=NAME),
         FilteredQrels(subsets['test'].qrels_handler(), video_qid_filter, mode='include'),
         documentation('test/video'),
     )

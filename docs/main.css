@@ -231,6 +231,15 @@ code.example {
   text-decoration: underline;
 }
 
+.lang-code {
+  display: inline-block;
+  border-radius: 6px;
+  padding: 2px 4px;
+  background-color: #4287f5;
+  color: white;
+  font-family: monospace;
+}
+
 td, th {
   text-align: left;
   padding: 0 8px;
