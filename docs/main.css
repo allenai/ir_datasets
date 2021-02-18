@@ -284,6 +284,19 @@ tbody tr:last-child td {
 .sep {
   border-top: 3px solid #333;
 }
+
+.warn {
+  color: white;
+  background-color: #ff9800;
+  padding: 8px 16px;
+  border-radius: 8px;
+}
+
+.warn::before {
+  content: "Warning: ";
+  font-weight: bold;
+}
+
 @media screen and (max-width: 420px){
   .page {
     padding: 6px;

@@ -229,6 +229,7 @@ Available datasets include:
  - [Medline](https://ir-datasets.com/medline.html)
  - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)
  - [MSMARCO (passage)](https://ir-datasets.com/msmarco-passage.html)
+ - [MSMARCO (QnA)](https://ir-datasets.com/msmarco-qna.html)
  - [NFCorpus (NutritionFacts)](https://ir-datasets.com/nfcorpus.html)
  - [NYT](https://ir-datasets.com/nyt.html)
  - [PubMed Central (TREC CDS)](https://ir-datasets.com/pmc.html)

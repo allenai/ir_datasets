@@ -784,6 +784,22 @@ msmarco-passage:
     expected_md5: 'aa6fbc51d66bd1dc745964c0e140a727'
 
 
+
+msmarco-qna:
+  train:
+    url: 'https://msmarco.blob.core.windows.net/msmarco/train_v2.1.json.gz'
+    expected_md5: '576230a745a06943c3a49e76acea1d9d'
+    cache_path: 'train_v2.1.json.gz'
+  dev:
+    url: 'https://msmarco.blob.core.windows.net/msmarco/dev_v2.1.json.gz'
+    expected_md5: '5e14839f31c933560fbb3bae4ce67829'
+    cache_path: 'dev_v2.1.json.gz'
+  eval:
+    url: 'https://msmarco.blob.core.windows.net/msmarco/eval_v2.1_public.json.gz'
+    expected_md5: '5fcca9336c7486498c3e1cf81fa89f74'
+    cache_path: 'eval_v2.1_public.json.gz'
+
+
 nfcorpus:
   main:
     url: 'https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz'

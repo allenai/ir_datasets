@@ -1,0 +1,63 @@
+_:
+  pretty_name: 'MSMARCO (QnA)'
+  desc: '
+<p>
+The MS MARCO Question Answering dataset. This is the source collection of <a class="ds-ref">msmarco-passage</a>
+and <a class="ds-ref">msmarco-document</a>.
+</p>
+<div class="warn">
+It is prohibited to use information from this dataset for submissions to the MS MARCO passage and document
+leaderboards or the TREC DL shared task.
+</div>
+<p>
+Query IDs in this collection align with those found in <a class="ds-ref">msmarco-passage</a> and
+<a class="ds-ref">msmarco-document</a>, but document IDs do not (the QnA collection does not
+come with document IDs itself; these are assigned sequentially by ir_datasets.)
+</p>
+<ul>
+  <li>Documents: Short passages (from web)</li>
+  <li>Queries: Natural language questions (from query log), including type and natural-language answers.</li>
+  <li><a href="https://microsoft.github.io/msmarco/#qna">Leaderboard</a></li>
+  <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+  <li><a href="https://github.com/microsoft/MSMARCO-Question-Answering">More information</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+
+train:
+  desc: '
+<p>
+Official train set.
+</p>
+<p>
+The scoreddocs provides the roughtly 10 passages presented to the user for annotation,
+where the score indicates the order presented.
+</p>
+'
+
+dev:
+  desc: '
+<p>
+Official dev set.
+</p>
+<p>
+The scoreddocs provides the roughtly 10 passages presented to the user for annotation,
+where the score indicates the order presented.
+</p>
+'
+
+eval:
+  desc: '
+<p>
+Official eval set.
+</p>
+<p>
+The scoreddocs provides the roughtly 10 passages presented to the user for annotation,
+where the score indicates the order presented.
+</p>
+'

@@ -182,3 +182,32 @@ BaseQueries.EXTENSIONS['queries_hash'] = hasher('queries_iter')
 BaseQrels.EXTENSIONS['qrels_hash'] = hasher('qrels_iter')
 BaseScoredDocs.EXTENSIONS['scoreddocs_hash'] = hasher('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_hash'] = hasher('docpairs_iter')
+
+
+class DocstoreBackedDocs(BaseDocs):
+    """
+    A Docs implementation that defers all operations to a pre-built docstore instance.
+    """
+    def __init__(self, docstore_lazy, docs_cls=GenericDoc, namespace=None, lang=None):
+        self._docstore_lazy = docstore_lazy
+        self._docs_cls = docs_cls
+        self._docs_namespace = namespace
+        self._docs_lang = lang
+
+    def docs_iter(self):
+        return iter(self._docstore_lazy())
+
+    def docs_count(self):
+        raise self._docstore_lazy().count()
+
+    def docs_cls(self):
+        return self._docs_cls
+
+    def docs_namespace(self):
+        return self._docs_namespace
+
+    def docs_lang(self):
+        return self._docs_lang
+
+    def docs_store(self):
+        return self._docstore_lazy()

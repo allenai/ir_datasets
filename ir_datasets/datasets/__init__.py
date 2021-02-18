@@ -11,6 +11,7 @@ from . import highwire
 from . import medline
 from . import msmarco_passage
 from . import msmarco_document
+from . import msmarco_qna
 from . import nfcorpus
 from . import trec_robust04
 from . import nyt

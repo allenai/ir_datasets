@@ -1,4 +1,5 @@
 import contextlib
+from typing import Tuple
 import io
 import ir_datasets
 from .base import GenericDoc, GenericQuery, GenericDocPair, BaseDocs, BaseQueries, BaseDocPairs
@@ -78,8 +79,19 @@ class TsvIter:
     def __next__(self):
         line = next(self.line_iter)
         cols = line.rstrip('\n').split('\t')
-        if len(cols) != len(self.cls._fields):
-            raise RuntimeError(f'expected {len(self.cls._fields)} fields, got {len(cols)}')
+        num_cols = len(self.cls._fields)
+        last_field = self.cls.__annotations__[self.cls._fields[-1]] if hasattr(self.cls, '__annotations__') else None
+        if last_field == Tuple[str, ...]:
+            if len(cols) < len(self.cls._fields) - 1:
+                raise RuntimeError(f'expected at least {len(self.cls._fields)-1} fields, got {len(cols)}')
+            if len(cols) == len(self.cls._fields) - 1:
+                cols += ((),)
+            else:
+                cols[len(self.cls._fields)-1] = tuple(cols[len(self.cls._fields)-1:])
+                cols = cols[:len(self.cls._fields)]
+        else:
+            if len(cols) != len(self.cls._fields):
+                raise RuntimeError(f'expected {len(self.cls._fields)} fields, got {len(cols)}')
         return self.cls(*cols)
 
     def __getitem__(self, key):
