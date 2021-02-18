@@ -185,6 +185,7 @@ class TrecQueries(BaseQueries):
             for line in f:
                 if line.startswith('</top>'):
                     assert len(fields) == len(self._qtype._fields), fields
+                    fields = {k: v.replace('</title>', '') for k, v in fields.items()}
                     yield self._qtype(*(fields[f].strip() for f in self._qtype._fields))
                     fields, reading = {}, None
                 match_any = False

@@ -1,0 +1,114 @@
+_:
+  pretty_name: 'GOV'
+  desc: '
+<p>
+GOV web document collection. Used for early TREC Web Tracks. Not to be confused with
+<a class="ds-ref">gov2</a>.
+</p>
+<p>
+The dataset is obtained for a fee from UoG, and is shipped as a hard drive. More information
+is provided <a href="http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html">here</a>.
+</p>
+<ul>
+<li><a href="http://ir.dcs.gla.ac.uk/test_collections/gov2-summary.htm">Document collection site</a></li>
+</ul>
+'
+  docs_instructions: &inst "docs available from UoG"
+
+trec-web-2002:
+  desc: '
+<p>
+The TREC Web Track 2002 ad-hoc ranking benchmark.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/t11.web.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec11/papers/WEB.OVER.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Craswell2002TrecWeb,
+      title={Overview of the TREC-2002 Web Track},
+      author={Nick Craswell and David Hawking},
+      booktitle={TREC},
+      year={2002}
+    }
+
+trec-web-2002/named-page:
+  desc: '
+<p>
+The TREC Web Track 2002 named page ranking benchmark.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/t11.web.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec11/papers/WEB.OVER.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Craswell2002TrecWeb,
+      title={Overview of the TREC-2002 Web Track},
+      author={Nick Craswell and David Hawking},
+      booktitle={TREC},
+      year={2002}
+    }
+
+trec-web-2003:
+  desc: '
+<p>
+The TREC Web Track 2003 ad-hoc ranking benchmark.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/t12.web.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec12/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Craswell2003TrecWeb,
+      title={Overview of the TREC 2003 Web Track},
+      author={Nick Craswell and David Hawking and Ross Wilkinson and Mingfang Wu},
+      booktitle={TREC},
+      year={2003}
+    }
+
+trec-web-2003/named-page:
+  desc: '
+<p>
+The TREC Web Track 2003 named page ranking benchmark.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/t12.web.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec12/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Craswell2003TrecWeb,
+      title={Overview of the TREC 2003 Web Track},
+      author={Nick Craswell and David Hawking and Ross Wilkinson and Mingfang Wu},
+      booktitle={TREC},
+      year={2003}
+    }
+
+trec-web-2004:
+  desc: '
+<p>
+The TREC Web Track 2004 ad-hoc ranking benchmark.
+</p>
+<p>
+Queries include a combination of topic distillation, homepage finding, and named page finding.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/t13.web.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec12/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Craswell2004TrecWeb,
+      title={Overview of the TREC-2004 Web Track},
+      author={Nick Craswell and David Hawking},
+      booktitle={TREC},
+      year={2004}
+    }

@@ -224,6 +224,7 @@ Available datasets include:
  - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
  - [CodeSearchNet](https://ir-datasets.com/codesearchnet.html)
  - [CORD-19](https://ir-datasets.com/cord19.html)
+ - [GOV](https://ir-datasets.com/gov.html)
  - [GOV2](https://ir-datasets.com/gov2.html)
  - [Highwire (TREC Genomics 2006-07)](https://ir-datasets.com/highwire.html)
  - [Medline](https://ir-datasets.com/medline.html)

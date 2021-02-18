@@ -266,6 +266,60 @@ cord19:
     cache_path: 'trec-covid/qrels'
 
 
+gov:
+  docs:
+    instructions: 'GOV is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>
+
+Link the GOV source files here: {path}
+
+Should contain G00, G01, G02, ...'
+    cache_path: 'corpus'
+  trec-web-2002/queries:
+    url: 'https://trec.nist.gov/data/topics_eng/webtopics_551-600.txt.gz'
+    expected_md5: '133e5d1628684f7a044df86ad08907f0'
+    cache_path: 'trec-web-2002/queries.txt.gz'
+  trec-web-2002/qrels:
+    url: 'https://trec.nist.gov/data/qrels_eng/qrels.distillation.txt.gz'
+    expected_md5: '313d1cab9a37aa9b76b6c647cf7151a8'
+    cache_path: 'trec-web-2002/qrels.txt.gz'
+  trec-web-2002/named-page/queries:
+    url: 'https://trec.nist.gov/data/topics_eng/webnamed_page_topics.1-150.txt.gz'
+    expected_md5: '00422f1c1f5109d7f609708de071e527'
+    cache_path: 'trec-web-2002/named-page/queries.txt.gz'
+  trec-web-2002/named-page/qrels:
+    url: 'https://trec.nist.gov/data/qrels_eng/qrels.named-page.txt.gz'
+    expected_md5: 'ed7e69528faddd1baece4cae41c6f613'
+    cache_path: 'trec-web-2002/named-page/qrels.txt.gz'
+  trec-web-2003/queries:
+    url: 'https://trec.nist.gov/data/topics_eng/2003.distillation_topics.1-50.txt'
+    expected_md5: '409e5d16eb8c795945715850c7d26a8e'
+    cache_path: 'trec-web-2003/queries.txt'
+  trec-web-2003/qrels:
+    url: 'https://trec.nist.gov/data/qrels_eng/qrels.distillation.2003.txt'
+    expected_md5: 'ce11fa22c6f7f5d8048bdc0d104986e5'
+    cache_path: 'trec-web-2003/qrels.txt'
+  trec-web-2003/named-page/queries:
+    url: 'https://trec.nist.gov/data/topics_eng/2003.named_page_topics.151-450.txt'
+    expected_md5: '0b9bbe2bce309c5bf5754536abaaa0b6'
+    cache_path: 'trec-web-2003/named-page/queries.txt'
+  trec-web-2003/named-page/qrels:
+    url: 'https://trec.nist.gov/data/qrels_eng/qrels.named-page.2003.txt'
+    expected_md5: 'e7b05e05fab39862d5f8ad6ebc0c36fd'
+    cache_path: 'trec-web-2003/named-page/qrels.txt'
+  trec-web-2004/queries:
+    url: 'https://trec.nist.gov/data/web/Web2004.query.stream.trecformat.txt'
+    expected_md5: '10821f7a000b8bec058097ede39570be'
+    cache_path: 'trec-web-2004/queries.txt'
+  trec-web-2004/qrels:
+    url: 'https://trec.nist.gov/data/web/04.qrels.web.mixed.txt'
+    expected_md5: '93daa0e4b4190c84e30d2cce78a0f674'
+    cache_path: 'trec-web-2004/qrels.txt'
+  trec-web-2004/types:
+    url: 'https://trec.nist.gov/data/web/04.topic-map.official.txt'
+    expected_md5: '79737768b3be1aa07b14691aa54802c5'
+    cache_path: 'trec-web-2004/types.txt'
+
+
 gov2:
   docs:
     instructions: 'GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>

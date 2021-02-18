@@ -6,6 +6,7 @@ from . import clueweb09
 from . import clueweb12
 from . import cord19
 from . import codesearchnet
+from . import gov
 from . import gov2
 from . import highwire
 from . import medline

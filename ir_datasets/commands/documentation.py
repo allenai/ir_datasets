@@ -310,6 +310,8 @@ def generate_dataset(dataset, dataset_id):
             documentation = dataset.documentation()
         else:
             documentation = {}
+        if 'desc' not in documentation:
+            print(f'no description for {dataset_id}')
         desc = documentation.get('desc', '<p><i>(no description provided)</i></p>')
         tags = []
         tags = ' '.join(f'<span class="tag tag-{t}" data-fields="{", ".join(c._fields)}">{t}</span>' for t, c in tags)
