@@ -141,11 +141,14 @@ Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled fr
 <a class="ds-ref">msmarco-passage/eval</a>. A subset of these queries were judged by NIST assessors,
 (filtered list available in <a class="ds-ref">msmarco-passage/trec-dl-2019/judged</a>).
 </p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li>
+</ul>
 '
   bibtex: |
     @inproceedings{Craswell2020OverviewOT,
       title={Overview of the TREC 2019 deep learning track},
-      author={Nick Craswell and Bhaskar Mitra and E. Yilmaz and Daniel Fernando Campos and E. Voorhees},
+      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
       booktitle={TREC 2019},
       year={2019}
     }
@@ -166,4 +169,14 @@ Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled fr
 <a class="ds-ref">msmarco-passage/eval</a>. Relevance judgments from NIST assessors to be made
 available in the future.
 </p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li>
+</ul>
 '
+  bibtex: |
+    @inproceedings{Craswell2021OverviewOT,
+      title={Overview of the TREC 2020 deep learning track},
+      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos},
+      booktitle={TREC},
+      year={2020}
+    }
