@@ -239,6 +239,7 @@ Available datasets include:
  - [TREC Robust 2004](https://ir-datasets.com/trec-robust04.html)
  - [TREC Spanish](https://ir-datasets.com/trec-spanish.html)
  - [Vaswani](https://ir-datasets.com/vaswani.html)
+ - [WikIR](https://ir-datasets.com/wikir.html)
 
 There are "subsets" under each dataset. For instance, `clueweb12/b13/trec-misinfo-2019` provides the
 queries and judgments from the [2019 TREC misinformation track](https://trec.nist.gov/data/misinfo2019.html),

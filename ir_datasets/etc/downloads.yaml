@@ -1043,3 +1043,21 @@ vaswani:
     url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz'
     expected_md5: '23e5607081191b153738e81fbd834680'
     cache_path: 'npl.tar.gz'
+
+
+wikir:
+  en1k:
+    url: 'https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1'
+    expected_md5: '554299bca984640cb283d6ba55753608'
+  en59k:
+    url: 'https://zenodo.org/record/3557342/files/wikIR59k.zip?download=1'
+    expected_md5: 'c9f7e646e022eea84e6f00e3870ca79b'
+  fr14k:
+    url: 'https://zenodo.org/record/3569718/files/FRwikIR14k.zip?download=1'
+    expected_md5: '0bf8a8965b1a550ad3604a9ddd5c6bbe'
+  es13k:
+    url: 'https://zenodo.org/record/3569724/files/ESwikIR13k.zip?download=1'
+    expected_md5: '4847eeffbf261d3877da86f5ccae4e43'
+  it16k:
+    url: 'https://zenodo.org/record/3569732/files/ITwikIR16k.zip?download=1'
+    expected_md5: 'e9c5b81c9df6fdc0e2986fa8ffb8ff12'

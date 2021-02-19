@@ -1,0 +1,189 @@
+_:
+  pretty_name: "WikIR"
+  desc: '
+<p>
+A suite of IR benchmarks in multiple languages built from Wikipeida.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.lrec-1.237.pdf">WikIR Paper</a></li>
+<li><a href="http://ceur-ws.org/Vol-2621/CIRCLE20_22.pdf">MLWikIR Paper</a></li>
+<li><a href="https://github.com/getalp/wikIR">GitHub Repository</a></li>
+</ul>
+'
+  bibtex: &bib |
+    @inproceedings{Frej2020WIKIRAP,
+      title={WIKIR: A Python toolkit for building a large-scale Wikipedia-based English Information Retrieval Dataset},
+      author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
+      booktitle={LREC},
+      year={2020}
+    }
+    @inproceedings{Frej2020MLWIKIRAP,
+      title={MLWIKIR: A Python Toolkit for Building Large-scale Wikipedia-based Information Retrieval Datasets in Chinese, English, French, Italian, Japanese, Spanish and More},
+      author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
+      booktitle={CIRCLE},
+      year={2020}
+    }
+
+en1k:
+  desc: '
+<p>
+A small version of WikIR for English.
+</p>
+'
+  bibtex: *bib
+
+en1k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+en1k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+en1k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+
+en59k:
+  desc: '
+<p>
+WikIR for English.
+</p>
+'
+  bibtex: *bib
+
+en59k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+en59k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+en59k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+
+fr14k:
+  desc: '
+<p>
+WikIR for French.
+</p>
+'
+  bibtex: *bib
+
+fr14k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+fr14k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+fr14k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+
+es13k:
+  desc: '
+<p>
+WikIR for Spanish.
+</p>
+'
+  bibtex: *bib
+
+es13k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+es13k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+es13k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+
+it16k:
+  desc: '
+<p>
+WikIR for Italian.
+</p>
+'
+  bibtex: *bib
+
+it16k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+it16k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
+
+it16k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex: *bib
