@@ -20,6 +20,8 @@ Want a new dataset, added functionality, or a bug fixed? Feel free to post an is
 
 ## Getting Started
 
+For a quick start with the Python API, check out our [Colab tutorial](https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets.ipynb).
+
 Install via pip:
 
 ```
