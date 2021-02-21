@@ -66,6 +66,49 @@ car:
     cache_path: 'train.tar.xz'
 
 
+clinicaltrials:
+  docs/2017:
+    url: 'https://bionlp.nlm.nih.gov/trec2017precisionmedicine/clinicaltrials_xml.tar.gz'
+    expected_md5: 'e5d333ceed0cbbbe513504c96148ab1a'
+    cache_path: 'docs_2017.tar.gz'
+  docs/2019/0:
+    url: 'http://www.trec-cds.org/clinical_trials.0.tar.gz'
+    expected_md5: 'd57fbafa63520c45faceedec3de801b7'
+    cache_path: 'docs_2019_0.tar.gz'
+  docs/2019/1:
+    url: 'http://www.trec-cds.org/clinical_trials.1.tar.gz'
+    expected_md5: 'd32a632fc72c68d63309732af667b1ee'
+    cache_path: 'docs_2019_1.tar.gz'
+  docs/2019/2:
+    url: 'http://www.trec-cds.org/clinical_trials.2.tar.gz'
+    expected_md5: '055980d685164cb1daefa2b4cc1e9a2f'
+    cache_path: 'docs_2019_2.tar.gz'
+  docs/2019/3:
+    url: 'http://www.trec-cds.org/clinical_trials.3.tar.gz'
+    expected_md5: 'fa8e76c85ab7204c0294f03fa76f6ed2'
+    cache_path: 'docs_2019_3.tar.gz'
+  trec-pm-2017/qrels:
+    url: 'https://trec.nist.gov/data/precmed/qrels-final-trials.txt'
+    expected_md5: '3c35f9e62abf64c873250ac8022d5a51'
+    cache_path: 'trec-pm-2017/qrels'
+  trec-pm-2018/qrels:
+    url: 'https://trec.nist.gov/data/precmed/qrels-treceval-clinical_trials-2018-v2.txt'
+    expected_md5: 'a6c9efbecb5f32a19c5ac37f1f98c951'
+    cache_path: 'trec-pm-2018/qrels'
+  trec-pm-2019/qrels:
+    url: 'https://trec.nist.gov/data/precmed/qrels-treceval-trials.38.txt'
+    expected_md5: 'fc4b0cf6007b2dc2a7e81536add65a8c'
+    cache_path: 'trec-pm-2019/qrels'
+  trec-pm-2019/queries:
+    url: 'http://www.trec-cds.org/topics2019.xml'
+    expected_md5: 'bc26cef87e842837daf2e6680d4652c0'
+    cache_path: 'trec-pm-2019/queries.xml'
+  trec-pm-2020/queries:
+    url: 'http://www.trec-cds.org/topics2020.xml'
+    expected_md5: 'b462984752925c44b654d7a5706c7af1'
+    cache_path: 'trec-pm-2020/queries.xml'
+
+
 clueweb09:
   docs:
     instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>

@@ -976,6 +976,11 @@ h4 {
   .screen-small-hide {
     display: none;
   }
+  .banner {
+    margin-top: -6px;
+    margin-left: -6px;
+    margin-right: -6px;
+  }
 }
 ''')
 

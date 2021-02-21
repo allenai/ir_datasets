@@ -1,0 +1,101 @@
+_:
+  pretty_name: 'Clinical Trials'
+  desc: '
+<p>
+Clinical trial information from <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a>.
+Used for the Clinical Trials subtasks in TREC Precision Medicine.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/">TREC Precision Medicine website</a></li>
+</ul>
+'
+
+2017:
+  desc: '
+<p>
+A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from April 2017
+for use with the <a class="ds-ref">clinicaltrials/2017/trec-pm-2017</a> and
+<a class="ds-ref">clinicaltrials/2017/trec-pm-2018</a> Clinical Trials subtasks.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2017.html#documents">Dataset information</a></li>
+</ul>
+'
+
+trec-pm-2017:
+  desc: '
+<p>
+The TREC 2017 Precision Medicine clinical trials subtask.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2017.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-PM.pdf">Shared task paper</a></li>
+<li>See also: <a class="ds-ref">medline/2017/trec-pm-2017</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Roberts2017TrecPm,
+      title={Overview of the TREC 2017 Precision Medicine Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar and Shubham Pant},
+      booktitle={TREC},
+      year={2017}
+    }
+
+trec-pm-2018:
+  desc: '
+<p>
+The TREC 2018 Precision Medicine clinical trials subtask.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2018.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-PM.pdf">Shared task paper</a></li>
+<li>See also: <a class="ds-ref">medline/2017/trec-pm-2018</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Roberts2018TrecPm,
+      title={Overview of the TREC 2018 Precision Medicine Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar},
+      booktitle={TREC},
+      year={2018}
+    }
+
+2019:
+  desc: '
+<p>
+A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from May 2019
+for use with the <a class="ds-ref">clinicaltrials/2019/trec-pm-2019</a> and
+<a class="ds-ref">clinicaltrials/2019/trec-pm-2020</a> Clinical Trials subtasks.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2019.html#documents">Dataset information</a></li>
+</ul>
+'
+
+trec-pm-2019:
+  desc: '
+<p>
+The TREC 2019 Precision Medicine clinical trials subtask.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2019.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec28/papers/OVERVIEW.PM.pdf">Shared task paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Roberts2019TrecPm,
+      title={Overview of the TREC 2019 Precision Medicine Track},
+      author={Kirk Roberts and Dina Demner-Fushman and Ellen Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar and Shubham Pant and Funda Meric-Bernstam},
+      booktitle={TREC},
+      year={2019}
+    }
+
+trec-pm-2020:
+  desc: '
+<p>
+The TREC 2020 Precision Medicine clinical trials subtask.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2020.html">Shared task site</a></li>
+</ul>
+'

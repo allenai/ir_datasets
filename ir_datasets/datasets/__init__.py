@@ -2,6 +2,7 @@ from . import base
 from . import antique
 from . import aquaint
 from . import car
+from . import clinicaltrials
 from . import clueweb09
 from . import clueweb12
 from . import cord19
