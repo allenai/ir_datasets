@@ -5,7 +5,7 @@ from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract, TarExtractAll
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -35,14 +35,6 @@ class TrecWebTrackQuery(NamedTuple):
     description: str
     type: str
     subtopics: Tuple[TrecSubtopic, ...]
-
-
-class TrecPrel(NamedTuple):
-    query_id: str
-    doc_id: str
-    relevance: int
-    method: int
-    iprob: float
 
 
 class ClueWeb09Docs(WarcDocs):
@@ -108,20 +100,6 @@ class ClueWeb09Docs(WarcDocs):
 
     def docs_namespace(self):
         return NAME
-
-
-class TrecPrels(TrecQrels):
-    def qrels_iter(self):
-        with self._qrels_dlc.stream() as f:
-            f = codecs.getreader('utf8')(f)
-            for line in f:
-                if line == '\n':
-                    continue # ignore blank lines
-                cols = line.rstrip().split()
-                if len(cols) != 5:
-                    raise RuntimeError(f'expected 5 columns, got {len(cols)}')
-                qid, did, rel, method, iprob = cols
-                yield TrecPrel(qid, did, int(rel), int(method), float(iprob))
 
 
 class CatBQrelFilter:
@@ -223,6 +201,12 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2012'))
+
+    subsets['trec-mq-2009'] = Dataset(
+        collection,
+        TrecColonQueries(GzipExtract(dlc['trec-mq-2009/queries']), encoding='latin1', lang='en'),
+        TrecPrels(GzipExtract(dlc['trec-mq-2009/qrels']), QREL_DEFS_09),
+        documentation('trec-mq-2009'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

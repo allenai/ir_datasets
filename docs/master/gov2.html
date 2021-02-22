@@ -21,6 +21,8 @@
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
 <ol class="index">
 <li><a href="#gov2"><kbd>gov2</kbd></a></li>
+<li><a href="#gov2/trec-mq-2007"><kbd><span class="prefix">gov2</span>/trec-mq-2007</kbd></a></li>
+<li><a href="#gov2/trec-mq-2008"><kbd><span class="prefix">gov2</span>/trec-mq-2008</kbd></a></li>
 <li><a href="#gov2/trec-tb-2004"><kbd><span class="prefix">gov2</span>/trec-tb-2004</kbd></a></li>
 <li><a href="#gov2/trec-tb-2005"><kbd><span class="prefix">gov2</span>/trec-tb-2005</kbd></a></li>
 <li><a href="#gov2/trec-tb-2005/efficiency"><kbd><span class="prefix">gov2</span>/trec-tb-2005/efficiency</kbd></a></li>
@@ -59,6 +61,180 @@
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
 </code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="gov2/trec-mq-2007" data-parent="gov2">
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2007"</kdb></h3>
+
+<div class="desc">
+ <p> TREC 2007 Million Query track. </p> <ul> <li><a href="https://trec.nist.gov/data/million.query07.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec16/papers/1MQ.OVERVIEW16.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="gov2/trec-mq-2007__queries">queries</a>
+<div id="gov2/trec-mq-2007__queries" class="tab-content">
+<p>Language: <em>multiple/other/unknown</em></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2007__docs">docs</a>
+<div id="gov2/trec-mq-2007__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2007__qrels">qrels</a>
+<div id="gov2/trec-mq-2007__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecPrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">method</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">iprob</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant</td></tr>
+<tr><td class="relScore">1</td><td>Relevant</td></tr>
+<tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2007__citation">Citation</a>
+<div id="gov2/trec-mq-2007__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Allen2007MQ,
+  title={Million Query Track 2007 Overview},
+  author={James Allan and Ben Carterette and Javed A. Aslam and Virgil Pavlu and Blagovest Dachev and Evangelos Kanoulas},
+  booktitle={TREC},
+  year={2007}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="gov2/trec-mq-2008" data-parent="gov2">
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2008"</kdb></h3>
+
+<div class="desc">
+ <p> TREC 2008 Million Query track. </p> <ul> <li><a href="https://trec.nist.gov/data/million.query08.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec17/papers/MQ.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="gov2/trec-mq-2008__queries">queries</a>
+<div id="gov2/trec-mq-2008__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2008__docs">docs</a>
+<div id="gov2/trec-mq-2008__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2008__qrels">qrels</a>
+<div id="gov2/trec-mq-2008__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecPrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">method</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">iprob</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant</td></tr>
+<tr><td class="relScore">1</td><td>Relevant</td></tr>
+<tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="gov2/trec-mq-2008__citation">Citation</a>
+<div id="gov2/trec-mq-2008__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Allen2008MQ,
+  title={Million Query Track 2008 Overview},
+  author={James Allan and Javed A. Aslam and Ben Carterette and Virgil Pavlu and Evangelos Kanoulas},
+  booktitle={TREC},
+  year={2008}
+}
+</cite>
 </div>
 </div>
 </div>

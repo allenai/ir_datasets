@@ -152,6 +152,14 @@ Should contain directories like ClueWeb09_English_1'
     url: 'https://trec.nist.gov/data/web/12/qrels.adhoc'
     expected_md5: '079723ba3e955269f0de6254c4bec180'
     cache_path: 'trec-web-2012/qrels'
+  trec-mq-2009/queries:
+    url: 'https://trec.nist.gov/data/million.query/09/09.mq.topics.20001-60000.gz'
+    expected_md5: '6347147d4d6c847f0423709140a7b10d'
+    cache_path: 'trec-mq-2009/queries.txt.gz'
+  trec-mq-2009/qrels:
+    url: 'https://trec.nist.gov/data/million.query/09/prels.20001-60000.gz'
+    expected_md5: 'e67f45d3060e20667596f37e34d696c8'
+    cache_path: 'trec-mq-2009/prels.gz'
 
 
 clueweb12:
@@ -419,6 +427,22 @@ Should contain GOV2_data'
     url: 'https://trec.nist.gov/data/terabyte/06/06.efficiency_topics.tar.gz'
     expected_md5: 'e8599a08af5b3f036c203957f5b82de8'
     cache_path: 'trec-tb-2006/efficiency/queries.tar.gz'
+  trec-mq-2007/queries:
+    url: 'https://trec.nist.gov/data/million.query/07/07-million-query-topics.1-10000.gz'
+    expected_md5: 'db64470f08450c6b15a9ee2c7eac2f9b'
+    cache_path: 'trec-mq-2007/queries.txt.gz'
+  trec-mq-2007/qrels:
+    url: 'https://trec.nist.gov/data/million.query/07/07.prels'
+    expected_md5: '4f930d85442ac74cc00b56a4252f1f4a'
+    cache_path: 'trec-mq-2007/prels'
+  trec-mq-2008/queries:
+    url: 'https://trec.nist.gov/data/million.query/08/08.million-query-topics.10001-20000.gz'
+    expected_md5: 'fc8fc0e92ae9bc1d16756534ac682058'
+    cache_path: 'trec-mq-2008/queries.txt.gz'
+  trec-mq-2008/qrels:
+    url: 'https://trec.nist.gov/data/million.query/08/2008.RC1.tgz'
+    expected_md5: 'dae403e1834e87cba1babbef71b73714'
+    cache_path: 'trec-mq-2008/prels.tar.gz'
 
 
 highwire:

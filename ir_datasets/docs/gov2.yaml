@@ -191,3 +191,41 @@ Stream 4 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries).
 </p>
 '
   docs_instructions: *inst
+
+trec-mq-2007:
+  desc: '
+<p>
+TREC 2007 Million Query track.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/million.query07.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec16/papers/1MQ.OVERVIEW16.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Allen2007MQ,
+      title={Million Query Track 2007 Overview},
+      author={James Allan and Ben Carterette and Javed A. Aslam and Virgil Pavlu and Blagovest Dachev and Evangelos Kanoulas},
+      booktitle={TREC},
+      year={2007}
+    }
+
+trec-mq-2008:
+  desc: '
+<p>
+TREC 2008 Million Query track.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/million.query08.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec17/papers/MQ.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Allen2008MQ,
+      title={Million Query Track 2008 Overview},
+      author={James Allan and Javed A. Aslam and Ben Carterette and Virgil Pavlu and Evangelos Kanoulas},
+      booktitle={TREC},
+      year={2008}
+    }

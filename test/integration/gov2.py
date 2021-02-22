@@ -2,7 +2,7 @@ import re
 import unittest
 import ir_datasets
 from ir_datasets.datasets.gov2 import Gov2Doc
-from ir_datasets.formats import TrecQrel, TrecQuery, GenericQuery
+from ir_datasets.formats import TrecQrel, TrecQuery, GenericQuery, TrecPrel
 from .base import DatasetIntegrationTest
 
 
@@ -93,6 +93,16 @@ class TestGov2(DatasetIntegrationTest):
             9: GenericQuery('75010', 'percentage of youth tobacco smokers'),
             24999: GenericQuery('100000', 'cervical flexion extension injury'),
         })
+        self._test_queries('gov2/trec-mq-2007', count=10000, items={
+            0: GenericQuery('1', 'after school program evaluation'),
+            9: GenericQuery('10', 'qualifications for a senator'),
+            9999: GenericQuery('10000', 'californa mission'),
+        })
+        self._test_queries('gov2/trec-mq-2008', count=10000, items={
+            0: GenericQuery('10001', 'comparability of pay analyses'),
+            9: GenericQuery('10010', 'in in 2015 will the u.s military be fighting iran and north korea'),
+            9999: GenericQuery('20000', 'manchester city hall'),
+        })
 
     def test_gov2_qrels(self):
         self._test_qrels('gov2/trec-tb-2004', count=58077, items={
@@ -135,7 +145,16 @@ class TestGov2(DatasetIntegrationTest):
             9: TrecQrel('62937', 'GX001-46-11521081', 1, '0'),
             31983: TrecQrel('71136', 'GX272-67-14117174', 0, '0'),
         })
-
+        self._test_qrels('gov2/trec-mq-2007', count=73015, items={
+            0: TrecPrel('10', 'GX253-98-16418961', 0, 1, 0.165904710473544),
+            9: TrecPrel('10', 'GX225-79-9870332', 1, 1, 0.568969759822883),
+            73014: TrecPrel('9999', 'GX237-19-4725226', 1, 1, 0.659520100607628),
+        })
+        self._test_qrels('gov2/trec-mq-2008', count=15211, items={
+            0: TrecPrel('10002', 'GX037-06-11625428', 0, 1, 0.0031586555555558),
+            9: TrecPrel('10032', 'GX010-65-7921994', 0, 1, 0.00137811889937823),
+            15210: TrecPrel('19997', 'GX257-71-11550035', 0, 1, 0.00107614156144011),
+        })
 
 if __name__ == '__main__':
     unittest.main()

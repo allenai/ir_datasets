@@ -34,6 +34,13 @@ class TrecQrel(NamedTuple):
     relevance: int
     iteration: str
 
+class TrecPrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    method: int
+    iprob: float
+
 # Default content tags from Anserini's TrecCollection
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()
 
@@ -312,6 +319,23 @@ class TrecQrels(BaseQrels):
 
     def qrels_defs(self):
         return self._qrels_defs
+
+
+class TrecPrels(TrecQrels):
+    def qrels_iter(self):
+        with self._qrels_dlc.stream() as f:
+            f = codecs.getreader('utf8')(f)
+            for line in f:
+                if line == '\n':
+                    continue # ignore blank lines
+                cols = line.rstrip().split()
+                if len(cols) != 5:
+                    raise RuntimeError(f'expected 5 columns, got {len(cols)}')
+                qid, did, rel, method, iprob = cols
+                yield TrecPrel(qid, did, int(rel), int(method), float(iprob))
+
+    def qrels_cls(self):
+        return TrecPrel
 
 
 class TrecScoredDocs(BaseScoredDocs):

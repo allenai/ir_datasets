@@ -47,9 +47,12 @@ class WarcDocs(BaseDocs):
                 http_headers, body = split
             content_type = re.search(b'Content-Type:(.*)', http_headers, flags=re.IGNORECASE)
             if content_type:
-                content_type = content_type.group(1).decode().strip()
-                content_type = content_type.split(';')
-                content_type = content_type[0]
+                try:
+                    content_type = content_type.group(1).decode().strip()
+                    content_type = content_type.split(';')
+                    content_type = content_type[0]
+                except UnicodeDecodeError:
+                    content_type = ''
             else:
                 content_type = ''
             yield WarcDoc(did, url, date, http_headers, body, content_type)

@@ -9,7 +9,7 @@ from typing import NamedTuple
 from glob import glob
 import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract
-from ir_datasets.formats import TrecQrels, TrecQueries, TrecColonQueries, BaseDocs, GenericQuery, BaseQrels
+from ir_datasets.formats import TrecQrels, TrecQueries, TrecColonQueries, BaseDocs, GenericQuery, BaseQrels, TrecPrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import Docstore
 
@@ -368,6 +368,19 @@ def _init():
         collection,
         TrecColonQueries(TarExtract(dlc['trec-tb-2006/efficiency/queries'], '06.efficiency_topics.stream-4'), encoding='latin1', namespace=NAME, lang='en'),
         documentation('trec-tb-2006/efficiency/stream4')
+    )
+
+    subsets['trec-mq-2007'] = Dataset(
+        collection,
+        TrecColonQueries(GzipExtract(dlc['trec-mq-2007/queries']), encoding='latin1'),
+        TrecPrels(dlc['trec-mq-2007/qrels'], QREL_DEFS),
+        documentation('trec-mq-2007')
+    )
+    subsets['trec-mq-2008'] = Dataset(
+        collection,
+        TrecColonQueries(GzipExtract(dlc['trec-mq-2008/queries']), encoding='latin1', namespace='trec-mq', lang='en'),
+        TrecPrels(TarExtract(dlc['trec-mq-2008/qrels'], '2008.RC1/prels'), QREL_DEFS),
+        documentation('trec-mq-2008')
     )
 
     ir_datasets.registry.register(NAME, base)

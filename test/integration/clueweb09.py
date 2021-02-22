@@ -134,6 +134,11 @@ class TestClueWeb09(DatasetIntegrationTest):
             9: TrecWebTrackQuery('160', 'grilling', '\n    Find kabob recipes.\n  ', 'ambiguous', (TrecSubtopic(number='1', text='\n    Find kabob recipes.\n  ', type='nav'), TrecSubtopic(number='2', text='\n    Find tips on grilling vegetables.\n  ', type='inf'), TrecSubtopic(number='3', text='\n    Find tips on grilling fish.\n  ', type='inf'), TrecSubtopic(number='4', text='\n    Find instructions for grilling chicken.\n  ', type='inf'), TrecSubtopic(number='5', text='\n    Find the Grilling Magazine website.\n  ', type='nav'), TrecSubtopic(number='6', text='\n    Find information on gas barbecue grills and cooking on a gas grill.\n  ', type='inf'))),
             49: TrecWebTrackQuery('200', 'ontario california airport', '\n    Find flight information for the Ontario, CA airport.\n  ', 'faceted', (TrecSubtopic(number='1', text='\n    Find flight information for the Ontario, CA airport.\n  ', type='inf'), TrecSubtopic(number='2', text='\n    What hotels are near the Ontario, CA airport?\n  ', type='inf'), TrecSubtopic(number='3', text='\n    What services/facilities does the Ontario, CA airport offer?\n  ', type='inf'), TrecSubtopic(number='4', text='\n    What is the address of the Ontario, CA airport?\n  ', type='nav'))),
         })
+        self._test_queries('clueweb09/trec-mq-2009', count=40000, items={
+            0: GenericQuery('20001', '1:obama family tree'),
+            9: GenericQuery('20010', '1:cheap internet'),
+            39999: GenericQuery('60000', '4:bird shingles'),
+        })
 
     def test_clueweb09_qrels(self):
         self._test_qrels('clueweb09/en/trec-web-2009', count=23601, items={
@@ -175,6 +180,11 @@ class TestClueWeb09(DatasetIntegrationTest):
             0: TrecQrel('151', 'clueweb09-en0000-00-03430', -2, '0'),
             9: TrecQrel('151', 'clueweb09-en0000-00-04023', -2, '0'),
             10021: TrecQrel('200', 'clueweb09-enwp03-49-00268', 0, '0'),
+        })
+        self._test_qrels('clueweb09/trec-mq-2009', count=34534, items={
+            0: TrecPrel('20001', 'clueweb09-en0003-55-31884', 0, 0, 1.0),
+            9: TrecPrel('20001', 'clueweb09-enwp01-17-09993', 2, 1, 1.0),
+            34533: TrecPrel('57118', 'clueweb09-en0010-39-07801', 0, 1, 0.0612006151868131),
         })
 
 

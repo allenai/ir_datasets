@@ -39,6 +39,7 @@
 <li><a href="#clueweb09/ja"><kbd><span class="prefix">clueweb09</span>/ja</kbd></a></li>
 <li><a href="#clueweb09/ko"><kbd><span class="prefix">clueweb09</span>/ko</kbd></a></li>
 <li><a href="#clueweb09/pt"><kbd><span class="prefix">clueweb09</span>/pt</kbd></a></li>
+<li><a href="#clueweb09/trec-mq-2009"><kbd><span class="prefix">clueweb09</span>/trec-mq-2009</kbd></a></li>
 <li><a href="#clueweb09/zh"><kbd><span class="prefix">clueweb09</span>/zh</kbd></a></li>
 </ol>
 <hr />
@@ -183,9 +184,9 @@
 <div id="clueweb09/catb/trec-web-2009__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 <div class="type">
-<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">TrecPrel: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">method</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">iprob</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
 <p>Relevance levels</p>
@@ -202,7 +203,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb09/catb/trec-web-2009')</div>
 <div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
 </code>
 </div>
 
@@ -618,9 +619,9 @@ bibtex:
 <div id="clueweb09/en/trec-web-2009__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 <div class="type">
-<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">TrecPrel: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">method</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">iprob</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
 <p>Relevance levels</p>
@@ -637,7 +638,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'clueweb09/en/trec-web-2009')</div>
 <div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
 </code>
 </div>
 
@@ -1110,6 +1111,93 @@ bibtex:
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
 </code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clueweb09/trec-mq-2009" data-parent="clueweb09">
+<h3><kbd class="ds-name select"><span class="str">"clueweb09/trec-mq-2009"</kdb></h3>
+
+<div class="desc">
+ <p> TREC 2009 Million Query track. </p> <ul> <li><a href="https://trec.nist.gov/data/million.query09.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec18/papers/MQ09OVERVIEW.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clueweb09/trec-mq-2009__queries">queries</a>
+<div id="clueweb09/trec-mq-2009__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/trec-mq-2009')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/trec-mq-2009__docs">docs</a>
+<div id="clueweb09/trec-mq-2009__docs" class="tab-content">
+<p>Language: <em>multiple/other/unknown</em></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">WarcDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">http_headers</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="5"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/trec-mq-2009')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, date, http_headers, body, body_content_type&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/trec-mq-2009__qrels">qrels</a>
+<div id="clueweb09/trec-mq-2009__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecPrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">method</span>: <span class="kwd">int</span></li><li data-tuple-idx="4"><span class="">iprob</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clueweb09/trec-mq-2009')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="clueweb09/trec-mq-2009__citation">Citation</a>
+<div id="clueweb09/trec-mq-2009__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Carterette2009MQ,
+  title={Million Query Track 2009 Overview},
+  author={Ben Carterette and Virgil Pavlu and Hui Fang and Evangelos Kanoulas},
+  booktitle={TREC},
+  year={2009}
+}
+</cite>
 </div>
 </div>
 </div>

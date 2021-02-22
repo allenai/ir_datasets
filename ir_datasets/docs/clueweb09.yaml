@@ -169,3 +169,22 @@ The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep 
       booktitle={TREC},
       year={2012}
     }
+
+trec-mq-2009:
+  desc: '
+<p>
+TREC 2009 Million Query track.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/million.query09.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec18/papers/MQ09OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Carterette2009MQ,
+      title={Million Query Track 2009 Overview},
+      author={Ben Carterette and Virgil Pavlu and Hui Fang and Evangelos Kanoulas},
+      booktitle={TREC},
+      year={2009}
+    }
