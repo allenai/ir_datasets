@@ -64,8 +64,7 @@ The TREC 2018 Precision Medicine clinical trials subtask.
   desc: '
 <p>
 A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from May 2019
-for use with the <a class="ds-ref">clinicaltrials/2019/trec-pm-2019</a> and
-<a class="ds-ref">clinicaltrials/2019/trec-pm-2020</a> Clinical Trials subtasks.
+for use with the <a class="ds-ref">clinicaltrials/2019/trec-pm-2019</a> Clinical Trials subtask.
 </p>
 <ul>
 <li><a href="http://www.trec-cds.org/2019.html#documents">Dataset information</a></li>
@@ -89,13 +88,3 @@ The TREC 2019 Precision Medicine clinical trials subtask.
       booktitle={TREC},
       year={2019}
     }
-
-trec-pm-2020:
-  desc: '
-<p>
-The TREC 2020 Precision Medicine clinical trials subtask.
-</p>
-<ul>
-<li><a href="http://www.trec-cds.org/2020.html">Shared task site</a></li>
-</ul>
-'

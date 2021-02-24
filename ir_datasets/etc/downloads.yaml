@@ -103,10 +103,6 @@ clinicaltrials:
     url: 'http://www.trec-cds.org/topics2019.xml'
     expected_md5: 'bc26cef87e842837daf2e6680d4652c0'
     cache_path: 'trec-pm-2019/queries.xml'
-  trec-pm-2020/queries:
-    url: 'http://www.trec-cds.org/topics2020.xml'
-    expected_md5: 'b462984752925c44b654d7a5706c7af1'
-    cache_path: 'trec-pm-2020/queries.xml'
 
 
 clueweb09:

@@ -1,7 +1,7 @@
 import re
 import unittest
 import ir_datasets
-from ir_datasets.datasets.clinicaltrials import ClinicalTrialsDoc, TrecPm2020Query
+from ir_datasets.datasets.clinicaltrials import ClinicalTrialsDoc
 from ir_datasets.datasets.medline import TrecPmQuery, TrecPm2017Query
 from ir_datasets.formats import GenericQuery, TrecQrel
 from .base import DatasetIntegrationTest
@@ -38,11 +38,6 @@ class TestClinicalTrials(DatasetIntegrationTest):
             0: TrecPmQuery('1', 'melanoma', 'BRAF (E586K)', '64-year-old female'),
             9: TrecPmQuery('10', 'mucosal melanoma', 'KIT (L576P), KIT amplification', '62-year-old female'),
             39: TrecPmQuery('40', 'malignant hyperthermia', 'RYR1', '54-year-old male'),
-        })
-        self._test_queries('clinicaltrials/2019/trec-pm-2020', count=40, items={
-            0: TrecPm2020Query('1', 'colorectal cancer', 'ABL1', 'Regorafenib'),
-            9: TrecPm2020Query('10', 'ovarian cancer', 'BRCA2', 'Olaparib'),
-            39: TrecPm2020Query('40', 'acute myeloid leukemia', 'SMO', 'Glasdegib'),
         })
 
     def test_qrels(self):

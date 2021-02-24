@@ -25,13 +25,6 @@ QREL_DEFS = {
 NAME = 'clinicaltrials'
 
 
-class TrecPm2020Query(NamedTuple):
-    query_id: str
-    disease: str
-    gene: str
-    treatment: str
-
-
 class ClinicalTrialsDoc(NamedTuple):
     doc_id: str
     title: str
@@ -131,12 +124,6 @@ def _init():
         TrecXmlQueries(dlc['trec-pm-2019/queries'], qtype=medline.TrecPmQuery, namespace='trec-pm-2019', lang='en'),
         TrecQrels(dlc['trec-pm-2019/qrels'], QREL_DEFS),
         documentation('trec-pm-2019')
-    )
-
-    subsets['2019/trec-pm-2020'] = Dataset(
-        collection19,
-        TrecXmlQueries(dlc['trec-pm-2020/queries'], qtype=TrecPm2020Query, namespace='trec-pm-2020', lang='en'),
-        documentation('trec-pm-2020')
     )
 
     ir_datasets.registry.register(NAME, base)
