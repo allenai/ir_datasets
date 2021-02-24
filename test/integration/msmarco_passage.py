@@ -80,6 +80,17 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: GenericQuery(query_id='1071750', text='why is pete rose banned from hall of fame'),
             199: GenericQuery(query_id='132622', text='definition of attempted arson')
         })
+        self._test_queries('msmarco-document/trec-dl-2020', count=200, items={
+            0: GenericQuery('1030303', 'who is aziz hashim'),
+            9: GenericQuery('1071750', 'why is pete rose banned from hall of fame'),
+            199: GenericQuery('132622', 'definition of attempted arson'),
+        })
+        self._test_queries('msmarco-document/trec-dl-2020/judged', count=45, items={
+            0: GenericQuery('1030303', 'who is aziz hashim'),
+            9: GenericQuery('1105792', 'define: geon'),
+            44: GenericQuery('997622', 'where is the show shameless filmed'),
+        })
+
 
     def test_msmarco_passage_qrels(self):
         self._test_qrels('msmarco-passage/train', count=532761, items={
@@ -131,6 +142,16 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             0: TrecQrel(query_id='318166', doc_id='179254', relevance=1, iteration='0'),
             9: TrecQrel(query_id='1158250', doc_id='791721', relevance=1, iteration='0'),
             130: TrecQrel(query_id='302427', doc_id='512871', relevance=1, iteration='0')
+        })
+        self._test_qrels('msmarco-document/trec-dl-2020', count=9098, items={
+            0: TrecQrel('42255', 'D1006124', 0, '0'),
+            9: TrecQrel('42255', 'D1168483', 0, '0'),
+            9097: TrecQrel('1136962', 'D96742', 0, '0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-2020/judged', count=9098, items={
+            0: TrecQrel('42255', 'D1006124', 0, '0'),
+            9: TrecQrel('42255', 'D1168483', 0, '0'),
+            9097: TrecQrel('1136962', 'D96742', 0, '0'),
         })
 
     def test_msmarco_passage_docpairs(self):

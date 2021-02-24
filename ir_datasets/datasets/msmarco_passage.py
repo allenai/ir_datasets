@@ -143,6 +143,7 @@ def _init():
     subsets['trec-dl-2020'] = Dataset(
         collection,
         TsvQueries(GzipExtract(dlc['trec-dl-2020/queries']), namespace='msmarco', lang='en'),
+        TrecQrels(dlc['trec-dl-2020/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(Cache(ExtractQidPid(GzipExtract(dlc['trec-dl-2020/scoreddocs'])), base_path/'trec-dl-2020/ms.run')),
     )
 
@@ -167,6 +168,13 @@ def _init():
         FilteredQueries(subsets['trec-dl-2019'].queries_handler(), dl19_judged),
         FilteredScoredDocs(subsets['trec-dl-2019'].scoreddocs_handler(), dl19_judged),
         subsets['trec-dl-2019'],
+    )
+
+    dl20_judged = Lazy(lambda: {q.query_id for q in subsets['trec-dl-2020'].qrels_iter()})
+    subsets['trec-dl-2020/judged'] = Dataset(
+        FilteredQueries(subsets['trec-dl-2020'].queries_handler(), dl20_judged),
+        FilteredScoredDocs(subsets['trec-dl-2020'].scoreddocs_handler(), dl20_judged),
+        subsets['trec-dl-2020'],
     )
 
     # split200 -- 200 queries held out from the training data for validation

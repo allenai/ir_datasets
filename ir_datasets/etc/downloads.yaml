@@ -838,6 +838,10 @@ msmarco-document:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctest2020-top100.gz'
     expected_md5:  '96f39dae3443736bd6393bd09a5a0a20'
     cache_path: 'trec-dl-2020/ms.run.gz'
+  trec-dl-2020/qrels:
+    url: 'https://trec.nist.gov/data/deep/2020qrels-docs.txt'
+    expected_md5:  'e10f3545583b124a4ed5e7992293e15a'
+    cache_path: 'trec-dl-2020/qrels'
   orcas/queries:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-queries.tsv.gz'
     expected_md5:  '519c5f522294406e3b0574d7d53cf233'
@@ -903,6 +907,10 @@ msmarco-passage:
   trec-dl-2020/scoreddocs:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2020-top1000.tsv.gz'
     expected_md5: 'aa6fbc51d66bd1dc745964c0e140a727'
+  trec-dl-2020/qrels:
+    url: 'https://trec.nist.gov/data/deep/2020qrels-pass.txt'
+    expected_md5:  '0355ccee7509ac0463e8278186cdd8d1'
+    cache_path: 'trec-dl-2020/qrels'
 
 
 

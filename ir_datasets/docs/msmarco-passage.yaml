@@ -166,8 +166,8 @@ trec-dl-2020:
   desc: '
 <p>
 Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from
-<a class="ds-ref">msmarco-passage/eval</a>. Relevance judgments from NIST assessors to be made
-available in the future.
+<a class="ds-ref">msmarco-passage/eval</a>. A subset of these queries were judged by NIST assessors,
+(filtered list available in <a class="ds-ref">msmarco-passage/trec-dl-2020/judged</a>).
 </p>
 <ul>
 <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li>
@@ -180,3 +180,10 @@ available in the future.
       booktitle={TREC},
       year={2020}
     }
+
+trec-dl-2020/judged:
+  desc: '
+<p>
+Subset of <a class="ds-ref">msmarco-passage/trec-dl-2020</a>, only including queries with qrels.
+</p>
+'
