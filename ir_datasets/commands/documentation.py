@@ -54,7 +54,7 @@ def main(args):
 def generate_dataset_page(out_dir, version, top_level, sub_datasets):
     dataset = ir_datasets.registry[top_level]
     documentation = dataset.documentation() if hasattr(dataset, 'documentation') else {}
-    with page_template(f'{top_level}.html', out_dir, version, title=documentation.get('pretty_name', top_level), source=f'datasets/{top_level}.py') as out:
+    with page_template(f'{top_level}.html', out_dir, version, title=documentation.get('pretty_name', top_level), source=f'datasets/{top_level.replace("-", "_")}.py') as out:
         index = '\n'.join(f'<li><a href="#{name}"><kbd><span class="prefix">{top_level}</span>{name[len(top_level):]}</kbd></a></li>' for name, ds in sub_datasets)
         out.write(f'''
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
