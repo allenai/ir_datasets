@@ -42,7 +42,8 @@ class RequestsDownload(BaseDownload):
         pbar = None
         response = None
         skip = 0
-        remaining_tries = self.tries if self.tries is not None else int(os.environ.get('IR_DATASETS_DL_TRIES', '3'))
+        default_tries = self.tries if self.tries is not None else int(os.environ.get('IR_DATASETS_DL_TRIES', '3'))
+        remaining_tries = default_tries
         with contextlib.ExitStack() as stack:
             while not done:
                 try:
@@ -59,6 +60,9 @@ class RequestsDownload(BaseDownload):
                         pbar = stack.enter_context(_logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt, file=pbar_f))
                     for data in self._iter_response_data(response, http_args, skip):
                         pbar.update(len(data))
+                        if response.headers.get('accept-ranges') == 'bytes':
+                            # since we got more data and the server accepts range requests, reset the "tries" counter
+                            remaining_tries = default_tries
                         yield data
                 except requests.exceptions.RequestException as ex:
                     remaining_tries -= 1
@@ -146,11 +150,12 @@ def _cleanup_tmp(file):
 class Download:
     _dua_ctxt = deque([None])
 
-    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None):
+    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None, stream=False):
         self.mirrors = list(mirrors)
         self.expected_md5 = expected_md5
         self.dua = dua or self._dua_ctxt[-1]
         self._cache_path = cache_path
+        self._stream = stream
         self._path = None
 
     def path(self):
@@ -197,8 +202,14 @@ class Download:
 
     @contextlib.contextmanager
     def stream(self):
-        with open(self.path(), 'rb') as f:
-            yield f
+        if self._stream:
+            assert len(self.mirrors) == 1, "cannot stream with multiple mirrors"
+            with self.mirrors[0].stream() as stream:
+                stream = util.HashStream(stream, self.expected_md5, algo='md5')
+                yield stream
+        else:
+            with open(self.path(), 'rb') as f:
+                yield f
 
     @classmethod
     @contextlib.contextmanager
@@ -251,7 +262,7 @@ class _DownloadConfig:
             sources.append(LocalDownload(local_path, dlc['instructions'].format(path=local_path)))
         else:
             raise RuntimeError('Must either provide url or instructions')
-        return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua)
+        return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua, stream=dlc.get('stream', False))
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.yaml')

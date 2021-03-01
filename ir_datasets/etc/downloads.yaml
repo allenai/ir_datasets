@@ -1109,6 +1109,37 @@ Once completed, place the uncompressed source here: {path}'
     cache_path: 'qrels'
 
 
+tweets2013-ia:
+  docs/feb:
+    url: 'https://archive.org/download/archiveteam-twitter-stream-2013-02/archiveteam-twitter-stream-2013-02.tar'
+    expected_md5: 'e82916d37116c781afff750e2127156f5'
+    stream: True
+    skip_local: True
+    skip_test: True # these take too long to verify with GH actions
+  docs/mar:
+    url: 'https://archive.org/download/archiveteam-twitter-stream-2013-03/archiveteam-twitter-stream-2013-03.tar'
+    expected_md5: '486817a372e03298162daa0e80dc63995'
+    stream: True
+    skip_local: True
+    skip_test: True # these take too long to verify with GH actions
+  trec-mb-2013/queries:
+    url: 'https://trec.nist.gov/data/microblog/2013/topics.MB111-170.txt'
+    expected_md5: '0b78d99dfa2d655dca7e9f138a93c21a'
+    cache_path: 'trec-mb-2013/queries.txt'
+  trec-mb-2013/qrels:
+    url: 'https://trec.nist.gov/data/microblog/2013/qrels.txt'
+    expected_md5: '4776a5dfd80b3f675184315ec989c02f'
+    cache_path: 'trec-mb-2013/qrels'
+  trec-mb-2014/queries:
+    url: 'https://trec.nist.gov/data/microblog/2014/topics.desc.MB171-225.txt'
+    expected_md5: 'e9d520f976176e710fd68bb3a065a3e7'
+    cache_path: 'trec-mb-2014/queries.txt'
+  trec-mb-2014/qrels:
+    url: 'https://trec.nist.gov/data/microblog/2014/qrels2014.txt'
+    expected_md5: '68d9a1920b244f6ccdc687ee1d473214'
+    cache_path: 'trec-mb-2014/qrels'
+
+
 vaswani:
   main:
     url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz'

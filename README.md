@@ -240,6 +240,7 @@ Available datasets include:
  - [TREC Mandarin](https://ir-datasets.com/trec-mandarin.html)
  - [TREC Robust 2004](https://ir-datasets.com/trec-robust04.html)
  - [TREC Spanish](https://ir-datasets.com/trec-spanish.html)
+ - [Tweets 2013 (Internet Archive)](https://ir-datasets.com/tweets2013-ia.html)
  - [Vaswani](https://ir-datasets.com/vaswani.html)
  - [WikIR](https://ir-datasets.com/wikir.html)
 

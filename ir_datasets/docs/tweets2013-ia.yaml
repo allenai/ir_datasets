@@ -1,0 +1,63 @@
+_:
+  pretty_name: 'Tweets 2013 (Internet Archive)'
+  desc: '
+<p>
+A collection of tweets from a 2-month window achived by the Internet Achive. This collection
+can be a stand-in document collection for the TREC Microblog 2013-14 tasks. (Even though it is
+not exactly the same collection, <a href="https://cs.uwaterloo.ca/~jimmylin/publications/Sequiera_Lin_SIGIR2017.pdf">Sequiera and Lin</a> show that it it close enough.)
+</p>
+<p>
+This collection is automatically downloaded from the Internet Archive, though download speeds are often
+slow so it takes some time. ir_datasets constructs a new directory hierarchy during the download process
+to facilitate fast lookups and slices.
+</p>
+<ul>
+  <li>Documents: Tweets</li>
+  <li><a href="https://cs.uwaterloo.ca/~jimmylin/publications/Sequiera_Lin_SIGIR2017.pdf">Information about dataset (paper)</a></li>
+  <li><a href="https://github.com/castorini/Tweets2013-IA">Information about dataset (repository)</a></li>
+</ul>'
+  bibtex: |
+    @inproceedings{Sequiera2017Finally,
+      title={Finally, a Downloadable Test Collection of Tweets},
+      author={Royal Sequiera and Jimmy Lin},
+      booktitle={SIGIR},
+      year={2017}
+    }
+
+
+trec-mb-2013:
+  desc: '
+<p>
+TREC Microblog 2013 test collection.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec22/papers/MB.OVERVIEW.pdf">Shared Task Paper</a></li>
+<li><a href="https://github.com/lintool/twitter-tools/wiki/TREC-2013-Track-Guidelines">Shared Task Site</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Lin2013Microblog,
+      title={Overview of the TREC-2013 Microblog Track},
+      author={Jimmy Lin and Miles Efron},
+      booktitle={TREC},
+      year={2013}
+    }
+
+
+trec-mb-2014:
+  desc: '
+<p>
+TREC Microblog 2014 test collection.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec23/papers/overview-microblog.pdf">Shared Task Paper</a></li>
+<li><a href="https://github.com/lintool/twitter-tools/wiki/TREC-2014-Track-Guidelines">Shared Task Site</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Lin2014Microblog,
+      title={Overview of the TREC-2014 Microblog Track},
+      author={Jimmy Lin and Miles Efron and Yulu Wang and Garrick Sherman},
+      booktitle={TREC},
+      year={2014}
+    }

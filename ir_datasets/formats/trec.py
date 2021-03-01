@@ -174,13 +174,14 @@ DEFAULT_QTYPE_MAP = {
     '<narr> *(Narrative:)?': 'narrative'
 }
 class TrecQueries(BaseQueries):
-    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, namespace=None, lang=None):
+    def __init__(self, queries_dlc, qtype=TrecQuery, qtype_map=None, encoding=None, namespace=None, lang=None, remove_tags=('</title>',)):
         self._queries_dlc = queries_dlc
         self._qtype = qtype
         self._qtype_map = qtype_map or DEFAULT_QTYPE_MAP
         self._encoding = encoding
         self._queries_namespace = namespace
         self._queries_lang = lang
+        self._remove_tags = remove_tags
 
     def queries_path(self):
         return self._queries_dlc.path()
@@ -192,7 +193,8 @@ class TrecQueries(BaseQueries):
             for line in f:
                 if line.startswith('</top>'):
                     assert len(fields) == len(self._qtype._fields), fields
-                    fields = {k: v.replace('</title>', '') for k, v in fields.items()}
+                    for tag in self._remove_tags:
+                        fields = {k: v.replace(tag, '') for k, v in fields.items()}
                     yield self._qtype(*(fields[f].strip() for f in self._qtype._fields))
                     fields, reading = {}, None
                 match_any = False
