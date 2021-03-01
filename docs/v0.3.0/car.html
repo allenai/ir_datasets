@@ -7,34 +7,47 @@
 <script src="main.js"></script>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-<title>ANTIQUE - ir_datasets</title>
+<meta name="robots" content="noindex,nofollow" />
+<title>TREC CAR - ir_datasets</title>
 <body>
 <div class="page">
 
+<div class="banner">This documentation is for <strong>v0.3.0</strong>. See <a href="../car.html">here</a> for documentation of the current latest version on pypi.</div>
+
 <div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
 
-<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/ir_datasets/datasets/antique.py">datasets/antique.py</a></div>
-<h1><code>ir_datasets</code>: ANTIQUE</h1>
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.0/ir_datasets/datasets/car.py">datasets/car.py</a></div>
+<h1><code>ir_datasets</code>: TREC CAR</h1>
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
 <ol class="index">
-<li><a href="#antique"><kbd>antique</kbd></a></li>
-<li><a href="#antique/test"><kbd><span class="prefix">antique</span>/test</kbd></a></li>
-<li><a href="#antique/test/non-offensive"><kbd><span class="prefix">antique</span>/test/non-offensive</kbd></a></li>
-<li><a href="#antique/train"><kbd><span class="prefix">antique</span>/train</kbd></a></li>
-<li><a href="#antique/train/split200-train"><kbd><span class="prefix">antique</span>/train/split200-train</kbd></a></li>
-<li><a href="#antique/train/split200-valid"><kbd><span class="prefix">antique</span>/train/split200-valid</kbd></a></li>
+<li><a href="#car"><kbd>car</kbd></a></li>
+<li><a href="#car/v1.5"><kbd><span class="prefix">car</span>/v1.5</kbd></a></li>
+<li><a href="#car/v1.5/test200"><kbd><span class="prefix">car</span>/v1.5/test200</kbd></a></li>
+<li><a href="#car/v1.5/train/fold0"><kbd><span class="prefix">car</span>/v1.5/train/fold0</kbd></a></li>
+<li><a href="#car/v1.5/trec-y1"><kbd><span class="prefix">car</span>/v1.5/trec-y1</kbd></a></li>
+<li><a href="#car/v1.5/trec-y1/auto"><kbd><span class="prefix">car</span>/v1.5/trec-y1/auto</kbd></a></li>
+<li><a href="#car/v1.5/trec-y1/manual"><kbd><span class="prefix">car</span>/v1.5/trec-y1/manual</kbd></a></li>
 </ol>
 <hr />
-<div class="dataset" id="antique">
-<h3><kbd class="select"><span class="str">"antique"</kdb></h3>
+<div class="dataset" id="car">
+<h3><kbd class="select"><span class="str">"car"</kdb></h3>
 
 <div class="desc">
- <p> "ANTIQUE is a non-factoid quesiton answering dataset based on the questions and answers of Yahoo! Webscope L6." </p> <ul> <li>Documents: Short answer passages (from Yahoo Answers)</li> <li>Queries: Natural language questions (from Yahoo Answers)</li> <li><a href="https://arxiv.org/abs/1905.08957">Dataset Paper</a></li> </ul> 
+ <p> An ad-hoc passage retrieval collection, constructed from Wikipedia and used as the basis of the TREC Complex Answer Retrieval (CAR) task. </p> 
+</div>
+
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5"</kdb></h3>
+
+<div class="desc">
+ <p> Version 1.5 of the TREC dataset. This version is used for year 1 (2017) of the TREC CAR shared task. </p> 
 </div>
 <div class="tabs">
-<a class="tab" target="antique__docs">docs</a>
-<div id="antique__docs" class="tab-content">
+<a class="tab" target="car/v1.5__docs">docs</a>
+<div id="car/v1.5__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Document type:</div>
 <div class="type">
@@ -46,20 +59,21 @@
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique__citation">Citation</a>
-<div id="antique__citation" class="tab-content">
+<a class="tab" target="car/v1.5__citation">Citation</a>
+<div id="car/v1.5__citation" class="tab-content">
 bibtex:
-<cite class="select">@inproceedings{Hashemi2020Antique,
-  title={ANTIQUE: A Non-Factoid Question Answering Benchmark},
-  author={Helia Hashemi and Mohammad Aliannejadi and Hamed Zamani and Bruce Croft},
-  booktitle={ECIR},
-  year={2020}
+<cite class="select">@article{Dietz2017,
+  title={{TREC CAR}: A Data Set for Complex Answer Retrieval},
+  author={Laura Dietz and Ben Gamari},
+  year={2017},
+  note={Version 1.5},
+  url={http://trec-car.cs.unh.edu}
 }
 </cite>
 </div>
@@ -67,15 +81,15 @@ bibtex:
 </div>
 
 <hr />
-<div class="dataset" id="antique/test" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/test"</kdb></h3>
+<div class="dataset" id="car/v1.5/test200" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/test200"</kdb></h3>
 
 <div class="desc">
- <p> Official test set of the ANTIQUE dataset. </p>
+ <p> Un-official test set consisting of manually-selected articles. Sometimes used as a validation set. </p> 
 </div>
 <div class="tabs">
-<a class="tab" target="antique/test__queries">queries</a>
-<div id="antique/test__queries" class="tab-content">
+<a class="tab" target="car/v1.5/test200__queries">queries</a>
+<div id="car/v1.5/test200__queries" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
@@ -87,14 +101,14 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/test200')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/test__docs">docs</a>
-<div id="antique/test__docs" class="tab-content">
+<a class="tab" target="car/v1.5/test200__docs">docs</a>
+<div id="car/v1.5/test200__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Document type:</div>
 <div class="type">
@@ -106,14 +120,14 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/test200')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/test__qrels">qrels</a>
-<div id="antique/test__qrels" class="tab-content">
+<a class="tab" target="car/v1.5/test200__qrels">qrels</a>
+<div id="car/v1.5/test200__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 <div class="type">
 <div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
@@ -125,16 +139,98 @@ bibtex:
 
 <table>
 <tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">1</td><td>It is completely out of context or does not make any sense.</td></tr>
-<tr><td class="relScore">2</td><td>It does not answer the question or if it does, it provides anunreasonable answer, however, it is not out of context. Therefore, you cannot accept it as an answer to the question.</td></tr>
-<tr><td class="relScore">3</td><td>It can be an answer to the question, however, it is notsufficiently convincing. There should be an answer with much better quality for the question.</td></tr>
-<tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
 </table>
 
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/test200')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/test200__citation">Citation</a>
+<div id="car/v1.5/test200__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{nanni2017benchmark,
+  title={Benchmark for complex answer retrieval},
+  author={Nanni, Federico and Mitra, Bhaskar and Magnusson, Matt and Dietz, Laura},
+  booktitle={ICTIR},
+  year={2017}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5/train/fold0" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold0"</kdb></h3>
+
+<div class="desc">
+ <p> Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/train/fold0__queries">queries</a>
+<div id="car/v1.5/train/fold0__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold0')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold0__docs">docs</a>
+<div id="car/v1.5/train/fold0__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold0')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold0__qrels">qrels</a>
+<div id="car/v1.5/train/fold0__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold0')</div>
 <div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
@@ -143,15 +239,15 @@ bibtex:
 </div>
 
 <hr />
-<div class="dataset" id="antique/test/non-offensive" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/test/non-offensive"</kdb></h3>
+<div class="dataset" id="car/v1.5/trec-y1" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1"</kdb></h3>
 
 <div class="desc">
- <p> <a class="ds-ref">antique/test</a> without a set of queries deemed by the authors of ANTIQUE to be "offensive (and noisy)." </p>
+ <p> Official test set of TREC CAR 2017 (year 1). </p> 
 </div>
 <div class="tabs">
-<a class="tab" target="antique/test/non-offensive__queries">queries</a>
-<div id="antique/test/non-offensive__queries" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1__queries">queries</a>
+<div id="car/v1.5/trec-y1__queries" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
@@ -163,14 +259,14 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/test/non-offensive__docs">docs</a>
-<div id="antique/test/non-offensive__docs" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1__docs">docs</a>
+<div id="car/v1.5/trec-y1__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Document type:</div>
 <div class="type">
@@ -182,14 +278,74 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/test/non-offensive__qrels">qrels</a>
-<div id="antique/test/non-offensive__qrels" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1__citation">Citation</a>
+<div id="car/v1.5/trec-y1__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{dietz2017trec,
+  title={TREC Complex Answer Retrieval Overview.},
+  author={Dietz, Laura and Verma, Manisha and Radlinski, Filip and Craswell, Nick},
+  booktitle={TREC},
+  year={2017}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5/trec-y1/auto" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1/auto"</kdb></h3>
+
+<div class="desc">
+ <p> Official test set of TREC CAR 2017 (year 1), using automatic relevance judgments (assumed from hierarchical structure of pages, i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/trec-y1/auto__queries">queries</a>
+<div id="car/v1.5/trec-y1/auto__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/auto')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/trec-y1/auto__docs">docs</a>
+<div id="car/v1.5/trec-y1/auto__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/auto')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/trec-y1/auto__qrels">qrels</a>
+<div id="car/v1.5/trec-y1/auto__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 <div class="type">
 <div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
@@ -201,16 +357,13 @@ bibtex:
 
 <table>
 <tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">1</td><td>It is completely out of context or does not make any sense.</td></tr>
-<tr><td class="relScore">2</td><td>It does not answer the question or if it does, it provides anunreasonable answer, however, it is not out of context. Therefore, you cannot accept it as an answer to the question.</td></tr>
-<tr><td class="relScore">3</td><td>It can be an answer to the question, however, it is notsufficiently convincing. There should be an answer with much better quality for the question.</td></tr>
-<tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
 </table>
 
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/auto')</div>
 <div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>
@@ -219,15 +372,15 @@ bibtex:
 </div>
 
 <hr />
-<div class="dataset" id="antique/train" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train"</kdb></h3>
+<div class="dataset" id="car/v1.5/trec-y1/manual" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1/manual"</kdb></h3>
 
 <div class="desc">
- <p> Official train set of the ANTIQUE dataset. </p>
+ <p> Official test set of TREC CAR 2017 (year 1), using manual graded relevance judgments. </p> 
 </div>
 <div class="tabs">
-<a class="tab" target="antique/train__queries">queries</a>
-<div id="antique/train__queries" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1/manual__queries">queries</a>
+<div id="car/v1.5/trec-y1/manual__queries" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
@@ -239,14 +392,14 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/manual')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/train__docs">docs</a>
-<div id="antique/train__docs" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1/manual__docs">docs</a>
+<div id="car/v1.5/trec-y1/manual__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
 <div>Document type:</div>
 <div class="type">
@@ -258,14 +411,14 @@ bibtex:
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/manual')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
 </code>
 </div>
 
-<a class="tab" target="antique/train__qrels">qrels</a>
-<div id="antique/train__qrels" class="tab-content">
+<a class="tab" target="car/v1.5/trec-y1/manual__qrels">qrels</a>
+<div id="car/v1.5/trec-y1/manual__qrels" class="tab-content">
 <div>Query relevance judgment type:</div>
 <div class="type">
 <div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
@@ -277,168 +430,18 @@ bibtex:
 
 <table>
 <tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">1</td><td>It is completely out of context or does not make any sense.</td></tr>
-<tr><td class="relScore">2</td><td>It does not answer the question or if it does, it provides anunreasonable answer, however, it is not out of context. Therefore, you cannot accept it as an answer to the question.</td></tr>
-<tr><td class="relScore">3</td><td>It can be an answer to the question, however, it is notsufficiently convincing. There should be an answer with much better quality for the question.</td></tr>
-<tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
+<tr><td class="relScore">-2</td><td>Trash</td></tr>
+<tr><td class="relScore">-1</td><td>NO, non-relevant</td></tr>
+<tr><td class="relScore">0</td><td>Non-relevant, but roughly on TOPIC</td></tr>
+<tr><td class="relScore">1</td><td>CAN be mentioned</td></tr>
+<tr><td class="relScore">2</td><td>SHOULD be mentioned</td></tr>
+<tr><td class="relScore">3</td><td>MUST be mentioned</td></tr>
 </table>
 
 <p>Example</p>
 <code class="example">
 <div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
-</code>
-</div>
-</div>
-</div>
-
-<hr />
-<div class="dataset" id="antique/train/split200-train" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-train"</kdb></h3>
-
-<div class="desc">
- <p> <a class="ds-ref">antique/train</a> without the 200 queries used by <a class="ds-ref">antique/train/split200-valid</a>. </p>
-</div>
-<div class="tabs">
-<a class="tab" target="antique/train/split200-train__queries">queries</a>
-<div id="antique/train/split200-train__queries" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Query type:</div>
-<div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="antique/train/split200-train__docs">docs</a>
-<div id="antique/train/split200-train__docs" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Document type:</div>
-<div class="type">
-<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="antique/train/split200-train__qrels">qrels</a>
-<div id="antique/train/split200-train__qrels" class="tab-content">
-<div>Query relevance judgment type:</div>
-<div class="type">
-<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Relevance levels</p>
-
-<table>
-<tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">1</td><td>It is completely out of context or does not make any sense.</td></tr>
-<tr><td class="relScore">2</td><td>It does not answer the question or if it does, it provides anunreasonable answer, however, it is not out of context. Therefore, you cannot accept it as an answer to the question.</td></tr>
-<tr><td class="relScore">3</td><td>It can be an answer to the question, however, it is notsufficiently convincing. There should be an answer with much better quality for the question.</td></tr>
-<tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
-</table>
-
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
-</code>
-</div>
-</div>
-</div>
-
-<hr />
-<div class="dataset" id="antique/train/split200-valid" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-valid"</kdb></h3>
-
-<div class="desc">
- <p> A held-out subset of 200 queries from <a class="ds-ref">antique/train</a>. Use in conjunction with <a class="ds-ref">antique/train/split200-train</a>. </p>
-</div>
-<div class="tabs">
-<a class="tab" target="antique/train/split200-valid__queries">queries</a>
-<div id="antique/train/split200-valid__queries" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Query type:</div>
-<div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="antique/train/split200-valid__docs">docs</a>
-<div id="antique/train/split200-valid__docs" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Document type:</div>
-<div class="type">
-<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="antique/train/split200-valid__qrels">qrels</a>
-<div id="antique/train/split200-valid__qrels" class="tab-content">
-<div>Query relevance judgment type:</div>
-<div class="type">
-<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Relevance levels</p>
-
-<table>
-<tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">1</td><td>It is completely out of context or does not make any sense.</td></tr>
-<tr><td class="relScore">2</td><td>It does not answer the question or if it does, it provides anunreasonable answer, however, it is not out of context. Therefore, you cannot accept it as an answer to the question.</td></tr>
-<tr><td class="relScore">3</td><td>It can be an answer to the question, however, it is notsufficiently convincing. There should be an answer with much better quality for the question.</td></tr>
-<tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
-</table>
-
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/manual')</div>
 <div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
 <div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
 </code>

@@ -229,6 +229,14 @@ def generate_data_format(cls):
 
 def generate_index(out_dir, version):
     with page_template('index.html', out_dir, version, title='Catalog') as out:
+        if version == 'master':
+            install = 'git+https://github.com/allenai/ir_datasets.git@master'
+        elif version.startswith('v'):
+            install = f'ir_datasets=={version[1:]}'
+        elif not version:
+            install = '--upgrade ir_datasets'
+        else:
+            raise RuntimeError(f'unknown version {version}')
         index = []
         for name in sorted(ir_datasets.registry):
             dataset = ir_datasets.registry[name]
@@ -242,11 +250,23 @@ def generate_index(out_dir, version):
             index.append(f'{tbody}<tr><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
         index = '\n'.join(index)
         out.write(f'''
-<h2>Guides</h2>
+<p>
+<code>ir_datasets</code> provides a common interface to many IR ranking datasets.
+</p>
+
+<h2>Getting Started</h2>
+
+<p>
+Install with pip:
+</p>
+
+<code class="example">pip install {install}</code>
+
+<p>Guides:</p>
 
 <ul>
-<li><a href="python.html">Python API Documentation</a></li>
 <li><a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets.ipynb">Colab Tutorial</a></li>
+<li><a href="python.html">Python API Documentation</a></li>
 </ul>
 
 <h2>Dataset Index</h2>
@@ -268,7 +288,11 @@ def generate_index(out_dir, version):
 ''')
         v_prefix = '../' if version else ''
         versions = [str(v).split('/')[-2] for v in sorted(Path(out_dir).glob('*/index.html'))]
-        versions = '\n'.join(f'<li><a href="{v_prefix}{v}/index.html">{v}</a></li>' for v in versions)
+        versions = [v for v in versions if v != version]
+        versions = [f'<li><a href="{v_prefix}{v}/index.html">{v}</a></li>' for v in versions]
+        if version:
+            versions = [f'<li><a href="../index.html">Latest Release</a></li>'] + versions
+        versions = '\n'.join(versions)
         out.write(f'''
 <h2>Other Versions</h2>
 <ul>
