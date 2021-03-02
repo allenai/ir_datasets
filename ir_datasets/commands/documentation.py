@@ -275,12 +275,12 @@ Install with pip:
 <table>
 <tbody>
 <tr>
-<th>Dataset</th>
-<th>docs</th>
-<th>queries</th>
-<th>qrels</th>
-<th class="screen-small-hide">scoreddocs</th>
-<th class="screen-small-hide">docpairs</th>
+<th class="stick-top">Dataset</th>
+<th class="stick-top">docs</th>
+<th class="stick-top">queries</th>
+<th class="stick-top">qrels</th>
+<th class="stick-top screen-small-hide">scoreddocs</th>
+<th class="stick-top screen-small-hide">docpairs</th>
 </tr>
 {index}
 </tbody>
@@ -977,6 +977,11 @@ h4 {
 
 .methodinfo {
   margin-left: 16px;
+}
+
+.stick-top {
+  position: sticky;
+  top: 0;
 }
 
 @media screen and (max-width: 420px){

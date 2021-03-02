@@ -281,6 +281,11 @@ h4 {
   margin-left: 16px;
 }
 
+.stick-top {
+  position: sticky;
+  top: 0;
+}
+
 @media screen and (max-width: 420px){
   .page {
     padding: 6px;

@@ -24,6 +24,10 @@
 <li><a href="#car/v1.5"><kbd><span class="prefix">car</span>/v1.5</kbd></a></li>
 <li><a href="#car/v1.5/test200"><kbd><span class="prefix">car</span>/v1.5/test200</kbd></a></li>
 <li><a href="#car/v1.5/train/fold0"><kbd><span class="prefix">car</span>/v1.5/train/fold0</kbd></a></li>
+<li><a href="#car/v1.5/train/fold1"><kbd><span class="prefix">car</span>/v1.5/train/fold1</kbd></a></li>
+<li><a href="#car/v1.5/train/fold2"><kbd><span class="prefix">car</span>/v1.5/train/fold2</kbd></a></li>
+<li><a href="#car/v1.5/train/fold3"><kbd><span class="prefix">car</span>/v1.5/train/fold3</kbd></a></li>
+<li><a href="#car/v1.5/train/fold4"><kbd><span class="prefix">car</span>/v1.5/train/fold4</kbd></a></li>
 <li><a href="#car/v1.5/trec-y1"><kbd><span class="prefix">car</span>/v1.5/trec-y1</kbd></a></li>
 <li><a href="#car/v1.5/trec-y1/auto"><kbd><span class="prefix">car</span>/v1.5/trec-y1/auto</kbd></a></li>
 <li><a href="#car/v1.5/trec-y1/manual"><kbd><span class="prefix">car</span>/v1.5/trec-y1/manual</kbd></a></li>
@@ -93,9 +97,9 @@ bibtex:
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
 </ol>
 </div>
 <p>Example</p>
@@ -103,7 +107,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'car/v1.5/test200')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
 </code>
 </div>
 
@@ -170,7 +174,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold0"</kdb></h3>
 
 <div class="desc">
- <p> Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+ <p> Fold 0 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
 </div>
 <div class="tabs">
 <a class="tab" target="car/v1.5/train/fold0__queries">queries</a>
@@ -178,9 +182,9 @@ bibtex:
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
 </ol>
 </div>
 <p>Example</p>
@@ -188,7 +192,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold0')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
 </code>
 </div>
 
@@ -239,6 +243,298 @@ bibtex:
 </div>
 
 <hr />
+<div class="dataset" id="car/v1.5/train/fold1" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold1"</kdb></h3>
+
+<div class="desc">
+ <p> Fold 1 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/train/fold1__queries">queries</a>
+<div id="car/v1.5/train/fold1__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold1')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold1__docs">docs</a>
+<div id="car/v1.5/train/fold1__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold1')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold1__qrels">qrels</a>
+<div id="car/v1.5/train/fold1__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold1')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5/train/fold2" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold2"</kdb></h3>
+
+<div class="desc">
+ <p> Fold 2 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/train/fold2__queries">queries</a>
+<div id="car/v1.5/train/fold2__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold2')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold2__docs">docs</a>
+<div id="car/v1.5/train/fold2__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold2')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold2__qrels">qrels</a>
+<div id="car/v1.5/train/fold2__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold2')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5/train/fold3" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold3"</kdb></h3>
+
+<div class="desc">
+ <p> Fold 3 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/train/fold3__queries">queries</a>
+<div id="car/v1.5/train/fold3__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold3')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold3__docs">docs</a>
+<div id="car/v1.5/train/fold3__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold3')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold3__qrels">qrels</a>
+<div id="car/v1.5/train/fold3__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold3')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="car/v1.5/train/fold4" data-parent="car">
+<h3><kbd class="ds-name select"><span class="str">"car/v1.5/train/fold4"</kdb></h3>
+
+<div class="desc">
+ <p> Fold 4 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of pages (i.e., paragraphs under a header are assumed relevant.) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="car/v1.5/train/fold4__queries">queries</a>
+<div id="car/v1.5/train/fold4__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold4')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold4__docs">docs</a>
+<div id="car/v1.5/train/fold4__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold4')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="car/v1.5/train/fold4__qrels">qrels</a>
+<div id="car/v1.5/train/fold4__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Paragraph appears under heading</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'car/v1.5/train/fold4')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
 <div class="dataset" id="car/v1.5/trec-y1" data-parent="car">
 <h3><kbd class="ds-name select"><span class="str">"car/v1.5/trec-y1"</kdb></h3>
 
@@ -251,9 +547,9 @@ bibtex:
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
 </ol>
 </div>
 <p>Example</p>
@@ -261,7 +557,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
 </code>
 </div>
 
@@ -311,9 +607,9 @@ bibtex:
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
 </ol>
 </div>
 <p>Example</p>
@@ -321,7 +617,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/auto')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
 </code>
 </div>
 
@@ -384,9 +680,9 @@ bibtex:
 <p>Language: <span class="lang-code">en</span></p>
 <div>Query type:</div>
 <div class="type">
-<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<div class="type-name">CarQuery: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">headings</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
 </ol>
 </div>
 <p>Example</p>
@@ -394,7 +690,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'car/v1.5/trec-y1/manual')</div>
 <div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, title, headings&gt;</span></div>
 </code>
 </div>
 
