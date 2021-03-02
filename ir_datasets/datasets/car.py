@@ -84,6 +84,9 @@ class CarQueries(BaseQueries):
     def queries_namespace(self):
         return NAME
 
+    def queries_cls(self):
+        return CarQuery
+
     def queries_lang(self):
         return 'en'
 
@@ -118,6 +121,22 @@ def _init():
         docs_v15,
         CarQueries(TarExtract(train_data, 'train/train.fold0.cbor.outlines', compression='xz')),
         TrecQrels(TarExtract(train_data, 'train/train.fold0.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+    subsets['v1.5/train/fold1'] = Dataset(
+        docs_v15,
+        CarQueries(TarExtract(train_data, 'train/train.fold1.cbor.outlines', compression='xz')),
+        TrecQrels(TarExtract(train_data, 'train/train.fold1.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+    subsets['v1.5/train/fold2'] = Dataset(
+        docs_v15,
+        CarQueries(TarExtract(train_data, 'train/train.fold2.cbor.outlines', compression='xz')),
+        TrecQrels(TarExtract(train_data, 'train/train.fold2.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+    subsets['v1.5/train/fold3'] = Dataset(
+        docs_v15,
+        CarQueries(TarExtract(train_data, 'train/train.fold3.cbor.outlines', compression='xz')),
+        TrecQrels(TarExtract(train_data, 'train/train.fold3.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+    subsets['v1.5/train/fold4'] = Dataset(
+        docs_v15,
+        CarQueries(TarExtract(train_data, 'train/train.fold4.cbor.outlines', compression='xz')),
+        TrecQrels(TarExtract(train_data, 'train/train.fold4.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

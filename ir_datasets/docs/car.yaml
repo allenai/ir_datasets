@@ -70,7 +70,39 @@ Un-official test set consisting of manually-selected articles. Sometimes used as
 v1.5/train/fold0:
   desc: '
 <p>
-Official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+Fold 0 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+pages (i.e., paragraphs under a header are assumed relevant.)
+</p>
+'
+
+v1.5/train/fold1:
+  desc: '
+<p>
+Fold 1 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+pages (i.e., paragraphs under a header are assumed relevant.)
+</p>
+'
+
+v1.5/train/fold2:
+  desc: '
+<p>
+Fold 2 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+pages (i.e., paragraphs under a header are assumed relevant.)
+</p>
+'
+
+v1.5/train/fold3:
+  desc: '
+<p>
+Fold 3 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
+pages (i.e., paragraphs under a header are assumed relevant.)
+</p>
+'
+
+v1.5/train/fold4:
+  desc: '
+<p>
+Fold 4 of the official large training set for TREC CAR 2017. Relevance assumed from hierarchical structure of
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '

@@ -29,6 +29,26 @@ class TestCar(DatasetIntegrationTest):
             9: CarQuery('Northrop%20YB-35/Variants', 'Northrop YB-35 Variants', 'Northrop YB-35', ('Variants',)),
             467945: CarQuery('1987%E2%80%9388%20Greek%20Cup/Final', '1987–88 Greek Cup Final', '1987–88 Greek Cup', ('Final',)),
         })
+        self._test_queries('car/v1.5/train/fold1', count=466596, items={
+            0: CarQuery('Roderick%20Spode/Overview', 'Roderick Spode Overview', 'Roderick Spode', ('Overview',)),
+            9: CarQuery('Alan%20Hale%20Jr./Personal%20life', 'Alan Hale Jr. Personal life', 'Alan Hale Jr.', ('Personal life',)),
+            466595: CarQuery('Brian%20Eno/Personal%20life%20and%20beliefs', 'Brian Eno Personal life and beliefs', 'Brian Eno', ('Personal life and beliefs',)),
+        })
+        self._test_queries('car/v1.5/train/fold2', count=469323, items={
+            0: CarQuery('Lost%20in%20Space%20(film)/Plot', 'Lost in Space (film) Plot', 'Lost in Space (film)', ('Plot',)),
+            9: CarQuery('Dick%20&%20Dom%20in%20da%20Bungalow/Bungalow%20Games/Forfeit%20Auction', 'Dick & Dom in da Bungalow Bungalow Games Forfeit Auction', 'Dick & Dom in da Bungalow', ('Bungalow Games', 'Forfeit Auction')),
+            469322: CarQuery('Erick%20van%20Egeraat/Awards%20and%20recognition', 'Erick van Egeraat Awards and recognition', 'Erick van Egeraat', ('Awards and recognition',)),
+        })
+        self._test_queries('car/v1.5/train/fold3', count=463314, items={
+            0: CarQuery('Bradford,%20Ontario/History', 'Bradford, Ontario History', 'Bradford, Ontario', ('History',)),
+            9: CarQuery('CBBC/Scheduling', 'CBBC Scheduling', 'CBBC', ('Scheduling',)),
+            463313: CarQuery('Br%C3%BCel%20&%20Kj%C3%A6r/Organisational%20developments', 'Brüel & Kjær Organisational developments', 'Brüel & Kjær', ('Organisational developments',)),
+        })
+        self._test_queries('car/v1.5/train/fold4', count=468789, items={
+            0: CarQuery('Status%20symbol/By%20region%20and%20time', 'Status symbol By region and time', 'Status symbol', ('By region and time',)),
+            9: CarQuery('History%20of%20Greece/Ancient%20Greece%20(1100%E2%80%93146%20BC)/Iron%20Age%20(1100%E2%80%93800%20BC)', 'History of Greece Ancient Greece (1100–146 BC) Iron Age (1100–800 BC)', 'History of Greece', ('Ancient Greece (1100–146 BC)', 'Iron Age (1100–800 BC)')),
+            468788: CarQuery('Manchester%20International%20Organ%20Competition/1986%20-%20Fifth%20competition', 'Manchester International Organ Competition 1986 - Fifth competition', 'Manchester International Organ Competition', ('1986 - Fifth competition',)),
+        })
 
     def test_car_qrels(self):
         self._test_qrels('car/v1.5/trec-y1/auto', count=5820, items={
@@ -50,6 +70,26 @@ class TestCar(DatasetIntegrationTest):
             0: TrecQrel("$pread/''$pread''%20Book", '2f545ffad1581dea4a2e4720aa9feb7389e1956a', 1, '0'),
             9: TrecQrel('%22Wild%20Bill%22%20Hickok/Death/Burial', '528b68a3355672c9b8bd5003428b72f54074b3fb', 1, '0'),
             1054368: TrecQrel('Zygmunt%20Szcz%C4%99sny%20Feli%C5%84ski/Views%20on%20Poland', 'fd77154f625ca721e554cbd0e4f33b51d4d92af6', 1, '0'),
+        })
+        self._test_qrels('car/v1.5/train/fold1', count=1052398, items={
+            0: TrecQrel('$100,000%20infield/Eddie%20Collins', 'c7aa3c7821a112a149d85f650cbca4ec23c63617', 1, '0'),
+            9: TrecQrel("%60Abdu'l-Bah%C3%A1/Acre/Marriage%20and%20family%20life", '4da4ea634ccae1173e553129b368e95962969ec8', 1, '0'),
+            1052397: TrecQrel('Zygosity/Types/Nullizygous', '36186e2655db62fd9c31701302f86636b03d2511', 1, '0'),
+        })
+        self._test_qrels('car/v1.5/train/fold2', count=1061162, items={
+            0: TrecQrel("$h*!%20My%20Dad%20Says/''Surviving%20Jack''", 'dc4866e5b230ffb48b6f808f41ccf8063fbdc9fa', 1, '0'),
+            9: TrecQrel('%22Left-Wing%22%20Communism:%20An%20Infantile%20Disorder/%22Left-wing%22%20communism%20in%20Germany', '22ec581e3e1c5397e64bc6f0066dc8aea12fc71f', 1, '0'),
+            1061161: TrecQrel('ZynAddSubFX/Windows%20version', 'b9d1be10b54e5efcbf3e6f1e5f2fbaf7c8af303c', 1, '0'),
+        })
+        self._test_qrels('car/v1.5/train/fold3', count=1046784, items={
+            0: TrecQrel('$2%20billion%20arms%20deal/Confessional%20statements', '0e512b5962fa5ea838a578cbf414ae09b863a33f', 1, '0'),
+            9: TrecQrel('$2%20billion%20arms%20deal/Investigative%20committee', '812cb64a35f482bd60f82c1d67204c73612cb6a7', 1, '0'),
+            1046783: TrecQrel('Zyuden%20Sentai%20Kyoryuger/Video%20game', '844b90cf6f7c62e5bf51625a4d216baec2825bf9', 1, '0'),
+        })
+        self._test_qrels('car/v1.5/train/fold4', count=1061911, items={
+            0: TrecQrel('$1,000%20genome/Additional%20Resources', '67ea5eae967657a8f0282066e3086573e41726d5', 1, '0'),
+            9: TrecQrel('$1,000%20genome/Commercial%20efforts', 'a7ac9041cd833d6b09cc5270b495e9f94704027f', 1, '0'),
+            1061910: TrecQrel('Zyron/Products', 'f355f98b4e3d5b08f60abe61022e9393202b9718', 1, '0'),
         })
 
 
