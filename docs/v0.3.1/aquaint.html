@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>AQUAINT - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../aquaint.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/aquaint.py">datasets/aquaint.py</a></div>
+<h1><code>ir_datasets</code>: AQUAINT</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#aquaint"><kbd>aquaint</kbd></a></li>
+<li><a href="#aquaint/trec-robust-2005"><kbd><span class="prefix">aquaint</span>/trec-robust-2005</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="aquaint">
+<h3><kbd class="select"><span class="str">"aquaint"</kdb></h3>
+
+<div class="desc">
+ <p> A document collection of about 1M English newswire text. Sources are the Xinhua News Service (People's Republic of China), the New York Times News Service, and the Associated Press Worldstream News Service. </p> <ul> <li><a href="https://catalog.ldc.upenn.edu/LDC2002T31">Dataset details</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="aquaint__docs">docs</a>
+<div id="aquaint__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'aquaint')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="aquaint__citation">Citation</a>
+<div id="aquaint__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{LDC2001T55,
+  title={The AQUAINT Corpus of English News Text},
+  author={David Graff},
+  year={2002},
+  url={https://catalog.ldc.upenn.edu/LDC2002T31},
+  publisher={Linguistic Data Consortium}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="aquaint/trec-robust-2005" data-parent="aquaint">
+<h3><kbd class="ds-name select"><span class="str">"aquaint/trec-robust-2005"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Robust 2005 dataset. Contains a subset of 50 "hard" queries from <a class="ds-ref">trec-robust04</a>. </p> <ul> <li>Documents: News articles</li> <li>Queries: keyword queries, descriptions, narratives</li> <li>Relevance: Deep judgments</li> <li><a href="https://trec.nist.gov/data/robust/05/05.guidelines.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/ROBUST.OVERVIEW.pdf">Task overview paper</a></li> <li>See also: <a class="ds-ref">trec-robust04</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="aquaint/trec-robust-2005__queries">queries</a>
+<div id="aquaint/trec-robust-2005__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'aquaint/trec-robust-2005')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="aquaint/trec-robust-2005__docs">docs</a>
+<div id="aquaint/trec-robust-2005__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'aquaint/trec-robust-2005')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="aquaint/trec-robust-2005__qrels">qrels</a>
+<div id="aquaint/trec-robust-2005__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'aquaint/trec-robust-2005')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="aquaint/trec-robust-2005__citation">Citation</a>
+<div id="aquaint/trec-robust-2005__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Voorhees2005Robust,
+  title={Overview of the TREC 2005 Robust Retrieval Track},
+  author={Ellen M. Voorhees},
+  booktitle={TREC},
+  year={2005}
+}
+</cite>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

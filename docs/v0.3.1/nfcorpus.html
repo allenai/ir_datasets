@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>NFCorpus (NutritionFacts) - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../nfcorpus.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/nfcorpus.py">datasets/nfcorpus.py</a></div>
+<h1><code>ir_datasets</code>: NFCorpus (NutritionFacts)</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#nfcorpus"><kbd>nfcorpus</kbd></a></li>
+<li><a href="#nfcorpus/dev"><kbd><span class="prefix">nfcorpus</span>/dev</kbd></a></li>
+<li><a href="#nfcorpus/dev/nontopic"><kbd><span class="prefix">nfcorpus</span>/dev/nontopic</kbd></a></li>
+<li><a href="#nfcorpus/dev/video"><kbd><span class="prefix">nfcorpus</span>/dev/video</kbd></a></li>
+<li><a href="#nfcorpus/test"><kbd><span class="prefix">nfcorpus</span>/test</kbd></a></li>
+<li><a href="#nfcorpus/test/nontopic"><kbd><span class="prefix">nfcorpus</span>/test/nontopic</kbd></a></li>
+<li><a href="#nfcorpus/test/video"><kbd><span class="prefix">nfcorpus</span>/test/video</kbd></a></li>
+<li><a href="#nfcorpus/train"><kbd><span class="prefix">nfcorpus</span>/train</kbd></a></li>
+<li><a href="#nfcorpus/train/nontopic"><kbd><span class="prefix">nfcorpus</span>/train/nontopic</kbd></a></li>
+<li><a href="#nfcorpus/train/video"><kbd><span class="prefix">nfcorpus</span>/train/video</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="nfcorpus">
+<h3><kbd class="select"><span class="str">"nfcorpus"</kdb></h3>
+
+<div class="desc">
+ <p> "NFCorpus is a full-text English retrieval data set for Medical Information Retrieval. It contains a total of 3,244 natural language queries (written in non-technical English, harvested from the NutritionFacts.org site) with 169,756 automatically extracted relevance judgments for 9,964 medical documents (written in a complex terminology-heavy language), mostly from PubMed." </p> <ul> <li><a href="https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/">Dataset website</p></li> <li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus__docs">docs</a>
+<div id="nfcorpus__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus__citation">Citation</a>
+<div id="nfcorpus__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{boteva16full,
+  title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+  author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+  booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+  location = "Padova, Italy",
+  publisher = "Springer",
+  year = 2016
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/dev" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev"</kdb></h3>
+
+<div class="desc">
+ <p> Official dev set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/dev__queries">queries</a>
+<div id="nfcorpus/dev__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev__docs">docs</a>
+<div id="nfcorpus/dev__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev__qrels">qrels</a>
+<div id="nfcorpus/dev__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/dev/nontopic" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/nontopic"</kdb></h3>
+
+<div class="desc">
+ <p> Official dev set, filtered to exclude queries from topic pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/dev/nontopic__queries">queries</a>
+<div id="nfcorpus/dev/nontopic__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev/nontopic__docs">docs</a>
+<div id="nfcorpus/dev/nontopic__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev/nontopic__qrels">qrels</a>
+<div id="nfcorpus/dev/nontopic__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/dev/video" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/video"</kdb></h3>
+
+<div class="desc">
+ <p> Official dev set, filtered to only include queries from video pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/dev/video__queries">queries</a>
+<div id="nfcorpus/dev/video__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusVideoQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev/video__docs">docs</a>
+<div id="nfcorpus/dev/video__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/dev/video__qrels">qrels</a>
+<div id="nfcorpus/dev/video__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/test" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test"</kdb></h3>
+
+<div class="desc">
+ <p> Official test set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/test__queries">queries</a>
+<div id="nfcorpus/test__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test__docs">docs</a>
+<div id="nfcorpus/test__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test__qrels">qrels</a>
+<div id="nfcorpus/test__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/test/nontopic" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/nontopic"</kdb></h3>
+
+<div class="desc">
+ <p> Official test set, filtered to exclude queries from topic pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/test/nontopic__queries">queries</a>
+<div id="nfcorpus/test/nontopic__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test/nontopic__docs">docs</a>
+<div id="nfcorpus/test/nontopic__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test/nontopic__qrels">qrels</a>
+<div id="nfcorpus/test/nontopic__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/test/video" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/video"</kdb></h3>
+
+<div class="desc">
+ <p> Official test set, filtered to only include queries from video pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/test/video__queries">queries</a>
+<div id="nfcorpus/test/video__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusVideoQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test/video__docs">docs</a>
+<div id="nfcorpus/test/video__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/test/video__qrels">qrels</a>
+<div id="nfcorpus/test/video__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/train" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train"</kdb></h3>
+
+<div class="desc">
+ <p> Official train set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/train__queries">queries</a>
+<div id="nfcorpus/train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train__docs">docs</a>
+<div id="nfcorpus/train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train__qrels">qrels</a>
+<div id="nfcorpus/train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/train/nontopic" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/nontopic"</kdb></h3>
+
+<div class="desc">
+ <p> Official train set, filtered to exclude queries from topic pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/train/nontopic__queries">queries</a>
+<div id="nfcorpus/train/nontopic__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train/nontopic__docs">docs</a>
+<div id="nfcorpus/train/nontopic__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train/nontopic__qrels">qrels</a>
+<div id="nfcorpus/train/nontopic__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="nfcorpus/train/video" data-parent="nfcorpus">
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/video"</kdb></h3>
+
+<div class="desc">
+ <p> Official train set, filtered to only include queries from video pages. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="nfcorpus/train/video__queries">queries</a>
+<div id="nfcorpus/train/video__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">NfCorpusVideoQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train/video__docs">docs</a>
+<div id="nfcorpus/train/video__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="nfcorpus/train/video__qrels">qrels</a>
+<div id="nfcorpus/train/video__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Marginally relevant, based on topic containment.</td></tr>
+<tr><td class="relScore">1</td><td>A link exists from the query to another query that directly links to the document.</td></tr>
+<tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>CORD-19 - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../cord19.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/cord19.py">datasets/cord19.py</a></div>
+<h1><code>ir_datasets</code>: CORD-19</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#cord19"><kbd>cord19</kbd></a></li>
+<li><a href="#cord19/fulltext"><kbd><span class="prefix">cord19</span>/fulltext</kbd></a></li>
+<li><a href="#cord19/fulltext/trec-covid"><kbd><span class="prefix">cord19</span>/fulltext/trec-covid</kbd></a></li>
+<li><a href="#cord19/trec-covid"><kbd><span class="prefix">cord19</span>/trec-covid</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="cord19">
+<h3><kbd class="select"><span class="str">"cord19"</kdb></h3>
+
+<div class="desc">
+ <p> Collection of scientific articles related to COVID-19. </p> <p> Uses the 2020-07-16 version of the dataset, corresponding to the "complete" collection used for TREC COVID. </p> <p> Note that this version of the document collection only provides article meta-data. To get the full text, use <a class="ds-ref">cord19/fulltext</a>. </p> <ul> <li><a href="https://www.semanticscholar.org/cord19">Document collection site</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19__docs">docs</a>
+<div id="cord19__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19__citation">Citation</a>
+<div id="cord19__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Wang2020CORD19TC,
+  title={CORD-19: The Covid-19 Open Research Dataset},
+  author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
+  journal={ArXiv},
+  year={2020}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/fulltext" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/fulltext"</kdb></h3>
+
+<div class="desc">
+ <p> Version of <a class="ds-ref">cord19</a> dataset that includes article full texts. This dataset takes longer to load than the version that only includes article meata-data. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/fulltext__docs">docs</a>
+<div id="cord19/fulltext__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19FullTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">Cord19FullTextSection: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/fulltext')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/fulltext__citation">Citation</a>
+<div id="cord19/fulltext__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Wang2020CORD19TC,
+  title={CORD-19: The Covid-19 Open Research Dataset},
+  author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
+  journal={ArXiv},
+  year={2020}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/fulltext/trec-covid" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/fulltext/trec-covid"</kdb></h3>
+
+<div class="desc">
+ <p> Version of <a class="ds-ref">cord19/trec-covid</a> dataset that includes article full texts. This dataset takes longer to load than the version that only includes article meata-data. </p> <p> Queries and qrels are the same as <a class="ds-ref">cord19/trec-covid</a>; it just uses the extended documents from <a class="ds-ref">cord19/fulltext</a>. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/fulltext/trec-covid__queries">queries</a>
+<div id="cord19/fulltext/trec-covid__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/fulltext/trec-covid')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/fulltext/trec-covid__docs">docs</a>
+<div id="cord19/fulltext/trec-covid__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19FullTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">body</span>: <span class="kwd">Tuple</span>[<div class="type">
+<div class="type-name">Cord19FullTextSection: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/fulltext/trec-covid')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/fulltext/trec-covid__qrels">qrels</a>
+<div id="cord19/fulltext/trec-covid__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/fulltext/trec-covid')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/fulltext/trec-covid__citation">Citation</a>
+<div id="cord19/fulltext/trec-covid__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC COVID collection. Queries related to COVID-19, including deep relevance judgments. </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid__queries">queries</a>
+<div id="cord19/trec-covid__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid__docs">docs</a>
+<div id="cord19/trec-covid__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid__qrels">qrels</a>
+<div id="cord19/trec-covid__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid__citation">Citation</a>
+<div id="cord19/trec-covid__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>TREC Robust 2004 - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../trec-robust04.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/trec_robust04.py">datasets/trec_robust04.py</a></div>
+<h1><code>ir_datasets</code>: TREC Robust 2004</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#trec-robust04"><kbd>trec-robust04</kbd></a></li>
+<li><a href="#trec-robust04/fold1"><kbd><span class="prefix">trec-robust04</span>/fold1</kbd></a></li>
+<li><a href="#trec-robust04/fold2"><kbd><span class="prefix">trec-robust04</span>/fold2</kbd></a></li>
+<li><a href="#trec-robust04/fold3"><kbd><span class="prefix">trec-robust04</span>/fold3</kbd></a></li>
+<li><a href="#trec-robust04/fold4"><kbd><span class="prefix">trec-robust04</span>/fold4</kbd></a></li>
+<li><a href="#trec-robust04/fold5"><kbd><span class="prefix">trec-robust04</span>/fold5</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="trec-robust04">
+<h3><kbd class="select"><span class="str">"trec-robust04"</kdb></h3>
+
+<div class="desc">
+ <p> The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by focusing on poorly performing topics." </p> <p> The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details <a href="https://trec.nist.gov/data/cd45/index.html">here</a>. </p> <ul> <li>Documents: News articles</li> <li>Queries: keyword queries, descriptions, narratives</li> <li>Relevance: Deep judgments</li> <li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li> <li>See also: <a class="ds-ref">aquaint/trec-robust-2005</a></li> </ul>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04__queries">queries</a>
+<div id="trec-robust04__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04__docs">docs</a>
+<div id="trec-robust04__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04__qrels">qrels</a>
+<div id="trec-robust04__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04__citation">Citation</a>
+<div id="trec-robust04__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Voorhees2004OverviewRobust,
+  title={Overview of the TREC 2004 Robust Retrieval Track},
+  author={Ellen Voorhees},
+  booktitle={TREC},
+  year={2004}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-robust04/fold1" data-parent="trec-robust04">
+<h3><kbd class="ds-name select"><span class="str">"trec-robust04/fold1"</kdb></h3>
+
+<div class="desc">
+ <p>Fold 1 used in various works</p>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04/fold1__queries">queries</a>
+<div id="trec-robust04/fold1__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold1')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold1__docs">docs</a>
+<div id="trec-robust04/fold1__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold1')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold1__qrels">qrels</a>
+<div id="trec-robust04/fold1__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold1')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-robust04/fold2" data-parent="trec-robust04">
+<h3><kbd class="ds-name select"><span class="str">"trec-robust04/fold2"</kdb></h3>
+
+<div class="desc">
+ <p>Fold 2 used in various works</p>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04/fold2__queries">queries</a>
+<div id="trec-robust04/fold2__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold2')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold2__docs">docs</a>
+<div id="trec-robust04/fold2__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold2')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold2__qrels">qrels</a>
+<div id="trec-robust04/fold2__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold2')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-robust04/fold3" data-parent="trec-robust04">
+<h3><kbd class="ds-name select"><span class="str">"trec-robust04/fold3"</kdb></h3>
+
+<div class="desc">
+ <p>Fold 3 used in various works</p>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04/fold3__queries">queries</a>
+<div id="trec-robust04/fold3__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold3')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold3__docs">docs</a>
+<div id="trec-robust04/fold3__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold3')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold3__qrels">qrels</a>
+<div id="trec-robust04/fold3__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold3')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-robust04/fold4" data-parent="trec-robust04">
+<h3><kbd class="ds-name select"><span class="str">"trec-robust04/fold4"</kdb></h3>
+
+<div class="desc">
+ <p>Fold 4 used in various works</p>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04/fold4__queries">queries</a>
+<div id="trec-robust04/fold4__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold4')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold4__docs">docs</a>
+<div id="trec-robust04/fold4__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold4')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold4__qrels">qrels</a>
+<div id="trec-robust04/fold4__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold4')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-robust04/fold5" data-parent="trec-robust04">
+<h3><kbd class="ds-name select"><span class="str">"trec-robust04/fold5"</kdb></h3>
+
+<div class="desc">
+ <p>Fold 5 used in various works</p>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-robust04/fold5__queries">queries</a>
+<div id="trec-robust04/fold5__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold5')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold5__docs">docs</a>
+<div id="trec-robust04/fold5__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold5')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-robust04/fold5__qrels">qrels</a>
+<div id="trec-robust04/fold5__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+<tr><td class="relScore">2</td><td>highly relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-robust04/fold5')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

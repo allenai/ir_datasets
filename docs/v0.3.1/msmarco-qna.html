@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>MSMARCO (QnA) - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../msmarco-qna.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/msmarco_qna.py">datasets/msmarco_qna.py</a></div>
+<h1><code>ir_datasets</code>: MSMARCO (QnA)</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#msmarco-qna"><kbd>msmarco-qna</kbd></a></li>
+<li><a href="#msmarco-qna/dev"><kbd><span class="prefix">msmarco-qna</span>/dev</kbd></a></li>
+<li><a href="#msmarco-qna/eval"><kbd><span class="prefix">msmarco-qna</span>/eval</kbd></a></li>
+<li><a href="#msmarco-qna/train"><kbd><span class="prefix">msmarco-qna</span>/train</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="msmarco-qna">
+<h3><kbd class="select"><span class="str">"msmarco-qna"</kdb></h3>
+
+<div class="desc">
+ <p> The MS MARCO Question Answering dataset. This is the source collection of <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>. </p> <div class="warn"> It is prohibited to use information from this dataset for submissions to the MS MARCO passage and document leaderboards or the TREC DL shared task. </div> <p> Query IDs in this collection align with those found in <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>, but document IDs do not (the QnA collection does not come with document IDs itself; these are assigned sequentially by ir_datasets.) </p> <ul> <li>Documents: Short passages (from web)</li> <li>Queries: Natural language questions (from query log), including type and natural-language answers.</li> <li><a href="https://microsoft.github.io/msmarco/#qna">Leaderboard</a></li> <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li> <li><a href="https://github.com/microsoft/MSMARCO-Question-Answering">More information</a></li> </ul>
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-qna__docs">docs</a>
+<div id="msmarco-qna__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna__citation">Citation</a>
+<div id="msmarco-qna__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Bajaj2016MSMA,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-qna/dev" data-parent="msmarco-qna">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-qna/dev"</kdb></h3>
+
+<div class="desc">
+ <p> Official dev set. </p> <p> The scoreddocs provides the roughtly 10 passages presented to the user for annotation, where the score indicates the order presented. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-qna/dev__queries">queries</a>
+<div id="msmarco-qna/dev__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnAQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">answers</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/dev')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, type, answers&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/dev__docs">docs</a>
+<div id="msmarco-qna/dev__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/dev')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/dev__qrels">qrels</a>
+<div id="msmarco-qna/dev__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not marked by annotator as a contribution to their answer</td></tr>
+<tr><td class="relScore">1</td><td>Marked by annotator as a contribution to their answer</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/dev')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/dev__scoreddocs">scoreddocs</a>
+<div id="msmarco-qna/dev__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/dev')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-qna/eval" data-parent="msmarco-qna">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-qna/eval"</kdb></h3>
+
+<div class="desc">
+ <p> Official eval set. </p> <p> The scoreddocs provides the roughtly 10 passages presented to the user for annotation, where the score indicates the order presented. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-qna/eval__queries">queries</a>
+<div id="msmarco-qna/eval__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnAEvalQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/eval')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, type&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/eval__docs">docs</a>
+<div id="msmarco-qna/eval__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/eval')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/eval__scoreddocs">scoreddocs</a>
+<div id="msmarco-qna/eval__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/eval')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-qna/train" data-parent="msmarco-qna">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-qna/train"</kdb></h3>
+
+<div class="desc">
+ <p> Official train set. </p> <p> The scoreddocs provides the roughtly 10 passages presented to the user for annotation, where the score indicates the order presented. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-qna/train__queries">queries</a>
+<div id="msmarco-qna/train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnAQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">type</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">answers</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>, ...]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, type, answers&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/train__docs">docs</a>
+<div id="msmarco-qna/train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/train__qrels">qrels</a>
+<div id="msmarco-qna/train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not marked by annotator as a contribution to their answer</td></tr>
+<tr><td class="relScore">1</td><td>Marked by annotator as a contribution to their answer</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-qna/train__scoreddocs">scoreddocs</a>
+<div id="msmarco-qna/train__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/train')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

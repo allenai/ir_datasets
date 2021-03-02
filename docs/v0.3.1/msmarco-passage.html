@@ -1,0 +1,1408 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>MSMARCO (passage) - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../msmarco-passage.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/msmarco_passage.py">datasets/msmarco_passage.py</a></div>
+<h1><code>ir_datasets</code>: MSMARCO (passage)</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#msmarco-passage"><kbd>msmarco-passage</kbd></a></li>
+<li><a href="#msmarco-passage/dev"><kbd><span class="prefix">msmarco-passage</span>/dev</kbd></a></li>
+<li><a href="#msmarco-passage/dev/judged"><kbd><span class="prefix">msmarco-passage</span>/dev/judged</kbd></a></li>
+<li><a href="#msmarco-passage/dev/small"><kbd><span class="prefix">msmarco-passage</span>/dev/small</kbd></a></li>
+<li><a href="#msmarco-passage/eval"><kbd><span class="prefix">msmarco-passage</span>/eval</kbd></a></li>
+<li><a href="#msmarco-passage/eval/small"><kbd><span class="prefix">msmarco-passage</span>/eval/small</kbd></a></li>
+<li><a href="#msmarco-passage/train"><kbd><span class="prefix">msmarco-passage</span>/train</kbd></a></li>
+<li><a href="#msmarco-passage/train/judged"><kbd><span class="prefix">msmarco-passage</span>/train/judged</kbd></a></li>
+<li><a href="#msmarco-passage/train/medical"><kbd><span class="prefix">msmarco-passage</span>/train/medical</kbd></a></li>
+<li><a href="#msmarco-passage/train/split200-train"><kbd><span class="prefix">msmarco-passage</span>/train/split200-train</kbd></a></li>
+<li><a href="#msmarco-passage/train/split200-valid"><kbd><span class="prefix">msmarco-passage</span>/train/split200-valid</kbd></a></li>
+<li><a href="#msmarco-passage/trec-dl-2019"><kbd><span class="prefix">msmarco-passage</span>/trec-dl-2019</kbd></a></li>
+<li><a href="#msmarco-passage/trec-dl-2019/judged"><kbd><span class="prefix">msmarco-passage</span>/trec-dl-2019/judged</kbd></a></li>
+<li><a href="#msmarco-passage/trec-dl-2020"><kbd><span class="prefix">msmarco-passage</span>/trec-dl-2020</kbd></a></li>
+<li><a href="#msmarco-passage/trec-dl-2020/judged"><kbd><span class="prefix">msmarco-passage</span>/trec-dl-2020/judged</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="msmarco-passage">
+<h3><kbd class="select"><span class="str">"msmarco-passage"</kdb></h3>
+
+<div class="desc">
+ <p> A passage ranking benchmark with a collection of 8.8 million passages and question queries. Most relevance judgments are shallow (typically at most 1-2 per query), but the TREC Deep Learning track adds deep judgments. Evaluation typically conducted using MRR@10. </p> <ul> <li>See also: <a class="ds-ref">msmarco-document</a></li> <li>Documents: Short passages (from web)</li> <li>Queries: Natural language questions (from query log)</li> <li><a href="https://microsoft.github.io/msmarco/#ranking">Leaderboard</a></li> <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li> </ul>
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage__docs">docs</a>
+<div id="msmarco-passage__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage__citation">Citation</a>
+<div id="msmarco-passage__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Bajaj2016MSMA,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/dev" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/dev"</kdb></h3>
+
+<div class="desc">
+ <p> Official dev set. </p> <p> scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note that these are sub-sampled to about 1/8 of the total avaialable dev queries by the MSMARCO authors for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/dev__queries">queries</a>
+<div id="msmarco-passage/dev__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev__docs">docs</a>
+<div id="msmarco-passage/dev__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev__qrels">qrels</a>
+<div id="msmarco-passage/dev__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/dev__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/dev/judged" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/dev/judged"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/dev</a> that only includes queries that have at least one qrel. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/dev/judged__queries">queries</a>
+<div id="msmarco-passage/dev/judged__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/judged')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/judged__docs">docs</a>
+<div id="msmarco-passage/dev/judged__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/judged')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/judged__qrels">qrels</a>
+<div id="msmarco-passage/dev/judged__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/judged')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/judged__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/dev/judged__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/judged')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/dev/small" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/dev/small"</kdb></h3>
+
+<div class="desc">
+ <p> Official "small" version of the dev set, consisting of 6,980 queries (6.9% of the full dev set). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/dev/small__queries">queries</a>
+<div id="msmarco-passage/dev/small__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/small__docs">docs</a>
+<div id="msmarco-passage/dev/small__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/dev/small__qrels">qrels</a>
+<div id="msmarco-passage/dev/small__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/dev/small')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/eval" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/eval"</kdb></h3>
+
+<div class="desc">
+ <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note that these are sub-sampled to about 1/8 of the total avaialable eval queries by the MSMARCO authors for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/eval__queries">queries</a>
+<div id="msmarco-passage/eval__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/eval__docs">docs</a>
+<div id="msmarco-passage/eval__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/eval__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/eval__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/eval/small" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/eval/small"</kdb></h3>
+
+<div class="desc">
+ <p> Official "small" version of the eval set, consisting of 6,837 queries (6.8% of the full eval set). </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/eval/small__queries">queries</a>
+<div id="msmarco-passage/eval/small__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval/small')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/eval/small__docs">docs</a>
+<div id="msmarco-passage/eval/small__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/eval/small')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/train" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/train"</kdb></h3>
+
+<div class="desc">
+ <p> Official train set. </p> <p> Not all queries have relevance judgments. Use <a class="ds-ref">msmarco-passage/train/judged</a> for a filtered list that only includes documents that have at least one qrel. </p> <p> scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note that these are sub-sampled to about 1/8 of the total avaialable train queries by the MSMARCO authors for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0). </p> <p> docpairs provides access to the "official" sequence for pairwise training. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/train__queries">queries</a>
+<div id="msmarco-passage/train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train__docs">docs</a>
+<div id="msmarco-passage/train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train__qrels">qrels</a>
+<div id="msmarco-passage/train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/train__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train__docpairs">docpairs</a>
+<div id="msmarco-passage/train__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/train/judged" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/train/judged"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/train</a> that only includes queries that have at least one qrel. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/train/judged__queries">queries</a>
+<div id="msmarco-passage/train/judged__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/judged')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/judged__docs">docs</a>
+<div id="msmarco-passage/train/judged__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/judged')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/judged__qrels">qrels</a>
+<div id="msmarco-passage/train/judged__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/judged')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/judged__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/train/judged__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/judged')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/judged__docpairs">docpairs</a>
+<div id="msmarco-passage/train/judged__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/judged')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/train/medical" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/train/medical"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/train</a> that only includes queries that have a layman or expert medical term. Note that this includes about 20% false matches due to terms with multiple senses. </p>
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/train/medical__queries">queries</a>
+<div id="msmarco-passage/train/medical__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/medical')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/medical__docs">docs</a>
+<div id="msmarco-passage/train/medical__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/medical')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/medical__qrels">qrels</a>
+<div id="msmarco-passage/train/medical__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/medical')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/medical__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/train/medical__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/medical')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/medical__docpairs">docpairs</a>
+<div id="msmarco-passage/train/medical__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/medical')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/medical__citation">Citation</a>
+<div id="msmarco-passage/train/medical__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{macavaney:emnlp2020-sledge,
+  author = {MacAvaney, Sean and Cohan, Arman and Goharian, Nazli},
+  title = {SLEDGE-Zero: A Zero-Shot Baseline for COVID-19 Literature Search},
+  booktitle = {EMNLP},
+  year = {2020}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/train/split200-train" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/train/split200-train"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/train</a> without 200 queries that are meant to be used as a small validation set. From various works. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/train/split200-train__queries">queries</a>
+<div id="msmarco-passage/train/split200-train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-train__docs">docs</a>
+<div id="msmarco-passage/train/split200-train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-train__qrels">qrels</a>
+<div id="msmarco-passage/train/split200-train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-train__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/train/split200-train__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-train')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-train__docpairs">docpairs</a>
+<div id="msmarco-passage/train/split200-train__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-train')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/train/split200-valid" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/train/split200-valid"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/train</a> with only 200 queries that are meant to be used as a small validation set. From various works. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/train/split200-valid__queries">queries</a>
+<div id="msmarco-passage/train/split200-valid__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-valid')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-valid__docs">docs</a>
+<div id="msmarco-passage/train/split200-valid__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-valid')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-valid__qrels">qrels</a>
+<div id="msmarco-passage/train/split200-valid__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-valid')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-valid__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/train/split200-valid__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-valid')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/train/split200-valid__docpairs">docpairs</a>
+<div id="msmarco-passage/train/split200-valid__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/train/split200-valid')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/trec-dl-2019" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/trec-dl-2019"</kdb></h3>
+
+<div class="desc">
+ <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-passage/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-passage/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/trec-dl-2019__queries">queries</a>
+<div id="msmarco-passage/trec-dl-2019__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019__docs">docs</a>
+<div id="msmarco-passage/trec-dl-2019__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019__qrels">qrels</a>
+<div id="msmarco-passage/trec-dl-2019__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: The passage has nothing to do with the query.</td></tr>
+<tr><td class="relScore">1</td><td>Related: The passage seems related to the query but does not answer it.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The passage has some answer for the query, but the answer may be a bit unclear, or hiddenamongst extraneous information.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: The passage is dedicated to the query and contains the exact answer.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/trec-dl-2019__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019__citation">Citation</a>
+<div id="msmarco-passage/trec-dl-2019__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Craswell2020OverviewOT,
+  title={Overview of the TREC 2019 deep learning track},
+  author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
+  booktitle={TREC 2019},
+  year={2019}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/trec-dl-2019/judged" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/trec-dl-2019/judged"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/trec-dl-2019</a>, only including queries with qrels. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/trec-dl-2019/judged__queries">queries</a>
+<div id="msmarco-passage/trec-dl-2019/judged__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019/judged')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019/judged__docs">docs</a>
+<div id="msmarco-passage/trec-dl-2019/judged__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019/judged')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019/judged__qrels">qrels</a>
+<div id="msmarco-passage/trec-dl-2019/judged__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: The passage has nothing to do with the query.</td></tr>
+<tr><td class="relScore">1</td><td>Related: The passage seems related to the query but does not answer it.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The passage has some answer for the query, but the answer may be a bit unclear, or hiddenamongst extraneous information.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: The passage is dedicated to the query and contains the exact answer.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019/judged')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2019/judged__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/trec-dl-2019/judged__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2019/judged')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/trec-dl-2020" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/trec-dl-2020"</kdb></h3>
+
+<div class="desc">
+ <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-passage/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-passage/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/trec-dl-2020__queries">queries</a>
+<div id="msmarco-passage/trec-dl-2020__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020__docs">docs</a>
+<div id="msmarco-passage/trec-dl-2020__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020__qrels">qrels</a>
+<div id="msmarco-passage/trec-dl-2020__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: The passage has nothing to do with the query.</td></tr>
+<tr><td class="relScore">1</td><td>Related: The passage seems related to the query but does not answer it.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The passage has some answer for the query, but the answer may be a bit unclear, or hiddenamongst extraneous information.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: The passage is dedicated to the query and contains the exact answer.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/trec-dl-2020__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020__citation">Citation</a>
+<div id="msmarco-passage/trec-dl-2020__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Craswell2021OverviewOT,
+  title={Overview of the TREC 2020 deep learning track},
+  author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos},
+  booktitle={TREC},
+  year={2020}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-passage/trec-dl-2020/judged" data-parent="msmarco-passage">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-passage/trec-dl-2020/judged"</kdb></h3>
+
+<div class="desc">
+ <p> Subset of <a class="ds-ref">msmarco-passage/trec-dl-2020</a>, only including queries with qrels. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-passage/trec-dl-2020/judged__queries">queries</a>
+<div id="msmarco-passage/trec-dl-2020/judged__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020/judged')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020/judged__docs">docs</a>
+<div id="msmarco-passage/trec-dl-2020/judged__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020/judged')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020/judged__qrels">qrels</a>
+<div id="msmarco-passage/trec-dl-2020/judged__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: The passage has nothing to do with the query.</td></tr>
+<tr><td class="relScore">1</td><td>Related: The passage seems related to the query but does not answer it.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The passage has some answer for the query, but the answer may be a bit unclear, or hiddenamongst extraneous information.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: The passage is dedicated to the query and contains the exact answer.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020/judged')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-passage/trec-dl-2020/judged__scoreddocs">scoreddocs</a>
+<div id="msmarco-passage/trec-dl-2020/judged__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-passage/trec-dl-2020/judged')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>

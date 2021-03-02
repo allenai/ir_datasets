@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>TREC Arabic - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.1</strong>. See <a href="../trec-arabic.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.3.1/ir_datasets/datasets/trec_arabic.py">datasets/trec_arabic.py</a></div>
+<h1><code>ir_datasets</code>: TREC Arabic</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#trec-arabic"><kbd>trec-arabic</kbd></a></li>
+<li><a href="#trec-arabic/ar2001"><kbd><span class="prefix">trec-arabic</span>/ar2001</kbd></a></li>
+<li><a href="#trec-arabic/ar2002"><kbd><span class="prefix">trec-arabic</span>/ar2002</kbd></a></li>
+</ol>
+<hr />
+<div class="dataset" id="trec-arabic">
+<h3><kbd class="select"><span class="str">"trec-arabic"</kdb></h3>
+
+<div class="desc">
+ <p> A collection of news articles in Arabic, used for multi-lingual evaluation in TREC 2001 and TREC 2002. </p> <p> Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2001T55">LDC2001T55</a>. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="trec-arabic__docs">docs</a>
+<div id="trec-arabic__docs" class="tab-content">
+<p>Language: <span class="lang-code">ar</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic__citation">Citation</a>
+<div id="trec-arabic__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{LDC2001T55,
+  title={Arabic Newswire Part 1 LDC2001T55},
+  author={Graff, David, and Walker, Kevin},
+  year={2001},
+  url={https://catalog.ldc.upenn.edu/LDC2001T55},
+  publisher={Linguistic Data Consortium}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-arabic/ar2001" data-parent="trec-arabic">
+<h3><kbd class="ds-name select"><span class="str">"trec-arabic/ar2001"</kdb></h3>
+
+<div class="desc">
+ <p> Arabic benchmark from TREC 2001. </p> <ul> <li><a href="https://trec.nist.gov/pubs/trec10/papers/clirtrack.pdf">Task Overview Paper</a></li> </ul>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-arabic/ar2001__queries">queries</a>
+<div id="trec-arabic/ar2001__queries" class="tab-content">
+<p>Language: <span class="lang-code">ar</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2001')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2001__docs">docs</a>
+<div id="trec-arabic/ar2001__docs" class="tab-content">
+<p>Language: <span class="lang-code">ar</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2001')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2001__qrels">qrels</a>
+<div id="trec-arabic/ar2001__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2001')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2001__citation">Citation</a>
+<div id="trec-arabic/ar2001__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{gey2001arabic,
+  title={The TREC-2001 Cross-Language Information Retrieval Track: Searching Arabic using English, French or Arabic Queries},
+  author={Fredric Gey and Douglas Oard},
+  booktitle={TREC},
+  year={2001}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="trec-arabic/ar2002" data-parent="trec-arabic">
+<h3><kbd class="ds-name select"><span class="str">"trec-arabic/ar2002"</kdb></h3>
+
+<div class="desc">
+ <p> Arabic benchmark from TREC 2002. </p> <ul> <li><a href="https://trec.nist.gov/pubs/trec11/papers/OVERVIEW.gey.ps.gz">Task Overview Paper</a></li> </ul>
+</div>
+<div class="tabs">
+<a class="tab" target="trec-arabic/ar2002__queries">queries</a>
+<div id="trec-arabic/ar2002__queries" class="tab-content">
+<p>Language: <span class="lang-code">ar</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2002')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2002__docs">docs</a>
+<div id="trec-arabic/ar2002__docs" class="tab-content">
+<p>Language: <span class="lang-code">ar</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TrecDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">marked_up_doc</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2002')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, marked_up_doc&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2002__qrels">qrels</a>
+<div id="trec-arabic/ar2002__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant</td></tr>
+<tr><td class="relScore">1</td><td>relevant</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'trec-arabic/ar2002')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="trec-arabic/ar2002__citation">Citation</a>
+<div id="trec-arabic/ar2002__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{gey2002arabic,
+  title={The TREC-2002 Arabic/English CLIR Track},
+  author={Fredric Gey and Douglas Oard},
+  booktitle={TREC},
+  year={2002}
+}
+</cite>
+</div>
+</div>
+</div>
+
+</div>
+</body>
+</html>
