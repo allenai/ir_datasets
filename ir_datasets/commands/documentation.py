@@ -33,6 +33,7 @@ def main(args):
 
         generate_index(args.out_dir, version)
         generate_python_docs(args.out_dir, version)
+        generate_cli_docs(args.out_dir, version)
         generate_redirect(args.out_dir, version, 'datasets.html', 'index.html')
         generate_redirect(args.out_dir, version, 'all.html', 'index.html')
         generate_css(args.out_dir, version)
@@ -265,8 +266,9 @@ Install with pip:
 <p>Guides:</p>
 
 <ul>
-<li><a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets.ipynb">Colab Tutorial</a></li>
+<li>Colab Tutorials: <a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets.ipynb">python</a>, <a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets_cli.ipynb">CLI</a></li>
 <li><a href="python.html">Python API Documentation</a></li>
+<li><a href="cli.html">CLI Documentation</a></li>
 </ul>
 
 <h2>Dataset Index</h2>
@@ -606,6 +608,89 @@ documents is not guaranteed to be the same as doc_ids. (This is to allow impleme
 optmize the order in which documents are retrieved from disk.) Missing documents will not
 appear in the iterator.
 </p>
+</div>
+''')
+
+
+def generate_cli_docs(out_dir, version):
+    with page_template('cli.html', out_dir, version, title='Command Line Interface') as out:
+        out.write(f'''
+<h2 id="export">export command</h2>
+
+<p>
+Data can be exported to stdout in various formats using the <code>ir_datasets export</code> command.
+</p>
+
+<h4><code>ir_datasts export [dataset-id] docs [--fields] [--format]</code></h4>
+
+<div class="methodinfo">
+<p>Exports documents</p>
+<p><code>--fields</code>: select which fields from the document to export (defaults to all)</p>
+<p><code>--format</code>: select output format to use: <code>tsv</code> (default) or <code>jsonl</code></p>
+</div>
+
+<h4><code>ir_datasts export [dataset-id] queries [--fields] [--format]</code></h4>
+
+<div class="methodinfo">
+<p>Exports queries</p>
+<p><code>--fields</code>: select which fields from the query to export (defaults to all)</p>
+<p><code>--format</code>: select output format to use: <code>tsv</code> (default) or <code>jsonl</code></p>
+</div>
+
+<h4><code>ir_datasts export [dataset-id] qrels [--fields] [--format]</code></h4>
+
+<div class="methodinfo">
+<p>Exports queries</p>
+<p><code>--fields</code>: select which fields from the qrels to export (defaults to all)</p>
+<p><code>--format</code>: select output format to use: <code>trec</code>  (default), <code>tsv</code> or <code>jsonl</code></p>
+</div>
+
+<h4><code>ir_datasts export [dataset-id] scoreddocs [--fields] [--format]</code></h4>
+
+<div class="methodinfo">
+<p>Exports queries</p>
+<p><code>--fields</code>: select which fields from the scoreddocs to export (defaults to all)</p>
+<p><code>--format</code>: select output format to use: <code>trec</code>  (default), <code>tsv</code> or <code>jsonl</code></p>
+</div>
+
+<h2 id="export">lookup command</h2>
+
+<p>
+You can look up documents by their <code>doc_id</code> using the <code>ir_datasets lookup</code> command.
+</p>
+
+<h4><code>ir_datasts lookup [dataset-id] [doc_ids ...] [--fields] [--format]</code></h4>
+
+<div class="methodinfo">
+<p>Efficiently finds documents that have the provided doc_ids</p>
+<p><code>--fields</code>: select which fields from the documents to export (defaults to all)</p>
+<p><code>--format</code>: select output format to use: <code>trec</code>  (default), <code>tsv</code> or <code>jsonl</code></p>
+</div>
+
+
+<h2 id="export">doc_fifo command</h2>
+
+<p>
+You can create output FIFOs suitable for Anserini indexing using the <code>ir_datasets doc_fifo</code> command.
+</p>
+
+<p>
+Note that unlike export and lookup, these always output as JSONL in a format that Anserini can use to index
+(id and content fields). All selected fields are concatenated.
+</p>
+
+<p>
+This command will output a command you can run for indexing with Anserini. This process remains running
+until all documents are sent to fifos.
+</p>
+
+<h4><code>ir_datasts doc_fifos [dataset-id] [--fields] [--count]</code></h4>
+
+<div class="methodinfo">
+<p>Creates a temporary directory with fifos</p>
+<p><code>--fields</code>: select which fields from the documents to export (defaults to all). These fields are concatenated.</p>
+<p><code>--count</code>: how many fifos to make? Defualts to 1 less than the number of processors (or 1).</p>
+<p><code>--dir</code>: where to put the fifos? Defaults to a new temp directory.</p>
 </div>
 ''')
 
