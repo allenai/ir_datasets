@@ -97,8 +97,14 @@ class MsMarcoQnAManager:
         docs_store = self._internal_docs_store()
         if docs_store.built():
             return # already built
-        doc_counter = itertools.count(0)
-        did_lookup = {}
+        dochash_lookup = {}
+        relaxed_match_map = {}
+        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='loading dochash map'):
+            dochash = bytes(hashlib.md5(doc.text.encode()).digest()[:8])
+            assert dochash not in dochash_lookup
+            dochash_lookup[dochash] = (int(doc.doc_id), {})
+            dochash_reaxed = bytes(hashlib.md5(re.sub(r'[^a-zA-Z0-9]', '', doc.text).encode()).digest()[:8])
+            relaxed_match_map[dochash_reaxed] = dochash
         nil_doc = MsMarcoQnADoc(None, None, None)
         current_doc = nil_doc
 
@@ -108,7 +114,7 @@ class MsMarcoQnAManager:
         prefix_text = re.compile(r'^query\.\d+$')
         prefix_id = re.compile(r'^query_id\.\d+$')
 
-        pbar_postfix = {'file': None, 'key': None}
+        pbar_postfix = {'file': None, 'key': None, 'relaxed_doc_matches': 0}
         with contextlib.ExitStack() as outer_stack:
             docs_trans = outer_stack.enter_context(docs_store.lookup.transaction())
             pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix))
@@ -138,14 +144,26 @@ class MsMarcoQnAManager:
                         if prefix_passages.match(prefix):
                             if event == 'end_map':
                                 assert current_doc.text is not None and current_doc.url is not None
-                                doc_hash = bytes(hashlib.md5(repr(current_doc).encode()).digest()[:48])
-                                if doc_hash in did_lookup:
-                                    did = did_lookup[doc_hash]
-                                    current_doc = current_doc._replace(doc_id=did)
+                                dochash = bytes(hashlib.md5(current_doc.text.encode()).digest()[:8])
+                                if dochash not in dochash_lookup:
+                                    dochash_reaxed = bytes(hashlib.md5(re.sub(r'[^a-zA-Z0-9]', '', current_doc.text).encode()).digest()[:8])
+                                    if dochash_reaxed in relaxed_match_map:
+                                        dochash = relaxed_match_map[dochash_reaxed]
+                                        pbar_postfix['relaxed_doc_matches'] += 1
+                                    else:
+                                        raise RuntimeError('document content not found')
+                                pid = dochash_lookup[dochash][0]
+                                urlhash = bytes(hashlib.md5(current_doc.url.encode()).digest()[:8])
+                                add = False
+                                if urlhash not in dochash_lookup[dochash][1]:
+                                    urlidx = len(dochash_lookup[dochash][1])
+                                    dochash_lookup[dochash][1][urlhash] = urlidx
+                                    add = True
                                 else:
-                                    did = str(next(doc_counter))
-                                    did_lookup[doc_hash] = did
-                                    current_doc = current_doc._replace(doc_id=did)
+                                    urlidx = dochash_lookup[dochash][1][urlhash]
+                                did = f'{pid}-{urlidx}'
+                                current_doc = current_doc._replace(doc_id=did)
+                                if add:
                                     docs_trans.add(current_doc)
                                 if out_qrels is not None:
                                     if last_psg_prefix == prefix:
