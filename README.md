@@ -205,8 +205,8 @@ Please cite the following if you use this package:
   author = {MacAvaney, Sean and Yates, Andrew and Feldman, Sergey and Downey, Doug and Cohan, Arman and Goharian, Nazli},
   title = {Simplified Data Wrangling with ir_datasets},
   year = {2021},
-  url = {https://arxiv.org/abs/XXX},
+  url = {https://arxiv.org/abs/2103.02280},
   journal = {arXiv},
-  volume = {abs/XXX}
+  volume = {abs/2103.02280}
 }
 ```
