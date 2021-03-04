@@ -32,31 +32,31 @@ class TestMsMarcoQnA(DatasetIntegrationTest):
 
     def test_qrels(self):
         self._test_qrels('msmarco-qna/train', count=8069749, items={
-            0: TrecQrel('1185869', '0', 1, '0'),
-            9: TrecQrel('1185869', '9', 0, '0'),
-            8069748: TrecQrel('461916', '7305465', 0, '0'),
+            0: TrecQrel('1185869', '0-0', 1, '0'),
+            9: TrecQrel('1185869', '9-0', 0, '0'),
+            8069748: TrecQrel('461916', '7066857-0', 0, '0'),
         })
         self._test_qrels('msmarco-qna/dev', count=1008985, items={
-            0: TrecQrel('1102432', '7305466', 0, '0'),
-            9: TrecQrel('1102432', '7305470', 0, '0'),
-            1008984: TrecQrel('371455', '8181708', 0, '0'),
+            0: TrecQrel('1102432', '7066858-0', 0, '0'),
+            9: TrecQrel('1102432', '7066861-0', 0, '0'),
+            1008984: TrecQrel('371455', '8009483-0', 0, '0'),
         })
 
     def test_scoreddocs(self):
         self._test_scoreddocs('msmarco-qna/train', count=8069749, items={
-            0: GenericScoredDoc('1185869', '0', 0.0),
-            9: GenericScoredDoc('1185869', '9', -9.0),
-            8069748: GenericScoredDoc('461916', '7305465', -9.0),
+            0: GenericScoredDoc('1185869', '0-0', 0.0),
+            9: GenericScoredDoc('1185869', '9-0', -9.0),
+            8069748: GenericScoredDoc('461916', '7066857-0', -9.0),
         })
         self._test_scoreddocs('msmarco-qna/dev', count=1008985, items={
-            0: GenericScoredDoc('1102432', '7305466', 0.0),
-            9: GenericScoredDoc('1102432', '7305470', -9.0),
-            1008984: GenericScoredDoc('371455', '8181708', -9.0),
+            0: GenericScoredDoc('1102432', '7066858-0', 0.0),
+            9: GenericScoredDoc('1102432', '7066861-0', -9.0),
+            1008984: GenericScoredDoc('371455', '8009483-0', -9.0),
         })
         self._test_scoreddocs('msmarco-qna/eval', count=1008943, items={
-            0: GenericScoredDoc('1136966', '7397758', 0.0),
-            9: GenericScoredDoc('1136966', '8181713', -9.0),
-            1008942: GenericScoredDoc('315646', '9048605', -9.0),
+            0: GenericScoredDoc('1136966', '7164732-0', 0.0),
+            9: GenericScoredDoc('1136966', '8009488-0', -9.0),
+            1008942: GenericScoredDoc('315646', '120010-0', -9.0),
         })
 
 
