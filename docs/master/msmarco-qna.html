@@ -30,7 +30,7 @@
 <h3><kbd class="select"><span class="str">"msmarco-qna"</kdb></h3>
 
 <div class="desc">
- <p> The MS MARCO Question Answering dataset. This is the source collection of <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>. </p> <div class="warn"> It is prohibited to use information from this dataset for submissions to the MS MARCO passage and document leaderboards or the TREC DL shared task. </div> <p> Query IDs in this collection align with those found in <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>, but document IDs do not (the QnA collection does not come with document IDs itself; these are assigned sequentially by ir_datasets.) </p> <ul> <li>Documents: Short passages (from web)</li> <li>Queries: Natural language questions (from query log), including type and natural-language answers.</li> <li><a href="https://microsoft.github.io/msmarco/#qna">Leaderboard</a></li> <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li> <li><a href="https://github.com/microsoft/MSMARCO-Question-Answering">More information</a></li> </ul>
+ <p> The MS MARCO Question Answering dataset. This is the source collection of <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>. </p> <div class="warn"> It is prohibited to use information from this dataset for submissions to the MS MARCO passage and document leaderboards or the TREC DL shared task. </div> <p> Query IDs in this collection align with those found in <a class="ds-ref">msmarco-passage</a> and <a class="ds-ref">msmarco-document</a>. The collection does not provide doc_ids, so these are assigned in the following format: <code>[msmarco_passage_id]-[url_seq]</code>, where <code>[msmarco_passage_id]</code> is the document from <a class="ds-ref">msmarco-passage</a> that has matching contents and <code>[url_seq]</code> is assigned sequentially for each URL encountered. In other words, all documents with the same prefix have the same text; they only differ in the originating document. </p> <p> Doc <code>msmarco_passage_id</code> fields are assigned by matching pasasge contents in <a class="ds-ref">msmarco-passage</a>, and this field is provided for every document. Doc <code>msmarco_document_id</code> fields are assigned by matching the URL to the one found in <a class="ds-ref">msmarco-document</a>. Due to how <a class="ds-ref">msmarco-document</a> was constructed, there is not necessarily a match (value will be <code class="kwd">None</code> if no match). </p> <ul> <li>Documents: Short passages (from web)</li> <li>Queries: Natural language questions (from query log), including type and natural-language answers.</li> <li><a href="https://microsoft.github.io/msmarco/#qna">Leaderboard</a></li> <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li> <li><a href="https://github.com/microsoft/MSMARCO-Question-Answering">More information</a></li> </ul>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-qna__docs">docs</a>
@@ -40,7 +40,7 @@
 <div class="type">
 <div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">msmarco_passage_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">msmarco_document_id</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -48,7 +48,7 @@
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'msmarco-qna')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url, msmarco_passage_id, msmarco_document_id&gt;</span></div>
 </code>
 </div>
 
@@ -100,7 +100,7 @@ bibtex:
 <div class="type">
 <div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">msmarco_passage_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">msmarco_document_id</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -108,7 +108,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/dev')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url, msmarco_passage_id, msmarco_document_id&gt;</span></div>
 </code>
 </div>
 
@@ -192,7 +192,7 @@ bibtex:
 <div class="type">
 <div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">msmarco_passage_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">msmarco_document_id</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -200,7 +200,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/eval')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url, msmarco_passage_id, msmarco_document_id&gt;</span></div>
 </code>
 </div>
 
@@ -258,7 +258,7 @@ bibtex:
 <div class="type">
 <div class="type-name">MsMarcoQnADoc: (<span class="kwd">namedtuple</span>)</div>
 <ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li>
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">msmarco_passage_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">msmarco_document_id</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
 <p>Example</p>
@@ -266,7 +266,7 @@ bibtex:
 <div><span class="kwd">import</span> ir_datasets</div>
 <div>dataset = ir_datasets.load(<span class="str">'msmarco-qna/train')</div>
 <div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url&gt;</span></div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, url, msmarco_passage_id, msmarco_document_id&gt;</span></div>
 </code>
 </div>
 
