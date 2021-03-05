@@ -2,7 +2,7 @@ import io
 import codecs
 import re
 import ir_datasets
-from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig
+from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredScoredDocs, FilteredQrels, FilteredDocPairs, YamlDocumentation
 from ir_datasets.formats import TsvQueries, TsvDocs, TrecQrels, TrecScoredDocs, TsvDocPairs
 
@@ -91,7 +91,12 @@ def _init():
     documentation = YamlDocumentation('docs/msmarco-passage.yaml')
     base_path = ir_datasets.util.home_path()/'msmarco-passage'
     dlc = DownloadConfig.context('msmarco-passage', base_path, dua=DUA)
+    migrator = Migrator(base_path/'irds_version.txt', 'v2',
+        affected_files=[base_path/'collection.tsv', base_path/'collection.tsv.pklz4'],
+        message='Migrating msmarco-passage (fixing passage encoding)')
+
     collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco', lang='en')
+    collection = migrator(collection)
     subsets = {}
 
     subsets['train'] = Dataset(

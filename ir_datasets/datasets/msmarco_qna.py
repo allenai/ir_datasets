@@ -8,7 +8,7 @@ from typing import NamedTuple, Tuple
 import re
 import ijson
 import ir_datasets
-from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig
+from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredScoredDocs, FilteredQrels, FilteredDocPairs, YamlDocumentation
 from ir_datasets.formats import TsvQueries, TsvDocs, TrecQrels, TrecScoredDocs, TsvDocPairs, DocstoreBackedDocs
 
@@ -287,29 +287,38 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     manager = MsMarcoQnAManager(GzipExtract(dlc['train']), GzipExtract(dlc['dev']), GzipExtract(dlc['eval']), base_path)
+    migrator = Migrator(base_path/'irds_version.txt', 'v2',
+        affected_files=[
+            base_path/'docs.pklz4',
+            base_path/'train.run', base_path/'train.qrels',
+            base_path/'dev.run', base_path/'dev.qrels',
+            base_path/'eval.run',
+        ],
+        message='Migrating msmarco-qna (correcting doc_ids)')
 
     collection = DocstoreBackedDocs(manager.docs_store, docs_cls=MsMarcoQnADoc, namespace=NAME, lang='en')
+    collection = migrator(collection)
 
     subsets = {}
 
     subsets['train'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('train.queries.tsv'), query_cls=MsMarcoQnAQuery, namespace='msmarco', lang='en'),
-        TrecQrels(manager.file_ref('train.qrels'), QRELS_DEFS),
-        TrecScoredDocs(manager.file_ref('train.run')),
+        migrator(TrecQrels(manager.file_ref('train.qrels'), QRELS_DEFS)),
+        migrator(TrecScoredDocs(manager.file_ref('train.run'))),
     )
 
     subsets['dev'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('dev.queries.tsv'), query_cls=MsMarcoQnAQuery, namespace='msmarco', lang='en'),
-        TrecQrels(manager.file_ref('dev.qrels'), QRELS_DEFS),
-        TrecScoredDocs(manager.file_ref('dev.run')),
+        migrator(TrecQrels(manager.file_ref('dev.qrels'), QRELS_DEFS)),
+        migrator(TrecScoredDocs(manager.file_ref('dev.run'))),
     )
 
     subsets['eval'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('eval.queries.tsv'), query_cls=MsMarcoQnAEvalQuery, namespace='msmarco', lang='en'),
-        TrecScoredDocs(manager.file_ref('eval.run')),
+        migrator(TrecScoredDocs(manager.file_ref('eval.run'))),
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
