@@ -163,7 +163,7 @@ class MsMarcoQnAManager:
                                 if msm_doc_id is None:
                                     pbar_postfix['missing_urls'] += 1
                                 did = f'{pid}-{urlidx}'
-                                current_doc = current_doc._replace(doc_id=did, msmarco_passage_id=pid, msmarco_document_id=msm_doc_id)
+                                current_doc = current_doc._replace(doc_id=did, msmarco_passage_id=str(pid), msmarco_document_id=msm_doc_id)
                                 if add:
                                     docs_trans.add(current_doc)
                                 if out_qrels is not None:
