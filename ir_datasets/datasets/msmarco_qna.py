@@ -43,6 +43,8 @@ class MsMarcoQnADoc(NamedTuple):
     doc_id: str
     text: str
     url: str
+    msmarco_passage_id: str
+    msmarco_document_id: str
 
 
 # The MS MARCO QnA data files are in a super inconvenient format. They have a script to convert it
@@ -98,11 +100,16 @@ class MsMarcoQnAManager:
         if docs_store.built():
             return # already built
         dochash_lookup = {}
-        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='loading dochash map'):
+        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='building msmarco-passage lookup', total=ir_datasets.load('msmarco-passage').docs_count()):
             dochash = bytes(hashlib.md5(doc.text.encode()).digest()[:8])
             assert dochash not in dochash_lookup
             dochash_lookup[dochash] = (int(doc.doc_id), {})
-        nil_doc = MsMarcoQnADoc(None, None, None)
+        urlhash_lookup = {}
+        for doc in _logger.pbar(ir_datasets.load('msmarco-document').docs_iter(), desc='building msmarco-document lookup', total=ir_datasets.load('msmarco-document').docs_count()):
+            urlhash = bytes(hashlib.md5(doc.url.encode()).digest()[:8])
+            assert urlhash not in urlhash_lookup
+            urlhash_lookup[urlhash] = doc.doc_id
+        nil_doc = MsMarcoQnADoc(None, None, None, None, None)
         current_doc = nil_doc
 
         prefix_passages = re.compile(r'^passages\.\d+\.item$')
@@ -111,7 +118,7 @@ class MsMarcoQnAManager:
         prefix_text = re.compile(r'^query\.\d+$')
         prefix_id = re.compile(r'^query_id\.\d+$')
 
-        pbar_postfix = {'file': None, 'key': None}
+        pbar_postfix = {'file': None, 'missing_urls': 0, 'key': None}
         with contextlib.ExitStack() as outer_stack:
             docs_trans = outer_stack.enter_context(docs_store.lookup.transaction())
             pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix))
@@ -152,8 +159,11 @@ class MsMarcoQnAManager:
                                     add = True
                                 else:
                                     urlidx = dochash_lookup[dochash][1][urlhash]
+                                msm_doc_id = urlhash_lookup.get(urlhash)
+                                if msm_doc_id is None:
+                                    pbar_postfix['missing_urls'] += 1
                                 did = f'{pid}-{urlidx}'
-                                current_doc = current_doc._replace(doc_id=did)
+                                current_doc = current_doc._replace(doc_id=did, msmarco_passage_id=pid, msmarco_document_id=msm_doc_id)
                                 if add:
                                     docs_trans.add(current_doc)
                                 if out_qrels is not None:
