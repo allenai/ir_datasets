@@ -1,13 +1,18 @@
 import os
 import math
 import functools
+import shutil
 from contextlib import contextmanager
 from threading import Lock
 from pathlib import Path
+from .. import log
 from .fileio import IterStream, Cache, TarExtract, TarExtractAll, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract
 from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload
 from .hash import HashVerificationError, HashVerifier, HashStream
 from .registry import Registry
+
+
+_logger = log.easy()
 
 
 def tmp_path():
@@ -149,3 +154,47 @@ def use_docstore(fn):
             return iter(docs_store) # iterate from the docstore -- really fast
         return DocstoreSplitter(fn(self), docs_store) # avoid building docstore if not needed
     return wrapper
+
+
+class Migrator:
+    def __init__(self, version_file, version, affected_files, message=None, wrapped=None):
+        self._wrapped = wrapped
+        self._version_file = Path(version_file)
+        self._version = version
+        self._affected_files = affected_files
+        self._message = message
+        self._state = 'NOT_CHECKED'
+
+    def __getattr__(self, attr):
+        item = getattr(self._wrapped, attr)
+        if callable(item):
+            item = self._migrate(item)
+        return item
+
+    def __call__(self, wrapped):
+        return Migrator(self._version_file, self._version, self._affected_files, self._message, wrapped)
+
+    def _migrate(self, fn):
+        # optionally wrap the function to perform cleanup of affected files
+        if not self._state == 'OK':
+            @functools.wraps(fn)
+            def wrapped(*args, **kwargs):
+                if not self._state == 'OK':
+                    self._version_file.parent.mkdir(parents=True, exist_ok=True)
+                    if not self._version_file.exists() or not self._version_file.open('rt').read() != self._version:
+                        self._state = 'IN_PROGRESS'
+                        paths_to_remove = [f for f in self._affected_files if os.path.exists(f)]
+                        if paths_to_remove:
+                            if self._message:
+                                _logger.info(self._message)
+                            for file in paths_to_remove:
+                                if Path(file).is_file():
+                                    os.unlink(file)
+                                else:
+                                    shutil.rmtree(file)
+                        with self._version_file.open('wt') as f:
+                            f.write(self._version)
+                    self._state = 'OK'
+                return fn(*args, **kwargs)
+            return wrapped
+        return fn

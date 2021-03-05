@@ -8,7 +8,7 @@ from typing import NamedTuple, Tuple
 import re
 import ijson
 import ir_datasets
-from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig
+from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredScoredDocs, FilteredQrels, FilteredDocPairs, YamlDocumentation
 from ir_datasets.formats import TsvQueries, TsvDocs, TrecQrels, TrecScoredDocs, TsvDocPairs, DocstoreBackedDocs
 
@@ -43,6 +43,8 @@ class MsMarcoQnADoc(NamedTuple):
     doc_id: str
     text: str
     url: str
+    msmarco_passage_id: str
+    msmarco_document_id: str
 
 
 # The MS MARCO QnA data files are in a super inconvenient format. They have a script to convert it
@@ -97,9 +99,17 @@ class MsMarcoQnAManager:
         docs_store = self._internal_docs_store()
         if docs_store.built():
             return # already built
-        doc_counter = itertools.count(0)
-        did_lookup = {}
-        nil_doc = MsMarcoQnADoc(None, None, None)
+        dochash_lookup = {}
+        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='building msmarco-passage lookup', total=ir_datasets.load('msmarco-passage').docs_count()):
+            dochash = bytes(hashlib.md5(doc.text.encode()).digest()[:8])
+            assert dochash not in dochash_lookup
+            dochash_lookup[dochash] = (int(doc.doc_id), {})
+        urlhash_lookup = {}
+        for doc in _logger.pbar(ir_datasets.load('msmarco-document').docs_iter(), desc='building msmarco-document lookup', total=ir_datasets.load('msmarco-document').docs_count()):
+            urlhash = bytes(hashlib.md5(doc.url.encode()).digest()[:8])
+            assert urlhash not in urlhash_lookup
+            urlhash_lookup[urlhash] = doc.doc_id
+        nil_doc = MsMarcoQnADoc(None, None, None, None, None)
         current_doc = nil_doc
 
         prefix_passages = re.compile(r'^passages\.\d+\.item$')
@@ -108,7 +118,7 @@ class MsMarcoQnAManager:
         prefix_text = re.compile(r'^query\.\d+$')
         prefix_id = re.compile(r'^query_id\.\d+$')
 
-        pbar_postfix = {'file': None, 'key': None}
+        pbar_postfix = {'file': None, 'missing_urls': 0, 'key': None}
         with contextlib.ExitStack() as outer_stack:
             docs_trans = outer_stack.enter_context(docs_store.lookup.transaction())
             pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix))
@@ -138,14 +148,23 @@ class MsMarcoQnAManager:
                         if prefix_passages.match(prefix):
                             if event == 'end_map':
                                 assert current_doc.text is not None and current_doc.url is not None
-                                doc_hash = bytes(hashlib.md5(repr(current_doc).encode()).digest()[:48])
-                                if doc_hash in did_lookup:
-                                    did = did_lookup[doc_hash]
-                                    current_doc = current_doc._replace(doc_id=did)
+                                dochash = bytes(hashlib.md5(current_doc.text.encode()).digest()[:8])
+                                assert dochash in dochash_lookup, "doc_id lookup failed; passage text not found in msmarco-passage"
+                                pid = dochash_lookup[dochash][0]
+                                urlhash = bytes(hashlib.md5(current_doc.url.encode()).digest()[:8])
+                                add = False
+                                if urlhash not in dochash_lookup[dochash][1]:
+                                    urlidx = len(dochash_lookup[dochash][1])
+                                    dochash_lookup[dochash][1][urlhash] = urlidx
+                                    add = True
                                 else:
-                                    did = str(next(doc_counter))
-                                    did_lookup[doc_hash] = did
-                                    current_doc = current_doc._replace(doc_id=did)
+                                    urlidx = dochash_lookup[dochash][1][urlhash]
+                                msm_doc_id = urlhash_lookup.get(urlhash)
+                                if msm_doc_id is None:
+                                    pbar_postfix['missing_urls'] += 1
+                                did = f'{pid}-{urlidx}'
+                                current_doc = current_doc._replace(doc_id=did, msmarco_passage_id=str(pid), msmarco_document_id=msm_doc_id)
+                                if add:
                                     docs_trans.add(current_doc)
                                 if out_qrels is not None:
                                     if last_psg_prefix == prefix:
@@ -268,29 +287,38 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     manager = MsMarcoQnAManager(GzipExtract(dlc['train']), GzipExtract(dlc['dev']), GzipExtract(dlc['eval']), base_path)
+    migrator = Migrator(base_path/'irds_version.txt', 'v2',
+        affected_files=[
+            base_path/'docs.pklz4',
+            base_path/'train.run', base_path/'train.qrels',
+            base_path/'dev.run', base_path/'dev.qrels',
+            base_path/'eval.run',
+        ],
+        message='Migrating msmarco-qna (correcting doc_ids)')
 
     collection = DocstoreBackedDocs(manager.docs_store, docs_cls=MsMarcoQnADoc, namespace=NAME, lang='en')
+    collection = migrator(collection)
 
     subsets = {}
 
     subsets['train'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('train.queries.tsv'), query_cls=MsMarcoQnAQuery, namespace='msmarco', lang='en'),
-        TrecQrels(manager.file_ref('train.qrels'), QRELS_DEFS),
-        TrecScoredDocs(manager.file_ref('train.run')),
+        migrator(TrecQrels(manager.file_ref('train.qrels'), QRELS_DEFS)),
+        migrator(TrecScoredDocs(manager.file_ref('train.run'))),
     )
 
     subsets['dev'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('dev.queries.tsv'), query_cls=MsMarcoQnAQuery, namespace='msmarco', lang='en'),
-        TrecQrels(manager.file_ref('dev.qrels'), QRELS_DEFS),
-        TrecScoredDocs(manager.file_ref('dev.run')),
+        migrator(TrecQrels(manager.file_ref('dev.qrels'), QRELS_DEFS)),
+        migrator(TrecScoredDocs(manager.file_ref('dev.run'))),
     )
 
     subsets['eval'] = Dataset(
         collection,
         TsvQueries(manager.file_ref('eval.queries.tsv'), query_cls=MsMarcoQnAEvalQuery, namespace='msmarco', lang='en'),
-        TrecScoredDocs(manager.file_ref('eval.run')),
+        migrator(TrecScoredDocs(manager.file_ref('eval.run'))),
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))

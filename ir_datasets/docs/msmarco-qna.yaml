@@ -11,8 +11,17 @@ leaderboards or the TREC DL shared task.
 </div>
 <p>
 Query IDs in this collection align with those found in <a class="ds-ref">msmarco-passage</a> and
-<a class="ds-ref">msmarco-document</a>, but document IDs do not (the QnA collection does not
-come with document IDs itself; these are assigned sequentially by ir_datasets.)
+<a class="ds-ref">msmarco-document</a>. The collection does not provide doc_ids, so these are assigned
+in the following format: <code>[msmarco_passage_id]-[url_seq]</code>, where <code>[msmarco_passage_id]</code>
+is the document from <a class="ds-ref">msmarco-passage</a> that has matching contents and <code>[url_seq]</code>
+is assigned sequentially for each URL encountered. In other words, all documents with the same prefix have the
+same text; they only differ in the originating document.
+</p>
+<p>
+Doc <code>msmarco_passage_id</code> fields are assigned by matching pasasge contents in <a class="ds-ref">msmarco-passage</a>,
+and this field is provided for every document. Doc <code>msmarco_document_id</code> fields are assigned by
+matching the URL to the one found in <a class="ds-ref">msmarco-document</a>. Due to how <a class="ds-ref">msmarco-document</a>
+was constructed, there is not necessarily a match (value will be <code class="kwd">None</code> if no match).
 </p>
 <ul>
   <li>Documents: Short passages (from web)</li>

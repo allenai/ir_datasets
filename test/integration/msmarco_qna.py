@@ -8,9 +8,9 @@ from .base import DatasetIntegrationTest
 class TestMsMarcoQnA(DatasetIntegrationTest):
     def test_docs(self):
         self._test_docs('msmarco-qna', count=9048606, items={
-            0: MsMarcoQnADoc('0', re.compile('^The presence of communication amid scientific minds was equally important to the success of the Manh.{125}nd engineers is what their success truly meant; hundreds of thousands of innocent lives obliterated\\.$', flags=48), 'http://www.pitt.edu/~sdb14/atombomb.html'),
-            9: MsMarcoQnADoc('9', re.compile("^One of the main reasons Hanford was selected as a site for the Manhattan Project's B Reactor was its.{13} the Columbia River, the largest river flowing into the Pacific Ocean from the North American coast\\.$", flags=48), 'https://www.atomicheritage.org/history/environmental-consequences'),
-            9048605: MsMarcoQnADoc('9048605', re.compile('^Considering the cost of tuition at a place like UNT, this logic would read that the total cost – inc.{36}er year at UNT would be around \\$9,000\\. For Indiana, the total cost should be around \\$18,000\\-\\$19,000\\.$', flags=48), 'http://musicschoolcentral.com/real-cost-dollars-getting-college-music-education/'),
+            0: MsMarcoQnADoc('0-0', re.compile('^The presence of communication amid scientific minds was equally important to the success of the Manh.{125}nd engineers is what their success truly meant; hundreds of thousands of innocent lives obliterated\\.$', flags=48), 'http://www.pitt.edu/~sdb14/atombomb.html', '0', 'D59219'),
+            9: MsMarcoQnADoc('9-0', re.compile("^One of the main reasons Hanford was selected as a site for the Manhattan Project's B Reactor was its.{13} the Columbia River, the largest river flowing into the Pacific Ocean from the North American coast\\.$", flags=48), 'https://www.atomicheritage.org/history/environmental-consequences', '9', 'D59228'),
+            9048605: MsMarcoQnADoc('120010-0', re.compile('^Considering the cost of tuition at a place like UNT, this logic would read that the total cost – inc.{36}er year at UNT would be around \\$9,000\\. For Indiana, the total cost should be around \\$18,000\\-\\$19,000\\.$', flags=48), 'http://musicschoolcentral.com/real-cost-dollars-getting-college-music-education/', '120010', 'D59214'),
         })
 
     def test_queries(self):
@@ -32,31 +32,31 @@ class TestMsMarcoQnA(DatasetIntegrationTest):
 
     def test_qrels(self):
         self._test_qrels('msmarco-qna/train', count=8069749, items={
-            0: TrecQrel('1185869', '0', 1, '0'),
-            9: TrecQrel('1185869', '9', 0, '0'),
-            8069748: TrecQrel('461916', '7305465', 0, '0'),
+            0: TrecQrel('1185869', '0-0', 1, '0'),
+            9: TrecQrel('1185869', '9-0', 0, '0'),
+            8069748: TrecQrel('461916', '7066857-0', 0, '0'),
         })
         self._test_qrels('msmarco-qna/dev', count=1008985, items={
-            0: TrecQrel('1102432', '7305466', 0, '0'),
-            9: TrecQrel('1102432', '7305470', 0, '0'),
-            1008984: TrecQrel('371455', '8181708', 0, '0'),
+            0: TrecQrel('1102432', '7066858-0', 0, '0'),
+            9: TrecQrel('1102432', '7066861-0', 0, '0'),
+            1008984: TrecQrel('371455', '8009483-0', 0, '0'),
         })
 
     def test_scoreddocs(self):
         self._test_scoreddocs('msmarco-qna/train', count=8069749, items={
-            0: GenericScoredDoc('1185869', '0', 0.0),
-            9: GenericScoredDoc('1185869', '9', -9.0),
-            8069748: GenericScoredDoc('461916', '7305465', -9.0),
+            0: GenericScoredDoc('1185869', '0-0', 0.0),
+            9: GenericScoredDoc('1185869', '9-0', -9.0),
+            8069748: GenericScoredDoc('461916', '7066857-0', -9.0),
         })
         self._test_scoreddocs('msmarco-qna/dev', count=1008985, items={
-            0: GenericScoredDoc('1102432', '7305466', 0.0),
-            9: GenericScoredDoc('1102432', '7305470', -9.0),
-            1008984: GenericScoredDoc('371455', '8181708', -9.0),
+            0: GenericScoredDoc('1102432', '7066858-0', 0.0),
+            9: GenericScoredDoc('1102432', '7066861-0', -9.0),
+            1008984: GenericScoredDoc('371455', '8009483-0', -9.0),
         })
         self._test_scoreddocs('msmarco-qna/eval', count=1008943, items={
-            0: GenericScoredDoc('1136966', '7397758', 0.0),
-            9: GenericScoredDoc('1136966', '8181713', -9.0),
-            1008942: GenericScoredDoc('315646', '9048605', -9.0),
+            0: GenericScoredDoc('1136966', '7164732-0', 0.0),
+            9: GenericScoredDoc('1136966', '8009488-0', -9.0),
+            1008942: GenericScoredDoc('315646', '120010-0', -9.0),
         })
 
 
