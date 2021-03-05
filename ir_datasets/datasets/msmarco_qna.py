@@ -98,13 +98,10 @@ class MsMarcoQnAManager:
         if docs_store.built():
             return # already built
         dochash_lookup = {}
-        relaxed_match_map = {}
         for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='loading dochash map'):
             dochash = bytes(hashlib.md5(doc.text.encode()).digest()[:8])
             assert dochash not in dochash_lookup
             dochash_lookup[dochash] = (int(doc.doc_id), {})
-            dochash_reaxed = bytes(hashlib.md5(re.sub(r'[^a-zA-Z0-9]', '', doc.text).encode()).digest()[:8])
-            relaxed_match_map[dochash_reaxed] = dochash
         nil_doc = MsMarcoQnADoc(None, None, None)
         current_doc = nil_doc
 
@@ -114,7 +111,7 @@ class MsMarcoQnAManager:
         prefix_text = re.compile(r'^query\.\d+$')
         prefix_id = re.compile(r'^query_id\.\d+$')
 
-        pbar_postfix = {'file': None, 'key': None, 'relaxed_doc_matches': 0}
+        pbar_postfix = {'file': None, 'key': None}
         with contextlib.ExitStack() as outer_stack:
             docs_trans = outer_stack.enter_context(docs_store.lookup.transaction())
             pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix))
@@ -145,13 +142,7 @@ class MsMarcoQnAManager:
                             if event == 'end_map':
                                 assert current_doc.text is not None and current_doc.url is not None
                                 dochash = bytes(hashlib.md5(current_doc.text.encode()).digest()[:8])
-                                if dochash not in dochash_lookup:
-                                    dochash_reaxed = bytes(hashlib.md5(re.sub(r'[^a-zA-Z0-9]', '', current_doc.text).encode()).digest()[:8])
-                                    if dochash_reaxed in relaxed_match_map:
-                                        dochash = relaxed_match_map[dochash_reaxed]
-                                        pbar_postfix['relaxed_doc_matches'] += 1
-                                    else:
-                                        raise RuntimeError('document content not found')
+                                assert dochash in dochash_lookup, "doc_id lookup failed; passage text not found in msmarco-passage"
                                 pid = dochash_lookup[dochash][0]
                                 urlhash = bytes(hashlib.md5(current_doc.url.encode()).digest()[:8])
                                 add = False

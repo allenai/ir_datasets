@@ -45,11 +45,8 @@ class ExtractQidPid:
 # The encoding of the MS MARCO passage collection is... weird...
 # Some characters are properly utf8-encoded, while others are not, even within the same passage.
 # So, thi cutom-built streaming class aims to fix that. What it does is finds "suspicious"
-# characters, basically anything in the 128-255 range. Once found, it will pick 2-3 characters
+# characters, basically anything in the 128-255 range. Once found, it will pick 2-4 characters
 # around it and try to encode them as latin-1 and decode them at utf8.
-# This seems to work well enough. Or at least better than anything else I've tried!
-# There may be a more efficient way of doing this, but since it's done before caching the file,
-# I'm not super concenred about the performance impact.
 class FixEncoding:
     def __init__(self, streamer):
         self._streamer = streamer
@@ -59,38 +56,34 @@ class FixEncoding:
 
     def __iter__(self):
         SUS = '[\x80-\xff]'
-        regex2 = re.compile(f'(.{SUS}|{SUS}.)')
-        regex3 = re.compile(f'(..{SUS}|.{SUS}.|{SUS}..)')
-
+        # Find sequences of up to 4 characters that contain a suspicious character.
+        # We'll attempt to interpret these as latin1 characters and then decode them back to UTF8.
+        # With this technique, we get 100% matches with MS MARCO QnA passages (which do not have this encoding issue)
+        # This approach is more than twice as fast as using ftfy
+        regexes = [
+            re.compile(f'(...{SUS}|..{SUS}.|.{SUS}..|{SUS}...)'),
+            re.compile(f'(..{SUS}|.{SUS}.|{SUS}..)'),
+            re.compile(f'(.{SUS}|{SUS}.)'),
+        ]
         with self._streamer.stream() as stream, \
              _logger.pbar_raw(desc='fixing encoding', unit='B', unit_scale=True) as pbar:
-            stream = codecs.getreader('utf8')(stream)
+             # NOTE: codecs.getreader is subtly broken here; it sometimes splits lines between special characters (and it's unclear why)
             for line in stream:
-                pbar.update(len(line.encode()))
-                pos = 0
-                while pos < len(line):
-                    match = regex3.search(line, pos=pos)
-                    if not match:
-                        break
-                    try:
-                        fixed = match.group().encode('latin1').decode('utf8')
-                        if len(fixed) == 1:
-                            line = line[:match.start()] + fixed + line[match.end():]
-                    except UnicodeError:
-                        pass
-                    pos = match.start() + 1
-                pos = 0
-                while pos < len(line):
-                    match = regex2.search(line, pos=pos)
-                    if not match:
-                        break
-                    try:
-                        fixed = match.group().encode('latin1').decode('utf8')
-                        if len(fixed) == 1:
-                            line = line[:match.start()] + fixed + line[match.end():]
-                    except UnicodeError:
-                        pass
-                    pos = match.start() + 1
+                pbar.update(len(line))
+                line = line.decode('utf8')
+                for regex in regexes:
+                    pos = 0
+                    while pos < len(line):
+                        match = regex.search(line, pos=pos)
+                        if not match:
+                            break
+                        try:
+                            fixed = match.group().encode('latin1').decode('utf8')
+                            if len(fixed) == 1:
+                                line = line[:match.start()] + fixed + line[match.end():]
+                        except UnicodeError:
+                            pass
+                        pos = match.start() + 1
                 yield line.encode()
 
 
