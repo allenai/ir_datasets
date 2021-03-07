@@ -28,25 +28,60 @@ agreements to be filed with NIST. See details <a href="https://trec.nist.gov/dat
 
 fold1:
   desc: '
-<p>Fold 1 used in various works</p>'
+<p>Robust04 Fold 1 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
+  bibtex: |
+    @article{Huston2014ACO,
+      title={A Comparison of Retrieval Models using Term Dependencies},
+      author={Samuel Huston , W. Bruce Croft},
+      journal={CIKM},
+      year={2014}
+    }
 
 fold2:
   desc: '
-<p>Fold 2 used in various works</p>'
+<p>Robust04 Fold 2 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
+  bibtex: |
+    @article{Huston2014ACO,
+      title={A Comparison of Retrieval Models using Term Dependencies},
+      author={Samuel Huston , W. Bruce Croft},
+      journal={CIKM},
+      year={2014}
+    }
 
 fold3:
   desc: '
-<p>Fold 3 used in various works</p>'
+<p>Robust04 Fold 3 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
+  bibtex: |
+    @article{Huston2014ACO,
+      title={A Comparison of Retrieval Models using Term Dependencies},
+      author={Samuel Huston , W. Bruce Croft},
+      journal={CIKM},
+      year={2014}
+    }
 
 fold4:
   desc: '
-<p>Fold 4 used in various works</p>'
+<p>Robust04 Fold 4 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
+  bibtex: |
+    @article{Huston2014ACO,
+      title={A Comparison of Retrieval Models using Term Dependencies},
+      author={Samuel Huston , W. Bruce Croft},
+      journal={CIKM},
+      year={2014}
+    }
 
 fold5:
   desc: '
-<p>Fold 5 used in various works</p>'
+<p>Robust04 Fold 5 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
+  bibtex: |
+    @article{Huston2014ACO,
+      title={A Comparison of Retrieval Models using Term Dependencies},
+      author={Samuel Huston , W. Bruce Croft},
+      journal={CIKM},
+      year={2014}
+    }

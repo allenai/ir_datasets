@@ -1097,7 +1097,9 @@ trec-robust04:
 copyrighted nature of the  documents, this collection is for research use only, which requires
 agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
 
-Once completed, place the uncompressed source here: {path}'
+Once completed, place the uncompressed source here: {path}
+
+This should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.'
     cache_path: 'trec45'
   queries:
     url: 'https://trec.nist.gov/data/robust/04.testset.gz'
