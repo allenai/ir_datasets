@@ -18,7 +18,7 @@ QRELS_DEFS = {
 TREC_DL_QRELS_DEFS = {
     3: "Perfectly relevant: The passage is dedicated to the query and contains the exact answer.",
     2: "Highly relevant: The passage has some answer for the query, but the answer may be a bit "
-       "unclear, or hiddenamongst extraneous information.",
+       "unclear, or hidden amongst extraneous information.",
     1: "Related: The passage seems related to the query but does not answer it.",
     0: "Irrelevant: The passage has nothing to do with the query.",
 }
