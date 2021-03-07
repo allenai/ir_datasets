@@ -774,7 +774,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^{top}/"
+        python -m test.downloads --filter "^{top}/" --output "{top}.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "{top}.json"
+        path: "{top}.json"
 ''')
 
 

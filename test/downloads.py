@@ -1,4 +1,7 @@
 import sys
+import json
+import time
+import datetime
 from contextlib import contextmanager
 import re
 import os
@@ -27,22 +30,47 @@ def tmp_environ(**kwargs):
 
 class TestDownloads(unittest.TestCase):
     dlc_filter = None
+    output_path = None
+    output_data = []
 
     def test_downloads(self):
         with open('ir_datasets/etc/downloads.yaml') as f:
             data = yaml.load(f, Loader=yaml.BaseLoader)
-        self._test_download_iter(data)
+        try:
+            self._test_download_iter(data)
+        finally:
+            if self.output_path is not None:
+                with open(self.output_path, 'wt') as f:
+                    json.dump(self.output_data, f)
 
     def _test_download_iter(self, data, prefix=''):
         with tmp_environ(IR_DATASETS_DL_TRIES='10'): # give the test up to 10 attempts to download
             if 'url' in data and 'expected_md5' in data:
                 if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False):
                     with self.subTest(prefix):
+                        record = {
+                            'name': prefix,
+                            'url': data['url'],
+                            'time': datetime.datetime.now().isoformat(),
+                            'duration': None,
+                            'result': 'IN_PROGRESS',
+                        }
+                        self.output_data.append(record)
+                        start = time.time()
                         try:
                             download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], cache_path=os.devnull)
                             download.path()
+                            record['duration'] = time.time() - start
+                            record['result'] = 'PASS'
                         except KeyboardInterrupt:
+                            record['duration'] = time.time() - start
+                            record['result'] = 'USER_SKIP'
                             self.skipTest('Test skipped by user')
+                            self.output_data.append({})
+                        except:
+                            record['duration'] = time.time() - start
+                            record['result'] = 'FAIL'
+                            raise
             elif 'instructions' in data:
                 pass
             else:
@@ -55,5 +83,9 @@ if __name__ == '__main__':
     for i, arg in enumerate(argv):
         if arg == '--filter':
             TestDownloads.dlc_filter = argv[i+1]
+            argv = argv[:i] + argv[i+2:]
+    for i, arg in enumerate(argv):
+        if arg == '--output':
+            TestDownloads.output_path = argv[i+1]
             argv = argv[:i] + argv[i+2:]
     unittest.main(argv=argv)

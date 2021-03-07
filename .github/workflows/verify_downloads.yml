@@ -29,7 +29,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^antique/"
+        python -m test.downloads --filter "^antique/" --output "antique.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "antique.json"
+        path: "antique.json"
 
   aquaint:
     runs-on: ubuntu-latest
@@ -47,7 +52,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^aquaint/"
+        python -m test.downloads --filter "^aquaint/" --output "aquaint.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "aquaint.json"
+        path: "aquaint.json"
 
   car:
     runs-on: ubuntu-latest
@@ -65,7 +75,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^car/"
+        python -m test.downloads --filter "^car/" --output "car.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "car.json"
+        path: "car.json"
 
   clinicaltrials:
     runs-on: ubuntu-latest
@@ -83,7 +98,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^clinicaltrials/"
+        python -m test.downloads --filter "^clinicaltrials/" --output "clinicaltrials.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "clinicaltrials.json"
+        path: "clinicaltrials.json"
 
   clueweb09:
     runs-on: ubuntu-latest
@@ -101,7 +121,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^clueweb09/"
+        python -m test.downloads --filter "^clueweb09/" --output "clueweb09.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "clueweb09.json"
+        path: "clueweb09.json"
 
   clueweb12:
     runs-on: ubuntu-latest
@@ -119,7 +144,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^clueweb12/"
+        python -m test.downloads --filter "^clueweb12/" --output "clueweb12.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "clueweb12.json"
+        path: "clueweb12.json"
 
   codesearchnet:
     runs-on: ubuntu-latest
@@ -137,7 +167,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^codesearchnet/"
+        python -m test.downloads --filter "^codesearchnet/" --output "codesearchnet.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "codesearchnet.json"
+        path: "codesearchnet.json"
 
   cord19:
     runs-on: ubuntu-latest
@@ -155,7 +190,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^cord19/"
+        python -m test.downloads --filter "^cord19/" --output "cord19.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "cord19.json"
+        path: "cord19.json"
 
   gov:
     runs-on: ubuntu-latest
@@ -173,7 +213,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^gov/"
+        python -m test.downloads --filter "^gov/" --output "gov.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "gov.json"
+        path: "gov.json"
 
   gov2:
     runs-on: ubuntu-latest
@@ -191,7 +236,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^gov2/"
+        python -m test.downloads --filter "^gov2/" --output "gov2.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "gov2.json"
+        path: "gov2.json"
 
   highwire:
     runs-on: ubuntu-latest
@@ -209,7 +259,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^highwire/"
+        python -m test.downloads --filter "^highwire/" --output "highwire.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "highwire.json"
+        path: "highwire.json"
 
   medline:
     runs-on: ubuntu-latest
@@ -227,7 +282,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^medline/"
+        python -m test.downloads --filter "^medline/" --output "medline.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "medline.json"
+        path: "medline.json"
 
   msmarco-document:
     runs-on: ubuntu-latest
@@ -245,7 +305,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^msmarco-document/"
+        python -m test.downloads --filter "^msmarco-document/" --output "msmarco-document.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "msmarco-document.json"
+        path: "msmarco-document.json"
 
   msmarco-passage:
     runs-on: ubuntu-latest
@@ -263,7 +328,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^msmarco-passage/"
+        python -m test.downloads --filter "^msmarco-passage/" --output "msmarco-passage.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "msmarco-passage.json"
+        path: "msmarco-passage.json"
 
   msmarco-qna:
     runs-on: ubuntu-latest
@@ -281,7 +351,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^msmarco-qna/"
+        python -m test.downloads --filter "^msmarco-qna/" --output "msmarco-qna.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "msmarco-qna.json"
+        path: "msmarco-qna.json"
 
   nfcorpus:
     runs-on: ubuntu-latest
@@ -299,7 +374,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^nfcorpus/"
+        python -m test.downloads --filter "^nfcorpus/" --output "nfcorpus.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "nfcorpus.json"
+        path: "nfcorpus.json"
 
   nyt:
     runs-on: ubuntu-latest
@@ -317,7 +397,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^nyt/"
+        python -m test.downloads --filter "^nyt/" --output "nyt.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "nyt.json"
+        path: "nyt.json"
 
   pmc:
     runs-on: ubuntu-latest
@@ -335,7 +420,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^pmc/"
+        python -m test.downloads --filter "^pmc/" --output "pmc.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "pmc.json"
+        path: "pmc.json"
 
   trec-arabic:
     runs-on: ubuntu-latest
@@ -353,7 +443,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^trec-arabic/"
+        python -m test.downloads --filter "^trec-arabic/" --output "trec-arabic.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "trec-arabic.json"
+        path: "trec-arabic.json"
 
   trec-mandarin:
     runs-on: ubuntu-latest
@@ -371,7 +466,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^trec-mandarin/"
+        python -m test.downloads --filter "^trec-mandarin/" --output "trec-mandarin.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "trec-mandarin.json"
+        path: "trec-mandarin.json"
 
   trec-robust04:
     runs-on: ubuntu-latest
@@ -389,7 +489,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^trec-robust04/"
+        python -m test.downloads --filter "^trec-robust04/" --output "trec-robust04.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "trec-robust04.json"
+        path: "trec-robust04.json"
 
   trec-spanish:
     runs-on: ubuntu-latest
@@ -407,7 +512,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^trec-spanish/"
+        python -m test.downloads --filter "^trec-spanish/" --output "trec-spanish.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "trec-spanish.json"
+        path: "trec-spanish.json"
 
   tweets2013-ia:
     runs-on: ubuntu-latest
@@ -425,7 +535,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^tweets2013-ia/"
+        python -m test.downloads --filter "^tweets2013-ia/" --output "tweets2013-ia.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "tweets2013-ia.json"
+        path: "tweets2013-ia.json"
 
   vaswani:
     runs-on: ubuntu-latest
@@ -443,7 +558,12 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^vaswani/"
+        python -m test.downloads --filter "^vaswani/" --output "vaswani.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "vaswani.json"
+        path: "vaswani.json"
 
   wikir:
     runs-on: ubuntu-latest
@@ -461,4 +581,9 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^wikir/"
+        python -m test.downloads --filter "^wikir/" --output "wikir.json"
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: "wikir.json"
+        path: "wikir.json"
