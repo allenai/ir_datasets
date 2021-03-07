@@ -31,6 +31,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^antique/" --output "antique.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "antique.json"
@@ -54,6 +55,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^aquaint/" --output "aquaint.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "aquaint.json"
@@ -77,6 +79,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^car/" --output "car.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "car.json"
@@ -100,6 +103,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^clinicaltrials/" --output "clinicaltrials.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "clinicaltrials.json"
@@ -123,6 +127,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^clueweb09/" --output "clueweb09.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "clueweb09.json"
@@ -146,6 +151,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^clueweb12/" --output "clueweb12.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "clueweb12.json"
@@ -169,6 +175,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^codesearchnet/" --output "codesearchnet.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "codesearchnet.json"
@@ -192,6 +199,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^cord19/" --output "cord19.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "cord19.json"
@@ -215,6 +223,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^gov/" --output "gov.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "gov.json"
@@ -238,6 +247,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^gov2/" --output "gov2.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "gov2.json"
@@ -261,6 +271,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^highwire/" --output "highwire.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "highwire.json"
@@ -284,6 +295,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^medline/" --output "medline.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "medline.json"
@@ -307,6 +319,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^msmarco-document/" --output "msmarco-document.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "msmarco-document.json"
@@ -330,6 +343,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^msmarco-passage/" --output "msmarco-passage.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "msmarco-passage.json"
@@ -353,6 +367,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^msmarco-qna/" --output "msmarco-qna.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "msmarco-qna.json"
@@ -376,6 +391,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^nfcorpus/" --output "nfcorpus.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "nfcorpus.json"
@@ -399,6 +415,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^nyt/" --output "nyt.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "nyt.json"
@@ -422,6 +439,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^pmc/" --output "pmc.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "pmc.json"
@@ -445,6 +463,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^trec-arabic/" --output "trec-arabic.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "trec-arabic.json"
@@ -468,6 +487,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^trec-mandarin/" --output "trec-mandarin.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "trec-mandarin.json"
@@ -491,6 +511,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^trec-robust04/" --output "trec-robust04.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "trec-robust04.json"
@@ -514,6 +535,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^trec-spanish/" --output "trec-spanish.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "trec-spanish.json"
@@ -537,6 +559,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^tweets2013-ia/" --output "tweets2013-ia.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "tweets2013-ia.json"
@@ -560,6 +583,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^vaswani/" --output "vaswani.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "vaswani.json"
@@ -583,6 +607,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^wikir/" --output "wikir.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "wikir.json"

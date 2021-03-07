@@ -776,6 +776,7 @@ jobs:
       run: |
         python -m test.downloads --filter "^{top}/" --output "{top}.json"
     - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defaults the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "{top}.json"
