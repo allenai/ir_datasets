@@ -35,8 +35,8 @@ class TestDownloads(unittest.TestCase):
 
     def _test_download_iter(self, data, prefix=''):
         with tmp_environ(IR_DATASETS_DL_TRIES='10'): # give the test up to 10 attempts to download
-            if 'url' in data and 'expected_md5' in data and not data.get('skip_test', False):
-                if self.dlc_filter is None or re.search(self.dlc_filter, prefix):
+            if 'url' in data and 'expected_md5' in data:
+                if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False):
                     with self.subTest(prefix):
                         try:
                             download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], cache_path=os.devnull)
