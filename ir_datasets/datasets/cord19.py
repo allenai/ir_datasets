@@ -73,8 +73,13 @@ class Cord19Docs(BaseDocs):
         if not os.path.exists(self._extr_path):
             try:
                 with self._streamer.stream() as stream:
+                    mode = 'r|'
+                    if self._streamer.path().endswith('.gz'):
+                        mode += 'gz'
+                    elif self._streamer.path().endswith('.bz2'):
+                        mode += 'bz2'
                     with _logger.duration('extracting tarfile'):
-                        with tarfile.open(fileobj=stream, mode='r|gz') as tarf:
+                        with tarfile.open(fileobj=stream, mode=mode) as tarf:
                             tarf.extractall(self._extr_path)
             except:
                 shutil.rmtree(self._extr_path)
@@ -154,6 +159,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=False)
+    collection_rnd1 = Cord19Docs(dlc['docs/2020-04-10'], base_path/'2020-04-10', '2020-04-10', include_fulltext=False)
     collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True)
 
     queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME, lang='en')
@@ -164,6 +170,12 @@ def _init():
     subsets['trec-covid'] = Dataset(queries, qrels, collection, documentation('trec-covid'))
     subsets['fulltext'] = Dataset(collection_ft, documentation('fulltext'))
     subsets['fulltext/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('fulltext/trec-covid'))
+
+    queries = TrecXmlQueries(dlc['round1/trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME, lang='en')
+    qrels = TrecQrels(dlc['round1/trec-covid/qrels'], QRELS_DEFS)
+
+    subsets['round1'] = Dataset(collection_rnd1, documentation('round1'))
+    subsets['round1/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('round1/trec-covid'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

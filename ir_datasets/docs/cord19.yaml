@@ -65,3 +65,20 @@ extended documents from <a class="ds-ref">cord19/fulltext</a>.
 </p>
 '
   bibtex: *treccovid
+
+round1:
+  desc: '
+<p>
+Version of <a class="ds-ref">cord19</a> dataset from 2020-04-10 with only documents used for
+the first round of the TREC COVID shared task.
+</p>
+'
+  bibtex: *collection
+
+round1/trec-covid:
+  desc: '
+<p>
+Round 1 of the TREC COVID task. Includes 30 queries.
+</p>
+'
+  bibtex: *treccovid

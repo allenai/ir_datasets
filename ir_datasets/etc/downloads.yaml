@@ -303,6 +303,10 @@ cord19:
     url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz'
     expected_md5: '018c4bc4d76d4ae072a26ac28c8b456b'
     cache_path: '2020-07-16.tar.gz'
+  docs/2020-04-10:
+    url: 'https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-04-10.tar.gz'
+    expected_md5: 'f4c3e742af7a6d6907ac86b1ca9f5312'
+    cache_path: '2020-04-10.tar.bz2'
   trec-covid/queries:
     url: 'https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml'
     expected_md5: '0307a37b6b9f1a5f233340a769d538ea'
@@ -311,6 +315,14 @@ cord19:
     url: 'https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt'
     expected_md5: '8138424a59daea0aba751c8a891e5f54'
     cache_path: 'trec-covid/qrels'
+  round1/trec-covid/queries:
+    url: 'https://ir.nist.gov/covidSubmit/data/topics-rnd1.xml'
+    expected_md5: 'cf1b605222f45f7dbc90ca8e4d9b2c31'
+    cache_path: 'round1/trec-covid/queries.xml'
+  round1/trec-covid/qrels:
+    url: 'https://ir.nist.gov/covidSubmit/data/qrels-rnd1.txt'
+    expected_md5: 'd58586df5823e7d1d0b3619a73b31518'
+    cache_path: 'round1/trec-covid/qrels'
 
 
 gov:
