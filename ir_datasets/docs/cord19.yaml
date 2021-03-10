@@ -28,7 +28,7 @@ text, use <a class="ds-ref">cord19/fulltext</a>.
 trec-covid:
   desc: '
 <p>
-The TREC COVID collection. Queries related to COVID-19, including deep relevance judgments.
+The Complete TREC COVID collection. Queries related to COVID-19, including deep relevance judgments.
 </p>
 <ul>
 <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li>
@@ -78,7 +78,11 @@ the first round of the TREC COVID shared task.
 round1/trec-covid:
   desc: '
 <p>
-Round 1 of the TREC COVID task. Includes 30 queries.
+Round 1 of the TREC COVID task. Includes 30 queries related to COVID-19, including deep relevance judgments.
 </p>
+<ul>
+<li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li>
+<li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li>
+</ul>
 '
   bibtex: *treccovid

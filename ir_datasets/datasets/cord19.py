@@ -175,7 +175,7 @@ def _init():
     qrels = TrecQrels(dlc['round1/trec-covid/qrels'], QRELS_DEFS)
 
     subsets['round1'] = Dataset(collection_rnd1, documentation('round1'))
-    subsets['round1/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('round1/trec-covid'))
+    subsets['round1/trec-covid'] = Dataset(queries, qrels, collection_rnd1, documentation('round1/trec-covid'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
