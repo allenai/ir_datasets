@@ -28,60 +28,36 @@ agreements to be filed with NIST. See details <a href="https://trec.nist.gov/dat
 
 fold1:
   desc: '
-<p>Robust04 Fold 1 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: |
-    @article{Huston2014ACO,
+  bibtex: &hustoncroft |
+    @inproceedings{Huston2014ACO,
       title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston , W. Bruce Croft},
-      journal={CIKM},
+      author={Samuel Huston and W. Bruce Croft},
+      booktitle={CIKM},
       year={2014}
     }
 
 fold2:
   desc: '
-<p>Robust04 Fold 2 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: |
-    @article{Huston2014ACO,
-      title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston , W. Bruce Croft},
-      journal={CIKM},
-      year={2014}
-    }
+  bibtex: *hustoncroft
 
 fold3:
   desc: '
-<p>Robust04 Fold 3 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: |
-    @article{Huston2014ACO,
-      title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston , W. Bruce Croft},
-      journal={CIKM},
-      year={2014}
-    }
+  bibtex: *hustoncroft
 
 fold4:
   desc: '
-<p>Robust04 Fold 4 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: |
-    @article{Huston2014ACO,
-      title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston , W. Bruce Croft},
-      journal={CIKM},
-      year={2014}
-    }
+  bibtex: *hustoncroft
 
 fold5:
   desc: '
-<p>Robust04 Fold 5 (Title) proposed by Hoston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: |
-    @article{Huston2014ACO,
-      title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston , W. Bruce Croft},
-      journal={CIKM},
-      year={2014}
-    }
+  bibtex: *hustoncroft
