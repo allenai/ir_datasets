@@ -1,4 +1,5 @@
 import io
+import codecs
 import json
 import csv
 import contextlib
@@ -49,9 +50,15 @@ QRELS_DEFS = {
     0: 'Not Relevant: everything else.',
 }
 
+QTYPE_MAP = {
+    'query': 'title',
+    'question': 'description',
+    'narrative': 'narrative'
+}
+
 
 class Cord19Docs(BaseDocs):
-    def __init__(self, streamer, extr_path, date, include_fulltext):
+    def __init__(self, streamer, extr_path, date, include_fulltext=False):
         self._streamer = streamer
         self._extr_path = Path(extr_path)
         self._date = date
@@ -70,20 +77,21 @@ class Cord19Docs(BaseDocs):
         return iter(self.docs_store())
 
     def _docs_iter(self):
-        if not os.path.exists(self._extr_path):
-            try:
-                with self._streamer.stream() as stream:
-                    mode = 'r|'
-                    if self._streamer.path().endswith('.gz'):
-                        mode += 'gz'
-                    elif self._streamer.path().endswith('.bz2'):
-                        mode += 'bz2'
-                    with _logger.duration('extracting tarfile'):
-                        with tarfile.open(fileobj=stream, mode=mode) as tarf:
-                            tarf.extractall(self._extr_path)
-            except:
-                shutil.rmtree(self._extr_path)
-                raise
+        if self._include_fulltext:
+            if not os.path.exists(self._extr_path):
+                try:
+                    with self._streamer.stream() as stream:
+                        mode = 'r|'
+                        if self._streamer.path().endswith('.gz'):
+                            mode += 'gz'
+                        elif self._streamer.path().endswith('.bz2'):
+                            mode += 'bz2'
+                        with _logger.duration('extracting tarfile'):
+                            with tarfile.open(fileobj=stream, mode=mode) as tarf:
+                                tarf.extractall(self._extr_path)
+                except:
+                    shutil.rmtree(self._extr_path)
+                    raise
 
         with contextlib.ExitStack() as ctxt:
             # Sometiems the document parses are in a single big file, sometimes in separate.
@@ -99,7 +107,11 @@ class Cord19Docs(BaseDocs):
                         'noncomm_use_subset': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'noncomm_use_subset.tar.gz').open('rb'))),
                         'custom_license': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'custom_license.tar.gz').open('rb'))),
                     }
-            csv_reader = ctxt.push((self._extr_path/self._date/'metadata.csv').open('rt'))
+            if self._include_fulltext:
+                csv_reader = ctxt.push((self._extr_path/self._date/'metadata.csv').open('rt'))
+            else:
+                csv_reader = ctxt.enter_context(self._streamer.stream())
+                csv_reader = codecs.getreader('utf8')(csv_reader)
             csv_reader = csv.DictReader(csv_reader)
             for record in csv_reader:
                 did = record['cord_uid']
@@ -158,11 +170,10 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    collection = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=False)
-    collection_rnd1 = Cord19Docs(dlc['docs/2020-04-10'], base_path/'2020-04-10', '2020-04-10', include_fulltext=False)
+    collection = Cord19Docs(dlc['docs/2020-07-16/metadata'], base_path/'2020-07-16', '2020-07-16')
     collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True)
 
-    queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME, lang='en')
+    queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS)
 
     base = Dataset(collection, documentation('_'))
@@ -171,11 +182,35 @@ def _init():
     subsets['fulltext'] = Dataset(collection_ft, documentation('fulltext'))
     subsets['fulltext/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('fulltext/trec-covid'))
 
-    queries = TrecXmlQueries(dlc['round1/trec-covid/queries'], qtype_map={'query': 'title', 'question': 'description', 'narrative': 'narrative'}, namespace=NAME, lang='en')
-    qrels = TrecQrels(dlc['round1/trec-covid/qrels'], QRELS_DEFS)
+    subsets['trec-covid/round1'] = Dataset(
+        Cord19Docs(dlc['docs/2020-04-10/metadata'], base_path/'2020-04-10', '2020-04-10'),
+        TrecXmlQueries(dlc['trec-covid/round1/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
+        TrecQrels(dlc['trec-covid/round1/qrels'], QRELS_DEFS),
+        documentation('trec-covid/round1'))
 
-    subsets['round1'] = Dataset(collection_rnd1, documentation('round1'))
-    subsets['round1/trec-covid'] = Dataset(queries, qrels, collection_rnd1, documentation('round1/trec-covid'))
+    subsets['trec-covid/round2'] = Dataset(
+        Cord19Docs(dlc['docs/2020-05-01/metadata'], base_path/'2020-05-01', '2020-05-01'),
+        TrecXmlQueries(dlc['trec-covid/round2/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
+        TrecQrels(dlc['trec-covid/round2/qrels'], QRELS_DEFS),
+        documentation('trec-covid/round2'))
+
+    subsets['trec-covid/round3'] = Dataset(
+        Cord19Docs(dlc['docs/2020-05-19/metadata'], base_path/'2020-05-19', '2020-05-19'),
+        TrecXmlQueries(dlc['trec-covid/round3/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
+        TrecQrels(dlc['trec-covid/round3/qrels'], QRELS_DEFS),
+        documentation('trec-covid/round3'))
+
+    subsets['trec-covid/round4'] = Dataset(
+        Cord19Docs(dlc['docs/2020-06-19/metadata'], base_path/'2020-06-19', '2020-06-19'),
+        TrecXmlQueries(dlc['trec-covid/round4/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
+        TrecQrels(dlc['trec-covid/round4/qrels'], QRELS_DEFS),
+        documentation('trec-covid/round4'))
+
+    subsets['trec-covid/round5'] = Dataset(
+        collection,
+        queries,
+        TrecQrels(dlc['trec-covid/round5/qrels'], QRELS_DEFS),
+        documentation('trec-covid/round5'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

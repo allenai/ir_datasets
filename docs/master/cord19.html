@@ -23,9 +23,12 @@
 <li><a href="#cord19"><kbd>cord19</kbd></a></li>
 <li><a href="#cord19/fulltext"><kbd><span class="prefix">cord19</span>/fulltext</kbd></a></li>
 <li><a href="#cord19/fulltext/trec-covid"><kbd><span class="prefix">cord19</span>/fulltext/trec-covid</kbd></a></li>
-<li><a href="#cord19/round1"><kbd><span class="prefix">cord19</span>/round1</kbd></a></li>
-<li><a href="#cord19/round1/trec-covid"><kbd><span class="prefix">cord19</span>/round1/trec-covid</kbd></a></li>
 <li><a href="#cord19/trec-covid"><kbd><span class="prefix">cord19</span>/trec-covid</kbd></a></li>
+<li><a href="#cord19/trec-covid/round1"><kbd><span class="prefix">cord19</span>/trec-covid/round1</kbd></a></li>
+<li><a href="#cord19/trec-covid/round2"><kbd><span class="prefix">cord19</span>/trec-covid/round2</kbd></a></li>
+<li><a href="#cord19/trec-covid/round3"><kbd><span class="prefix">cord19</span>/trec-covid/round3</kbd></a></li>
+<li><a href="#cord19/trec-covid/round4"><kbd><span class="prefix">cord19</span>/trec-covid/round4</kbd></a></li>
+<li><a href="#cord19/trec-covid/round5"><kbd><span class="prefix">cord19</span>/trec-covid/round5</kbd></a></li>
 </ol>
 <hr />
 <div class="dataset" id="cord19">
@@ -208,135 +211,6 @@ bibtex:
 </div>
 
 <hr />
-<div class="dataset" id="cord19/round1" data-parent="cord19">
-<h3><kbd class="ds-name select"><span class="str">"cord19/round1"</kdb></h3>
-
-<div class="desc">
- <p> Version of <a class="ds-ref">cord19</a> dataset from 2020-04-10 with only documents used for the first round of the TREC COVID shared task. </p> 
-</div>
-<div class="tabs">
-<a class="tab" target="cord19/round1__docs">docs</a>
-<div id="cord19/round1__docs" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Document type:</div>
-<div class="type">
-<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'cord19/round1')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="cord19/round1__citation">Citation</a>
-<div id="cord19/round1__citation" class="tab-content">
-bibtex:
-<cite class="select">@article{Wang2020CORD19TC,
-  title={CORD-19: The Covid-19 Open Research Dataset},
-  author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
-  journal={ArXiv},
-  year={2020}
-}
-</cite>
-</div>
-</div>
-</div>
-
-<hr />
-<div class="dataset" id="cord19/round1/trec-covid" data-parent="cord19">
-<h3><kbd class="ds-name select"><span class="str">"cord19/round1/trec-covid"</kdb></h3>
-
-<div class="desc">
- <p> Round 1 of the TREC COVID task. Includes 30 queries related to COVID-19, including deep relevance judgments. </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
-</div>
-<div class="tabs">
-<a class="tab" target="cord19/round1/trec-covid__queries">queries</a>
-<div id="cord19/round1/trec-covid__queries" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Query type:</div>
-<div class="type">
-<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'cord19/round1/trec-covid')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="cord19/round1/trec-covid__docs">docs</a>
-<div id="cord19/round1/trec-covid__docs" class="tab-content">
-<p>Language: <span class="lang-code">en</span></p>
-<div>Document type:</div>
-<div class="type">
-<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'cord19/round1/trec-covid')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="cord19/round1/trec-covid__qrels">qrels</a>
-<div id="cord19/round1/trec-covid__qrels" class="tab-content">
-<div>Query relevance judgment type:</div>
-<div class="type">
-<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
-<ol class="type-fields">
-<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
-</ol>
-</div>
-<p>Relevance levels</p>
-
-<table>
-<tr><th>Rel.</th><th>Definition</th></tr>
-<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
-<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
-<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
-</table>
-
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'cord19/round1/trec-covid')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
-</code>
-</div>
-
-<a class="tab" target="cord19/round1/trec-covid__citation">Citation</a>
-<div id="cord19/round1/trec-covid__citation" class="tab-content">
-bibtex:
-<cite class="select">@article{Voorhees2020TRECCOVIDCA,
-  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
-  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
-  journal={ArXiv},
-  year={2020},
-  volume={abs/2005.04474}
-}
-</cite>
-</div>
-</div>
-</div>
-
-<hr />
 <div class="dataset" id="cord19/trec-covid" data-parent="cord19">
 <h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid"</kdb></h3>
 
@@ -411,6 +285,446 @@ bibtex:
 
 <a class="tab" target="cord19/trec-covid__citation">Citation</a>
 <div id="cord19/trec-covid__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid/round1" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid/round1"</kdb></h3>
+
+<div class="desc">
+ <p> Round 1 of the TREC COVID task. Includes 30 queries related to COVID-19. This uses the "2020-04-10" version of the collection. </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/round1.html">Round 1 Guidelines</a></li> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid/round1__queries">queries</a>
+<div id="cord19/trec-covid/round1__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round1')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round1__docs">docs</a>
+<div id="cord19/trec-covid/round1__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round1')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round1__qrels">qrels</a>
+<div id="cord19/trec-covid/round1__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round1')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round1__citation">Citation</a>
+<div id="cord19/trec-covid/round1__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid/round2" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid/round2"</kdb></h3>
+
+<div class="desc">
+ <p> Round 2 of the TREC COVID task. Includes 35 queries related to COVID-19. This uses the "2020-05-01" version of the collection. </p> <p> Note that the qrels do not contain results from the prior round(s). Use the "complete" version for this setting (<a class="ds-ref">cord19/trec-covid</a>). </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/round2.html">Round 2 Guidelines</a></li> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid/round2__queries">queries</a>
+<div id="cord19/trec-covid/round2__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round2')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round2__docs">docs</a>
+<div id="cord19/trec-covid/round2__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round2')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round2__qrels">qrels</a>
+<div id="cord19/trec-covid/round2__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round2')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round2__citation">Citation</a>
+<div id="cord19/trec-covid/round2__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid/round3" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid/round3"</kdb></h3>
+
+<div class="desc">
+ <p> Round 3 of the TREC COVID task. Includes 40 queries related to COVID-19. This uses the "2020-05-19" version of the collection. </p> <p> Note that the qrels do not contain results from the prior round(s). Use the "complete" version for this setting (<a class="ds-ref">cord19/trec-covid</a>). </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/round3.html">Round 3 Guidelines</a></li> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid/round3__queries">queries</a>
+<div id="cord19/trec-covid/round3__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round3')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round3__docs">docs</a>
+<div id="cord19/trec-covid/round3__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round3')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round3__qrels">qrels</a>
+<div id="cord19/trec-covid/round3__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round3')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round3__citation">Citation</a>
+<div id="cord19/trec-covid/round3__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid/round4" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid/round4"</kdb></h3>
+
+<div class="desc">
+ <p> Round 4 of the TREC COVID task. Includes 45 queries related to COVID-19. This uses the "2020-06-19" version of the collection. </p> <p> Note that the qrels do not contain results from the prior round(s). Use the "complete" version for this setting (<a class="ds-ref">cord19/trec-covid</a>). </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/round4.html">Round 4 Guidelines</a></li> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid/round4__queries">queries</a>
+<div id="cord19/trec-covid/round4__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round4')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round4__docs">docs</a>
+<div id="cord19/trec-covid/round4__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round4')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round4__qrels">qrels</a>
+<div id="cord19/trec-covid/round4__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round4')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round4__citation">Citation</a>
+<div id="cord19/trec-covid/round4__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Voorhees2020TRECCOVIDCA,
+  title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+  author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+  journal={ArXiv},
+  year={2020},
+  volume={abs/2005.04474}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="cord19/trec-covid/round5" data-parent="cord19">
+<h3><kbd class="ds-name select"><span class="str">"cord19/trec-covid/round5"</kdb></h3>
+
+<div class="desc">
+ <p> Round 5 of the TREC COVID task. Includes 50 queries related to COVID-19. This uses the "2020-07-16" version of the collection. </p> <p> Note that the qrels do not contain results from the prior round(s). Use the "complete" version for this setting (<a class="ds-ref">cord19/trec-covid</a>). </p> <ul> <li><a href="https://ir.nist.gov/covidSubmit/round5.html">Round 5 Guidelines</a></li> <li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li> <li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="cord19/trec-covid/round5__queries">queries</a>
+<div id="cord19/trec-covid/round5__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">TrecQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round5')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round5__docs">docs</a>
+<div id="cord19/trec-covid/round5__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">Cord19Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doi</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">date</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">abstract</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round5')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, doi, date, abstract&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round5__qrels">qrels</a>
+<div id="cord19/trec-covid/round5__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Not Relevant: everything else.</td></tr>
+<tr><td class="relScore">1</td><td>Partially Relevant: the article answers part of the question but would need to be combined with other information to get a complete answer.</td></tr>
+<tr><td class="relScore">2</td><td>Relevant: the article is fully responsive to the information need as expressed by the topic, i.e. answers the Question in the topic. The article need not contain all information on the topic, but must, on its own, provide an answer to the question.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'cord19/trec-covid/round5')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="cord19/trec-covid/round5__citation">Citation</a>
+<div id="cord19/trec-covid/round5__citation" class="tab-content">
 bibtex:
 <cite class="select">@article{Voorhees2020TRECCOVIDCA,
   title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
