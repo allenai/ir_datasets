@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>Python API - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.3.2</strong>. See <a href="../python.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/tree/v0.3.2/">allenai/ir_datasets</a></div>
+<h1><code>ir_datasets</code>: Python API</h1>
+<h2 id="dataset">Dataset objects</h2>
+
+<p>
+Datasets can be obtained through <code>ir_datasts.load(<span class="str">"dataset-id"</span>)</code>
+or constructed with <code>ir_datasets.create_dataset(...)</code>. Dataset objects provide the
+following methods:
+</p>
+
+<h4><code>dataset.has_docs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.docs_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_queries() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.queries_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_qrels() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.qrels_*</code> methods.</p>
+</div>
+<h4><code>dataset.has_scoreddocs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.scoreddocs_*</code> methods.</p>
+</div>
+<h4><code>dataset.has_docpairs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.docpairs_*</code> methods.</p>
+</div>
+
+
+<h4><code>dataset.docs_count() -> int</code></h4>
+
+<div class="methodinfo">
+<p>Returns the number of documents in the collection.</p>
+</div>
+
+
+<h4><code>dataset.docs_iter() -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>Returns an iterator of <code>namedtuple</code>s, where each item is a document in the collection.</p>
+<p>This iterator supports fancy slicing (with some limitations):</p>
+
+<code class="example">
+<div class="comment"># First 10 documents</div>
+<div>dataset.docs_iter()[:10]</div>
+
+<div class="comment"># Last 10 documents</div>
+<div>dataset.docs_iter()[-10:]</div>
+
+<div class="comment"># Every 2 documents</div>
+<div>dataset.docs_iter()[::2]</div>
+
+<div class="comment"># Every 2 documents, starting with the first document</div>
+<div>dataset.docs_iter()[1::2]</div>
+
+<div class="comment"># The first half of the collection</div>
+<div>dataset.docs_iter()[:1/2]</div>
+
+<div class="comment"># The middle third of collection</div>
+<div>dataset.docs_iter()[1/3:2/3]</div>
+</code>
+
+<p>
+Note that the fancy slicing mechanics are faster and more sophisticated than
+<code>itertools.islice</code>; documents are not processed if they are skipped.
+</p>
+</div>
+
+<h4><code>dataset.docs_cls() -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the <code class="kwd">NamedTuple</code> type that the <code>docs_iter</code> returns.
+The available fields and type information can be found with <code>_fields</code> and <code>__annotations__</code>:
+</p>
+
+<code class="example">
+<div>dataset.docs_cls()._fields</div>
+</code>
+<code class="output">
+<div>(<span class="str">'doc_id'</span>, <span class="str">'title'</span>, <span class="str">'doi'</span>, <span class="str">'date'</span>, <span class="str">'abstract'</span>)</div>
+</code>
+<code class="example">
+<div>dataset.docs_cls().__annotations__</div>
+</code>
+<code class="output">
+<div>{</div>
+<div>&nbsp;&nbsp;<span class="str">'doc_id'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'title'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'doi'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'date'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'abstract'</span>: <span class="kwd">str</span></div>
+<div>}</div>
+</code>
+</div>
+
+
+<h4><code>dataset.docs_store() -> docstore</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a <a href="#docstore">docstore object</a> for this dataset, which enables
+fast lookups by <code>doc_id</code>.
+</p>
+</div>
+
+<h4><code>dataset.docs_lang() -> str</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the two-character <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1
+language code</a> (e.g., <span class="str">"en"</span> for English) of the documents in this collection.
+Returns <span class="kwd">None</span> if there are multiple languages, a language not represented by an
+ISO 639-1 code, or the language is otherwise unknown.
+</p>
+</div>
+
+
+<h4><code>dataset.queries_iter() -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing queries in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.queries_cls() -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>queries_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>dataset.queries_lang() -> str</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the two-character <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1
+language code</a> (e.g., <span class="str">"en"</span> for English) of the queries.
+Returns <span class="kwd">None</span> if there are multiple languages, a language not represented by an
+ISO 639-1 code, or the language is otherwise unknown. Note that some datasets include
+translations as different query fields.
+</p>
+</div>
+
+
+<h4><code>dataset.qrels_iter() -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing query relevance assessments in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.qrels_cls() -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>qrels_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>dataset.qrels_defs() -> dict[int, str]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a mapping between relevance levels and a textual description of
+what the level represents. (E.g., 0 represting not relevant, 1 representing
+possibly relevant, 2 representing definitely relevant.)
+</p>
+</div>
+
+
+<h4><code>dataset.qrels_dict() -> dict[str, dict[str, int]]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a dict of dicts representing all qrels for this collection. Note
+that this will load all qrels into memory. The outer dict key is the
+<code>query_id</code> and the inner key is the <code>doc_id</code>.
+This is useful in tools such as <a href="https://github.com/cvangysel/pytrec_eval">pytrec_eval</a>.
+</p>
+</div>
+
+
+<h4><code>dataset.scoreddocs_iter() -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing scored docs (e.g., initial rankings
+for re-ranking tasks) in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.scoreddocs_cls() -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>scoreddocs_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>dataset.docpairs_iter() -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing doc pairs (e.g., training pairs) in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.docpairs_cls() -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>docpairs_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h2 id="docstore">Docstore objects</h2>
+
+<p>
+Docstores enable fast lookups of documents by their <code>doc_id</code>.
+</p>
+<p>
+The implementation depends on the dataset. For small datasets, a simple
+index structure is built on disk to enable fast lookups. For large datasets,
+you wouldn't want to make a copy of the collection, so lookups are accelerated
+by taking advantage of the source file structure and decompression checkpoints.
+</p>
+<p>
+For small datasets, docstores also enable faster iteration and fancy slicing.
+In some cases, a docstore instance is automatically generated during the first
+call to <code>docs_iter</code> to enable faster iteration in the future.
+</p>
+
+<h4><code>docstore.get(doc_id: str) -> namedtuple</code></h4>
+<div class="methodinfo">
+<p>
+Gets a single document by <code>doc_id</code>. Returns a single <span class="kwd">namedtuple</span>
+or throws a <span class="kwd">KeyError</span> if the document it not in the collection.
+</p>
+</div>
+
+<h4><code>docstore.get_many(doc_ids: iter[str]) -> dict[str, namedtuple]</code></h4>
+<div class="methodinfo">
+<p>
+Gets documents whose IDs appear in <code>doc_ids</code>. Returns a <span class="kwd">dict</span>
+mapping string IDs to <span class="kwd">namedtuple</span>. Missing documents will not appear in
+the dictionary.
+</p>
+</div>
+
+<h4><code>docstore.get_many_iter(doc_ids: iter[str]) -> iter[namedtuple]</code></h4>
+<div class="methodinfo">
+<p>
+Returns an iterator over documents whose IDs appear in <code>doc_ids</code>. The order of the
+documents is not guaranteed to be the same as doc_ids. (This is to allow implementations to
+optmize the order in which documents are retrieved from disk.) Missing documents will not
+appear in the iterator.
+</p>
+</div>
+
+</div>
+</body>
+</html>
