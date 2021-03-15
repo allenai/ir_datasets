@@ -181,7 +181,7 @@ class Migrator:
             def wrapped(*args, **kwargs):
                 if not self._state == 'OK':
                     self._version_file.parent.mkdir(parents=True, exist_ok=True)
-                    if not self._version_file.exists() or not self._version_file.open('rt').read() != self._version:
+                    if not self._version_file.exists() or self._version_file.open('rt').read() != self._version:
                         self._state = 'IN_PROGRESS'
                         paths_to_remove = [f for f in self._affected_files if os.path.exists(f)]
                         if paths_to_remove:
