@@ -42,6 +42,8 @@
 <li><a href="#wikir/it16k/training"><kbd><span class="prefix">wikir</span>/it16k/training</kbd></a></li>
 <li><a href="#wikir/it16k/validation"><kbd><span class="prefix">wikir</span>/it16k/validation</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="wikir">
 <h3><kbd class="select"><span class="str">"wikir"</kdb></h3>
@@ -1969,6 +1971,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=wikir'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

@@ -24,6 +24,8 @@
 <li><a href="#highwire/trec-genomics-2006"><kbd><span class="prefix">highwire</span>/trec-genomics-2006</kbd></a></li>
 <li><a href="#highwire/trec-genomics-2007"><kbd><span class="prefix">highwire</span>/trec-genomics-2007</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="highwire">
 <h3><kbd class="select"><span class="str">"highwire"</kdb></h3>
@@ -240,6 +242,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=highwire'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

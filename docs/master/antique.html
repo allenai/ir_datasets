@@ -27,6 +27,8 @@
 <li><a href="#antique/train/split200-train"><kbd><span class="prefix">antique</span>/train/split200-train</kbd></a></li>
 <li><a href="#antique/train/split200-valid"><kbd><span class="prefix">antique</span>/train/split200-valid</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="antique">
 <h3><kbd class="select"><span class="str">"antique"</kdb></h3>
@@ -447,6 +449,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=antique'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

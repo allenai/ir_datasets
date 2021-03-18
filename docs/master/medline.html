@@ -28,6 +28,8 @@
 <li><a href="#medline/2017/trec-pm-2017"><kbd><span class="prefix">medline</span>/2017/trec-pm-2017</kbd></a></li>
 <li><a href="#medline/2017/trec-pm-2018"><kbd><span class="prefix">medline</span>/2017/trec-pm-2018</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="medline">
 <h3><kbd class="select"><span class="str">"medline"</kdb></h3>
@@ -443,6 +445,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=medline'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

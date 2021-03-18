@@ -23,6 +23,8 @@
 <li><a href="#aquaint"><kbd>aquaint</kbd></a></li>
 <li><a href="#aquaint/trec-robust-2005"><kbd><span class="prefix">aquaint</span>/trec-robust-2005</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="aquaint">
 <h3><kbd class="select"><span class="str">"aquaint"</kdb></h3>
@@ -151,6 +153,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=aquaint'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

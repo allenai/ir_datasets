@@ -24,6 +24,8 @@
 <li><a href="#nyt/train"><kbd><span class="prefix">nyt</span>/train</kbd></a></li>
 <li><a href="#nyt/valid"><kbd><span class="prefix">nyt</span>/valid</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="nyt">
 <h3><kbd class="select"><span class="str">"nyt"</kdb></h3>
@@ -225,6 +227,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=nyt'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

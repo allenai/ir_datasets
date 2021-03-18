@@ -51,3 +51,49 @@ $(document).ready(function() {
         $target.addClass('selected');
     });
 });
+function toEmoji(test) {
+    if (test) {
+        return '✅';
+    }
+    return '❌';
+}
+function toTime(duration) {
+    if (duration < 60) {
+        return duration.toFixed(2) + 's';
+    }
+    var minutes = Math.floor(duration / 60);
+    var seconds = duration % 60;
+    return minutes.toFixed(0) + 'm ' + seconds.toFixed(0) + 's';
+}
+function generateDownloads(title, downloads) {
+    if (downloads.length === 0) {
+        return $('<div></div>');
+    }
+    var allGood = true;
+    var $content = $('<table></table>');
+    $content.append($('<tr><th>Avail</th><th>ID</th><th>Time</th><th>URL</th><th>Last Tested At</th><th>Expected MD5 Hash</th></tr>'));
+    var goodCount = 0;
+    var totalCount = 0;
+    $.each(downloads, function (i, dl) {
+        var good = dl.result === "PASS";
+        totalCount += 1;
+        if (!good) {
+            allGood = false;
+        } else {
+            goodCount += 1;
+        }
+        $content.append($('<tr></tr>')
+            .append($('<td></td>').text(toEmoji(good)).attr('title', dl.result))
+            .append($('<td></td>').text(dl.name))
+            .append($('<td></td>').text(toTime(dl.duration)))
+            .append($('<td></td>').append($('<a>').attr('href', dl.url).text('link')))
+            .append($('<td></td>').text(dl.time.substring(0, 19)))
+            .append($('<td></td>').text(dl.md5))
+        );
+    });
+    return $('<details></details>')
+        .append($('<summary></summary>').text(toEmoji(allGood) + ' ' + title + ' (' + goodCount.toString() + ' of ' + totalCount.toString() + ')'))
+        .append($('<p>These files are automatically downloaded by ir_datasets as they are needed. We also periodically check that they are still available and unchanged through an automated <a href="https://github.com/allenai/ir_datasets/actions/workflows/verify_downloads.yml">GitHub action</a>. The latest results from that test are shown here:</p>'))
+        .append($content)
+        .prop('open', !allGood);
+}

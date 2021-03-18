@@ -24,6 +24,8 @@
 <li><a href="#trec-arabic/ar2001"><kbd><span class="prefix">trec-arabic</span>/ar2001</kbd></a></li>
 <li><a href="#trec-arabic/ar2002"><kbd><span class="prefix">trec-arabic</span>/ar2002</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="trec-arabic">
 <h3><kbd class="select"><span class="str">"trec-arabic"</kdb></h3>
@@ -237,6 +239,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=trec-arabic'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

@@ -23,6 +23,8 @@
 <li><a href="#vaswani"><kbd>vaswani</kbd></a></li>
 
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="vaswani">
 <h3><kbd class="select"><span class="str">"vaswani"</kdb></h3>
@@ -95,6 +97,16 @@
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=vaswani'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>
