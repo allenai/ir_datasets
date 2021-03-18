@@ -54,6 +54,7 @@ class TestDownloads(unittest.TestCase):
                             'time': datetime.datetime.now().isoformat(),
                             'duration': None,
                             'result': 'IN_PROGRESS',
+                            'md5': data['expected_md5'],
                         }
                         self.output_data.append(record)
                         start = time.time()
