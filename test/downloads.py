@@ -67,7 +67,6 @@ class TestDownloads(unittest.TestCase):
                                 while len(inp) > 0:
                                     record['size'] += len(inp)
                                     inp = stream.read(io.DEFAULT_BUFFER_SIZE)
-                            download.path()
                             record['duration'] = time.time() - start
                             record['result'] = 'PASS'
                         except KeyboardInterrupt:
