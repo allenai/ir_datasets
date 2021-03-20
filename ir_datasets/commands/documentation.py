@@ -1212,13 +1212,30 @@ function toTime(duration) {
     var seconds = duration % 60;
     return minutes.toFixed(0) + 'm ' + seconds.toFixed(0) + 's';
 }
+function toFileSize(size) {
+    if (!size) {
+        return '';
+    }
+    var unit = 'B';
+    var units = ['KB', 'MB', 'GB'];
+    while (units.length > 0 && size > 1000) {
+        size = size / 1000;
+        unit = units.shift();
+    }
+    if (unit === 'B') {
+        size = size.toFixed(0);
+    } else {
+        size = size.toFixed(1);
+    }
+    return size + ' ' + unit;
+}
 function generateDownloads(title, downloads) {
     if (downloads.length === 0) {
         return $('<div></div>');
     }
     var allGood = true;
     var $content = $('<table></table>');
-    $content.append($('<tr><th>Avail</th><th>ID</th><th>Time</th><th>URL</th><th>Last Tested At</th><th>Expected MD5 Hash</th></tr>'));
+    $content.append($('<tr><th>Avail</th><th>Download ID</th><th>Size</th><th>Time</th><th>Last Tested At</th><th>Expected MD5 Hash</th></tr>'));
     var goodCount = 0;
     var totalCount = 0;
     $.each(downloads, function (i, dl) {
@@ -1230,12 +1247,12 @@ function generateDownloads(title, downloads) {
             goodCount += 1;
         }
         $content.append($('<tr></tr>')
-            .append($('<td></td>').text(toEmoji(good)).attr('title', dl.result))
-            .append($('<td></td>').text(dl.name))
+            .append($('<td></td>').text(toEmoji(good)).attr('title', dl.result).css('text-align', 'center'))
+            .append($('<td></td>').append($('<a></a>').attr('href', dl.url).text(dl.name)))
+            .append($('<td></td>').text(toFileSize(dl.size)))
             .append($('<td></td>').text(toTime(dl.duration)))
-            .append($('<td></td>').append($('<a>').attr('href', dl.url).text('link')))
-            .append($('<td></td>').text(dl.time.substring(0, 19)))
-            .append($('<td></td>').text(dl.md5))
+            .append($('<td></td>').text(dl.time.substring(0, 19).replace('T', ' ')))
+            .append($('<td></td>').append($('<code>').text(dl.md5)))
         );
     });
     return $('<details></details>')
