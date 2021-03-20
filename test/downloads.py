@@ -1,3 +1,4 @@
+import io
 import sys
 import json
 import time
@@ -55,11 +56,17 @@ class TestDownloads(unittest.TestCase):
                             'duration': None,
                             'result': 'IN_PROGRESS',
                             'md5': data['expected_md5'],
+                            'size': 0,
                         }
                         self.output_data.append(record)
                         start = time.time()
                         try:
-                            download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], cache_path=os.devnull)
+                            download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], stream=True)
+                            with download.stream() as stream:
+                                inp = stream.read(io.DEFAULT_BUFFER_SIZE)
+                                while len(inp) > 0:
+                                    record['size'] += len(inp)
+                                    inp = stream.read(io.DEFAULT_BUFFER_SIZE)
                             download.path()
                             record['duration'] = time.time() - start
                             record['result'] = 'PASS'
