@@ -55,6 +55,7 @@ class TestDownloads(unittest.TestCase):
                             'time': datetime.datetime.now().isoformat(),
                             'duration': None,
                             'result': 'IN_PROGRESS',
+                            'fail_messagae': None,
                             'md5': data['expected_md5'],
                             'size': 0,
                         }
@@ -74,9 +75,10 @@ class TestDownloads(unittest.TestCase):
                             record['result'] = 'USER_SKIP'
                             self.skipTest('Test skipped by user')
                             self.output_data.append({})
-                        except:
+                        except Exception as ex:
                             record['duration'] = time.time() - start
                             record['result'] = 'FAIL'
+                            record['fail_messagae'] = str(ex)
                             raise
             elif 'instructions' in data:
                 pass
