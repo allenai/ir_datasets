@@ -21,6 +21,7 @@ from . import pmc
 from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish
+from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
 from . import wikir

@@ -17,6 +17,12 @@ class TrecDoc(NamedTuple):
     text: str
     marked_up_doc: str
 
+class TitleUrlTextDoc(NamedTuple):
+    doc_id: str
+    title: str
+    url: str
+    text: str
+
 class TrecQuery(NamedTuple):
     query_id: str
     title: str
@@ -53,10 +59,12 @@ class TrecDocs(BaseDocs):
         self._parser = {
             'BS4': self._parser_bs,
             'text': self._parser_text,
+            'tut': self._parser_tut,
         }[parser]
         self._doc = {
             'BS4': TrecDoc,
             'text': GenericDoc,
+            'tut': TitleUrlTextDoc,
         }[parser]
         self._docs_namespace = namespace
         self._docs_lang = lang
@@ -144,6 +152,28 @@ class TrecDocs(BaseDocs):
                 if line.startswith('<'):
                     if any(line.startswith(f'<{tag}>') for tag in self._content_tags):
                         in_tag = True
+
+    def _parser_tut(self, stream):
+        f = codecs.getreader(self._encoding or 'utf8')(stream, errors='replace')
+        doc_id, doc_title, doc_url, doc_text = None, None, None, ''
+        in_tag = False
+        for line in f:
+            if line.startswith('<DOCNO>'):
+                doc_id = line.replace('<DOCNO>', '').replace('</DOCNO>\n', '').strip()
+            if line.startswith('<TITLE>'):
+                doc_title = line.replace('<TITLE>', '').replace('</TITLE>\n', '').strip()
+            if line.startswith('<URL>'):
+                doc_url = line.replace('<URL>', '').replace('</URL>\n', '').strip()
+            elif line == '</DOC>\n':
+                yield TitleUrlTextDoc(doc_id, doc_title, doc_url, doc_text)
+                doc_id, doc_title, doc_url, doc_text = None, None, None, ''
+            else:
+                if line.startswith('</TEXT>'):
+                    in_tag = False
+                if in_tag:
+                    doc_text += line
+                if line.startswith('<TEXT>'):
+                    in_tag = True
 
     def docs_cls(self):
         return self._doc

@@ -12,7 +12,7 @@ import ir_datasets
 from ir_datasets import util
 
 
-__all__ = ['IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
+__all__ = ['IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'RelativePath', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
 
 
 _logger = ir_datasets.log.easy()
@@ -106,16 +106,24 @@ class TarExtract:
 
 
 class TarExtractAll:
-    def __init__(self, streamer, extract_path, compression='gz'):
+    def __init__(self, streamer, extract_path, compression='gz', path_globs=None):
         self._streamer = streamer
         self._extract_path = extract_path
         self._compression = compression
+        self._path_globs = path_globs
 
     def path(self):
         if not os.path.exists(self._extract_path):
             try:
-                with self._streamer.stream() as stream, tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}') as tarf:
-                    tarf.extractall(self._extract_path)
+                with self._streamer.stream() as stream, tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}') as tarf, \
+                     _logger.duration('extracting from tar file'):
+                    if self._path_globs is None:
+                        # shortcut to extract everything
+                        tarf.extractall(self._extract_path)
+                    else:
+                        for member in tarf:
+                            if any(fnmatch(member.name, g) for g in self._path_globs):
+                                tarf.extract(member, self._extract_path)
             except:
                 if os.path.exists(self._extract_path):
                     shutil.rmtree(self._extract_path)
@@ -124,6 +132,20 @@ class TarExtractAll:
 
     def stream(self):
         raise NotImplementedError()
+
+
+class RelativePath:
+    def __init__(self, streamer, path):
+        self._streamer = streamer
+        self._path = path
+
+    def path(self):
+        return os.path.join(self._streamer.path(), self._path)
+
+    @contextlib.contextmanager
+    def stream(self):
+        with open(self.path(), 'rb') as f:
+            yield f
 
 
 class ReTar:

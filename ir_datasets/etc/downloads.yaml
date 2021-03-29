@@ -1146,6 +1146,27 @@ To proceed, symlink the source file here: {path}'
     cache_path: 'trec4/qrels.gz'
 
 
+tripclick:
+  benchmark:
+    instructions: 'TODO
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "6e5d3deeba138750e9a148b538f30a8f"
+    cache_path: 'benchmark.tar.gz'
+  dlfiles:
+    instructions: 'TODO
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "1f256c19466b414e365324d8ef21f09c"
+    cache_path: 'dlfiles.tar.gz'
+  dlfiles_runs_test:
+    instructions: 'TODO
+
+To proceed, symlink the source file here: {path}'
+    expected_md5: "2b5e98c683a91e19630636b6f83e3b15"
+    cache_path: 'dlfiles_runs_test.tar.gz'
+
+
 trec-robust04:
   docs:
     instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the

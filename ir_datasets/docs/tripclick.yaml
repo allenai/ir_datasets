@@ -1,0 +1,236 @@
+_:
+  pretty_name: 'TripClick'
+  desc: '
+<p>
+TripClick is a large collection from the <a href="https://www.tripdatabase.com/">Trip Database</a>.
+Relevance is inferred from click signals.
+</p>
+<p>
+A copy of this dataset can be obtained from the Trip Database through the process described
+<a href="https://tripdatabase.github.io/tripclick/#getting-the-data">here</a>. Documents, queries,
+and qrels require the "TripClick IR Benchmark"; for scoreddocs and docpairs, you will also need to
+request the "TripClick Training Package for Deep Learning Models".
+</p>
+<ul>
+<li>Documents: <a href="https://www.nlm.nih.gov/medline/medline_overview.html">Medline</a> article titles and abstracts</li>
+<li>Queries: user queries issued to the <a href="https://www.tripdatabase.com/">Trip Database</a></li>
+<li>Qrels: Inferred from clicks</li>
+<li><a href="https://docs.google.com/document/d/1RHVxVnZsPBDDZMDcSvbB8VyNZDl2cn6KpeeSvIu6g_c/edit?usp=sharing">Dataset request form</a></li>
+<li><a href="https://tripdatabase.github.io/tripclick/">Dataset website</a></li>
+<li><a href="https://arxiv.org/abs/2103.07901">Dataset paper</a></li>
+</ul>
+'
+  docs_instructions: &docs_inst "docs available from the Trip Database"
+  queries_instructions: &queries_inst "queries available from the Trip Database"
+  qrels_instructions: &qrels_inst "qrels available from the Trip Database"
+  scoreddocs_instructions: &scoreddocs_inst "scoreddocs available from the Trip Database"
+  docpairs_instructions: &docpairs_inst "docpairs available from the Trip Database"
+  bibtex: &bibtex |
+    @misc{rekabsaz2021tripclick,
+      title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+      author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+      year={2021},
+      eprint={2103.07901},
+      archivePrefix={arXiv},
+      primaryClass={cs.IR}
+    }
+
+train:
+  desc: '
+<p>
+Training subset of <a class="ds-ref">tripclick</a>, including all queries from
+<a class="ds-ref">tripclick/train/head</a>, <a class="ds-ref">tripclick/train/torso</a>,
+and <a class="ds-ref">tripclick/train/tail</a>.
+</p>
+<p>
+The dataset provides docpairs in a full text format; we map this text back to the query and doc IDs.
+A small number of docpairs could not be mapped back, so they are skipped.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+train/head:
+  desc: '
+<p>
+The most frequent queries in the train set. This represents 20% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+train/head/dctr:
+  desc: '
+<p>
+The same as <a class="ds-ref">tripclick/train/head</a>, but using qrels scaled by the Document
+Click Through Rate (DCTR).
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+train/torso:
+  desc: '
+<p>
+The moderately frequent queries in the train set. This represents 30% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+train/tail:
+  desc: '
+<p>
+The least frequent queries in the train set. This represents 50% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+val:
+  desc: '
+<p>
+Validation subset of <a class="ds-ref">tripclick</a>, including all queries from
+<a class="ds-ref">tripclick/val/head</a>, <a class="ds-ref">tripclick/val/torso</a>,
+and <a class="ds-ref">tripclick/val/tail</a>.
+</p>
+<p>
+The scoreddocs are the official BM25 results from Anserini.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+val/head:
+  desc: '
+<p>
+The most frequent queries in the validation set. This represents 20% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+val/head/dctr:
+  desc: '
+<p>
+The same as <a class="ds-ref">tripclick/val/head</a>, but using qrels scaled by the Document
+Click Through Rate (DCTR).
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+val/torso:
+  desc: '
+<p>
+The moderately frequent queries in the validation set. This represents 30% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+val/tail:
+  desc: '
+<p>
+The least frequent queries in the validation set. This represents 50% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+test:
+  desc: '
+<p>
+Test subset of <a class="ds-ref">tripclick</a>, including all queries from
+<a class="ds-ref">tripclick/test/head</a>, <a class="ds-ref">tripclick/test/torso</a>,
+and <a class="ds-ref">tripclick/test/tail</a>.
+</p>
+<p>
+The scoreddocs are the official BM25 results from Anserini.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+test/head:
+  desc: '
+<p>
+The most frequent queries in the test set. This represents 20% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+test/torso:
+  desc: '
+<p>
+The moderately frequent queries in the test set. This represents 30% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
+
+test/tail:
+  desc: '
+<p>
+The least frequent queries in the test set. This represents 50% of the search engine traffic.
+</p>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  scoreddocs_instructions: *scoreddocs_inst
+  docpairs_instructions: *docpairs_inst
+  bibtex: *bibtex
