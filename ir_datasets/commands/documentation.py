@@ -808,9 +808,9 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^{top}/" --output "{top}.json"
+        python -m test.downloads --filter "^{top}/" --output "{top}.json" --randdelay 60
     - name: Upload artifact
-      if: always() # don't skip if the Test step fails (defaults the whole purpose)
+      if: always() # don't skip if the Test step fails (defeats the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "{top}.json"

@@ -1,4 +1,5 @@
 import io
+import random
 import sys
 import json
 import time
@@ -32,6 +33,7 @@ def tmp_environ(**kwargs):
 class TestDownloads(unittest.TestCase):
     dlc_filter = None
     output_path = None
+    rand_delay = None # useful for being nice to servers when running tests by adding a random delay between tests
     output_data = []
 
     def test_downloads(self):
@@ -49,6 +51,9 @@ class TestDownloads(unittest.TestCase):
             if 'url' in data and 'expected_md5' in data:
                 if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False):
                     with self.subTest(prefix):
+                        if self.rand_delay is not None:
+                            # sleep in range of [0.5, 1.5] * rand_delay seconds
+                            time.sleep(random.uniform(self.rand_delay * 0.5, self.rand_delay * 1.5))
                         record = {
                             'name': prefix,
                             'url': data['url'],
@@ -96,5 +101,9 @@ if __name__ == '__main__':
     for i, arg in enumerate(argv):
         if arg == '--output':
             TestDownloads.output_path = argv[i+1]
+            argv = argv[:i] + argv[i+2:]
+    for i, arg in enumerate(argv):
+        if arg == '--randdelay':
+            TestDownloads.rand_delay = argv[i+1]
             argv = argv[:i] + argv[i+2:]
     unittest.main(argv=argv)
