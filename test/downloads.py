@@ -104,6 +104,6 @@ if __name__ == '__main__':
             argv = argv[:i] + argv[i+2:]
     for i, arg in enumerate(argv):
         if arg == '--randdelay':
-            TestDownloads.rand_delay = argv[i+1]
+            TestDownloads.rand_delay = float(argv[i+1])
             argv = argv[:i] + argv[i+2:]
     unittest.main(argv=argv)
