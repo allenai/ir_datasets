@@ -51,7 +51,7 @@ class TrecPrel(NamedTuple):
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()
 
 class TrecDocs(BaseDocs):
-    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None, lang=None):
+    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None, lang=None, expected_file_count=None):
         self._docs_dlc = docs_dlc
         self._encoding = encoding
         self._path_globs = path_globs
@@ -68,6 +68,9 @@ class TrecDocs(BaseDocs):
         }[parser]
         self._docs_namespace = namespace
         self._docs_lang = lang
+        self._expected_file_count = expected_file_count
+        if expected_file_count is not None:
+            assert self._path_globs is not None, "expected_file_count only supported with path_globs"
 
     def docs_path(self):
         return self._docs_dlc.path()
@@ -76,13 +79,19 @@ class TrecDocs(BaseDocs):
     def docs_iter(self):
         if Path(self._docs_dlc.path()).is_dir():
             if self._path_globs:
+                file_count = 0
                 for glob in sorted(self._path_globs):
                     for path in sorted(Path(self._docs_dlc.path()).glob(glob)):
+                        file_count += 1
                         yield from self._docs_iter(path)
+                if self._expected_file_count is not None:
+                    if file_count != self._expected_file_count:
+                        raise RuntimeError(f'found {file_count} files of the expected {self._expected_file_count} matching the following: {self._path_globs} under {self._docs_dlc.path()}. Make sure that directories are linked such that these globs match the correct number of files.')
             else:
                 yield from self._docs_iter(self._docs_dlc.path())
         else:
             if self._path_globs:
+                file_count = 0
                 # tarfile, find globs, open in streaming mode (r|)
                 with self._docs_dlc.stream() as stream:
                     with tarfile.open(fileobj=stream, mode='r|gz') as tarf:
@@ -92,6 +101,10 @@ class TrecDocs(BaseDocs):
                                 if block.name.endswith('.gz'):
                                     file = gzip.GzipFile(fileobj=file)
                                 yield from self._parser(file)
+                                file_count += 1
+                if self._expected_file_count is not None:
+                    if file_count != self._expected_file_count:
+                        raise RuntimeError(f'found {file_count} files of the expected {self._expected_file_count} matching the following: {self._path_globs} under {self._docs_dlc.path()}. Make sure that directories are linked such that these globs match the correct number of files.')
             else:
                 with self._docs_dlc.stream() as f:
                     yield from self._parser(f)
