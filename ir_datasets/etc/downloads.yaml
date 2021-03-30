@@ -995,6 +995,14 @@ nyt:
 To proceed, symlink the source file here: {path}'
     expected_md5: '67a1bcf200c448424bf0fba34cef17b0'
     cache_path: nyt.tgz
+  trec-core-2017/queries:
+    url: 'https://trec.nist.gov/data/core/core_nist.txt'
+    expected_md5: '821f8eaaf11ae3ce9657d1442749480a'
+    cache_path: 'trec-core-2017/queries.txt'
+  trec-core-2017/qrels:
+    url: 'https://trec.nist.gov/data/core/qrels.txt'
+    expected_md5: '8cf8dcafba6557e5ee62a28a44b0314d'
+    cache_path: 'trec-core-2017/qrels'
 
 
 pmc:

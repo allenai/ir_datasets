@@ -3,10 +3,12 @@ _:
   desc: '
   <p>
 The New York Times Annotated Corpus. Consists of articles published between 1987 and 2007. It is
-useful for transferring relevance signals in cases where training data is in short supply.
+used in TREC Core 2017 and it is also useful for transferring relevance signals in cases where
+training data is in short supply.
 </p>
 <p>
-Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>.
+Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>. The source
+collection can be downloaded from the LDC.
 </p>'
   docs_instructions: &inst "docs available from LDC"
   bibtex: |
@@ -20,11 +22,34 @@ Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>
       year={2008}
     }
 
-train:
+trec-core-2017:
   desc: '
 <p>
-Training set (without held-out <a class="ds-ref">nyt/valid</a>) for transferring relevance signals
-from NYT corpus.
+The TREC Common Core 2017 benchmark.
+</p>
+<p>
+Note that this dataset only contains the 50 queries assessed by NIST.
+</p>
+<ul>
+<li>Queries: TREC-style (keyword, description, narrative)</li>
+<li>Relevance: Deeply-annotated</li>
+<li><a href="https://github.com/trec-core/2017">Shared Task Website</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-CC.pdf">Shared Task Paper</a></li>
+<ul>'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{allan2017treccore,
+      author = {James Allan and Donna Harman and Evangelos Kanoulas and Dan Li and Christophe Van Gysel and Ellen Vorhees},
+      title = {TREC 2017 Common Core Track Overview},
+      booktitle = {TREC},
+      year = {2017}
+    }
+
+wksup:
+  desc: '
+<p>
+Weak supervision from the NYT document collection. This is useful for transferring relevance signals
+in cases where training data is in short supply.
 </p>
 <ul>
 <li>Queries: Headlines</li>
@@ -32,6 +57,8 @@ from NYT corpus.
 <li><a href="https://arxiv.org/abs/1707.00189">Paper</a></li>
 <ul>'
   docs_instructions: *inst
+  queries_instructions: &inst_queries "queries available from LDC"
+  qrels_instructions: &inst_qrels "qrels available from LDC"
   bibtex: |
     @inproceedings{macavaney:sigir2019-nyt,
       author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
@@ -40,10 +67,36 @@ from NYT corpus.
       year = {2019}
     }
 
-valid:
+wksup/train:
+  desc: '
+<p>
+Training set (without held-out <a class="ds-ref">nyt/wksup/valid</a>) for transferring relevance signals
+from NYT corpus.
+</p>'
+  docs_instructions: *inst
+  queries_instructions: *inst_queries
+  qrels_instructions: *inst_qrels
+  bibtex: |
+    @inproceedings{macavaney:sigir2019-nyt,
+      author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
+      title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
+      booktitle = {SIGIR},
+      year = {2019}
+    }
+
+wksup/valid:
   desc: '
 <p>
 Held-out validation set for transferring relevance signals from NYT corpus (see 
-<a class="ds-ref">nyt/train</a>).
+<a class="ds-ref">nyt/wksup/train</a>).
 </p>'
   docs_instructions: *inst
+  queries_instructions: *inst_queries
+  qrels_instructions: *inst_qrels
+  bibtex: |
+    @inproceedings{macavaney:sigir2019-nyt,
+      author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
+      title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
+      booktitle = {SIGIR},
+      year = {2019}
+    }
