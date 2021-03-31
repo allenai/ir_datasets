@@ -24,4 +24,5 @@ from . import trec_spanish
 from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
+from . import wapo
 from . import wikir

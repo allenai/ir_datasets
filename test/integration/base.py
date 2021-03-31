@@ -218,13 +218,16 @@ self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_name
         # needed because python <= 3.6 doesn't expose re.Pattern class
         Pattern = re.Pattern if hasattr(re, 'Pattern') else type(re.compile(''))
         self.assertEqual(type(a).__name__, type(b).__name__)
-        self.assertEqual(type(a)._fields, type(b)._fields)
+        if hasattr(type(a), '_fields') or hasattr(type(b), '_fields'):
+            self.assertEqual(type(a)._fields, type(b)._fields)
         for v_a, v_b in zip(a, b):
             # support compiled regex for matching (e.g., for long documents)
             if isinstance(v_b, Pattern):
                 self.assertRegex(v_a, v_b)
             elif isinstance(v_a, Pattern):
                 self.assertRegex(v_b, v_a)
+            elif isinstance(v_a, tuple) and isinstance(v_b, tuple):
+                self._assert_namedtuple(v_a, v_b)
             else:
                 self.assertEqual(v_a, v_b)
 

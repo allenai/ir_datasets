@@ -1,0 +1,39 @@
+_:
+  pretty_name: 'Washington Post'
+  desc: '
+<p>
+The Washington Post collection.
+</p>'
+  docs_instructions: &inst "docs available from NIST"
+
+v2:
+  desc: '
+<p>
+Version 2 of the Washington Post collection, consisting of articles published between 2012-2017.
+</p>
+<p>
+The collection is obtained from NIST by requesting it from NIST <a href="https://trec.nist.gov/data/wapost/">here</a>.
+</p>
+<p>
+body contains all body text in plain text format, including paragrphs and multi-media captions.
+body_paras_html contains only source paragraphs and contains HTML markup.
+body_media contains images, videos, tweets, and galeries, along with a link to the content
+and a textual caption.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/wapost/">Collection Website</a></li>
+</ul>
+'
+  docs_instructions: *inst
+
+v2/trec-core-2018:
+  desc: '
+<p>
+The TREC Common Core 2018 benchmark.
+</p>
+<ul>
+<li>Queries: TREC-style (keyword, description, narrative)</li>
+<li>Relevance: Deeply-annotated</li>
+<li><a href="https://github.com/trec-core/2018">Shared Task Website</a></li>
+<ul>'
+  docs_instructions: *inst

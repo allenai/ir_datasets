@@ -1233,6 +1233,24 @@ vaswani:
     cache_path: 'npl.tar.gz'
 
 
+wapo:
+  v2:
+    instructions: 'The Washington Post collection can be requested here:
+<https://trec.nist.gov/data/wapost/>
+
+Once completed, place/link the source file: {path}'
+    expected_md5: 'ce6e93f6ce9959b72c2de4f8d12089ab'
+    cache_path: 'WashingtonPost.v2.tar.gz'
+  trec-core-2018/queries:
+    url: 'https://trec.nist.gov/data/core/topics2018.txt'
+    expected_md5: '1b11276f0e1badd68347884664816654'
+    cache_path: 'trec-core-2018/queries.txt'
+  trec-core-2018/qrels:
+    url: 'https://trec.nist.gov/data/core/qrels2018.txt'
+    expected_md5: '7a982cd110f8bb30da4141f0f639f2e1'
+    cache_path: 'trec-core-2018/qrels'
+
+
 wikir:
   en1k:
     url: 'https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1'

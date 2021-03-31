@@ -171,6 +171,7 @@ Available datasets include:
  - [TripClick](https://ir-datasets.com/tripclick.html)
  - [Tweets 2013 (Internet Archive)](https://ir-datasets.com/tweets2013-ia.html)
  - [Vaswani](https://ir-datasets.com/vaswani.html)
+ - [Washingotn Post](https://ir-datasets.com/wapo.html)
  - [WikIR](https://ir-datasets.com/wikir.html)
 
 There are "subsets" under each dataset. For instance, `clueweb12/b13/trec-misinfo-2019` provides the
