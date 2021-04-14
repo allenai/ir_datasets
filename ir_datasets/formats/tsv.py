@@ -9,6 +9,7 @@ from ir_datasets.indices import PickleLz4FullStore
 class FileLineIter:
     def __init__(self, dlc, start=None, stop=None, step=1):
         self.dlc = dlc
+        self.stream_idx = 0
         self.stream = None
         self.pos = -1
         self.start = start
@@ -21,13 +22,24 @@ class FileLineIter:
             self.ctxt.close()
             raise StopIteration
         if self.stream is None:
-            self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc.stream()))
+            if isinstance(self.dlc, list):
+                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()))
+            else:
+                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc.stream()))
         while self.pos < self.start:
             line = self.stream.readline()
             if line != '\n':
                 self.pos += 1
         if line == '':
-            raise StopIteration
+            if isinstance(self.dlc, list):
+                self.stream_idx += 1
+                if self.stream_idx < len(self.dlc):
+                    self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()))
+                    line = self.stream.readline()
+                else:
+                    raise StopIteration()
+            else:
+                raise StopIteration()
         self.start += self.step
         return line
 

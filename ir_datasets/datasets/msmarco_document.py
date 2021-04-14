@@ -1,9 +1,9 @@
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.util import DownloadConfig, GzipExtract, Lazy
-from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
+from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy
+from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS
+from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
 
 _logger = ir_datasets.log.easy()
 
@@ -111,6 +111,53 @@ def _init():
         FilteredQueries(subsets['trec-dl-2020'].queries_handler(), dl20_judged),
         FilteredScoredDocs(subsets['trec-dl-2020'].scoreddocs_handler(), dl20_judged),
         subsets['trec-dl-2020'],
+    )
+
+    # DL-Hard
+    hard_qids = Lazy(lambda: DL_HARD_QIDS)
+    dl_hard_base_queries = TsvQueries([
+            Cache(GzipExtract(dlc['trec-dl-2019/queries']), base_path/'trec-dl-2019/queries.tsv'),
+            Cache(GzipExtract(dlc['trec-dl-2020/queries']), base_path/'trec-dl-2020/queries.tsv')], namespace='msmarco', lang='en')
+    subsets['trec-dl-hard'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        TrecQrels(dlc['trec-dl-hard/qrels'], TREC_DL_QRELS_DEFS),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['1'])
+    subsets['trec-dl-hard/fold1'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard/fold1')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['2'])
+    subsets['trec-dl-hard/fold2'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard/fold2')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['3'])
+    subsets['trec-dl-hard/fold3'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard/fold3')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['4'])
+    subsets['trec-dl-hard/fold4'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard/fold4')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['5'])
+    subsets['trec-dl-hard/fold5'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard/fold5')
     )
 
     ir_datasets.registry.register('msmarco-document', Dataset(collection, documentation("_")))

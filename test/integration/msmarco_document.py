@@ -59,6 +59,31 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             9: GenericQuery('1105792', 'define: geon'),
             44: GenericQuery('997622', 'where is the show shameless filmed'),
         })
+        self._test_queries('msmarco-document/trec-dl-hard', count=49, items={
+            0: GenericQuery('1108939', 'what slows down the flow of blood'),
+            9: GenericQuery('451602', "medicare's definition of mechanical ventilation"),
+            48: GenericQuery('88495', 'causes of stroke?'),
+        })
+        self._test_queries('msmarco-document/trec-dl-hard/fold1', count=10, items={
+            0: GenericQuery('966413', 'where are the benefits of cinnamon as a supplement?'),
+            9: GenericQuery('883915', 'what other brain proteins can cause dementia'),
+        })
+        self._test_queries('msmarco-document/trec-dl-hard/fold2', count=10, items={
+            0: GenericQuery('588587', 'what causes heavy metal toxins in your body'),
+            9: GenericQuery('794429', 'what is sculpture shape space'),
+        })
+        self._test_queries('msmarco-document/trec-dl-hard/fold3', count=10, items={
+            0: GenericQuery('1108939', 'what slows down the flow of blood'),
+            9: GenericQuery('86606', 'causes of gas in large intestine'),
+        })
+        self._test_queries('msmarco-document/trec-dl-hard/fold4', count=10, items={
+            0: GenericQuery('1108100', 'what type of movement do bacteria exhibit?'),
+            9: GenericQuery('88495', 'causes of stroke?'),
+        })
+        self._test_queries('msmarco-document/trec-dl-hard/fold5', count=9, items={
+            0: GenericQuery('190044', 'foods to detox liver naturally'),
+            8: GenericQuery('877809', 'what metal are hip replacements made of'),
+        })
 
 
     def test_msmarco_document_qrels(self):
@@ -96,6 +121,36 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             0: TrecQrel('42255', 'D1006124', 0, '0'),
             9: TrecQrel('42255', 'D1168483', 0, '0'),
             9097: TrecQrel('1136962', 'D96742', 0, '0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard', count=8540, items={
+            0: TrecQrel('1117817', 'D192188', 0, 'Q0'),
+            9: TrecQrel('801118', 'D579461', 1, 'Q0'),
+            8539: TrecQrel('315637', 'D655701', 3, 'Q0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard/fold1', count=1557, items={
+            0: TrecQrel('1056204', 'D1891649', 1, 'Q0'),
+            9: TrecQrel('182539', 'D1085644', 2, 'Q0'),
+            1556: TrecQrel('883915', 'D36260', 3, 'Q0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard/fold2', count=1345, items={
+            0: TrecQrel('794429', 'D170919', 2, 'Q0'),
+            9: TrecQrel('443396', 'D1014847', 1, 'Q0'),
+            1344: TrecQrel('19335', 'D975548', 1, 'Q0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard/fold3', count=474, items={
+            0: TrecQrel('1117817', 'D192188', 0, 'Q0'),
+            9: TrecQrel('177604', 'D3421416', 3, 'Q0'),
+            473: TrecQrel('315637', 'D655701', 3, 'Q0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard/fold4', count=1054, items={
+            0: TrecQrel('801118', 'D1416399', 1, 'Q0'),
+            9: TrecQrel('87452', 'D1000458', 2, 'Q0'),
+            1053: TrecQrel('1108100', 'D3318246', 3, 'Q0'),
+        })
+        self._test_qrels('msmarco-document/trec-dl-hard/fold5', count=4110, items={
+            0: TrecQrel('489204', 'D1002646', 0, 'Q0'),
+            9: TrecQrel('489204', 'D1025842', 1, 'Q0'),
+            4109: TrecQrel('190044', 'D910793', 3, 'Q0'),
         })
 
     def test_msmarco_document_scoreddocs(self):

@@ -905,6 +905,10 @@ msmarco-document:
     url: 'https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-top100.gz'
     expected_md5:  '118d0884638fd405e111157a124ef0b2'
     cache_path: 'orcas/ms.run.gz'
+  trec-dl-hard/qrels:
+    url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels'
+    expected_md5: 'da2366aef13c11b352fe4587d96ee9f8'
+    cache_path: 'trec-dl-hard/qrels'
 
 
 msmarco-passage:
@@ -962,6 +966,10 @@ msmarco-passage:
     url: 'https://trec.nist.gov/data/deep/2020qrels-pass.txt'
     expected_md5:  '0355ccee7509ac0463e8278186cdd8d1'
     cache_path: 'trec-dl-2020/qrels'
+  trec-dl-hard/qrels:
+    url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-passage.qrels'
+    expected_md5: '32c5f50e7be95927342eafd84e9a6d2c'
+    cache_path: 'trec-dl-hard/qrels'
 
 
 

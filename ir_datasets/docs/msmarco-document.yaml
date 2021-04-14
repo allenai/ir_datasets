@@ -130,3 +130,49 @@ trec-dl-2020/judged:
 Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels.
 </p>
 '
+
+trec-dl-hard:
+  desc: '
+<p>
+A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>.
+</p>
+<ul>
+<li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li>
+<li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li>
+</ul>
+'
+
+trec-dl-hard/fold1:
+  desc: '
+<p>
+Fold 1 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
+</p>
+'
+
+trec-dl-hard/fold2:
+  desc: '
+<p>
+Fold 2 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
+</p>
+'
+
+trec-dl-hard/fold3:
+  desc: '
+<p>
+Fold 3 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
+</p>
+'
+
+trec-dl-hard/fold4:
+  desc: '
+<p>
+Fold 4 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
+</p>
+'
+
+trec-dl-hard/fold5:
+  desc: '
+<p>
+Fold 5 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
+</p>
+'

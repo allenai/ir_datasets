@@ -25,6 +25,16 @@ TREC_DL_QRELS_DEFS = {
 
 SPLIT200_QIDS = {'484694', '836399', '683975', '428803', '1035062', '723895', '267447', '325379', '582244', '148817', '44209', '1180950', '424238', '683835', '701002', '1076878', '289809', '161771', '807419', '530982', '600298', '33974', '673484', '1039805', '610697', '465983', '171424', '1143723', '811440', '230149', '23861', '96621', '266814', '48946', '906755', '1142254', '813639', '302427', '1183962', '889417', '252956', '245327', '822507', '627304', '835624', '1147010', '818560', '1054229', '598875', '725206', '811871', '454136', '47069', '390042', '982640', '1174500', '816213', '1011280', '368335', '674542', '839790', '270629', '777692', '906062', '543764', '829102', '417947', '318166', '84031', '45682', '1160562', '626816', '181315', '451331', '337653', '156190', '365221', '117722', '908661', '611484', '144656', '728947', '350999', '812153', '149680', '648435', '274580', '867810', '101999', '890661', '17316', '763438', '685333', '210018', '600923', '1143316', '445800', '951737', '1155651', '304696', '958626', '1043094', '798480', '548097', '828870', '241538', '337392', '594253', '1047678', '237264', '538851', '126690', '979598', '707766', '1160366', '123055', '499590', '866943', '18892', '93927', '456604', '560884', '370753', '424562', '912736', '155244', '797512', '584995', '540814', '200926', '286184', '905213', '380420', '81305', '749773', '850038', '942745', '68689', '823104', '723061', '107110', '951412', '1157093', '218549', '929871', '728549', '30937', '910837', '622378', '1150980', '806991', '247142', '55840', '37575', '99395', '231236', '409162', '629357', '1158250', '686443', '1017755', '1024864', '1185054', '1170117', '267344', '971695', '503706', '981588', '709783', '147180', '309550', '315643', '836817', '14509', '56157', '490796', '743569', '695967', '1169364', '113187', '293255', '859268', '782494', '381815', '865665', '791137', '105299', '737381', '479590', '1162915', '655989', '292309', '948017', '1183237', '542489', '933450', '782052', '45084', '377501', '708154'}
 
+# from <https://github.com/grill-lab/DL-Hard/blob/main/dataset/folds.json> on 14 April 2021
+DL_HARD_QIDS_BYFOLD = {
+    "1": {'915593', '451602', '966413', '1056204', '182539', '655914', '67316', '883915', '1049519', '174463'},
+    "2": {'794429', '588587', '1114646', '537817', '1065636', '144862', '443396', '332593', '1103812', '19335'},
+    "3": {'177604', '1108939', '264403', '86606', '1133485', '1117817', '705609', '315637', '673670', '1105792'},
+    "4": {'801118', '507445', '87452', '88495', '554515', '166046', '730539', '1108100', '1109707', '1056416'},
+    "5": {'190044', '527433', '489204', '877809', '1106007', '47923', '1136769', '1112341', '1103153'},
+}
+DL_HARD_QIDS = set.union(*DL_HARD_QIDS_BYFOLD.values())
+
 
 # Converts "top1000" MS run files "QID DID QText DText" to "QID DID" to remove tons of redundant
 # storage with query and document files.
@@ -204,6 +214,53 @@ def _init():
         FilteredDocPairs(subsets['train'].docpairs_handler(), train_med),
         FilteredQrels(subsets['train'].qrels_handler(), train_med),
         subsets['train'],
+    )
+
+    # DL-Hard
+    hard_qids = Lazy(lambda: DL_HARD_QIDS)
+    dl_hard_base_queries = TsvQueries([
+            Cache(GzipExtract(dlc['trec-dl-2019/queries']), base_path/'trec-dl-2019/queries.tsv'),
+            Cache(GzipExtract(dlc['trec-dl-2020/queries']), base_path/'trec-dl-2020/queries.tsv')], namespace='msmarco', lang='en')
+    subsets['trec-dl-hard'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        TrecQrels(dlc['trec-dl-hard/qrels'], TREC_DL_QRELS_DEFS),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['1'])
+    subsets['trec-dl-hard/fold1'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['2'])
+    subsets['trec-dl-hard/fold2'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['3'])
+    subsets['trec-dl-hard/fold3'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['4'])
+    subsets['trec-dl-hard/fold4'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard')
+    )
+    hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['5'])
+    subsets['trec-dl-hard/fold5'] = Dataset(
+        collection,
+        FilteredQueries(dl_hard_base_queries, hard_qids),
+        FilteredQrels(subsets['trec-dl-hard'], hard_qids),
+        documentation('trec-dl-hard')
     )
 
     ir_datasets.registry.register('msmarco-passage', Dataset(collection, documentation('_')))
