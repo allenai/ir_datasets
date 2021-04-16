@@ -289,6 +289,7 @@ Install with pip:
 <li><a href="python.html">Python API Documentation</a></li>
 <li><a href="cli.html">CLI Documentation</a></li>
 <li><a href="downloads.html">Download Dashboard</a></li>
+<li><a href="https://github.com/allenai/ir_datasets/blob/master/examples/adding_datasets.ipynb">Adding new datasets</a></li>
 </ul>
 
 <h2 style="margin-bottom: 4px;">Dataset Index</h2>
