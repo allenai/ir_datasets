@@ -232,35 +232,35 @@ def _init():
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
-        documentation('trec-dl-hard')
+        documentation('trec-dl-hard/fold1')
     )
     hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['2'])
     subsets['trec-dl-hard/fold2'] = Dataset(
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
-        documentation('trec-dl-hard')
+        documentation('trec-dl-hard/fold2')
     )
     hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['3'])
     subsets['trec-dl-hard/fold3'] = Dataset(
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
-        documentation('trec-dl-hard')
+        documentation('trec-dl-hard/fold3')
     )
     hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['4'])
     subsets['trec-dl-hard/fold4'] = Dataset(
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
-        documentation('trec-dl-hard')
+        documentation('trec-dl-hard/fold4')
     )
     hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['5'])
     subsets['trec-dl-hard/fold5'] = Dataset(
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
-        documentation('trec-dl-hard')
+        documentation('trec-dl-hard/fold5')
     )
 
     ir_datasets.registry.register('msmarco-passage', Dataset(collection, documentation('_')))
