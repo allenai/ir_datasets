@@ -995,6 +995,284 @@ nfcorpus:
     cache_path: 'nfcorpus.tar.gz'
 
 
+natural-questions:
+  nq-dev-00:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-00.jsonl.gz'
+    expected_md5: '21df324e9d0725c7cbc5ec06a34b630b'
+    stream: True
+    skip_local: True
+  nq-dev-01:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-01.jsonl.gz'
+    expected_md5: '3de5cd9d66b705f3ef0462c9bcde1c4b'
+    stream: True
+    skip_local: True
+  nq-dev-02:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-02.jsonl.gz'
+    expected_md5: 'd7b6f2e7f296006ad2f3de291d5960ce'
+    stream: True
+    skip_local: True
+  nq-dev-03:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-03.jsonl.gz'
+    expected_md5: '0d93b1e520328c50e0f4582dc89023c7'
+    stream: True
+    skip_local: True
+  nq-dev-04:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-04.jsonl.gz'
+    expected_md5: 'cc27dc8fc0a2d2753e2ff60a7e6fb976'
+    stream: True
+    skip_local: True
+  nq-train-00:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-00.jsonl.gz'
+    expected_md5: '22c9c2954ea80ff33f9667a9b398c86c'
+    stream: True
+    skip_local: True
+  nq-train-01:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-01.jsonl.gz'
+    expected_md5: '2b76373340261ef019434235a2671a49'
+    stream: True
+    skip_local: True
+  nq-train-02:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-02.jsonl.gz'
+    expected_md5: '785f6ca88ba7f039240218d20644f121'
+    stream: True
+    skip_local: True
+  nq-train-03:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-03.jsonl.gz'
+    expected_md5: '4386753b84222234e12455cf99f116b9'
+    stream: True
+    skip_local: True
+  nq-train-04:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-04.jsonl.gz'
+    expected_md5: 'e02d403b1bacee5404f1db48fa3250d9'
+    stream: True
+    skip_local: True
+  nq-train-05:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-05.jsonl.gz'
+    expected_md5: '39c46c3b5ab81ba92766dcb796037fd4'
+    stream: True
+    skip_local: True
+  nq-train-06:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-06.jsonl.gz'
+    expected_md5: 'e2c8f7434a40cc3740be8e0597c0db78'
+    stream: True
+    skip_local: True
+  nq-train-07:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-07.jsonl.gz'
+    expected_md5: '3fc55e3e1ef3d834fed665840522e841'
+    stream: True
+    skip_local: True
+  nq-train-08:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-08.jsonl.gz'
+    expected_md5: '660990d45610d4d4f37fcd21965b183e'
+    stream: True
+    skip_local: True
+  nq-train-09:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-09.jsonl.gz'
+    expected_md5: 'f4335cb2b08d3166ef5fa007560d0f95'
+    stream: True
+    skip_local: True
+  nq-train-10:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-10.jsonl.gz'
+    expected_md5: '66c607ec3dae612422dd44a0a4ead32b'
+    stream: True
+    skip_local: True
+  nq-train-11:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-11.jsonl.gz'
+    expected_md5: 'a9b36187b8ccee70f461e8ae06109cb4'
+    stream: True
+    skip_local: True
+  nq-train-12:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-12.jsonl.gz'
+    expected_md5: 'feeec2103ce408899c721fc937dab83b'
+    stream: True
+    skip_local: True
+  nq-train-13:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-13.jsonl.gz'
+    expected_md5: '97f3068af15e6a0c1d107bfa6dc50f70'
+    stream: True
+    skip_local: True
+  nq-train-14:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-14.jsonl.gz'
+    expected_md5: 'c4ea6358f617fbb8f9e65760e88b2028'
+    stream: True
+    skip_local: True
+  nq-train-15:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-15.jsonl.gz'
+    expected_md5: 'e3bf5b86c977b41bce825d853fba8e3e'
+    stream: True
+    skip_local: True
+  nq-train-16:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-16.jsonl.gz'
+    expected_md5: '92abe032b4608bf35f08bcf8295eb1d3'
+    stream: True
+    skip_local: True
+  nq-train-17:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-17.jsonl.gz'
+    expected_md5: '2c3acddbce0f5221f24e9db4e1d7662a'
+    stream: True
+    skip_local: True
+  nq-train-18:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-18.jsonl.gz'
+    expected_md5: 'a301430662fb1f25a73359f521d1da47'
+    stream: True
+    skip_local: True
+  nq-train-19:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-19.jsonl.gz'
+    expected_md5: '9e0e96cca9e3594f885d8e6063cbd0c7'
+    stream: True
+    skip_local: True
+  nq-train-20:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-20.jsonl.gz'
+    expected_md5: '8747331d168160e013a0c81e0323491d'
+    stream: True
+    skip_local: True
+  nq-train-21:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-21.jsonl.gz'
+    expected_md5: '6de9b253b4a069fdfdc2bc80ddc5c2d1'
+    stream: True
+    skip_local: True
+  nq-train-22:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-22.jsonl.gz'
+    expected_md5: '7c24574f4bc21ad764b9b8b208b97d64'
+    stream: True
+    skip_local: True
+  nq-train-23:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-23.jsonl.gz'
+    expected_md5: 'eadf9189bd9557943f468323e00de2ff'
+    stream: True
+    skip_local: True
+  nq-train-24:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-24.jsonl.gz'
+    expected_md5: 'f063dec5a57b2701e9318d3c93ad6486'
+    stream: True
+    skip_local: True
+  nq-train-25:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-25.jsonl.gz'
+    expected_md5: '7db0ce87b997e3d47d4b511924384ec8'
+    stream: True
+    skip_local: True
+  nq-train-26:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-26.jsonl.gz'
+    expected_md5: 'c50093c839d33956d38548e2b44e0c50'
+    stream: True
+    skip_local: True
+  nq-train-27:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-27.jsonl.gz'
+    expected_md5: '355e504e2a4b5bb6eb05d6976c93517f'
+    stream: True
+    skip_local: True
+  nq-train-28:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-28.jsonl.gz'
+    expected_md5: 'f4da07e59b33d1ce1dc006363f961e9d'
+    stream: True
+    skip_local: True
+  nq-train-29:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-29.jsonl.gz'
+    expected_md5: '519c4a0349495253ec9f4211c85f8fcb'
+    stream: True
+    skip_local: True
+  nq-train-30:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-30.jsonl.gz'
+    expected_md5: '96cde3a58f5e9bad4c94510aab7a5db5'
+    stream: True
+    skip_local: True
+  nq-train-31:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-31.jsonl.gz'
+    expected_md5: '26955c79974141f71cb4729908f9c45b'
+    stream: True
+    skip_local: True
+  nq-train-32:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-32.jsonl.gz'
+    expected_md5: '91e33f14401adafb3d5cd2c13239531b'
+    stream: True
+    skip_local: True
+  nq-train-33:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-33.jsonl.gz'
+    expected_md5: 'd28bf97bf7d433e64d7c016a477e97a1'
+    stream: True
+    skip_local: True
+  nq-train-34:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-34.jsonl.gz'
+    expected_md5: 'c98c6aa8578b04524a8e7f035aaa4bbe'
+    stream: True
+    skip_local: True
+  nq-train-35:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-35.jsonl.gz'
+    expected_md5: '3e2b5b6280158f9ba312158a57360512'
+    stream: True
+    skip_local: True
+  nq-train-36:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-36.jsonl.gz'
+    expected_md5: 'b6114ca6d3804c045b6abd4b6e6a9f52'
+    stream: True
+    skip_local: True
+  nq-train-37:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-37.jsonl.gz'
+    expected_md5: '89d1c93f2425c232882118fc3af92b9d'
+    stream: True
+    skip_local: True
+  nq-train-38:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-38.jsonl.gz'
+    expected_md5: '785d092d65bb3d815eb5a8027d764c13'
+    stream: True
+    skip_local: True
+  nq-train-39:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-39.jsonl.gz'
+    expected_md5: 'c58b54591127ef977f9b900c05ec44ec'
+    stream: True
+    skip_local: True
+  nq-train-40:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-40.jsonl.gz'
+    expected_md5: 'cd14b09b6fc9ae8a7bda558b020459aa'
+    stream: True
+    skip_local: True
+  nq-train-41:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-41.jsonl.gz'
+    expected_md5: 'bb7415c0fd7cdc52ef8381c44194f2da'
+    stream: True
+    skip_local: True
+  nq-train-42:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-42.jsonl.gz'
+    expected_md5: '08f384e34c0358ab4e9d72ac18eeb4f2'
+    stream: True
+    skip_local: True
+  nq-train-43:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-43.jsonl.gz'
+    expected_md5: 'c148652671404f7b2796327db542ef90'
+    stream: True
+    skip_local: True
+  nq-train-44:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-44.jsonl.gz'
+    expected_md5: '245074693e3863f099ad92a2e7e07d88'
+    stream: True
+    skip_local: True
+  nq-train-45:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-45.jsonl.gz'
+    expected_md5: '8e6d4a0895f5c87ede7cbbd0fe8ec0bb'
+    stream: True
+    skip_local: True
+  nq-train-46:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-46.jsonl.gz'
+    expected_md5: '6b965fb2b2fdc3772da641aac10a7c7e'
+    stream: True
+    skip_local: True
+  nq-train-47:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-47.jsonl.gz'
+    expected_md5: '79ac295cf818f1dcdf676772b3863232'
+    stream: True
+    skip_local: True
+  nq-train-48:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-48.jsonl.gz'
+    expected_md5: '545bb6edf1290d61fd42b13125b5bf2a'
+    stream: True
+    skip_local: True
+  nq-train-49:
+    url: 'https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-49.jsonl.gz'
+    expected_md5: 'd6aaa8706626d4b6210e4f9bc6ffe265'
+    stream: True
+    skip_local: True
+
+
 nyt:
   source:
     instructions: 'The New York Times Annotated Corpus. It is available from the LDC via:
