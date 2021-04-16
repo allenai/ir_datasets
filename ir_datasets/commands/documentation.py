@@ -245,7 +245,7 @@ def generate_data_format(cls):
 def generate_index(out_dir, version):
     with page_template('index.html', out_dir, version, title='Catalog') as out:
         if version == 'master':
-            install = 'git+https://github.com/allenai/ir_datasets.git@master'
+            install = '--upgrade git+https://github.com/allenai/ir_datasets.git'
         elif version.startswith('v'):
             install = f'ir_datasets=={version[1:]}'
         elif not version:
@@ -253,17 +253,22 @@ def generate_index(out_dir, version):
         else:
             raise RuntimeError(f'unknown version {version}')
         index = []
+        jump = []
         for name in sorted(ir_datasets.registry):
             dataset = ir_datasets.registry[name]
             parent = name.split('/')[0]
             if parent != name:
                 ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a>'
                 tbody = ''
+                row_id = ''
             else:
                 ds_name = f'<a style="font-weight: bold;" href="{parent}.html"><kbd>{parent}</kbd></a></li>'
                 tbody = '</tbody><tbody>'
-            index.append(f'{tbody}<tr><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
+                row_id = f' id="{parent}"'
+                jump.append(f'<option value="{parent}">{parent}</option>')
+            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
         index = '\n'.join(index)
+        jump = '\n'.join(jump)
         out.write(f'''
 <p>
 <code>ir_datasets</code> provides a common interface to many IR ranking datasets.
@@ -286,7 +291,11 @@ Install with pip:
 <li><a href="downloads.html">Download Dashboard</a></li>
 </ul>
 
-<h2>Dataset Index</h2>
+<h2 style="margin-bottom: 4px;">Dataset Index</h2>
+<select id="DatasetJump">
+<option value="">Jump to Dataset...</option>
+{jump}
+</select>
 <p>✅: Data available as automatic download</p>
 <p>⚠️: Data available from a third party</p>
 <table>
@@ -1196,6 +1205,13 @@ $(document).ready(function() {
         $('[id="'+$target.attr('target')+'"]').show();
         tabs.find('.tab.selected').removeClass('selected');
         $target.addClass('selected');
+    });
+    $('#DatasetJump').change(function () {
+        var targetRow = $('#DatasetJump').val();
+        if (targetRow) {
+            $('#' + targetRow)[0].scrollIntoView();
+            $('#DatasetJump').val(''); // clear selection
+        }
     });
 });
 function toEmoji(test) {

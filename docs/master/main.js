@@ -50,6 +50,13 @@ $(document).ready(function() {
         tabs.find('.tab.selected').removeClass('selected');
         $target.addClass('selected');
     });
+    $('#DatasetJump').change(function () {
+        var targetRow = $('#DatasetJump').val();
+        if (targetRow) {
+            $('#' + targetRow)[0].scrollIntoView();
+            $('#DatasetJump').val(''); // clear selection
+        }
+    });
 });
 function toEmoji(test) {
     if (test) {
