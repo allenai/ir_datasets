@@ -1,0 +1,75 @@
+_:
+  pretty_name: 'DPR Wiki100'
+  desc: '
+<p>
+A wikipedia dump from 20 December, 2018, split into passages of 100 words. Used in experiments
+in the DPR paper (and other subsequent works) for retrieval experiments over Q&amp;A collections.
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2004.04906.pdf">Dataset paper</a></li>
+<li><a href="https://github.com/facebookresearch/DPR">Repository</a></li>
+</ul>
+'
+  bibtex: |
+    @misc{karpukhin2020dense,
+      title={Dense Passage Retrieval for Open-Domain Question Answering},
+      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+      year={2020},
+      eprint={2004.04906},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+    }
+
+natural-questions/train:
+  desc: '
+<p>
+Training subset from the Natural Questions Q&amp;A collection. This differs from the
+<a class="ds-ref">natural-questions/train</a> dataset in that it uses the full Wikipedia dump
+and additional filtering (described in the DPR paper) was applied.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">natural-questions</a></li>
+</ul>
+'
+  bibtex: |
+    @misc{karpukhin2020dense,
+      title={Dense Passage Retrieval for Open-Domain Question Answering},
+      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+      year={2020},
+      eprint={2004.04906},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+    }
+    @article{Kwiatkowski2019NQ,
+      title = {Natural Questions: a Benchmark for Question Answering Research},
+      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+      year = {2019},
+      journal = {TACL}
+    }
+
+natural-questions/dev:
+  desc: '
+<p>
+Training subset from the Natural Questions Q&amp;A collection. This differs from the
+<a class="ds-ref">natural-questions/dev</a> dataset in that it uses the full Wikipedia dump
+and additional filtering (described in the DPR paper) was applied.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">natural-questions</a></li>
+</ul>
+'
+  bibtex: |
+    @misc{karpukhin2020dense,
+      title={Dense Passage Retrieval for Open-Domain Question Answering},
+      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+      year={2020},
+      eprint={2004.04906},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+    }
+    @article{Kwiatkowski2019NQ,
+      title = {Natural Questions: a Benchmark for Question Answering Research},
+      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+      year = {2019},
+      journal = {TACL}
+    }

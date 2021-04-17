@@ -6,6 +6,7 @@ from . import clinicaltrials
 from . import clueweb09
 from . import clueweb12
 from . import cord19
+from . import dpr_w100
 from . import codesearchnet
 from . import gov
 from . import gov2

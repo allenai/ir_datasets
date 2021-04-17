@@ -6,12 +6,18 @@ Google Natural Questions is a Q&amp;A dataset containing long, short, and Yes/No
 Wikipedia. <kbd>ir_datasets</kbd> frames this around an ad-hoc ranking setting by building a collection
 of all long answer candidate passages. However, short and Yes/No annotations are also available
 in the <kbd>qrels</kbd>, as are the passages presented to the annotators (via <kbd>scoreddocs</kbd>).
+</p>
+<p>
 Importantly, the document collection does not consist of all Wikipedia passages, but instead a union of
 the candidate passages presented to the annotators (akin to MS MARCO).
+<a class="ds-ref">dph-w100/natural-questions/train</a> and <a class="ds-ref">dph-w100/natural-questions/dev</a>
+contain a filtered set of the questions in this dataset and a full Wikipedia dump (which is a more
+realistic retrieval setting).
 </p>
 <ul>
-<li><a href="https://ai.google.com/research/NaturalQuestions">Dataset website</p></li>
-<li><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/1f7b46b5378d757553d3e92ead36bda2e4254244.pdf">Dataset paper</p></li>
+<li><a href="https://ai.google.com/research/NaturalQuestions">Dataset website</a></li>
+<li><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/1f7b46b5378d757553d3e92ead36bda2e4254244.pdf">Dataset paper</a></li>
+<li>See also: <a class="ds-ref">dph-w100</a></li>
 </ul>
 '
   bibtex: &nq |

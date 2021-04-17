@@ -368,6 +368,20 @@ cord19:
     expected_md5: '6111c00ac9adac774f5b51e4f9a2a25b'
     cache_path: 'trec-covid/round5/qrels'
 
+dpr-w100:
+  docs:
+    url: 'https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz'
+    expected_md5: '612fe66e0b6b41ee28f806140226c563'
+    cache_path: 'docs.tsv.gz'
+  nq-train:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz'
+    expected_md5: 'a1c927b5adae71388eb064329387709f'
+    cache_path: 'nq-train.json.gz'
+  nq-dev:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz'
+    expected_md5: '2640483dbe0df7ae29c6da419c551a80'
+    cache_path: 'nq-dev.json.gz'
+
 gov:
   docs:
     instructions: 'GOV is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>

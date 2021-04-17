@@ -111,11 +111,12 @@ class TsvIter:
 
 
 class _TsvBase:
-    def __init__(self, dlc, cls, datatype):
+    def __init__(self, dlc, cls, datatype, skip_first_line=False):
         super().__init__()
         self._dlc = dlc
         self._cls = cls
         self._datatype = datatype
+        self._skip_first_line = skip_first_line
 
     def _path(self):
         return self._dlc.path()
@@ -124,12 +125,13 @@ class _TsvBase:
         stop = None
         if hasattr(self, f'{self._datatype}_count'):
             stop = getattr(self, f'{self._datatype}_count')()
-        return TsvIter(self._cls, FileLineIter(self._dlc, start=0, stop=stop, step=1))
+        start = 1 if self._skip_first_line else 0
+        return TsvIter(self._cls, FileLineIter(self._dlc, start=start, stop=stop, step=1))
 
 
 class TsvDocs(_TsvBase, BaseDocs):
-    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None):
-        super().__init__(docs_dlc, doc_cls, "docs")
+    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, skip_first_line=False):
+        super().__init__(docs_dlc, doc_cls, "docs", skip_first_line=skip_first_line)
         self._doc_store_index_fields = doc_store_index_fields
         self._docs_namespace = namespace
         self._docs_lang = lang
