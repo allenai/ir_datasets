@@ -43,6 +43,69 @@ To proceed, symlink the source file here: {path}'
     cache_path: 'trec-robust-2005/qrels'
 
 
+beir:
+  msmarco:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip'
+    expected_md5: '444067daf65d982533ea17ebd59501e4'
+    cache_path: 'msmarco/source.zip'
+  trec-covid:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/trec-covid.zip'
+    expected_md5: 'ce62140cb23feb9becf6270d0d1fe6d1'
+    cache_path: 'trec-covid/source.zip'
+  nfcorpus:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip'
+    expected_md5: 'a89dba18a62ef92f7d323ec890a0d38d'
+    cache_path: 'nfcorpus/source.zip'
+  nq:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nq.zip'
+    expected_md5: 'd4d3d2e48787a744b6f6e691ff534307'
+    cache_path: 'nq/source.zip'
+  hotpotqa:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/hotpotqa.zip'
+    expected_md5: 'f412724f78b0d91183a0e86805e16114'
+    cache_path: 'hotpotqa/source.zip'
+  fiqa:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fiqa.zip'
+    expected_md5: '17918ed23cd04fb15047f73e6c3bd9d9'
+    cache_path: 'fiqa/source.zip'
+  arguana:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/arguana.zip'
+    expected_md5: '8ad3e3c2a5867cdced806d6503f29b99'
+    cache_path: 'arguana/source.zip'
+  webis-touche2020:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip'
+    expected_md5: 'd6550a3e0f725dc4aae83253ae63547f'
+    cache_path: 'webis-touche2020/source.zip'
+  cqadupstack:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/cqadupstack.zip'
+    expected_md5: '4e41456d7df8ee7760a7f866133bda78'
+    cache_path: 'cqadupstack/source.zip'
+  quora:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/quora.zip'
+    expected_md5: '18fb154900ba42a600f84b839c173167'
+    cache_path: 'quora/source.zip'
+  dbpedia-entity:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/dbpedia-entity.zip'
+    expected_md5: 'c2a39eb420a3164af735795df012ac2c'
+    cache_path: 'dbpedia-entity/source.zip'
+  scidocs:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip'
+    expected_md5: '38121350fc3a4d2f48850f6aff52e4a9'
+    cache_path: 'scidocs/source.zip'
+  fever:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fever.zip'
+    expected_md5: '88591ef8eb2913126d0c93ecbde6285f'
+    cache_path: 'fever/source.zip'
+  climate-fever:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/climate-fever.zip'
+    expected_md5: '8b66f0a9126c521bae2bde127b4dc99d'
+    cache_path: 'climate-fever/source.zip'
+  scifact:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip'
+    expected_md5: '5f7d1de60b170fc8027bb7898e2efca1'
+    cache_path: 'scifact/source.zip'
+
+
 car:
   docs:
     url: 'http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz'
