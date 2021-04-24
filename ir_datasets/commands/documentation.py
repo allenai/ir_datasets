@@ -220,7 +220,7 @@ def generate_data_format(cls):
                 args.append(' ...')
             else:
                 args.append(generate_data_format(arg))
-        if cls._name in ('Tuple', 'List'):
+        if cls._name in ('Tuple', 'List', 'Dict'):
             return f'<span class="kwd">{cls._name}</span>[{",".join(args)}]'
     elif tuple in cls.__bases__ and hasattr(cls, '_fields'):
         fields = []

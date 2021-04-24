@@ -1,6 +1,7 @@
 from . import base
 from . import antique
 from . import aquaint
+from . import beir
 from . import car
 from . import clinicaltrials
 from . import clueweb09

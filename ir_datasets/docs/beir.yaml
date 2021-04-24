@@ -1,0 +1,526 @@
+_:
+  pretty_name: 'Beir (benchmark suite)'
+  desc: '
+<p>
+Beir is a suite of benchmarks to test zero-shot transfer.
+</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2104.08663">Paper</a></li>
+<li><a href="https://github.com/UKPLab/beir/blob/main/README.md">GitHub</a></li>
+</ul>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+arguana:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+climate-fever:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/train:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/train:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/train:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco:
+  desc: '
+<p>
+A version of the MS MARCO passage ranking dataset.
+</p>
+</p>
+<p>
+Note that this version differs from <a class="ds-ref">msmarco-passage</a>, in that it does not correct
+the encoding problems in the source documents.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/dev:
+  desc: '
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/dev</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/test:
+  desc: '
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/trec-dl-2019</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Craswell2020OverviewOT,
+      title={Overview of the TREC 2019 deep learning track},
+      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
+      booktitle={TREC 2019},
+      year={2019}
+    }
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/train:
+  desc: '
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/train</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/train:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nq:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora/dev:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scidocs:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact/test:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact/train:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+trec-covid:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+webis-touche2020:
+  desc: '
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+

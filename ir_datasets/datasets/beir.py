@@ -2,8 +2,8 @@ import json
 import codecs
 from typing import NamedTuple, Dict
 import ir_datasets
-from ir_datasets.util import ZipExtract, Cache
-from ir_datasets.datasets.base import Dataset, YamlDocumentation
+from ir_datasets.util import ZipExtract, Cache, Lazy
+from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
 from ir_datasets.formats import BaseQueries, BaseDocs, BaseQrels, TrecQrel
 from ir_datasets.indices import PickleLz4FullStore
 
@@ -123,20 +123,59 @@ def _init():
 
     subsets = {}
 
-    for ds in ['msmarco', 'trec-covid', 'nfcorpus', 'nq', 'hotpotqa', 'fiqa', 'arguana', 'webis-touche2020', 'quora', 'dbpedia-entity', 'scidocs', 'fever', 'climate-fever', 'scifact']:
+    benchmarks = {
+        'msmarco': ['train', 'dev', 'test'],
+        'trec-covid': ['test'],
+        'nfcorpus': ['train', 'dev', 'test'],
+        'nq': ['test'],
+        'hotpotqa': ['train', 'dev', 'test'],
+        'fiqa': ['train', 'dev', 'test'],
+        'arguana': ['test'],
+        'webis-touche2020': ['test'],
+        'quora': ['dev', 'test'],
+        'dbpedia-entity': ['dev', 'test'],
+        'scidocs': ['test'],
+        'fever': ['train', 'dev', 'test'],
+        'climate-fever': ['test'],
+        'scifact': ['train', 'test'],
+    }
+
+    for ds, qrels in benchmarks.items():
         dlc_ds = dlc[ds]
-        subsets[ds] = Dataset(
-            BeirDocs(ds, ZipExtract(dlc_ds, f'{ds}/corpus.jsonl')),
-            BeirQueries(ds, Cache(ZipExtract(dlc_ds, f'{ds}/queries.jsonl'), base_path/ds/'queries.json')),
-            TrecQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/test.tsv'), base_path/ds/'qrels'), qrels_defs={}),
-            documentation(ds)
-        )
+        docs = BeirDocs(ds, ZipExtract(dlc_ds, f'{ds}/corpus.jsonl'))
+        queries = BeirQueries(ds, Cache(ZipExtract(dlc_ds, f'{ds}/queries.jsonl'), base_path/ds/'queries.json'))
+        if len(qrels) == 1:
+            subsets[ds] = Dataset(
+                docs,
+                queries,
+                TrecQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrels[0]}.tsv'), base_path/ds/f'{qrels[0]}.qrels'), qrels_defs={}),
+                documentation(ds)
+            )
+        else:
+            subsets[ds] = Dataset(
+                docs,
+                queries,
+                documentation(ds)
+            )
+            for qrel in qrels:
+                subset_qrels = TrecQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrel}.tsv'), base_path/ds/f'{qrel}.qrels'), qrels_defs={})
+                subset_qids = qid_filter(subset_qrels)
+                subsets[f'{ds}/{qrel}'] = Dataset(
+                    docs,
+                    FilteredQueries(queries, subset_qids, mode='include'),
+                    subset_qrels,
+                    documentation(f'{ds}/{qrel}')
+                )
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
         ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
 
     return base, subsets
+
+def qid_filter(subset_qrels):
+    # NOTE: this must be in a separate function otherwise there can be weird lambda binding problems
+    return Lazy(lambda: {q.query_id for q in subset_qrels.qrels_iter()})
 
 
 base, subsets = _init()
