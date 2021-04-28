@@ -444,6 +444,14 @@ dpr-w100:
     url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz'
     expected_md5: '2640483dbe0df7ae29c6da419c551a80'
     cache_path: 'nq-dev.json.gz'
+  tqa-train:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-train.json.gz'
+    expected_md5: '5aa4d3577c91425cd20e239ed89a252b'
+    cache_path: 'tqa-train.json.gz'
+  tqa-dev:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-dev.json.gz'
+    expected_md5: 'd559dffe09acfe5a6370adea55b8abf2'
+    cache_path: 'tqa-dev.json.gz'
 
 gov:
   docs:
