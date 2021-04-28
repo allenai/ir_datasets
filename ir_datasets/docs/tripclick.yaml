@@ -39,7 +39,7 @@ request the "TripClick Training Package for Deep Learning Models".
 To use this dataset, you need a copy of the source files, provided by the Trip Database.
 </p>
 <p>
-A copy of the source files can be requrested through the procedure detailed
+A copy of the source files can be requested through the procedure detailed
 <a href="https://tripdatabase.github.io/tripclick/#getting-the-data">here</a>. Documents, queries,
 and qrels require the "TripClick IR Benchmark"; for scoreddocs and docpairs, you will also need to
 request the "TripClick Training Package for Deep Learning Models".

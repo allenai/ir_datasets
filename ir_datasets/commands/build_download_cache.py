@@ -49,7 +49,7 @@ def _build_cache(data, dir, prefix=''):
             except KeyboardInterrupt:
                 sys.exit(1)
         except Exception as ex:
-            _logger.warning(f'error: {ex}')
+            _logger.warn(f'error: {ex}')
     elif 'instructions' in data:
         pass
     else:

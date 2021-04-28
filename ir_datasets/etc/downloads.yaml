@@ -30,6 +30,8 @@ aquaint:
     instructions: 'The AQUAINT corpus is available from the LDC via:
 <https://catalog.ldc.upenn.edu/LDC2002T31>.
 
+More details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: 'ac623257d8dd35326c9d500d5f6834e5'
     cache_path: 'aquaint_comp_LDC2002T31.tgz'
@@ -1363,6 +1365,8 @@ nyt:
     instructions: 'The New York Times Annotated Corpus. It is available from the LDC via:
 <https://catalog.ldc.upenn.edu/LDC2008T19>.
 
+More details about the procedure can be found here: <https://ir-datasets.com/nyt.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: '67a1bcf200c448424bf0fba34cef17b0'
     cache_path: nyt.tgz
@@ -1452,6 +1456,8 @@ trec-arabic:
     instructions: 'The dataset is based on the Arabic Newswire corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2001T55>
 
+More details about the procedure can be found here: <https://ir-datasets.com/trec-arabic.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: "b17f34a51dca8d19fae66c338c9ed73a"
     cache_path: 'corpus.tgz'
@@ -1478,6 +1484,8 @@ trec-mandarin:
     instructions: 'The dataset is based on the TREC Mandarin corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2000T52>
 
+More details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: "a847fa029a1356b8f396aa642c449e38"
     cache_path: 'corpus.tgz'
@@ -1503,6 +1511,8 @@ trec-spanish:
   docs:
     instructions: 'The dataset is based on the TREC Spanish corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2000T51>
+
+More details about the procedure can be found here: <https://ir-datasets.com/trec-spanish.html#DataAccess>.
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "4b8583c03149cf0c06c090fd230b33c6"

@@ -19,6 +19,24 @@ Associated Press Worldstream News Service.
       url={https://catalog.ldc.upenn.edu/LDC2002T31},
       publisher={Linguistic Data Consortium}
     }
+  data_access: '
+<p>
+To use this dataset, you need a copy of the source corpus, provided by the the
+Linguistic Data Consortium. The specific resource needed
+is <a href="https://catalog.ldc.upenn.edu/LDC2002T31">LDC2002T31</a>.
+</p>
+<p>
+Many organizations already have a subscription to the LDC, so access to the collection
+can be as easy as confirming the data usage agreement and downloading the corpus. Check
+with your library for access details.
+</p>
+<p>
+The source file is: <kbd>aquaint_comp_LDC2002T31.tgz</kbd>.
+</p>
+<p>
+ir_datasets expects this file to be copied/linked in <kbd>~/.ir_datasets/aquaint/</kbd>.
+</p>
+'
 
 trec-robust-2005:
   desc: '
