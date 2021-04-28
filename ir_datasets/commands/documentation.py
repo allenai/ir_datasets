@@ -1148,6 +1148,11 @@ details {
     margin: 3px 0;
 }
 
+#Downloads {
+    min-height: 21px;
+    margin: 8px 0;
+}
+
 .screen-small-show {
     display: none;
 }
