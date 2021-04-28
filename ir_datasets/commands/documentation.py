@@ -271,7 +271,7 @@ def generate_index(out_dir, version):
             dataset = ir_datasets.registry[name]
             parent = name.split('/')[0]
             if parent != name:
-                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a>'
+                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix"><span class="screen-small-hide">{parent}</span><span class="screen-small-show">&hellip;</span></span>{name[len(parent):]}</kbd></a>'
                 tbody = ''
                 row_id = ''
             else:
@@ -1148,7 +1148,11 @@ details {
     margin: 3px 0;
 }
 
-@media screen and (max-width: 420px){
+.screen-small-show {
+    display: none;
+}
+
+@media screen and (max-width: 500px){
   .page {
     padding: 6px;
     margin: 0;
@@ -1168,6 +1172,9 @@ details {
   }
   .screen-small-hide {
     display: none;
+  }
+  .screen-small-show {
+    display: inherit;
   }
   .banner {
     margin-top: -6px;

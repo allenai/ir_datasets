@@ -302,7 +302,11 @@ details {
     margin: 3px 0;
 }
 
-@media screen and (max-width: 420px){
+.screen-small-show {
+    display: none;
+}
+
+@media screen and (max-width: 500px){
   .page {
     padding: 6px;
     margin: 0;
@@ -322,6 +326,9 @@ details {
   }
   .screen-small-hide {
     display: none;
+  }
+  .screen-small-show {
+    display: inherit;
   }
   .banner {
     margin-top: -6px;
