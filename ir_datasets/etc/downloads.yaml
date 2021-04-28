@@ -1627,6 +1627,8 @@ wapo:
     instructions: 'The Washington Post collection can be requested here:
 <https://trec.nist.gov/data/wapost/>
 
+More details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.
+
 Once completed, place/link the source file: {path}'
     expected_md5: 'ce6e93f6ce9959b72c2de4f8d12089ab'
     cache_path: 'WashingtonPost.v2.tar.gz'
