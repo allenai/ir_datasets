@@ -1566,7 +1566,9 @@ trec-robust04:
   docs:
     instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the
 copyrighted nature of the  documents, this collection is for research use only, which requires
-agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
+agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
+
+More details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.
 
 Once completed, place the uncompressed source here: {path}
 
