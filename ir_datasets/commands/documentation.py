@@ -57,6 +57,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
     dataset = ir_datasets.registry[top_level]
     documentation = dataset.documentation() if hasattr(dataset, 'documentation') else {}
     with page_template(f'{top_level}.html', out_dir, version, title=documentation.get('pretty_name', top_level), source=f'datasets/{top_level.replace("-", "_")}.py') as out:
+        data_access_section = generate_data_access_section(documentation)
         index = '\n'.join(f'<li><a href="#{name}"><kbd><span class="prefix">{top_level}</span>{name[len(top_level):]}</kbd></a></li>' for name, ds in sub_datasets)
         out.write(f'''
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
@@ -66,7 +67,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
 </ol>
 <div id="Downloads">
 </div>
-<hr />
+{data_access_section}<hr />
 <div class="dataset" id="{top_level}">
 <h3><kbd class="select"><span class="str">"{top_level}"</kdb></h3>
 {generate_dataset(dataset, top_level)}
@@ -209,6 +210,18 @@ bibtex:
             out.write('</div>')
         out.seek(0)
         return out.read()
+
+
+def generate_data_access_section(documentation):
+    if 'data_access' not in documentation:
+        return ''
+    return f'''
+<div id="DataAccess">
+<h3>Data Access Information</h3>
+{documentation["data_access"]}
+</div>
+'''
+
 
 def generate_data_format(cls):
     if cls in (str, int, float, bytes):
@@ -1121,6 +1134,18 @@ h4 {
 
 details {
     margin: 8px 0;
+}
+
+#DataAccess {
+    border: 1px solid #91b6ca;
+    margin: 8px;
+    padding: 6px;
+    background-color: #eff8fc;
+    border-radius: 4px;
+}
+
+#DataAccess h3 {
+    margin: 3px 0;
 }
 
 @media screen and (max-width: 420px){

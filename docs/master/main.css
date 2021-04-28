@@ -290,6 +290,18 @@ details {
     margin: 8px 0;
 }
 
+#DataAccess {
+    border: 1px solid #91b6ca;
+    margin: 8px;
+    padding: 6px;
+    background-color: #eff8fc;
+    border-radius: 4px;
+}
+
+#DataAccess h3 {
+    margin: 3px 0;
+}
+
 @media screen and (max-width: 420px){
   .page {
     padding: 6px;
