@@ -11,6 +11,7 @@ _logger = ir_datasets.log.easy()
 class Dataset:
     def __init__(self, *constituents):
         self._constituents = constituents
+        self._beta_apis = {}
 
     def __getstate__(self):
         return self._constituents
@@ -19,6 +20,26 @@ class Dataset:
         self._constituents = state
 
     def __getattr__(self, attr):
+        if attr == 'docs' and self.has_docs():
+            if 'docs' not in self._beta_apis:
+                self._beta_apis['docs'] = _BetaPythonApiDocs(self.docs_handler())
+            return self._beta_apis['docs']
+        if attr == 'queries' and self.has_queries():
+            if 'queries' not in self._beta_apis:
+                self._beta_apis['queries'] = _BetaPythonApiQueries(self.queries_handler())
+            return self._beta_apis['queries']
+        if attr == 'qrels' and self.has_qrels():
+            if 'qrels' not in self._beta_apis:
+                self._beta_apis['qrels'] = _BetaPythonApiQrels(self.qrels_handler())
+            return self._beta_apis['qrels']
+        if attr == 'scoreddocs' and self.has_scoreddocs():
+            if 'scoreddocs' not in self._beta_apis:
+                self._beta_apis['scoreddocs'] = _BetaPythonApiScoreddocs(self.scoreddocs_handler())
+            return self._beta_apis['scoreddocs']
+        if attr == 'docpairs' and self.has_docpairs():
+            if 'docpairs' not in self._beta_apis:
+                self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self.docpairs_handler())
+            return self._beta_apis['docpairs']
         for cons in self._constituents:
             if hasattr(cons, attr):
                 return getattr(cons, attr)
@@ -59,6 +80,125 @@ class Dataset:
 
     def has_docpairs(self):
         return hasattr(self, 'docpairs_handler')
+
+
+class _BetaPythonApiDocs:
+    def __init__(self, handler):
+        self._handler = handler
+        self._docstore = None
+        self.type = handler.docs_cls()
+        self.lang = handler.docs_lang()
+
+    def __iter__(self):
+        return self._handler.docs_iter()
+
+    def __len__(self):
+        return self._handler.docs_count()
+
+    def __getitem__(self, key):
+        return self._handler.docs_iter()[key]
+
+    def __repr__(self):
+        return f'BetaPythonApiDocs({repr(self._handler)})'
+
+    def lookup(self, doc_ids):
+        if self._docstore is None:
+            self._docstore = self._handler.docs_store()
+        if isinstance(doc_ids, str):
+            return self._docstore.get(doc_ids)
+        return self._docstore.get_many(doc_ids)
+
+    def lookup_iter(self, doc_ids):
+        if self._docstore is None:
+            self._docstore = self._handler.docs_store()
+        if isinstance(doc_ids, str):
+            yield self._docstore.get(doc_ids)
+        else:
+            yield from self._docstore.get_many_iter(doc_ids)
+
+
+class _BetaPythonApiQueries:
+    def __init__(self, handler):
+        self._handler = handler
+        self._query_lookup = None
+        self.type = handler.queries_cls()
+        self.lang = handler.queries_lang()
+
+    def __iter__(self):
+        return self._handler.queries_iter()
+
+    def __repr__(self):
+        return f'BetaPythonApiQueries({repr(self._handler)})'
+
+    def __len__(self):
+        if self._query_lookup is None:
+            self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
+        return len(self._query_lookup)
+
+    def lookup(self, query_ids):
+        if self._query_lookup is None:
+            self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
+        if isinstance(query_ids, str):
+            return self._query_lookup[query_ids]
+        return {qid: self._query_lookup[qid] for qid in query_ids if qid in self._query_lookup}
+
+    def lookup_iter(self, query_ids):
+        if self._query_lookup is None:
+            self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
+        if isinstance(query_ids, str):
+            yield self._query_lookup[query_ids]
+        else:
+            for qid in query_ids:
+                if qid in self._query_lookup:
+                    yield self._query_lookup[qid]
+
+
+class _BetaPythonApiQrels:
+    def __init__(self, handler):
+        self._handler = handler
+        self.type = handler.qrels_cls()
+        self.defs = handler.qrels_defs()
+        self._qrels_dict = None
+
+    def __iter__(self):
+        return self._handler.qrels_iter()
+
+    def __repr__(self):
+        return f'BetaPythonApiQrels({repr(self._handler)})'
+
+    def asdict(self):
+        if self._qrels_dict is None:
+            self._qrels_dict = self._handler.qrels_dict()
+        return self._qrels_dict
+
+    def __len__(self):
+        if self._qrels_dict is None:
+            self._qrels_dict = self._handler.qrels_dict()
+        return sum(len(x) for x in self._qrels_dict.values())
+
+
+class _BetaPythonApiScoreddocs:
+    def __init__(self, handler):
+        self._handler = handler
+        self.type = handler.scoreddocs_cls()
+
+    def __iter__(self):
+        return self._handler.scoreddocs_iter()
+
+    def __repr__(self):
+        return f'BetaPythonApiScoreddocs({repr(self._handler)})'
+
+
+class _BetaPythonApiDocpairs:
+    def __init__(self, handler):
+        self._handler = handler
+        self.type = handler.docpairs_cls()
+
+    def __iter__(self):
+        return self._handler.docpairs_iter()
+
+    def __repr__(self):
+        return f'BetaPythonApiDocpairs({repr(self._handler)})'
 
 
 class FilteredQueries:
