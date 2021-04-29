@@ -985,3 +985,361 @@ Negative relevance judgments from the original dataset are replaced with 0.
       url = "https://arxiv.org/abs/2104.08663",
     }
 
+
+cqadupstack/android:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>android</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+cqadupstack/english:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>english</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/gaming:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>gaming</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/gis:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>gis</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/mathematica:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>mathematica</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/physics:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>physics</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/programmers:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>programmers</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/stats:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>stats</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/tex:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>tex</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/unix:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>unix</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/webmasters:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>webmasters</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/wordpress:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>wordpress</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }

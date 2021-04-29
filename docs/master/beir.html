@@ -23,6 +23,18 @@
 <li><a href="#beir"><kbd>beir</kbd></a></li>
 <li><a href="#beir/arguana"><kbd><span class="prefix">beir</span>/arguana</kbd></a></li>
 <li><a href="#beir/climate-fever"><kbd><span class="prefix">beir</span>/climate-fever</kbd></a></li>
+<li><a href="#beir/cqadupstack/android"><kbd><span class="prefix">beir</span>/cqadupstack/android</kbd></a></li>
+<li><a href="#beir/cqadupstack/english"><kbd><span class="prefix">beir</span>/cqadupstack/english</kbd></a></li>
+<li><a href="#beir/cqadupstack/gaming"><kbd><span class="prefix">beir</span>/cqadupstack/gaming</kbd></a></li>
+<li><a href="#beir/cqadupstack/gis"><kbd><span class="prefix">beir</span>/cqadupstack/gis</kbd></a></li>
+<li><a href="#beir/cqadupstack/mathematica"><kbd><span class="prefix">beir</span>/cqadupstack/mathematica</kbd></a></li>
+<li><a href="#beir/cqadupstack/physics"><kbd><span class="prefix">beir</span>/cqadupstack/physics</kbd></a></li>
+<li><a href="#beir/cqadupstack/programmers"><kbd><span class="prefix">beir</span>/cqadupstack/programmers</kbd></a></li>
+<li><a href="#beir/cqadupstack/stats"><kbd><span class="prefix">beir</span>/cqadupstack/stats</kbd></a></li>
+<li><a href="#beir/cqadupstack/tex"><kbd><span class="prefix">beir</span>/cqadupstack/tex</kbd></a></li>
+<li><a href="#beir/cqadupstack/unix"><kbd><span class="prefix">beir</span>/cqadupstack/unix</kbd></a></li>
+<li><a href="#beir/cqadupstack/webmasters"><kbd><span class="prefix">beir</span>/cqadupstack/webmasters</kbd></a></li>
+<li><a href="#beir/cqadupstack/wordpress"><kbd><span class="prefix">beir</span>/cqadupstack/wordpress</kbd></a></li>
 <li><a href="#beir/dbpedia-entity"><kbd><span class="prefix">beir</span>/dbpedia-entity</kbd></a></li>
 <li><a href="#beir/dbpedia-entity/dev"><kbd><span class="prefix">beir</span>/dbpedia-entity/dev</kbd></a></li>
 <li><a href="#beir/dbpedia-entity/test"><kbd><span class="prefix">beir</span>/dbpedia-entity/test</kbd></a></li>
@@ -260,6 +272,1122 @@ bibtex:
   journal={ArXiv},
   year={2020},
   volume={abs/2012.00614}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/android" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/android"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>android</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/android__queries">queries</a>
+<div id="beir/cqadupstack/android__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/android')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/android__docs">docs</a>
+<div id="beir/cqadupstack/android__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/android')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/android__qrels">qrels</a>
+<div id="beir/cqadupstack/android__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/android')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/android__citation">Citation</a>
+<div id="beir/cqadupstack/android__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/english" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/english"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>english</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/english__queries">queries</a>
+<div id="beir/cqadupstack/english__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/english')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/english__docs">docs</a>
+<div id="beir/cqadupstack/english__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/english')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/english__qrels">qrels</a>
+<div id="beir/cqadupstack/english__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/english')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/english__citation">Citation</a>
+<div id="beir/cqadupstack/english__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/gaming" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/gaming"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>gaming</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/gaming__queries">queries</a>
+<div id="beir/cqadupstack/gaming__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gaming')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gaming__docs">docs</a>
+<div id="beir/cqadupstack/gaming__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gaming')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gaming__qrels">qrels</a>
+<div id="beir/cqadupstack/gaming__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gaming')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gaming__citation">Citation</a>
+<div id="beir/cqadupstack/gaming__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/gis" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/gis"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>gis</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/gis__queries">queries</a>
+<div id="beir/cqadupstack/gis__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gis')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gis__docs">docs</a>
+<div id="beir/cqadupstack/gis__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gis')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gis__qrels">qrels</a>
+<div id="beir/cqadupstack/gis__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/gis')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/gis__citation">Citation</a>
+<div id="beir/cqadupstack/gis__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/mathematica" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/mathematica"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>mathematica</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/mathematica__queries">queries</a>
+<div id="beir/cqadupstack/mathematica__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/mathematica')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/mathematica__docs">docs</a>
+<div id="beir/cqadupstack/mathematica__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/mathematica')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/mathematica__qrels">qrels</a>
+<div id="beir/cqadupstack/mathematica__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/mathematica')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/mathematica__citation">Citation</a>
+<div id="beir/cqadupstack/mathematica__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/physics" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/physics"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>physics</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/physics__queries">queries</a>
+<div id="beir/cqadupstack/physics__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/physics')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/physics__docs">docs</a>
+<div id="beir/cqadupstack/physics__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/physics')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/physics__qrels">qrels</a>
+<div id="beir/cqadupstack/physics__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/physics')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/physics__citation">Citation</a>
+<div id="beir/cqadupstack/physics__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/programmers" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/programmers"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>programmers</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/programmers__queries">queries</a>
+<div id="beir/cqadupstack/programmers__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/programmers')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/programmers__docs">docs</a>
+<div id="beir/cqadupstack/programmers__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/programmers')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/programmers__qrels">qrels</a>
+<div id="beir/cqadupstack/programmers__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/programmers')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/programmers__citation">Citation</a>
+<div id="beir/cqadupstack/programmers__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/stats" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/stats"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>stats</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/stats__queries">queries</a>
+<div id="beir/cqadupstack/stats__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/stats')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/stats__docs">docs</a>
+<div id="beir/cqadupstack/stats__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/stats')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/stats__qrels">qrels</a>
+<div id="beir/cqadupstack/stats__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/stats')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/stats__citation">Citation</a>
+<div id="beir/cqadupstack/stats__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/tex" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/tex"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>tex</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/tex__queries">queries</a>
+<div id="beir/cqadupstack/tex__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/tex')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/tex__docs">docs</a>
+<div id="beir/cqadupstack/tex__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/tex')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/tex__qrels">qrels</a>
+<div id="beir/cqadupstack/tex__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/tex')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/tex__citation">Citation</a>
+<div id="beir/cqadupstack/tex__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/unix" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/unix"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>unix</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/unix__queries">queries</a>
+<div id="beir/cqadupstack/unix__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/unix')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/unix__docs">docs</a>
+<div id="beir/cqadupstack/unix__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/unix')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/unix__qrels">qrels</a>
+<div id="beir/cqadupstack/unix__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/unix')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/unix__citation">Citation</a>
+<div id="beir/cqadupstack/unix__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/webmasters" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/webmasters"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>webmasters</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/webmasters__queries">queries</a>
+<div id="beir/cqadupstack/webmasters__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/webmasters')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/webmasters__docs">docs</a>
+<div id="beir/cqadupstack/webmasters__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/webmasters')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/webmasters__qrels">qrels</a>
+<div id="beir/cqadupstack/webmasters__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/webmasters')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/webmasters__citation">Citation</a>
+<div id="beir/cqadupstack/webmasters__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
+}
+@article{thakur2021beir,
+  title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+  author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+  journal= "arXiv preprint arXiv:2104.08663",
+  month = "4",
+  year = "2021",
+  url = "https://arxiv.org/abs/2104.08663",
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="beir/cqadupstack/wordpress" data-parent="beir">
+<h3><kbd class="ds-name select"><span class="str">"beir/cqadupstack/wordpress"</kdb></h3>
+
+<div class="desc">
+ <p> A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the <kbd>wordpress</kbd> StackExchange subforum. </p> <ul> <li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li> <li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li> <li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="beir/cqadupstack/wordpress__queries">queries</a>
+<div id="beir/cqadupstack/wordpress__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">BeirQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/wordpress')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/wordpress__docs">docs</a>
+<div id="beir/cqadupstack/wordpress__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">BeirDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">metadata</span>: <span class="kwd">Dict</span>[<span class="kwd">str</span>,<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/wordpress')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title, metadata&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/wordpress__qrels">qrels</a>
+<div id="beir/cqadupstack/wordpress__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'beir/cqadupstack/wordpress')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="beir/cqadupstack/wordpress__citation">Citation</a>
+<div id="beir/cqadupstack/wordpress__citation" class="tab-content">
+bibtex:
+<cite class="select">@article{Hoogeveen2015CQADupStackAB,
+  title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+  author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+  journal={Proceedings of the 20th Australasian Document Computing Symposium},
+  year={2015}
 }
 @article{thakur2021beir,
   title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",

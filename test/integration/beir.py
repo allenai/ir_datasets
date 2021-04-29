@@ -88,6 +88,66 @@ class TestBeir(DatasetIntegrationTest):
             9: BeirDoc('fbe6ad2-2019-04-18T11:12:36Z-00001-000', re.compile('^Why is it that so\\-called christians, Because there is no such a thing as a christian, Have serious t.{315}, All you did was babble on and on and on\\. So in this sense, It was YOU that forfeited\\. Sheesh! Bye\\.$', flags=48), 'The closet dementia of the superior ego god complex, The bible and why you should not believe in god', {'stance': 'PRO', 'url': 'https://www.debate.org/debates/The-closet-dementia-of-the-superior-ego-god-complex-The-bible-and-why-you-should-not-believe-in-god/1/'}),
             382544: BeirDoc('671509c8-2019-04-17T11:47:34Z-00007-000', 'Charter schools are exploited most by affable students', 'Charter schools', {'stance': 'CON', 'url': 'http://www.debatepedia.org/en/index.php/Debate:_Charter_schools'}),
         })
+        self._test_docs('beir/cqadupstack/android', count=22998, items={
+            0: BeirDoc('51829', re.compile('^I want to send files to android tablet with a application from PC\\. \\- I can send files directly to ta.{188}m \\? \\- How can show my device as a external drive\\? my application that sent files written via Delphi\\.$', flags=48), 'How can show android tablet as a external storage to PC?', {'tags': ['usb-connection-mode']}),
+            9: BeirDoc('19394', re.compile('^I bought "Cut the Rope" on my Nexus One cellphone from the Android Market\\. When I open this game on .{51}it to be "Purchased"\\. How can I add my Google account to Kindle Fire\'s Amazon appstore account list\\?$', flags=48), 'How can I use an app purchased from the Market on a Kindle Fire?', {'tags': ['google-play-store', 'amazon-kindle-fire', 'accounts']}),
+            22997: BeirDoc('38348', re.compile('^With the growing number of Android devices in all sorts of different form factors \\(dev boards like R.{163}roid\\. For example, having the standard Linux build tools available would let me easily run a server\\.$', flags=48), 'Is there any easy way to get GNU build tools on Android? If not... why not?', {'tags': ['linux', 'development']}),
+        })
+        self._test_docs('beir/cqadupstack/english', count=40221, items={
+            0: BeirDoc('11547', re.compile('^An eponym is one way to eternal \\(if posthumous\\) fame\\. But is there a word meaning an eponym someone .{65}oycott_ , Mr Justice _Lynch_ , and Patrick _Hooligan_ would not appreciate their undying notoriety\\.\\)$', flags=48), 'Is there a word meaning "an unwanted eponym"?', {'tags': ['single-word-requests', 'eponyms']}),
+            9: BeirDoc('182056', re.compile("^In the following statement, which one is grammatically correct\\? > XYZ caterers \\*\\*is\\*\\* on to somethin.{76} be 'are' as caterers is plural\\. But it has been suggested that I might be wrong\\. What do you think\\?$", flags=48), '"XYZ caterers is.." or "XYZ caterers are.."?', {'tags': ['grammar', 'grammatical-number']}),
+            40220: BeirDoc('38346', re.compile('^A colleague and I were having a discussion as to the proper plural form of _abacus_\\. I believe the p.{183}rd that is part of the Arabic language\\. Any opinions or history to this matter would be appreciated\\.$', flags=48), 'Plural of "abacus"', {'tags': ['meaning', 'etymology', 'grammar', 'latin', 'roots']}),
+        })
+        self._test_docs('beir/cqadupstack/gaming', count=45301, items={
+            0: BeirDoc('11542', 'What\'s your Supreme Commander 2 build order. I don\'t just want "6 mass extractors, 2 power and a factory". List of building and units out to the second or third factory, please.', 'Supreme Commander 2 - Build Orders', {'tags': ['supreme-commander-2']}),
+            9: BeirDoc('19393', re.compile('^What are the benefits of an assault ship over an interceptor\\? I played some significant time ago, an.{176}So: a\\) What are the main uses of each b\\) Which would most benefit the style of play mentioned above\\?$', flags=48), 'Assault ships v. Interceptors', {'tags': ['eve-online']}),
+            45300: BeirDoc('38346', re.compile("^_But you can't have more than one companion\\._ \\*\\*Wrong\\.\\*\\* So I was taking that stupid dog, Barbas, to.{156}ne with the dragon they start attacking each other\\. How can I get them to stop and be friends again\\?$", flags=48), 'How do I make my companions friends?', {'tags': ['skyrim']}),
+        })
+        self._test_docs('beir/cqadupstack/gis', count=37637, items={
+            0: BeirDoc('73399', re.compile("^There is a satellite image it's size is 10 GB and I need to display this image using GeoServer and O.{211} response time using 32 GB satellite image\\. Please advice me how to achieve this\\? Thanks in advance\\.$", flags=48), 'Satellite image display with the help of GeoServer and OpenLayers', {'tags': ['openlayers', 'geoserver']}),
+            9: BeirDoc('5983', re.compile('^Has anyone succeeded in programmatically updating metadata in ArcGIS 10\\? Considering using Python/ar.{254} except where they are in conflict in which case the added elements overwrite the existing elements\\.$', flags=48), 'Programmatically edit/update metadata in ArcGIS 10', {'tags': ['arcobjects', 'arcgis-10.0', 'python', 'c#', 'metadata']}),
+            37636: BeirDoc('103092', re.compile('^Link: http://projects\\.nytimes\\.com/census/2010/explorer How can I also render that specific kind of m.{121} says its from Google at the bottom right, but then why does it look different from maps\\.google\\.com\\?$', flags=48), 'What map library does this census visualization use?', {'tags': ['gui']}),
+        })
+        self._test_docs('beir/cqadupstack/mathematica', count=16705, items={
+            0: BeirDoc('35237', re.compile("^I'm trying to use `Get` to load some pretty substantial packages from a custom menu in the _Mathemat.{320}` / `MenuItem`\\) that will remove that time constraint so that my command can be executed completely\\.$", flags=48), 'Time constraints on KernelExecute commands or MenuItems?', {'tags': ['front-end', 'menu']}),
+            9: BeirDoc('28990', re.compile("^I have multiple data sets, each of which is a 2D matrix\\. I want to construct a new 2D Matrix in whic.{139}ix2\\[i\\]\\[j\\] \\+ \\.\\.\\. \\+ MatrixN\\[i\\]\\[j\\]\\)      I can't quite figure out how to do it in _Mathematica_\\. Thanks$", flags=48), 'Averaging multiple 2D data sets', {'tags': ['list-manipulation', 'matrix']}),
+            16704: BeirDoc('34149', re.compile('^I want to add two matrices, the first one containing a 2D vector at each position the other one a li.{675},MB\\},2\\]      This works but is rather slow\\. Is there a faster and maybe more elegant way to do this\\?$', flags=48), 'MapThread Alternatives', {'tags': ['list-manipulation', 'performance-tuning', 'map']}),
+        })
+        self._test_docs('beir/cqadupstack/physics', count=38316, items={
+            0: BeirDoc('110557', re.compile("^Let's discuss about \\$SU\\(3\\)\\$\\. I understand that the most important representations \\(relevant to physi.{732} indices\\)\\. What is the general procedure to represent the generators in an arbitrary representation\\?$", flags=48), 'Representation of SU(3) generators', {'tags': ['particle-physics', 'group-representations']}),
+            9: BeirDoc('11546', re.compile('^I have a question about the relation: \\$\\\\exp\\(\\-i \\\\vec\\{\\\\sigma\\} \\\\cdot \\\\hat\\{n\\}\\\\phi/2\\) = \\\\cos\\(\\\\phi/2\\) \\- i .{152}alized for \\$\\\\hat\\{n\\}\\$ being an operator\\? If so how exactly would the expression be different\\? Thanks\\.$', flags=48), 'generalizing spin rotations', {'tags': ['quantum-mechanics', 'angular-momentum', 'spin']}),
+            38315: BeirDoc('38347', re.compile("^Let's say a box is moved by attaching a rope to it and pulling with an applied force at a certain an.{528}ined ramp, the above would not work\\. What do I need to do differently to solve this type of problem\\?$", flags=48), 'Overcoming Friction', {'tags': ['homework', 'newtonian-mechanics', 'friction']}),
+        })
+        self._test_docs('beir/cqadupstack/programmers', count=32176, items={
+            0: BeirDoc('228054', re.compile('^I am in the midst of writing a web application for work\\. Everything is from scratch\\. I have been a P.{739}s of speed\\. So, my question is as the title asks, is a client\\-side centric app substantially slower\\?$', flags=48), 'Are (mostly) client-side JavaScript web apps slower or less efficient?', {'tags': ['javascript', 'node.js', 'ajax', 'browser', 'client-side']}),
+            9: BeirDoc('127472', re.compile("^I've been developing web apps for a while now and it is standard practice in our team to use agile d.{317}words, when you develop ML and NLP algorithms as a job, do you use agile development in the process\\?$", flags=48), 'Is Agile Development used in Machine Learning and Natural Language Processing?', {'tags': ['agile', 'development-process', 'machine-learning', 'nlp']}),
+            32175: BeirDoc('213799', re.compile("^I'm developing a small system with two components: one polls data from an internet resource and tran.{762}he other writes\\? I started writing the code but was wondering if this is a misapplication of SQLite\\.$", flags=48), 'SQLite with two python processes accessing it: one reading, one writing', {'tags': ['web-development', 'python', 'sql', 'concurrency', 'sqlite']}),
+        })
+        self._test_docs('beir/cqadupstack/stats', count=42269, items={
+            0: BeirDoc('110556', re.compile("^I'm a beginner in statistics and R, sorry if this question may seem trivial\\. I've collected data mea.{5246}analysis do you suggest\\?   \\* If yes, how can I interpret the result I got \\(please, in simple terms\\)\\?$", flags=48), 'Is this a case for an ordinal logistic regression? Problems interpreting output', {'tags': ['r', 'regression', 'logistic', 'interpretation']}),
+            9: BeirDoc('89379', re.compile('^!\\[enter image description here\\]\\(http://i\\.stack\\.imgur\\.com/qmNwR\\.png\\) The image above represents a hyp.{574} know of a good way to do that\\? If there is a better place to ask this question, please let me know\\.$', flags=48), 'Need subspace partition algorithm, not necessarily a full classifier', {'tags': ['machine-learning', 'data-mining']}),
+            42268: BeirDoc('38346', re.compile('^Regression: Wage=b0\\+b1collegegrad, where collegegrad is a dummy variable\\. Suppose you want to estima.{221}nd thus get the true ratio, so the estimator is consistent\\. Am I correct, or am I missing something\\?$', flags=48), 'Consistency of estimator', {'tags': ['self-study', 'consistency']}),
+        })
+        self._test_docs('beir/cqadupstack/tex', count=68184, items={
+            0: BeirDoc('182565', re.compile('^I am using a pgfplots stacked bar to display the aggregated energy demand of a houshold and the asso.{1179}              \\\\legend\\{low price, high price\\}     \\\\end\\{axis\\}     \\\\end\\{tikzpicture\\}     \\\\end\\{document\\}$', flags=48), 'Adding horizontal lines to pgfplots bar', {'tags': ['pgfplots', 'bar-chart']}),
+            9: BeirDoc('61123', re.compile('^> \\*\\*Possible Duplicate:\\*\\*   >  Left and right subscript   >  Superscripts before a letter in math I .{128} the subscript O but to be on the left side\\? Is this possible which commands/packages I need to use\\?$', flags=48), 'How to change the side on which the superscript appears?', {'tags': ['superscripts']}),
+            68183: BeirDoc('103090', re.compile('^I appreciate it if you let me know the most elegant way to draw a crossed hierarchy such as the foll.{3}ngs:                   X        /\\\\       Y  Z       /\\\\/\\\\      p q  t      q has two parents Y and Z\\.$', flags=48), 'Crossed hierarchy', {'tags': ['tikz-pgf', 'horizontal-alignment', 'tikz-trees']}),
+        })
+        self._test_docs('beir/cqadupstack/unix', count=47382, items={
+            0: BeirDoc('110557', re.compile('^Is there a way to avoid ssh printing warning messages like this\\?               "@@@@@@@@@@@@@@@@@@@@.{196}the remote host identity has changed but I know it is fine and just want to get rid of this warning\\.$', flags=48), 'Force ssh to not to print warnings', {'tags': ['ssh']}),
+            9: BeirDoc('110550', 'What is the difference between the red5 versions RC1 and RC2 ? and what does RC mean?', 'What is the difference between red5 RC1 and RC2?', {'tags': ['broadcast']}),
+            47381: BeirDoc('38346', re.compile("^I've got my vacation coming in and thought I might use that for something useful\\. Essentially, I've .{2438}stuff used in enterprise security, I'm very ignorant about how things are actually used in practice\\.$", flags=48), 'Getting from proficient to expert', {'tags': ['shell', 'virtualization', 'storage', 'cluster']}),
+        })
+        self._test_docs('beir/cqadupstack/webmasters', count=17405, items={
+            0: BeirDoc('35236', re.compile("^I'm making a website for a small hotel in php\\. The hotel owners want a reservation system that uses .{290}d of buying with paypal\\. Is this possible\\? Does anyone know of an open php system that handles this\\?$", flags=48), 'Hotel Reservation Request Booking Paypal PHP', {'tags': ['php', 'looking-for-a-script', 'paypal']}),
+            9: BeirDoc('503', re.compile("^My website used to have sitelinks and now it doesn't\\. It's very possible that it's due to changing t.{219}\\.imgur\\.com/sBaDc\\.jpg\\) What are some things that I can do to improve my chances of getting sitelinks\\?$", flags=48), 'What are the most important things I need to do to encourage Google Sitelinks?', {'tags': ['seo', 'google', 'sitelinks']}),
+            17404: BeirDoc('38346', re.compile("^I'm looking for a keyword racking tracker tool for google\\. I have found a lot of them over the inter.{182}ord as my site has hundreds of pages\\. Any recommendation\\? Or do I have to set each URLs per keyword\\?$", flags=48), 'Keyword ranking tracker that works on a per-domain basis', {'tags': ['seo', 'keywords', 'tools', 'ranking', 'google-ranking']}),
+        })
+        self._test_docs('beir/cqadupstack/wordpress', count=48605, items={
+            0: BeirDoc('108998', re.compile("^In a shortcode context, is there any difference here\\?               array\\(             'slideshow' =.{32}         array\\(             'slideshow' => NULL,         \\),       Is there a best practice for that\\?$", flags=48), 'What is the difference between Null vs Empty (Zero Length) string?', {'tags': ['php', 'plugin-development', 'shortcode']}),
+            9: BeirDoc('19393', re.compile("^I'm using WP\\-Cufon for font replacements\\. It's adding extra cufon canvas out side of p tags in my pa.{127} it happening\\? How can I solve it\\? I'm having same kind of problem with all\\-in\\-one cufon plugin too\\.$", flags=48), 'WP-Cufon adding extra space in my paragraphs in Firefox and Chrome', {'tags': ['plugins', 'javascript', 'plugin-all-in-one-cufon']}),
+            48604: BeirDoc('38344', 'Is there a specific reason why we can find max-width:97.5% instead of 100% in common themes such as Twenty Eleven?', 'Why max-width:97.5% on content images?', {'tags': ['theme-development', 'css', 'maximized-width']}),
+        })
 
     def test_queries(self):
         self._test_queries('beir/arguana', count=1406, items={
@@ -265,6 +325,66 @@ class TestBeir(DatasetIntegrationTest):
             9: BeirQuery('10', 'Should any vaccines be required for children?', {'description': 'Anti-vaccination movements are on the rise, and so are pathogens like measles again. The freedom to not vaccinate paired with rampant disinformation may be a threat to society at large, and for children in particular. A users thus wonders, whether there are vaccines that should be mandatory.', 'narrative': 'Highly relevant arguments name one or more vaccines and reason about the (un)necessity to administer them to children. Relevant arguments talk about vaccination for children in general.'}),
             48: BeirQuery('50', 'Should everyone get a universal basic income?', {'description': 'Redistribution of wealth is a fundamental concept of many economies and social systems. A key component might be a universal basic income, however, a user wonders whether this truly would help.', 'narrative': 'Highly relevant arguments take a clear stance toward the universal basic income, giving clear premises. Relevant arguments offer only emotional arguments, or talk about minimum wages, mentioning universal basic income only in passing.'}),
         })
+        self._test_queries('beir/cqadupstack/android', count=699, items={
+            0: BeirQuery('11546', 'Android chroot ubuntu - is it possible to get ubuntu to recognise usb devices', {'tags': ['linux', 'development']}),
+            9: BeirQuery('20256', 'Does Android hide some amount of RAM from the User?', {'tags': ['linux', 'development']}),
+            698: BeirQuery('61210', 'Can you remotely download AndroidLost to your phone if your phone battery is dead?', {'tags': ['linux', 'development']}),
+        })
+        self._test_queries('beir/cqadupstack/english', count=1570, items={
+            0: BeirQuery('19399', 'Is "a wide range of features" singular or plural?', {'tags': ['meaning', 'etymology', 'grammar', 'latin', 'roots']}),
+            9: BeirQuery('21616', 'How are "yes" and "no" formatted in sentences?', {'tags': ['meaning', 'etymology', 'grammar', 'latin', 'roots']}),
+            1569: BeirQuery('76823', 'When to use articles and when not to?', {'tags': ['meaning', 'etymology', 'grammar', 'latin', 'roots']}),
+        })
+        self._test_queries('beir/cqadupstack/gaming', count=1595, items={
+            0: BeirQuery('82449', 'Can the trophy system protect me against bullets?', {'tags': ['skyrim']}),
+            9: BeirQuery('176686', 'Please instruct me on how to light myself on fire', {'tags': ['skyrim']}),
+            1594: BeirQuery('146551', 'How can I fix a corrupted solo world?', {'tags': ['skyrim']}),
+        })
+        self._test_queries('beir/cqadupstack/gis', count=885, items={
+            0: BeirQuery('52462', 'Calculating mean upslope aspect from each cell in DEM using Python?', {'tags': ['gui']}),
+            9: BeirQuery('12833', 'How to smooth a DEM?', {'tags': ['gui']}),
+            884: BeirQuery('104332', 'MODIS MOD13Q1 extract ndvi value', {'tags': ['gui']}),
+        })
+        self._test_queries('beir/cqadupstack/mathematica', count=804, items={
+            0: BeirQuery('35544', 'How to use Automorphisms[] on a graph?', {'tags': ['list-manipulation', 'performance-tuning', 'map']}),
+            9: BeirQuery('37414', 'limit calculation step by step', {'tags': ['list-manipulation', 'performance-tuning', 'map']}),
+            803: BeirQuery('25260', 'NDSolve with vector function', {'tags': ['list-manipulation', 'performance-tuning', 'map']}),
+        })
+        self._test_queries('beir/cqadupstack/physics', count=1039, items={
+            0: BeirQuery('110554', 'Magnetic field resistance material: are there any?', {'tags': ['homework', 'newtonian-mechanics', 'friction']}),
+            9: BeirQuery('12012', 'Is spacetime simply connected?', {'tags': ['homework', 'newtonian-mechanics', 'friction']}),
+            1038: BeirQuery('16082', 'How do I find the frictional force using a free body diagram?', {'tags': ['homework', 'newtonian-mechanics', 'friction']}),
+        })
+        self._test_queries('beir/cqadupstack/programmers', count=876, items={
+            0: BeirQuery('88392', 'Why is closure important for JavaScript?', {'tags': ['web-development', 'python', 'sql', 'concurrency', 'sqlite']}),
+            9: BeirQuery('210327', "What is the one or the few major changes from Java 6 to Java 7, couldn't JBoss do that already with Java 5?", {'tags': ['web-development', 'python', 'sql', 'concurrency', 'sqlite']}),
+            875: BeirQuery('133937', 'Methods to rewrite a program', {'tags': ['web-development', 'python', 'sql', 'concurrency', 'sqlite']}),
+        })
+        self._test_queries('beir/cqadupstack/stats', count=652, items={
+            0: BeirQuery('11546', 'Tool to confirm Gaussian fit', {'tags': ['self-study', 'consistency']}),
+            9: BeirQuery('59955', 'Variance of superset from variance of subsets', {'tags': ['self-study', 'consistency']}),
+            651: BeirQuery('35719', 'Improvement of regression model', {'tags': ['self-study', 'consistency']}),
+        })
+        self._test_queries('beir/cqadupstack/tex', count=2906, items={
+            0: BeirQuery('197555', 'How can I learn to make my own packages?', {'tags': ['tikz-pgf', 'horizontal-alignment', 'tikz-trees']}),
+            9: BeirQuery('57481', 'Aliasing issues using beamer with pdfLaTeX', {'tags': ['tikz-pgf', 'horizontal-alignment', 'tikz-trees']}),
+            2905: BeirQuery('84944', 'How I can delete frametitle after pagebreak in mdframed box?', {'tags': ['tikz-pgf', 'horizontal-alignment', 'tikz-trees']}),
+        })
+        self._test_queries('beir/cqadupstack/unix', count=1072, items={
+            0: BeirQuery('103549', 'Yanked USB Key During Move', {'tags': ['shell', 'virtualization', 'storage', 'cluster']}),
+            9: BeirQuery('111331', 'Evolution of the shell', {'tags': ['shell', 'virtualization', 'storage', 'cluster']}),
+            1071: BeirQuery('20536', 'reformatting output with aligned columns', {'tags': ['shell', 'virtualization', 'storage', 'cluster']}),
+        })
+        self._test_queries('beir/cqadupstack/webmasters', count=506, items={
+            0: BeirQuery('28994', 'Someone else is using our Google Analytics Tracking code number. What do we do?', {'tags': ['seo', 'keywords', 'tools', 'ranking', 'google-ranking']}),
+            9: BeirQuery('30705', 'Redirecting from blogger to custom domain', {'tags': ['seo', 'keywords', 'tools', 'ranking', 'google-ranking']}),
+            505: BeirQuery('65733', 'Does removing ID from url improve SEO?', {'tags': ['seo', 'keywords', 'tools', 'ranking', 'google-ranking']}),
+        })
+        self._test_queries('beir/cqadupstack/wordpress', count=541, items={
+            0: BeirQuery('120122', "How to enqueue script or style in a theme's template file?", {'tags': ['theme-development', 'css', 'maximized-width']}),
+            9: BeirQuery('23263', 'Syntax highlighting for post/page editor', {'tags': ['theme-development', 'css', 'maximized-width']}),
+            540: BeirQuery('90939', 'All-in-One Event Calendar: Custom Query - Getting each event Instance', {'tags': ['theme-development', 'css', 'maximized-width']}),
+        })
 
     def test_qrels(self):
         self._test_qrels('beir/arguana', count=1406, items={
@@ -402,6 +522,67 @@ class TestBeir(DatasetIntegrationTest):
             9: TrecQrel('1', '24e47090-2019-04-18T19:22:46Z-00003-000', 3, '0'),
             2961: TrecQrel('50', '799d051-2019-04-18T11:47:02Z-00000-000', -2, '0'),
         })
+        self._test_qrels('beir/cqadupstack/android', count=1696, items={
+            0: TrecQrel('11546', '18572', 1, '0'),
+            9: TrecQrel('82440', '78789', 1, '0'),
+            1695: TrecQrel('61210', '61212', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/english', count=3765, items={
+            0: TrecQrel('19399', '102236', 1, '0'),
+            9: TrecQrel('19399', '4501', 1, '0'),
+            3764: TrecQrel('76823', '31410', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/gaming', count=2263, items={
+            0: TrecQrel('82449', '53562', 1, '0'),
+            9: TrecQrel('46138', '42968', 1, '0'),
+            2262: TrecQrel('146551', '28158', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/gis', count=1114, items={
+            0: TrecQrel('52462', '49462', 1, '0'),
+            9: TrecQrel('46866', '46762', 1, '0'),
+            1113: TrecQrel('104332', '104331', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/mathematica', count=1358, items={
+            0: TrecQrel('35544', '14789', 1, '0'),
+            9: TrecQrel('48026', '47994', 1, '0'),
+            1357: TrecQrel('25260', '26583', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/physics', count=1933, items={
+            0: TrecQrel('110554', '21138', 1, '0'),
+            9: TrecQrel('89378', '36242', 1, '0'),
+            1932: TrecQrel('16082', '16081', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/programmers', count=1675, items={
+            0: TrecQrel('88392', '203507', 1, '0'),
+            9: TrecQrel('145437', '229691', 1, '0'),
+            1674: TrecQrel('133937', '27335', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/stats', count=913, items={
+            0: TrecQrel('11546', '66109', 1, '0'),
+            9: TrecQrel('57083', '91074', 1, '0'),
+            912: TrecQrel('35719', '35716', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/tex', count=5154, items={
+            0: TrecQrel('197555', '12668', 1, '0'),
+            9: TrecQrel('89372', '80', 1, '0'),
+            5153: TrecQrel('84944', '84946', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/unix', count=1693, items={
+            0: TrecQrel('103549', '2677', 1, '0'),
+            9: TrecQrel('103549', '48253', 1, '0'),
+            1692: TrecQrel('20536', '17664', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/webmasters', count=1395, items={
+            0: TrecQrel('28994', '53865', 1, '0'),
+            9: TrecQrel('11544', '52031', 1, '0'),
+            1394: TrecQrel('65733', '65118', 1, '0'),
+        })
+        self._test_qrels('beir/cqadupstack/wordpress', count=744, items={
+            0: TrecQrel('120122', '21561', 1, '0'),
+            9: TrecQrel('114225', '78428', 1, '0'),
+            743: TrecQrel('90939', '105803', 1, '0'),
+        })
+
 
 
 if __name__ == '__main__':

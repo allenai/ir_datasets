@@ -64,16 +64,20 @@ class BeirDocs(BaseDocs):
 
 
 class BeirQueries(BaseQueries):
-    def __init__(self, name, dlc):
+    def __init__(self, name, dlc, keep_metadata=None):
         super().__init__()
         self._name = name
         self._dlc = dlc
+        self._keep_metadata = keep_metadata
 
     def queries_iter(self):
         with self._dlc.stream() as stream:
             for line in stream:
                 data = json.loads(line)
-                yield BeirQuery(data['_id'], data['text'], data.get('metadata', {}))
+                metadata = data.get('metadata', {})
+                if self._keep_metadata is not None:
+                    metadata = {k: v for k, v in metadata.items() if k in self._keep_metadata}
+                yield BeirQuery(data['_id'], data['text'], metadata)
 
     def queries_cls(self):
         return BeirQuery
@@ -166,6 +170,16 @@ def _init():
                     subset_qrels,
                     documentation(f'{ds}/{qrel}')
                 )
+
+    cqa = ['android', 'english', 'gaming', 'gis', 'mathematica', 'physics', 'programmers', 'stats', 'tex', 'unix', 'webmasters', 'wordpress']
+    cqa_dlc = dlc['cqadupstack']
+    for ds in cqa:
+        subsets[f'cqadupstack/{ds}'] = Dataset(
+            BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl')),
+            BeirQueries(f'cqadupstack/{ds}', Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/queries.jsonl'), base_path/'cqadupstack'/ds/'queries.json'), keep_metadata=['tags']),
+            TrecQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
+            documentation(f'cqadupstack/{ds}')
+        )
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
