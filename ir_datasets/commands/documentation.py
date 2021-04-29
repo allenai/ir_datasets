@@ -279,7 +279,7 @@ def generate_index(out_dir, version):
                 tbody = '</tbody><tbody>'
                 row_id = f' id="{parent}"'
                 jump.append(f'<option value="{parent}">{parent}</option>')
-            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
+            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs", parent)}</td><td class="center">{emoji(dataset, "queries", parent)}</td><td class="center">{emoji(dataset, "qrels", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs", parent)}</td></tr>')
         index = '\n'.join(index)
         jump = '\n'.join(jump)
         out.write(f'''
@@ -1334,12 +1334,12 @@ def generate_qrel_defs_table(defs):
 </table>
 '''
 
-def emoji(ds, arg):
+def emoji(ds, arg, top_level):
     has = getattr(ds, f'has_{arg}')()
     if has:
         instructions = hasattr(ds, f'documentation') and ds.documentation().get(f'{arg}_instructions')
         if instructions:
-            return f'<span style="cursor: help;" title="{instructions}">⚠️</span>'
+            return f'<a href="{top_level}.html#DataAccess" title="{instructions}. Click for details.">⚠️</a>'
         return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
     return ''
 
