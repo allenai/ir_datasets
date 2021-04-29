@@ -149,6 +149,7 @@ dataset.docs_iter()[1/3:2/3] # supports proportional slicing (this takes the mid
 Available datasets include:
  - [ANTIQUE](https://ir-datasets.com/antique.html)
  - [AQUAINT](https://ir-datasets.com/aquaint.html)
+ - [BEIR (benchmark suite)](https://ir-datasets.com/beir.html)
  - [TREC CAR](https://ir-datasets.com/car.html)
  - [ClueWeb09](https://ir-datasets.com/clueweb09.html)
  - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
