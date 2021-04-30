@@ -1083,7 +1083,7 @@ msmarco-passage:
     cache_path: 'trec-dl-2020/qrels'
   trec-dl-hard/qrels:
     url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-passage.qrels'
-    expected_md5: '32c5f50e7be95927342eafd84e9a6d2c'
+    expected_md5: '7e93a1f3af6a804cf8372b012dd8ba49'
     cache_path: 'trec-dl-hard/qrels'
 
 
