@@ -200,18 +200,16 @@ dataset, its available subsets, and what data they provide.
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](https://allenai.github.io/ir_datasets/datasets.html),
+can be found on the [datasets documentation page](https://ir-datasets.com/),
 or in the python interface via `dataset.documentation()['bibtex']` (when available).
 
-Please cite the following if you use this package:
+If you use this tool, please cite [our SIGIR resource paper](https://arxiv.org/pdf/2103.02280.pdf):
 
 ```
-@article{macavaney:arxiv2021-irds,
+@inproceedings{macavaney:sigir2021-irds,
   author = {MacAvaney, Sean and Yates, Andrew and Feldman, Sergey and Downey, Doug and Cohan, Arman and Goharian, Nazli},
   title = {Simplified Data Wrangling with ir_datasets},
   year = {2021},
-  url = {https://arxiv.org/abs/2103.02280},
-  journal = {arXiv},
-  volume = {abs/2103.02280}
+  booktitle = {SIGIR}
 }
 ```

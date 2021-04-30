@@ -303,6 +303,7 @@ Install with pip:
 <li><a href="cli.html">CLI Documentation</a></li>
 <li><a href="downloads.html">Download Dashboard</a></li>
 <li><a href="https://github.com/allenai/ir_datasets/blob/master/examples/adding_datasets.ipynb">Adding new datasets</a></li>
+<li><a href="https://arxiv.org/pdf/2103.02280.pdf">ir_datasets SIGIR resource paper</a></li>
 </ul>
 
 <h2 style="margin-bottom: 4px;">Dataset Index</h2>
@@ -338,6 +339,20 @@ Install with pip:
 <ul>
 {versions}
 </ul>
+<h2>Citation</h2>
+<p>
+When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
+can be found on each dataset's documenation page, or in the python interface via
+<kbd>dataset.documentation()['bibtex']</kbd> (when available).
+</p>
+<p>If you use this tool, please cite our <a href="https://arxiv.org/pdf/2103.02280.pdf">SIGIR resource paper</a>:</p>
+<cite class="select">@inproceedings{{macavaney:sigir2021-irds,
+  author = {{MacAvaney, Sean and Yates, Andrew and Feldman, Sergey and Downey, Doug and Cohan, Arman and Goharian, Nazli}},
+  title = {{Simplified Data Wrangling with ir_datasets}},
+  year = {{2021}},
+  booktitle = {{SIGIR}}
+}}
+</cite>
 ''')
 
 
