@@ -152,6 +152,26 @@ clinicaltrials:
     url: 'http://www.trec-cds.org/clinical_trials.3.tar.gz'
     expected_md5: 'fa8e76c85ab7204c0294f03fa76f6ed2'
     cache_path: 'docs_2019_3.tar.gz'
+  docs/2021/1:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part1.zip'
+    expected_md5: 'e12eb9a0d21452503b0ef8874c69f490'
+    cache_path: 'docs_2021_1.zip'
+  docs/2021/2:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part2.zip'
+    expected_md5: 'f6986125506434887a162f144ca4d9a2'
+    cache_path: 'docs_2021_2.zip'
+  docs/2021/3:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part3.zip'
+    expected_md5: '9b7fb528b22edfcf4535154cc3d98111'
+    cache_path: 'docs_2021_3.zip'
+  docs/2021/4:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part4.zip'
+    expected_md5: '4fd98d209e7b62cee87af211c0c281f6'
+    cache_path: 'docs_2021_4.zip'
+  docs/2021/5:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part5.zip'
+    expected_md5: 'a747f09ac5d4f3cd0cc75957ad9f32d8'
+    cache_path: 'docs_2021_5.zip'
   trec-pm-2017/qrels:
     url: 'https://trec.nist.gov/data/precmed/qrels-final-trials.txt'
     expected_md5: '3c35f9e62abf64c873250ac8022d5a51'

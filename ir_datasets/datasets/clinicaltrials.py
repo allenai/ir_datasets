@@ -6,6 +6,7 @@ from contextlib import ExitStack
 import itertools
 from typing import NamedTuple, Tuple
 import tarfile
+import zipfile
 import xml.etree.ElementTree as ET
 import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, ZipExtract
@@ -35,17 +36,32 @@ class ClinicalTrialsDoc(NamedTuple):
 
 
 class ClinicalTrialsDocs(BaseDocs):
-    def __init__(self, name, dlcs):
+    def __init__(self, name, dlcs, compress_format='tgz'):
         self._name = name
         self._dlcs = dlcs
+        self._compress_format = compress_format
 
-    @ir_datasets.util.use_docstore
     def docs_iter(self):
+        return iter(self.docs_store())
+
+    def _docs_iter(self):
         for dlc in self._dlcs:
-            with dlc.stream() as stream, tarfile.open(fileobj=stream, mode='r|gz') as tarf:
-                for record in tarf:
-                    if record.path.endswith('.xml'):
-                        xml = tarf.extractfile(record).read()
+            with dlc.stream() as stream, ExitStack() as stack:
+                if self._compress_format == 'tgz':
+                    tarf = stack.enter_context(tarfile.open(fileobj=stream, mode='r|gz'))
+                    tarf_iter = iter(tarf)
+                    extract = tarf.extractfile
+                    path_attr = 'path'
+                elif self._compress_format == 'zip':
+                    tarf = stack.enter_context(zipfile.ZipFile(stream))
+                    tarf_iter = tarf.filelist
+                    extract = tarf.open
+                    path_attr = 'filename'
+                else:
+                    raise ValueError('unknown compress format')
+                for record in tarf_iter:
+                    if getattr(record, path_attr).endswith('.xml'):
+                        xml = extract(record).read()
                         yield self._parse_doc(xml)
 
     def _parse_doc(self, xml):
@@ -71,7 +87,7 @@ class ClinicalTrialsDocs(BaseDocs):
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
             path=f'{self.docs_path()}.pklz4',
-            init_iter_fn=self.docs_iter,
+            init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
@@ -100,10 +116,13 @@ def _init():
 
     collection17 = ClinicalTrialsDocs('2017', [dlc['docs/2017']])
     collection19 = ClinicalTrialsDocs('2019', [dlc['docs/2019/0'], dlc['docs/2019/1'], dlc['docs/2019/2'], dlc['docs/2019/3']])
+    collection21 = ClinicalTrialsDocs('2021', [dlc['docs/2021/1'], dlc['docs/2021/2'], dlc['docs/2021/3'], dlc['docs/2021/4'], dlc['docs/2021/5']], compress_format='zip')
 
     subsets['2017'] = Dataset(collection17, documentation('2017'))
 
     subsets['2019'] = Dataset(collection19, documentation('2019'))
+
+    subsets['2021'] = Dataset(collection21, documentation('2021'))
 
     subsets['2017/trec-pm-2017'] = Dataset(
         collection17,
