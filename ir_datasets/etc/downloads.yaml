@@ -1668,6 +1668,30 @@ Once completed, place/link the source file: {path}'
     url: 'https://trec.nist.gov/data/core/qrels2018.txt'
     expected_md5: '7a982cd110f8bb30da4141f0f639f2e1'
     cache_path: 'trec-core-2018/qrels'
+  trec-news-2018/queries:
+    url: 'https://trec.nist.gov/data/news/2018/newsir18-topics.txt'
+    expected_md5: '73740793543b439d1ff1b8ee9359973a'
+    cache_path: 'trec-news-2018/queries.txt'
+  trec-news-2018/qrels:
+    url: 'https://trec.nist.gov/data/news/2018/bqrels.exp-gains.txt'
+    expected_md5: '396963175006cb3201ea7c16e874033a'
+    cache_path: 'trec-news-2018/qrels'
+  trec-news-2019/queries:
+    url: 'https://trec.nist.gov/data/news/2019/newsir19-background-linking-topics.xml'
+    expected_md5: '388b5c96f8962da17eb1024b856d21c1'
+    cache_path: 'trec-news-2019/queries.txt'
+  trec-news-2019/qrels:
+    url: 'https://trec.nist.gov/data/news/2019/newsir19-qrels-background.txt'
+    expected_md5: '7b839a1a94e349d3facf28012542cc1d'
+    cache_path: 'trec-news-2019/qrels'
+  trec-news-2020/queries:
+    url: 'https://trec.nist.gov/data/news/2020/newsir20-topics.txt'
+    expected_md5: '2674538a07fb7ac29200cbc4c4a05404'
+    cache_path: 'trec-news-2020/queries.txt'
+  trec-news-2020/qrels:
+    url: 'https://trec.nist.gov/data/news/2020/qrels.background'
+    expected_md5: '7c31f731775bdd4148d349df1a9e43fc'
+    cache_path: 'trec-news-2020/qrels'
 
 
 wikir:

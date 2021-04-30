@@ -55,3 +55,58 @@ The TREC Common Core 2018 benchmark.
 <li><a href="https://github.com/trec-core/2018">Shared Task Website</a></li>
 <ul>'
   docs_instructions: *inst
+
+v2/trec-news-2018:
+  desc: '
+<p>
+The TREC News 2018 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-News.pdf">Sared task paper</a></li>
+<ul>'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Soboroff2018News,
+      title={TREC 2018 News Track Overview},
+      author={Ian Soboroff and Shudong Huang and Donna Harman},
+      booktitle={TREC},
+      year={2018}
+    }
+
+v2/trec-news-2019:
+  desc: '
+<p>
+The TREC News 2019 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec28/papers/OVERVIEW.N.pdf">Sared task paper</a></li>
+<ul>'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Soboroff2019News,
+      title={TREC 2019 News Track Overview},
+      author={Ian Soboroff and Shudong Huang and Donna Harman},
+      booktitle={TREC},
+      year={2019}
+    }
+
+v3/trec-news-2020:
+  desc: '
+<p>
+The TREC News 2020 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<p>
+If you have a copy of the v3 dataset, we would appreciate a pull request to add support!
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
+<ul>'
+  docs_instructions: *inst
