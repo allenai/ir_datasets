@@ -89,7 +89,7 @@ class BeirQueries(BaseQueries):
         return 'en'
 
 
-class TrecQrels(BaseQrels):
+class BeirQrels(BaseQrels):
     def __init__(self, qrels_dlc, qrels_defs):
         self._qrels_dlc = qrels_dlc
         self._qrels_defs = qrels_defs
@@ -107,7 +107,7 @@ class TrecQrels(BaseQrels):
                     continue # ignore blank lines
                 cols = line.rstrip().split()
                 if len(cols) != 3:
-                    raise RuntimeError(f'expected 4 columns, got {len(cols)}')
+                    raise RuntimeError(f'expected 3 columns, got {len(cols)}')
                 qid, did, score = cols
                 yield TrecQrel(qid, did, int(score), '0')
 
@@ -152,7 +152,7 @@ def _init():
             subsets[ds] = Dataset(
                 docs,
                 queries,
-                TrecQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrels[0]}.tsv'), base_path/ds/f'{qrels[0]}.qrels'), qrels_defs={}),
+                BeirQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrels[0]}.tsv'), base_path/ds/f'{qrels[0]}.qrels'), qrels_defs={}),
                 documentation(ds)
             )
         else:
@@ -162,7 +162,7 @@ def _init():
                 documentation(ds)
             )
             for qrel in qrels:
-                subset_qrels = TrecQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrel}.tsv'), base_path/ds/f'{qrel}.qrels'), qrels_defs={})
+                subset_qrels = BeirQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrel}.tsv'), base_path/ds/f'{qrel}.qrels'), qrels_defs={})
                 subset_qids = qid_filter(subset_qrels)
                 subsets[f'{ds}/{qrel}'] = Dataset(
                     docs,
@@ -177,7 +177,7 @@ def _init():
         subsets[f'cqadupstack/{ds}'] = Dataset(
             BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl')),
             BeirQueries(f'cqadupstack/{ds}', Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/queries.jsonl'), base_path/'cqadupstack'/ds/'queries.json'), keep_metadata=['tags']),
-            TrecQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
+            BeirQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
             documentation(f'cqadupstack/{ds}')
         )
 

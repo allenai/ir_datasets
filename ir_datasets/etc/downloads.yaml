@@ -457,6 +457,12 @@ cord19:
     expected_md5: '6111c00ac9adac774f5b51e4f9a2a25b'
     cache_path: 'trec-covid/round5/qrels'
 
+cranfield:
+  main:
+    url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/cran/cran.tar.gz'
+    expected_md5: '1730f7be572d95a5a4b56c59a7b900a5'
+    cache_path: 'cran.tar.gz'
+
 dpr-w100:
   docs:
     url: 'https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz'
