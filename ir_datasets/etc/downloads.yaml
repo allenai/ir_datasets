@@ -1028,7 +1028,7 @@ msmarco-document:
     cache_path: 'orcas/ms.run.gz'
   trec-dl-hard/qrels:
     url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels'
-    expected_md5: 'da2366aef13c11b352fe4587d96ee9f8'
+    expected_md5: '06dfe71d497e081a7c4c1294979edb7d'
     cache_path: 'trec-dl-hard/qrels'
 
 

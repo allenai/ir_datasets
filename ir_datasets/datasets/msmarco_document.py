@@ -1,6 +1,6 @@
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy
+from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs
 from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
@@ -114,6 +114,9 @@ def _init():
     )
 
     # DL-Hard
+    dl_hard_qrels_migrator = Migrator(base_path/'trec-dl-hard'/'irds_version.txt', 'v2',
+        affected_files=[base_path/'trec-dl-hard'/'qrels'],
+        message='Updating trec-dl-hard qrels')
     hard_qids = Lazy(lambda: DL_HARD_QIDS)
     dl_hard_base_queries = TsvQueries([
             Cache(GzipExtract(dlc['trec-dl-2019/queries']), base_path/'trec-dl-2019/queries.tsv'),
@@ -121,7 +124,7 @@ def _init():
     subsets['trec-dl-hard'] = Dataset(
         collection,
         FilteredQueries(dl_hard_base_queries, hard_qids),
-        TrecQrels(dlc['trec-dl-hard/qrels'], TREC_DL_QRELS_DEFS),
+        dl_hard_qrels_migrator(TrecQrels(dlc['trec-dl-hard/qrels'], TREC_DL_QRELS_DEFS)),
         documentation('trec-dl-hard')
     )
     hard_qids = Lazy(lambda: DL_HARD_QIDS_BYFOLD['1'])
