@@ -32,7 +32,7 @@ pip install ir_datasets
 If you want to build from source, use:
 
 ```
-$ git clone https://github.com/allenai/ir_datasets
+$ git clone https://github.com/ssun32/ir_datasets
 $ cd ir_datasets
 $ python setup.py bdist_wheel
 $ pip install dist/ir_datasets-*.whl
