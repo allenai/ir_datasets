@@ -119,9 +119,10 @@ class RequestsDownload(BaseDownload):
 
 
 class LocalDownload(BaseDownload):
-    def __init__(self, path, message=None):
+    def __init__(self, path, message=None, mkdir=True):
         self._path = Path(path)
-        self._path.parent.mkdir(parents=True, exist_ok=True)
+        if mkdir:
+            self._path.parent.mkdir(parents=True, exist_ok=True)
         self._message = message
 
     def path(self):
@@ -220,22 +221,40 @@ class Download:
 
 
 class _DownloadConfig:
-    def __init__(self, file=None, base_path=None, contents=None, dua=None):
+    def __init__(self, file=None, base_path=None, contents=None, dua=None, parser="yaml"):
         self._file = file
         self._base_path = base_path
         self._contents = contents
         self._dua = dua
+        self._parser = parser
+        self.home_path = None
+        self.download_path = None
 
     def contents(self):
         if self._contents is None:
-            yaml = ir_datasets.lazy_libs.yaml()
             data = pkgutil.get_data('ir_datasets', self._file)
-            self._contents = yaml.load(data, Loader=yaml.BaseLoader)
+            if self._parser == "json":
+                json = ir_datasets.lazy_libs.json()
+                self._contents = json.loads(data)
+            else:
+                yaml = ir_datasets.lazy_libs.yaml()
+                self._contents = yaml.load(data, Loader=yaml.BaseLoader)
         return self._contents
 
     def context(self, key, base_path=None, dua=None):
         contents = self.contents()
         return _DownloadConfig(contents=contents[key] if key else contents, base_path=base_path or self._base_path, dua=dua or self._dua)
+
+    def get_home_path(self):
+        if self.home_path is None:
+            self.home_path = util.home_path()
+        return self.home_path
+
+    def get_download_path(self):
+        if self.download_path is None:
+            self.download_path = Path(self.get_home_path()) / 'downloads'
+            self.download_path.parent.mkdir(parents=True, exist_ok=True)
+        return self.download_path
 
     def __getitem__(self, key):
         dlc = self.contents()[key]
@@ -248,11 +267,10 @@ class _DownloadConfig:
                 cache_path = dlc['cache_path']
         if 'url' in dlc:
             if not dlc.get('skip_local') and dlc.get('expected_md5'):
-                local_path = Path(util.home_path()) / 'downloads' / dlc['expected_md5']
-                local_path.parent.mkdir(parents=True, exist_ok=True)
+                local_path = Path(self.get_download_path()) / dlc['expected_md5']
                 local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it here '
                              f'to avoid downloading it again: {local_path}')
-                sources.append(LocalDownload(local_path, local_msg))
+                sources.append(LocalDownload(local_path, local_msg, mkdir=False))
             sources.append(RequestsDownload(dlc['url']))
         elif 'instructions' in dlc:
             if 'cache_path' in dlc:
@@ -266,3 +284,4 @@ class _DownloadConfig:
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.yaml')
+DownloadConfig_CM = _DownloadConfig(file='etc/clirmatrix_downloads.json', parser="json")

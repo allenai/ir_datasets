@@ -37,6 +37,13 @@ def yaml():
     return _cache['yaml']
 
 
+def json():
+    if 'json' not in _cache:
+        import json
+        _cache['json'] = json
+    return _cache['json']
+
+
 def trec_car():
     if 'trec_car' not in _cache:
         import trec_car.read_data
