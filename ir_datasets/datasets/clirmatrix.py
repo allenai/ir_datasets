@@ -5,7 +5,6 @@ import ir_datasets
 from ir_datasets.util import GzipExtract, DownloadConfig_CM
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import TsvDocs, CLIRMatrixQueries, CLIRMatrixQrels
-from tqdm import tqdm
 
 NAME = 'clirmatrix'
 
@@ -37,7 +36,7 @@ def _init():
     for dataset in ["clirmatrix_multi8", "clirmatrix_bi139_base", "clirmatrix_bi139_full"]:
         dataset_name = dataset.split("_", 1)[-1]
         dlc = DownloadConfig_CM.context(dataset, base_path)
-        for k in tqdm(dlc.contents().keys()):
+        for k in dlc.contents().keys():
             _, lcodes, split = k.split("/")
             query_lcode, doc_lcode = lcodes.split("_")
             qrel_dlc = GzipExtract(dlc[k])
