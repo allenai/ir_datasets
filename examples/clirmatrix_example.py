@@ -1,9 +1,6 @@
 import ir_datasets
-l = [l.strip() for l in open("lcodes")]
-
-print(l)
 """
-dataset format
+dataset name
 clirmatrix/[dataset]/[query language code]/[doc language code]/[split]
 
 options:
