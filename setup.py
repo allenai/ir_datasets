@@ -22,7 +22,7 @@ setuptools.setup(
         'console_scripts': ['ir_datasets=ir_datasets:main_cli'],
     },
     package_data={
-        'ir_datasets': glob('docs/*.yaml') + glob('etc/*.yaml') + glob('etc/*.json'),
+        'ir_datasets': glob('docs/*.yaml') + glob('etc/*.yaml'),
         '': ['requirements.txt', 'LICENSE'],
     },
 )

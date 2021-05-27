@@ -232,7 +232,10 @@ class _DownloadConfig:
 
     def contents(self):
         if self._contents is None:
-            data = pkgutil.get_data('ir_datasets', self._file)
+            if self._file.startswith('/'):
+                data = open(self._file).read()
+            else:
+                data = pkgutil.get_data('ir_datasets', self._file)
             if self._parser == "json":
                 json = ir_datasets.lazy_libs.json()
                 self._contents = json.loads(data)
@@ -284,4 +287,3 @@ class _DownloadConfig:
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.yaml')
-DownloadConfig_CM = _DownloadConfig(file='etc/clirmatrix_downloads.json', parser="json")

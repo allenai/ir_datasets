@@ -105,6 +105,13 @@ clinicaltrials:
     cache_path: 'trec-pm-2019/queries.xml'
 
 
+clirmatrix:
+  downloads:
+    url: 'https://macavaney.us/clirmatrix_downloads.json' # TODO: move this to JHU server?
+    expected_md5: '9e70cd85ec45caa8c16061c42d1ce9b8'
+    cache_path: 'clirmatrix_downloads.json'
+
+
 clueweb09:
   docs:
     instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>
