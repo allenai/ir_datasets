@@ -5,6 +5,24 @@ _:
 The Washington Post collection.
 </p>'
   docs_instructions: &inst "docs available from NIST"
+  data_access: '
+<p>
+To use this dataset, you need a copy of <a href="https://trec.nist.gov/data/wapost/">Washington Post Collection</a>,
+provided by NIST.
+</p>
+<p>
+Your organization may already have a copy. If this is the case, you may only need to complete a new
+"Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement"
+with NIST. It can take some time to process, but you will end up with a password-protected download link.
+</p>
+<p>
+The source file required is <kbd>WashingtonPost.v2.tar.gz</kbd>.
+<p>
+ir_datasets expects the above file to be copied/linked under <kbd>~/.ir_datasets/wapo/WashingtonPost.v2.tar.gz</kbd>.
+</p>
+<p>
+</p>
+'
 
 v2:
   desc: '
@@ -35,5 +53,60 @@ The TREC Common Core 2018 benchmark.
 <li>Queries: TREC-style (keyword, description, narrative)</li>
 <li>Relevance: Deeply-annotated</li>
 <li><a href="https://github.com/trec-core/2018">Shared Task Website</a></li>
+<ul>'
+  docs_instructions: *inst
+
+v2/trec-news-2018:
+  desc: '
+<p>
+The TREC News 2018 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-News.pdf">Sared task paper</a></li>
+<ul>'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Soboroff2018News,
+      title={TREC 2018 News Track Overview},
+      author={Ian Soboroff and Shudong Huang and Donna Harman},
+      booktitle={TREC},
+      year={2018}
+    }
+
+v2/trec-news-2019:
+  desc: '
+<p>
+The TREC News 2019 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec28/papers/OVERVIEW.N.pdf">Sared task paper</a></li>
+<ul>'
+  docs_instructions: *inst
+  bibtex: |
+    @inproceedings{Soboroff2019News,
+      title={TREC 2019 News Track Overview},
+      author={Ian Soboroff and Shudong Huang and Donna Harman},
+      booktitle={TREC},
+      year={2019}
+    }
+
+v3/trec-news-2020:
+  desc: '
+<p>
+The TREC News 2020 Background Linking task. The task is to find relevant background information
+for the provided articles.
+</p>
+<p>
+If you have a copy of the v3 dataset, we would appreciate a pull request to add support!
+</p>
+<ul>
+<li>Queries: Articles via the doc_id field</li>
+<li><a href="http://trec-news.org/">Shared Task Website</a></li>
 <ul>'
   docs_instructions: *inst

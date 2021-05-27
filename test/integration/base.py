@@ -134,7 +134,7 @@ class DatasetIntegrationTest(unittest.TestCase):
 
             self.assertEqual(0, len(items))
 
-    def _build_test_docs(self, dataset_name, include_count=True):
+    def _build_test_docs(self, dataset_name, include_count=True, include_idxs=(0, 9)):
         items = {}
         count = 0
         if isinstance(dataset_name, str):
@@ -143,7 +143,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             dataset = dataset_name
         for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs')):
             count += 1
-            if i in (0, 9):
+            if i in include_idxs:
                 items[i] = doc
             if not include_count and i == 1000:
                 break

@@ -1,0 +1,12 @@
+_:
+  pretty_name: 'Cranfield'
+  desc: '
+<p>
+A small corpus of 1,400 scientific abstracts.
+</p>
+<ul>
+  <li>Documents: Scientific abstracts</li>
+  <li>Queries: Natural language questions</li>
+  <li><a href="http://ir.dcs.gla.ac.uk/resources/test_collections/cran/">Dataset Information</a></li>
+</ul>
+'

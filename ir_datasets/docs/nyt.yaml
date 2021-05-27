@@ -21,6 +21,24 @@ collection can be downloaded from the LDC.
       pages={e26752},
       year={2008}
     }
+  data_access: '
+<p>
+To use this dataset, you need a copy of the source corpus, provided by the the
+Linguistic Data Consortium. The specific resource needed
+is <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>.
+</p>
+<p>
+Many organizations already have a subscription to the LDC, so access to the collection
+can be as easy as confirming the data usage agreement and downloading the corpus. Check
+with your library for access details.
+</p>
+<p>
+The source file is: <kbd>nyt_corpus_LDC2008T19.tgz</kbd>.
+</p>
+<p>
+ir_datasets expects this file to be copied/linked as <kbd>~/.ir_datasets/nyt/nyt.tgz</kbd>.
+</p>
+'
 
 trec-core-2017:
   desc: '

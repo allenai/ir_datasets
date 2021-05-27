@@ -1,0 +1,1345 @@
+_:
+  pretty_name: 'Beir (benchmark suite)'
+  desc: '
+<p>
+Beir is a suite of benchmarks to test zero-shot transfer.
+</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2104.08663">Paper</a></li>
+<li><a href="https://github.com/UKPLab/beir/blob/main/README.md">GitHub</a></li>
+</ul>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+arguana:
+  desc: '
+<p>
+A version of the ArguAna Counterargs dataset, for argument retrieval.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/P18-1023.pdf">Dataset paper</a></li>
+<li><a href="http://argumentation.bplaced.net/arguana/data">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{wachsmuth:2018a,
+        author =  "Wachsmuth, Henning and Syed, Shahbaz and Stein, Benno",
+        title =   "Retrieval of the Best Counterargument without Prior Topic Knowledge",
+        booktitle =   "Proceedings of the 56th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+        year =  "2018",
+        publisher =   "Association for Computational Linguistics",
+        location =  "Melbourne, Australia",
+        pages =   "241--251",
+        url =   "http://aclweb.org/anthology/P18-1023"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+climate-fever:
+  desc: '
+<p>
+A version of the CLIMATE-FEVER dataset, for fact verification on claims about climate.
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2012.00614.pdf">Dataset paper</a></li>
+<li><a href="https://www.sustainablefinance.uzh.ch/en/research/climate-fever.html">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Diggelmann2020CLIMATEFEVERAD,
+      title={CLIMATE-FEVER: A Dataset for Verification of Real-World Climate Claims},
+      author={T. Diggelmann and Jordan L. Boyd-Graber and Jannis Bulian and Massimiliano Ciaramita and Markus Leippold},
+      journal={ArXiv},
+      year={2020},
+      volume={abs/2012.00614}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity:
+  desc: '
+<p>
+A version of the DBPedia-Entity-v2 dataset for entity retrieval.
+</p>
+<ul>
+<li><a href="http://hasibi.com/files/sigir2017-dbpedia_entity.pdf">Dataset paper</a></li>
+<li><a href="https://github.com/iai-group/DBpedia-Entity">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hasibi2017DBpediaEntityVA,
+      title={DBpedia-Entity v2: A Test Collection for Entity Search},
+      author={Faegheh Hasibi and Fedor Nikolaev and Chenyan Xiong and K. Balog and S. E. Bratsberg and Alexander Kotov and J. Callan},
+      journal={Proceedings of the 40th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+      year={2017}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity/dev:
+  desc: '
+<p>
+A random sample of 67 queries from the official test set, used as a dev set.
+</p>
+'
+  bibtex: |
+    @article{Hasibi2017DBpediaEntityVA,
+      title={DBpedia-Entity v2: A Test Collection for Entity Search},
+      author={Faegheh Hasibi and Fedor Nikolaev and Chenyan Xiong and K. Balog and S. E. Bratsberg and Alexander Kotov and J. Callan},
+      journal={Proceedings of the 40th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+      year={2017}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+dbpedia-entity/test:
+  desc: '
+<p>
+A the official test set, without 67 queries used as a dev set.
+</p>
+'
+  bibtex: |
+    @article{Hasibi2017DBpediaEntityVA,
+      title={DBpedia-Entity v2: A Test Collection for Entity Search},
+      author={Faegheh Hasibi and Fedor Nikolaev and Chenyan Xiong and K. Balog and S. E. Bratsberg and Alexander Kotov and J. Callan},
+      journal={Proceedings of the 40th International ACM SIGIR Conference on Research and Development in Information Retrieval},
+      year={2017}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever:
+  desc: '
+<p>
+A version of the FEVER dataset for fact verification. Includes queries from the /train /dev and /test subsets.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/N18-1074.pdf">Dataset paper</a></li>
+<li><a href="https://fever.ai/resources.html">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{thorne-etal-2018-fever,
+        title = "{FEVER}: a Large-scale Dataset for Fact Extraction and {VER}ification",
+        author = "Thorne, James  and
+          Vlachos, Andreas  and
+          Christodoulopoulos, Christos  and
+          Mittal, Arpit",
+        booktitle = "Proceedings of the 2018 Conference of the North {A}merican Chapter of the Association for Computational Linguistics: Human Language Technologies, Volume 1 (Long Papers)",
+        month = jun,
+        year = "2018",
+        address = "New Orleans, Louisiana",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/N18-1074",
+        doi = "10.18653/v1/N18-1074",
+        pages = "809--819"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/dev:
+  desc: '
+<p>
+The official dev set.
+</p>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/test:
+  desc: '
+<p>
+The official test set.
+</p>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fever/train:
+  desc: '
+<p>
+The official train set.
+</p>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa:
+  desc: '
+<p>
+A version of the FIQA-2018 dataset (financial opinion question answering). Queries include those in
+the /train /dev and /test subsets.
+</p>
+<ul>
+<li><a href="https://dl.acm.org/doi/10.1145/3184558.3192301">Dataset paper</a></li>
+<li><a href="https://sites.google.com/view/fiqa/home">Dataset site</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Maia2018WWW18OC,
+      title={WWW'18 Open Challenge: Financial Opinion Mining and Question Answering},
+      author={Macedo Maia and S. Handschuh and A. Freitas and Brian Davis and R. McDermott and M. Zarrouk and A. Balahur},
+      journal={Companion Proceedings of the The Web Conference 2018},
+      year={2018}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/dev:
+  desc: '
+<p>
+Random sample of 500 queries from the official dataset.
+</p>
+'
+  bibtex: |
+    @article{Maia2018WWW18OC,
+      title={WWW'18 Open Challenge: Financial Opinion Mining and Question Answering},
+      author={Macedo Maia and S. Handschuh and A. Freitas and Brian Davis and R. McDermott and M. Zarrouk and A. Balahur},
+      journal={Companion Proceedings of the The Web Conference 2018},
+      year={2018}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/test:
+  desc: '
+<p>
+Random sample of 648 queries from the official dataset.
+</p>
+'
+  bibtex: |
+    @article{Maia2018WWW18OC,
+      title={WWW'18 Open Challenge: Financial Opinion Mining and Question Answering},
+      author={Macedo Maia and S. Handschuh and A. Freitas and Brian Davis and R. McDermott and M. Zarrouk and A. Balahur},
+      journal={Companion Proceedings of the The Web Conference 2018},
+      year={2018}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+fiqa/train:
+  desc: '
+<p>
+Official dataset without the 1148 queries sampled for /dev and /test.
+</p>
+'
+  bibtex: |
+    @article{Maia2018WWW18OC,
+      title={WWW'18 Open Challenge: Financial Opinion Mining and Question Answering},
+      author={Macedo Maia and S. Handschuh and A. Freitas and Brian Davis and R. McDermott and M. Zarrouk and A. Balahur},
+      journal={Companion Proceedings of the The Web Conference 2018},
+      year={2018}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa:
+  desc: '
+<p>
+A version of the Hotpot QA dataset for multi-hop question answering. Queries include all
+those in /train /dev and /test.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/D18-1259">Dataset paper</a></li>
+<li><a href="https://github.com/hotpotqa/hotpot">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{yang-etal-2018-hotpotqa,
+        title = "{H}otpot{QA}: A Dataset for Diverse, Explainable Multi-hop Question Answering",
+        author = "Yang, Zhilin  and
+          Qi, Peng  and
+          Zhang, Saizheng  and
+          Bengio, Yoshua  and
+          Cohen, William  and
+          Salakhutdinov, Ruslan  and
+          Manning, Christopher D.",
+        booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+        month = oct # "-" # nov,
+        year = "2018",
+        address = "Brussels, Belgium",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/D18-1259",
+        doi = "10.18653/v1/D18-1259",
+        pages = "2369--2380"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/dev:
+  desc: '
+<p>
+Random selection of the 5447 queries from /train.
+</p>
+'
+  bibtex: |
+    @inproceedings{yang-etal-2018-hotpotqa,
+        title = "{H}otpot{QA}: A Dataset for Diverse, Explainable Multi-hop Question Answering",
+        author = "Yang, Zhilin  and
+          Qi, Peng  and
+          Zhang, Saizheng  and
+          Bengio, Yoshua  and
+          Cohen, William  and
+          Salakhutdinov, Ruslan  and
+          Manning, Christopher D.",
+        booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+        month = oct # "-" # nov,
+        year = "2018",
+        address = "Brussels, Belgium",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/D18-1259",
+        doi = "10.18653/v1/D18-1259",
+        pages = "2369--2380"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/test:
+  desc: '
+<p>
+Official <em>dev</em> set from HotpotQA, here used as a test set.
+</p>
+'
+  bibtex: |
+    @inproceedings{yang-etal-2018-hotpotqa,
+        title = "{H}otpot{QA}: A Dataset for Diverse, Explainable Multi-hop Question Answering",
+        author = "Yang, Zhilin  and
+          Qi, Peng  and
+          Zhang, Saizheng  and
+          Bengio, Yoshua  and
+          Cohen, William  and
+          Salakhutdinov, Ruslan  and
+          Manning, Christopher D.",
+        booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+        month = oct # "-" # nov,
+        year = "2018",
+        address = "Brussels, Belgium",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/D18-1259",
+        doi = "10.18653/v1/D18-1259",
+        pages = "2369--2380"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+hotpotqa/train:
+  desc: '
+<p>
+Official train set, without the random selection of the 5447 queries used for /dev.
+</p>
+'
+  bibtex: |
+    @inproceedings{yang-etal-2018-hotpotqa,
+        title = "{H}otpot{QA}: A Dataset for Diverse, Explainable Multi-hop Question Answering",
+        author = "Yang, Zhilin  and
+          Qi, Peng  and
+          Zhang, Saizheng  and
+          Bengio, Yoshua  and
+          Cohen, William  and
+          Salakhutdinov, Ruslan  and
+          Manning, Christopher D.",
+        booktitle = "Proceedings of the 2018 Conference on Empirical Methods in Natural Language Processing",
+        month = oct # "-" # nov,
+        year = "2018",
+        address = "Brussels, Belgium",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/D18-1259",
+        doi = "10.18653/v1/D18-1259",
+        pages = "2369--2380"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco:
+  desc: '
+<p>
+A version of the MS MARCO passage ranking dataset. Includes queries from the /train, /dev, and /test sub-datasets.
+</p>
+<p>
+Note that this version differs from <a class="ds-ref">msmarco-passage</a>, in that it does not correct
+the encoding problems in the source documents.
+</p>
+<ul>
+<li><a href="https://microsoft.github.io/msmarco/#ranking">Leaderboard</a></li>
+<li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+<li>See also: <a class="ds-ref">msmarco-passage</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/dev:
+  desc: '
+<p>
+A version of the MS MARCO passage ranking dev set.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/dev</a></li>
+<li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/test:
+  desc: '
+<p>
+A version of the TREC Deep Learning 2019 set.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/trec-dl-2019</a></li>
+<li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Craswell2020OverviewOT,
+      title={Overview of the TREC 2019 deep learning track},
+      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
+      booktitle={TREC 2019},
+      year={2019}
+    }
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+msmarco/train:
+  desc: '
+<p>
+A version of the MS MARCO passage ranking train set.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">msmarco-passage/train</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bajaj2016MSMA,
+      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+      booktitle={InCoCo@NIPS},
+      year={2016}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus:
+  desc: '
+<p>
+A version of the NF Corpus (Nutrition Facts). Queries use the "title" variant of the query,
+which here are often natural language questions. Queries include all those from /train /dev and /test.
+</p>
+<p>
+Data pre-processing may be different than what is done in <a class="ds-ref">nfcorpus</a>.
+</p>
+<ul>
+<li><a href="https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/">Dataset website</p></li>
+<li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li>
+<li>See also: <a class="ds-ref">nfcorpus</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{boteva16full,
+      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+      location = "Padova, Italy",
+      publisher = "Springer",
+      year = 2016
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/dev:
+  desc: '
+<p>
+Combined dev set of NFCorpus.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">nfcorpus/dev</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{boteva16full,
+      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+      location = "Padova, Italy",
+      publisher = "Springer",
+      year = 2016
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/test:
+  desc: '
+<p>
+Combined test set of NFCorpus.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">nfcorpus/test</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{boteva16full,
+      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+      location = "Padova, Italy",
+      publisher = "Springer",
+      year = 2016
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nfcorpus/train:
+  desc: '
+<p>
+Combined train set of NFCorpus.
+</p>
+<ul>
+<li>See also: <a class="ds-ref">nfcorpus/train</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{boteva16full,
+      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
+      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
+      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
+      location = "Padova, Italy",
+      publisher = "Springer",
+      year = 2016
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+nq:
+  desc: '
+<p>
+A version of the Natural Questions dev dataset.
+</p>
+<p>
+Data pre-processing differs both from what is done in <a class="ds-ref">natural-questions</a> and
+<a class="ds-ref">dpr-w100/natural-questions</a>, especially with respect to the document collection
+and filtering conducted on the queries. See the Beir paper for details.
+</p>
+<ul>
+<li><a href="https://ai.google.com/research/NaturalQuestions">Dataset website</a></li>
+<li><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/1f7b46b5378d757553d3e92ead36bda2e4254244.pdf">Dataset paper</a></li>
+<li>See also: <a class="ds-ref">natural-questions</a>, <a class="ds-ref">dpr-w100/natural-questions</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Kwiatkowski2019NQ,
+      title = {Natural Questions: a Benchmark for Question Answering Research},
+      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+      year = {2019},
+      journal = {TACL}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora:
+  desc: '
+<p>
+A version of the Quora duplicate question detection dataset (QQP). Includes queries from
+/dev and /test sets.
+</p>
+<ul>
+<li><a href="https://www.kaggle.com/c/quora-question-pairs">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora/dev:
+  desc: '
+<p>
+A 5,000 question subset of the original dataset, without overlaps in the other subsets.
+</p>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+quora/test:
+  desc: '
+<p>
+A 10,000 question subset of the original dataset, without overlaps in the other subsets.
+</p>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scidocs:
+  desc: '
+<p>
+A version of the SciDocs dataset, used for citation retrieval.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.acl-main.207.pdf">Dataset paper</a></li>
+<li><a href="https://allenai.org/data/scidocs">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{cohan-etal-2020-specter,
+        title = "{SPECTER}: Document-level Representation Learning using Citation-informed Transformers",
+        author = "Cohan, Arman  and
+          Feldman, Sergey  and
+          Beltagy, Iz  and
+          Downey, Doug  and
+          Weld, Daniel",
+        booktitle = "Proceedings of the 58th Annual Meeting of the Association for Computational Linguistics",
+        month = jul,
+        year = "2020",
+        address = "Online",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/2020.acl-main.207",
+        doi = "10.18653/v1/2020.acl-main.207",
+        pages = "2270--2282"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact:
+  desc: '
+<p>
+A version of the SciFact dataset, for fact verification. Queries include those form the /train and /test sets.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.emnlp-main.609.pdf">Dataset paper</a></li>
+<li><a href="https://www.aclweb.org/anthology/2020.emnlp-main.609.pdf">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{wadden-etal-2020-fact,
+        title = "Fact or Fiction: Verifying Scientific Claims",
+        author = "Wadden, David  and
+          Lin, Shanchuan  and
+          Lo, Kyle  and
+          Wang, Lucy Lu  and
+          van Zuylen, Madeleine  and
+          Cohan, Arman  and
+          Hajishirzi, Hannaneh",
+        booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+        month = nov,
+        year = "2020",
+        address = "Online",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/2020.emnlp-main.609",
+        doi = "10.18653/v1/2020.emnlp-main.609",
+        pages = "7534--7550"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact/test:
+  desc: '
+<p>
+The official <em>dev</em> set.
+</p>
+'
+  bibtex: |
+    inproceedings{wadden-etal-2020-fact,
+        title = "Fact or Fiction: Verifying Scientific Claims",
+        author = "Wadden, David  and
+          Lin, Shanchuan  and
+          Lo, Kyle  and
+          Wang, Lucy Lu  and
+          van Zuylen, Madeleine  and
+          Cohan, Arman  and
+          Hajishirzi, Hannaneh",
+        booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+        month = nov,
+        year = "2020",
+        address = "Online",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/2020.emnlp-main.609",
+        doi = "10.18653/v1/2020.emnlp-main.609",
+        pages = "7534--7550"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+scifact/train:
+  desc: '
+<p>
+The official train set.
+</p>
+'
+  bibtex: |
+    @inproceedings{wadden-etal-2020-fact,
+        title = "Fact or Fiction: Verifying Scientific Claims",
+        author = "Wadden, David  and
+          Lin, Shanchuan  and
+          Lo, Kyle  and
+          Wang, Lucy Lu  and
+          van Zuylen, Madeleine  and
+          Cohan, Arman  and
+          Hajishirzi, Hannaneh",
+        booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
+        month = nov,
+        year = "2020",
+        address = "Online",
+        publisher = "Association for Computational Linguistics",
+        url = "https://www.aclweb.org/anthology/2020.emnlp-main.609",
+        doi = "10.18653/v1/2020.emnlp-main.609",
+        pages = "7534--7550"
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+trec-covid:
+  desc: '
+<p>
+A version of the TREC COVID (complete) dataset, with titles and abstracts as documents. Queries
+are the question variant.
+</p>
+<p>
+Data pre-processing may be different than what is done in <a class="ds-ref">cord19/trec-covid</a>.
+</p>
+<ul>
+<li><a href="https://www.semanticscholar.org/cord19">Document collection site</a></li>
+<li><a href="https://ir.nist.gov/covidSubmit/index.html">Shared task site</a></li>
+<li><a href="https://ir.nist.gov/covidSubmit/papers/Forum_TRECCOVID1.pdf">Shared task paper</a></li>
+<li>See also: <a class="ds-ref">cord19/trec-covid</a></li>
+</ul>
+'
+  bibtex: |
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+    @article{Wang2020CORD19TC,
+      title={CORD-19: The Covid-19 Open Research Dataset},
+      author={Lucy Lu Wang and Kyle Lo and Yoganand Chandrasekhar and Russell Reas and Jiangjiang Yang and Darrin Eide and K. Funk and Rodney Michael Kinney and Ziyang Liu and W. Merrill and P. Mooney and D. Murdick and Devvret Rishi and Jerry Sheehan and Zhihong Shen and B. Stilson and A. Wade and K. Wang and Christopher Wilhelm and Boya Xie and D. Raymond and Daniel S. Weld and Oren Etzioni and Sebastian Kohlmeier},
+      journal={ArXiv},
+      year={2020}
+    }
+    @article{Voorhees2020TRECCOVIDCA,
+      title={TREC-COVID: Constructing a Pandemic Information Retrieval Test Collection},
+      author={E. Voorhees and Tasmeer Alam and Steven Bedrick and Dina Demner-Fushman and W. Hersh and Kyle Lo and Kirk Roberts and I. Soboroff and Lucy Lu Wang},
+      journal={ArXiv},
+      year={2020},
+      volume={abs/2005.04474}
+    }
+
+webis-touche2020:
+  desc: '
+<p>
+A version of the Touchè-2020 dataset, for argument retrieval.
+</p>
+<p>
+Negative relevance judgments from the original dataset are replaced with 0.
+</p>
+<ul>
+<li><a href="https://link.springer.com/chapter/10.1007%2F978-3-030-58219-7_26">Dataset paper</a></li>
+<li><a href="https://webis.de/events/touche-20/">Dataset webiste</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Bondarenko2020OverviewOT,
+      title={Overview of Touch{\'e} 2020: Argument Retrieval},
+      author={Alexander Bondarenko and Maik Fr{\"o}be and Meriem Beloucif and Lukas Gienapp and Yamen Ajjour and Alexander Panchenko and Christian Biemann and Benno Stein and Henning Wachsmuth and Martin Potthast and Matthias Hagen},
+      booktitle={CLEF},
+      year={2020}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/android:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>android</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+cqadupstack/english:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>english</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/gaming:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>gaming</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/gis:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>gis</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/mathematica:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>mathematica</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/physics:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>physics</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/programmers:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>programmers</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/stats:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>stats</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/tex:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>tex</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/unix:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>unix</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/webmasters:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>webmasters</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }
+
+
+cqadupstack/wordpress:
+  desc: '
+<p>
+A version of the CQADupStack dataset, for duplicate question retrieval. This subset is from the
+<kbd>wordpress</kbd>
+StackExchange subforum.
+</p>
+<ul>
+<li><a href="https://people.eng.unimelb.edu.au/tbaldwin/pubs/adcs2015.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cis.unimelb.edu.au/resources/cqadupstack/">Dataset website</a></li>
+<li><a href="https://github.com/D1Doris/CQADupStack">Dataset repository</a></li>
+</ul>
+'
+  bibtex: |
+    @article{Hoogeveen2015CQADupStackAB,
+      title={{CQADupStack}: A Benchmark Data Set for Community Question-Answering Research},
+      author={D. Hoogeveen and Karin M. Verspoor and Timothy Baldwin},
+      journal={Proceedings of the 20th Australasian Document Computing Symposium},
+      year={2015}
+    }
+    @article{thakur2021beir,
+      title = "BEIR: A Heterogenous Benchmark for Zero-shot Evaluation of Information Retrieval Models",
+      author = "Thakur, Nandan and Reimers, Nils and Rücklé, Andreas and Srivastava, Abhishek and Gurevych, Iryna", 
+      journal= "arXiv preprint arXiv:2104.08663",
+      month = "4",
+      year = "2021",
+      url = "https://arxiv.org/abs/2104.08663",
+    }

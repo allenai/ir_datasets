@@ -59,10 +59,10 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             9: GenericQuery('1105792', 'define: geon'),
             44: GenericQuery('997622', 'where is the show shameless filmed'),
         })
-        self._test_queries('msmarco-document/trec-dl-hard', count=49, items={
+        self._test_queries('msmarco-document/trec-dl-hard', count=50, items={
             0: GenericQuery('1108939', 'what slows down the flow of blood'),
             9: GenericQuery('451602', "medicare's definition of mechanical ventilation"),
-            48: GenericQuery('88495', 'causes of stroke?'),
+            49: GenericQuery('88495', 'causes of stroke?'),
         })
         self._test_queries('msmarco-document/trec-dl-hard/fold1', count=10, items={
             0: GenericQuery('966413', 'where are the benefits of cinnamon as a supplement?'),
@@ -80,9 +80,9 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             0: GenericQuery('1108100', 'what type of movement do bacteria exhibit?'),
             9: GenericQuery('88495', 'causes of stroke?'),
         })
-        self._test_queries('msmarco-document/trec-dl-hard/fold5', count=9, items={
+        self._test_queries('msmarco-document/trec-dl-hard/fold5', count=10, items={
             0: GenericQuery('190044', 'foods to detox liver naturally'),
-            8: GenericQuery('877809', 'what metal are hip replacements made of'),
+            9: GenericQuery('877809', 'what metal are hip replacements made of'),
         })
 
 
@@ -122,10 +122,10 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             9: TrecQrel('42255', 'D1168483', 0, '0'),
             9097: TrecQrel('1136962', 'D96742', 0, '0'),
         })
-        self._test_qrels('msmarco-document/trec-dl-hard', count=8540, items={
+        self._test_qrels('msmarco-document/trec-dl-hard', count=8544, items={
             0: TrecQrel('1117817', 'D192188', 0, 'Q0'),
             9: TrecQrel('801118', 'D579461', 1, 'Q0'),
-            8539: TrecQrel('315637', 'D655701', 3, 'Q0'),
+            8543: TrecQrel('273695', 'D736968', 2, 'Q0'),
         })
         self._test_qrels('msmarco-document/trec-dl-hard/fold1', count=1557, items={
             0: TrecQrel('1056204', 'D1891649', 1, 'Q0'),
@@ -147,10 +147,10 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             9: TrecQrel('87452', 'D1000458', 2, 'Q0'),
             1053: TrecQrel('1108100', 'D3318246', 3, 'Q0'),
         })
-        self._test_qrels('msmarco-document/trec-dl-hard/fold5', count=4110, items={
+        self._test_qrels('msmarco-document/trec-dl-hard/fold5', count=4114, items={
             0: TrecQrel('489204', 'D1002646', 0, 'Q0'),
             9: TrecQrel('489204', 'D1025842', 1, 'Q0'),
-            4109: TrecQrel('190044', 'D910793', 3, 'Q0'),
+            4113: TrecQrel('273695', 'D736968', 2, 'Q0'),
         })
 
     def test_msmarco_document_scoreddocs(self):

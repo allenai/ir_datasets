@@ -30,6 +30,8 @@ aquaint:
     instructions: 'The AQUAINT corpus is available from the LDC via:
 <https://catalog.ldc.upenn.edu/LDC2002T31>.
 
+More details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: 'ac623257d8dd35326c9d500d5f6834e5'
     cache_path: 'aquaint_comp_LDC2002T31.tgz'
@@ -41,6 +43,69 @@ To proceed, symlink the source file here: {path}'
     url: 'https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt'
     expected_md5: '9186021c74090464c50f577d4826e2e2'
     cache_path: 'trec-robust-2005/qrels'
+
+
+beir:
+  msmarco:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip'
+    expected_md5: '444067daf65d982533ea17ebd59501e4'
+    cache_path: 'msmarco/source.zip'
+  trec-covid:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/trec-covid.zip'
+    expected_md5: 'ce62140cb23feb9becf6270d0d1fe6d1'
+    cache_path: 'trec-covid/source.zip'
+  nfcorpus:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip'
+    expected_md5: 'a89dba18a62ef92f7d323ec890a0d38d'
+    cache_path: 'nfcorpus/source.zip'
+  nq:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nq.zip'
+    expected_md5: 'd4d3d2e48787a744b6f6e691ff534307'
+    cache_path: 'nq/source.zip'
+  hotpotqa:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/hotpotqa.zip'
+    expected_md5: 'f412724f78b0d91183a0e86805e16114'
+    cache_path: 'hotpotqa/source.zip'
+  fiqa:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fiqa.zip'
+    expected_md5: '17918ed23cd04fb15047f73e6c3bd9d9'
+    cache_path: 'fiqa/source.zip'
+  arguana:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/arguana.zip'
+    expected_md5: '8ad3e3c2a5867cdced806d6503f29b99'
+    cache_path: 'arguana/source.zip'
+  webis-touche2020:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip'
+    expected_md5: 'd6550a3e0f725dc4aae83253ae63547f'
+    cache_path: 'webis-touche2020/source.zip'
+  cqadupstack:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/cqadupstack.zip'
+    expected_md5: '4e41456d7df8ee7760a7f866133bda78'
+    cache_path: 'cqadupstack/source.zip'
+  quora:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/quora.zip'
+    expected_md5: '18fb154900ba42a600f84b839c173167'
+    cache_path: 'quora/source.zip'
+  dbpedia-entity:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/dbpedia-entity.zip'
+    expected_md5: 'c2a39eb420a3164af735795df012ac2c'
+    cache_path: 'dbpedia-entity/source.zip'
+  scidocs:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip'
+    expected_md5: '38121350fc3a4d2f48850f6aff52e4a9'
+    cache_path: 'scidocs/source.zip'
+  fever:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fever.zip'
+    expected_md5: '88591ef8eb2913126d0c93ecbde6285f'
+    cache_path: 'fever/source.zip'
+  climate-fever:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/climate-fever.zip'
+    expected_md5: '8b66f0a9126c521bae2bde127b4dc99d'
+    cache_path: 'climate-fever/source.zip'
+  scifact:
+    url: 'https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip'
+    expected_md5: '5f7d1de60b170fc8027bb7898e2efca1'
+    cache_path: 'scifact/source.zip'
 
 
 car:
@@ -87,6 +152,26 @@ clinicaltrials:
     url: 'http://www.trec-cds.org/clinical_trials.3.tar.gz'
     expected_md5: 'fa8e76c85ab7204c0294f03fa76f6ed2'
     cache_path: 'docs_2019_3.tar.gz'
+  docs/2021/1:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part1.zip'
+    expected_md5: 'e12eb9a0d21452503b0ef8874c69f490'
+    cache_path: 'docs_2021_1.zip'
+  docs/2021/2:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part2.zip'
+    expected_md5: 'f6986125506434887a162f144ca4d9a2'
+    cache_path: 'docs_2021_2.zip'
+  docs/2021/3:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part3.zip'
+    expected_md5: '9b7fb528b22edfcf4535154cc3d98111'
+    cache_path: 'docs_2021_3.zip'
+  docs/2021/4:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part4.zip'
+    expected_md5: '4fd98d209e7b62cee87af211c0c281f6'
+    cache_path: 'docs_2021_4.zip'
+  docs/2021/5:
+    url: 'http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part5.zip'
+    expected_md5: 'a747f09ac5d4f3cd0cc75957ad9f32d8'
+    cache_path: 'docs_2021_5.zip'
   trec-pm-2017/qrels:
     url: 'https://trec.nist.gov/data/precmed/qrels-final-trials.txt'
     expected_md5: '3c35f9e62abf64c873250ac8022d5a51'
@@ -115,6 +200,8 @@ clirmatrix:
 clueweb09:
   docs:
     instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>
+
+More details about the procedure can be found here: <https://ir-datasets.com/ClueWeb09.html#DataAccess>.
 
 Link the ClueWeb09 source files here: {path}
 
@@ -167,7 +254,9 @@ Should contain directories like ClueWeb09_English_1'
 
 clueweb12:
   docs:
-    instructions: 'ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>
+    instructions: 'ClueWeb12 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>
+
+More details about the procedure can be found here: <https://ir-datasets.com/ClueWeb12.html#DataAccess>.
 
 Link the ClueWeb12 source files here: {path}
 
@@ -375,6 +464,12 @@ cord19:
     expected_md5: '6111c00ac9adac774f5b51e4f9a2a25b'
     cache_path: 'trec-covid/round5/qrels'
 
+cranfield:
+  main:
+    url: 'http://ir.dcs.gla.ac.uk/resources/test_collections/cran/cran.tar.gz'
+    expected_md5: '1730f7be572d95a5a4b56c59a7b900a5'
+    cache_path: 'cran.tar.gz'
+
 dpr-w100:
   docs:
     url: 'https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz'
@@ -388,10 +483,20 @@ dpr-w100:
     url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz'
     expected_md5: '2640483dbe0df7ae29c6da419c551a80'
     cache_path: 'nq-dev.json.gz'
+  tqa-train:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-train.json.gz'
+    expected_md5: '5aa4d3577c91425cd20e239ed89a252b'
+    cache_path: 'tqa-train.json.gz'
+  tqa-dev:
+    url: 'https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-dev.json.gz'
+    expected_md5: 'd559dffe09acfe5a6370adea55b8abf2'
+    cache_path: 'tqa-dev.json.gz'
 
 gov:
   docs:
     instructions: 'GOV is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>
+
+More details about the procedure can be found here: <https://ir-datasets.com/gov.html#DataAccess>.
 
 Link the GOV source files here: {path}
 
@@ -446,6 +551,8 @@ Should contain G00, G01, G02, ...'
 gov2:
   docs:
     instructions: 'GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>
+
+More details about the procedure can be found here: <https://ir-datasets.com/gov2.html#DataAccess>.
 
 Link the GOV2 source files here: {path}
 
@@ -928,7 +1035,7 @@ msmarco-document:
     cache_path: 'orcas/ms.run.gz'
   trec-dl-hard/qrels:
     url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels'
-    expected_md5: 'da2366aef13c11b352fe4587d96ee9f8'
+    expected_md5: '06dfe71d497e081a7c4c1294979edb7d'
     cache_path: 'trec-dl-hard/qrels'
 
 
@@ -989,7 +1096,7 @@ msmarco-passage:
     cache_path: 'trec-dl-2020/qrels'
   trec-dl-hard/qrels:
     url: 'https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-passage.qrels'
-    expected_md5: '32c5f50e7be95927342eafd84e9a6d2c'
+    expected_md5: '8583c2cbad56eeacb449586fe1d2a471'
     cache_path: 'trec-dl-hard/qrels'
 
 
@@ -1299,6 +1406,8 @@ nyt:
     instructions: 'The New York Times Annotated Corpus. It is available from the LDC via:
 <https://catalog.ldc.upenn.edu/LDC2008T19>.
 
+More details about the procedure can be found here: <https://ir-datasets.com/nyt.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: '67a1bcf200c448424bf0fba34cef17b0'
     cache_path: nyt.tgz
@@ -1388,6 +1497,8 @@ trec-arabic:
     instructions: 'The dataset is based on the Arabic Newswire corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2001T55>
 
+More details about the procedure can be found here: <https://ir-datasets.com/trec-arabic.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: "b17f34a51dca8d19fae66c338c9ed73a"
     cache_path: 'corpus.tgz'
@@ -1413,6 +1524,8 @@ trec-mandarin:
   docs:
     instructions: 'The dataset is based on the TREC Mandarin corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2000T52>
+
+More details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "a847fa029a1356b8f396aa642c449e38"
@@ -1440,6 +1553,8 @@ trec-spanish:
     instructions: 'The dataset is based on the TREC Spanish corpus. It is available from the LDC
 via: <https://catalog.ldc.upenn.edu/LDC2000T51>
 
+More details about the procedure can be found here: <https://ir-datasets.com/trec-spanish.html#DataAccess>.
+
 To proceed, symlink the source file here: {path}'
     expected_md5: "4b8583c03149cf0c06c090fd230b33c6"
     cache_path: 'corpus.tgz'
@@ -1463,19 +1578,25 @@ To proceed, symlink the source file here: {path}'
 
 tripclick:
   benchmark:
-    instructions: 'TODO
+    instructions: 'To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.
+
+More details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "6e5d3deeba138750e9a148b538f30a8f"
     cache_path: 'benchmark.tar.gz'
   dlfiles:
-    instructions: 'TODO
+    instructions: 'To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.
+
+More details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "1f256c19466b414e365324d8ef21f09c"
     cache_path: 'dlfiles.tar.gz'
   dlfiles_runs_test:
-    instructions: 'TODO
+    instructions: 'To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.
+
+More details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.
 
 To proceed, symlink the source file here: {path}'
     expected_md5: "2b5e98c683a91e19630636b6f83e3b15"
@@ -1486,7 +1607,9 @@ trec-robust04:
   docs:
     instructions: 'The TREC Robust document collection is from TREC disks 4 and 5. Due to the
 copyrighted nature of the  documents, this collection is for research use only, which requires
-agreements to be  filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
+agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.
+
+More details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.
 
 Once completed, place the uncompressed source here: {path}
 
@@ -1545,6 +1668,8 @@ wapo:
     instructions: 'The Washington Post collection can be requested here:
 <https://trec.nist.gov/data/wapost/>
 
+More details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.
+
 Once completed, place/link the source file: {path}'
     expected_md5: 'ce6e93f6ce9959b72c2de4f8d12089ab'
     cache_path: 'WashingtonPost.v2.tar.gz'
@@ -1556,6 +1681,30 @@ Once completed, place/link the source file: {path}'
     url: 'https://trec.nist.gov/data/core/qrels2018.txt'
     expected_md5: '7a982cd110f8bb30da4141f0f639f2e1'
     cache_path: 'trec-core-2018/qrels'
+  trec-news-2018/queries:
+    url: 'https://trec.nist.gov/data/news/2018/newsir18-topics.txt'
+    expected_md5: '73740793543b439d1ff1b8ee9359973a'
+    cache_path: 'trec-news-2018/queries.txt'
+  trec-news-2018/qrels:
+    url: 'https://trec.nist.gov/data/news/2018/bqrels.exp-gains.txt'
+    expected_md5: '396963175006cb3201ea7c16e874033a'
+    cache_path: 'trec-news-2018/qrels'
+  trec-news-2019/queries:
+    url: 'https://trec.nist.gov/data/news/2019/newsir19-background-linking-topics.xml'
+    expected_md5: '388b5c96f8962da17eb1024b856d21c1'
+    cache_path: 'trec-news-2019/queries.txt'
+  trec-news-2019/qrels:
+    url: 'https://trec.nist.gov/data/news/2019/newsir19-qrels-background.txt'
+    expected_md5: '7b839a1a94e349d3facf28012542cc1d'
+    cache_path: 'trec-news-2019/qrels'
+  trec-news-2020/queries:
+    url: 'https://trec.nist.gov/data/news/2020/newsir20-topics.txt'
+    expected_md5: '2674538a07fb7ac29200cbc4c4a05404'
+    cache_path: 'trec-news-2020/queries.txt'
+  trec-news-2020/qrels:
+    url: 'https://trec.nist.gov/data/news/2020/qrels.background'
+    expected_md5: '7c31f731775bdd4148d349df1a9e43fc'
+    cache_path: 'trec-news-2020/qrels'
 
 
 wikir:
