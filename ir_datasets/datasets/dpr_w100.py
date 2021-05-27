@@ -34,10 +34,11 @@ class DprW100Query(NamedTuple):
 
 
 class DprW100Manager:
-    def __init__(self, dlc, base_path):
+    def __init__(self, dlc, base_path, passage_id_key='passage_id'):
         self._dlc = dlc
         self._base_path = base_path
         self._base_path.mkdir(parents=True, exist_ok=True)
+        self._passage_id_key = passage_id_key
 
     def build(self):
         if (self._base_path/'queries.tsv').exists():
@@ -58,18 +59,18 @@ class DprW100Manager:
                     ]) + '\n')
                 seen = set()
                 for ctxt in record['positive_ctxs']:
-                    if ctxt["passage_id"] not in seen:
-                        seen.add(ctxt["passage_id"])
+                    if ctxt[self._passage_id_key] not in seen:
+                        seen.add(ctxt[self._passage_id_key])
                         rel = 2 if ctxt['score'] == 1000 else 1
-                        f_qrels.write(f'{qid} 0 {ctxt["passage_id"]} {rel}\n')
+                        f_qrels.write(f'{qid} 0 {ctxt[self._passage_id_key]} {rel}\n')
                 for ctxt in record['hard_negative_ctxs']:
-                    if ctxt["passage_id"] not in seen:
-                        seen.add(ctxt["passage_id"])
-                        f_qrels.write(f'{qid} 0 {ctxt["passage_id"]} 0\n')
+                    if ctxt[self._passage_id_key] not in seen:
+                        seen.add(ctxt[self._passage_id_key])
+                        f_qrels.write(f'{qid} 0 {ctxt[self._passage_id_key]} 0\n')
                 for ctxt in record['negative_ctxs']:
-                    if ctxt["passage_id"] not in seen:
-                        seen.add(ctxt["passage_id"])
-                        f_qrels.write(f'{qid} 0 {ctxt["passage_id"]} -1\n')
+                    if ctxt[self._passage_id_key] not in seen:
+                        seen.add(ctxt[self._passage_id_key])
+                        f_qrels.write(f'{qid} 0 {ctxt[self._passage_id_key]} -1\n')
 
     def file_ref(self, path):
         return _ManagedDlc(self, self._base_path/path)
@@ -136,6 +137,20 @@ def _init():
         DprW100Queries(nq_train_manager.file_ref('queries.tsv')),
         TrecQrels(nq_train_manager.file_ref('qrels'), QREL_DEFS),
         documentation('natural-questions/train'))
+
+    tqa_dev_manager = DprW100Manager(GzipExtract(dlc['tqa-dev']), base_path/'tqa-dev', passage_id_key='psg_id')
+    subsets['trivia-qa/dev'] = Dataset(
+        collection,
+        DprW100Queries(tqa_dev_manager.file_ref('queries.tsv')),
+        TrecQrels(tqa_dev_manager.file_ref('qrels'), QREL_DEFS),
+        documentation('trivia-qa/dev'))
+
+    tqa_train_manager = DprW100Manager(GzipExtract(dlc['tqa-train']), base_path/'tqa-train', passage_id_key='psg_id')
+    subsets['trivia-qa/train'] = Dataset(
+        collection,
+        DprW100Queries(tqa_train_manager.file_ref('queries.tsv')),
+        TrecQrels(tqa_train_manager.file_ref('qrels'), QREL_DEFS),
+        documentation('trivia-qa/train'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

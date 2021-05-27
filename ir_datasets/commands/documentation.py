@@ -57,6 +57,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
     dataset = ir_datasets.registry[top_level]
     documentation = dataset.documentation() if hasattr(dataset, 'documentation') else {}
     with page_template(f'{top_level}.html', out_dir, version, title=documentation.get('pretty_name', top_level), source=f'datasets/{top_level.replace("-", "_")}.py') as out:
+        data_access_section = generate_data_access_section(documentation)
         index = '\n'.join(f'<li><a href="#{name}"><kbd><span class="prefix">{top_level}</span>{name[len(top_level):]}</kbd></a></li>' for name, ds in sub_datasets)
         out.write(f'''
 <div style="font-weight: bold; font-size: 1.1em;">Index</div>
@@ -66,7 +67,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
 </ol>
 <div id="Downloads">
 </div>
-<hr />
+{data_access_section}<hr />
 <div class="dataset" id="{top_level}">
 <h3><kbd class="select"><span class="str">"{top_level}"</kdb></h3>
 {generate_dataset(dataset, top_level)}
@@ -210,6 +211,18 @@ bibtex:
         out.seek(0)
         return out.read()
 
+
+def generate_data_access_section(documentation):
+    if 'data_access' not in documentation:
+        return ''
+    return f'''
+<div id="DataAccess">
+<h3>Data Access Information</h3>
+{documentation["data_access"]}
+</div>
+'''
+
+
 def generate_data_format(cls):
     if cls in (str, int, float, bytes):
         return f'<span class="kwd">{cls.__name__}</span>'
@@ -220,7 +233,7 @@ def generate_data_format(cls):
                 args.append(' ...')
             else:
                 args.append(generate_data_format(arg))
-        if cls._name in ('Tuple', 'List'):
+        if cls._name in ('Tuple', 'List', 'Dict'):
             return f'<span class="kwd">{cls._name}</span>[{",".join(args)}]'
     elif tuple in cls.__bases__ and hasattr(cls, '_fields'):
         fields = []
@@ -258,7 +271,7 @@ def generate_index(out_dir, version):
             dataset = ir_datasets.registry[name]
             parent = name.split('/')[0]
             if parent != name:
-                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix">{parent}</span>{name[len(parent):]}</kbd></a>'
+                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix"><span class="screen-small-hide">{parent}</span><span class="screen-small-show">&hellip;</span></span>{name[len(parent):]}</kbd></a>'
                 tbody = ''
                 row_id = ''
             else:
@@ -266,7 +279,7 @@ def generate_index(out_dir, version):
                 tbody = '</tbody><tbody>'
                 row_id = f' id="{parent}"'
                 jump.append(f'<option value="{parent}">{parent}</option>')
-            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs")}</td><td class="center">{emoji(dataset, "queries")}</td><td class="center">{emoji(dataset, "qrels")}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs")}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs")}</td></tr>')
+            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs", parent)}</td><td class="center">{emoji(dataset, "queries", parent)}</td><td class="center">{emoji(dataset, "qrels", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs", parent)}</td></tr>')
         index = '\n'.join(index)
         jump = '\n'.join(jump)
         out.write(f'''
@@ -286,10 +299,11 @@ Install with pip:
 
 <ul>
 <li>Colab Tutorials: <a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets.ipynb">python</a>, <a href="https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets_cli.ipynb">CLI</a></li>
-<li><a href="python.html">Python API Documentation</a></li>
+<li><a href="python.html">Python API Documentation</a> (<a href="python-beta.html">beta version</a>)</li>
 <li><a href="cli.html">CLI Documentation</a></li>
 <li><a href="downloads.html">Download Dashboard</a></li>
 <li><a href="https://github.com/allenai/ir_datasets/blob/master/examples/adding_datasets.ipynb">Adding new datasets</a></li>
+<li><a href="https://arxiv.org/pdf/2103.02280.pdf">ir_datasets SIGIR resource paper</a></li>
 </ul>
 
 <h2 style="margin-bottom: 4px;">Dataset Index</h2>
@@ -325,6 +339,20 @@ Install with pip:
 <ul>
 {versions}
 </ul>
+<h2>Citation</h2>
+<p>
+When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
+can be found on each dataset's documenation page, or in the python interface via
+<kbd>dataset.documentation()['bibtex']</kbd> (when available).
+</p>
+<p>If you use this tool, please cite our <a href="https://arxiv.org/pdf/2103.02280.pdf">SIGIR resource paper</a>:</p>
+<cite class="select">@inproceedings{{macavaney:sigir2021-irds,
+  author = {{MacAvaney, Sean and Yates, Andrew and Feldman, Sergey and Downey, Doug and Cohan, Arman and Goharian, Nazli}},
+  title = {{Simplified Data Wrangling with ir_datasets}},
+  year = {{2021}},
+  booktitle = {{SIGIR}}
+}}
+</cite>
 ''')
 
 
@@ -635,6 +663,296 @@ appear in the iterator.
 </p>
 </div>
 ''')
+    with page_template('python-beta.html', out_dir, version, title='Beta Python API') as out:
+        out.write(f'''
+<div class="warn">
+This is an experimental version of the Python API, and may be buggy and subject to change in future
+versions. See <a href="python.html">here</a> for the official python API. For now, both versions
+of the python API live side-by-side.
+</div>
+
+<h2 id="dataset">Dataset objects</h2>
+
+<p>
+Datasets can be obtained through <code>ir_datasts.load(<span class="str">"dataset-id"</span>)</code>
+or constructed with <code>ir_datasets.create_dataset(...)</code>. Dataset objects provide the
+following methods:
+</p>
+
+<h4><code>dataset.has_docs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.docs_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_queries() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.queries_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_qrels() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.qrels_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_scoreddocs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.scoreddocs_*</code> methods.</p>
+</div>
+
+<h4><code>dataset.has_docpairs() -> bool</code></h4>
+
+<div class="methodinfo">
+<p>Returns <code class="kwd">True</code> if this dataset supports <code>dataset.docpairs_*</code> methods.</p>
+</div>
+
+
+<h4><code>iter(dataset.docs) -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>Returns an iterator of <code>namedtuple</code>s, where each item is a document in the collection.</p>
+</div>
+
+<h4><code>len(dataset.docs) -> int</code></h4>
+
+<div class="methodinfo">
+<p>Returns the number of documents in the collection.</p>
+</div>
+
+<h4><code>dataset.docs[start:stop:skip] -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>Returns an iterator of <code>namedtuple</code>s by index, specified by the slice given.</p>
+
+<code class="example">
+<div class="comment"># First 10 documents</div>
+<div>dataset.docs[:10]</div>
+
+<div class="comment"># Last 10 documents</div>
+<div>dataset.docs[-10:]</div>
+
+<div class="comment"># Every 2 documents</div>
+<div>dataset.docs[::2]</div>
+
+<div class="comment"># Every 2 documents, starting with the first document</div>
+<div>dataset.docs[1::2]</div>
+
+<div class="comment"># The first half of the collection</div>
+<div>dataset.docs[:1/2]</div>
+
+<div class="comment"># The middle third of collection</div>
+<div>dataset.docs[1/3:2/3]</div>
+</code>
+
+<p>
+Note that the fancy slicing mechanics are faster and more sophisticated than
+<code>itertools.islice</code>; documents are not processed if they are skipped.
+</p>
+</div>
+
+<h4><code>dataset.docs.type -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the <code class="kwd">NamedTuple</code> type that the <code>docs_iter</code> returns.
+The available fields and type information can be found with <code>_fields</code> and <code>__annotations__</code>:
+</p>
+
+<code class="example">
+<div>dataset.docs.type._fields</div>
+</code>
+<code class="output">
+<div>(<span class="str">'doc_id'</span>, <span class="str">'title'</span>, <span class="str">'doi'</span>, <span class="str">'date'</span>, <span class="str">'abstract'</span>)</div>
+</code>
+<code class="example">
+<div>dataset.docs.type.__annotations__</div>
+</code>
+<code class="output">
+<div>{{</div>
+<div>&nbsp;&nbsp;<span class="str">'doc_id'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'title'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'doi'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'date'</span>: <span class="kwd">str</span>,</div>
+<div>&nbsp;&nbsp;<span class="str">'abstract'</span>: <span class="kwd">str</span></div>
+<div>}}</div>
+</code>
+</div>
+
+
+<h4><code>dataset.docs.lookup(doc_ids) -> Dict[str, namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a dictionary mapping all doc_ids found in the collection to their contents.
+</p>
+</div>
+
+<h4><code>dataset.docs.lookup_iter(doc_ids) -> Iterable[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterable of all docs associated with the specified doc_ids found in the collection.
+</p>
+</div>
+
+<h4><code>dataset.docs.lang -> str</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the two-character <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1
+language code</a> (e.g., <span class="str">"en"</span> for English) of the documents in this collection.
+Returns <span class="kwd">None</span> if there are multiple languages, a language not represented by an
+ISO 639-1 code, or the language is otherwise unknown.
+</p>
+</div>
+
+
+<h4><code>iter(dataset.queries) -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing queries in the dataset.
+</p>
+</div>
+
+<h4><code>len(dataset.queries) -> int</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the number of queries in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.queries.type -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>iter(queries)</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>dataset.queries.lang -> str</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the two-character <a href="https://en.wikipedia.org/wiki/ISO_639-1">ISO 639-1
+language code</a> (e.g., <span class="str">"en"</span> for English) of the queries.
+Returns <span class="kwd">None</span> if there are multiple languages, a language not represented by an
+ISO 639-1 code, or the language is otherwise unknown. Note that some datasets include
+translations as different query fields.
+</p>
+</div>
+
+<h4><code>dataset.queries.lookup(query_ids) -> Dict[str, namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a dictionary mapping all query_ids found in the dataset to their contents.
+</p>
+</div>
+
+<h4><code>dataset.queries.lookup_iter(query_ids) -> Iterable[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterable of all docs associated with the specified query_ids found in the dataset.
+</p>
+</div>
+
+
+<h4><code>iter(dataset.qrels) -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing query relevance assessments in the dataset.
+</p>
+</div>
+
+<h4><code>len(dataset.qrels) -> int</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the numer of qrels in the dataset.
+</p>
+</div>
+
+<h4><code>dataset.qrels.type -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>qrels_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>dataset.qrels.defs -> dict[int, str]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a mapping between relevance levels and a textual description of
+what the level represents. (E.g., 0 represting not relevant, 1 representing
+possibly relevant, 2 representing definitely relevant.)
+</p>
+</div>
+
+
+<h4><code>dataset.qrels.asdict() -> dict[str, dict[str, int]]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns a dict of dicts representing all qrels for this collection. Note
+that this will load all qrels into memory. The outer dict key is the
+<code>query_id</code> and the inner key is the <code>doc_id</code>.
+This is useful in tools such as <a href="https://github.com/cvangysel/pytrec_eval">pytrec_eval</a>.
+</p>
+</div>
+
+
+<h4><code>iter(dataset.scoreddocs) -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing scored docs (e.g., initial rankings
+for re-ranking tasks) in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.scoreddocs.type -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>scoreddocs_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+
+
+<h4><code>iter(dataset.docpairs) -> iter[namedtuple]</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns an iterator over namedtuples representing doc pairs (e.g., training pairs) in the dataset.
+</p>
+</div>
+
+
+<h4><code>dataset.docpairs.type -> type</code></h4>
+
+<div class="methodinfo">
+<p>
+Returns the type of the namedtuple returned by <code>docpairs_iter</code>,
+including <code>_fields</code> and <code>__annotations__</code>.
+</p>
+</div>
+''')
 
 
 def generate_cli_docs(out_dir, version):
@@ -832,27 +1150,14 @@ jobs:
 def generate_css(base_dir, version):
     with open(get_file_path(base_dir, version, 'main.css'), 'wt') as out:
         out.write(r'''
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Titillium Web'), local('TitilliumWeb-Regular'), 
-url("https://fonts.gstatic.com/s/titilliumweb/v4/7XUFZ5tgS-tD6QamInJTcRnhefaTZMTJ3r9AXhRp6aM.woff2") format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Titillium Web SemiBold'), local('TitilliumWeb-SemiBold'), url(https://fonts.gstatic.com/s/titilliumweb/v8/NaPDcZTIAOhVxoMyOr9n_E7ffBzCGItzY5abuWI.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
 body {
-  font-family: "Titillium Web", Calibri, Arial, sans-serif;
-  font-size: 13px;
+  font-family: "Roboto", Arial, sans-serif;
+  font-size: 14px;
   background-color: #eee;
   padding: 0;
   margin: 0;
+  line-height: 1.3;
 }
 .dataset {
   margin: 24px 0;
@@ -881,8 +1186,8 @@ body {
 .tag-scoreddocs { background-color: #9e5bd9; }
 .tag-docpairs { background-color: #06a892; }
 p, blockquote {
-  margin: 4px 0;
-  color: #666;
+  margin: 6px 0;
+  color: #333;
 }
 blockquote {
   border-left: 3px solid #a5bcd1;
@@ -890,7 +1195,7 @@ blockquote {
   margin-left: 6px;
 }
 .desc {
-  color: #666;
+  color: #333;
 }
 .ds-ref {
   font-family: monospace;
@@ -968,6 +1273,7 @@ cite {
   cursor: pointer;
   background-color: #666;
   color: white;
+  line-height: 1.5;
 }
 
 .tab.selected {
@@ -1096,7 +1402,7 @@ tbody tr:last-child td {
 
 .warn {
   color: white;
-  background-color: #ff9800;
+  background-color: #c17300;
   padding: 8px 16px;
   border-radius: 8px;
 }
@@ -1123,7 +1429,28 @@ details {
     margin: 8px 0;
 }
 
-@media screen and (max-width: 420px){
+#DataAccess {
+    border: 1px solid #91b6ca;
+    margin: 8px;
+    padding: 6px;
+    background-color: #eff8fc;
+    border-radius: 4px;
+}
+
+#DataAccess h3 {
+    margin: 3px 0;
+}
+
+#Downloads {
+    min-height: 21px;
+    margin: 8px 0;
+}
+
+.screen-small-show {
+    display: none;
+}
+
+@media screen and (max-width: 500px){
   .page {
     padding: 6px;
     margin: 0;
@@ -1143,6 +1470,9 @@ details {
   }
   .screen-small-hide {
     display: none;
+  }
+  .screen-small-show {
+    display: inherit;
   }
   .banner {
     margin-top: -6px;
@@ -1297,12 +1627,12 @@ def generate_qrel_defs_table(defs):
 </table>
 '''
 
-def emoji(ds, arg):
+def emoji(ds, arg, top_level):
     has = getattr(ds, f'has_{arg}')()
     if has:
         instructions = hasattr(ds, f'documentation') and ds.documentation().get(f'{arg}_instructions')
         if instructions:
-            return f'<span style="cursor: help;" title="{instructions}">⚠️</span>'
+            return f'<a href="{top_level}.html#DataAccess" title="{instructions}. Click for details.">⚠️</a>'
         return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
     return ''
 

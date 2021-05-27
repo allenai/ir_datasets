@@ -32,6 +32,12 @@ and additional filtering (described in the DPR paper) was applied.
 </ul>
 '
   bibtex: |
+    @article{Kwiatkowski2019NQ,
+      title = {Natural Questions: a Benchmark for Question Answering Research},
+      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+      year = {2019},
+      journal = {TACL}
+    }
     @misc{karpukhin2020dense,
       title={Dense Passage Retrieval for Open-Domain Question Answering},
       author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
@@ -40,17 +46,11 @@ and additional filtering (described in the DPR paper) was applied.
       archivePrefix={arXiv},
       primaryClass={cs.CL}
     }
-    @article{Kwiatkowski2019NQ,
-      title = {Natural Questions: a Benchmark for Question Answering Research},
-      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-      year = {2019},
-      journal = {TACL}
-    }
 
 natural-questions/dev:
   desc: '
 <p>
-Training subset from the Natural Questions Q&amp;A collection. This differs from the
+Dev subset from the Natural Questions Q&amp;A collection. This differs from the
 <a class="ds-ref">natural-questions/dev</a> dataset in that it uses the full Wikipedia dump
 and additional filtering (described in the DPR paper) was applied.
 </p>
@@ -59,6 +59,12 @@ and additional filtering (described in the DPR paper) was applied.
 </ul>
 '
   bibtex: |
+    @article{Kwiatkowski2019NQ,
+      title = {Natural Questions: a Benchmark for Question Answering Research},
+      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+      year = {2019},
+      journal = {TACL}
+    }
     @misc{karpukhin2020dense,
       title={Dense Passage Retrieval for Open-Domain Question Answering},
       author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
@@ -67,9 +73,57 @@ and additional filtering (described in the DPR paper) was applied.
       archivePrefix={arXiv},
       primaryClass={cs.CL}
     }
-    @article{Kwiatkowski2019NQ,
-      title = {Natural Questions: a Benchmark for Question Answering Research},
-      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-      year = {2019},
-      journal = {TACL}
+
+trivia-qa/train:
+  desc: '
+<p>
+Training subset from the Trivia QA dataset. Differing from the official Trivia QA collection,
+this uses the DPR Wikipedia dump as the source collection. Refer to the DPR paper for more details.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/P17-1147.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Joshi2017TriviaQAAL,
+      title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
+      author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
+      booktitle={ACL},
+      year={2017}
+    }
+    @misc{karpukhin2020dense,
+      title={Dense Passage Retrieval for Open-Domain Question Answering},
+      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+      year={2020},
+      eprint={2004.04906},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
+    }
+
+trivia-qa/dev:
+  desc: '
+<p>
+Dev subset from the Trivia QA dataset. Differing from the official Trivia QA collection,
+this uses the DPR Wikipedia dump as the source collection. Refer to the DPR paper for more details.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/P17-1147.pdf">Dataset paper</a></li>
+<li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li>
+</ul>
+'
+  bibtex: |
+    @inproceedings{Joshi2017TriviaQAAL,
+      title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
+      author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
+      booktitle={ACL},
+      year={2017}
+    }
+    @misc{karpukhin2020dense,
+      title={Dense Passage Retrieval for Open-Domain Question Answering},
+      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+      year={2020},
+      eprint={2004.04906},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL}
     }

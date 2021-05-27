@@ -97,10 +97,10 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: GenericQuery('1105792', 'define: geon'),
             44: GenericQuery('997622', 'where is the show shameless filmed'),
         })
-        self._test_queries('msmarco-passage/trec-dl-hard', count=49, items={
+        self._test_queries('msmarco-passage/trec-dl-hard', count=50, items={
             0: GenericQuery('1108939', 'what slows down the flow of blood'),
             9: GenericQuery('451602', "medicare's definition of mechanical ventilation"),
-            48: GenericQuery('88495', 'causes of stroke?'),
+            49: GenericQuery('88495', 'causes of stroke?'),
         })
         self._test_queries('msmarco-passage/trec-dl-hard/fold1', count=10, items={
             0: GenericQuery('966413', 'where are the benefits of cinnamon as a supplement?'),
@@ -118,9 +118,9 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             0: GenericQuery('1108100', 'what type of movement do bacteria exhibit?'),
             9: GenericQuery('88495', 'causes of stroke?'),
         })
-        self._test_queries('msmarco-passage/trec-dl-hard/fold5', count=9, items={
+        self._test_queries('msmarco-passage/trec-dl-hard/fold5', count=10, items={
             0: GenericQuery('190044', 'foods to detox liver naturally'),
-            8: GenericQuery('877809', 'what metal are hip replacements made of'),
+            9: GenericQuery('877809', 'what metal are hip replacements made of'),
         })
 
     def test_msmarco_passage_qrels(self):
@@ -184,10 +184,10 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: TrecQrel('42255', 'D1168483', 0, '0'),
             9097: TrecQrel('1136962', 'D96742', 0, '0'),
         })
-        self._test_qrels('msmarco-passage/trec-dl-hard', count=4226, items={
+        self._test_qrels('msmarco-passage/trec-dl-hard', count=4236, items={
             0: TrecQrel('915593', '1396701', 0, 'Q0'),
             9: TrecQrel('915593', '1772932', 0, 'Q0'),
-            4225: TrecQrel('1105792', '996676', 0, '0'),
+            4235: TrecQrel('273695', '8282605', 3, 'Q0'),
         })
         self._test_qrels('msmarco-passage/trec-dl-hard/fold1', count=1072, items={
             0: TrecQrel('915593', '1396701', 0, 'Q0'),
@@ -209,10 +209,10 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: TrecQrel('507445', '8407104', 1, 'Q0'),
             705: TrecQrel('1109707', '8746678', 0, '0'),
         })
-        self._test_qrels('msmarco-passage/trec-dl-hard/fold5', count=1106, items={
+        self._test_qrels('msmarco-passage/trec-dl-hard/fold5', count=1116, items={
             0: TrecQrel('190044', '1353072', 3, 'Q0'),
             9: TrecQrel('190044', '886798', 1, 'Q0'),
-            1105: TrecQrel('1112341', '943110', 0, 'Q0'),
+            1115: TrecQrel('273695', '8282605', 3, 'Q0'),
         })
 
 

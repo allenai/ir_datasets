@@ -23,6 +23,8 @@
 <li><a href="#dpr-w100"><kbd>dpr-w100</kbd></a></li>
 <li><a href="#dpr-w100/natural-questions/dev"><kbd><span class="prefix">dpr-w100</span>/natural-questions/dev</kbd></a></li>
 <li><a href="#dpr-w100/natural-questions/train"><kbd><span class="prefix">dpr-w100</span>/natural-questions/train</kbd></a></li>
+<li><a href="#dpr-w100/trivia-qa/dev"><kbd><span class="prefix">dpr-w100</span>/trivia-qa/dev</kbd></a></li>
+<li><a href="#dpr-w100/trivia-qa/train"><kbd><span class="prefix">dpr-w100</span>/trivia-qa/train</kbd></a></li>
 </ol>
 <div id="Downloads">
 </div>
@@ -74,7 +76,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"dpr-w100/natural-questions/dev"</kdb></h3>
 
 <div class="desc">
- <p> Training subset from the Natural Questions Q&amp;A collection. This differs from the <a class="ds-ref">natural-questions/dev</a> dataset in that it uses the full Wikipedia dump and additional filtering (described in the DPR paper) was applied. </p> <ul> <li>See also: <a class="ds-ref">natural-questions</a></li> </ul> 
+ <p> Dev subset from the Natural Questions Q&amp;A collection. This differs from the <a class="ds-ref">natural-questions/dev</a> dataset in that it uses the full Wikipedia dump and additional filtering (described in the DPR paper) was applied. </p> <ul> <li>See also: <a class="ds-ref">natural-questions</a></li> </ul> 
 </div>
 <div class="tabs">
 <a class="tab" target="dpr-w100/natural-questions/dev__queries">queries</a>
@@ -146,19 +148,19 @@ bibtex:
 <a class="tab" target="dpr-w100/natural-questions/dev__citation">Citation</a>
 <div id="dpr-w100/natural-questions/dev__citation" class="tab-content">
 bibtex:
-<cite class="select">@misc{karpukhin2020dense,
+<cite class="select">@article{Kwiatkowski2019NQ,
+  title = {Natural Questions: a Benchmark for Question Answering Research},
+  author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+  year = {2019},
+  journal = {TACL}
+}
+@misc{karpukhin2020dense,
   title={Dense Passage Retrieval for Open-Domain Question Answering},
   author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
   year={2020},
   eprint={2004.04906},
   archivePrefix={arXiv},
   primaryClass={cs.CL}
-}
-@article{Kwiatkowski2019NQ,
-  title = {Natural Questions: a Benchmark for Question Answering Research},
-  author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-  year = {2019},
-  journal = {TACL}
 }
 </cite>
 </div>
@@ -242,7 +244,13 @@ bibtex:
 <a class="tab" target="dpr-w100/natural-questions/train__citation">Citation</a>
 <div id="dpr-w100/natural-questions/train__citation" class="tab-content">
 bibtex:
-<cite class="select">@misc{karpukhin2020dense,
+<cite class="select">@article{Kwiatkowski2019NQ,
+  title = {Natural Questions: a Benchmark for Question Answering Research},
+  author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
+  year = {2019},
+  journal = {TACL}
+}
+@misc{karpukhin2020dense,
   title={Dense Passage Retrieval for Open-Domain Question Answering},
   author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
   year={2020},
@@ -250,11 +258,197 @@ bibtex:
   archivePrefix={arXiv},
   primaryClass={cs.CL}
 }
-@article{Kwiatkowski2019NQ,
-  title = {Natural Questions: a Benchmark for Question Answering Research},
-  author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-  year = {2019},
-  journal = {TACL}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="dpr-w100/trivia-qa/dev" data-parent="dpr-w100">
+<h3><kbd class="ds-name select"><span class="str">"dpr-w100/trivia-qa/dev"</kdb></h3>
+
+<div class="desc">
+ <p> Dev subset from the Trivia QA dataset. Differing from the official Trivia QA collection, this uses the DPR Wikipedia dump as the source collection. Refer to the DPR paper for more details. </p> <ul> <li><a href="https://www.aclweb.org/anthology/P17-1147.pdf">Dataset paper</a></li> <li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="dpr-w100/trivia-qa/dev__queries">queries</a>
+<div id="dpr-w100/trivia-qa/dev__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">DprW100Query: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">answers</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/dev')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, answers&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/dev__docs">docs</a>
+<div id="dpr-w100/trivia-qa/dev__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">DprW100Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/dev')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/dev__qrels">qrels</a>
+<div id="dpr-w100/trivia-qa/dev__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">-1</td><td>negative samples</td></tr>
+<tr><td class="relScore">0</td><td>"hard" negative samples</td></tr>
+<tr><td class="relScore">1</td><td>contains the answer text and retrieved in the top BM25 results</td></tr>
+<tr><td class="relScore">2</td><td>marked by human annotator as containing the answer</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/dev')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/dev__citation">Citation</a>
+<div id="dpr-w100/trivia-qa/dev__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Joshi2017TriviaQAAL,
+  title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
+  author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
+  booktitle={ACL},
+  year={2017}
+}
+@misc{karpukhin2020dense,
+  title={Dense Passage Retrieval for Open-Domain Question Answering},
+  author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+  year={2020},
+  eprint={2004.04906},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="dpr-w100/trivia-qa/train" data-parent="dpr-w100">
+<h3><kbd class="ds-name select"><span class="str">"dpr-w100/trivia-qa/train"</kdb></h3>
+
+<div class="desc">
+ <p> Training subset from the Trivia QA dataset. Differing from the official Trivia QA collection, this uses the DPR Wikipedia dump as the source collection. Refer to the DPR paper for more details. </p> <ul> <li><a href="https://www.aclweb.org/anthology/P17-1147.pdf">Dataset paper</a></li> <li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="dpr-w100/trivia-qa/train__queries">queries</a>
+<div id="dpr-w100/trivia-qa/train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">DprW100Query: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">answers</span>: <span class="kwd">Tuple</span>[<span class="kwd">str</span>]</li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text, answers&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/train__docs">docs</a>
+<div id="dpr-w100/trivia-qa/train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">DprW100Doc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text, title&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/train__qrels">qrels</a>
+<div id="dpr-w100/trivia-qa/train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">-1</td><td>negative samples</td></tr>
+<tr><td class="relScore">0</td><td>"hard" negative samples</td></tr>
+<tr><td class="relScore">1</td><td>contains the answer text and retrieved in the top BM25 results</td></tr>
+<tr><td class="relScore">2</td><td>marked by human annotator as containing the answer</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'dpr-w100/trivia-qa/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="dpr-w100/trivia-qa/train__citation">Citation</a>
+<div id="dpr-w100/trivia-qa/train__citation" class="tab-content">
+bibtex:
+<cite class="select">@inproceedings{Joshi2017TriviaQAAL,
+  title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
+  author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
+  booktitle={ACL},
+  year={2017}
+}
+@misc{karpukhin2020dense,
+  title={Dense Passage Retrieval for Open-Domain Question Answering},
+  author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
+  year={2020},
+  eprint={2004.04906},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL}
 }
 </cite>
 </div>
