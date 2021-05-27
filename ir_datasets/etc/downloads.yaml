@@ -107,9 +107,9 @@ clinicaltrials:
 
 clirmatrix:
   downloads:
-    url: 'https://macavaney.us/clirmatrix_downloads.json' # TODO: move this to JHU server?
-    expected_md5: '9e70cd85ec45caa8c16061c42d1ce9b8'
-    cache_path: 'clirmatrix_downloads.json'
+    url: 'http://www.cs.jhu.edu/~shuosun/clirmatrix/data/downloads.json.gz'
+    expected_md5: '371cc532aca236759bd3602eb6ce2181'
+    cache_path: 'clirmatrix_downloads.json.gz'
 
 
 clueweb09:
