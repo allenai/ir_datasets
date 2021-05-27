@@ -29,8 +29,10 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
 
     def _dlc_init():
+        import json, gzip
         dlc = DownloadConfig.context(NAME, base_path)
-        clirmatrix_dlc = _DownloadConfig(dlc['downloads'].path(), parser='json')
+        with gzip.open(dlc['downloads'].path(), 'rb') as f:
+            clirmatrix_dlc = _DownloadConfig(contents = json.load(f))
         return clirmatrix_dlc
 
     _dlc = ir_datasets.util.Lazy(_dlc_init)
