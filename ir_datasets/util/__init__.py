@@ -7,7 +7,7 @@ from threading import Lock
 from pathlib import Path
 from .. import log
 from .fileio import IterStream, Cache, TarExtract, TarExtractAll, RelativePath, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract
-from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload, DownloadConfig_CM
+from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload, _DownloadConfig
 from .hash import HashVerificationError, HashVerifier, HashStream
 from .registry import Registry
 

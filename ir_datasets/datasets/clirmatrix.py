@@ -2,7 +2,7 @@ import contextlib
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.util import GzipExtract, DownloadConfig_CM
+from ir_datasets.util import GzipExtract, DownloadConfig, _DownloadConfig
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import TsvDocs, CLIRMatrixQueries, CLIRMatrixQrels
 
@@ -29,7 +29,9 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
 
     def _dlc_init():
-        return DownloadConfig_CM
+        dlc = DownloadConfig.context(NAME, base_path)
+        clirmatrix_dlc = _DownloadConfig(dlc['downloads'].path(), parser='json')
+        return clirmatrix_dlc
 
     _dlc = ir_datasets.util.Lazy(_dlc_init)
 
