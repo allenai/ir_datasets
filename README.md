@@ -24,8 +24,15 @@ For a quick start with the Python API, check out our Colab tutorials:
 [Command Line](https://colab.research.google.com/github/allenai/ir_datasets/blob/master/examples/ir_datasets_cli.ipynb)
 
 Install via pip:
+
 ```
-$ git clone https://github.com/ssun32/ir_datasets
+pip install ir_datasets
+```
+
+If you want to build from source, use:
+
+```
+$ git clone https://github.com/allenai/ir_datasets
 $ cd ir_datasets
 $ python setup.py bdist_wheel
 $ pip install dist/ir_datasets-*.whl
