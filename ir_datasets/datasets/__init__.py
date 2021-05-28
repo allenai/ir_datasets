@@ -31,4 +31,3 @@ from . import tweets2013_ia
 from . import vaswani
 from . import wapo
 from . import wikir
-from . import clirmatrix
