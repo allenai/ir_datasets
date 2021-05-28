@@ -11,13 +11,13 @@ NAME = 'clirmatrix'
 _logger = ir_datasets.log.easy()
 
 QRELS_DEFS = {
-    6: "6",
-    5: "5",
-    4: "4",
-    3: "3",
-    2: "2",
-    1: "1",
-    0: "0",
+    6: "Most relevant, based on Jenks-optimized BM25 retrieval scores in the source language",
+    5: "Jenks-optimized BM25 retrieval scores in the source language",
+    4: "Jenks-optimized BM25 retrieval scores in the source language",
+    3: "Jenks-optimized BM25 retrieval scores in the source language",
+    2: "Jenks-optimized BM25 retrieval scores in the source language",
+    1: "Jenks-optimized BM25 retrieval scores in the source language",
+    0: "Document not retrieved in the source language",
 }
 
 def _init():
