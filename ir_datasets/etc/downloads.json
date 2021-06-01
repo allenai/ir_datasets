@@ -88,7 +88,7 @@
   },
   "webis-touche2020": {
     "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip",
-    "expected_md5": "d6550a3e0f725dc4aae83253ae63547f",
+    "expected_md5": "5ec7f8b18481fc2e9b3964ad1b22dd28",
     "cache_path": "webis-touche2020/source.zip"
   },
   "cqadupstack": {
