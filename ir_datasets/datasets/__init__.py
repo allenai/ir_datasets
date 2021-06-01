@@ -4,6 +4,7 @@ from . import aquaint
 from . import beir
 from . import car
 from . import clinicaltrials
+from . import clirmatrix
 from . import clueweb09
 from . import clueweb12
 from . import cord19

@@ -5,3 +5,4 @@ from .tsv import TsvDocs, TsvQueries, TsvDocPairs
 from .trec import TrecDocs, TrecQueries, TrecXmlQueries, TrecColonQueries, TrecQrels, TrecPrels, TrecScoredDocs, TrecDoc, TitleUrlTextDoc, TrecQuery, TrecSubtopic, TrecQrel, TrecPrel
 from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
+from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
