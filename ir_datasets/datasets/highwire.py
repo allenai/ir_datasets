@@ -1,7 +1,6 @@
 import codecs
 from typing import NamedTuple, Tuple
 from zipfile import ZipFile
-import lxml.html
 import ir_datasets
 from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import BaseDocs, BaseQueries, GenericQuery, BaseQrels
@@ -64,6 +63,7 @@ class HighwireDocs(BaseDocs):
         return iter(self.docs_store())
 
     def _docs_iter(self):
+        lxml_html = ir_datasets.lazy_libs.lxml_html()
         def _legalspans_iter():
             with self._legalspans_dlc.stream() as f:
                 prev_did, spans = None, None
@@ -86,11 +86,11 @@ class HighwireDocs(BaseDocs):
                     assert legalspans_did == doc_id
                     spans = tuple(HighwireSpan(s, l, doc_raw[s:s+l]) for s, l in legalspans)
                     # the title should be in the first span inside a <h2> element
-                    title = lxml.html.document_fromstring(b'<OUTER>' + spans[0].text + b'</OUTER>')
+                    title = lxml_html.document_fromstring(b'<OUTER>' + spans[0].text + b'</OUTER>')
                     title = title.xpath("//h2")
                     title = title[0].text_content() if title else ''
                     # keep just the text content within each spans
-                    spans = tuple(HighwireSpan(s, l, lxml.html.document_fromstring(b'<OUTER>' + t + b'</OUTER>').text_content()) for s, l, t in spans)
+                    spans = tuple(HighwireSpan(s, l, lxml_html.document_fromstring(b'<OUTER>' + t + b'</OUTER>').text_content()) for s, l, t in spans)
                     yield HighwireDoc(doc_id, source, title, spans)
 
     def docs_path(self):

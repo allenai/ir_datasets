@@ -1,0 +1,2022 @@
+{
+"antique": {
+  "docs": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/antique-collection.txt",
+    "expected_md5": "684f7015aff377062a758e478476aac8",
+    "cache_path": "collection.tsv"
+  },
+  "train/qrels": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/antique-train.qrel",
+    "expected_md5": "bac76531a3313a2d1debf5f1602d88ab",
+    "cache_path": "train/qrels"
+  },
+  "train/queries": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/antique-train-queries.txt",
+    "expected_md5": "7684bd977d2682177b559d8da714f45a",
+    "cache_path": "train/queries.txt"
+  },
+  "test/qrels": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/antique-test.qrel",
+    "expected_md5": "c93ab0f0ce7937c84270c1eef172db4e",
+    "cache_path": "test/qrels"
+  },
+  "test/queries": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/antique-test-queries.txt",
+    "expected_md5": "d09c5d9ad14368c23c853f6be81e7f2e",
+    "cache_path": "test/queries.txt"
+  },
+  "disallow_list": {
+    "url": "https://ciir.cs.umass.edu/downloads/Antique/test-queries-blacklist.txt",
+    "expected_md5": "4ca64485dabf26221b90cf96ae2997f9",
+    "cache_path": "test-disallow-list.txt"
+  }
+},
+
+"aquaint": {
+  "docs": {
+    "instructions": "The AQUAINT corpus is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2002T31>.\nMore details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "ac623257d8dd35326c9d500d5f6834e5",
+    "cache_path": "aquaint_comp_LDC2002T31.tgz"
+  },
+  "trec-robust-2005/queries": {
+    "url": "https://trec.nist.gov/data/robust/05/05.50.topics.txt",
+    "expected_md5": "c2e722e6bdfd00f088c6f6517db564ce",
+    "cache_path": "trec-robust-2005/queries"
+  },
+  "trec-robust-2005/qrels": {
+    "url": "https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt",
+    "expected_md5": "9186021c74090464c50f577d4826e2e2",
+    "cache_path": "trec-robust-2005/qrels"
+  }
+},
+
+"beir": {
+  "msmarco": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip",
+    "expected_md5": "444067daf65d982533ea17ebd59501e4",
+    "cache_path": "msmarco/source.zip"
+  },
+  "trec-covid": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/trec-covid.zip",
+    "expected_md5": "ce62140cb23feb9becf6270d0d1fe6d1",
+    "cache_path": "trec-covid/source.zip"
+  },
+  "nfcorpus": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nfcorpus.zip",
+    "expected_md5": "a89dba18a62ef92f7d323ec890a0d38d",
+    "cache_path": "nfcorpus/source.zip"
+  },
+  "nq": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/nq.zip",
+    "expected_md5": "d4d3d2e48787a744b6f6e691ff534307",
+    "cache_path": "nq/source.zip"
+  },
+  "hotpotqa": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/hotpotqa.zip",
+    "expected_md5": "f412724f78b0d91183a0e86805e16114",
+    "cache_path": "hotpotqa/source.zip"
+  },
+  "fiqa": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fiqa.zip",
+    "expected_md5": "17918ed23cd04fb15047f73e6c3bd9d9",
+    "cache_path": "fiqa/source.zip"
+  },
+  "arguana": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/arguana.zip",
+    "expected_md5": "8ad3e3c2a5867cdced806d6503f29b99",
+    "cache_path": "arguana/source.zip"
+  },
+  "webis-touche2020": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip",
+    "expected_md5": "d6550a3e0f725dc4aae83253ae63547f",
+    "cache_path": "webis-touche2020/source.zip"
+  },
+  "cqadupstack": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/cqadupstack.zip",
+    "expected_md5": "4e41456d7df8ee7760a7f866133bda78",
+    "cache_path": "cqadupstack/source.zip"
+  },
+  "quora": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/quora.zip",
+    "expected_md5": "18fb154900ba42a600f84b839c173167",
+    "cache_path": "quora/source.zip"
+  },
+  "dbpedia-entity": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/dbpedia-entity.zip",
+    "expected_md5": "c2a39eb420a3164af735795df012ac2c",
+    "cache_path": "dbpedia-entity/source.zip"
+  },
+  "scidocs": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scidocs.zip",
+    "expected_md5": "38121350fc3a4d2f48850f6aff52e4a9",
+    "cache_path": "scidocs/source.zip"
+  },
+  "fever": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fever.zip",
+    "expected_md5": "88591ef8eb2913126d0c93ecbde6285f",
+    "cache_path": "fever/source.zip"
+  },
+  "climate-fever": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/climate-fever.zip",
+    "expected_md5": "8b66f0a9126c521bae2bde127b4dc99d",
+    "cache_path": "climate-fever/source.zip"
+  },
+  "scifact": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/scifact.zip",
+    "expected_md5": "5f7d1de60b170fc8027bb7898e2efca1",
+    "cache_path": "scifact/source.zip"
+  }
+},
+
+"car": {
+  "docs": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz",
+    "expected_md5": "4d006dd67cbc11541ed7f87b875cb990",
+    "cache_path": "docs.tar.xz"
+  },
+  "trec-y1/queries": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/benchmarkY1test.public-v1.5.tar.xz",
+    "expected_md5": "6ab490517accd2a2cb4848c0f160bc8d",
+    "cache_path": "trec-y1/qrels.tar.xz"
+  },
+  "trec-y1/qrels": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/trec-car-2017-qrels.tar.gz",
+    "expected_md5": "1ab7cf01c341757af1bb3db2aedd020f",
+    "cache_path": "trec-y1/qrels.tar.gz"
+  },
+  "test200": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/test200-v1.5.tar.xz",
+    "expected_md5": "a7d8ea41f933b2ef49f06d782e908d13",
+    "cache_path": "test200.tar.xz"
+  },
+  "train": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/train-v1.5.tar.xz",
+    "expected_md5": "70eb3cf1d9358614f9d96dcd2565dc2b",
+    "cache_path": "train.tar.xz"
+  }
+},
+
+"clinicaltrials": {
+  "docs/2017": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/clinicaltrials_xml.tar.gz",
+    "expected_md5": "e5d333ceed0cbbbe513504c96148ab1a",
+    "cache_path": "docs_2017.tar.gz"
+  },
+  "docs/2019/0": {
+    "url": "http://www.trec-cds.org/clinical_trials.0.tar.gz",
+    "expected_md5": "d57fbafa63520c45faceedec3de801b7",
+    "cache_path": "docs_2019_0.tar.gz"
+  },
+  "docs/2019/1": {
+    "url": "http://www.trec-cds.org/clinical_trials.1.tar.gz",
+    "expected_md5": "d32a632fc72c68d63309732af667b1ee",
+    "cache_path": "docs_2019_1.tar.gz"
+  },
+  "docs/2019/2": {
+    "url": "http://www.trec-cds.org/clinical_trials.2.tar.gz",
+    "expected_md5": "055980d685164cb1daefa2b4cc1e9a2f",
+    "cache_path": "docs_2019_2.tar.gz"
+  },
+  "docs/2019/3": {
+    "url": "http://www.trec-cds.org/clinical_trials.3.tar.gz",
+    "expected_md5": "fa8e76c85ab7204c0294f03fa76f6ed2",
+    "cache_path": "docs_2019_3.tar.gz"
+  },
+  "docs/2021/1": {
+    "url": "http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part1.zip",
+    "expected_md5": "e12eb9a0d21452503b0ef8874c69f490",
+    "cache_path": "docs_2021_1.zip"
+  },
+  "docs/2021/2": {
+    "url": "http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part2.zip",
+    "expected_md5": "f6986125506434887a162f144ca4d9a2",
+    "cache_path": "docs_2021_2.zip"
+  },
+  "docs/2021/3": {
+    "url": "http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part3.zip",
+    "expected_md5": "9b7fb528b22edfcf4535154cc3d98111",
+    "cache_path": "docs_2021_3.zip"
+  },
+  "docs/2021/4": {
+    "url": "http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part4.zip",
+    "expected_md5": "4fd98d209e7b62cee87af211c0c281f6",
+    "cache_path": "docs_2021_4.zip"
+  },
+  "docs/2021/5": {
+    "url": "http://www.trec-cds.org/2021_data/ClinicalTrials.2021-04-27.part5.zip",
+    "expected_md5": "a747f09ac5d4f3cd0cc75957ad9f32d8",
+    "cache_path": "docs_2021_5.zip"
+  },
+  "trec-pm-2017/qrels": {
+    "url": "https://trec.nist.gov/data/precmed/qrels-final-trials.txt",
+    "expected_md5": "3c35f9e62abf64c873250ac8022d5a51",
+    "cache_path": "trec-pm-2017/qrels"
+  },
+  "trec-pm-2018/qrels": {
+    "url": "https://trec.nist.gov/data/precmed/qrels-treceval-clinical_trials-2018-v2.txt",
+    "expected_md5": "a6c9efbecb5f32a19c5ac37f1f98c951",
+    "cache_path": "trec-pm-2018/qrels"
+  },
+  "trec-pm-2019/qrels": {
+    "url": "https://trec.nist.gov/data/precmed/qrels-treceval-trials.38.txt",
+    "expected_md5": "fc4b0cf6007b2dc2a7e81536add65a8c",
+    "cache_path": "trec-pm-2019/qrels"
+  },
+  "trec-pm-2019/queries": {
+    "url": "http://www.trec-cds.org/topics2019.xml",
+    "expected_md5": "bc26cef87e842837daf2e6680d4652c0",
+    "cache_path": "trec-pm-2019/queries.xml"
+  }
+},
+
+"clueweb09": {
+  "docs": {
+    "instructions": "ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>\nMore details about the procedure can be found here: <https://ir-datasets.com/ClueWeb09.html#DataAccess>.\nLink the ClueWeb09 source files here: {path}\nShould contain directories like ClueWeb09_English_1",
+    "cache_path": "corpus"
+  },
+  "docs.chk": {
+    "url": "https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb09/clueweb09-source-chk.tar.gz",
+    "expected_md5": "74328d9c743c52ddef434ce41a4e6dc1"
+  },
+  "trec-web-2009/queries": {
+    "url": "https://trec.nist.gov/data/web/09/wt09.topics.full.xml",
+    "expected_md5": "52e4a03d32718fa11290286e8e8dff47",
+    "cache_path": "trec-web-2009/queries.xml"
+  },
+  "trec-web-2009/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/09/prels.1-50.gz",
+    "expected_md5": "3afdef86adf3211629182e3380f9e751",
+    "cache_path": "trec-web-2009/prels.gz"
+  },
+  "trec-web-2010/queries": {
+    "url": "https://trec.nist.gov/data/web/10/wt2010-topics.xml",
+    "expected_md5": "8f084cc90c13e4cd66192d3a9585235e",
+    "cache_path": "trec-web-2010/queries.xml"
+  },
+  "trec-web-2010/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/10/10.adhoc-qrels.final",
+    "expected_md5": "8a22083b0370d6ac799e1e779110de06",
+    "cache_path": "trec-web-2010/qrels"
+  },
+  "trec-web-2011/queries": {
+    "url": "https://trec.nist.gov/data/web/11/full-topics.xml",
+    "expected_md5": "23914875d80a5d24571d4f458a83c7fa",
+    "cache_path": "trec-web-2011/queries.xml"
+  },
+  "trec-web-2011/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/11/qrels.adhoc",
+    "expected_md5": "7844c8a9cc3a4b6f740d45e56013693d",
+    "cache_path": "trec-web-2011/qrels"
+  },
+  "trec-web-2012/queries": {
+    "url": "https://trec.nist.gov/data/web/12/full-topics.xml",
+    "expected_md5": "a0b8ee33da312a284fda379582b0bc2a",
+    "cache_path": "trec-web-2012/queries.xml"
+  },
+  "trec-web-2012/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/12/qrels.adhoc",
+    "expected_md5": "079723ba3e955269f0de6254c4bec180",
+    "cache_path": "trec-web-2012/qrels"
+  },
+  "trec-mq-2009/queries": {
+    "url": "https://trec.nist.gov/data/million.query/09/09.mq.topics.20001-60000.gz",
+    "expected_md5": "6347147d4d6c847f0423709140a7b10d",
+    "cache_path": "trec-mq-2009/queries.txt.gz"
+  },
+  "trec-mq-2009/qrels": {
+    "url": "https://trec.nist.gov/data/million.query/09/prels.20001-60000.gz",
+    "expected_md5": "e67f45d3060e20667596f37e34d696c8",
+    "cache_path": "trec-mq-2009/prels.gz"
+  }
+},
+
+"clueweb12": {
+  "docs": {
+    "instructions": "ClueWeb12 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>\nMore details about the procedure can be found here: <https://ir-datasets.com/ClueWeb12.html#DataAccess>.\nLink the ClueWeb12 source files here: {path}\nShould contain ClueWeb12_00--19 directories",
+    "cache_path": "corpus"
+  },
+  "docs.chk": {
+    "url": "https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/clueweb12/clueweb12-source-chk.tar.gz",
+    "expected_md5": "fb92d1f8ed1436839313d2eb47f628a5"
+  },
+  "cw12b-info": {
+    "url": "http://lemurproject.org/clueweb12/ClueWeb12-CreateB13.tgz",
+    "expected_md5": "8175ce74a97e46be80c2127d965da200",
+    "cache_path": "ClueWeb12-CreateB13.tgz"
+  },
+  "trec-web-2013/queries": {
+    "url": "https://trec.nist.gov/data/web/2013/trec2013-topics.xml",
+    "expected_md5": "4c0ecdddc8632d3fa8fecb507f19801d",
+    "cache_path": "trec-web-2013/queries.xml"
+  },
+  "trec-web-2013/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/2013/qrels.adhoc.txt",
+    "expected_md5": "44aa6300f9df4a77f7205c574afb9c2d",
+    "cache_path": "trec-web-2013/qrels.adhoc"
+  },
+  "trec-web-2014/queries": {
+    "url": "https://trec.nist.gov/data/web/2014/trec2014-topics.xml",
+    "expected_md5": "b1bf5c7aa9f6e7026e1558686330744f",
+    "cache_path": "trec-web-2014/queries.xml"
+  },
+  "trec-web-2014/qrels.adhoc": {
+    "url": "https://trec.nist.gov/data/web/2014/qrels.adhoc.txt",
+    "expected_md5": "afa1db71680acf71283adc7846282a44",
+    "cache_path": "trec-web-2014/qrels.adhoc"
+  },
+  "ntcir-www-1/queries": {
+    "url": "http://www.thuir.cn/ntcirwww/files/eng.queries.xml.zip",
+    "expected_md5": "ed43ba82791bb20776c049421525a055"
+  },
+  "ntcir-www-1/qrels": {
+    "url": "https://macavaney.us/misc/ntcir-www-1.qrels",
+    "expected_md5": "634464456437bf378725958822910242",
+    "cache_path": "ntcir-www-1/qrels"
+  },
+  "ntcir-www-2/queries": {
+    "url": "http://www.thuir.cn/ntcirwww2/qEng.zip",
+    "expected_md5": "d4b108b52b2e2c8bedc2e12540414735"
+  },
+  "ntcir-www-2/qrels": {
+    "url": "http://www.thuir.cn/ntcirwww3/www2e.qrels",
+    "expected_md5": "155b515dd9fc05e1aeb9c116c9147bb0",
+    "cache_path": "ntcir-www-2/qrels"
+  },
+  "ntcir-www-3/queries": {
+    "url": "http://www.thuir.cn/ntcirwww3/www2www3topics-E.xml",
+    "expected_md5": "1ecd1380b20894014a54eb6cb8064587",
+    "cache_path": "ntcir-www-3/queries.xml"
+  },
+  "trec-misinfo-2019/queries": {
+    "url": "https://trec.nist.gov/data/misinfo/2019topics.xml",
+    "expected_md5": "e46bb8ff3058bbcc1bd73a0ecbda1621",
+    "cache_path": "trec-misinfo-2019/queries.xml"
+  },
+  "trec-misinfo-2019/qrels": {
+    "url": "https://trec.nist.gov/data/misinfo/2019qrels_raw.txt",
+    "expected_md5": "faf86b2ac5fcca52b189a3ad408fd019",
+    "cache_path": "trec-misinfo-2019/qrels"
+  },
+  "clef-ehealth/queries": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/eng_queries/queries2016_with_url.xml",
+    "expected_md5": "ed0289056e21643baa07dfc7bee9574b",
+    "cache_path": "clef-ehealth/queries.xml"
+  },
+  "clef-ehealth/queries/cs": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016cs.xml",
+    "expected_md5": "f7940a8961fae713742b935c83b6118d",
+    "cache_path": "clef-ehealth/queries.cs.xml"
+  },
+  "clef-ehealth/queries/de": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016de.xml",
+    "expected_md5": "f59e000328a8cbe357ff94d5d5e82474",
+    "cache_path": "clef-ehealth/queries.de.xml"
+  },
+  "clef-ehealth/queries/fr": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016fr.xml",
+    "expected_md5": "7362ccb451a606af7a47e359894f524c",
+    "cache_path": "clef-ehealth/queries.fr.xml"
+  },
+  "clef-ehealth/queries/hu": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016hu.xml",
+    "expected_md5": "17603aecae72eeb70ada73700956ab3f",
+    "cache_path": "clef-ehealth/queries.hu.xml"
+  },
+  "clef-ehealth/queries/pl": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016pl.xml",
+    "expected_md5": "e6d442846786793c235bf927289af4c3",
+    "cache_path": "clef-ehealth/queries.pl.xml"
+  },
+  "clef-ehealth/queries/sv": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/queries/multilingual/queries2016sv.xml",
+    "expected_md5": "bc9066f128a391c9f5c282dbcca3e44f",
+    "cache_path": "clef-ehealth/queries.sv.xml"
+  },
+  "clef-ehealth/2016.qrels": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qrels",
+    "expected_md5": "5392a6f7cdbb0cab56c34656ab100684",
+    "cache_path": "clef-ehealth-2016/2016.qrels"
+  },
+  "clef-ehealth/2016.qtrust": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qtrust",
+    "expected_md5": "14cf266961f686b49d8430b802064ac6",
+    "cache_path": "clef-ehealth/2016.qtrust"
+  },
+  "clef-ehealth/2016.qunder": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2016Task3/master/qrels/task1.qunder",
+    "expected_md5": "4314d1a0db76a50204e5e900ffa2d4e3",
+    "cache_path": "clef-ehealth/2016.qunder"
+  },
+  "clef-ehealth/2017.qrels": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qrels.txt",
+    "expected_md5": "b9909f2fa7f2a0ceca1033fc92729482",
+    "cache_path": "clef-ehealth/2017.qrels"
+  },
+  "clef-ehealth/2017.qtrust": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qtrust.txt",
+    "expected_md5": "3a43cc9a49a781b13f0b8438bceed2f5",
+    "cache_path": "clef-ehealth/2017.qtrust"
+  },
+  "clef-ehealth/2017.qreads": {
+    "url": "https://raw.githubusercontent.com/CLEFeHealth/CLEFeHealth2017IRtask/master/assessments/2017/clef2017_qreads.txt",
+    "expected_md5": "75302c012adf0126ab93e330ffb6aaab",
+    "cache_path": "clef-ehealth/2017.qureads"
+  }
+},
+
+"codesearchnet": {
+  "python": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip",
+    "expected_md5": "07b49dd01fbac894fbdae22da6462e4f"
+  },
+  "java": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip",
+    "expected_md5": "fea180077275d8f98f42a3386f492837"
+  },
+  "go": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/go.zip",
+    "expected_md5": "c0288db91f067c95bb952577949e7b13"
+  },
+  "php": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/php.zip",
+    "expected_md5": "62373f85cfae2f5d7422dc1e55fbbb50"
+  },
+  "ruby": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/ruby.zip",
+    "expected_md5": "6847c0149666334cc937909b0e2297ae"
+  },
+  "javascript": {
+    "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/javascript.zip",
+    "expected_md5": "7649178a02f7b5c8fbccb64abe7946b6"
+  },
+  "challenge/queries": {
+    "url": "https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/queries.csv",
+    "expected_md5": "6041a0c32dff4286859ca76d420d76f4",
+    "cache_path": "queries.csv"
+  },
+  "challenge/qrels": {
+    "url": "https://raw.githubusercontent.com/github/CodeSearchNet/master/resources/annotationStore.csv",
+    "expected_md5": "9e0a57ae90b3dd0144d59064d0751abd",
+    "cache_path": "qrels.csv"
+  }
+},
+
+"cord19": {
+  "docs/2020-07-16": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz",
+    "expected_md5": "018c4bc4d76d4ae072a26ac28c8b456b",
+    "cache_path": "2020-07-16.tar.gz"
+  },
+  "docs/2020-07-16/metadata": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-07-16/metadata.csv",
+    "expected_md5": "80d664e496b8b7e50a39c6f6bb92e0ef",
+    "cache_path": "2020-07-16/metadata.csv"
+  },
+  "docs/2020-04-10/metadata": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-04-10/metadata.csv",
+    "expected_md5": "42a21f386be86c24647a41bedde34046",
+    "cache_path": "2020-04-10/metadata.csv"
+  },
+  "docs/2020-05-01/metadata": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-05-01/metadata.csv",
+    "expected_md5": "b1d2e409026494e0c8034278bacd1248",
+    "cache_path": "2020-05-01/metadata.csv"
+  },
+  "docs/2020-05-19/metadata": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-05-19/metadata.csv",
+    "expected_md5": "e3c5c8af3a078e19cb179e630c345959",
+    "cache_path": "2020-05-19/metadata.csv"
+  },
+  "docs/2020-06-19/metadata": {
+    "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/2020-06-19/metadata.csv",
+    "expected_md5": "4e8788b6e44f3428ff9ab1d4bfdfb6ab",
+    "cache_path": "2020-06-19/metadata.csv"
+  },
+  "trec-covid/queries": {
+    "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml",
+    "expected_md5": "0307a37b6b9f1a5f233340a769d538ea",
+    "cache_path": "trec-covid/queries.xml"
+  },
+  "trec-covid/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt",
+    "expected_md5": "8138424a59daea0aba751c8a891e5f54",
+    "cache_path": "trec-covid/qrels"
+  },
+  "trec-covid/round1/queries": {
+    "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd1.xml",
+    "expected_md5": "cf1b605222f45f7dbc90ca8e4d9b2c31",
+    "cache_path": "trec-covid/round1/queries.xml"
+  },
+  "trec-covid/round1/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-rnd1.txt",
+    "expected_md5": "d58586df5823e7d1d0b3619a73b31518",
+    "cache_path": "trec-covid/round1/qrels"
+  },
+  "trec-covid/round2/queries": {
+    "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd2.xml",
+    "expected_md5": "550129e71c83de3fb4d6d29a172c5842",
+    "cache_path": "trec-covid/round2/queries.xml"
+  },
+  "trec-covid/round2/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-rnd2.txt",
+    "expected_md5": "157df01d5a084b09be089407f41cf51b",
+    "cache_path": "trec-covid/round2/qrels"
+  },
+  "trec-covid/round3/queries": {
+    "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd3.xml",
+    "expected_md5": "aa42a15c107e74488c8189a16a311358",
+    "cache_path": "trec-covid/round3/queries.xml"
+  },
+  "trec-covid/round3/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d3_j2.5-3.txt",
+    "expected_md5": "2a534a42b5b6b43dd8ae7d9433249006",
+    "cache_path": "trec-covid/round3/qrels"
+  },
+  "trec-covid/round4/queries": {
+    "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd4.xml",
+    "expected_md5": "202ba3155b1e390115ae13f34d80d4fc",
+    "cache_path": "trec-covid/round4/queries.xml"
+  },
+  "trec-covid/round4/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d4_j3.5-4.txt",
+    "expected_md5": "b86dd338d6b0a41e62f18e566e541b96",
+    "cache_path": "trec-covid/round4/qrels"
+  },
+  "trec-covid/round5/qrels": {
+    "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j4.5-5.txt",
+    "expected_md5": "6111c00ac9adac774f5b51e4f9a2a25b",
+    "cache_path": "trec-covid/round5/qrels"
+  }
+},
+
+"cranfield": {
+  "main": {
+    "url": "http://ir.dcs.gla.ac.uk/resources/test_collections/cran/cran.tar.gz",
+    "expected_md5": "1730f7be572d95a5a4b56c59a7b900a5",
+    "cache_path": "cran.tar.gz"
+  }
+},
+
+"dpr-w100": {
+  "docs": {
+    "url": "https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz",
+    "expected_md5": "612fe66e0b6b41ee28f806140226c563",
+    "cache_path": "docs.tsv.gz"
+  },
+  "nq-train": {
+    "url": "https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-train.json.gz",
+    "expected_md5": "a1c927b5adae71388eb064329387709f",
+    "cache_path": "nq-train.json.gz"
+  },
+  "nq-dev": {
+    "url": "https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-nq-dev.json.gz",
+    "expected_md5": "2640483dbe0df7ae29c6da419c551a80",
+    "cache_path": "nq-dev.json.gz"
+  },
+  "tqa-train": {
+    "url": "https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-train.json.gz",
+    "expected_md5": "5aa4d3577c91425cd20e239ed89a252b",
+    "cache_path": "tqa-train.json.gz"
+  },
+  "tqa-dev": {
+    "url": "https://dl.fbaipublicfiles.com/dpr/data/retriever/biencoder-trivia-dev.json.gz",
+    "expected_md5": "d559dffe09acfe5a6370adea55b8abf2",
+    "cache_path": "tqa-dev.json.gz"
+  }
+},
+
+"gov": {
+  "docs": {
+    "instructions": "GOV is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>\nMore details about the procedure can be found here: <https://ir-datasets.com/gov.html#DataAccess>.\nLink the GOV source files here: {path}\nShould contain G00, G01, G02, ...",
+    "cache_path": "corpus"
+  },
+  "trec-web-2002/queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/webtopics_551-600.txt.gz",
+    "expected_md5": "133e5d1628684f7a044df86ad08907f0",
+    "cache_path": "trec-web-2002/queries.txt.gz"
+  },
+  "trec-web-2002/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.distillation.txt.gz",
+    "expected_md5": "313d1cab9a37aa9b76b6c647cf7151a8",
+    "cache_path": "trec-web-2002/qrels.txt.gz"
+  },
+  "trec-web-2002/named-page/queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/webnamed_page_topics.1-150.txt.gz",
+    "expected_md5": "00422f1c1f5109d7f609708de071e527",
+    "cache_path": "trec-web-2002/named-page/queries.txt.gz"
+  },
+  "trec-web-2002/named-page/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.named-page.txt.gz",
+    "expected_md5": "ed7e69528faddd1baece4cae41c6f613",
+    "cache_path": "trec-web-2002/named-page/qrels.txt.gz"
+  },
+  "trec-web-2003/queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/2003.distillation_topics.1-50.txt",
+    "expected_md5": "409e5d16eb8c795945715850c7d26a8e",
+    "cache_path": "trec-web-2003/queries.txt"
+  },
+  "trec-web-2003/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.distillation.2003.txt",
+    "expected_md5": "ce11fa22c6f7f5d8048bdc0d104986e5",
+    "cache_path": "trec-web-2003/qrels.txt"
+  },
+  "trec-web-2003/named-page/queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/2003.named_page_topics.151-450.txt",
+    "expected_md5": "0b9bbe2bce309c5bf5754536abaaa0b6",
+    "cache_path": "trec-web-2003/named-page/queries.txt"
+  },
+  "trec-web-2003/named-page/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.named-page.2003.txt",
+    "expected_md5": "e7b05e05fab39862d5f8ad6ebc0c36fd",
+    "cache_path": "trec-web-2003/named-page/qrels.txt"
+  },
+  "trec-web-2004/queries": {
+    "url": "https://trec.nist.gov/data/web/Web2004.query.stream.trecformat.txt",
+    "expected_md5": "10821f7a000b8bec058097ede39570be",
+    "cache_path": "trec-web-2004/queries.txt"
+  },
+  "trec-web-2004/qrels": {
+    "url": "https://trec.nist.gov/data/web/04.qrels.web.mixed.txt",
+    "expected_md5": "93daa0e4b4190c84e30d2cce78a0f674",
+    "cache_path": "trec-web-2004/qrels.txt"
+  },
+  "trec-web-2004/types": {
+    "url": "https://trec.nist.gov/data/web/04.topic-map.official.txt",
+    "expected_md5": "79737768b3be1aa07b14691aa54802c5",
+    "cache_path": "trec-web-2004/types.txt"
+  }
+},
+
+"gov2": {
+  "docs": {
+    "instructions": "GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>\nMore details about the procedure can be found here: <https://ir-datasets.com/gov2.html#DataAccess>.\nLink the GOV2 source files here: {path}\nShould contain GOV2_data",
+    "cache_path": "corpus"
+  },
+  "trec-tb-2004/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/04/04topics.701-750.txt",
+    "expected_md5": "18b390335e440d099f3d64bef81708be",
+    "cache_path": "trec-tb-2004/queries.txt"
+  },
+  "trec-tb-2004/qrels": {
+    "url": "https://trec.nist.gov/data/terabyte/04/04.qrels.12-Nov-04",
+    "expected_md5": "228e4b0c466b1778a01b3337f8774fb6",
+    "cache_path": "trec-tb-2004/qrels.txt"
+  },
+  "trec-tb-2005/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/05/05.topics.751-800.txt",
+    "expected_md5": "f0fb2603c7d89425965e5aaa104ddca6",
+    "cache_path": "trec-tb-2005/queries.txt"
+  },
+  "trec-tb-2005/qrels": {
+    "url": "https://trec.nist.gov/data/terabyte/05/05.adhoc_qrels",
+    "expected_md5": "87f2af26215f092c948249771c8607f6",
+    "cache_path": "trec-tb-2005/qrels.txt"
+  },
+  "trec-tb-2005/named-page/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/05/05.np_topics.601-872.final.txt",
+    "expected_md5": "266444c58e3567250f56df5c6a79670d",
+    "cache_path": "trec-tb-2005/named-page/queries.txt"
+  },
+  "trec-tb-2005/named-page/qrels": {
+    "url": "https://trec.nist.gov/data/terabyte/05/05.np_qrels",
+    "expected_md5": "0b0f73650d1297a7e5572576a4b93d28",
+    "cache_path": "trec-tb-2005/named-page/qrels.txt"
+  },
+  "trec-tb-2005/efficiency/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/05/05.efficiency_topics.gz",
+    "expected_md5": "034a21c9dd956f3b7fb4f162782c9909",
+    "cache_path": "trec-tb-2005/efficiency/queries.txt.gz"
+  },
+  "trec-tb-2006/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/06/06.topics.801-850.txt",
+    "expected_md5": "6e23a748c060ef5be64dbcc65245072f",
+    "cache_path": "trec-tb-2006/queries.txt"
+  },
+  "trec-tb-2006/qrels": {
+    "url": "https://trec.nist.gov/data/terabyte/06/qrels.tb06.top50",
+    "expected_md5": "1b1dfd769ff00d9e8ec4530c64221543",
+    "cache_path": "trec-tb-2006/qrels.txt"
+  },
+  "trec-tb-2006/named-page/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/06/06.np_topics.901-1081.txt",
+    "expected_md5": "811a53107b4445a9955e7376d90a1eec",
+    "cache_path": "trec-tb-2006/named-page/queries.txt"
+  },
+  "trec-tb-2006/named-page/qrels": {
+    "url": "https://trec.nist.gov/data/terabyte/06/qrels.tb06.np",
+    "expected_md5": "f9f7d07de3070eafc08989dd98d1fab8",
+    "cache_path": "trec-tb-2006/named-page/qrels.txt"
+  },
+  "trec-tb-2006/efficiency/queries": {
+    "url": "https://trec.nist.gov/data/terabyte/06/06.efficiency_topics.tar.gz",
+    "expected_md5": "e8599a08af5b3f036c203957f5b82de8",
+    "cache_path": "trec-tb-2006/efficiency/queries.tar.gz"
+  },
+  "trec-mq-2007/queries": {
+    "url": "https://trec.nist.gov/data/million.query/07/07-million-query-topics.1-10000.gz",
+    "expected_md5": "db64470f08450c6b15a9ee2c7eac2f9b",
+    "cache_path": "trec-mq-2007/queries.txt.gz"
+  },
+  "trec-mq-2007/qrels": {
+    "url": "https://trec.nist.gov/data/million.query/07/07.prels",
+    "expected_md5": "4f930d85442ac74cc00b56a4252f1f4a",
+    "cache_path": "trec-mq-2007/prels"
+  },
+  "trec-mq-2008/queries": {
+    "url": "https://trec.nist.gov/data/million.query/08/08.million-query-topics.10001-20000.gz",
+    "expected_md5": "fc8fc0e92ae9bc1d16756534ac682058",
+    "cache_path": "trec-mq-2008/queries.txt.gz"
+  },
+  "trec-mq-2008/qrels": {
+    "url": "https://trec.nist.gov/data/million.query/08/2008.RC1.tgz",
+    "expected_md5": "dae403e1834e87cba1babbef71b73714",
+    "cache_path": "trec-mq-2008/prels.tar.gz"
+  }
+},
+
+"highwire": {
+  "ajepidem": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajepidem.zip",
+    "expected_md5": "d7db27233b28245724f3212a5b3cd659",
+    "cache_path": "corpus/ajepidem.zip"
+  },
+  "ajpcell": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpcell.zip",
+    "expected_md5": "5d5cdc8e6cdaeeb924bc5af603e4478e",
+    "cache_path": "corpus/ajpcell.zip"
+  },
+  "ajpendometa": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpendometa.zip",
+    "expected_md5": "2ce8f78e813e60e424136f010f9e0af0",
+    "cache_path": "corpus/ajpendometa.zip"
+  },
+  "ajpgastro": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpgastro.zip",
+    "expected_md5": "0fe9e5091ac4f3adcc2325ed6d881964",
+    "cache_path": "corpus/ajpgastro.zip"
+  },
+  "ajpheart": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajpheart.zip",
+    "expected_md5": "4152b0904cc66e95f953a5c097d7ad77",
+    "cache_path": "corpus/ajpheart.zip"
+  },
+  "ajplung": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajplung.zip",
+    "expected_md5": "ca5a42357e4d8413ac32ffc21cc7a25f",
+    "cache_path": "corpus/ajplung.zip"
+  },
+  "ajprenal": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajprenal.zip",
+    "expected_md5": "6c21485c1858eda002766ec364af576a",
+    "cache_path": "corpus/ajprenal.zip"
+  },
+  "alcohol": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/alcohol.zip",
+    "expected_md5": "ca34997e36b919e64b99e12606c511cc",
+    "cache_path": "corpus/alcohol.zip"
+  },
+  "andrology": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/andrology.zip",
+    "expected_md5": "d715933ff1c96689e9647bbecdaaf599",
+    "cache_path": "corpus/andrology.zip"
+  },
+  "annonc": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/annonc.zip",
+    "expected_md5": "32234a3d00ea71b923006dd1f90c2dd5",
+    "cache_path": "corpus/annonc.zip"
+  },
+  "bjanast": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/bjanast.zip",
+    "expected_md5": "5a9c47c19d6bd33b8e30c27be9e41d25",
+    "cache_path": "corpus/bjanast.zip"
+  },
+  "bjp": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/bjp.zip",
+    "expected_md5": "93707a10817b15773e67bf1a2d3b2e24",
+    "cache_path": "corpus/bjp.zip"
+  },
+  "blood": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/blood.zip",
+    "expected_md5": "2216234fc6d66445026cc38c9c714855",
+    "cache_path": "corpus/blood.zip"
+  },
+  "carcinogenesis": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/carcinogenesis.zip",
+    "expected_md5": "7f4d797e2b779c9490eb9e523ebf628f",
+    "cache_path": "corpus/carcinogenesis.zip"
+  },
+  "cercor": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/cercor.zip",
+    "expected_md5": "60cfd9eebf42e1602cd69805de409e04",
+    "cache_path": "corpus/cercor.zip"
+  },
+  "development": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/development.zip",
+    "expected_md5": "f71ca283a55848a51a53c73a5af7db3c",
+    "cache_path": "corpus/development.zip"
+  },
+  "diabetes": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/diabetes.zip",
+    "expected_md5": "e6fcc28d779833b5b07fc8f2d2b4077e",
+    "cache_path": "corpus/diabetes.zip"
+  },
+  "endocrinology": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/endocrinology.zip",
+    "expected_md5": "85cf5f2870ccf333114e59ce1ab4d1db",
+    "cache_path": "corpus/endocrinology.zip"
+  },
+  "euroheartj": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/euroheartj.zip",
+    "expected_md5": "099dd344c7a98e3b6d3dbed2cdb17fb7",
+    "cache_path": "corpus/euroheartj.zip"
+  },
+  "glycobiology": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/glycobiology.zip",
+    "expected_md5": "4e390a903cbf2381c2eb530a3e7b3b68",
+    "cache_path": "corpus/glycobiology.zip"
+  },
+  "humanrep": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/humanrep.zip",
+    "expected_md5": "b30e1d36c8c551f33c0a8cf4cc09dfce",
+    "cache_path": "corpus/humanrep.zip"
+  },
+  "humolgen": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/humolgen.zip",
+    "expected_md5": "81ae00345d24ec20a542e9c151181c93",
+    "cache_path": "corpus/humolgen.zip"
+  },
+  "ijepidem": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ijepidem.zip",
+    "expected_md5": "d9e1ea6aaabcc04fb57f26a756a49b40",
+    "cache_path": "corpus/ijepidem.zip"
+  },
+  "intimm": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/intimm.zip",
+    "expected_md5": "17ebda5809cd22a23ac92310a103fb9c",
+    "cache_path": "corpus/intimm.zip"
+  },
+  "jantichemo": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jantichemo.zip",
+    "expected_md5": "e8b6088e655078ff40647af9a3cbd30f",
+    "cache_path": "corpus/jantichemo.zip"
+  },
+  "jappliedphysio": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jappliedphysio.zip",
+    "expected_md5": "7a5406c65b0385a5cc493fede1424b27",
+    "cache_path": "corpus/jappliedphysio.zip"
+  },
+  "jbc-1995": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1995.zip",
+    "expected_md5": "690f25229a7040627d32be56bdcf4556",
+    "cache_path": "corpus/jbc-1995.zip"
+  },
+  "jbc-1996": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1996.zip",
+    "expected_md5": "646a254c22f40861966fccacea0b1b5b",
+    "cache_path": "corpus/jbc-1996.zip"
+  },
+  "jbc-1997": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1997.zip",
+    "expected_md5": "5dfb2a85548e3da5305bd5d7e051c2fa",
+    "cache_path": "corpus/jbc-1997.zip"
+  },
+  "jbc-1998": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1998.zip",
+    "expected_md5": "43cc8a9797700d99d17cd14596a08028",
+    "cache_path": "corpus/jbc-1998.zip"
+  },
+  "jbc-1999": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-1999.zip",
+    "expected_md5": "d5972b628653f5719a7ca3d04d238c10",
+    "cache_path": "corpus/jbc-1999.zip"
+  },
+  "jbc-2000": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2000.zip",
+    "expected_md5": "d00f5eb17beb680752fa1711c6fe2cb8",
+    "cache_path": "corpus/jbc-2000.zip"
+  },
+  "jbc-2001": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2001.zip",
+    "expected_md5": "a8e8e08a530754a5c2de9197c1d4259c",
+    "cache_path": "corpus/jbc-2001.zip"
+  },
+  "jbc-2002": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2002.zip",
+    "expected_md5": "93e8ae6565afc20affcf785fb6a34646",
+    "cache_path": "corpus/jbc-2002.zip"
+  },
+  "jbc-2003": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2003.zip",
+    "expected_md5": "7ddf90fede68fc0a94a674557e457063",
+    "cache_path": "corpus/jbc-2003.zip"
+  },
+  "jbc-2004": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2004.zip",
+    "expected_md5": "d50a6264161f1aed2545737ace31ad32",
+    "cache_path": "corpus/jbc-2004.zip"
+  },
+  "jbc-2005": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jbc-2005.zip",
+    "expected_md5": "4bac0f72d3845b6266a5bdf448d215b4",
+    "cache_path": "corpus/jbc-2005.zip"
+  },
+  "jcb": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jcb.zip",
+    "expected_md5": "dba03aa0b7c8e1b72817afc880f5ff6c",
+    "cache_path": "corpus/jcb.zip"
+  },
+  "jclinicalendometa": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jclinicalendometa.zip",
+    "expected_md5": "fdc5a8b41be0b58beabc822dc28660e2",
+    "cache_path": "corpus/jclinicalendometa.zip"
+  },
+  "jcs": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jcs.zip",
+    "expected_md5": "cd506b2d653c41916450f7f46a78d402",
+    "cache_path": "corpus/jcs.zip"
+  },
+  "jexpbio": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jexpbio.zip",
+    "expected_md5": "2072dad39b3fcdc58cb5a522c35f1b59",
+    "cache_path": "corpus/jexpbio.zip"
+  },
+  "jexpmed": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jexpmed.zip",
+    "expected_md5": "6a6b6fd5d883c99be91d84e8663b6293",
+    "cache_path": "corpus/jexpmed.zip"
+  },
+  "jgenphysio": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jgenphysio.zip",
+    "expected_md5": "4cb4bbb2c979e992e2668c0a6585d9b4",
+    "cache_path": "corpus/jgenphysio.zip"
+  },
+  "jgenviro": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jgenviro.zip",
+    "expected_md5": "ba0fa54e2b8e7101c2c5008cb89f4c47",
+    "cache_path": "corpus/jgenviro.zip"
+  },
+  "jhistocyto": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jhistocyto.zip",
+    "expected_md5": "def37c9b86e4ddbffd6a845c642ef009",
+    "cache_path": "corpus/jhistocyto.zip"
+  },
+  "jnci": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jnci.zip",
+    "expected_md5": "649621e050ab0f0e73eb626002cf2a91",
+    "cache_path": "corpus/jnci.zip"
+  },
+  "jneuro": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/jneuro.zip",
+    "expected_md5": "cfd69effb5d2e0eb845173095e21888c",
+    "cache_path": "corpus/jneuro.zip"
+  },
+  "mcp": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/mcp.zip",
+    "expected_md5": "198e85d2c65d3c3964195e955660409d",
+    "cache_path": "corpus/mcp.zip"
+  },
+  "microbio": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/microbio.zip",
+    "expected_md5": "06840bddca76f1c7d8644ca989189368",
+    "cache_path": "corpus/microbio.zip"
+  },
+  "molbiolevol": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/molbiolevol.zip",
+    "expected_md5": "8b1eb9eceaea7da237f177d235a058a5",
+    "cache_path": "corpus/molbiolevol.zip"
+  },
+  "molendo": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/molendo.zip",
+    "expected_md5": "a2f55efa0e3bffe5d736316585540b62",
+    "cache_path": "corpus/molendo.zip"
+  },
+  "molhumanrep": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/molhumanrep.zip",
+    "expected_md5": "125a49b8f11ad1a78eda3ce03f867ef4",
+    "cache_path": "corpus/molhumanrep.zip"
+  },
+  "nar": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/nar.zip",
+    "expected_md5": "63c34a05440cd0259b06aef3edb22ea3",
+    "cache_path": "corpus/nar.zip"
+  },
+  "nephrodiatransp": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/nephrodiatransp.zip",
+    "expected_md5": "914e51d8ac94e85d2bbdc8afb9206731",
+    "cache_path": "corpus/nephrodiatransp.zip"
+  },
+  "peds": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/peds.zip",
+    "expected_md5": "db8266c186e902715beb511f12bcd16a",
+    "cache_path": "corpus/peds.zip"
+  },
+  "physiogenomics": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/physiogenomics.zip",
+    "expected_md5": "eeda5cc0b14ad36402cdc6ffd964e3c1",
+    "cache_path": "corpus/physiogenomics.zip"
+  },
+  "rheumatolgy": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/rheumatolgy.zip",
+    "expected_md5": "3e840dfb598dbefe630cdb1b412f3c57",
+    "cache_path": "corpus/rheumatolgy.zip"
+  },
+  "rna": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/rna.zip",
+    "expected_md5": "f48dd7fe09ae06609d6a8dc5e77aae2f",
+    "cache_path": "corpus/rna.zip"
+  },
+  "toxsci": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/toxsci.zip",
+    "expected_md5": "0093349b4f41e5431b1d832d13738010",
+    "cache_path": "corpus/toxsci.zip"
+  },
+  "legalspans": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/legalspans.txt",
+    "expected_md5": "24c7bbed8eb3bdd2daf3f3ab2c1963b2",
+    "cache_path": "legalspans.txt"
+  },
+  "trec-genomics-2006/queries": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/topics/2006topics.txt",
+    "expected_md5": "fd458f5398350e59831745e51854b2b0",
+    "cache_path": "trec-genomics-2006/queries.txt"
+  },
+  "trec-genomics-2006/qrels": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2006/trec2006.raw.relevance.tsv.txt",
+    "expected_md5": "a133e38bcd03c8b6509f46506cae753b",
+    "cache_path": "trec-genomics-2006/qrels"
+  },
+  "trec-genomics-2007/queries": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2007/2007topics.txt",
+    "expected_md5": "be5fc2d4e984003da6aa9dfab9eb67a3",
+    "cache_path": "trec-genomics-2007/queries.txt"
+  },
+  "trec-genomics-2007/qrels": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2007/trecgen2007.all.judgments.tsv.txt",
+    "expected_md5": "5be6b6eea10d8ec0dac25bbe21af38a0",
+    "cache_path": "trec-genomics-2007/qrels"
+  }
+},
+
+"medline": {
+  "2004/a": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_A.gz",
+    "expected_md5": "7858e5b908c25b88e30965b770e9780f",
+    "cache_path": "2004/2004_TREC_XML_MEDLINE_A.gz"
+  },
+  "2004/b": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_B.gz",
+    "expected_md5": "d4f8b510716d71612dc84129b7bc86a8",
+    "cache_path": "2004/2004_TREC_XML_MEDLINE_B.gz"
+  },
+  "2004/c": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_C.gz",
+    "expected_md5": "155c77b6f75b549a810863dae03058d1",
+    "cache_path": "2004/2004_TREC_XML_MEDLINE_C.gz"
+  },
+  "2004/d": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_D.gz",
+    "expected_md5": "cb1570f0212f8b737c757b6177788f36",
+    "cache_path": "2004/2004_TREC_XML_MEDLINE_D.gz"
+  },
+  "trec-genomics-2004/queries": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/rest.zip",
+    "expected_md5": "3f252c59774fe8e74337637d73f8afc6",
+    "cache_path": "trec-genomics-2004/rest.zip"
+  },
+  "trec-genomics-2004/qrels": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2004/04.qrels.txt",
+    "expected_md5": "1cb017045d7909102476bcb17fb19878",
+    "cache_path": "trec-genomics-2004/qrels"
+  },
+  "trec-genomics-2005/queries": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2005/adhoc2005narrative.txt",
+    "expected_md5": "71e8044cb65458731f4496fdc2aad94a",
+    "cache_path": "trec-genomics-2005/queries.txt"
+  },
+  "trec-genomics-2005/qrels": {
+    "url": "https://dmice.ohsu.edu/trec-gen/data/2005/genomics.qrels.large.txt",
+    "expected_md5": "fd6ac71dcd337c0c0cddf0ffc0528cc6",
+    "cache_path": "trec-genomics-2005/qrels"
+  },
+  "2017/part1": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part1.tar.gz",
+    "expected_md5": "04d14a46af586faf9306580291758c29",
+    "cache_path": "2017/part1.tar.gz"
+  },
+  "2017/part2": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part2.tar.gz",
+    "expected_md5": "19740bcde4e5e3bcfc583b347cd59d17",
+    "cache_path": "2017/part2.tar.gz"
+  },
+  "2017/part3": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part3.tar.gz",
+    "expected_md5": "7e7d3cfb452c6e4260704f0a6cc7932e",
+    "cache_path": "2017/part3.tar.gz"
+  },
+  "2017/part4": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part4.tar.gz",
+    "expected_md5": "1b22d0932d319d127be326358435c5e5",
+    "cache_path": "2017/part4.tar.gz"
+  },
+  "2017/part5": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/medline_xml.part5.tar.gz",
+    "expected_md5": "d71b9bb9e11d017f3f77ffe47dbf8aa9",
+    "cache_path": "2017/part5.tar.gz"
+  },
+  "2017/aacr_asco_extra": {
+    "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/extra_abstracts.tar.gz",
+    "expected_md5": "d91bb4ca9b50cbbd5986bb5c43082afb",
+    "cache_path": "2017/extra_abstracts.tar.gz"
+  },
+  "trec-pm-2017/queries": {
+    "url": "https://trec.nist.gov/data/precmed/topics2017.xml",
+    "expected_md5": "16d69bf9119aaaf4b8545c24dde4156d",
+    "cache_path": "trec-pm-2017/queries.xml"
+  },
+  "trec-pm-2017/qrels": {
+    "url": "https://trec.nist.gov/data/precmed/qrels-final-abstracts.txt",
+    "expected_md5": "0a302cb9cd580709d9e3db9881a25d47",
+    "cache_path": "trec-pm-2017/qrels"
+  },
+  "trec-pm-2018/queries": {
+    "url": "http://www.trec-cds.org/topics2018.xml",
+    "expected_md5": "6c59de8eaf3bd9925a567c50dfab6936",
+    "cache_path": "trec-pm-2018/queries.xml"
+  },
+  "trec-pm-2018/qrels": {
+    "url": "https://trec.nist.gov/data/precmed/qrels-treceval-abstracts-2018-v2.txt",
+    "expected_md5": "a09754dec58ee90458ff8e0e7f2cb934",
+    "cache_path": "trec-pm-2018/qrels"
+  }
+},
+
+"msmarco-document": {
+  "docs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
+    "expected_md5": "d4863e4f342982b51b9a8fc668b2d0c0",
+    "cache_path": "collection.tsv.gz"
+  },
+  "train/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-queries.tsv.gz",
+    "expected_md5": "4086d31a9cf2d7b69c4932609058111d",
+    "cache_path": "train/queries.tsv.gz"
+  },
+  "train/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-qrels.tsv.gz",
+    "expected_md5": "9d1609e240113b0504fd2e61cb36d924",
+    "cache_path": "train/qrels.gz"
+  },
+  "train/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-top100.gz",
+    "expected_md5": "be32fa12eb71e93014c84775d7465976",
+    "cache_path": "train/ms.run.gz"
+  },
+  "dev/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-queries.tsv.gz",
+    "expected_md5": "ac20593d71b9c32ab2633230f9cdf10d",
+    "cache_path": "dev/queries.tsv.gz"
+  },
+  "dev/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-qrels.tsv.gz",
+    "expected_md5": "5eeafaeb4960979a62e7fed93273254e",
+    "cache_path": "dev/qrels.gz"
+  },
+  "dev/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docdev-top100.gz",
+    "expected_md5": "ac10255edf321821b0ccd0f123037780",
+    "cache_path": "dev/ms.run.gz"
+  },
+  "eval/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docleaderboard-queries.tsv.gz",
+    "expected_md5": "50fe4285d64444c9ffc933b66a79f775",
+    "cache_path": "eval/queries.tsv.gz"
+  },
+  "eval/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docleaderboard-top100.tsv.gz",
+    "expected_md5": "a039a00356c09606962f3c07c68d02ef",
+    "cache_path": "eval/ms.run.gz"
+  },
+  "trec-dl-2019/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2019-queries.tsv.gz",
+    "expected_md5": "eda71eccbe4d251af83150abe065368c",
+    "cache_path": "trec-dl-2019/queries.tsv.gz"
+  },
+  "trec-dl-2019/qrels": {
+    "url": "https://trec.nist.gov/data/deep/2019qrels-docs.txt",
+    "expected_md5": "d7ef53b995ef7e01676ea85d7ec01dda",
+    "cache_path": "trec-dl-2019/qrels"
+  },
+  "trec-dl-2019/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctest2019-top100.gz",
+    "expected_md5": "91071b89dd52124057a87d53cd22028d",
+    "cache_path": "trec-dl-2019/ms.run.gz"
+  },
+  "trec-dl-2020/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz",
+    "expected_md5": "00a406fb0d14ed3752d70d1e4eb98600",
+    "cache_path": "trec-dl-2020/queries.tsv.gz"
+  },
+  "trec-dl-2020/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctest2020-top100.gz",
+    "expected_md5": "96f39dae3443736bd6393bd09a5a0a20",
+    "cache_path": "trec-dl-2020/ms.run.gz"
+  },
+  "trec-dl-2020/qrels": {
+    "url": "https://trec.nist.gov/data/deep/2020qrels-docs.txt",
+    "expected_md5": "e10f3545583b124a4ed5e7992293e15a",
+    "cache_path": "trec-dl-2020/qrels"
+  },
+  "orcas/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-queries.tsv.gz",
+    "expected_md5": "519c5f522294406e3b0574d7d53cf233",
+    "cache_path": "orcas/queries.tsv.gz"
+  },
+  "orcas/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-qrels.tsv.gz",
+    "expected_md5": "3f94db106374be649782022c3018acd0",
+    "cache_path": "orcas/qrels.gz"
+  },
+  "orcas/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-top100.gz",
+    "expected_md5": "118d0884638fd405e111157a124ef0b2",
+    "cache_path": "orcas/ms.run.gz"
+  },
+  "trec-dl-hard/qrels": {
+    "url": "https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels",
+    "expected_md5": "06dfe71d497e081a7c4c1294979edb7d",
+    "cache_path": "trec-dl-hard/qrels"
+  }
+},
+
+"msmarco-passage": {
+  "collectionandqueries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
+    "expected_md5": "31644046b18952c1386cd4564ba2ae69",
+    "cache_path": "collectionandqueries.tar.gz"
+  },
+  "queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz",
+    "expected_md5": "c177b2795d5f2dcc524cf00fcd973be1",
+    "cache_path": "queries.tar.gz"
+  },
+  "medmarco_ids": {
+    "url": "https://raw.githubusercontent.com/Georgetown-IR-Lab/covid-neural-ir/master/med-msmarco-train.txt",
+    "expected_md5": "dc5199de7d4a872c361f89f08b1163ef",
+    "cache_path": "medmarco.qids"
+  },
+  "train/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qrels.train.tsv",
+    "expected_md5": "733fb9fe12d93e497f7289409316eccf",
+    "cache_path": "train/qrels"
+  },
+  "train/docpairs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.tsv.gz",
+    "expected_md5": "215a5204288820672f5e9451d9e202c5",
+    "cache_path": "train/docpairs.tsv.gz"
+  },
+  "train/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.train.tar.gz",
+    "expected_md5": "d99fdbd5b2ea84af8aa23194a3263052"
+  },
+  "dev/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qrels.dev.tsv",
+    "expected_md5": "9157ccaeaa8227f91722ba5770787b16",
+    "cache_path": "dev/qrels"
+  },
+  "dev/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.dev.tar.gz",
+    "expected_md5": "8c140662bdf123a98fbfe3bb174c5831"
+  },
+  "eval/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.eval.tar.gz",
+    "expected_md5": "73778cd99f6e0632d12d0b5731b20a02"
+  },
+  "trec-dl-2019/qrels": {
+    "url": "https://trec.nist.gov/data/deep/2019qrels-pass.txt",
+    "expected_md5": "2f4be390198da108f6845c822e5ada14",
+    "cache_path": "trec-dl-2019/qrels"
+  },
+  "trec-dl-2019/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2019-queries.tsv.gz",
+    "expected_md5": "eda71eccbe4d251af83150abe065368c"
+  },
+  "trec-dl-2019/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2019-top1000.tsv.gz",
+    "expected_md5": "ec9e012746aa9763c7ff10b3336a3ce1"
+  },
+  "trec-dl-2020/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz",
+    "expected_md5": "00a406fb0d14ed3752d70d1e4eb98600",
+    "cache_path": "trec-dl-2020/queries.tsv.gz"
+  },
+  "trec-dl-2020/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-passagetest2020-top1000.tsv.gz",
+    "expected_md5": "aa6fbc51d66bd1dc745964c0e140a727"
+  },
+  "trec-dl-2020/qrels": {
+    "url": "https://trec.nist.gov/data/deep/2020qrels-pass.txt",
+    "expected_md5": "0355ccee7509ac0463e8278186cdd8d1",
+    "cache_path": "trec-dl-2020/qrels"
+  },
+  "trec-dl-hard/qrels": {
+    "url": "https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-passage.qrels",
+    "expected_md5": "8583c2cbad56eeacb449586fe1d2a471",
+    "cache_path": "trec-dl-hard/qrels"
+  }
+},
+
+"msmarco-qna": {
+  "train": {
+    "url": "https://msmarco.blob.core.windows.net/msmarco/train_v2.1.json.gz",
+    "expected_md5": "576230a745a06943c3a49e76acea1d9d",
+    "cache_path": "train_v2.1.json.gz"
+  },
+  "dev": {
+    "url": "https://msmarco.blob.core.windows.net/msmarco/dev_v2.1.json.gz",
+    "expected_md5": "5e14839f31c933560fbb3bae4ce67829",
+    "cache_path": "dev_v2.1.json.gz"
+  },
+  "eval": {
+    "url": "https://msmarco.blob.core.windows.net/msmarco/eval_v2.1_public.json.gz",
+    "expected_md5": "5fcca9336c7486498c3e1cf81fa89f74",
+    "cache_path": "eval_v2.1_public.json.gz"
+  }
+},
+
+"nfcorpus": {
+  "main": {
+    "url": "https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz",
+    "expected_md5": "49c061fbadc52ba4d35d0e42e2d742fd",
+    "cache_path": "nfcorpus.tar.gz"
+  }
+},
+
+"natural-questions": {
+  "nq-dev-00": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-00.jsonl.gz",
+    "expected_md5": "21df324e9d0725c7cbc5ec06a34b630b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-dev-01": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-01.jsonl.gz",
+    "expected_md5": "3de5cd9d66b705f3ef0462c9bcde1c4b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-dev-02": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-02.jsonl.gz",
+    "expected_md5": "d7b6f2e7f296006ad2f3de291d5960ce",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-dev-03": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-03.jsonl.gz",
+    "expected_md5": "0d93b1e520328c50e0f4582dc89023c7",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-dev-04": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-04.jsonl.gz",
+    "expected_md5": "cc27dc8fc0a2d2753e2ff60a7e6fb976",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-00": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-00.jsonl.gz",
+    "expected_md5": "22c9c2954ea80ff33f9667a9b398c86c",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-01": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-01.jsonl.gz",
+    "expected_md5": "2b76373340261ef019434235a2671a49",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-02": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-02.jsonl.gz",
+    "expected_md5": "785f6ca88ba7f039240218d20644f121",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-03": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-03.jsonl.gz",
+    "expected_md5": "4386753b84222234e12455cf99f116b9",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-04": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-04.jsonl.gz",
+    "expected_md5": "e02d403b1bacee5404f1db48fa3250d9",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-05": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-05.jsonl.gz",
+    "expected_md5": "39c46c3b5ab81ba92766dcb796037fd4",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-06": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-06.jsonl.gz",
+    "expected_md5": "e2c8f7434a40cc3740be8e0597c0db78",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-07": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-07.jsonl.gz",
+    "expected_md5": "3fc55e3e1ef3d834fed665840522e841",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-08": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-08.jsonl.gz",
+    "expected_md5": "660990d45610d4d4f37fcd21965b183e",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-09": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-09.jsonl.gz",
+    "expected_md5": "f4335cb2b08d3166ef5fa007560d0f95",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-10": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-10.jsonl.gz",
+    "expected_md5": "66c607ec3dae612422dd44a0a4ead32b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-11": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-11.jsonl.gz",
+    "expected_md5": "a9b36187b8ccee70f461e8ae06109cb4",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-12": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-12.jsonl.gz",
+    "expected_md5": "feeec2103ce408899c721fc937dab83b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-13": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-13.jsonl.gz",
+    "expected_md5": "97f3068af15e6a0c1d107bfa6dc50f70",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-14": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-14.jsonl.gz",
+    "expected_md5": "c4ea6358f617fbb8f9e65760e88b2028",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-15": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-15.jsonl.gz",
+    "expected_md5": "e3bf5b86c977b41bce825d853fba8e3e",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-16": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-16.jsonl.gz",
+    "expected_md5": "92abe032b4608bf35f08bcf8295eb1d3",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-17": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-17.jsonl.gz",
+    "expected_md5": "2c3acddbce0f5221f24e9db4e1d7662a",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-18": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-18.jsonl.gz",
+    "expected_md5": "a301430662fb1f25a73359f521d1da47",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-19": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-19.jsonl.gz",
+    "expected_md5": "9e0e96cca9e3594f885d8e6063cbd0c7",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-20": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-20.jsonl.gz",
+    "expected_md5": "8747331d168160e013a0c81e0323491d",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-21": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-21.jsonl.gz",
+    "expected_md5": "6de9b253b4a069fdfdc2bc80ddc5c2d1",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-22": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-22.jsonl.gz",
+    "expected_md5": "7c24574f4bc21ad764b9b8b208b97d64",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-23": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-23.jsonl.gz",
+    "expected_md5": "eadf9189bd9557943f468323e00de2ff",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-24": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-24.jsonl.gz",
+    "expected_md5": "f063dec5a57b2701e9318d3c93ad6486",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-25": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-25.jsonl.gz",
+    "expected_md5": "7db0ce87b997e3d47d4b511924384ec8",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-26": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-26.jsonl.gz",
+    "expected_md5": "c50093c839d33956d38548e2b44e0c50",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-27": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-27.jsonl.gz",
+    "expected_md5": "355e504e2a4b5bb6eb05d6976c93517f",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-28": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-28.jsonl.gz",
+    "expected_md5": "f4da07e59b33d1ce1dc006363f961e9d",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-29": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-29.jsonl.gz",
+    "expected_md5": "519c4a0349495253ec9f4211c85f8fcb",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-30": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-30.jsonl.gz",
+    "expected_md5": "96cde3a58f5e9bad4c94510aab7a5db5",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-31": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-31.jsonl.gz",
+    "expected_md5": "26955c79974141f71cb4729908f9c45b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-32": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-32.jsonl.gz",
+    "expected_md5": "91e33f14401adafb3d5cd2c13239531b",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-33": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-33.jsonl.gz",
+    "expected_md5": "d28bf97bf7d433e64d7c016a477e97a1",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-34": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-34.jsonl.gz",
+    "expected_md5": "c98c6aa8578b04524a8e7f035aaa4bbe",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-35": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-35.jsonl.gz",
+    "expected_md5": "3e2b5b6280158f9ba312158a57360512",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-36": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-36.jsonl.gz",
+    "expected_md5": "b6114ca6d3804c045b6abd4b6e6a9f52",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-37": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-37.jsonl.gz",
+    "expected_md5": "89d1c93f2425c232882118fc3af92b9d",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-38": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-38.jsonl.gz",
+    "expected_md5": "785d092d65bb3d815eb5a8027d764c13",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-39": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-39.jsonl.gz",
+    "expected_md5": "c58b54591127ef977f9b900c05ec44ec",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-40": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-40.jsonl.gz",
+    "expected_md5": "cd14b09b6fc9ae8a7bda558b020459aa",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-41": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-41.jsonl.gz",
+    "expected_md5": "bb7415c0fd7cdc52ef8381c44194f2da",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-42": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-42.jsonl.gz",
+    "expected_md5": "08f384e34c0358ab4e9d72ac18eeb4f2",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-43": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-43.jsonl.gz",
+    "expected_md5": "c148652671404f7b2796327db542ef90",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-44": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-44.jsonl.gz",
+    "expected_md5": "245074693e3863f099ad92a2e7e07d88",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-45": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-45.jsonl.gz",
+    "expected_md5": "8e6d4a0895f5c87ede7cbbd0fe8ec0bb",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-46": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-46.jsonl.gz",
+    "expected_md5": "6b965fb2b2fdc3772da641aac10a7c7e",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-47": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-47.jsonl.gz",
+    "expected_md5": "79ac295cf818f1dcdf676772b3863232",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-48": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-48.jsonl.gz",
+    "expected_md5": "545bb6edf1290d61fd42b13125b5bf2a",
+    "stream": true,
+    "skip_local": true
+  },
+  "nq-train-49": {
+    "url": "https://storage.googleapis.com/natural_questions/v1.0/train/nq-train-49.jsonl.gz",
+    "expected_md5": "d6aaa8706626d4b6210e4f9bc6ffe265",
+    "stream": true,
+    "skip_local": true
+  }
+},
+
+"nyt": {
+  "source": {
+    "instructions": "The New York Times Annotated Corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2008T19>.\nMore details about the procedure can be found here: <https://ir-datasets.com/nyt.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "67a1bcf200c448424bf0fba34cef17b0",
+    "cache_path": "nyt.tgz"
+  },
+  "trec-core-2017/queries": {
+    "url": "https://trec.nist.gov/data/core/core_nist.txt",
+    "expected_md5": "821f8eaaf11ae3ce9657d1442749480a",
+    "cache_path": "trec-core-2017/queries.txt"
+  },
+  "trec-core-2017/qrels": {
+    "url": "https://trec.nist.gov/data/core/qrels.txt",
+    "expected_md5": "8cf8dcafba6557e5ee62a28a44b0314d",
+    "cache_path": "trec-core-2017/qrels"
+  }
+},
+
+"pmc": {
+  "v1/source0": {
+    "url": "https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-00.tar.gz",
+    "expected_md5": "3448bc2967913dd46c771d55b3b3ccae",
+    "cache_path": "v1/pmc-text-00.tar.gz"
+  },
+  "v1/source1": {
+    "url": "https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-01.tar.gz",
+    "expected_md5": "6f4bee841dcf307ce1f4cd137f65e822",
+    "cache_path": "v1/pmc-text-01.tar.gz"
+  },
+  "v1/source2": {
+    "url": "https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-02.tar.gz",
+    "expected_md5": "03375c91a74220c59071c7aa5f78deee",
+    "cache_path": "v1/pmc-text-02.tar.gz"
+  },
+  "v1/source3": {
+    "url": "https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-03.tar.gz",
+    "expected_md5": "270648367547f746cf1e2e4323a46aa9",
+    "cache_path": "v1/pmc-text-03.tar.gz"
+  },
+  "v1/dup1": {
+    "url": "http://www.trec-cds.org/duplicates-1.txt",
+    "expected_md5": "7a93656ca21c1749bf0b71a03be01cf3",
+    "cache_path": "v1/duplicates-1.txt"
+  },
+  "v1/dup2": {
+    "url": "http://www.trec-cds.org/duplicates-2.txt",
+    "expected_md5": "8d5f1004ea4d00cfd5a96b40c6419be1",
+    "cache_path": "v1/duplicates-2.txt"
+  },
+  "v2/source0": {
+    "url": "https://ceb.nlm.nih.gov/~robertske/pmc-00.tar.gz",
+    "expected_md5": "d66f2e243cb697138753e622f0a1867a",
+    "cache_path": "v2/pmc-text-00.tar.gz"
+  },
+  "v2/source1": {
+    "url": "https://ceb.nlm.nih.gov/~robertske/pmc-01.tar.gz",
+    "expected_md5": "e59422e5d21ef7e1be307a0de61626f7",
+    "cache_path": "v2/pmc-text-01.tar.gz"
+  },
+  "v2/source2": {
+    "url": "https://ceb.nlm.nih.gov/~robertske/pmc-02.tar.gz",
+    "expected_md5": "145d194643818ea09a4947ba6b1c91c7",
+    "cache_path": "v2/pmc-text-02.tar.gz"
+  },
+  "v2/source3": {
+    "url": "https://ceb.nlm.nih.gov/~robertske/pmc-03.tar.gz",
+    "expected_md5": "231de843bb5334c3c885d75f2ca3240b",
+    "cache_path": "v2/pmc-text-03.tar.gz"
+  },
+  "trec-cds-2014/queries": {
+    "url": "http://www.trec-cds.org/topics2014.xml",
+    "expected_md5": "4924e2a3bb539feac6cbb967f4875926",
+    "cache_path": "trec-cds-2014/queries.xml"
+  },
+  "trec-cds-2014/qrels": {
+    "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2014.txt",
+    "expected_md5": "07c8f85a7b7bcfd4211301ecaa3b4769",
+    "cache_path": "trec-cds-2014/qrels"
+  },
+  "trec-cds-2015/queries": {
+    "url": "https://trec.nist.gov/data/clinical/topics-2015-A.xml",
+    "expected_md5": "462d9804257e7ad0128f16324c9ec06d",
+    "cache_path": "trec-cds-2015/queries.xml"
+  },
+  "trec-cds-2015/qrels": {
+    "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2015.txt",
+    "expected_md5": "7bbe901cfa36df56dd13cce0275c1a2b",
+    "cache_path": "trec-cds-2015/qrels"
+  },
+  "trec-cds-2016/queries": {
+    "url": "https://trec.nist.gov/data/clinical/topics2016.xml",
+    "expected_md5": "22ccb3412931efe1ea084330737e41bc",
+    "cache_path": "trec-cds-2016/queries.xml"
+  },
+  "trec-cds-2016/qrels": {
+    "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2016.txt",
+    "expected_md5": "1a450d38137082e214c1201a3023a6d1",
+    "cache_path": "trec-cds-2016/qrels"
+  }
+},
+
+"trec-arabic": {
+  "docs": {
+    "instructions": "The dataset is based on the Arabic Newswire corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2001T55>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-arabic.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "b17f34a51dca8d19fae66c338c9ed73a",
+    "cache_path": "corpus.tgz"
+  },
+  "ar2001/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/arabic_topics.txt",
+    "expected_md5": "a3d78c379056a080fe40a59a341496b8",
+    "cache_path": "ar2001/queries"
+  },
+  "ar2001/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/xlingual_t10qrels.txt",
+    "expected_md5": "5951e2f0bf72df9f93fc32b93e3a7fde",
+    "cache_path": "ar2001/qrels"
+  },
+  "ar2002/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/CL.topics.arabic.trec11.txt",
+    "expected_md5": "f75a6164d794bab66509f1e818612363",
+    "cache_path": "ar2002/queries"
+  },
+  "ar2002/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/qrels.trec11.xlingual.txt",
+    "expected_md5": "40f25e1e98101e27d081685cbdc390ef",
+    "cache_path": "ar2002/qrels"
+  }
+},
+
+"trec-mandarin": {
+  "docs": {
+    "instructions": "The dataset is based on the TREC Mandarin corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T52>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "a847fa029a1356b8f396aa642c449e38",
+    "cache_path": "corpus.tgz"
+  },
+  "trec5/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/topics.CH1-CH28.chinese.english.gz",
+    "expected_md5": "9ce885d36e8642d4114f40e7008e5b8a",
+    "cache_path": "trec5/queries.gz"
+  },
+  "trec5/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/qrels.1-28.chinese.gz",
+    "expected_md5": "73693083d75ef323fca2a218604b41ac",
+    "cache_path": "trec5/qrels.gz"
+  },
+  "trec6/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/topics.CH29-CH54.chinese.english.gz",
+    "expected_md5": "c3a58ec59e55c162fdc3e3a9c5e9b8a7",
+    "cache_path": "trec6/queries.gz"
+  },
+  "trec6/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/qrels.trec6.29-54.chinese.gz",
+    "expected_md5": "675ab2f14fad9017d646d052c0b35c46",
+    "cache_path": "trec6/qrels.gz"
+  }
+},
+
+"trec-spanish": {
+  "docs": {
+    "instructions": "The dataset is based on the TREC Spanish corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T51>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-spanish.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "4b8583c03149cf0c06c090fd230b33c6",
+    "cache_path": "corpus.tgz"
+  },
+  "trec3/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/topics.SP1-SP25.spanish.english.gz",
+    "expected_md5": "22eea4a5c131db9cc4a431235f6a0573",
+    "cache_path": "trec3/queries.gz"
+  },
+  "trec3/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/qrels.1-25.spanish.gz",
+    "expected_md5": "e1703487f43fb7ea30b87a0f14ccb5ce",
+    "cache_path": "trec3/qrels.gz"
+  },
+  "trec4/queries": {
+    "url": "https://trec.nist.gov/data/topics_noneng/topics.SP26-SP50.spanish.english.gz",
+    "expected_md5": "dfd9685cce559e33ab397c1878a6a1f8",
+    "cache_path": "trec4/querie.gz"
+  },
+  "trec4/qrels": {
+    "url": "https://trec.nist.gov/data/qrels_noneng/qrels.26-50.spanish.gz",
+    "expected_md5": "f2540f9fb83433ca8ef9503671136498",
+    "cache_path": "trec4/qrels.gz"
+  }
+},
+
+"tripclick": {
+  "benchmark": {
+    "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "6e5d3deeba138750e9a148b538f30a8f",
+    "cache_path": "benchmark.tar.gz"
+  },
+  "dlfiles": {
+    "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "1f256c19466b414e365324d8ef21f09c",
+    "cache_path": "dlfiles.tar.gz"
+  },
+  "dlfiles_runs_test": {
+    "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "2b5e98c683a91e19630636b6f83e3b15",
+    "cache_path": "dlfiles_runs_test.tar.gz"
+  }
+},
+
+"trec-robust04": {
+  "docs": {
+    "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
+    "cache_path": "trec45"
+  },
+  "queries": {
+    "url": "https://trec.nist.gov/data/robust/04.testset.gz",
+    "expected_md5": "5eac3d774a2f87da61c08a94f945beff",
+    "cache_path": "queries.gz"
+  },
+  "qrels": {
+    "url": "https://trec.nist.gov/data/robust/qrels.robust2004.txt",
+    "expected_md5": "123c2a0ba2ec31178cb1050995dcfdfa",
+    "cache_path": "qrels"
+  }
+},
+
+"tweets2013-ia": {
+  "docs/feb": {
+    "url": "https://archive.org/download/archiveteam-twitter-stream-2013-02/archiveteam-twitter-stream-2013-02.tar",
+    "expected_md5": "e82916d37116c781afff750e2127156f5",
+    "stream": true,
+    "skip_local": true,
+    "skip_test": true
+  },
+  "docs/mar": {
+    "url": "https://archive.org/download/archiveteam-twitter-stream-2013-03/archiveteam-twitter-stream-2013-03.tar",
+    "expected_md5": "486817a372e03298162daa0e80dc63995",
+    "stream": true,
+    "skip_local": true,
+    "skip_test": true
+  },
+  "trec-mb-2013/queries": {
+    "url": "https://trec.nist.gov/data/microblog/2013/topics.MB111-170.txt",
+    "expected_md5": "0b78d99dfa2d655dca7e9f138a93c21a",
+    "cache_path": "trec-mb-2013/queries.txt"
+  },
+  "trec-mb-2013/qrels": {
+    "url": "https://trec.nist.gov/data/microblog/2013/qrels.txt",
+    "expected_md5": "4776a5dfd80b3f675184315ec989c02f",
+    "cache_path": "trec-mb-2013/qrels"
+  },
+  "trec-mb-2014/queries": {
+    "url": "https://trec.nist.gov/data/microblog/2014/topics.desc.MB171-225.txt",
+    "expected_md5": "e9d520f976176e710fd68bb3a065a3e7",
+    "cache_path": "trec-mb-2014/queries.txt"
+  },
+  "trec-mb-2014/qrels": {
+    "url": "https://trec.nist.gov/data/microblog/2014/qrels2014.txt",
+    "expected_md5": "68d9a1920b244f6ccdc687ee1d473214",
+    "cache_path": "trec-mb-2014/qrels"
+  }
+},
+
+"vaswani": {
+  "main": {
+    "url": "http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz",
+    "expected_md5": "23e5607081191b153738e81fbd834680",
+    "cache_path": "npl.tar.gz"
+  }
+},
+
+"wapo": {
+  "v2": {
+    "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
+    "expected_md5": "ce6e93f6ce9959b72c2de4f8d12089ab",
+    "cache_path": "WashingtonPost.v2.tar.gz"
+  },
+  "trec-core-2018/queries": {
+    "url": "https://trec.nist.gov/data/core/topics2018.txt",
+    "expected_md5": "1b11276f0e1badd68347884664816654",
+    "cache_path": "trec-core-2018/queries.txt"
+  },
+  "trec-core-2018/qrels": {
+    "url": "https://trec.nist.gov/data/core/qrels2018.txt",
+    "expected_md5": "7a982cd110f8bb30da4141f0f639f2e1",
+    "cache_path": "trec-core-2018/qrels"
+  },
+  "trec-news-2018/queries": {
+    "url": "https://trec.nist.gov/data/news/2018/newsir18-topics.txt",
+    "expected_md5": "73740793543b439d1ff1b8ee9359973a",
+    "cache_path": "trec-news-2018/queries.txt"
+  },
+  "trec-news-2018/qrels": {
+    "url": "https://trec.nist.gov/data/news/2018/bqrels.exp-gains.txt",
+    "expected_md5": "396963175006cb3201ea7c16e874033a",
+    "cache_path": "trec-news-2018/qrels"
+  },
+  "trec-news-2019/queries": {
+    "url": "https://trec.nist.gov/data/news/2019/newsir19-background-linking-topics.xml",
+    "expected_md5": "388b5c96f8962da17eb1024b856d21c1",
+    "cache_path": "trec-news-2019/queries.txt"
+  },
+  "trec-news-2019/qrels": {
+    "url": "https://trec.nist.gov/data/news/2019/newsir19-qrels-background.txt",
+    "expected_md5": "7b839a1a94e349d3facf28012542cc1d",
+    "cache_path": "trec-news-2019/qrels"
+  },
+  "trec-news-2020/queries": {
+    "url": "https://trec.nist.gov/data/news/2020/newsir20-topics.txt",
+    "expected_md5": "2674538a07fb7ac29200cbc4c4a05404",
+    "cache_path": "trec-news-2020/queries.txt"
+  },
+  "trec-news-2020/qrels": {
+    "url": "https://trec.nist.gov/data/news/2020/qrels.background",
+    "expected_md5": "7c31f731775bdd4148d349df1a9e43fc",
+    "cache_path": "trec-news-2020/qrels"
+  }
+},
+
+"wikir": {
+  "en1k": {
+    "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1",
+    "expected_md5": "554299bca984640cb283d6ba55753608"
+  },
+  "en59k": {
+    "url": "https://zenodo.org/record/3557342/files/wikIR59k.zip?download=1",
+    "expected_md5": "c9f7e646e022eea84e6f00e3870ca79b"
+  },
+  "fr14k": {
+    "url": "https://zenodo.org/record/3569718/files/FRwikIR14k.zip?download=1",
+    "expected_md5": "0bf8a8965b1a550ad3604a9ddd5c6bbe"
+  },
+  "es13k": {
+    "url": "https://zenodo.org/record/3569724/files/ESwikIR13k.zip?download=1",
+    "expected_md5": "4847eeffbf261d3877da86f5ccae4e43"
+  },
+  "it16k": {
+    "url": "https://zenodo.org/record/3569732/files/ITwikIR16k.zip?download=1",
+    "expected_md5": "e9c5b81c9df6fdc0e2986fa8ffb8ff12"
+  }
+}
+}

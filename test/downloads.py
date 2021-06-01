@@ -9,7 +9,7 @@ import re
 import os
 import unittest
 import argparse
-import yaml
+import json
 import ir_datasets
 
 
@@ -37,8 +37,8 @@ class TestDownloads(unittest.TestCase):
     output_data = []
 
     def test_downloads(self):
-        with open('ir_datasets/etc/downloads.yaml') as f:
-            data = yaml.load(f, Loader=yaml.BaseLoader)
+        with open('ir_datasets/etc/downloads.json') as f:
+            data = json.load(f)
         try:
             self._test_download_iter(data)
         finally:

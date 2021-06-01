@@ -6,7 +6,6 @@ import io
 import codecs
 from typing import NamedTuple, Tuple
 import re
-import ijson
 import ir_datasets
 from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredScoredDocs, FilteredQrels, FilteredDocPairs, YamlDocumentation
@@ -96,6 +95,7 @@ class MsMarcoQnAManager:
         return self._docs_store
 
     def build(self):
+        ijson = ir_datasets.lazy_libs.ijson()
         docs_store = self._internal_docs_store()
         if docs_store.built():
             return # already built

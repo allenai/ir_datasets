@@ -72,3 +72,21 @@ def zlib_state():
         import zlib_state
         _cache['zlib_state'] = zlib_state
     return _cache['zlib_state']
+
+def xml_etree():
+    if 'xml_etree' not in _cache:
+        import xml.etree.ElementTree as ET
+        _cache['xml_etree'] = ET
+    return _cache['xml_etree']
+
+def lxml_html():
+    if 'lxml_html' not in _cache:
+        import lxml.html
+        _cache['lxml_html'] = lxml.html
+    return _cache['lxml_html']
+
+def ijson():
+    if 'ijson' not in _cache:
+        import ijson
+        _cache['ijson'] = ijson
+    return _cache['ijson']

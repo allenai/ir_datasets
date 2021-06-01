@@ -1,5 +1,4 @@
 from typing import NamedTuple, Tuple
-import ijson
 import contextlib
 import itertools
 import ir_datasets
@@ -41,6 +40,7 @@ class DprW100Manager:
         self._passage_id_key = passage_id_key
 
     def build(self):
+        ijson = ir_datasets.lazy_libs.ijson()
         if (self._base_path/'queries.tsv').exists():
             return # already built
 
