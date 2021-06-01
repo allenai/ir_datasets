@@ -228,6 +228,14 @@
     "cache_path": "trec-pm-2019/queries.xml"
   }
 },
+  
+"clirmatrix": {
+  "downloads": {
+    "url": "http://www.cs.jhu.edu/~shuosun/clirmatrix/data/downloads.json.gz",
+    "expected_md5": "371cc532aca236759bd3602eb6ce2181",
+    "cache_path": "clirmatrix_downloads.json.gz"
+  }
+},
 
 "clueweb09": {
   "docs": {
