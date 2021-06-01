@@ -217,7 +217,7 @@ def _init():
     )
 
     # DL-Hard
-    dl_hard_qrels_migrator = Migrator(base_path/'trec-dl-hard'/'irds_version.txt', 'v2',
+    dl_hard_qrels_migrator = Migrator(base_path/'trec-dl-hard'/'irds_version.txt', 'v3',
         affected_files=[base_path/'trec-dl-hard'/'qrels'],
         message='Updating trec-dl-hard qrels')
     hard_qids = Lazy(lambda: DL_HARD_QIDS)
