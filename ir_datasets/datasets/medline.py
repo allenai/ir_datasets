@@ -6,7 +6,6 @@ from contextlib import ExitStack
 import itertools
 from typing import NamedTuple, Tuple
 import tarfile
-import xml.etree.ElementTree as ET
 import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, ZipExtract
 from ir_datasets.formats import BaseDocs, BaseQueries, GenericQuery, TrecQrels, TrecXmlQueries
@@ -85,6 +84,7 @@ class MedlineDocs(BaseDocs):
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
+        ET = ir_datasets.lazy_libs.xml_etree()
         with ExitStack() as stack:
             if self._name == '2004':
                 # The files for 2004 are a large XML file that's split internally.

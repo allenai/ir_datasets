@@ -1,3 +1,4 @@
+import json
 import pkgutil
 import os
 from pathlib import Path
@@ -232,16 +233,8 @@ class _DownloadConfig:
 
     def contents(self):
         if self._contents is None:
-            if self._file.startswith('/'):
-                data = open(self._file).read()
-            else:
-                data = pkgutil.get_data('ir_datasets', self._file)
-            if self._parser == "json":
-                json = ir_datasets.lazy_libs.json()
-                self._contents = json.loads(data)
-            else:
-                yaml = ir_datasets.lazy_libs.yaml()
-                self._contents = yaml.load(data, Loader=yaml.BaseLoader)
+            data = pkgutil.get_data('ir_datasets', self._file)
+            self._contents = json.loads(data)
         return self._contents
 
     def context(self, key, base_path=None, dua=None):
@@ -286,4 +279,4 @@ class _DownloadConfig:
         return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua, stream=dlc.get('stream', False))
 
 
-DownloadConfig = _DownloadConfig(file='etc/downloads.yaml')
+DownloadConfig = _DownloadConfig(file='etc/downloads.json')

@@ -6,12 +6,12 @@ from .base import DatasetIntegrationTest
 
 
 class TestDprW100(DatasetIntegrationTest):
-    # def test_docs(self):
-    #     self._test_docs('dpr-w100', count=21015324, items={
-    #         0: DprW100Doc('1', re.compile('^"Aaron Aaron \\( or ; ""Ahärôn""\\) is a prophet, high priest, and the brother of Moses in the Abrahamic.{412} brother\'s spokesman \\(""prophet""\\) to the Pharaoh\\. Part of the Law \\(Torah\\) that Moses received from"$', flags=48), 'Aaron'),
-    #         9: DprW100Doc('10', re.compile('^"families some time in Israel\'s past\\. Others argue that the story simply shows what can happen if th.{397}ho affirmed Moses\' uniqueness as the one with whom the spoke face to face\\. Miriam was punished with"$', flags=48), 'Aaron'),
-    #         21015323: DprW100Doc('21015324', re.compile('^"committee was established before the building was opened\\. It is the District Nursing base for North.{425}ontains 81 extra care apartments two GP surgeries, a public library, a community café, an optician,"$', flags=48), '"Limelight centre"'),
-    #     })
+    def test_docs(self):
+        self._test_docs('dpr-w100', count=21015324, items={
+            0: DprW100Doc('1', re.compile('^"Aaron Aaron \\( or ; ""Ahärôn""\\) is a prophet, high priest, and the brother of Moses in the Abrahamic.{412} brother\'s spokesman \\(""prophet""\\) to the Pharaoh\\. Part of the Law \\(Torah\\) that Moses received from"$', flags=48), 'Aaron'),
+            9: DprW100Doc('10', re.compile('^"families some time in Israel\'s past\\. Others argue that the story simply shows what can happen if th.{397}ho affirmed Moses\' uniqueness as the one with whom the spoke face to face\\. Miriam was punished with"$', flags=48), 'Aaron'),
+            21015323: DprW100Doc('21015324', re.compile('^"committee was established before the building was opened\\. It is the District Nursing base for North.{425}ontains 81 extra care apartments two GP surgeries, a public library, a community café, an optician,"$', flags=48), '"Limelight centre"'),
+        })
 
     def test_queries(self):
         self._test_queries('dpr-w100/natural-questions/train', count=58880, items={

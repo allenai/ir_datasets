@@ -184,10 +184,10 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: TrecQrel('42255', 'D1168483', 0, '0'),
             9097: TrecQrel('1136962', 'D96742', 0, '0'),
         })
-        self._test_qrels('msmarco-passage/trec-dl-hard', count=4236, items={
+        self._test_qrels('msmarco-passage/trec-dl-hard', count=4256, items={
             0: TrecQrel('915593', '1396701', 0, 'Q0'),
             9: TrecQrel('915593', '1772932', 0, 'Q0'),
-            4235: TrecQrel('273695', '8282605', 3, 'Q0'),
+            4255: TrecQrel('1056416', '8739207', 0, 'Q0'),
         })
         self._test_qrels('msmarco-passage/trec-dl-hard/fold1', count=1072, items={
             0: TrecQrel('915593', '1396701', 0, 'Q0'),
@@ -204,15 +204,15 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: TrecQrel('177604', '8451996', 2, 'Q0'),
             443: TrecQrel('1105792', '996676', 0, '0'),
         })
-        self._test_qrels('msmarco-passage/trec-dl-hard/fold4', count=706, items={
+        self._test_qrels('msmarco-passage/trec-dl-hard/fold4', count=716, items={
             0: TrecQrel('801118', '8708701', 3, 'Q0'),
             9: TrecQrel('507445', '8407104', 1, 'Q0'),
-            705: TrecQrel('1109707', '8746678', 0, '0'),
+            715: TrecQrel('1056416', '8739207', 0, 'Q0'),
         })
-        self._test_qrels('msmarco-passage/trec-dl-hard/fold5', count=1116, items={
+        self._test_qrels('msmarco-passage/trec-dl-hard/fold5', count=1126, items={
             0: TrecQrel('190044', '1353072', 3, 'Q0'),
             9: TrecQrel('190044', '886798', 1, 'Q0'),
-            1115: TrecQrel('273695', '8282605', 3, 'Q0'),
+            1125: TrecQrel('1103153', '8226445', 0, 'Q0'),
         })
 
 
