@@ -1,4 +1,4 @@
 include ir_datasets/docs/*.yaml
-include ir_datasets/etc/*.yaml
+include ir_datasets/etc/*.json
 include requirements.txt
 include LICENSE
