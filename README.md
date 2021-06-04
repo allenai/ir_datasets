@@ -196,6 +196,9 @@ dataset, its available subsets, and what data they provide.
    When the server accepts Range requests, uses them. Otherwise, will download the entire file again
  - `IR_DATASETS_DL_DISABLE_PBAR`: Set to `true` to disable the progress bar for downloads. Useful in settings
    where an interactive console is not available.
+ - `IR_DATASETS_DL_SIKIP_SSL`: Set to `true` to disable checking SSL certificates when downloading files.
+   Useful as a short-term solution when SSL certificates expire or are otherwise invalid. Note that this
+   does not disable hash verification of the downloaded content.
 
 ## Citing
 
