@@ -25,6 +25,13 @@
 <li><a href="#gov/trec-web-2003/named-page"><kbd><span class="prefix">gov</span>/trec-web-2003/named-page</kbd></a></li>
 <li><a href="#gov/trec-web-2004"><kbd><span class="prefix">gov</span>/trec-web-2004</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
+
+<div id="DataAccess">
+<h3>Data Access Information</h3>
+ <p> To use this dataset, you need a copy of <a href="http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html">GOV</a>, provided by the University of Glasgow. </p> <p> Your organization may already have a copy. If this is the case, you may only need to complete a new "Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement" and pay a fee to UoG to get a copy. The data are provided as hard drives that are shipped to you. </p> <p> Once you have the data, ir_datasets will need the directories that look like the following: </p> <ul> <li><kbd>G00</kbd></li> <li><kbd>G01</kbd></li> <li><kbd>...</kbd></li> </ul> <p> ir_datasets expects the above directories to be copied/linked under <kbd>~/.ir_datasets/gov/corpus</kbd>. </p> 
+</div>
 <hr />
 <div class="dataset" id="gov">
 <h3><kbd class="select"><span class="str">"gov"</kdb></h3>
@@ -481,6 +488,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=gov'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

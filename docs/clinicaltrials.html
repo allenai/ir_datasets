@@ -24,7 +24,10 @@
 <li><a href="#clinicaltrials/2017/trec-pm-2018"><kbd><span class="prefix">clinicaltrials</span>/2017/trec-pm-2018</kbd></a></li>
 <li><a href="#clinicaltrials/2019"><kbd><span class="prefix">clinicaltrials</span>/2019</kbd></a></li>
 <li><a href="#clinicaltrials/2019/trec-pm-2019"><kbd><span class="prefix">clinicaltrials</span>/2019/trec-pm-2019</kbd></a></li>
+<li><a href="#clinicaltrials/2021"><kbd><span class="prefix">clinicaltrials</span>/2021</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="clinicaltrials">
 <h3><kbd class="select"><span class="str">"clinicaltrials"</kdb></h3>
@@ -353,6 +356,45 @@ bibtex:
 </div>
 </div>
 </div>
+
+<hr />
+<div class="dataset" id="clinicaltrials/2021" data-parent="clinicaltrials">
+<h3><kbd class="ds-name select"><span class="str">"clinicaltrials/2021"</kdb></h3>
+
+<div class="desc">
+ <p> A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from April 2021 for use with the <a href="http://www.trec-cds.org/2021.html">TREC Clinical Trials 2021 Track</a>. </p> <p> Queries for the TREC Clinical Trials 2021 Track will be released later. </p> <ul> <li><a href="http://www.trec-cds.org/2021.html#documents">Dataset information</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clinicaltrials/2021__docs">docs</a>
+<div id="clinicaltrials/2021__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">ClinicalTrialsDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">condition</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">summary</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">detailed_description</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">eligibility</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'clinicaltrials/2021')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, condition, summary, detailed_description, eligibility&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=clinicaltrials'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

@@ -22,6 +22,13 @@
 <li><a href="#trec-mandarin/trec5"><kbd><span class="prefix">trec-mandarin</span>/trec5</kbd></a></li>
 <li><a href="#trec-mandarin/trec6"><kbd><span class="prefix">trec-mandarin</span>/trec6</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
+
+<div id="DataAccess">
+<h3>Data Access Information</h3>
+ <p> To use this dataset, you need a copy of the source corpus, provided by the the Linguistic Data Consortium. The specific resource needed is <a href="https://catalog.ldc.upenn.edu/LDC2000T52">LDC2000T52</a>. </p> <p> Many organizations already have a subscription to the LDC, so access to the collection can be as easy as confirming the data usage agreement and downloading the corpus. Check with your library for access details. </p> <p> The source file is: <kbd>LDC2000T52.tgz</kbd>. </p> <p> ir_datasets expects this file to be copied/linked as <kbd>~/.ir_datasets/trec-mandarin/corpus.tgz</kbd>. </p> 
+</div>
 <hr />
 <div class="dataset" id="trec-mandarin">
 <h3><kbd class="select"><span class="str">"trec-mandarin"</kdb></h3>
@@ -235,6 +242,16 @@ bibtex:
 </div>
 </div>
 </div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=trec-mandarin'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

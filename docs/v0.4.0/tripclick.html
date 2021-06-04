@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="main.css" />
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+<script src="main.js"></script>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>TripClick - ir_datasets</title>
+<body>
+<div class="page">
+
+<div class="banner">This documentation is for <strong>v0.4.0</strong>. See <a href="../tripclick.html">here</a> for documentation of the current latest version on pypi.</div>
+
+<div style="position: absolute; top: 4px; left: 4px;"><a href="index.html">&larr; home</a></div>
+
+<div style="position: absolute; top: 4px; right: 4px;">Github: <a href="https://github.com/allenai/ir_datasets/blob/v0.4.0/ir_datasets/datasets/tripclick.py">datasets/tripclick.py</a></div>
+<h1><code>ir_datasets</code>: TripClick</h1>
+<div style="font-weight: bold; font-size: 1.1em;">Index</div>
+<ol class="index">
+<li><a href="#tripclick"><kbd>tripclick</kbd></a></li>
+<li><a href="#tripclick/test"><kbd><span class="prefix">tripclick</span>/test</kbd></a></li>
+<li><a href="#tripclick/test/head"><kbd><span class="prefix">tripclick</span>/test/head</kbd></a></li>
+<li><a href="#tripclick/test/tail"><kbd><span class="prefix">tripclick</span>/test/tail</kbd></a></li>
+<li><a href="#tripclick/test/torso"><kbd><span class="prefix">tripclick</span>/test/torso</kbd></a></li>
+<li><a href="#tripclick/train"><kbd><span class="prefix">tripclick</span>/train</kbd></a></li>
+<li><a href="#tripclick/train/head"><kbd><span class="prefix">tripclick</span>/train/head</kbd></a></li>
+<li><a href="#tripclick/train/head/dctr"><kbd><span class="prefix">tripclick</span>/train/head/dctr</kbd></a></li>
+<li><a href="#tripclick/train/tail"><kbd><span class="prefix">tripclick</span>/train/tail</kbd></a></li>
+<li><a href="#tripclick/train/torso"><kbd><span class="prefix">tripclick</span>/train/torso</kbd></a></li>
+<li><a href="#tripclick/val"><kbd><span class="prefix">tripclick</span>/val</kbd></a></li>
+<li><a href="#tripclick/val/head"><kbd><span class="prefix">tripclick</span>/val/head</kbd></a></li>
+<li><a href="#tripclick/val/head/dctr"><kbd><span class="prefix">tripclick</span>/val/head/dctr</kbd></a></li>
+<li><a href="#tripclick/val/tail"><kbd><span class="prefix">tripclick</span>/val/tail</kbd></a></li>
+<li><a href="#tripclick/val/torso"><kbd><span class="prefix">tripclick</span>/val/torso</kbd></a></li>
+</ol>
+<div id="Downloads">
+</div>
+
+<div id="DataAccess">
+<h3>Data Access Information</h3>
+ <p> To use this dataset, you need a copy of the source files, provided by the Trip Database. </p> <p> A copy of the source files can be requested through the procedure detailed <a href="https://tripdatabase.github.io/tripclick/#getting-the-data">here</a>. Documents, queries, and qrels require the "TripClick IR Benchmark"; for scoreddocs and docpairs, you will also need to request the "TripClick Training Package for Deep Learning Models". </p> <p> The source files you will need are: <ul> <li><kbd>benchmark.tar.gz</kbd> (for docs, queries, and qrels)</li> <li><kbd>dlfiles.tar.gz</kbd> (for docpairs and scoreddocs)</li> <li><kbd>dlfiles_runs_test.tar.gz</kbd> (for scoreddocs on the test set)</li> </ul> <p> ir_datasets expects these files to be copied/linked in <kbd>~/.ir_datasets/tripclick/</kbd>. </p> 
+</div>
+<hr />
+<div class="dataset" id="tripclick">
+<h3><kbd class="select"><span class="str">"tripclick"</kdb></h3>
+
+<div class="desc">
+ <p> TripClick is a large collection from the <a href="https://www.tripdatabase.com/">Trip Database</a>. Relevance is inferred from click signals. </p> <p> A copy of this dataset can be obtained from the Trip Database through the process described <a href="https://tripdatabase.github.io/tripclick/#getting-the-data">here</a>. Documents, queries, and qrels require the "TripClick IR Benchmark"; for scoreddocs and docpairs, you will also need to request the "TripClick Training Package for Deep Learning Models". </p> <ul> <li>Documents: <a href="https://www.nlm.nih.gov/medline/medline_overview.html">Medline</a> article titles and abstracts</li> <li>Queries: user queries issued to the <a href="https://www.tripdatabase.com/">Trip Database</a></li> <li>Qrels: Inferred from clicks</li> <li><a href="https://docs.google.com/document/d/1RHVxVnZsPBDDZMDcSvbB8VyNZDl2cn6KpeeSvIu6g_c/edit?usp=sharing">Dataset request form</a></li> <li><a href="https://tripdatabase.github.io/tripclick/">Dataset website</a></li> <li><a href="https://arxiv.org/abs/2103.07901">Dataset paper</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick__docs">docs</a>
+<div id="tripclick__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick__citation">Citation</a>
+<div id="tripclick__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/test" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test"</kdb></h3>
+
+<div class="desc">
+ <p> Test subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/test/head</a>, <a class="ds-ref">tripclick/test/torso</a>, and <a class="ds-ref">tripclick/test/tail</a>. </p> <p> The scoreddocs are the official BM25 results from Anserini. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/test__queries">queries</a>
+<div id="tripclick/test__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test__docs">docs</a>
+<div id="tripclick/test__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test__scoreddocs">scoreddocs</a>
+<div id="tripclick/test__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test__citation">Citation</a>
+<div id="tripclick/test__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/test/head" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/head"</kdb></h3>
+
+<div class="desc">
+ <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/test/head__queries">queries</a>
+<div id="tripclick/test/head__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/head__docs">docs</a>
+<div id="tripclick/test/head__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/head__scoreddocs">scoreddocs</a>
+<div id="tripclick/test/head__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/head__citation">Citation</a>
+<div id="tripclick/test/head__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/test/tail" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/tail"</kdb></h3>
+
+<div class="desc">
+ <p> The least frequent queries in the test set. This represents 50% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/test/tail__queries">queries</a>
+<div id="tripclick/test/tail__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/tail__docs">docs</a>
+<div id="tripclick/test/tail__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/tail__scoreddocs">scoreddocs</a>
+<div id="tripclick/test/tail__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/tail__citation">Citation</a>
+<div id="tripclick/test/tail__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/test/torso" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/torso"</kdb></h3>
+
+<div class="desc">
+ <p> The moderately frequent queries in the test set. This represents 30% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/test/torso__queries">queries</a>
+<div id="tripclick/test/torso__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/torso__docs">docs</a>
+<div id="tripclick/test/torso__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/torso__scoreddocs">scoreddocs</a>
+<div id="tripclick/test/torso__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/test/torso__citation">Citation</a>
+<div id="tripclick/test/torso__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/train" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train"</kdb></h3>
+
+<div class="desc">
+ <p> Training subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/train/head</a>, <a class="ds-ref">tripclick/train/torso</a>, and <a class="ds-ref">tripclick/train/tail</a>. </p> <p> The dataset provides docpairs in a full text format; we map this text back to the query and doc IDs. A small number of docpairs could not be mapped back, so they are skipped. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/train__queries">queries</a>
+<div id="tripclick/train__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train__docs">docs</a>
+<div id="tripclick/train__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train__qrels">qrels</a>
+<div id="tripclick/train__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train__docpairs">docpairs</a>
+<div id="tripclick/train__docpairs" class="tab-content">
+<div>Document Pair type:</div>
+<div class="type">
+<div class="type-name">GenericDocPair: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
+<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train__citation">Citation</a>
+<div id="tripclick/train__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/train/head" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head"</kdb></h3>
+
+<div class="desc">
+ <p> The most frequent queries in the train set. This represents 20% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/train/head__queries">queries</a>
+<div id="tripclick/train/head__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head__docs">docs</a>
+<div id="tripclick/train/head__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head__qrels">qrels</a>
+<div id="tripclick/train/head__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head__citation">Citation</a>
+<div id="tripclick/train/head__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/train/head/dctr" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head/dctr"</kdb></h3>
+
+<div class="desc">
+ <p> The most frequent queries in the train set. This represents 20% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/train/head/dctr__queries">queries</a>
+<div id="tripclick/train/head/dctr__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head/dctr__docs">docs</a>
+<div id="tripclick/train/head/dctr__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head/dctr__qrels">qrels</a>
+<div id="tripclick/train/head/dctr__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant; never clicked</td></tr>
+<tr><td class="relScore">1</td><td>partially relevant; clicked less than 4% of times it was shown (but at least once)</td></tr>
+<tr><td class="relScore">2</td><td>relevant; clicked more than 4% but less than 30% of times it was shown</td></tr>
+<tr><td class="relScore">3</td><td>highly relevant; clicked more than 30% of the times it was shown</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/head/dctr__citation">Citation</a>
+<div id="tripclick/train/head/dctr__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/train/tail" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/tail"</kdb></h3>
+
+<div class="desc">
+ <p> The least frequent queries in the train set. This represents 50% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/train/tail__queries">queries</a>
+<div id="tripclick/train/tail__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/tail__docs">docs</a>
+<div id="tripclick/train/tail__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/tail__qrels">qrels</a>
+<div id="tripclick/train/tail__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/tail__citation">Citation</a>
+<div id="tripclick/train/tail__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/train/torso" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/torso"</kdb></h3>
+
+<div class="desc">
+ <p> The moderately frequent queries in the train set. This represents 30% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/train/torso__queries">queries</a>
+<div id="tripclick/train/torso__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/torso__docs">docs</a>
+<div id="tripclick/train/torso__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/torso__qrels">qrels</a>
+<div id="tripclick/train/torso__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/train/torso__citation">Citation</a>
+<div id="tripclick/train/torso__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/val" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val"</kdb></h3>
+
+<div class="desc">
+ <p> Validation subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/val/head</a>, <a class="ds-ref">tripclick/val/torso</a>, and <a class="ds-ref">tripclick/val/tail</a>. </p> <p> The scoreddocs are the official BM25 results from Anserini. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/val__queries">queries</a>
+<div id="tripclick/val__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val__docs">docs</a>
+<div id="tripclick/val__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val__qrels">qrels</a>
+<div id="tripclick/val__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val__scoreddocs">scoreddocs</a>
+<div id="tripclick/val__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val__citation">Citation</a>
+<div id="tripclick/val__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/val/head" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head"</kdb></h3>
+
+<div class="desc">
+ <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/val/head__queries">queries</a>
+<div id="tripclick/val/head__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head__docs">docs</a>
+<div id="tripclick/val/head__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head__qrels">qrels</a>
+<div id="tripclick/val/head__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head__scoreddocs">scoreddocs</a>
+<div id="tripclick/val/head__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head__citation">Citation</a>
+<div id="tripclick/val/head__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/val/head/dctr" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head/dctr"</kdb></h3>
+
+<div class="desc">
+ <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/val/head/dctr__queries">queries</a>
+<div id="tripclick/val/head/dctr__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head/dctr__docs">docs</a>
+<div id="tripclick/val/head/dctr__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head/dctr__qrels">qrels</a>
+<div id="tripclick/val/head/dctr__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not relevant; never clicked</td></tr>
+<tr><td class="relScore">1</td><td>partially relevant; clicked less than 4% of times it was shown (but at least once)</td></tr>
+<tr><td class="relScore">2</td><td>relevant; clicked more than 4% but less than 30% of times it was shown</td></tr>
+<tr><td class="relScore">3</td><td>highly relevant; clicked more than 30% of the times it was shown</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head/dctr__scoreddocs">scoreddocs</a>
+<div id="tripclick/val/head/dctr__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/head/dctr__citation">Citation</a>
+<div id="tripclick/val/head/dctr__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/val/tail" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/tail"</kdb></h3>
+
+<div class="desc">
+ <p> The least frequent queries in the validation set. This represents 50% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/val/tail__queries">queries</a>
+<div id="tripclick/val/tail__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/tail__docs">docs</a>
+<div id="tripclick/val/tail__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/tail__qrels">qrels</a>
+<div id="tripclick/val/tail__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/tail__scoreddocs">scoreddocs</a>
+<div id="tripclick/val/tail__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/tail__citation">Citation</a>
+<div id="tripclick/val/tail__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="tripclick/val/torso" data-parent="tripclick">
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/torso"</kdb></h3>
+
+<div class="desc">
+ <p> The moderately frequent queries in the validation set. This represents 30% of the search engine traffic. </p> 
+</div>
+<div class="tabs">
+<a class="tab" target="tripclick/val/torso__queries">queries</a>
+<div id="tripclick/val/torso__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/torso__docs">docs</a>
+<div id="tripclick/val/torso__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/torso__qrels">qrels</a>
+<div id="tripclick/val/torso__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>not clicked and appeared higher in search results</td></tr>
+<tr><td class="relScore">1</td><td>clicked</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/torso__scoreddocs">scoreddocs</a>
+<div id="tripclick/val/torso__scoreddocs" class="tab-content">
+<div>Scored Document type:</div>
+<div class="type">
+<div class="type-name">GenericScoredDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
+<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="tripclick/val/torso__citation">Citation</a>
+<div id="tripclick/val/torso__citation" class="tab-content">
+bibtex:
+<cite class="select">@misc{rekabsaz2021tripclick,
+  title={TripClick: The Log Files of a Large Health Web Search Engine}, 
+  author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
+  year={2021},
+  eprint={2103.07901},
+  archivePrefix={arXiv},
+  primaryClass={cs.IR}
+}
+</cite>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=tripclick'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
+
+</div>
+</body>
+</html>

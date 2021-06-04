@@ -27,7 +27,15 @@
 <li><a href="#msmarco-document/trec-dl-2019/judged"><kbd><span class="prefix">msmarco-document</span>/trec-dl-2019/judged</kbd></a></li>
 <li><a href="#msmarco-document/trec-dl-2020"><kbd><span class="prefix">msmarco-document</span>/trec-dl-2020</kbd></a></li>
 <li><a href="#msmarco-document/trec-dl-2020/judged"><kbd><span class="prefix">msmarco-document</span>/trec-dl-2020/judged</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard/fold1"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard/fold1</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard/fold2"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard/fold2</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard/fold3"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard/fold3</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard/fold4"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard/fold4</kbd></a></li>
+<li><a href="#msmarco-document/trec-dl-hard/fold5"><kbd><span class="prefix">msmarco-document</span>/trec-dl-hard/fold5</kbd></a></li>
 </ol>
+<div id="Downloads">
+</div>
 <hr />
 <div class="dataset" id="msmarco-document">
 <h3><kbd class="select"><span class="str">"msmarco-document"</kdb></h3>
@@ -819,6 +827,472 @@ bibtex:
 </div>
 </div>
 </div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard/fold1" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold1"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard/fold1__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard/fold1__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold1__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard/fold1__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold1__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard/fold1__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard/fold2" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold2"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard/fold2__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard/fold2__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold2__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard/fold2__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold2__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard/fold2__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard/fold3" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold3"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard/fold3__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard/fold3__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold3__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard/fold3__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold3__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard/fold3__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard/fold4" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold4"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard/fold4__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard/fold4__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold4__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard/fold4__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold4__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard/fold4__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="msmarco-document/trec-dl-hard/fold5" data-parent="msmarco-document">
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold5"</kdb></h3>
+
+<div class="desc">
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="msmarco-document/trec-dl-hard/fold5__queries">queries</a>
+<div id="msmarco-document/trec-dl-hard/fold5__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
+<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold5__docs">docs</a>
+<div id="msmarco-document/trec-dl-hard/fold5__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
+<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+</code>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold5__qrels">qrels</a>
+<div id="msmarco-document/trec-dl-hard/fold5__qrels" class="tab-content">
+<div>Query relevance judgment type:</div>
+<div class="type">
+<div class="type-name">TrecQrel: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">relevance</span>: <span class="kwd">int</span></li><li data-tuple-idx="3"><span class="">iteration</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Relevance levels</p>
+
+<table>
+<tr><th>Rel.</th><th>Definition</th></tr>
+<tr><td class="relScore">0</td><td>Irrelevant: Document does not provide any useful information about the query</td></tr>
+<tr><td class="relScore">1</td><td>Relevant: Document provides some information relevant to the query, which may be minimal.</td></tr>
+<tr><td class="relScore">2</td><td>Highly relevant: The content of this document provides substantial information on the query.</td></tr>
+<tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
+</table>
+
+<p>Example</p>
+<code class="example">
+<div><span class="kwd">import</span> ir_datasets</div>
+<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
+<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
+<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+</code>
+</div>
+</div>
+</div>
+
+<script type="text/javascript">
+$(function () {
+    $.ajax({
+        'url': 'https://smac.pub/irdsdlc?ds=msmarco-document'
+    }).done(function (data) {
+        $('#Downloads').append(generateDownloads('Downloadable content', data));
+    });
+});
+</script>
 
 </div>
 </body>

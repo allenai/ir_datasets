@@ -153,6 +153,7 @@ Available datasets include:
  - [TREC CAR](https://ir-datasets.com/car.html)
  - [ClueWeb09](https://ir-datasets.com/clueweb09.html)
  - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
+ - [CLIRMatrix](https://ir-datasets.com/clirmatrix.html)
  - [CodeSearchNet](https://ir-datasets.com/codesearchnet.html)
  - [CORD-19](https://ir-datasets.com/cord19.html)
  - [DPR Wiki100](https://ir-datasets.com/dpr-w100.html)
