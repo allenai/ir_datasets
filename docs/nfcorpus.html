@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>NFCorpus (NutritionFacts) - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -33,7 +34,7 @@
 </div>
 <hr />
 <div class="dataset" id="nfcorpus">
-<h3><kbd class="select"><span class="str">"nfcorpus"</kdb></h3>
+<h3><kbd class="select"><span class="str">"nfcorpus"</span></kbd></h3>
 
 <div class="desc">
  <p> "NFCorpus is a full-text English retrieval data set for Medical Information Retrieval. It contains a total of 3,244 natural language queries (written in non-technical English, harvested from the NutritionFacts.org site) with 169,756 automatically extracted relevance judgments for 9,964 medical documents (written in a complex terminology-heavy language), mostly from PubMed." </p> <ul> <li><a href="https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/">Dataset website</p></li> <li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li> </ul> 
@@ -42,6 +43,7 @@
 <a class="tab" target="nfcorpus__docs">docs</a>
 <div id="nfcorpus__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -49,13 +51,37 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus__citation">Citation</a>
@@ -76,7 +102,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="nfcorpus/dev" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev"</span></kbd></h3>
 
 <div class="desc">
  <p> Official dev set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
@@ -92,18 +118,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, all&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[all]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev__docs">docs</a>
 <div id="nfcorpus/dev__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -111,13 +163,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev__qrels">qrels</a>
@@ -138,20 +214,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/dev/nontopic" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/nontopic"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/nontopic"</span></kbd></h3>
 
 <div class="desc">
  <p> Official dev set, filtered to exclude queries from topic pages. </p> 
@@ -167,18 +274,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/nontopic queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev/nontopic__docs">docs</a>
 <div id="nfcorpus/dev/nontopic__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -186,13 +319,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/nontopic docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/nontopic&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev/nontopic__qrels">qrels</a>
@@ -213,20 +370,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/nontopic')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/nontopic qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/dev/video" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/video"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/dev/video"</span></kbd></h3>
 
 <div class="desc">
  <p> Official dev set, filtered to only include queries from video pages. </p> 
@@ -242,18 +430,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, desc&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/video queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[desc]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev/video__docs">docs</a>
 <div id="nfcorpus/dev/video__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -261,13 +475,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/video docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/video&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/dev/video__qrels">qrels</a>
@@ -288,20 +526,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/dev/video')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/dev/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/dev/video qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/dev/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/test" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Official test set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
@@ -317,18 +586,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, all&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[all]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test__docs">docs</a>
 <div id="nfcorpus/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -336,13 +631,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test__qrels">qrels</a>
@@ -363,20 +682,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/test/nontopic" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/nontopic"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/nontopic"</span></kbd></h3>
 
 <div class="desc">
  <p> Official test set, filtered to exclude queries from topic pages. </p> 
@@ -392,18 +742,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/nontopic queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test/nontopic__docs">docs</a>
 <div id="nfcorpus/test/nontopic__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -411,13 +787,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/nontopic docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/nontopic&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test/nontopic__qrels">qrels</a>
@@ -438,20 +838,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/nontopic')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/nontopic qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/test/video" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/video"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/test/video"</span></kbd></h3>
 
 <div class="desc">
  <p> Official test set, filtered to only include queries from video pages. </p> 
@@ -467,18 +898,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, desc&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/video queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[desc]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test/video__docs">docs</a>
 <div id="nfcorpus/test/video__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -486,13 +943,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/video docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/video&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/test/video__qrels">qrels</a>
@@ -513,20 +994,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/test/video')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/test/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/test/video qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/test/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/train" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train"</span></kbd></h3>
 
 <div class="desc">
  <p> Official train set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments) </p> 
@@ -542,18 +1054,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">all</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, all&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, all&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[all]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train__docs">docs</a>
 <div id="nfcorpus/train__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -561,13 +1099,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train__qrels">qrels</a>
@@ -588,20 +1150,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/train/nontopic" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/nontopic"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/nontopic"</span></kbd></h3>
 
 <div class="desc">
  <p> Official train set, filtered to exclude queries from topic pages. </p> 
@@ -617,18 +1210,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/nontopic queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train/nontopic__docs">docs</a>
 <div id="nfcorpus/train/nontopic__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -636,13 +1255,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/nontopic docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/nontopic&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train/nontopic__qrels">qrels</a>
@@ -663,20 +1306,51 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/nontopic')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/nontopic&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/nontopic qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/nontopic&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="nfcorpus/train/video" data-parent="nfcorpus">
-<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/video"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"nfcorpus/train/video"</span></kbd></h3>
 
 <div class="desc">
  <p> Official train set, filtered to only include queries from video pages. </p> 
@@ -692,18 +1366,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">desc</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, desc&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, desc&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/video queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[desc]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">))</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train/video__docs">docs</a>
 <div id="nfcorpus/train/video__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">nfcorpus</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">NfCorpusDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -711,13 +1411,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">abstract</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, abstract&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, abstract&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/video docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[abstract]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/video&#39;</span><span class="p">)</span>
+<span class="c1"># Index nfcorpus</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;abstract&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="nfcorpus/train/video__qrels">qrels</a>
@@ -738,13 +1462,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>A direct link from the query to the document the cited sources section of a page.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'nfcorpus/train/video')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;nfcorpus/train/video&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> nfcorpus/train/video qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:nfcorpus/train/video&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/nfcorpus&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(</span><span class="s1">&#39;title&#39;</span><span class="p">),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>

@@ -69,7 +69,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
 </div>
 {data_access_section}<hr />
 <div class="dataset" id="{top_level}">
-<h3><kbd class="select"><span class="str">"{top_level}"</kdb></h3>
+<h3><kbd class="select"><span class="str">"{top_level}"</span></kbd></h3>
 {generate_dataset(dataset, top_level)}
 </div>
 ''')
@@ -77,7 +77,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
             out.write(f'''
 <hr />
 <div class="dataset" id="{name}" data-parent="{top_level}">
-<h3><kbd class="ds-name select"><span class="str">"{name}"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"{name}"</span></kbd></h3>
 {generate_dataset(dataset, name)}
 </div>
 ''')
@@ -96,6 +96,12 @@ $(function () {
 
 
 def generate_dataset(dataset, dataset_id):
+    from ir_datasets.commands import example_generators
+    generators = {
+        ('Python API', 'irds-python'): example_generators.PythonExampleGenerator(dataset_id),
+        ('CLI', 'irds-cli'): example_generators.CliExampleGenerator(dataset_id),
+        ('PyTerrier', 'pyterrier'): example_generators.PyTerrierExampleGenerator(dataset_id),
+    }
     with io.StringIO() as out:
         if hasattr(dataset, 'documentation'):
             documentation = dataset.documentation()
@@ -122,30 +128,22 @@ def generate_dataset(dataset, dataset_id):
 <p>Language: {_lang(dataset.queries_lang())}</p>
 <div>Query type:</div>
 {generate_data_format(dataset.queries_cls())}
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'{dataset_id}')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;{fields}&gt;</span></div>
-</code>
+{generate_examples(generators, 'generate_queries')}
 </div>
 ''')
         if dataset.has_docs():
-            fields = ", ".join(dataset.docs_cls()._fields)
+            corpus_ds = find_corpus_dataset(dataset_id)
+            corpus_ds_note = ''
+            if corpus_ds != dataset_id:
+                corpus_ds_note = f'<p><strong>Note:</strong> Uses docs from <a class="ds-ref">{corpus_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__docs">docs</a>
 <div id="{dataset_id}__docs" class="tab-content">
 <p>Language: {_lang(dataset.docs_lang())}</p>
+{corpus_ds_note}
 <div>Document type:</div>
 {generate_data_format(dataset.docs_cls())}
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'{dataset_id}')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;{fields}&gt;</span></div>
-</code>
+{generate_examples(generators, 'generate_docs')}
 </div>
 ''')
         if dataset.has_qrels():
@@ -157,13 +155,7 @@ def generate_dataset(dataset, dataset_id):
 {generate_data_format(dataset.qrels_cls())}
 <p>Relevance levels</p>
 {generate_qrel_defs_table(dataset.qrels_defs())}
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'{dataset_id}')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;{fields}&gt;</span></div>
-</code>
+{generate_examples(generators, 'generate_qrels')}
 </div>
 ''')
         if dataset.has_scoreddocs():
@@ -173,13 +165,7 @@ def generate_dataset(dataset, dataset_id):
 <div id="{dataset_id}__scoreddocs" class="tab-content">
 <div>Scored Document type:</div>
 {generate_data_format(dataset.scoreddocs_cls())}
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'{dataset_id}')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;{fields}&gt;</span></div>
-</code>
+{generate_examples(generators, 'generate_scoreddocs')}
 </div>
 ''')
         if dataset.has_docpairs():
@@ -189,13 +175,7 @@ def generate_dataset(dataset, dataset_id):
 <div id="{dataset_id}__docpairs" class="tab-content">
 <div>Document Pair type:</div>
 {generate_data_format(dataset.docpairs_cls())}
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'{dataset_id}')</div>
-<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;{fields}&gt;</span></div>
-</code>
+{generate_examples(generators, 'generate_docpairs')}
 </div>
 ''')
         if 'bibtex' in documentation:
@@ -211,6 +191,42 @@ bibtex:
         out.seek(0)
         return out.read()
 
+def generate_examples(generators, fn):
+    from pygments import highlight
+    from pygments.lexers import PythonLexer, BashLexer
+    from pygments.formatters import HtmlFormatter
+    with io.StringIO() as f:
+        f.write('<p>Examples:</p>')
+        f.write('<div class="ex-tabs">')
+        for (name, kwd), generator in generators.items():
+            f.write(f'''
+<a class="ex-tab" target="{kwd}">{name}</a>
+<div class="ex-tab-content {kwd}">
+''')
+            example = getattr(generator, fn)()
+            if example is None:
+                f.write(f'<p><i>No example available for {name}</i></p>')
+            else:
+                if example.code:
+                    lexer = {
+                        'py': PythonLexer,
+                        'bash': BashLexer,
+                    }[example.code_lang]()
+                    code = highlight(example.code, lexer, HtmlFormatter())
+                    f.write(code)
+                if example.output:
+                    f.write(f'''
+<code class="output">
+{example.output}
+</code>
+''')
+                if example.message_html:
+                    f.write(f'<p>{example.message_html}</p>')
+            f.write('</div>')
+        f.write('</div>')
+        f.seek(0)
+        return f.read()
+
 
 def generate_data_access_section(documentation):
     if 'data_access' not in documentation:
@@ -221,6 +237,23 @@ def generate_data_access_section(documentation):
 {documentation["data_access"]}
 </div>
 '''
+
+
+def find_corpus_dataset(name):
+    # adapted from https://github.com/Georgetown-IR-Lab/OpenNIR/blob/master/onir/datasets/irds.py#L47
+    ds = ir_datasets.load(name)
+    segments = name.split("/")
+    docs_handler = ds.docs_handler()
+    parent_docs_ds = name
+    while len(segments) > 1:
+        segments = segments[:-1]
+        try:
+            parent_ds = ir_datasets.load("/".join(segments))
+            if parent_ds.has_docs() and parent_ds.docs_handler() == docs_handler:
+                parent_docs_ds = "/".join(segments)
+        except KeyError:
+            pass
+    return parent_docs_ds
 
 
 def generate_data_format(cls):
@@ -1072,6 +1105,7 @@ def page_template(file, base_dir, version, title=None, source=None):
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 {no_index}
 <title>{title + ' - ir_datasets' if title else 'ir_datasets'}</title>
+</head>
 <body>
 <div class="page">
 ''')
@@ -1250,6 +1284,9 @@ cite {
   padding: 4px;
   margin: 4px 0;
 }
+pre {
+    margin: 0;
+}
 .banner {
     padding: 24px 16px 8px 16px;
     background-color: #ffc150;
@@ -1284,7 +1321,7 @@ cite {
   bottom: -1px;
 }
 
-code.example {
+code.example, .highlight {
   display: block;
   border-left: 4px solid #4287f5;
   padding-left: 6px;
@@ -1446,9 +1483,90 @@ details {
     margin: 8px 0;
 }
 
+.ex-tab {
+    display: inline-block;
+    padding: 2px 4px;
+    border: 1px solid black;
+    cursor: pointer;
+    margin: 2px;
+    border-radius: 4px;
+}
+
+.ex-tab.selected {
+    background-color: #4287f5;
+    border-color: #4287f5;
+    color: white;
+}
+
 .screen-small-show {
     display: none;
 }
+
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #999988; font-style: italic } /* Comment */
+.highlight .err { color: #a61717; background-color: #e3d2d2 } /* Error */
+.highlight .k { color: #000000; font-weight: bold } /* Keyword */
+.highlight .o { color: #000000; font-weight: bold } /* Operator */
+.highlight .ch { color: #999988; font-style: italic } /* Comment.Hashbang */
+.highlight .cm { color: #999988; font-style: italic } /* Comment.Multiline */
+.highlight .cp { color: #999999; font-weight: bold; font-style: italic } /* Comment.Preproc */
+.highlight .cpf { color: #999988; font-style: italic } /* Comment.PreprocFile */
+.highlight .c1 { color: #999988; font-style: italic } /* Comment.Single */
+.highlight .cs { color: #999999; font-weight: bold; font-style: italic } /* Comment.Special */
+.highlight .gd { color: #000000; background-color: #ffdddd } /* Generic.Deleted */
+.highlight .ge { color: #000000; font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #aa0000 } /* Generic.Error */
+.highlight .gh { color: #999999 } /* Generic.Heading */
+.highlight .gi { color: #000000; background-color: #ddffdd } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #555555 } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #aaaaaa } /* Generic.Subheading */
+.highlight .gt { color: #aa0000 } /* Generic.Traceback */
+.highlight .kc { color: #000000; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #000000; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #000000; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #000000; font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #000000; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #445588; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #009999 } /* Literal.Number */
+.highlight .s { color: #dd1144 } /* Literal.String */
+.highlight .na { color: #008080 } /* Name.Attribute */
+.highlight .nb { color: #0086B3 } /* Name.Builtin */
+.highlight .nc { color: #445588; font-weight: bold } /* Name.Class */
+.highlight .no { color: #008080 } /* Name.Constant */
+.highlight .nd { color: #3c5d5d; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #800080 } /* Name.Entity */
+.highlight .ne { color: #990000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #990000; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #990000; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #555555 } /* Name.Namespace */
+.highlight .nt { color: #000080 } /* Name.Tag */
+.highlight .nv { color: #008080 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #009999 } /* Literal.Number.Bin */
+.highlight .mf { color: #009999 } /* Literal.Number.Float */
+.highlight .mh { color: #009999 } /* Literal.Number.Hex */
+.highlight .mi { color: #009999 } /* Literal.Number.Integer */
+.highlight .mo { color: #009999 } /* Literal.Number.Oct */
+.highlight .sb { color: #dd1144 } /* Literal.String.Backtick */
+.highlight .sc { color: #dd1144 } /* Literal.String.Char */
+.highlight .sd { color: #dd1144 } /* Literal.String.Doc */
+.highlight .s2 { color: #dd1144 } /* Literal.String.Double */
+.highlight .se { color: #dd1144 } /* Literal.String.Escape */
+.highlight .sh { color: #dd1144 } /* Literal.String.Heredoc */
+.highlight .si { color: #dd1144 } /* Literal.String.Interpol */
+.highlight .sx { color: #dd1144 } /* Literal.String.Other */
+.highlight .sr { color: #009926 } /* Literal.String.Regex */
+.highlight .s1 { color: #dd1144 } /* Literal.String.Single */
+.highlight .ss { color: #990073 } /* Literal.String.Symbol */
+.highlight .bp { color: #999999 } /* Name.Builtin.Pseudo */
+.highlight .vc { color: #008080 } /* Name.Variable.Class */
+.highlight .vg { color: #008080 } /* Name.Variable.Global */
+.highlight .vi { color: #008080 } /* Name.Variable.Instance */
+.highlight .il { color: #009999 } /* Literal.Number.Integer.Long */
 
 @media screen and (max-width: 500px){
   .page {
@@ -1507,6 +1625,24 @@ function selectText(element) {
         window.getSelection().addRange(range);
     }
 }
+function toggleExamples(examples, relativeTo) {
+    // Since this changes the examples shown on the entire page, it has the potential to
+    // really disorient the user as the content of the page will shift and potentially
+    // scroll what they're looking away or even off screen. So we keep track of the y position
+    //  "target" element (relative to the window) at the start, and then adjust the scroll
+    // of the window after to make sure what they clicked on stays in the same spot.
+    if (relativeTo) {
+        var startTop = relativeTo[0].getBoundingClientRect().top;
+    }
+    $('.ex-tab-content').hide();
+    $('.ex-tab-content.' + examples).show();
+    $('.ex-tab').removeClass('selected');
+    $('.ex-tab[target=' + examples + ']').addClass('selected');
+    if (relativeTo) {
+        var deltaTop = relativeTo[0].getBoundingClientRect().top - startTop;
+        window.scrollBy(0, deltaTop);
+    }
+}
 $(document).ready(function() {
     $('.ds-ref').click(function () {
         var target = $('[id="' + $(this).text() + '"]');
@@ -1543,6 +1679,31 @@ $(document).ready(function() {
             $('#' + targetRow)[0].scrollIntoView();
             $('#DatasetJump').val(''); // clear selection
         }
+    });
+    $('.ex-tabs').each(function (i, e) {
+        $(e).find('.ex-tab').prependTo(e);
+    });
+    var examples = null;
+    if (window.sessionStorage) {
+        examples = sessionStorage.getItem("examples");
+    }
+    if (!examples && window.localStorage) {
+        examples = localStorage.getItem("examples");
+    }
+    if (!examples) {
+        examples = 'irds-python';
+    }
+    toggleExamples(examples, null);
+    $(document).on('click', '.ex-tab', function(e) {
+        var $target = $(e.target);
+        var examples = $target.attr('target');
+        if (window.sessionStorage) {
+            sessionStorage.setItem("examples", examples);
+        }
+        if (window.localStorage) {
+            localStorage.setItem("examples", examples);
+        }
+        toggleExamples(examples, $target);
     });
 });
 function toEmoji(test) {

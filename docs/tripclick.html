@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>TripClick - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -43,7 +44,7 @@
 </div>
 <hr />
 <div class="dataset" id="tripclick">
-<h3><kbd class="select"><span class="str">"tripclick"</kdb></h3>
+<h3><kbd class="select"><span class="str">"tripclick"</span></kbd></h3>
 
 <div class="desc">
  <p> TripClick is a large collection from the <a href="https://www.tripdatabase.com/">Trip Database</a>. Relevance is inferred from click signals. </p> <p> A copy of this dataset can be obtained from the Trip Database through the process described <a href="https://tripdatabase.github.io/tripclick/#getting-the-data">here</a>. Documents, queries, and qrels require the "TripClick IR Benchmark"; for scoreddocs and docpairs, you will also need to request the "TripClick Training Package for Deep Learning Models". </p> <ul> <li>Documents: <a href="https://www.nlm.nih.gov/medline/medline_overview.html">Medline</a> article titles and abstracts</li> <li>Queries: user queries issued to the <a href="https://www.tripdatabase.com/">Trip Database</a></li> <li>Qrels: Inferred from clicks</li> <li><a href="https://docs.google.com/document/d/1RHVxVnZsPBDDZMDcSvbB8VyNZDl2cn6KpeeSvIu6g_c/edit?usp=sharing">Dataset request form</a></li> <li><a href="https://tripdatabase.github.io/tripclick/">Dataset website</a></li> <li><a href="https://arxiv.org/abs/2103.07901">Dataset paper</a></li> </ul> 
@@ -52,6 +53,7 @@
 <a class="tab" target="tripclick__docs">docs</a>
 <div id="tripclick__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -59,13 +61,37 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick__citation">Citation</a>
@@ -86,7 +112,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/test" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/test/head</a>, <a class="ds-ref">tripclick/test/torso</a>, and <a class="ds-ref">tripclick/test/tail</a>. </p> <p> The scoreddocs are the official BM25 results from Anserini. </p> 
@@ -102,18 +128,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test__docs">docs</a>
 <div id="tripclick/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -121,13 +173,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test__scoreddocs">scoreddocs</a>
@@ -139,13 +215,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test__citation">Citation</a>
@@ -166,7 +259,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/test/head" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/test/head"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/head"</span></kbd></h3>
 
 <div class="desc">
  <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
@@ -182,18 +275,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/head queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/head&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/head__docs">docs</a>
 <div id="tripclick/test/head__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -201,13 +320,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/head docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/head&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/head__scoreddocs">scoreddocs</a>
@@ -219,13 +362,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/head')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/head scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/head__citation">Citation</a>
@@ -246,7 +406,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/test/tail" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/test/tail"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/tail"</span></kbd></h3>
 
 <div class="desc">
  <p> The least frequent queries in the test set. This represents 50% of the search engine traffic. </p> 
@@ -262,18 +422,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/tail queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/tail&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/tail__docs">docs</a>
 <div id="tripclick/test/tail__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -281,13 +467,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/tail docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/tail&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/tail__scoreddocs">scoreddocs</a>
@@ -299,13 +509,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/tail')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/tail scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/tail__citation">Citation</a>
@@ -326,7 +553,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/test/torso" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/test/torso"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/test/torso"</span></kbd></h3>
 
 <div class="desc">
  <p> The moderately frequent queries in the test set. This represents 30% of the search engine traffic. </p> 
@@ -342,18 +569,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/torso queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/torso&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/torso__docs">docs</a>
 <div id="tripclick/test/torso__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -361,13 +614,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/torso docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/test/torso&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/torso__scoreddocs">scoreddocs</a>
@@ -379,13 +656,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/test/torso')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/test/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/test/torso scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/test/torso__citation">Citation</a>
@@ -406,7 +700,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/train" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/train"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train"</span></kbd></h3>
 
 <div class="desc">
  <p> Training subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/train/head</a>, <a class="ds-ref">tripclick/train/torso</a>, and <a class="ds-ref">tripclick/train/tail</a>. </p> <p> The dataset provides docpairs in a full text format; we map this text back to the query and doc IDs. A small number of docpairs could not be mapped back, so they are skipped. </p> 
@@ -422,18 +716,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train__docs">docs</a>
 <div id="tripclick/train__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -441,13 +761,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train__qrels">qrels</a>
@@ -467,13 +811,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train__docpairs">docpairs</a>
@@ -485,13 +860,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id_a</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">doc_id_b</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train')</div>
-<div><span class="kwd">for</span> docpair <span class="kwd">in</span> dataset.docpairs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;docpair <span class="comment"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">docpair</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docpairs_iter</span><span class="p">():</span>
+    <span class="n">docpair</span> <span class="c1"># namedtuple&lt;query_id, doc_id_a, doc_id_b&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train docpairs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id_a]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id_b]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train__citation">Citation</a>
@@ -512,7 +904,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/train/head" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head"</span></kbd></h3>
 
 <div class="desc">
  <p> The most frequent queries in the train set. This represents 20% of the search engine traffic. </p> 
@@ -528,18 +920,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head__docs">docs</a>
 <div id="tripclick/train/head__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -547,13 +965,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head__qrels">qrels</a>
@@ -573,13 +1015,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head__citation">Citation</a>
@@ -600,7 +1073,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/train/head/dctr" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head/dctr"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/head/dctr"</span></kbd></h3>
 
 <div class="desc">
  <p> The most frequent queries in the train set. This represents 20% of the search engine traffic. </p> 
@@ -616,18 +1089,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head/dctr queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head/dctr&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head/dctr__docs">docs</a>
 <div id="tripclick/train/head/dctr__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -635,13 +1134,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head/dctr docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head/dctr&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head/dctr__qrels">qrels</a>
@@ -663,13 +1186,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>highly relevant; clicked more than 30% of the times it was shown</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/head/dctr')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/head/dctr qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/head/dctr&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/head/dctr__citation">Citation</a>
@@ -690,7 +1244,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/train/tail" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/train/tail"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/tail"</span></kbd></h3>
 
 <div class="desc">
  <p> The least frequent queries in the train set. This represents 50% of the search engine traffic. </p> 
@@ -706,18 +1260,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/tail queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/tail&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/tail__docs">docs</a>
 <div id="tripclick/train/tail__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -725,13 +1305,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/tail docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/tail&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/tail__qrels">qrels</a>
@@ -751,13 +1355,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/tail')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/tail qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/tail&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/tail__citation">Citation</a>
@@ -778,7 +1413,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/train/torso" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/train/torso"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/train/torso"</span></kbd></h3>
 
 <div class="desc">
  <p> The moderately frequent queries in the train set. This represents 30% of the search engine traffic. </p> 
@@ -794,18 +1429,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/torso queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/torso&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/torso__docs">docs</a>
 <div id="tripclick/train/torso__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -813,13 +1474,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/torso docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/torso&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/torso__qrels">qrels</a>
@@ -839,13 +1524,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/train/torso')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/train/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/train/torso qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/train/torso&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/train/torso__citation">Citation</a>
@@ -866,7 +1582,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/val" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/val"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation subset of <a class="ds-ref">tripclick</a>, including all queries from <a class="ds-ref">tripclick/val/head</a>, <a class="ds-ref">tripclick/val/torso</a>, and <a class="ds-ref">tripclick/val/tail</a>. </p> <p> The scoreddocs are the official BM25 results from Anserini. </p> 
@@ -882,18 +1598,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val__docs">docs</a>
 <div id="tripclick/val__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -901,13 +1643,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val__qrels">qrels</a>
@@ -927,13 +1693,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val__scoreddocs">scoreddocs</a>
@@ -945,13 +1742,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val__citation">Citation</a>
@@ -972,7 +1786,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/val/head" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head"</span></kbd></h3>
 
 <div class="desc">
  <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
@@ -988,18 +1802,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head__docs">docs</a>
 <div id="tripclick/val/head__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1007,13 +1847,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head__qrels">qrels</a>
@@ -1033,13 +1897,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head__scoreddocs">scoreddocs</a>
@@ -1051,13 +1946,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head__citation">Citation</a>
@@ -1078,7 +1990,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/val/head/dctr" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head/dctr"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/head/dctr"</span></kbd></h3>
 
 <div class="desc">
  <p> The most frequent queries in the validation set. This represents 20% of the search engine traffic. </p> 
@@ -1094,18 +2006,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head/dctr queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head/dctr&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head/dctr__docs">docs</a>
 <div id="tripclick/val/head/dctr__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1113,13 +2051,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head/dctr docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head/dctr&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head/dctr__qrels">qrels</a>
@@ -1141,13 +2103,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>highly relevant; clicked more than 30% of the times it was shown</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head/dctr qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/head/dctr&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head/dctr__scoreddocs">scoreddocs</a>
@@ -1159,13 +2152,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/head/dctr')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/head/dctr&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/head/dctr scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/head/dctr__citation">Citation</a>
@@ -1186,7 +2196,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/val/tail" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/val/tail"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/tail"</span></kbd></h3>
 
 <div class="desc">
  <p> The least frequent queries in the validation set. This represents 50% of the search engine traffic. </p> 
@@ -1202,18 +2212,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/tail queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/tail&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/tail__docs">docs</a>
 <div id="tripclick/val/tail__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1221,13 +2257,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/tail docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/tail&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/tail__qrels">qrels</a>
@@ -1247,13 +2307,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/tail qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/tail&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/tail__scoreddocs">scoreddocs</a>
@@ -1265,13 +2356,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/tail')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/tail&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/tail scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/tail__citation">Citation</a>
@@ -1292,7 +2400,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="tripclick/val/torso" data-parent="tripclick">
-<h3><kbd class="ds-name select"><span class="str">"tripclick/val/torso"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"tripclick/val/torso"</span></kbd></h3>
 
 <div class="desc">
  <p> The moderately frequent queries in the validation set. This represents 30% of the search engine traffic. </p> 
@@ -1308,18 +2416,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/torso queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/torso&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/torso__docs">docs</a>
 <div id="tripclick/val/torso__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">tripclick</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">TitleUrlTextDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1327,13 +2461,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, title, url, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, url, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/torso docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/torso&#39;</span><span class="p">)</span>
+<span class="c1"># Index tripclick</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/torso__qrels">qrels</a>
@@ -1353,13 +2511,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>clicked</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/torso qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:tripclick/val/torso&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/tripclick&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/torso__scoreddocs">scoreddocs</a>
@@ -1371,13 +2560,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'tripclick/val/torso')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;tripclick/val/torso&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> tripclick/val/torso scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="tripclick/val/torso__citation">Citation</a>

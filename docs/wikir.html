@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>WikIR - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -44,7 +45,7 @@
 </div>
 <hr />
 <div class="dataset" id="wikir">
-<h3><kbd class="select"><span class="str">"wikir"</kdb></h3>
+<h3><kbd class="select"><span class="str">"wikir"</span></kbd></h3>
 
 <div class="desc">
  <p> A suite of IR benchmarks in multiple languages built from Wikipeida. </p> <ul> <li><a href="https://www.aclweb.org/anthology/2020.lrec-1.237.pdf">WikIR Paper</a></li> <li><a href="http://ceur-ws.org/Vol-2621/CIRCLE20_22.pdf">MLWikIR Paper</a></li> <li><a href="https://github.com/getalp/wikIR">GitHub Repository</a></li> </ul> 
@@ -72,7 +73,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en1k" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en1k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en1k"</span></kbd></h3>
 
 <div class="desc">
  <p> A small version of WikIR for English. </p> 
@@ -81,6 +82,7 @@ bibtex:
 <a class="tab" target="wikir/en1k__docs">docs</a>
 <div id="wikir/en1k__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -88,13 +90,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en1k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k__citation">Citation</a>
@@ -119,7 +145,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en1k/test" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -135,18 +161,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/test__docs">docs</a>
 <div id="wikir/en1k/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en1k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -154,13 +206,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/test&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en1k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/test__qrels">qrels</a>
@@ -181,13 +257,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/test__scoreddocs">scoreddocs</a>
@@ -199,13 +306,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/test__citation">Citation</a>
@@ -230,7 +354,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en1k/training" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/training"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/training"</span></kbd></h3>
 
 <div class="desc">
  <p> Training set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -246,18 +370,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/training')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/training queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/training&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/training__docs">docs</a>
 <div id="wikir/en1k/training__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en1k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -265,13 +415,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/training')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/training docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/training&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en1k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/training__qrels">qrels</a>
@@ -292,13 +466,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/training')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/training qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/training&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/training__scoreddocs">scoreddocs</a>
@@ -310,13 +515,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/training')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/training scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/training__citation">Citation</a>
@@ -341,7 +563,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en1k/validation" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/validation"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en1k/validation"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -357,18 +579,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/validation')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/validation queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/validation&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/validation__docs">docs</a>
 <div id="wikir/en1k/validation__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en1k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -376,13 +624,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/validation')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/validation docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/validation&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en1k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/validation__qrels">qrels</a>
@@ -403,13 +675,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/validation')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/validation qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en1k/validation&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en1k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/validation__scoreddocs">scoreddocs</a>
@@ -421,13 +724,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en1k/validation')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en1k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en1k/validation scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en1k/validation__citation">Citation</a>
@@ -452,7 +772,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en59k" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en59k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en59k"</span></kbd></h3>
 
 <div class="desc">
  <p> WikIR for English. </p> 
@@ -461,6 +781,7 @@ bibtex:
 <a class="tab" target="wikir/en59k__docs">docs</a>
 <div id="wikir/en59k__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -468,13 +789,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en59k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k__citation">Citation</a>
@@ -499,7 +844,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en59k/test" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -515,18 +860,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/test__docs">docs</a>
 <div id="wikir/en59k/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en59k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -534,13 +905,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/test&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en59k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/test__qrels">qrels</a>
@@ -561,13 +956,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/test__scoreddocs">scoreddocs</a>
@@ -579,13 +1005,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/test__citation">Citation</a>
@@ -610,7 +1053,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en59k/training" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/training"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/training"</span></kbd></h3>
 
 <div class="desc">
  <p> Training set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -626,18 +1069,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/training')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/training queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/training&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/training__docs">docs</a>
 <div id="wikir/en59k/training__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en59k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -645,13 +1114,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/training')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/training docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/training&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en59k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/training__qrels">qrels</a>
@@ -672,13 +1165,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/training')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/training qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/training&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/training__scoreddocs">scoreddocs</a>
@@ -690,13 +1214,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/training')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/training scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/training__citation">Citation</a>
@@ -721,7 +1262,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/en59k/validation" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/validation"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/en59k/validation"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -737,18 +1278,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/validation')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/validation queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/validation&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/validation__docs">docs</a>
 <div id="wikir/en59k/validation__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/en59k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -756,13 +1323,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/validation')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/validation docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/validation&#39;</span><span class="p">)</span>
+<span class="c1"># Index wikir/en59k</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/validation__qrels">qrels</a>
@@ -783,13 +1374,44 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/validation')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/validation qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:wikir/en59k/validation&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/wikir_en59k&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/validation__scoreddocs">scoreddocs</a>
@@ -801,13 +1423,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/en59k/validation')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/en59k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/en59k/validation scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/en59k/validation__citation">Citation</a>
@@ -832,7 +1471,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/es13k" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/es13k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/es13k"</span></kbd></h3>
 
 <div class="desc">
  <p> WikIR for Spanish. </p> 
@@ -841,6 +1480,7 @@ bibtex:
 <a class="tab" target="wikir/es13k__docs">docs</a>
 <div id="wikir/es13k__docs" class="tab-content">
 <p>Language: <span class="lang-code">es</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -848,13 +1488,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k__citation">Citation</a>
@@ -879,7 +1536,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/es13k/test" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -895,18 +1552,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/test__docs">docs</a>
 <div id="wikir/es13k/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">es</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/es13k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -914,13 +1589,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/test__qrels">qrels</a>
@@ -941,13 +1633,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/test__scoreddocs">scoreddocs</a>
@@ -959,13 +1668,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/test__citation">Citation</a>
@@ -990,7 +1716,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/es13k/training" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/training"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/training"</span></kbd></h3>
 
 <div class="desc">
  <p> Training set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1006,18 +1732,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/training')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/training queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/training__docs">docs</a>
 <div id="wikir/es13k/training__docs" class="tab-content">
 <p>Language: <span class="lang-code">es</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/es13k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1025,13 +1769,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/training')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/training docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/training__qrels">qrels</a>
@@ -1052,13 +1813,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/training')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/training qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/training__scoreddocs">scoreddocs</a>
@@ -1070,13 +1848,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/training')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/training scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/training__citation">Citation</a>
@@ -1101,7 +1896,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/es13k/validation" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/validation"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/es13k/validation"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1117,18 +1912,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/validation')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/validation queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/validation__docs">docs</a>
 <div id="wikir/es13k/validation__docs" class="tab-content">
 <p>Language: <span class="lang-code">es</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/es13k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1136,13 +1949,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/validation')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/validation docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/validation__qrels">qrels</a>
@@ -1163,13 +1993,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/validation')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/validation qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/validation__scoreddocs">scoreddocs</a>
@@ -1181,13 +2028,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/es13k/validation')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/es13k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/es13k/validation scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/es13k/validation__citation">Citation</a>
@@ -1212,7 +2076,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/fr14k" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k"</span></kbd></h3>
 
 <div class="desc">
  <p> WikIR for French. </p> 
@@ -1221,6 +2085,7 @@ bibtex:
 <a class="tab" target="wikir/fr14k__docs">docs</a>
 <div id="wikir/fr14k__docs" class="tab-content">
 <p>Language: <span class="lang-code">fr</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1228,13 +2093,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k__citation">Citation</a>
@@ -1259,7 +2141,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/fr14k/test" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1275,18 +2157,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/test__docs">docs</a>
 <div id="wikir/fr14k/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">fr</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/fr14k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1294,13 +2194,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/test__qrels">qrels</a>
@@ -1321,13 +2238,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/test__scoreddocs">scoreddocs</a>
@@ -1339,13 +2273,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/test__citation">Citation</a>
@@ -1370,7 +2321,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/fr14k/training" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/training"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/training"</span></kbd></h3>
 
 <div class="desc">
  <p> Training set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1386,18 +2337,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/training')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/training queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/training__docs">docs</a>
 <div id="wikir/fr14k/training__docs" class="tab-content">
 <p>Language: <span class="lang-code">fr</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/fr14k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1405,13 +2374,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/training')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/training docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/training__qrels">qrels</a>
@@ -1432,13 +2418,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/training')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/training qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/training__scoreddocs">scoreddocs</a>
@@ -1450,13 +2453,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/training')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/training scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/training__citation">Citation</a>
@@ -1481,7 +2501,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/fr14k/validation" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/validation"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/fr14k/validation"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1497,18 +2517,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/validation')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/validation queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/validation__docs">docs</a>
 <div id="wikir/fr14k/validation__docs" class="tab-content">
 <p>Language: <span class="lang-code">fr</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/fr14k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1516,13 +2554,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/validation')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/validation docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/validation__qrels">qrels</a>
@@ -1543,13 +2598,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/validation')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/validation qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/validation__scoreddocs">scoreddocs</a>
@@ -1561,13 +2633,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/fr14k/validation')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/fr14k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/fr14k/validation scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/fr14k/validation__citation">Citation</a>
@@ -1592,7 +2681,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/it16k" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/it16k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/it16k"</span></kbd></h3>
 
 <div class="desc">
  <p> WikIR for Italian. </p> 
@@ -1601,6 +2690,7 @@ bibtex:
 <a class="tab" target="wikir/it16k__docs">docs</a>
 <div id="wikir/it16k__docs" class="tab-content">
 <p>Language: <span class="lang-code">it</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1608,13 +2698,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k__citation">Citation</a>
@@ -1639,7 +2746,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/it16k/test" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Test set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1655,18 +2762,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/test__docs">docs</a>
 <div id="wikir/it16k/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">it</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/it16k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1674,13 +2799,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/test__qrels">qrels</a>
@@ -1701,13 +2843,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/test__scoreddocs">scoreddocs</a>
@@ -1719,13 +2878,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/test')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/test scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/test__citation">Citation</a>
@@ -1750,7 +2926,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/it16k/training" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/training"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/training"</span></kbd></h3>
 
 <div class="desc">
  <p> Training set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1766,18 +2942,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/training')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/training queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/training__docs">docs</a>
 <div id="wikir/it16k/training__docs" class="tab-content">
 <p>Language: <span class="lang-code">it</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/it16k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1785,13 +2979,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/training')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/training docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/training__qrels">qrels</a>
@@ -1812,13 +3023,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/training')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/training qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/training__scoreddocs">scoreddocs</a>
@@ -1830,13 +3058,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/training')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/training&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/training scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/training__citation">Citation</a>
@@ -1861,7 +3106,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="wikir/it16k/validation" data-parent="wikir">
-<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/validation"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"wikir/it16k/validation"</span></kbd></h3>
 
 <div class="desc">
  <p> Validation set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run. </p> 
@@ -1877,18 +3122,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/validation')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/validation queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/validation__docs">docs</a>
 <div id="wikir/it16k/validation__docs" class="tab-content">
 <p>Language: <span class="lang-code">it</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">wikir/it16k</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -1896,13 +3159,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/validation')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/validation docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/validation__qrels">qrels</a>
@@ -1923,13 +3203,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Query is the article title</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/validation')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/validation qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/validation__scoreddocs">scoreddocs</a>
@@ -1941,13 +3238,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'wikir/it16k/validation')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;wikir/it16k/validation&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> wikir/it16k/validation scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="wikir/it16k/validation__citation">Citation</a>

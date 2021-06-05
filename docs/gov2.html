@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>GOV2 - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -43,7 +44,7 @@
 </div>
 <hr />
 <div class="dataset" id="gov2">
-<h3><kbd class="select"><span class="str">"gov2"</kdb></h3>
+<h3><kbd class="select"><span class="str">"gov2"</span></kbd></h3>
 
 <div class="desc">
  <p> GOV2 web document collection. Used for the TREC Terabyte Track. </p> <p> The dataset is obtained for a fee from UoG, and is shipped as a hard drive. More information is provided <a href="http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html">here</a>. </p> <ul> <li><a href="http://ir.dcs.gla.ac.uk/test_collections/gov2-summary.htm">Document collection site</a></li> </ul> 
@@ -52,6 +53,7 @@
 <a class="tab" target="gov2__docs">docs</a>
 <div id="gov2__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -59,20 +61,37 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-mq-2007" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2007"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2007"</span></kbd></h3>
 
 <div class="desc">
  <p> TREC 2007 Million Query track. </p> <ul> <li><a href="https://trec.nist.gov/data/million.query07.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec16/papers/1MQ.OVERVIEW16.pdf">Shared task paper</a></li> </ul> 
@@ -88,18 +107,36 @@
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2007&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2007 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2007__docs">docs</a>
 <div id="gov2/trec-mq-2007__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -107,13 +144,30 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2007&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2007 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2007__qrels">qrels</a>
@@ -134,13 +188,30 @@
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2007')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2007&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2007 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[method]&nbsp;&nbsp;&nbsp;&nbsp;[iprob]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2007__citation">Citation</a>
@@ -159,7 +230,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-mq-2008" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2008"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-mq-2008"</span></kbd></h3>
 
 <div class="desc">
  <p> TREC 2008 Million Query track. </p> <ul> <li><a href="https://trec.nist.gov/data/million.query08.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec17/papers/MQ.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -175,18 +246,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2008&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2008 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2008__docs">docs</a>
 <div id="gov2/trec-mq-2008__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -194,13 +283,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2008&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2008 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2008__qrels">qrels</a>
@@ -221,13 +327,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-mq-2008')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-mq-2008&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, method, iprob&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-mq-2008 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[method]&nbsp;&nbsp;&nbsp;&nbsp;[iprob]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-mq-2008__citation">Citation</a>
@@ -246,7 +369,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2004" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2004"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2004"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2004 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte04.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec13/papers/TERA.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -262,18 +385,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2004')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2004&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, description, narrative&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2004 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[description]&nbsp;&nbsp;&nbsp;&nbsp;[narrative]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2004__docs">docs</a>
 <div id="gov2/trec-tb-2004__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -281,13 +422,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2004')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2004&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2004 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2004__qrels">qrels</a>
@@ -308,13 +466,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2004')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2004&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2004 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2004__citation">Citation</a>
@@ -333,7 +508,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2005" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2005 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -349,18 +524,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, description, narrative&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[description]&nbsp;&nbsp;&nbsp;&nbsp;[narrative]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005__docs">docs</a>
 <div id="gov2/trec-tb-2005__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -368,13 +561,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005__qrels">qrels</a>
@@ -395,13 +605,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005__citation">Citation</a>
@@ -420,7 +647,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2005/efficiency" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005/efficiency"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005/efficiency"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2005 efficiency ranking benchmark. Contains 50,000 queries from a search engine, including the 50 topics from <a class="ds-ref">gov2/trec-tb-2005</a>. Only the 50 topics have judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -436,18 +663,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/efficiency')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/efficiency queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/efficiency__docs">docs</a>
 <div id="gov2/trec-tb-2005/efficiency__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -455,13 +700,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/efficiency')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/efficiency docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/efficiency__qrels">qrels</a>
@@ -482,13 +744,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/efficiency')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/efficiency qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/efficiency__citation">Citation</a>
@@ -507,7 +786,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2005/named-page" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005/named-page"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2005/named-page"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2005 named page ranking benchmark. Contains 252 queries with titles that resemble bookmark labels. Relevance judgments include near-duplicate pages and other pages that may satisfy the bookmark label. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -523,18 +802,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/named-page')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/named-page queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/named-page__docs">docs</a>
 <div id="gov2/trec-tb-2005/named-page__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -542,13 +839,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/named-page')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/named-page docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/named-page__qrels">qrels</a>
@@ -568,13 +882,30 @@ bibtex:
 <tr><td class="relScore">1</td><td>Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2005/named-page')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2005/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2005/named-page qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2005/named-page__citation">Citation</a>
@@ -593,7 +924,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2006 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte06.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec15/papers/TERA06.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -609,18 +940,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">description</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">narrative</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, title, description, narrative&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, title, description, narrative&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[description]&nbsp;&nbsp;&nbsp;&nbsp;[narrative]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006__docs">docs</a>
 <div id="gov2/trec-tb-2006__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -628,13 +977,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006__qrels">qrels</a>
@@ -655,13 +1021,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006__citation">Citation</a>
@@ -680,7 +1063,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2006 efficiency ranking benchmark. Contains 100,000 queries from a search engine, including the 50 topics from <a class="ds-ref">gov2/trec-tb-2006</a>. Only the 50 topics have judgments. </p> <ul> <li><a href="https://trec.nist.gov/data/terabyte05.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec14/papers/TERABYTE.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -696,18 +1079,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -715,13 +1116,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency__qrels">qrels</a>
@@ -742,13 +1160,30 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency__citation">Citation</a>
@@ -767,7 +1202,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency/10k" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/10k"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/10k"</span></kbd></h3>
 
 <div class="desc">
  <p> Small stream from <a class="ds-ref">gov2/trec-tb-2006/efficiency</a>, with 10,000 queries. </p> 
@@ -783,18 +1218,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/10k')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/10k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/10k queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/10k__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency/10k__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -802,20 +1255,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/10k')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/10k&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/10k docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency/stream1" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream1"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream1"</span></kbd></h3>
 
 <div class="desc">
  <p> Stream 1 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries). </p> 
@@ -831,18 +1301,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream1')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream1&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream1 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/stream1__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency/stream1__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -850,20 +1338,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream1')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream1&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream1 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency/stream2" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream2"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream2"</span></kbd></h3>
 
 <div class="desc">
  <p> Stream 2 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries). </p> 
@@ -879,18 +1384,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream2')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream2 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/stream2__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency/stream2__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -898,20 +1421,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream2')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream2 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency/stream3" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream3"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream3"</span></kbd></h3>
 
 <div class="desc">
  <p> Stream 3 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries). </p> 
@@ -927,18 +1467,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream3')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream3 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/stream3__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency/stream3__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -946,13 +1504,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream3')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream3 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/stream3__qrels">qrels</a>
@@ -973,20 +1548,37 @@ bibtex:
 <tr><td class="relScore">2</td><td>Highly Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream3')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream3 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/efficiency/stream4" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream4"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/efficiency/stream4"</span></kbd></h3>
 
 <div class="desc">
  <p> Stream 4 of <a class="ds-ref">gov2/trec-tb-2006/efficiency</a> (25,000 queries). </p> 
@@ -1002,18 +1594,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream4')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream4&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream4 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/efficiency/stream4__docs">docs</a>
 <div id="gov2/trec-tb-2006/efficiency/stream4__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -1021,20 +1631,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/efficiency/stream4')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/efficiency/stream4&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/efficiency/stream4 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="gov2/trec-tb-2006/named-page" data-parent="gov2">
-<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/named-page"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"gov2/trec-tb-2006/named-page"</span></kbd></h3>
 
 <div class="desc">
  <p> The TREC Terabyte Track 2006 named page ranking benchmark. Contains 181 queries with titles that resemble bookmark labels. Relevance judgments include near-duplicate pages and other pages that may satisfy the bookmark label.</p> <ul> <li><a href="https://trec.nist.gov/data/terabyte06.html">Shared task site</a></li> <li><a href="https://trec.nist.gov/pubs/trec15/papers/TERA06.OVERVIEW.pdf">Shared task paper</a></li> </ul> 
@@ -1050,18 +1677,36 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/named-page')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/named-page queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/named-page__docs">docs</a>
 <div id="gov2/trec-tb-2006/named-page__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">gov2</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">Gov2Doc: (<span class="kwd">namedtuple</span>)</div>
@@ -1069,13 +1714,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">http_headers</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">bytes</span></li><li data-tuple-idx="4"><span class="">body_content_type</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/named-page')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, http_headers, body, body_content_type&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/named-page docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[http_headers]&nbsp;&nbsp;&nbsp;&nbsp;[body]&nbsp;&nbsp;&nbsp;&nbsp;[body_content_type]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/named-page__qrels">qrels</a>
@@ -1095,13 +1757,30 @@ bibtex:
 <tr><td class="relScore">1</td><td>Relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'gov2/trec-tb-2006/named-page')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;gov2/trec-tb-2006/named-page&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> gov2/trec-tb-2006/named-page qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="gov2/trec-tb-2006/named-page__citation">Citation</a>

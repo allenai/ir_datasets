@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 
 <title>MSMARCO (document) - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -38,7 +39,7 @@
 </div>
 <hr />
 <div class="dataset" id="msmarco-document">
-<h3><kbd class="select"><span class="str">"msmarco-document"</kdb></h3>
+<h3><kbd class="select"><span class="str">"msmarco-document"</span></kbd></h3>
 
 <div class="desc">
  <p> "Based the questions in the [MS-MARCO] Question Answering Dataset and the documents which answered the questions a document ranking task was formulated. There are 3.2 million documents and the goal is to rank based on their relevance. Relevance labels are derived from what passages was marked as having the answer in the QnA dataset." </p> <ul> <li>See also: <a class="ds-ref">msmarco-passage</a></li> <li>Documents: Text extracted from web pages</li> <li>Queries: Natural language questions (from query log)</li> <li><a href="https://microsoft.github.io/msmarco/#docranking">Leaderboard</a></li> <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li> </ul>
@@ -47,6 +48,7 @@
 <a class="tab" target="msmarco-document__docs">docs</a>
 <div id="msmarco-document__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -54,13 +56,37 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document__citation">Citation</a>
@@ -79,7 +105,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="msmarco-document/dev" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/dev"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/dev"</span></kbd></h3>
 
 <div class="desc">
  <p> Official dev set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
@@ -95,18 +121,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/dev')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/dev queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/dev&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/dev__docs">docs</a>
 <div id="msmarco-document/dev__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -114,13 +166,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/dev')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/dev docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/dev&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/dev__qrels">qrels</a>
@@ -139,13 +215,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/dev')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/dev qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/dev&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/dev__scoreddocs">scoreddocs</a>
@@ -157,20 +264,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/dev')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/dev&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/dev scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/eval" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/eval"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/eval"</span></kbd></h3>
 
 <div class="desc">
  <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
@@ -186,18 +310,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/eval')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/eval&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/eval queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/eval&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/eval__docs">docs</a>
 <div id="msmarco-document/eval__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -205,13 +355,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/eval')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/eval&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/eval docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/eval&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/eval__scoreddocs">scoreddocs</a>
@@ -223,20 +397,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/eval')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/eval&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/eval scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/orcas" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/orcas"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/orcas"</span></kbd></h3>
 
 <div class="desc">
  <p> "ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries." </p> <ul> <li>Queries: From query log</li> <li>Relevance Data: User clicks</li> <li>Scored docs: Indri Query Likelihood model</li> <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li> </ul> 
@@ -252,18 +443,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/orcas')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/orcas&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/orcas queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/orcas&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/orcas__docs">docs</a>
 <div id="msmarco-document/orcas__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -271,13 +488,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/orcas')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/orcas&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/orcas docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/orcas&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/orcas__qrels">qrels</a>
@@ -296,13 +537,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>User click</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/orcas')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/orcas&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/orcas qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/orcas&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/orcas__scoreddocs">scoreddocs</a>
@@ -314,13 +586,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/orcas')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/orcas&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/orcas scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/orcas__citation">Citation</a>
@@ -339,7 +628,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="msmarco-document/train" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/train"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/train"</span></kbd></h3>
 
 <div class="desc">
  <p> Official train set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
@@ -355,18 +644,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/train queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/train__docs">docs</a>
 <div id="msmarco-document/train__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -374,13 +689,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/train docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/train&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/train__qrels">qrels</a>
@@ -399,13 +738,44 @@ bibtex:
 <tr><td class="relScore">1</td><td>Labeled by crowd worker as relevant</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/train qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/train__scoreddocs">scoreddocs</a>
@@ -417,20 +787,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/train')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/train scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-2019" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019"</span></kbd></h3>
 
 <div class="desc">
  <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> 
@@ -446,18 +833,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019__docs">docs</a>
 <div id="msmarco-document/trec-dl-2019__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -465,13 +878,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019__qrels">qrels</a>
@@ -493,13 +930,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019__scoreddocs">scoreddocs</a>
@@ -511,13 +979,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019 scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019__citation">Citation</a>
@@ -536,7 +1021,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-2019/judged" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019/judged"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019/judged"</span></kbd></h3>
 
 <div class="desc">
  <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels. </p> 
@@ -552,18 +1037,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019/judged')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019/judged queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019/judged&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__docs">docs</a>
 <div id="msmarco-document/trec-dl-2019/judged__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -571,13 +1082,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019/judged')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019/judged docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019/judged&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__qrels">qrels</a>
@@ -599,13 +1134,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019/judged')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019/judged qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2019/judged&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__scoreddocs">scoreddocs</a>
@@ -617,20 +1183,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2019/judged')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2019/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2019/judged scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-2020" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020"</span></kbd></h3>
 
 <div class="desc">
  <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> 
@@ -646,18 +1229,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020__docs">docs</a>
 <div id="msmarco-document/trec-dl-2020__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -665,13 +1274,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020__qrels">qrels</a>
@@ -693,13 +1326,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020__scoreddocs">scoreddocs</a>
@@ -711,13 +1375,30 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020 scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020__citation">Citation</a>
@@ -736,7 +1417,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-2020/judged" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020/judged"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020/judged"</span></kbd></h3>
 
 <div class="desc">
  <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels. </p> 
@@ -752,18 +1433,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020/judged')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020/judged queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020/judged&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020/judged__docs">docs</a>
 <div id="msmarco-document/trec-dl-2020/judged__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -771,13 +1478,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020/judged')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020/judged docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020/judged&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020/judged__qrels">qrels</a>
@@ -799,13 +1530,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020/judged')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020/judged qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-2020/judged&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-2020/judged__scoreddocs">scoreddocs</a>
@@ -817,20 +1579,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">score</span>: <span class="kwd">float</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-2020/judged')</div>
-<div><span class="kwd">for</span> scoreddoc <span class="kwd">in</span> dataset.scoreddocs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;scoreddoc <span class="comment"># namedtuple&lt;query_id, doc_id, score&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-2020/judged&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">scoreddoc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">scoreddocs_iter</span><span class="p">():</span>
+    <span class="n">scoreddoc</span> <span class="c1"># namedtuple&lt;query_id, doc_id, score&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-2020/judged scoreddocs
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[score]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<p><i>No example available for PyTerrier</i></p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -846,18 +1625,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -865,13 +1670,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard__qrels">qrels</a>
@@ -893,20 +1722,51 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard/fold1" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold1"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold1"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -922,18 +1782,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold1&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold1 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold1&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold1__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard/fold1__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -941,13 +1827,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold1&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold1 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold1&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold1__qrels">qrels</a>
@@ -969,20 +1879,51 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold1')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold1&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold1 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold1&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard/fold2" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold2"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold2"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -998,18 +1939,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold2 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold2&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold2__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard/fold2__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -1017,13 +1984,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold2 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold2&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold2__qrels">qrels</a>
@@ -1045,20 +2036,51 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold2')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold2&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold2 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold2&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard/fold3" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold3"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold3"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -1074,18 +2096,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold3 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold3&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold3__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard/fold3__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -1093,13 +2141,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold3 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold3&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold3__qrels">qrels</a>
@@ -1121,20 +2193,51 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold3')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold3&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold3 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold3&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard/fold4" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold4"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold4"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -1150,18 +2253,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold4&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold4 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold4&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold4__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard/fold4__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -1169,13 +2298,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold4&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold4 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold4&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold4__qrels">qrels</a>
@@ -1197,20 +2350,51 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold4')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold4&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold4 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold4&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="msmarco-document/trec-dl-hard/fold5" data-parent="msmarco-document">
-<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold5"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold5"</span></kbd></h3>
 
 <div class="desc">
  <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
@@ -1226,18 +2410,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold5&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold5 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold5&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold5__docs">docs</a>
 <div id="msmarco-document/trec-dl-hard/fold5__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">msmarco-document</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">MsMarcoDocument: (<span class="kwd">namedtuple</span>)</div>
@@ -1245,13 +2455,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">url</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">body</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, url, title, body&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold5&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, url, title, body&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold5 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[url]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[body]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold5&#39;</span><span class="p">)</span>
+<span class="c1"># Index msmarco-document</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;url&#39;</span><span class="p">,</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="msmarco-document/trec-dl-hard/fold5__qrels">qrels</a>
@@ -1273,13 +2507,44 @@ bibtex:
 <tr><td class="relScore">3</td><td>Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result in a search engine.</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'msmarco-document/trec-dl-hard/fold5')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;msmarco-document/trec-dl-hard/fold5&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> msmarco-document/trec-dl-hard/fold5 qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:msmarco-document/trec-dl-hard/fold5&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/msmarco-document&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>

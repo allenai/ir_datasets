@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="robots" content="noindex,nofollow" />
 <title>ANTIQUE - ir_datasets</title>
+</head>
 <body>
 <div class="page">
 
@@ -31,7 +32,7 @@
 </div>
 <hr />
 <div class="dataset" id="antique">
-<h3><kbd class="select"><span class="str">"antique"</kdb></h3>
+<h3><kbd class="select"><span class="str">"antique"</span></kbd></h3>
 
 <div class="desc">
  <p> "ANTIQUE is a non-factoid quesiton answering dataset based on the questions and answers of Yahoo! Webscope L6." </p> <ul> <li>Documents: Short answer passages (from Yahoo Answers)</li> <li>Queries: Natural language questions (from Yahoo Answers)</li> <li><a href="https://arxiv.org/abs/1905.08957">Dataset Paper</a></li> </ul> 
@@ -40,6 +41,7 @@
 <a class="tab" target="antique__docs">docs</a>
 <div id="antique__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -47,13 +49,37 @@
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique__citation">Citation</a>
@@ -72,7 +98,7 @@ bibtex:
 
 <hr />
 <div class="dataset" id="antique/test" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/test"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"antique/test"</span></kbd></h3>
 
 <div class="desc">
  <p> Official test set of the ANTIQUE dataset. </p>
@@ -88,18 +114,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/test__docs">docs</a>
 <div id="antique/test__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">antique</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -107,13 +159,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/test__qrels">qrels</a>
@@ -135,20 +211,51 @@ bibtex:
 <tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="antique/test/non-offensive" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/test/non-offensive"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"antique/test/non-offensive"</span></kbd></h3>
 
 <div class="desc">
  <p> <a class="ds-ref">antique/test</a> without a set of queries deemed by the authors of ANTIQUE to be "offensive (and noisy)." </p>
@@ -164,18 +271,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test/non-offensive&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test/non-offensive queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test/non-offensive&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/test/non-offensive__docs">docs</a>
 <div id="antique/test/non-offensive__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">antique</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -183,13 +316,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test/non-offensive&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test/non-offensive docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test/non-offensive&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/test/non-offensive__qrels">qrels</a>
@@ -211,20 +368,51 @@ bibtex:
 <tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/test/non-offensive')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/test/non-offensive&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/test/non-offensive qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/test/non-offensive&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="antique/train" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"antique/train"</span></kbd></h3>
 
 <div class="desc">
  <p> Official train set of the ANTIQUE dataset. </p>
@@ -240,18 +428,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train__docs">docs</a>
 <div id="antique/train__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">antique</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -259,13 +473,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train__qrels">qrels</a>
@@ -287,20 +525,51 @@ bibtex:
 <tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="antique/train/split200-train" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-train"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-train"</span></kbd></h3>
 
 <div class="desc">
  <p> <a class="ds-ref">antique/train</a> without the 200 queries used by <a class="ds-ref">antique/train/split200-valid</a>. </p>
@@ -316,18 +585,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-train queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train/split200-train__docs">docs</a>
 <div id="antique/train/split200-train__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">antique</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -335,13 +630,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-train docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-train&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train/split200-train__qrels">qrels</a>
@@ -363,20 +682,51 @@ bibtex:
 <tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-train')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-train&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-train qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-train&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>
 
 <hr />
 <div class="dataset" id="antique/train/split200-valid" data-parent="antique">
-<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-valid"</kdb></h3>
+<h3><kbd class="ds-name select"><span class="str">"antique/train/split200-valid"</span></kbd></h3>
 
 <div class="desc">
  <p> A held-out subset of 200 queries from <a class="ds-ref">antique/train</a>. Use in conjunction with <a class="ds-ref">antique/train/split200-train</a>. </p>
@@ -392,18 +742,44 @@ bibtex:
 <li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
-<div><span class="kwd">for</span> query <span class="kwd">in</span> dataset.queries_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;query <span class="comment"># namedtuple&lt;query_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-valid&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-valid queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-valid&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train/split200-valid__docs">docs</a>
 <div id="antique/train/split200-valid__docs" class="tab-content">
 <p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">antique</a></p>
 <div>Document type:</div>
 <div class="type">
 <div class="type-name">GenericDoc: (<span class="kwd">namedtuple</span>)</div>
@@ -411,13 +787,37 @@ bibtex:
 <li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
 </ol>
 </div>
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
-<div><span class="kwd">for</span> doc <span class="kwd">in</span> dataset.docs_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;doc <span class="comment"># namedtuple&lt;doc_id, text&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-valid&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-valid docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-valid&#39;</span><span class="p">)</span>
+<span class="c1"># Index antique</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;text&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
 </div>
 
 <a class="tab" target="antique/train/split200-valid__qrels">qrels</a>
@@ -439,13 +839,44 @@ bibtex:
 <tr><td class="relScore">4</td><td>It looks reasonable and convincing. Its quality is on parwith or better than the "Possibly Correct Answer". Note that it does not have to provide the same answer as the "PossiblyCorrect Answer".</td></tr>
 </table>
 
-<p>Example</p>
-<code class="example">
-<div><span class="kwd">import</span> ir_datasets</div>
-<div>dataset = ir_datasets.load(<span class="str">'antique/train/split200-valid')</div>
-<div><span class="kwd">for</span> qrel <span class="kwd">in</span> dataset.qrels_iter():</div>
-<div>&nbsp;&nbsp;&nbsp;&nbsp;qrel <span class="comment"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span></div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;antique/train/split200-valid&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">qrel</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">qrels_iter</span><span class="p">():</span>
+    <span class="n">qrel</span> <span class="c1"># namedtuple&lt;query_id, doc_id, relevance, iteration&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> antique/train/split200-valid qrels
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[relevance]&nbsp;&nbsp;&nbsp;&nbsp;[iteration]</div>
+<div>...</div>
+
 </code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="kn">from</span> <span class="nn">pyterrier.measures</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:antique/train/split200-valid&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/antique&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">Experiment</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
+    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+<span class="p">)</span>
+</pre></div>
+<p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
 </div>
 </div>
 </div>

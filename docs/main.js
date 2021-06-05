@@ -20,6 +20,24 @@ function selectText(element) {
         window.getSelection().addRange(range);
     }
 }
+function toggleExamples(examples, relativeTo) {
+    // Since this changes the examples shown on the entire page, it has the potential to
+    // really disorient the user as the content of the page will shift and potentially
+    // scroll what they're looking away or even off screen. So we keep track of the y position
+    //  "target" element (relative to the window) at the start, and then adjust the scroll
+    // of the window after to make sure what they clicked on stays in the same spot.
+    if (relativeTo) {
+        var startTop = relativeTo[0].getBoundingClientRect().top;
+    }
+    $('.ex-tab-content').hide();
+    $('.ex-tab-content.' + examples).show();
+    $('.ex-tab').removeClass('selected');
+    $('.ex-tab[target=' + examples + ']').addClass('selected');
+    if (relativeTo) {
+        var deltaTop = relativeTo[0].getBoundingClientRect().top - startTop;
+        window.scrollBy(0, deltaTop);
+    }
+}
 $(document).ready(function() {
     $('.ds-ref').click(function () {
         var target = $('[id="' + $(this).text() + '"]');
@@ -56,6 +74,31 @@ $(document).ready(function() {
             $('#' + targetRow)[0].scrollIntoView();
             $('#DatasetJump').val(''); // clear selection
         }
+    });
+    $('.ex-tabs').each(function (i, e) {
+        $(e).find('.ex-tab').prependTo(e);
+    });
+    var examples = null;
+    if (window.sessionStorage) {
+        examples = sessionStorage.getItem("examples");
+    }
+    if (!examples && window.localStorage) {
+        examples = localStorage.getItem("examples");
+    }
+    if (!examples) {
+        examples = 'irds-python';
+    }
+    toggleExamples(examples, null);
+    $(document).on('click', '.ex-tab', function(e) {
+        var $target = $(e.target);
+        var examples = $target.attr('target');
+        if (window.sessionStorage) {
+            sessionStorage.setItem("examples", examples);
+        }
+        if (window.localStorage) {
+            localStorage.setItem("examples", examples);
+        }
+        toggleExamples(examples, $target);
     });
 });
 function toEmoji(test) {
