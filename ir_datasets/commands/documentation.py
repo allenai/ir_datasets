@@ -1328,6 +1328,7 @@ code.example, .highlight {
   margin-left: 4px;
   margin-top: 2px;
   margin-bottom: 2px;
+  overflow-x: auto;
 }
 code.output {
   display: block;
