@@ -217,3 +217,8 @@ If you use this tool, please cite [our SIGIR resource paper](https://arxiv.org/p
   booktitle = {SIGIR}
 }
 ```
+
+## Credits
+
+ - Sean MacAvaney (University of Glasgow)
+ - Shuo Sun (Johns Hopkins University)
