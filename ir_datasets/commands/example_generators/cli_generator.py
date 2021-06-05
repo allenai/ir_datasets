@@ -33,7 +33,7 @@ ir_datasets export {self.dataset_id} queries
             return None
         fields = '&nbsp;&nbsp;&nbsp;&nbsp;'.join(f'[{f}]' for f in self.dataset.qrels_cls()._fields)
         return Example(code=f'''
-ir_datasets export {self.dataset_id} qrels
+ir_datasets export {self.dataset_id} qrels --format tsv
 ''', output=f'''
 <div>{fields}</div>
 <div>...</div>
@@ -44,7 +44,7 @@ ir_datasets export {self.dataset_id} qrels
             return None
         fields = '&nbsp;&nbsp;&nbsp;&nbsp;'.join(f'[{f}]' for f in self.dataset.scoreddocs_cls()._fields)
         return Example(code=f'''
-ir_datasets export {self.dataset_id} scoreddocs
+ir_datasets export {self.dataset_id} scoreddocs --format tsv
 ''', output=f'''
 <div>{fields}</div>
 <div>...</div>

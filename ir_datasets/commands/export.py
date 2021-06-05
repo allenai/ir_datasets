@@ -45,6 +45,14 @@ def main_scoreddocs(dataset, args):
     exporter.flush()
 
 
+def main_docpairs(dataset, args):
+    assert hasattr(dataset, 'docpairs_handler'), f"{args.dataset} does not provide docpairs"
+    exporter = DEFAULT_EXPORTERS[args.format]
+    exporter = exporter(dataset.docpairs_cls(), args.out, args.fields)
+    for query in dataset.docpairs_iter():
+        exporter.next(query)
+    exporter.flush()
+
 
 class TsvExporter:
     def __init__(self, data_cls, out, fields=None):
@@ -190,7 +198,6 @@ QRELS_EXPORTERS = {**DEFAULT_EXPORTERS, 'trec': TrecQrelsExporter}
 
 SCOREDDOCS_EXPORTERS = {**DEFAULT_EXPORTERS, 'trec': TrecRunExporter}
 
-
 def main(args):
     parser = argparse.ArgumentParser(prog='ir_datasets export', description='Exports documents, queries, qrels, and scoreddocs in various formats.')
     parser.add_argument('dataset')
@@ -218,6 +225,11 @@ def main(args):
     subparser.add_argument('--fields', nargs='+')
     subparser.add_argument('--runtag', default='run')
     subparser.set_defaults(fn=main_scoreddocs)
+
+    subparser = subparsers.add_parser('docpairs')
+    subparser.add_argument('--format', choices=DEFAULT_EXPORTERS.keys(), default='tsv')
+    subparser.add_argument('--fields', nargs='+')
+    subparser.set_defaults(fn=main_docpairs)
 
     args = parser.parse_args(args)
     dataset = ir_datasets.load(args.dataset)
