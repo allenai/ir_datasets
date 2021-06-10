@@ -13,14 +13,7 @@ v1.5:
 Version 1.5 of the TREC dataset. This version is used for year 1 (2017) of the TREC CAR shared task.
 </p>
 '
-  bibtex: |
-    @article{Dietz2017,
-      title={{TREC CAR}: A Data Set for Complex Answer Retrieval},
-      author={Laura Dietz and Ben Gamari},
-      year={2017},
-      note={Version 1.5},
-      url={http://trec-car.cs.unh.edu}
-    }
+  bibtex_ids: ['Dietz2017Car']
 
 v1.5/trec-y1:
   desc: '
@@ -28,14 +21,7 @@ v1.5/trec-y1:
 Official test set of TREC CAR 2017 (year 1).
 </p>
 '
-  bibtex: |
-    @inproceedings{dietz2017trec,
-      title={TREC Complex Answer Retrieval Overview.},
-      author={Dietz, Laura and Verma, Manisha and Radlinski, Filip and Craswell, Nick},
-      booktitle={TREC},
-      year={2017}
-    }
-
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/trec-y1/manual:
   desc: '
@@ -43,6 +29,7 @@ v1.5/trec-y1/manual:
 Official test set of TREC CAR 2017 (year 1), using manual graded relevance judgments.
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/trec-y1/auto:
   desc: '
@@ -51,6 +38,7 @@ Official test set of TREC CAR 2017 (year 1), using automatic relevance judgments
 hierarchical structure of pages, i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/test200:
   desc: '
@@ -58,14 +46,7 @@ v1.5/test200:
 Un-official test set consisting of manually-selected articles. Sometimes used as a validation set.
 </p>
 '
-  bibtex: |
-    @inproceedings{nanni2017benchmark,
-      title={Benchmark for complex answer retrieval},
-      author={Nanni, Federico and Mitra, Bhaskar and Magnusson, Matt and Dietz, Laura},
-      booktitle={ICTIR},
-      year={2017}
-    }
-
+  bibtex_ids: ['Nanni2017BenchmarkCar', 'Dietz2017Car']
 
 v1.5/train/fold0:
   desc: '
@@ -74,6 +55,7 @@ Fold 0 of the official large training set for TREC CAR 2017. Relevance assumed f
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/train/fold1:
   desc: '
@@ -82,6 +64,7 @@ Fold 1 of the official large training set for TREC CAR 2017. Relevance assumed f
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/train/fold2:
   desc: '
@@ -90,6 +73,7 @@ Fold 2 of the official large training set for TREC CAR 2017. Relevance assumed f
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/train/fold3:
   desc: '
@@ -98,6 +82,7 @@ Fold 3 of the official large training set for TREC CAR 2017. Relevance assumed f
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
 
 v1.5/train/fold4:
   desc: '
@@ -106,3 +91,4 @@ Fold 4 of the official large training set for TREC CAR 2017. Relevance assumed f
 pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
+  bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']

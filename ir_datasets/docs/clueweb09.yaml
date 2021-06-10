@@ -129,13 +129,7 @@ The TREC Web Track 2009 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Clarke2009TrecWeb,
-      title={Overview of the TREC 2009 Web Track},
-      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff},
-      booktitle={TREC},
-      year={2009}
-    }
+  bibtex_ids: ['Clarke2009TrecWeb']
 
 trec-web-2010:
   desc: '
@@ -148,13 +142,7 @@ The TREC Web Track 2010 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Clarke2010TrecWeb,
-      title={Overview of the TREC 2010 Web Track},
-      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Gordon V. Cormack},
-      booktitle={TREC},
-      year={2010}
-    }
+  bibtex_ids: ['Clarke2010TrecWeb']
 
 trec-web-2011:
   desc: '
@@ -167,13 +155,7 @@ The TREC Web Track 2011 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Clarke2011TrecWeb,
-      title={Overview of the TREC 2011 Web Track},
-      author={Charles L. A. Clarke and Nick Craswell and Ian Soboroff and Ellen M. Voorhees},
-      booktitle={TREC},
-      year={2011}
-    }
+  bibtex_ids: ['Clarke2011TrecWeb']
 
 trec-web-2012:
   desc: '
@@ -186,13 +168,7 @@ The TREC Web Track 2012 ad-hoc ranking benchmark. Contains 50 queries with deep 
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Clarke2012TrecWeb,
-      title={Overview of the TREC 2012 Web Track},
-      author={Charles L. A. Clarke and Nick Craswell and Ellen M. Voorhees},
-      booktitle={TREC},
-      year={2012}
-    }
+  bibtex_ids: ['Clarke2012TrecWeb']
 
 trec-mq-2009:
   desc: '
@@ -205,10 +181,4 @@ TREC 2009 Million Query track.
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Carterette2009MQ,
-      title={Million Query Track 2009 Overview},
-      author={Ben Carterette and Virgil Pavlu and Hui Fang and Evangelos Kanoulas},
-      booktitle={TREC},
-      year={2009}
-    }
+  bibtex_ids: ['Carterette2009MQ']

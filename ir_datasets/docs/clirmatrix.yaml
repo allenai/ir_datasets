@@ -39,17 +39,4 @@ ar, de, en, es, fr, ja, ru, zh
 <li><a href="http://www.cs.jhu.edu/~shuosun/clirmatrix/">Data Website</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{sun-duh-2020-clirmatrix,
-      title = "{CLIRM}atrix: A massively large collection of bilingual and multilingual datasets for Cross-Lingual Information Retrieval",
-      author = "Sun, Shuo  and
-        Duh, Kevin",
-      booktitle = "Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing (EMNLP)",
-      month = nov,
-      year = "2020",
-      address = "Online",
-      publisher = "Association for Computational Linguistics",
-      url = "https://www.aclweb.org/anthology/2020.emnlp-main.340",
-      doi = "10.18653/v1/2020.emnlp-main.340",
-      pages = "4160--4170"
-    }
+  bibtex_ids: ['Sun2020Clirmatrix']

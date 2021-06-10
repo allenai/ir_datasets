@@ -39,6 +39,7 @@ def main(args):
         generate_downloads(args.out_dir, version)
         generate_css(args.out_dir, version)
         generate_js(args.out_dir, version)
+        generate_bib(args.out_dir, version)
 
         top_level = [name for name in sorted(ir_datasets.registry) if '/' not in name]
         top_level_map = {t: [] for t in top_level}
@@ -48,12 +49,15 @@ def main(args):
             if parent != name:
                 top_level_map[parent].append((name, dataset))
 
+        bibliography = open('ir_datasets/docs/bibliography.bib', 'rt').read().split('\n\n')
+        bibliography = {b.split('{')[1].split(',')[0]: b for b in bibliography}
+
         generate_ghdl(top_level)
         for top_level in sorted(top_level_map):
-            generate_dataset_page(args.out_dir, version, top_level, top_level_map[top_level])
+            generate_dataset_page(args.out_dir, version, top_level, top_level_map[top_level], bibliography)
 
 
-def generate_dataset_page(out_dir, version, top_level, sub_datasets):
+def generate_dataset_page(out_dir, version, top_level, sub_datasets, bibliography):
     dataset = ir_datasets.registry[top_level]
     documentation = dataset.documentation() if hasattr(dataset, 'documentation') else {}
     with page_template(f'{top_level}.html', out_dir, version, title=documentation.get('pretty_name', top_level), source=f'datasets/{top_level.replace("-", "_")}.py') as out:
@@ -70,7 +74,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
 {data_access_section}<hr />
 <div class="dataset" id="{top_level}">
 <h3><kbd class="select"><span class="str">"{top_level}"</span></kbd></h3>
-{generate_dataset(dataset, top_level)}
+{generate_dataset(dataset, top_level, bibliography)}
 </div>
 ''')
         for name, dataset in sub_datasets:
@@ -78,7 +82,7 @@ def generate_dataset_page(out_dir, version, top_level, sub_datasets):
 <hr />
 <div class="dataset" id="{name}" data-parent="{top_level}">
 <h3><kbd class="ds-name select"><span class="str">"{name}"</span></kbd></h3>
-{generate_dataset(dataset, name)}
+{generate_dataset(dataset, name, bibliography)}
 </div>
 ''')
         out.write('''
@@ -95,7 +99,7 @@ $(function () {
 
 
 
-def generate_dataset(dataset, dataset_id):
+def generate_dataset(dataset, dataset_id, bibliography):
     from ir_datasets.commands import example_generators
     generators = {
         ('Python API', 'irds-python'): example_generators.PythonExampleGenerator(dataset_id),
@@ -117,7 +121,7 @@ def generate_dataset(dataset, dataset_id):
 {desc}
 </div>
 ''')
-        has_any = dataset.has_docs() or dataset.has_queries() or dataset.has_qrels() or dataset.has_docpairs() or dataset.has_scoreddocs() or 'bibtex' in documentation
+        has_any = dataset.has_docs() or dataset.has_queries() or dataset.has_qrels() or dataset.has_docpairs() or dataset.has_scoreddocs() or 'bibtex_ids' in documentation
         if has_any:
             out.write('<div class="tabs">')
         if dataset.has_queries():
@@ -178,12 +182,15 @@ def generate_dataset(dataset, dataset_id):
 {generate_examples(generators, 'generate_docpairs')}
 </div>
 ''')
-        if 'bibtex' in documentation:
+        if 'bibtex_ids' in documentation:
+            prefix = f'<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\\cite{{{",".join(documentation["bibtex_ids"])}}}</cite>'
+            bibtex = '\n'.join(bibliography[bid] for bid in documentation['bibtex_ids'])
             out.write(f'''
 <a class="tab" target="{dataset_id}__citation">Citation</a>
 <div id="{dataset_id}__citation" class="tab-content">
-bibtex:
-<cite class="select">{documentation["bibtex"]}</cite>
+{prefix}
+<p>Bibtex:</p>
+<cite class="select">{bibtex}</cite>
 </div>
 ''')
         if has_any:
@@ -375,8 +382,7 @@ Install with pip:
 <h2>Citation</h2>
 <p>
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on each dataset's documenation page, or in the python interface via
-<kbd>dataset.documentation()['bibtex']</kbd> (when available).
+can be found on each dataset's documenation page.
 </p>
 <p>If you use this tool, please cite our <a href="https://arxiv.org/pdf/2103.02280.pdf">SIGIR resource paper</a>:</p>
 <cite class="select">@inproceedings{{macavaney:sigir2021-irds,
@@ -1771,6 +1777,13 @@ function generateDownloads(title, downloads) {
         .prop('open', !allGood);
 }
 ''')
+
+
+
+def generate_bib(base_dir, version):
+    with open(get_file_path(base_dir, version, 'ir_datasets.bib'), 'wt') as out:
+        with open('ir_datasets/docs/bibliography.bib', 'rt') as fin:
+            out.write(fin.read())
 
 
 def get_file_path(base_dir, version, file):

@@ -14,13 +14,7 @@ having the answer in the QnA dataset."
   <li><a href="https://microsoft.github.io/msmarco/#docranking">Leaderboard</a></li>
   <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
 </ul>'
-  bibtex: |
-    @inproceedings{Bajaj2016MSMA,
-      title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
-      author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
-      booktitle={InCoCo@NIPS},
-      year={2016}
-    }
+  bibtex_ids: ['Bajaj2016Msmarco']
 
 
 dev:
@@ -32,6 +26,7 @@ Official dev set. All queries have exactly 1 (positive) relevance judgment.
 scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
 </p>
 '
+  bibtex_ids: ['Bajaj2016Msmarco']
 
 
 eval:
@@ -43,6 +38,7 @@ Official eval set for submission to MS MARCO leaderboard. Relevance judgments ar
 scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
 </p>
 '
+  bibtex_ids: ['Bajaj2016Msmarco']
 
 
 orcas:
@@ -57,13 +53,7 @@ orcas:
 <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li>
 </ul>
 '
-  bibtex: |
-    @article{craswell2020orcas,
-      title={ORCAS: 18 Million Clicked Query-Document Pairs for Analyzing Search},
-      author={Craswell, Nick and Campos, Daniel and Mitra, Bhaskar and Yilmaz, Emine and Billerbeck, Bodo},
-      journal={arXiv preprint arXiv:2006.05324},
-      year={2020}
-    }
+  bibtex_ids: ['Craswell2020Orcas']
 
 
 train:
@@ -75,6 +65,7 @@ Official train set. All queries have exactly 1 (positive) relevance judgment.
 scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting.
 </p>
 '
+  bibtex_ids: ['Bajaj2016Msmarco']
 
 
 trec-dl-2019:
@@ -88,13 +79,7 @@ Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled fr
 <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Craswell2020OverviewOT,
-      title={Overview of the TREC 2019 deep learning track},
-      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
-      booktitle={TREC 2019},
-      year={2019}
-    }
+  bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
 
 
 trec-dl-2019/judged:
@@ -103,6 +88,7 @@ trec-dl-2019/judged:
 Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels.
 </p>
 '
+  bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
 
 
 trec-dl-2020:
@@ -116,13 +102,7 @@ Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled fr
 <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Craswell2021OverviewOT,
-      title={Overview of the TREC 2020 deep learning track},
-      author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos},
-      booktitle={TREC},
-      year={2020}
-    }
+  bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
 
 trec-dl-2020/judged:
   desc: '
@@ -130,6 +110,7 @@ trec-dl-2020/judged:
 Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels.
 </p>
 '
+  bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
 
 trec-dl-hard:
   desc: '
@@ -141,6 +122,7 @@ A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>
 <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li>
 </ul>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
 
 trec-dl-hard/fold1:
   desc: '
@@ -148,6 +130,7 @@ trec-dl-hard/fold1:
 Fold 1 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
 
 trec-dl-hard/fold2:
   desc: '
@@ -155,6 +138,7 @@ trec-dl-hard/fold2:
 Fold 2 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
 
 trec-dl-hard/fold3:
   desc: '
@@ -162,6 +146,7 @@ trec-dl-hard/fold3:
 Fold 3 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
 
 trec-dl-hard/fold4:
   desc: '
@@ -169,6 +154,7 @@ trec-dl-hard/fold4:
 Fold 4 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
 
 trec-dl-hard/fold5:
   desc: '
@@ -176,3 +162,4 @@ trec-dl-hard/fold5:
 Fold 5 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
+  bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']

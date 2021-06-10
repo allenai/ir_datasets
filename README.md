@@ -175,7 +175,7 @@ Available datasets include:
  - [TripClick](https://ir-datasets.com/tripclick.html)
  - [Tweets 2013 (Internet Archive)](https://ir-datasets.com/tweets2013-ia.html)
  - [Vaswani](https://ir-datasets.com/vaswani.html)
- - [Washingotn Post](https://ir-datasets.com/wapo.html)
+ - [Washington Post](https://ir-datasets.com/wapo.html)
  - [WikIR](https://ir-datasets.com/wikir.html)
 
 There are "subsets" under each dataset. For instance, `clueweb12/b13/trec-misinfo-2019` provides the
@@ -204,8 +204,7 @@ dataset, its available subsets, and what data they provide.
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](https://ir-datasets.com/),
-or in the python interface via `dataset.documentation()['bibtex']` (when available).
+can be found on the [datasets documentation page](https://ir-datasets.com/).
 
 If you use this tool, please cite [our SIGIR resource paper](https://arxiv.org/pdf/2103.02280.pdf):
 

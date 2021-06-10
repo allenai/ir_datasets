@@ -25,15 +25,7 @@ request the "TripClick Training Package for Deep Learning Models".
   qrels_instructions: &qrels_inst "qrels available from the Trip Database"
   scoreddocs_instructions: &scoreddocs_inst "scoreddocs available from the Trip Database"
   docpairs_instructions: &docpairs_inst "docpairs available from the Trip Database"
-  bibtex: &bibtex |
-    @misc{rekabsaz2021tripclick,
-      title={TripClick: The Log Files of a Large Health Web Search Engine}, 
-      author={Navid Rekabsaz and Oleg Lesota and Markus Schedl and Jon Brassey and Carsten Eickhoff},
-      year={2021},
-      eprint={2103.07901},
-      archivePrefix={arXiv},
-      primaryClass={cs.IR}
-    }
+  bibtex_ids: ['Rekabsaz2021TripClick']
   data_access: '
 <p>
 To use this dataset, you need a copy of the source files, provided by the Trip Database.
@@ -73,7 +65,7 @@ A small number of docpairs could not be mapped back, so they are skipped.
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 train/head:
   desc: '
@@ -86,7 +78,7 @@ The most frequent queries in the train set. This represents 20% of the search en
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 train/head/dctr:
   desc: '
@@ -100,7 +92,7 @@ Click Through Rate (DCTR).
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 train/torso:
   desc: '
@@ -113,7 +105,7 @@ The moderately frequent queries in the train set. This represents 30% of the sea
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 train/tail:
   desc: '
@@ -126,7 +118,7 @@ The least frequent queries in the train set. This represents 50% of the search e
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 val:
   desc: '
@@ -144,7 +136,7 @@ The scoreddocs are the official BM25 results from Anserini.
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 val/head:
   desc: '
@@ -157,7 +149,7 @@ The most frequent queries in the validation set. This represents 20% of the sear
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 val/head/dctr:
   desc: '
@@ -171,7 +163,7 @@ Click Through Rate (DCTR).
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 val/torso:
   desc: '
@@ -184,7 +176,7 @@ The moderately frequent queries in the validation set. This represents 30% of th
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 val/tail:
   desc: '
@@ -197,7 +189,7 @@ The least frequent queries in the validation set. This represents 50% of the sea
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 test:
   desc: '
@@ -215,7 +207,7 @@ The scoreddocs are the official BM25 results from Anserini.
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 test/head:
   desc: '
@@ -228,7 +220,7 @@ The most frequent queries in the test set. This represents 20% of the search eng
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 test/torso:
   desc: '
@@ -241,7 +233,7 @@ The moderately frequent queries in the test set. This represents 30% of the sear
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']
 
 test/tail:
   desc: '
@@ -254,4 +246,4 @@ The least frequent queries in the test set. This represents 50% of the search en
   qrels_instructions: *qrels_inst
   scoreddocs_instructions: *scoreddocs_inst
   docpairs_instructions: *docpairs_inst
-  bibtex: *bibtex
+  bibtex_ids: ['Rekabsaz2021TripClick']

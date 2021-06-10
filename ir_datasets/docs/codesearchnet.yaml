@@ -11,13 +11,7 @@ A benchmark for semantic code search. Uses
   <li><a href="https://wandb.ai/github/codesearchnet/benchmark/leaderboard">Challenge Task Leaderboard</a></li>
 </ul>
 '
-  bibtex: |
-    @article{Husain2019CodeSearchNet,
-      title={CodeSearchNet Challenge: Evaluating the State of Semantic Code Search},
-      author={Hamel Husain and Ho-Hsiang Wu and Tiferet Gazit and Miltiadis Allamanis and Marc Brockschmidt},
-      journal={ArXiv},
-      year={2019}
-    }
+  bibtex_ids: ['Husain2019CodeSearchNet']
 
 train:
   desc: '
@@ -25,6 +19,7 @@ train:
 Official train set, using queries inferred from docstrings.
 </p>
 '
+  bibtex_ids: ['Husain2019CodeSearchNet']
 
 valid:
   desc: '
@@ -32,6 +27,7 @@ valid:
 Official validation set, using queries inferred from docstrings.
 </p>
 '
+  bibtex_ids: ['Husain2019CodeSearchNet']
 
 test:
   desc: '
@@ -39,6 +35,7 @@ test:
 Official test set, using queries inferred from docstrings.
 </p>
 '
+  bibtex_ids: ['Husain2019CodeSearchNet']
 
 challenge:
   desc: '
@@ -46,3 +43,4 @@ challenge:
 Official challenge set, with keyword queries and deep relevance assessments.
 </p>
 '
+  bibtex_ids: ['Husain2019CodeSearchNet']

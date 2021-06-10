@@ -10,15 +10,7 @@ in the DPR paper (and other subsequent works) for retrieval experiments over Q&a
 <li><a href="https://github.com/facebookresearch/DPR">Repository</a></li>
 </ul>
 '
-  bibtex: |
-    @misc{karpukhin2020dense,
-      title={Dense Passage Retrieval for Open-Domain Question Answering},
-      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
-      year={2020},
-      eprint={2004.04906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-    }
+  bibtex_ids: ['Karpukhin2020Dpr']
 
 natural-questions/train:
   desc: '
@@ -31,21 +23,7 @@ and additional filtering (described in the DPR paper) was applied.
 <li>See also: <a class="ds-ref">natural-questions</a></li>
 </ul>
 '
-  bibtex: |
-    @article{Kwiatkowski2019NQ,
-      title = {Natural Questions: a Benchmark for Question Answering Research},
-      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-      year = {2019},
-      journal = {TACL}
-    }
-    @misc{karpukhin2020dense,
-      title={Dense Passage Retrieval for Open-Domain Question Answering},
-      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
-      year={2020},
-      eprint={2004.04906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-    }
+  bibtex_ids: ['Kwiatkowski2019Nq', 'Karpukhin2020Dpr']
 
 natural-questions/dev:
   desc: '
@@ -58,21 +36,7 @@ and additional filtering (described in the DPR paper) was applied.
 <li>See also: <a class="ds-ref">natural-questions</a></li>
 </ul>
 '
-  bibtex: |
-    @article{Kwiatkowski2019NQ,
-      title = {Natural Questions: a Benchmark for Question Answering Research},
-      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-      year = {2019},
-      journal = {TACL}
-    }
-    @misc{karpukhin2020dense,
-      title={Dense Passage Retrieval for Open-Domain Question Answering},
-      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
-      year={2020},
-      eprint={2004.04906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-    }
+  bibtex_ids: ['Kwiatkowski2019Nq', 'Karpukhin2020Dpr']
 
 trivia-qa/train:
   desc: '
@@ -85,21 +49,7 @@ this uses the DPR Wikipedia dump as the source collection. Refer to the DPR pape
 <li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Joshi2017TriviaQAAL,
-      title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
-      author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
-      booktitle={ACL},
-      year={2017}
-    }
-    @misc{karpukhin2020dense,
-      title={Dense Passage Retrieval for Open-Domain Question Answering},
-      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
-      year={2020},
-      eprint={2004.04906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-    }
+  bibtex_ids: ['Joshi2017TriviaQA', 'Karpukhin2020Dpr']
 
 trivia-qa/dev:
   desc: '
@@ -112,18 +62,4 @@ this uses the DPR Wikipedia dump as the source collection. Refer to the DPR pape
 <li><a href="http://nlp.cs.washington.edu/triviaqa/">Dataset website</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Joshi2017TriviaQAAL,
-      title={TriviaQA: A Large Scale Distantly Supervised Challenge Dataset for Reading Comprehension},
-      author={Mandar Joshi and Eunsol Choi and Daniel S. Weld and Luke Zettlemoyer},
-      booktitle={ACL},
-      year={2017}
-    }
-    @misc{karpukhin2020dense,
-      title={Dense Passage Retrieval for Open-Domain Question Answering},
-      author={Vladimir Karpukhin and Barlas Oğuz and Sewon Min and Patrick Lewis and Ledell Wu and Sergey Edunov and Danqi Chen and Wen-tau Yih},
-      year={2020},
-      eprint={2004.04906},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
-    }
+  bibtex_ids: ['Joshi2017TriviaQA', 'Karpukhin2020Dpr']

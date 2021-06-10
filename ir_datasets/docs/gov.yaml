@@ -48,13 +48,7 @@ The TREC Web Track 2002 ad-hoc ranking benchmark.
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Craswell2002TrecWeb,
-      title={Overview of the TREC-2002 Web Track},
-      author={Nick Craswell and David Hawking},
-      booktitle={TREC},
-      year={2002}
-    }
+  bibtex_ids: ['Craswell2002TrecWeb']
 
 trec-web-2002/named-page:
   desc: '
@@ -67,13 +61,7 @@ The TREC Web Track 2002 named page ranking benchmark.
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Craswell2002TrecWeb,
-      title={Overview of the TREC-2002 Web Track},
-      author={Nick Craswell and David Hawking},
-      booktitle={TREC},
-      year={2002}
-    }
+  bibtex_ids: ['Craswell2002TrecWeb']
 
 trec-web-2003:
   desc: '
@@ -86,13 +74,7 @@ The TREC Web Track 2003 ad-hoc ranking benchmark.
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Craswell2003TrecWeb,
-      title={Overview of the TREC 2003 Web Track},
-      author={Nick Craswell and David Hawking and Ross Wilkinson and Mingfang Wu},
-      booktitle={TREC},
-      year={2003}
-    }
+  bibtex_ids: ['Craswell2003TrecWeb']
 
 trec-web-2003/named-page:
   desc: '
@@ -105,13 +87,7 @@ The TREC Web Track 2003 named page ranking benchmark.
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Craswell2003TrecWeb,
-      title={Overview of the TREC 2003 Web Track},
-      author={Nick Craswell and David Hawking and Ross Wilkinson and Mingfang Wu},
-      booktitle={TREC},
-      year={2003}
-    }
+  bibtex_ids: ['Craswell2003TrecWeb']
 
 trec-web-2004:
   desc: '
@@ -127,10 +103,4 @@ Queries include a combination of topic distillation, homepage finding, and named
 </ul>
 '
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Craswell2004TrecWeb,
-      title={Overview of the TREC-2004 Web Track},
-      author={Nick Craswell and David Hawking},
-      booktitle={TREC},
-      year={2004}
-    }
+  bibtex_ids: ['Craswell2004TrecWeb']
