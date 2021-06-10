@@ -269,6 +269,9 @@ class _DownloadConfig:
                              f'to avoid downloading it again: {local_path}')
                 sources.append(LocalDownload(local_path, local_msg, mkdir=False))
             sources.append(RequestsDownload(dlc['url']))
+            if dlc.get('irds_mirror') and dlc.get('expected_md5'):
+                # this file has the irds mirror to fall back on
+                sources.append(RequestsDownload(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))
         elif 'instructions' in dlc:
             if 'cache_path' in dlc:
                 local_path = Path(cache_path)

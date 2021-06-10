@@ -40,11 +40,13 @@
   },
   "trec-robust-2005/queries": {
     "url": "https://trec.nist.gov/data/robust/05/05.50.topics.txt",
+    "irds_mirror": true,
     "expected_md5": "c2e722e6bdfd00f088c6f6517db564ce",
     "cache_path": "trec-robust-2005/queries"
   },
   "trec-robust-2005/qrels": {
     "url": "https://trec.nist.gov/data/robust/05/TREC2005.qrels.txt",
+    "irds_mirror": true,
     "expected_md5": "9186021c74090464c50f577d4826e2e2",
     "cache_path": "trec-robust-2005/qrels"
   }
@@ -209,16 +211,19 @@
   },
   "trec-pm-2017/qrels": {
     "url": "https://trec.nist.gov/data/precmed/qrels-final-trials.txt",
+    "irds_mirror": true,
     "expected_md5": "3c35f9e62abf64c873250ac8022d5a51",
     "cache_path": "trec-pm-2017/qrels"
   },
   "trec-pm-2018/qrels": {
     "url": "https://trec.nist.gov/data/precmed/qrels-treceval-clinical_trials-2018-v2.txt",
+    "irds_mirror": true,
     "expected_md5": "a6c9efbecb5f32a19c5ac37f1f98c951",
     "cache_path": "trec-pm-2018/qrels"
   },
   "trec-pm-2019/qrels": {
     "url": "https://trec.nist.gov/data/precmed/qrels-treceval-trials.38.txt",
+    "irds_mirror": true,
     "expected_md5": "fc4b0cf6007b2dc2a7e81536add65a8c",
     "cache_path": "trec-pm-2019/qrels"
   },
@@ -248,51 +253,61 @@
   },
   "trec-web-2009/queries": {
     "url": "https://trec.nist.gov/data/web/09/wt09.topics.full.xml",
+    "irds_mirror": true,
     "expected_md5": "52e4a03d32718fa11290286e8e8dff47",
     "cache_path": "trec-web-2009/queries.xml"
   },
   "trec-web-2009/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/09/prels.1-50.gz",
+    "irds_mirror": true,
     "expected_md5": "3afdef86adf3211629182e3380f9e751",
     "cache_path": "trec-web-2009/prels.gz"
   },
   "trec-web-2010/queries": {
     "url": "https://trec.nist.gov/data/web/10/wt2010-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "8f084cc90c13e4cd66192d3a9585235e",
     "cache_path": "trec-web-2010/queries.xml"
   },
   "trec-web-2010/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/10/10.adhoc-qrels.final",
+    "irds_mirror": true,
     "expected_md5": "8a22083b0370d6ac799e1e779110de06",
     "cache_path": "trec-web-2010/qrels"
   },
   "trec-web-2011/queries": {
     "url": "https://trec.nist.gov/data/web/11/full-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "23914875d80a5d24571d4f458a83c7fa",
     "cache_path": "trec-web-2011/queries.xml"
   },
   "trec-web-2011/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/11/qrels.adhoc",
+    "irds_mirror": true,
     "expected_md5": "7844c8a9cc3a4b6f740d45e56013693d",
     "cache_path": "trec-web-2011/qrels"
   },
   "trec-web-2012/queries": {
     "url": "https://trec.nist.gov/data/web/12/full-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "a0b8ee33da312a284fda379582b0bc2a",
     "cache_path": "trec-web-2012/queries.xml"
   },
   "trec-web-2012/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/12/qrels.adhoc",
+    "irds_mirror": true,
     "expected_md5": "079723ba3e955269f0de6254c4bec180",
     "cache_path": "trec-web-2012/qrels"
   },
   "trec-mq-2009/queries": {
     "url": "https://trec.nist.gov/data/million.query/09/09.mq.topics.20001-60000.gz",
+    "irds_mirror": true,
     "expected_md5": "6347147d4d6c847f0423709140a7b10d",
     "cache_path": "trec-mq-2009/queries.txt.gz"
   },
   "trec-mq-2009/qrels": {
     "url": "https://trec.nist.gov/data/million.query/09/prels.20001-60000.gz",
+    "irds_mirror": true,
     "expected_md5": "e67f45d3060e20667596f37e34d696c8",
     "cache_path": "trec-mq-2009/prels.gz"
   }
@@ -314,21 +329,25 @@
   },
   "trec-web-2013/queries": {
     "url": "https://trec.nist.gov/data/web/2013/trec2013-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "4c0ecdddc8632d3fa8fecb507f19801d",
     "cache_path": "trec-web-2013/queries.xml"
   },
   "trec-web-2013/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/2013/qrels.adhoc.txt",
+    "irds_mirror": true,
     "expected_md5": "44aa6300f9df4a77f7205c574afb9c2d",
     "cache_path": "trec-web-2013/qrels.adhoc"
   },
   "trec-web-2014/queries": {
     "url": "https://trec.nist.gov/data/web/2014/trec2014-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "b1bf5c7aa9f6e7026e1558686330744f",
     "cache_path": "trec-web-2014/queries.xml"
   },
   "trec-web-2014/qrels.adhoc": {
     "url": "https://trec.nist.gov/data/web/2014/qrels.adhoc.txt",
+    "irds_mirror": true,
     "expected_md5": "afa1db71680acf71283adc7846282a44",
     "cache_path": "trec-web-2014/qrels.adhoc"
   },
@@ -357,11 +376,13 @@
   },
   "trec-misinfo-2019/queries": {
     "url": "https://trec.nist.gov/data/misinfo/2019topics.xml",
+    "irds_mirror": true,
     "expected_md5": "e46bb8ff3058bbcc1bd73a0ecbda1621",
     "cache_path": "trec-misinfo-2019/queries.xml"
   },
   "trec-misinfo-2019/qrels": {
     "url": "https://trec.nist.gov/data/misinfo/2019qrels_raw.txt",
+    "irds_mirror": true,
     "expected_md5": "faf86b2ac5fcca52b189a3ad408fd019",
     "cache_path": "trec-misinfo-2019/qrels"
   },
@@ -502,56 +523,67 @@
   },
   "trec-covid/queries": {
     "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd5.xml",
+    "irds_mirror": true,
     "expected_md5": "0307a37b6b9f1a5f233340a769d538ea",
     "cache_path": "trec-covid/queries.xml"
   },
   "trec-covid/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j0.5-5.txt",
+    "irds_mirror": true,
     "expected_md5": "8138424a59daea0aba751c8a891e5f54",
     "cache_path": "trec-covid/qrels"
   },
   "trec-covid/round1/queries": {
     "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd1.xml",
+    "irds_mirror": true,
     "expected_md5": "cf1b605222f45f7dbc90ca8e4d9b2c31",
     "cache_path": "trec-covid/round1/queries.xml"
   },
   "trec-covid/round1/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-rnd1.txt",
+    "irds_mirror": true,
     "expected_md5": "d58586df5823e7d1d0b3619a73b31518",
     "cache_path": "trec-covid/round1/qrels"
   },
   "trec-covid/round2/queries": {
     "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd2.xml",
+    "irds_mirror": true,
     "expected_md5": "550129e71c83de3fb4d6d29a172c5842",
     "cache_path": "trec-covid/round2/queries.xml"
   },
   "trec-covid/round2/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-rnd2.txt",
+    "irds_mirror": true,
     "expected_md5": "157df01d5a084b09be089407f41cf51b",
     "cache_path": "trec-covid/round2/qrels"
   },
   "trec-covid/round3/queries": {
     "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd3.xml",
+    "irds_mirror": true,
     "expected_md5": "aa42a15c107e74488c8189a16a311358",
     "cache_path": "trec-covid/round3/queries.xml"
   },
   "trec-covid/round3/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d3_j2.5-3.txt",
+    "irds_mirror": true,
     "expected_md5": "2a534a42b5b6b43dd8ae7d9433249006",
     "cache_path": "trec-covid/round3/qrels"
   },
   "trec-covid/round4/queries": {
     "url": "https://ir.nist.gov/covidSubmit/data/topics-rnd4.xml",
+    "irds_mirror": true,
     "expected_md5": "202ba3155b1e390115ae13f34d80d4fc",
     "cache_path": "trec-covid/round4/queries.xml"
   },
   "trec-covid/round4/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d4_j3.5-4.txt",
+    "irds_mirror": true,
     "expected_md5": "b86dd338d6b0a41e62f18e566e541b96",
     "cache_path": "trec-covid/round4/qrels"
   },
   "trec-covid/round5/qrels": {
     "url": "https://ir.nist.gov/covidSubmit/data/qrels-covid_d5_j4.5-5.txt",
+    "irds_mirror": true,
     "expected_md5": "6111c00ac9adac774f5b51e4f9a2a25b",
     "cache_path": "trec-covid/round5/qrels"
   }
@@ -600,56 +632,67 @@
   },
   "trec-web-2002/queries": {
     "url": "https://trec.nist.gov/data/topics_eng/webtopics_551-600.txt.gz",
+    "irds_mirror": true,
     "expected_md5": "133e5d1628684f7a044df86ad08907f0",
     "cache_path": "trec-web-2002/queries.txt.gz"
   },
   "trec-web-2002/qrels": {
     "url": "https://trec.nist.gov/data/qrels_eng/qrels.distillation.txt.gz",
+    "irds_mirror": true,
     "expected_md5": "313d1cab9a37aa9b76b6c647cf7151a8",
     "cache_path": "trec-web-2002/qrels.txt.gz"
   },
   "trec-web-2002/named-page/queries": {
     "url": "https://trec.nist.gov/data/topics_eng/webnamed_page_topics.1-150.txt.gz",
+    "irds_mirror": true,
     "expected_md5": "00422f1c1f5109d7f609708de071e527",
     "cache_path": "trec-web-2002/named-page/queries.txt.gz"
   },
   "trec-web-2002/named-page/qrels": {
     "url": "https://trec.nist.gov/data/qrels_eng/qrels.named-page.txt.gz",
+    "irds_mirror": true,
     "expected_md5": "ed7e69528faddd1baece4cae41c6f613",
     "cache_path": "trec-web-2002/named-page/qrels.txt.gz"
   },
   "trec-web-2003/queries": {
     "url": "https://trec.nist.gov/data/topics_eng/2003.distillation_topics.1-50.txt",
+    "irds_mirror": true,
     "expected_md5": "409e5d16eb8c795945715850c7d26a8e",
     "cache_path": "trec-web-2003/queries.txt"
   },
   "trec-web-2003/qrels": {
     "url": "https://trec.nist.gov/data/qrels_eng/qrels.distillation.2003.txt",
+    "irds_mirror": true,
     "expected_md5": "ce11fa22c6f7f5d8048bdc0d104986e5",
     "cache_path": "trec-web-2003/qrels.txt"
   },
   "trec-web-2003/named-page/queries": {
     "url": "https://trec.nist.gov/data/topics_eng/2003.named_page_topics.151-450.txt",
+    "irds_mirror": true,
     "expected_md5": "0b9bbe2bce309c5bf5754536abaaa0b6",
     "cache_path": "trec-web-2003/named-page/queries.txt"
   },
   "trec-web-2003/named-page/qrels": {
     "url": "https://trec.nist.gov/data/qrels_eng/qrels.named-page.2003.txt",
+    "irds_mirror": true,
     "expected_md5": "e7b05e05fab39862d5f8ad6ebc0c36fd",
     "cache_path": "trec-web-2003/named-page/qrels.txt"
   },
   "trec-web-2004/queries": {
     "url": "https://trec.nist.gov/data/web/Web2004.query.stream.trecformat.txt",
+    "irds_mirror": true,
     "expected_md5": "10821f7a000b8bec058097ede39570be",
     "cache_path": "trec-web-2004/queries.txt"
   },
   "trec-web-2004/qrels": {
     "url": "https://trec.nist.gov/data/web/04.qrels.web.mixed.txt",
+    "irds_mirror": true,
     "expected_md5": "93daa0e4b4190c84e30d2cce78a0f674",
     "cache_path": "trec-web-2004/qrels.txt"
   },
   "trec-web-2004/types": {
     "url": "https://trec.nist.gov/data/web/04.topic-map.official.txt",
+    "irds_mirror": true,
     "expected_md5": "79737768b3be1aa07b14691aa54802c5",
     "cache_path": "trec-web-2004/types.txt"
   }
@@ -662,81 +705,97 @@
   },
   "trec-tb-2004/queries": {
     "url": "https://trec.nist.gov/data/terabyte/04/04topics.701-750.txt",
+    "irds_mirror": true,
     "expected_md5": "18b390335e440d099f3d64bef81708be",
     "cache_path": "trec-tb-2004/queries.txt"
   },
   "trec-tb-2004/qrels": {
     "url": "https://trec.nist.gov/data/terabyte/04/04.qrels.12-Nov-04",
+    "irds_mirror": true,
     "expected_md5": "228e4b0c466b1778a01b3337f8774fb6",
     "cache_path": "trec-tb-2004/qrels.txt"
   },
   "trec-tb-2005/queries": {
     "url": "https://trec.nist.gov/data/terabyte/05/05.topics.751-800.txt",
+    "irds_mirror": true,
     "expected_md5": "f0fb2603c7d89425965e5aaa104ddca6",
     "cache_path": "trec-tb-2005/queries.txt"
   },
   "trec-tb-2005/qrels": {
     "url": "https://trec.nist.gov/data/terabyte/05/05.adhoc_qrels",
+    "irds_mirror": true,
     "expected_md5": "87f2af26215f092c948249771c8607f6",
     "cache_path": "trec-tb-2005/qrels.txt"
   },
   "trec-tb-2005/named-page/queries": {
     "url": "https://trec.nist.gov/data/terabyte/05/05.np_topics.601-872.final.txt",
+    "irds_mirror": true,
     "expected_md5": "266444c58e3567250f56df5c6a79670d",
     "cache_path": "trec-tb-2005/named-page/queries.txt"
   },
   "trec-tb-2005/named-page/qrels": {
     "url": "https://trec.nist.gov/data/terabyte/05/05.np_qrels",
+    "irds_mirror": true,
     "expected_md5": "0b0f73650d1297a7e5572576a4b93d28",
     "cache_path": "trec-tb-2005/named-page/qrels.txt"
   },
   "trec-tb-2005/efficiency/queries": {
     "url": "https://trec.nist.gov/data/terabyte/05/05.efficiency_topics.gz",
+    "irds_mirror": true,
     "expected_md5": "034a21c9dd956f3b7fb4f162782c9909",
     "cache_path": "trec-tb-2005/efficiency/queries.txt.gz"
   },
   "trec-tb-2006/queries": {
     "url": "https://trec.nist.gov/data/terabyte/06/06.topics.801-850.txt",
+    "irds_mirror": true,
     "expected_md5": "6e23a748c060ef5be64dbcc65245072f",
     "cache_path": "trec-tb-2006/queries.txt"
   },
   "trec-tb-2006/qrels": {
     "url": "https://trec.nist.gov/data/terabyte/06/qrels.tb06.top50",
+    "irds_mirror": true,
     "expected_md5": "1b1dfd769ff00d9e8ec4530c64221543",
     "cache_path": "trec-tb-2006/qrels.txt"
   },
   "trec-tb-2006/named-page/queries": {
     "url": "https://trec.nist.gov/data/terabyte/06/06.np_topics.901-1081.txt",
+    "irds_mirror": true,
     "expected_md5": "811a53107b4445a9955e7376d90a1eec",
     "cache_path": "trec-tb-2006/named-page/queries.txt"
   },
   "trec-tb-2006/named-page/qrels": {
     "url": "https://trec.nist.gov/data/terabyte/06/qrels.tb06.np",
+    "irds_mirror": true,
     "expected_md5": "f9f7d07de3070eafc08989dd98d1fab8",
     "cache_path": "trec-tb-2006/named-page/qrels.txt"
   },
   "trec-tb-2006/efficiency/queries": {
     "url": "https://trec.nist.gov/data/terabyte/06/06.efficiency_topics.tar.gz",
+    "irds_mirror": true,
     "expected_md5": "e8599a08af5b3f036c203957f5b82de8",
     "cache_path": "trec-tb-2006/efficiency/queries.tar.gz"
   },
   "trec-mq-2007/queries": {
     "url": "https://trec.nist.gov/data/million.query/07/07-million-query-topics.1-10000.gz",
+    "irds_mirror": true,
     "expected_md5": "db64470f08450c6b15a9ee2c7eac2f9b",
     "cache_path": "trec-mq-2007/queries.txt.gz"
   },
   "trec-mq-2007/qrels": {
     "url": "https://trec.nist.gov/data/million.query/07/07.prels",
+    "irds_mirror": true,
     "expected_md5": "4f930d85442ac74cc00b56a4252f1f4a",
     "cache_path": "trec-mq-2007/prels"
   },
   "trec-mq-2008/queries": {
     "url": "https://trec.nist.gov/data/million.query/08/08.million-query-topics.10001-20000.gz",
+    "irds_mirror": true,
     "expected_md5": "fc8fc0e92ae9bc1d16756534ac682058",
     "cache_path": "trec-mq-2008/queries.txt.gz"
   },
   "trec-mq-2008/qrels": {
     "url": "https://trec.nist.gov/data/million.query/08/2008.RC1.tgz",
+    "irds_mirror": true,
     "expected_md5": "dae403e1834e87cba1babbef71b73714",
     "cache_path": "trec-mq-2008/prels.tar.gz"
   }
@@ -1138,11 +1197,13 @@
   },
   "trec-pm-2017/queries": {
     "url": "https://trec.nist.gov/data/precmed/topics2017.xml",
+    "irds_mirror": true,
     "expected_md5": "16d69bf9119aaaf4b8545c24dde4156d",
     "cache_path": "trec-pm-2017/queries.xml"
   },
   "trec-pm-2017/qrels": {
     "url": "https://trec.nist.gov/data/precmed/qrels-final-abstracts.txt",
+    "irds_mirror": true,
     "expected_md5": "0a302cb9cd580709d9e3db9881a25d47",
     "cache_path": "trec-pm-2017/qrels"
   },
@@ -1153,6 +1214,7 @@
   },
   "trec-pm-2018/qrels": {
     "url": "https://trec.nist.gov/data/precmed/qrels-treceval-abstracts-2018-v2.txt",
+    "irds_mirror": true,
     "expected_md5": "a09754dec58ee90458ff8e0e7f2cb934",
     "cache_path": "trec-pm-2018/qrels"
   }
@@ -1211,6 +1273,7 @@
   },
   "trec-dl-2019/qrels": {
     "url": "https://trec.nist.gov/data/deep/2019qrels-docs.txt",
+    "irds_mirror": true,
     "expected_md5": "d7ef53b995ef7e01676ea85d7ec01dda",
     "cache_path": "trec-dl-2019/qrels"
   },
@@ -1231,6 +1294,7 @@
   },
   "trec-dl-2020/qrels": {
     "url": "https://trec.nist.gov/data/deep/2020qrels-docs.txt",
+    "irds_mirror": true,
     "expected_md5": "e10f3545583b124a4ed5e7992293e15a",
     "cache_path": "trec-dl-2020/qrels"
   },
@@ -1301,6 +1365,7 @@
   },
   "trec-dl-2019/qrels": {
     "url": "https://trec.nist.gov/data/deep/2019qrels-pass.txt",
+    "irds_mirror": true,
     "expected_md5": "2f4be390198da108f6845c822e5ada14",
     "cache_path": "trec-dl-2019/qrels"
   },
@@ -1323,6 +1388,7 @@
   },
   "trec-dl-2020/qrels": {
     "url": "https://trec.nist.gov/data/deep/2020qrels-pass.txt",
+    "irds_mirror": true,
     "expected_md5": "0355ccee7509ac0463e8278186cdd8d1",
     "cache_path": "trec-dl-2020/qrels"
   },
@@ -1700,11 +1766,13 @@
   },
   "trec-core-2017/queries": {
     "url": "https://trec.nist.gov/data/core/core_nist.txt",
+    "irds_mirror": true,
     "expected_md5": "821f8eaaf11ae3ce9657d1442749480a",
     "cache_path": "trec-core-2017/queries.txt"
   },
   "trec-core-2017/qrels": {
     "url": "https://trec.nist.gov/data/core/qrels.txt",
+    "irds_mirror": true,
     "expected_md5": "8cf8dcafba6557e5ee62a28a44b0314d",
     "cache_path": "trec-core-2017/qrels"
   }
@@ -1768,26 +1836,31 @@
   },
   "trec-cds-2014/qrels": {
     "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2014.txt",
+    "irds_mirror": true,
     "expected_md5": "07c8f85a7b7bcfd4211301ecaa3b4769",
     "cache_path": "trec-cds-2014/qrels"
   },
   "trec-cds-2015/queries": {
     "url": "https://trec.nist.gov/data/clinical/topics-2015-A.xml",
+    "irds_mirror": true,
     "expected_md5": "462d9804257e7ad0128f16324c9ec06d",
     "cache_path": "trec-cds-2015/queries.xml"
   },
   "trec-cds-2015/qrels": {
     "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2015.txt",
+    "irds_mirror": true,
     "expected_md5": "7bbe901cfa36df56dd13cce0275c1a2b",
     "cache_path": "trec-cds-2015/qrels"
   },
   "trec-cds-2016/queries": {
     "url": "https://trec.nist.gov/data/clinical/topics2016.xml",
+    "irds_mirror": true,
     "expected_md5": "22ccb3412931efe1ea084330737e41bc",
     "cache_path": "trec-cds-2016/queries.xml"
   },
   "trec-cds-2016/qrels": {
     "url": "https://trec.nist.gov/data/clinical/qrels-treceval-2016.txt",
+    "irds_mirror": true,
     "expected_md5": "1a450d38137082e214c1201a3023a6d1",
     "cache_path": "trec-cds-2016/qrels"
   }
@@ -1801,21 +1874,25 @@
   },
   "ar2001/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/arabic_topics.txt",
+    "irds_mirror": true,
     "expected_md5": "a3d78c379056a080fe40a59a341496b8",
     "cache_path": "ar2001/queries"
   },
   "ar2001/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/xlingual_t10qrels.txt",
+    "irds_mirror": true,
     "expected_md5": "5951e2f0bf72df9f93fc32b93e3a7fde",
     "cache_path": "ar2001/qrels"
   },
   "ar2002/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/CL.topics.arabic.trec11.txt",
+    "irds_mirror": true,
     "expected_md5": "f75a6164d794bab66509f1e818612363",
     "cache_path": "ar2002/queries"
   },
   "ar2002/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/qrels.trec11.xlingual.txt",
+    "irds_mirror": true,
     "expected_md5": "40f25e1e98101e27d081685cbdc390ef",
     "cache_path": "ar2002/qrels"
   }
@@ -1829,21 +1906,25 @@
   },
   "trec5/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/topics.CH1-CH28.chinese.english.gz",
+    "irds_mirror": true,
     "expected_md5": "9ce885d36e8642d4114f40e7008e5b8a",
     "cache_path": "trec5/queries.gz"
   },
   "trec5/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/qrels.1-28.chinese.gz",
+    "irds_mirror": true,
     "expected_md5": "73693083d75ef323fca2a218604b41ac",
     "cache_path": "trec5/qrels.gz"
   },
   "trec6/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/topics.CH29-CH54.chinese.english.gz",
+    "irds_mirror": true,
     "expected_md5": "c3a58ec59e55c162fdc3e3a9c5e9b8a7",
     "cache_path": "trec6/queries.gz"
   },
   "trec6/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/qrels.trec6.29-54.chinese.gz",
+    "irds_mirror": true,
     "expected_md5": "675ab2f14fad9017d646d052c0b35c46",
     "cache_path": "trec6/qrels.gz"
   }
@@ -1857,21 +1938,25 @@
   },
   "trec3/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/topics.SP1-SP25.spanish.english.gz",
+    "irds_mirror": true,
     "expected_md5": "22eea4a5c131db9cc4a431235f6a0573",
     "cache_path": "trec3/queries.gz"
   },
   "trec3/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/qrels.1-25.spanish.gz",
+    "irds_mirror": true,
     "expected_md5": "e1703487f43fb7ea30b87a0f14ccb5ce",
     "cache_path": "trec3/qrels.gz"
   },
   "trec4/queries": {
     "url": "https://trec.nist.gov/data/topics_noneng/topics.SP26-SP50.spanish.english.gz",
+    "irds_mirror": true,
     "expected_md5": "dfd9685cce559e33ab397c1878a6a1f8",
     "cache_path": "trec4/querie.gz"
   },
   "trec4/qrels": {
     "url": "https://trec.nist.gov/data/qrels_noneng/qrels.26-50.spanish.gz",
+    "irds_mirror": true,
     "expected_md5": "f2540f9fb83433ca8ef9503671136498",
     "cache_path": "trec4/qrels.gz"
   }
@@ -1898,15 +1983,18 @@
 "trec-robust04": {
   "docs": {
     "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
+    "irds_mirror": true,
     "cache_path": "trec45"
   },
   "queries": {
     "url": "https://trec.nist.gov/data/robust/04.testset.gz",
+    "irds_mirror": true,
     "expected_md5": "5eac3d774a2f87da61c08a94f945beff",
     "cache_path": "queries.gz"
   },
   "qrels": {
     "url": "https://trec.nist.gov/data/robust/qrels.robust2004.txt",
+    "irds_mirror": true,
     "expected_md5": "123c2a0ba2ec31178cb1050995dcfdfa",
     "cache_path": "qrels"
   }
@@ -1929,21 +2017,25 @@
   },
   "trec-mb-2013/queries": {
     "url": "https://trec.nist.gov/data/microblog/2013/topics.MB111-170.txt",
+    "irds_mirror": true,
     "expected_md5": "0b78d99dfa2d655dca7e9f138a93c21a",
     "cache_path": "trec-mb-2013/queries.txt"
   },
   "trec-mb-2013/qrels": {
     "url": "https://trec.nist.gov/data/microblog/2013/qrels.txt",
+    "irds_mirror": true,
     "expected_md5": "4776a5dfd80b3f675184315ec989c02f",
     "cache_path": "trec-mb-2013/qrels"
   },
   "trec-mb-2014/queries": {
     "url": "https://trec.nist.gov/data/microblog/2014/topics.desc.MB171-225.txt",
+    "irds_mirror": true,
     "expected_md5": "e9d520f976176e710fd68bb3a065a3e7",
     "cache_path": "trec-mb-2014/queries.txt"
   },
   "trec-mb-2014/qrels": {
     "url": "https://trec.nist.gov/data/microblog/2014/qrels2014.txt",
+    "irds_mirror": true,
     "expected_md5": "68d9a1920b244f6ccdc687ee1d473214",
     "cache_path": "trec-mb-2014/qrels"
   }
@@ -1965,41 +2057,49 @@
   },
   "trec-core-2018/queries": {
     "url": "https://trec.nist.gov/data/core/topics2018.txt",
+    "irds_mirror": true,
     "expected_md5": "1b11276f0e1badd68347884664816654",
     "cache_path": "trec-core-2018/queries.txt"
   },
   "trec-core-2018/qrels": {
     "url": "https://trec.nist.gov/data/core/qrels2018.txt",
+    "irds_mirror": true,
     "expected_md5": "7a982cd110f8bb30da4141f0f639f2e1",
     "cache_path": "trec-core-2018/qrels"
   },
   "trec-news-2018/queries": {
     "url": "https://trec.nist.gov/data/news/2018/newsir18-topics.txt",
+    "irds_mirror": true,
     "expected_md5": "73740793543b439d1ff1b8ee9359973a",
     "cache_path": "trec-news-2018/queries.txt"
   },
   "trec-news-2018/qrels": {
     "url": "https://trec.nist.gov/data/news/2018/bqrels.exp-gains.txt",
+    "irds_mirror": true,
     "expected_md5": "396963175006cb3201ea7c16e874033a",
     "cache_path": "trec-news-2018/qrels"
   },
   "trec-news-2019/queries": {
     "url": "https://trec.nist.gov/data/news/2019/newsir19-background-linking-topics.xml",
+    "irds_mirror": true,
     "expected_md5": "388b5c96f8962da17eb1024b856d21c1",
     "cache_path": "trec-news-2019/queries.txt"
   },
   "trec-news-2019/qrels": {
     "url": "https://trec.nist.gov/data/news/2019/newsir19-qrels-background.txt",
+    "irds_mirror": true,
     "expected_md5": "7b839a1a94e349d3facf28012542cc1d",
     "cache_path": "trec-news-2019/qrels"
   },
   "trec-news-2020/queries": {
     "url": "https://trec.nist.gov/data/news/2020/newsir20-topics.txt",
+    "irds_mirror": true,
     "expected_md5": "2674538a07fb7ac29200cbc4c4a05404",
     "cache_path": "trec-news-2020/queries.txt"
   },
   "trec-news-2020/qrels": {
     "url": "https://trec.nist.gov/data/news/2020/qrels.background",
+    "irds_mirror": true,
     "expected_md5": "7c31f731775bdd4148d349df1a9e43fc",
     "cache_path": "trec-news-2020/qrels"
   }
