@@ -11,14 +11,7 @@ Associated Press Worldstream News Service.
 </ul>
 '
   docs_instructions: &inst "docs available from LDC"
-  bibtex: |
-    @misc{LDC2001T55,
-      title={The AQUAINT Corpus of English News Text},
-      author={David Graff},
-      year={2002},
-      url={https://catalog.ldc.upenn.edu/LDC2002T31},
-      publisher={Linguistic Data Consortium}
-    }
+  bibtex_ids: ['Graff2002Aquaint']
   data_access: '
 <p>
 To use this dataset, you need a copy of the source corpus, provided by the the
@@ -53,11 +46,5 @@ The TREC Robust 2005 dataset. Contains a subset of 50 "hard" queries from
 <li>See also: <a class="ds-ref">trec-robust04</a></li>
 </ul>
 '
+  bibtex_ids: ['Voorhees2005Robust', 'Graff2002Aquaint']
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Voorhees2005Robust,
-      title={Overview of the TREC 2005 Robust Retrieval Track},
-      author={Ellen M. Voorhees},
-      booktitle={TREC},
-      year={2005}
-    }

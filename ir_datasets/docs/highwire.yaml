@@ -30,13 +30,7 @@ The TREC Genomics Track 2006 benchmark. Contains 28 queries with passage-level r
 <li><a href="https://trec.nist.gov/pubs/trec15/papers/GEO06.OVERVIEW.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Hersh2006TrecGenomics,
-      title={TREC 2006 Genomics Track Overview},
-      author={William Hersh and Aaron M. Cohen and Phoebe Roberts and Hari Krishna Rekapalli},
-      booktitle={TREC},
-      year={2006}
-    }
+  bibtex_ids: ['Hersh2006TrecGenomics']
 
 trec-genomics-2007:
   desc: '
@@ -51,10 +45,4 @@ The TREC Genomics Track 2007 benchmark. Contains 36 queries with passage-level r
 <li><a href="https://dmice.ohsu.edu/hersh/trec-07-genomics.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Hersh2007TrecGenomics,
-      title={TREC 2007 Genomics Track Overview},
-      author={William Hersh and Aaron Cohen and Lynn Ruslen and Phoebe Roberts},
-      booktitle={TREC},
-      year={2007}
-    }
+  bibtex_ids: ['Hersh2007TrecGenomics']

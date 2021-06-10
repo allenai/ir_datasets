@@ -16,13 +16,7 @@ to facilitate fast lookups and slices.
   <li><a href="https://cs.uwaterloo.ca/~jimmylin/publications/Sequiera_Lin_SIGIR2017.pdf">Information about dataset (paper)</a></li>
   <li><a href="https://github.com/castorini/Tweets2013-IA">Information about dataset (repository)</a></li>
 </ul>'
-  bibtex: |
-    @inproceedings{Sequiera2017Finally,
-      title={Finally, a Downloadable Test Collection of Tweets},
-      author={Royal Sequiera and Jimmy Lin},
-      booktitle={SIGIR},
-      year={2017}
-    }
+  bibtex_ids: ['Sequiera2017TweetsIA']
 
 
 trec-mb-2013:
@@ -35,13 +29,7 @@ TREC Microblog 2013 test collection.
 <li><a href="https://github.com/lintool/twitter-tools/wiki/TREC-2013-Track-Guidelines">Shared Task Site</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Lin2013Microblog,
-      title={Overview of the TREC-2013 Microblog Track},
-      author={Jimmy Lin and Miles Efron},
-      booktitle={TREC},
-      year={2013}
-    }
+  bibtex_ids: ['Lin2013Microblog', 'Sequiera2017TweetsIA']
 
 
 trec-mb-2014:
@@ -54,10 +42,4 @@ TREC Microblog 2014 test collection.
 <li><a href="https://github.com/lintool/twitter-tools/wiki/TREC-2014-Track-Guidelines">Shared Task Site</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Lin2014Microblog,
-      title={Overview of the TREC-2014 Microblog Track},
-      author={Jimmy Lin and Miles Efron and Yulu Wang and Garrick Sherman},
-      booktitle={TREC},
-      year={2014}
-    }
+  bibtex_ids: ['Lin2014Microblog', 'Sequiera2017TweetsIA']

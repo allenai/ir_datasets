@@ -20,13 +20,7 @@ realistic retrieval setting).
 <li>See also: <a class="ds-ref">dph-w100</a></li>
 </ul>
 '
-  bibtex: &nq |
-    @article{Kwiatkowski2019NQ,
-      title = {Natural Questions: a Benchmark for Question Answering Research},
-      author = {Tom Kwiatkowski and Jennimaria Palomaki and Olivia Redfield and Michael Collins and Ankur Parikh and Chris Alberti and Danielle Epstein and Illia Polosukhin and Matthew Kelcey and Jacob Devlin and Kenton Lee and Kristina N. Toutanova and Llion Jones and Ming-Wei Chang and Andrew Dai and Jakob Uszkoreit and Quoc Le and Slav Petrov},
-      year = {2019},
-      journal = {TACL}
-    }
+  bibtex_ids: ['Kwiatkowski2019Nq']
 
 train:
   desc: '
@@ -34,7 +28,7 @@ train:
 Official train set.
 </p>
 '
-  bibtex: *nq
+  bibtex_ids: ['Kwiatkowski2019Nq']
 
 dev:
   desc: '
@@ -42,4 +36,4 @@ dev:
 Official dev set.
 </p>
 '
-  bibtex: *nq
+  bibtex_ids: ['Kwiatkowski2019Nq']

@@ -11,16 +11,7 @@ Uses data from <a href="https://catalog.ldc.upenn.edu/LDC2008T19">LDC2008T19</a>
 collection can be downloaded from the LDC.
 </p>'
   docs_instructions: &inst "docs available from LDC"
-  bibtex: |
-    @article{sandhaus2008nyt,
-      title={The new york times annotated corpus},
-      author={Sandhaus, Evan},
-      journal={Linguistic Data Consortium, Philadelphia},
-      volume={6},
-      number={12},
-      pages={e26752},
-      year={2008}
-    }
+  bibtex_ids: ['Sandhaus2008Nyt']
   data_access: '
 <p>
 To use this dataset, you need a copy of the source corpus, provided by the the
@@ -55,13 +46,7 @@ Note that this dataset only contains the 50 queries assessed by NIST.
 <li><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-CC.pdf">Shared Task Paper</a></li>
 <ul>'
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{allan2017treccore,
-      author = {James Allan and Donna Harman and Evangelos Kanoulas and Dan Li and Christophe Van Gysel and Ellen Vorhees},
-      title = {TREC 2017 Common Core Track Overview},
-      booktitle = {TREC},
-      year = {2017}
-    }
+  bibtex_ids: ['Allan2017TrecCore', 'Sandhaus2008Nyt']
 
 wksup:
   desc: '
@@ -77,13 +62,7 @@ in cases where training data is in short supply.
   docs_instructions: *inst
   queries_instructions: &inst_queries "queries available from LDC"
   qrels_instructions: &inst_qrels "qrels available from LDC"
-  bibtex: |
-    @inproceedings{macavaney:sigir2019-nyt,
-      author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
-      title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
-      booktitle = {SIGIR},
-      year = {2019}
-    }
+  bibtex_ids: ['MacAvaney2019Wksup', 'Sandhaus2008Nyt']
 
 wksup/train:
   desc: '
@@ -94,13 +73,7 @@ from NYT corpus.
   docs_instructions: *inst
   queries_instructions: *inst_queries
   qrels_instructions: *inst_qrels
-  bibtex: |
-    @inproceedings{macavaney:sigir2019-nyt,
-      author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
-      title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
-      booktitle = {SIGIR},
-      year = {2019}
-    }
+  bibtex_ids: ['MacAvaney2019Wksup', 'Sandhaus2008Nyt']
 
 wksup/valid:
   desc: '
@@ -111,10 +84,4 @@ Held-out validation set for transferring relevance signals from NYT corpus (see
   docs_instructions: *inst
   queries_instructions: *inst_queries
   qrels_instructions: *inst_qrels
-  bibtex: |
-    @inproceedings{macavaney:sigir2019-nyt,
-      author = {MacAvaney, Sean and Yates, Andrew and Hui, Kai and Frieder, Ophir},
-      title = {Content-Based Weak Supervision for Ad-Hoc Re-Ranking},
-      booktitle = {SIGIR},
-      year = {2019}
-    }
+  bibtex_ids: ['MacAvaney2019Wksup', 'Sandhaus2008Nyt']

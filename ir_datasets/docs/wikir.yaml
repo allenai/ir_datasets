@@ -10,19 +10,7 @@ A suite of IR benchmarks in multiple languages built from Wikipeida.
 <li><a href="https://github.com/getalp/wikIR">GitHub Repository</a></li>
 </ul>
 '
-  bibtex: &bib |
-    @inproceedings{Frej2020WIKIRAP,
-      title={WIKIR: A Python toolkit for building a large-scale Wikipedia-based English Information Retrieval Dataset},
-      author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
-      booktitle={LREC},
-      year={2020}
-    }
-    @inproceedings{Frej2020MLWIKIRAP,
-      title={MLWIKIR: A Python Toolkit for Building Large-scale Wikipedia-based Information Retrieval Datasets in Chinese, English, French, Italian, Japanese, Spanish and More},
-      author={Jibril Frej and Didier Schwab and Jean-Pierre Chevallet},
-      booktitle={CIRCLE},
-      year={2020}
-    }
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en1k:
   desc: '
@@ -30,7 +18,7 @@ en1k:
 A small version of WikIR for English.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en1k/training:
   desc: '
@@ -38,7 +26,7 @@ en1k/training:
 Training set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en1k/validation:
   desc: '
@@ -46,7 +34,7 @@ en1k/validation:
 Validation set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en1k/test:
   desc: '
@@ -54,7 +42,7 @@ en1k/test:
 Test set of <a class="ds-ref">wikir/en1k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 
 en59k:
@@ -63,7 +51,7 @@ en59k:
 WikIR for English.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en59k/training:
   desc: '
@@ -71,7 +59,7 @@ en59k/training:
 Training set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en59k/validation:
   desc: '
@@ -79,7 +67,7 @@ en59k/validation:
 Validation set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 en59k/test:
   desc: '
@@ -87,7 +75,7 @@ en59k/test:
 Test set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 
 fr14k:
@@ -96,7 +84,7 @@ fr14k:
 WikIR for French.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 fr14k/training:
   desc: '
@@ -104,7 +92,7 @@ fr14k/training:
 Training set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 fr14k/validation:
   desc: '
@@ -112,7 +100,7 @@ fr14k/validation:
 Validation set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 fr14k/test:
   desc: '
@@ -120,7 +108,7 @@ fr14k/test:
 Test set of <a class="ds-ref">wikir/fr14k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 
 es13k:
@@ -129,7 +117,7 @@ es13k:
 WikIR for Spanish.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 es13k/training:
   desc: '
@@ -137,7 +125,7 @@ es13k/training:
 Training set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 es13k/validation:
   desc: '
@@ -145,7 +133,7 @@ es13k/validation:
 Validation set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 es13k/test:
   desc: '
@@ -153,7 +141,7 @@ es13k/test:
 Test set of <a class="ds-ref">wikir/es13k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 
 it16k:
@@ -162,7 +150,7 @@ it16k:
 WikIR for Italian.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 it16k/training:
   desc: '
@@ -170,7 +158,7 @@ it16k/training:
 Training set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 it16k/validation:
   desc: '
@@ -178,7 +166,7 @@ it16k/validation:
 Validation set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 it16k/test:
   desc: '
@@ -186,4 +174,4 @@ it16k/test:
 Test set of <a class="ds-ref">wikir/it16k</a>. Scoreddocs are the provided BM25 run.
 </p>
 '
-  bibtex: *bib
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']

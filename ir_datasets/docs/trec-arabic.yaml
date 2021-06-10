@@ -10,14 +10,7 @@ Document collection from <a href="https://catalog.ldc.upenn.edu/LDC2001T55">LDC2
 </p>
 '
   docs_instructions: &inst "docs available from LDC"
-  bibtex: |
-    @misc{LDC2001T55,
-      title={Arabic Newswire Part 1 LDC2001T55},
-      author={Graff, David, and Walker, Kevin},
-      year={2001},
-      url={https://catalog.ldc.upenn.edu/LDC2001T55},
-      publisher={Linguistic Data Consortium}
-    }
+  bibtex_ids: ['Graff2001Arabic']
   data_access: '
 <p>
 To use this dataset, you need a copy of the source corpus, provided by the the
@@ -46,13 +39,7 @@ Arabic benchmark from TREC 2001.
 <li><a href="https://trec.nist.gov/pubs/trec10/papers/clirtrack.pdf">Task Overview Paper</a></li>
 </ul>'
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{gey2001arabic,
-      title={The TREC-2001 Cross-Language Information Retrieval Track: Searching Arabic using English, French or Arabic Queries},
-      author={Fredric Gey and Douglas Oard},
-      booktitle={TREC},
-      year={2001}
-    }
+  bibtex_ids: ['Gey2001Arabic', 'Graff2001Arabic']
 
 ar2002:
   desc: '
@@ -63,10 +50,4 @@ Arabic benchmark from TREC 2002.
 <li><a href="https://trec.nist.gov/pubs/trec11/papers/OVERVIEW.gey.ps.gz">Task Overview Paper</a></li>
 </ul>'
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{gey2002arabic,
-      title={The TREC-2002 Arabic/English CLIR Track},
-      author={Fredric Gey and Douglas Oard},
-      booktitle={TREC},
-      year={2002}
-    }
+  bibtex_ids: ['Gey2002Arabic', 'Graff2001Arabic']

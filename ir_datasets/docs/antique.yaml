@@ -11,19 +11,14 @@ Webscope L6."
   <li><a href="https://arxiv.org/abs/1905.08957">Dataset Paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Hashemi2020Antique,
-      title={ANTIQUE: A Non-Factoid Question Answering Benchmark},
-      author={Helia Hashemi and Mohammad Aliannejadi and Hamed Zamani and Bruce Croft},
-      booktitle={ECIR},
-      year={2020}
-    }
+  bibtex_ids: ['Hashemi2020Antique']
 
 train:
   desc: '
 <p>
 Official train set of the ANTIQUE dataset.
 </p>'
+  bibtex_ids: ['Hashemi2020Antique']
 
 
 train/split200-train:
@@ -32,6 +27,7 @@ train/split200-train:
 <a class="ds-ref">antique/train</a> without the 200 queries used by
 <a class="ds-ref">antique/train/split200-valid</a>.
 </p>'
+  bibtex_ids: ['Hashemi2020Antique']
 
 
 train/split200-valid:
@@ -40,6 +36,7 @@ train/split200-valid:
 A held-out subset of 200 queries from <a class="ds-ref">antique/train</a>. Use in conjunction with
 <a class="ds-ref">antique/train/split200-train</a>.
 </p>'
+  bibtex_ids: ['Hashemi2020Antique']
 
 
 test:
@@ -47,6 +44,7 @@ test:
 <p>
 Official test set of the ANTIQUE dataset.
 </p>'
+  bibtex_ids: ['Hashemi2020Antique']
 
 
 test/non-offensive:
@@ -55,3 +53,4 @@ test/non-offensive:
 <a class="ds-ref">antique/test</a> without a set of queries deemed by the authors of ANTIQUE to be
 "offensive (and noisy)."
 </p>'
+  bibtex_ids: ['Hashemi2020Antique']

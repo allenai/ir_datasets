@@ -68,13 +68,7 @@ for the provided articles.
 <li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-News.pdf">Sared task paper</a></li>
 <ul>'
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Soboroff2018News,
-      title={TREC 2018 News Track Overview},
-      author={Ian Soboroff and Shudong Huang and Donna Harman},
-      booktitle={TREC},
-      year={2018}
-    }
+  bibtex_ids: ['Soboroff2018News']
 
 v2/trec-news-2019:
   desc: '
@@ -88,13 +82,7 @@ for the provided articles.
 <li><a href="https://trec.nist.gov/pubs/trec28/papers/OVERVIEW.N.pdf">Sared task paper</a></li>
 <ul>'
   docs_instructions: *inst
-  bibtex: |
-    @inproceedings{Soboroff2019News,
-      title={TREC 2019 News Track Overview},
-      author={Ian Soboroff and Shudong Huang and Donna Harman},
-      booktitle={TREC},
-      year={2019}
-    }
+  bibtex_ids: ['Soboroff2019News']
 
 v3/trec-news-2020:
   desc: '

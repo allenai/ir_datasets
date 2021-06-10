@@ -32,13 +32,7 @@ The TREC Genomics Track 2004 benchmark. Contains 50 queries with article-level r
 <li><a href="https://trec.nist.gov/pubs/trec13/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Hersh2004TrecGenomics,
-      title={TREC 2004 Genomics Track Overview},
-      author={William R. Hersh and Ravi Teja Bhuptiraju and Laura Ross and Phoebe Johnson and Aaron M. Cohen and Dale F. Kraemer},
-      booktitle={TREC},
-      year={2004}
-    }
+  bibtex_ids: ['Hersh2004TrecGenomics']
 
 trec-genomics-2005:
   desc: '
@@ -53,13 +47,7 @@ The TREC Genomics Track 2005 benchmark. Contains 36 queries with passage-level r
 <li><a href="https://trec.nist.gov/pubs/trec14/papers/GEO.OVERVIEW.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Hersh2005TrecGenomics,
-      title={TREC 2005 Genomics Track Overview},
-      author={William Hersh and Aaron Cohen and Jianji Yang and Ravi Teja Bhupatiraju and Phoebe Roberts and Marti Hearst},
-      booktitle={TREC},
-      year={2007}
-    }
+  bibtex_ids: ['Hersh2005TrecGenomics']
 
 2017:
   desc: '
@@ -86,13 +74,7 @@ The TREC Precision Medicine (PM) Track 2017 benchmark. Contains 30 queries conta
 <li><a href="https://trec.nist.gov/pubs/trec26/papers/Overview-PM.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Roberts2017TrecPm,
-      title={Overview of the TREC 2017 Precision Medicine Track},
-      author={Kirk Roberts and Dina Demner-Fushman and Ellen M. Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar and Shubham Pant},
-      booktitle={TREC},
-      year={2017}
-    }
+  bibtex_ids: ['Roberts2017TrecPm']
 
 trec-pm-2018:
   desc: '
@@ -107,10 +89,4 @@ The TREC Precision Medicine (PM) Track 2018 benchmark. Contains 50 queries conta
 <li><a href="https://trec.nist.gov/pubs/trec27/papers/Overview-PM.pdf">Shared task paper</a></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{Roberts2018TrecPm,
-      title={Overview of the TREC 2018 Precision Medicine Track},
-      author={Kirk Roberts and Dina Demner-Fushman and Ellen M. Voorhees and William R. Hersh and Steven Bedrick and Alexander J. Lazar},
-      booktitle={TREC},
-      year={2018}
-    }
+  bibtex_ids: ['Roberts2018TrecPm']

@@ -204,8 +204,7 @@ dataset, its available subsets, and what data they provide.
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset
-can be found on the [datasets documentation page](https://ir-datasets.com/),
-or in the python interface via `dataset.documentation()['bibtex']` (when available).
+can be found on the [datasets documentation page](https://ir-datasets.com/).
 
 If you use this tool, please cite [our SIGIR resource paper](https://arxiv.org/pdf/2103.02280.pdf):
 

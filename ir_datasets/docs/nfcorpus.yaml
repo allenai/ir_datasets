@@ -12,15 +12,7 @@ documents (written in a complex terminology-heavy language), mostly from PubMed.
 <li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li>
 </ul>
 '
-  bibtex: |
-    @inproceedings{boteva16full,
-      title="A Full-Text Learning to Rank Dataset for Medical Information Retrieval",
-      author = "Vera Boteva and Demian Gholipour and Artem Sokolov and Stefan Riezler",
-      booktitle = "Proceedings of the European Conference on Information Retrieval ({ECIR})",
-      location = "Padova, Italy",
-      publisher = "Springer",
-      year = 2016
-    }
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 train:
   desc: '
@@ -28,6 +20,7 @@ train:
 Official train set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 train/nontopic:
   desc: '
@@ -35,6 +28,7 @@ train/nontopic:
 Official train set, filtered to exclude queries from topic pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 train/video:
   desc: '
@@ -42,6 +36,7 @@ train/video:
 Official train set, filtered to only include queries from video pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 dev:
   desc: '
@@ -49,6 +44,7 @@ dev:
 Official dev set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 dev/nontopic:
   desc: '
@@ -56,6 +52,7 @@ dev/nontopic:
 Official dev set, filtered to exclude queries from topic pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 dev/video:
   desc: '
@@ -63,6 +60,7 @@ dev/video:
 Official dev set, filtered to only include queries from video pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 test:
   desc: '
@@ -70,6 +68,7 @@ test:
 Official test set. Queries include both title and combinted "all" text field (titles, descriptions, topics, transcripts and comments)
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 test/nontopic:
   desc: '
@@ -77,6 +76,7 @@ test/nontopic:
 Official test set, filtered to exclude queries from topic pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']
 
 test/video:
   desc: '
@@ -84,3 +84,4 @@ test/video:
 Official test set, filtered to only include queries from video pages.
 </p>
 '
+  bibtex_ids: ['Boteva2016Nfcorpus']

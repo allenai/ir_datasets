@@ -18,13 +18,7 @@ agreements to be filed with NIST. See details <a href="https://trec.nist.gov/dat
 <li>See also: <a class="ds-ref">aquaint/trec-robust-2005</a></li>
 </ul>'
   docs_instructions: &inst "docs available from NIST"
-  bibtex: |
-    @inproceedings{Voorhees2004OverviewRobust,
-      title={Overview of the TREC 2004 Robust Retrieval Track},
-      author={Ellen Voorhees},
-      booktitle={TREC},
-      year={2004}
-    }
+  bibtex_ids: ['Voorhees2004Robust']
   data_access: '
 <p>
 To use this dataset, you need a copy of <a href="https://trec.nist.gov/data/cd45/index.html">TREC
@@ -57,34 +51,28 @@ fold1:
   desc: '
 <p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: &hustoncroft |
-    @inproceedings{Huston2014ACO,
-      title={A Comparison of Retrieval Models using Term Dependencies},
-      author={Samuel Huston and W. Bruce Croft},
-      booktitle={CIKM},
-      year={2014}
-    }
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold2:
   desc: '
 <p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: *hustoncroft
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold3:
   desc: '
 <p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: *hustoncroft
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold4:
   desc: '
 <p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: *hustoncroft
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold5:
   desc: '
 <p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
   docs_instructions: *inst
-  bibtex: *hustoncroft
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
