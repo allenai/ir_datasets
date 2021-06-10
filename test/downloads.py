@@ -82,7 +82,7 @@ class TestDownloads(unittest.TestCase):
                             self.output_data.append({})
                         except Exception as ex:
                             record['duration'] = time.time() - start
-                            record['result'] = 'FAIL'
+                            record['result'] = 'FAIL' if not data.get('irds_mirror') else 'FAIL_BUT_HAS_MIRROR'
                             record['fail_messagae'] = str(ex)
                             raise
             elif 'instructions' in data:
