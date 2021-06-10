@@ -27,6 +27,7 @@ scoreddocs are the top 100 results from Indri QL. These are used for the "re-ran
 </p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
 
 
 eval:
@@ -39,6 +40,7 @@ scoreddocs are the top 100 results from Indri QL. These are used for the "re-ran
 </p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
 
 
 orcas:
@@ -54,6 +56,7 @@ orcas:
 </ul>
 '
   bibtex_ids: ['Craswell2020Orcas']
+  official_measures: ['RR', 'nDCG']
 
 
 train:
@@ -66,6 +69,7 @@ scoreddocs are the top 100 results from Indri QL. These are used for the "re-ran
 </p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
 
 
 trec-dl-2019:
@@ -80,6 +84,7 @@ Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled fr
 </ul>
 '
   bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR', 'MAP']
 
 
 trec-dl-2019/judged:
@@ -89,6 +94,7 @@ Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including qu
 </p>
 '
   bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR', 'MAP']
 
 
 trec-dl-2020:
@@ -103,6 +109,7 @@ Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled fr
 </ul>
 '
   bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR', 'MAP']
 
 trec-dl-2020/judged:
   desc: '
@@ -111,6 +118,7 @@ Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including qu
 </p>
 '
   bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR', 'MAP']
 
 trec-dl-hard:
   desc: '
@@ -123,6 +131,7 @@ A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>
 </ul>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']
 
 trec-dl-hard/fold1:
   desc: '
@@ -131,6 +140,7 @@ Fold 1 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']
 
 trec-dl-hard/fold2:
   desc: '
@@ -139,6 +149,7 @@ Fold 2 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']
 
 trec-dl-hard/fold3:
   desc: '
@@ -147,6 +158,7 @@ Fold 3 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']
 
 trec-dl-hard/fold4:
   desc: '
@@ -155,6 +167,7 @@ Fold 4 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']
 
 trec-dl-hard/fold5:
   desc: '
@@ -163,3 +176,4 @@ Fold 5 of <a class="ds-ref">msmarco-document/trec-dl-hard</a>
 </p>
 '
   bibtex_ids: ['Mackie2021DlHard', 'Bajaj2016Msmarco']
+  official_measures: ['nDCG@10', 'RR(rel=2)']

@@ -73,6 +73,9 @@ pipeline(dataset.get_topics({query_field}))
         query_field = ''
         if len(self.dataset.queries_cls()._fields) > 2 and self.dataset.queries_cls()._fields[1] != 'query':
             query_field = f"'{self.dataset.queries_cls()._fields[1]}'"
+        measures = 'MAP, nDCG@20'
+        if 'official_measures' in self.dataset.documentation():
+            measures = ', '.join(self.dataset.documentation()['official_measures'])
         return Example(f'''
 import pyterrier as pt
 from pyterrier.measures import *
@@ -85,6 +88,6 @@ pt.Experiment(
     [pipeline],
     dataset.get_topics({query_field}),
     dataset.get_qrels(),
-    [MAP, nDCG@20]
+    [{measures}]
 )
 ''', message_html='You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.')
