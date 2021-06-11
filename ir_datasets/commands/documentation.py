@@ -116,9 +116,13 @@ def generate_dataset(dataset, dataset_id, bibliography):
         desc = documentation.get('desc', '<p><i>(no description provided)</i></p>')
         tags = []
         tags = ' '.join(f'<span class="tag tag-{t}" data-fields="{", ".join(c._fields)}">{t}</span>' for t, c in tags)
+        measures = ''
+        if 'official_measures' in documentation:
+            measures = ', '.join([f'<a href="https://ir-measur.es/en/latest/measures.html"><kbd>{m}</kbd></a>' for m in documentation['official_measures']])
+            measures = f'<p>Official evaluation measures: {measures}</p>'
         out.write(f'''
 <div class="desc">
-{desc}
+{desc}{measures}
 </div>
 ''')
         has_any = dataset.has_docs() or dataset.has_queries() or dataset.has_qrels() or dataset.has_docpairs() or dataset.has_scoreddocs() or 'bibtex_ids' in documentation

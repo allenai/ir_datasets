@@ -110,7 +110,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/dev"</span></kbd></h3>
 
 <div class="desc">
- <p> Official dev set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official dev set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/dev__queries">queries</a>
@@ -251,7 +251,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -311,7 +311,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/eval"</span></kbd></h3>
 
 <div class="desc">
- <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/eval__queries">queries</a>
@@ -456,7 +456,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/orcas"</span></kbd></h3>
 
 <div class="desc">
- <p> "ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries." </p> <ul> <li>Queries: From query log</li> <li>Relevance Data: User clicks</li> <li>Scored docs: Indri Query Likelihood model</li> <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li> </ul> 
+ <p> "ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries." </p> <ul> <li>Queries: From query log</li> <li>Relevance Data: User clicks</li> <li>Scored docs: Indri Query Likelihood model</li> <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/orcas__queries">queries</a>
@@ -597,7 +597,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="p">,</span> <span class="n">nDCG</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -657,7 +657,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/train"</span></kbd></h3>
 
 <div class="desc">
- <p> Official train set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official train set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/train__queries">queries</a>
@@ -798,7 +798,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -858,7 +858,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019"</span></kbd></h3>
 
 <div class="desc">
- <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> 
+ <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019__queries">queries</a>
@@ -1002,7 +1002,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1068,7 +1068,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019/judged"</span></kbd></h3>
 
 <div class="desc">
- <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels. </p> 
+ <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__queries">queries</a>
@@ -1212,7 +1212,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1278,7 +1278,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020"</span></kbd></h3>
 
 <div class="desc">
- <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> 
+ <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2020__queries">queries</a>
@@ -1422,7 +1422,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1488,7 +1488,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020/judged"</span></kbd></h3>
 
 <div class="desc">
- <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels. </p> 
+ <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2020/judged__queries">queries</a>
@@ -1632,7 +1632,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1698,7 +1698,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard__queries">queries</a>
@@ -1842,7 +1842,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1874,7 +1874,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold1"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold1__queries">queries</a>
@@ -2018,7 +2018,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -2050,7 +2050,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold2"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold2__queries">queries</a>
@@ -2194,7 +2194,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -2226,7 +2226,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold3"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold3__queries">queries</a>
@@ -2370,7 +2370,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -2402,7 +2402,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold4"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold4__queries">queries</a>
@@ -2546,7 +2546,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -2578,7 +2578,7 @@
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold5"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold5__queries">queries</a>
@@ -2722,7 +2722,7 @@
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
