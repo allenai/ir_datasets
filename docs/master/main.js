@@ -101,9 +101,13 @@ $(document).ready(function() {
         toggleExamples(examples, $target);
     });
 });
-function toEmoji(test) {
+function toEmoji(test, result) {
     if (test) {
-        return '✅';
+        if (result === 'FAIL_BUT_HAS_MIRROR') {
+            return '❎';
+        } else {
+            return '✅';
+        }
     }
     return '❌';
 }
@@ -142,7 +146,7 @@ function generateDownloads(title, downloads) {
     var goodCount = 0;
     var totalCount = 0;
     $.each(downloads, function (i, dl) {
-        var good = dl.result === "PASS";
+        var good = dl.result === "PASS" || dl.result === 'FAIL_BUT_HAS_MIRROR';
         totalCount += 1;
         if (!good) {
             allGood = false;
@@ -150,7 +154,7 @@ function generateDownloads(title, downloads) {
             goodCount += 1;
         }
         $content.append($('<tr></tr>')
-            .append($('<td></td>').text(toEmoji(good)).attr('title', dl.result).css('text-align', 'center'))
+            .append($('<td></td>').text(toEmoji(good, dl.result)).attr('title', dl.result).css('text-align', 'center'))
             .append($('<td></td>').append($('<a></a>').attr('href', dl.url).text(dl.name)))
             .append($('<td></td>').text(toFileSize(dl.size)))
             .append($('<td></td>').text(toTime(dl.duration)))
