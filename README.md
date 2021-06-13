@@ -65,7 +65,9 @@ ir_datasets export msmarco-passage/train docs | head -n2
 **Automatically downloads source files** (when available). Will download and verify the source
 files for queries, documents, qrels, etc. when they are publicly available, as they are needed.
 A CI build checks weekly to ensure that all the downloadable content is available and correct:
-![Downloadable Content](https://github.com/allenai/ir_datasets/workflows/Downloadable%20Content/badge.svg)
+![Downloadable Content](https://github.com/allenai/ir_datasets/workflows/Downloadable%20Content/badge.svg).
+We mirror some troublesome files on [mirror.ir-datasets.com](https://mirror.ir-datasets.com/), and
+automatically switch to the mirror when the original source is not available.
 
 ```python
 import ir_datasets
