@@ -21,10 +21,36 @@ class BaseDownload:
         raise NotImplementedError()
 
 
-class RequestsDownload(BaseDownload):
+class GoogleDriveDownload(BaseDownload):
     def __init__(self, url, tries=None):
         self.url = url
         self.tries = tries
+
+    def stream(self):
+        # For Google Drive, we may get a "large file" warning that means we need to "confirm".
+        # This just involves pulling a cookie out of the response and adding it to the URL.
+        requests = ir_datasets.lazy_libs.requests()
+        http_args = {
+            'url': self.url,
+            'stream': True, # return the response as a stream, rather than loading it all into memory
+            'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
+            'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
+            'verify': os.environ.get('IR_DATASETS_DL_SIKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
+        }
+        url = self.url
+        with _logger.duration('Google Drive verification'), requests.get(**http_args) as response:
+            # Adapted from <https://github.com/huggingface/datasets/blob/d006e207d73ac2b65f5da2041f300f8f6a62e834/src/datasets/utils/file_utils.py#L594>
+            cookies = response.cookies
+            for k, v in response.cookies.items():
+                if k.startswith("download_warning"):
+                    url += "&confirm=" + v
+        return RequestsDownload(url, self.tries, cookies).stream()
+
+class RequestsDownload(BaseDownload):
+    def __init__(self, url, tries=None, cookies=None):
+        self.url = url
+        self.tries = tries
+        self.cookies = cookies
 
     @contextlib.contextmanager
     def stream(self):
@@ -39,6 +65,7 @@ class RequestsDownload(BaseDownload):
             'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
             'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
             'verify': os.environ.get('IR_DATASETS_DL_SIKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
+            'cookies': self.cookies,
         }
         done = False
         pbar = None
@@ -268,7 +295,10 @@ class _DownloadConfig:
                 local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it here '
                              f'to avoid downloading it again: {local_path}')
                 sources.append(LocalDownload(local_path, local_msg, mkdir=False))
-            sources.append(RequestsDownload(dlc['url']))
+            if dlc['url'].startswith('https://drive.google.com/'):
+                sources.append(GoogleDriveDownload(dlc['url']))
+            else:
+                sources.append(RequestsDownload(dlc['url']))
             if dlc.get('irds_mirror') and dlc.get('expected_md5'):
                 # this file has the irds mirror to fall back on
                 sources.append(RequestsDownload(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))
