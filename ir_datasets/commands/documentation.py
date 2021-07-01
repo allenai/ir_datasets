@@ -426,7 +426,7 @@ def generate_python_docs(out_dir, version):
 <h2 id="dataset">Dataset objects</h2>
 
 <p>
-Datasets can be obtained through <code>ir_datasts.load(<span class="str">"dataset-id"</span>)</code>
+Datasets can be obtained through <code>ir_datasets.load(<span class="str">"dataset-id"</span>)</code>
 or constructed with <code>ir_datasets.create_dataset(...)</code>. Dataset objects provide the
 following methods:
 </p>
@@ -717,7 +717,7 @@ of the python API live side-by-side.
 <h2 id="dataset">Dataset objects</h2>
 
 <p>
-Datasets can be obtained through <code>ir_datasts.load(<span class="str">"dataset-id"</span>)</code>
+Datasets can be obtained through <code>ir_datasets.load(<span class="str">"dataset-id"</span>)</code>
 or constructed with <code>ir_datasets.create_dataset(...)</code>. Dataset objects provide the
 following methods:
 </p>
