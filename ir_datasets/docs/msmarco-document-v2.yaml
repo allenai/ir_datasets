@@ -1,0 +1,84 @@
+_:
+  pretty_name: 'MSMARCO (document, version 2)'
+  desc: '
+  <p>
+Version 2 of the MS MARCO document ranking dataset. The corpus contains 12M documents (roughly 3x
+as many as version 1).
+</p>
+<ul>
+  <li>Version 1 of dataset: <a class="ds-ref">msmarco-document</a></li>
+  <li>Documents: Text extracted from web pages</li>
+  <li>Queries: Natural language questions (from query log)</li>
+  <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+</ul>'
+  bibtex_ids: ['Bajaj2016Msmarco']
+
+
+dev1:
+  desc: '
+<p>
+Official dev1 set with 4,552 queries.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+
+dev2:
+  desc: '
+<p>
+Official dev2 set with 5,000 queries.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+
+train:
+  desc: '
+<p>
+Official train set with 322,196 queries.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+
+
+trec-dl-2019:
+  desc: '
+<p>
+Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from
+<a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors,
+(filtered list available in <a class="ds-ref">msmarco-document-v2/trec-dl-2019/judged</a>).
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li>
+</ul>
+'
+  bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
+
+
+trec-dl-2019/judged:
+  desc: '
+<p>
+Subset of <a class="ds-ref">msmarco-document-v2/trec-dl-2019</a>, only including queries with qrels.
+</p>
+'
+  bibtex_ids: ['Craswell2019TrecDl', 'Bajaj2016Msmarco']
+
+
+trec-dl-2020:
+  desc: '
+<p>
+Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from
+<a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors,
+(filtered list available in <a class="ds-ref">msmarco-document-v2/trec-dl-2020/judged</a>).
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li>
+</ul>
+'
+  bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
+
+trec-dl-2020/judged:
+  desc: '
+<p>
+Subset of <a class="ds-ref">msmarco-document-v2/trec-dl-2020</a>, only including queries with qrels.
+</p>
+'
+  bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']

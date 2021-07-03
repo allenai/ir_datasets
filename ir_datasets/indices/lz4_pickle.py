@@ -94,7 +94,7 @@ class Lz4PickleIter:
 
 
 class Lz4PickleLookup:
-    def __init__(self, path, doc_cls, key_field, index_fields):
+    def __init__(self, path, doc_cls, key_field, index_fields, key_field_prefix=None):
         self._path = path
         self._key_field = key_field
         self._key_idx = doc_cls._fields.index(key_field)
@@ -107,6 +107,7 @@ class Lz4PickleLookup:
         self._pos_path = os.path.join(self._path, 'bin.pos')
         self._idx = None
         self._idx_path = os.path.join(self._path, f'idx.{safe_str(self._key_field)}')
+        self._key_field_prefix = key_field_prefix
 
         # check that the fields match
         meta_path = os.path.join(self._path, 'bin.meta')
@@ -164,6 +165,9 @@ class Lz4PickleLookup:
     def __getitem__(self, values):
         if isinstance(values, str):
             values = (values,)
+        # for removing long doc_id prefixes
+        if self._key_field_prefix:
+            values = [v[len(self._key_field_prefix):] for v in values if v.startswith(self._key_field_prefix)]
         poss = self.idx()[values]
         poss = sorted(poss) # go though the file in increasing order-- better for HDDs
         binf = None
@@ -243,16 +247,20 @@ class Lz4PickleTransaction:
         self.pos.add(bin_pos)
         for idx, field in zip(self.idxs, self.lookup._index_fields):
             value = getattr(record, field)
+            # remove long doc_id prefixes to cut down on storage
+            if field == self.lookup._key_field and self.lookup._key_field_prefix:
+                assert value.startswith(self.lookup._key_field_prefix)
+                value = value[len(self.lookup._key_field_prefix):]
             idx.add(value, bin_pos)
         _write_next(self.bin, record)
 
 
 class PickleLz4FullStore(Docstore):
-    def __init__(self, path, init_iter_fn, data_cls, lookup_field, index_fields):
+    def __init__(self, path, init_iter_fn, data_cls, lookup_field, index_fields, key_field_prefix=None):
         super().__init__(data_cls, lookup_field)
         self.path = path
         self.init_iter_fn = init_iter_fn
-        self.lookup = Lz4PickleLookup(path, data_cls, lookup_field, index_fields)
+        self.lookup = Lz4PickleLookup(path, data_cls, lookup_field, index_fields, key_field_prefix)
 
     def get_many_iter(self, keys):
         self.build()
