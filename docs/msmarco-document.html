@@ -91,14 +91,14 @@
 
 <a class="tab" target="msmarco-document__citation">Citation</a>
 <div id="msmarco-document__citation" class="tab-content">
-bibtex:
-<cite class="select">@inproceedings{Bajaj2016MSMA,
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Bajaj2016Msmarco,
   title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
   author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
   booktitle={InCoCo@NIPS},
   year={2016}
-}
-</cite>
+}</cite>
 </div>
 </div>
 </div>
@@ -108,7 +108,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/dev"</span></kbd></h3>
 
 <div class="desc">
- <p> Official dev set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official dev set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/dev__queries">queries</a>
@@ -249,7 +249,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -289,6 +289,18 @@ bibtex:
 <div class="ex-tab-content pyterrier">
 <p><i>No example available for PyTerrier</i></p></div></div>
 </div>
+
+<a class="tab" target="msmarco-document/dev__citation">Citation</a>
+<div id="msmarco-document/dev__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
+</div>
 </div>
 </div>
 
@@ -297,7 +309,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/eval"</span></kbd></h3>
 
 <div class="desc">
- <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official eval set for submission to MS MARCO leaderboard. Relevance judgments are hidden. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/eval__queries">queries</a>
@@ -422,6 +434,18 @@ bibtex:
 <div class="ex-tab-content pyterrier">
 <p><i>No example available for PyTerrier</i></p></div></div>
 </div>
+
+<a class="tab" target="msmarco-document/eval__citation">Citation</a>
+<div id="msmarco-document/eval__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
+</div>
 </div>
 </div>
 
@@ -430,7 +454,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/orcas"</span></kbd></h3>
 
 <div class="desc">
- <p> "ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries." </p> <ul> <li>Queries: From query log</li> <li>Relevance Data: User clicks</li> <li>Scored docs: Indri Query Likelihood model</li> <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li> </ul> 
+ <p> "ORCAS is a click-based dataset associated with the TREC Deep Learning Track. It covers 1.4 million of the TREC DL documents, providing 18 million connections to 10 million distinct queries." </p> <ul> <li>Queries: From query log</li> <li>Relevance Data: User clicks</li> <li>Scored docs: Indri Query Likelihood model</li> <li><a href="https://arxiv.org/abs/2006.05324">Dataset Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/orcas__queries">queries</a>
@@ -571,7 +595,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="p">,</span> <span class="n">nDCG</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -614,14 +638,14 @@ bibtex:
 
 <a class="tab" target="msmarco-document/orcas__citation">Citation</a>
 <div id="msmarco-document/orcas__citation" class="tab-content">
-bibtex:
-<cite class="select">@article{craswell2020orcas,
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Craswell2020Orcas}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Craswell2020Orcas,
   title={ORCAS: 18 Million Clicked Query-Document Pairs for Analyzing Search},
   author={Craswell, Nick and Campos, Daniel and Mitra, Bhaskar and Yilmaz, Emine and Billerbeck, Bodo},
   journal={arXiv preprint arXiv:2006.05324},
   year={2020}
-}
-</cite>
+}</cite>
 </div>
 </div>
 </div>
@@ -631,7 +655,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/train"</span></kbd></h3>
 
 <div class="desc">
- <p> Official train set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> 
+ <p> Official train set. All queries have exactly 1 (positive) relevance judgment. </p> <p> scoreddocs are the top 100 results from Indri QL. These are used for the "re-ranking" setting. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR@10</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/train__queries">queries</a>
@@ -772,7 +796,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">RR</span><span class="o">@</span><span class="mi">10</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -812,6 +836,18 @@ bibtex:
 <div class="ex-tab-content pyterrier">
 <p><i>No example available for PyTerrier</i></p></div></div>
 </div>
+
+<a class="tab" target="msmarco-document/train__citation">Citation</a>
+<div id="msmarco-document/train__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
+</div>
 </div>
 </div>
 
@@ -820,7 +856,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019"</span></kbd></h3>
 
 <div class="desc">
- <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> 
+ <p> Queries from the TREC Deep Learning (DL) 2019 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2019/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2003.07820.pdf">Shared Task Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019__queries">queries</a>
@@ -964,7 +1000,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1007,14 +1043,20 @@ bibtex:
 
 <a class="tab" target="msmarco-document/trec-dl-2019__citation">Citation</a>
 <div id="msmarco-document/trec-dl-2019__citation" class="tab-content">
-bibtex:
-<cite class="select">@inproceedings{Craswell2020OverviewOT,
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Craswell2019TrecDl,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Craswell2019TrecDl,
   title={Overview of the TREC 2019 deep learning track},
   author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
   booktitle={TREC 2019},
   year={2019}
 }
-</cite>
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -1024,7 +1066,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2019/judged"</span></kbd></h3>
 
 <div class="desc">
- <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels. </p> 
+ <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a>, only including queries with qrels. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2019/judged__queries">queries</a>
@@ -1168,7 +1210,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1208,6 +1250,24 @@ bibtex:
 <div class="ex-tab-content pyterrier">
 <p><i>No example available for PyTerrier</i></p></div></div>
 </div>
+
+<a class="tab" target="msmarco-document/trec-dl-2019/judged__citation">Citation</a>
+<div id="msmarco-document/trec-dl-2019/judged__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Craswell2019TrecDl,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Craswell2019TrecDl,
+  title={Overview of the TREC 2019 deep learning track},
+  author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos and Ellen Voorhees},
+  booktitle={TREC 2019},
+  year={2019}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
+</div>
 </div>
 </div>
 
@@ -1216,7 +1276,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020"</span></kbd></h3>
 
 <div class="desc">
- <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> 
+ <p> Queries from the TREC Deep Learning (DL) 2020 shared task, which were sampled from <a class="ds-ref">msmarco-document/eval</a>. A subset of these queries were judged by NIST assessors, (filtered list available in <a class="ds-ref">msmarco-document/trec-dl-2020/judged</a>). </p> <ul> <li><a href="https://arxiv.org/pdf/2102.07662.pdf">Shared Task Paper</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2020__queries">queries</a>
@@ -1360,7 +1420,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1403,14 +1463,20 @@ bibtex:
 
 <a class="tab" target="msmarco-document/trec-dl-2020__citation">Citation</a>
 <div id="msmarco-document/trec-dl-2020__citation" class="tab-content">
-bibtex:
-<cite class="select">@inproceedings{Craswell2021OverviewOT,
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Craswell2020TrecDl,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Craswell2020TrecDl,
   title={Overview of the TREC 2020 deep learning track},
   author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos},
   booktitle={TREC},
   year={2020}
 }
-</cite>
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -1420,7 +1486,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-2020/judged"</span></kbd></h3>
 
 <div class="desc">
- <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels. </p> 
+ <p> Subset of <a class="ds-ref">msmarco-document/trec-dl-2020</a>, only including queries with qrels. </p> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>MAP</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-2020/judged__queries">queries</a>
@@ -1564,7 +1630,7 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">,</span> <span class="n">MAP</span><span class="p">]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
@@ -1604,6 +1670,24 @@ bibtex:
 <div class="ex-tab-content pyterrier">
 <p><i>No example available for PyTerrier</i></p></div></div>
 </div>
+
+<a class="tab" target="msmarco-document/trec-dl-2020/judged__citation">Citation</a>
+<div id="msmarco-document/trec-dl-2020/judged__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Craswell2020TrecDl,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@inproceedings{Craswell2020TrecDl,
+  title={Overview of the TREC 2020 deep learning track},
+  author={Nick Craswell and Bhaskar Mitra and Emine Yilmaz and Daniel Campos},
+  booktitle={TREC},
+  year={2020}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
+</div>
 </div>
 </div>
 
@@ -1612,7 +1696,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard__queries">queries</a>
@@ -1756,10 +1840,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -1769,7 +1872,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold1"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold1__queries">queries</a>
@@ -1913,10 +2016,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold1__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard/fold1__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -1926,7 +2048,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold2"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold2__queries">queries</a>
@@ -2070,10 +2192,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold2__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard/fold2__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -2083,7 +2224,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold3"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold3__queries">queries</a>
@@ -2227,10 +2368,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold3__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard/fold3__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -2240,7 +2400,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold4"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold4__queries">queries</a>
@@ -2384,10 +2544,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold4__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard/fold4__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
@@ -2397,7 +2576,7 @@ bibtex:
 <h3><kbd class="ds-name select"><span class="str">"msmarco-document/trec-dl-hard/fold5"</span></kbd></h3>
 
 <div class="desc">
- <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> 
+ <p> A more challenging subset of <a class="ds-ref">msmarco-document/trec-dl-2019</a> and <a class="ds-ref">msmarco-document/trec-dl-2020</a>. </p> <ul> <li><a href="https://github.com/grill-lab/DL-Hard">data website</a></li> <li>See Also: <a class="ds-ref">msmarco-passage/trec-dl-hard</a></li> </ul> <p>Official evaluation measures: <a href="https://ir-measur.es/en/latest/measures.html"><kbd>nDCG@10</kbd></a>, <a href="https://ir-measur.es/en/latest/measures.html"><kbd>RR(rel=2)</kbd></a></p>
 </div>
 <div class="tabs">
 <a class="tab" target="msmarco-document/trec-dl-hard/fold5__queries">queries</a>
@@ -2541,10 +2720,29 @@ bibtex:
     <span class="p">[</span><span class="n">pipeline</span><span class="p">],</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">(),</span>
     <span class="n">dataset</span><span class="o">.</span><span class="n">get_qrels</span><span class="p">(),</span>
-    <span class="p">[</span><span class="n">MAP</span><span class="p">,</span> <span class="n">nDCG</span><span class="o">@</span><span class="mi">20</span><span class="p">]</span>
+    <span class="p">[</span><span class="n">nDCG</span><span class="o">@</span><span class="mi">10</span><span class="p">,</span> <span class="n">RR</span><span class="p">(</span><span class="n">rel</span><span class="o">=</span><span class="mi">2</span><span class="p">)]</span>
 <span class="p">)</span>
 </pre></div>
 <p>You can find more details about PyTerrier experiments <a href="https://pyterrier.readthedocs.io/en/latest/experiments.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="msmarco-document/trec-dl-hard/fold5__citation">Citation</a>
+<div id="msmarco-document/trec-dl-hard/fold5__citation" class="tab-content">
+<p><a href="ir_datasets.bib">ir_datasets.bib</a>:</p><cite class="select">\cite{Mackie2021DlHard,Bajaj2016Msmarco}</cite>
+<p>Bibtex:</p>
+<cite class="select">@article{Mackie2021DlHard,
+  title={How Deep is your Learning: the DL-HARD Annotated Deep Learning Dataset},
+  author={Iain Mackie and Jeffrey Dalton and Andrew Yates},
+  journal={ArXiv},
+  year={2021},
+  volume={abs/2105.07975}
+}
+@inproceedings{Bajaj2016Msmarco,
+  title={MS MARCO: A Human Generated MAchine Reading COmprehension Dataset},
+  author={Payal Bajaj, Daniel Campos, Nick Craswell, Li Deng, Jianfeng Gao, Xiaodong Liu, Rangan Majumder, Andrew McNamara, Bhaskar Mitra, Tri Nguyen, Mir Rosenberg, Xia Song, Alina Stoica, Saurabh Tiwary, Tong Wang},
+  booktitle={InCoCo@NIPS},
+  year={2016}
+}</cite>
 </div>
 </div>
 </div>
