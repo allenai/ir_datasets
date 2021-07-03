@@ -31,7 +31,6 @@ def main(args):
         if version:
             os.makedirs(f'{args.out_dir}/{version}', exist_ok=True)
 
-        generate_index(args.out_dir, version)
         generate_python_docs(args.out_dir, version)
         generate_cli_docs(args.out_dir, version)
         generate_redirect(args.out_dir, version, 'datasets.html', 'index.html')
@@ -48,6 +47,8 @@ def main(args):
             parent = name.split('/')[0]
             if parent != name:
                 top_level_map[parent].append((name, dataset))
+
+        generate_index(args.out_dir, version, top_level_map)
 
         bibliography = open('ir_datasets/docs/bibliography.bib', 'rt').read().split('\n\n')
         bibliography = {b.split('{')[1].split(',')[0]: b for b in bibliography}
@@ -299,7 +300,7 @@ def generate_data_format(cls):
 
 
 
-def generate_index(out_dir, version):
+def generate_index(out_dir, version, top_level_map):
     with page_template('index.html', out_dir, version, title='Catalog') as out:
         if version == 'master':
             install = '--upgrade git+https://github.com/allenai/ir_datasets.git'
@@ -311,19 +312,21 @@ def generate_index(out_dir, version):
             raise RuntimeError(f'unknown version {version}')
         index = []
         jump = []
-        for name in sorted(ir_datasets.registry):
-            dataset = ir_datasets.registry[name]
-            parent = name.split('/')[0]
-            if parent != name:
-                ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix"><span class="screen-small-hide">{parent}</span><span class="screen-small-show">&hellip;</span></span>{name[len(parent):]}</kbd></a>'
-                tbody = ''
-                row_id = ''
-            else:
-                ds_name = f'<a style="font-weight: bold;" href="{parent}.html"><kbd>{parent}</kbd></a></li>'
-                tbody = '</tbody><tbody>'
-                row_id = f' id="{parent}"'
-                jump.append(f'<option value="{parent}">{parent}</option>')
-            index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs", parent)}</td><td class="center">{emoji(dataset, "queries", parent)}</td><td class="center">{emoji(dataset, "qrels", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs", parent)}</td></tr>')
+        for top_level in sorted(top_level_map):
+            names = [top_level] + sorted(x[0] for x in top_level_map[top_level])
+            for name in names:
+                dataset = ir_datasets.registry[name]
+                parent = name.split('/')[0]
+                if parent != name:
+                    ds_name = f'<a href="{parent}.html#{name}"><kbd><span class="prefix"><span class="screen-small-hide">{parent}</span><span class="screen-small-show">&hellip;</span></span>{name[len(parent):]}</kbd></a>'
+                    tbody = ''
+                    row_id = ''
+                else:
+                    ds_name = f'<a style="font-weight: bold;" href="{parent}.html"><kbd>{parent}</kbd></a></li>'
+                    tbody = '</tbody><tbody>'
+                    row_id = f' id="{parent}"'
+                    jump.append(f'<option value="{parent}">{parent}</option>')
+                index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs", parent)}</td><td class="center">{emoji(dataset, "queries", parent)}</td><td class="center">{emoji(dataset, "qrels", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs", parent)}</td></tr>')
         index = '\n'.join(index)
         jump = '\n'.join(jump)
         out.write(f'''

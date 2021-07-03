@@ -1320,6 +1320,79 @@
   }
 },
 
+"msmarco-document-v2": {
+  "docs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco_v2_doc.tar",
+    "expected_md5": "eea90100409a254fdb157b8e4e349deb",
+    "cache_path": "msmarco_v2_doc.tar"
+  },
+  "train_queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_train_queries.tsv",
+    "expected_md5": "7821d8bef3971e12780a80a89a3e5cbd",
+    "cache_path": "train/queries.tsv"
+  },
+  "train_scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_train_top100.txt.gz",
+    "expected_md5": "b4d5915172d5f54bd23c31e966c114de",
+    "cache_path": "train/top100.trec.gz"
+  },
+  "train_qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_train_qrels.tsv",
+    "expected_md5": "2f788d031c2ca29c4c482167fa5966de",
+    "cache_path": "train/qrels"
+  },
+  "dev1_queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev_queries.tsv",
+    "expected_md5": "b05dc19f1d2b8ad729f189328a685aa1",
+    "cache_path": "dev1/queries.tsv"
+  },
+  "dev1_scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev_top100.txt.gz",
+    "expected_md5": "4dd27d511748bede545cd7ae3fc92bf4",
+    "cache_path": "dev1/top100.trec"
+  },
+  "dev1_qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev_qrels.tsv",
+    "expected_md5": "aad92d731892ccb0cf9c4c2e37e0f0f1",
+    "cache_path": "dev1/qrels"
+  },
+  "dev2_queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev2_queries.tsv",
+    "expected_md5": "f000319f1893a7acdd60fdcae0703b95",
+    "cache_path": "dev2/queries.tsv"
+  },
+  "dev2_scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev2_top100.txt.gz",
+    "expected_md5": "e03b5404e9027569c1aa794b1408d8a5",
+    "cache_path": "dev2/top100.trec"
+  },
+  "dev2_qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_dev2_qrels.tsv",
+    "expected_md5": "f2eead4b192683ae5fbd66f4d3f08b96",
+    "cache_path": "dev2/qrels"
+  },
+  "trec-dl-2019/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2019-queries.tsv.gz",
+    "expected_md5": "eda71eccbe4d251af83150abe065368c",
+    "cache_path": "trec-dl-2019/queries.tsv.gz"
+  },
+  "trec_dl_2019_qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_trec2019_qrels.txt.gz",
+    "expected_md5": "aa37367d6db77c63d1ee392de6d446e2",
+    "cache_path": "trec-dl-2019/qrels.gz"
+  },
+  "trec-dl-2020/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-test2020-queries.tsv.gz",
+    "expected_md5": "00a406fb0d14ed3752d70d1e4eb98600",
+    "cache_path": "trec-dl-2020/queries.tsv.gz"
+  },
+  "trec_dl_2020_qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_trec2020_qrels.txt.gz",
+    "expected_md5": "06a0a6f29621ee477a093d9dba8e5be9",
+    "cache_path": "trec-dl-2020/qrels.gz"
+  }
+},
+
 "msmarco-passage": {
   "collectionandqueries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
