@@ -180,13 +180,14 @@ def _cleanup_tmp(file):
 class Download:
     _dua_ctxt = deque([None])
 
-    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None, stream=False):
+    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None, stream=False, size_hint=None):
         self.mirrors = list(mirrors)
         self.expected_md5 = expected_md5
         self.dua = dua or self._dua_ctxt[-1]
         self._cache_path = cache_path
         self._stream = stream
         self._path = None
+        self._size_hint = size_hint
 
     def path(self):
         if self._path is not None:
@@ -209,6 +210,9 @@ class Download:
         errors = []
 
         Path(download_path).parent.mkdir(parents=True, exist_ok=True)
+
+        if self._size_hint:
+            util.check_disk_free(download_path, self._size_hint)
 
         for mirror in self.mirrors:
             try:
@@ -310,7 +314,7 @@ class _DownloadConfig:
             sources.append(LocalDownload(local_path, dlc['instructions'].format(path=local_path)))
         else:
             raise RuntimeError('Must either provide url or instructions')
-        return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua, stream=dlc.get('stream', False))
+        return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua, stream=dlc.get('stream', False), size_hint=dlc.get('size_hint'))
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.json')

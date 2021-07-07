@@ -202,6 +202,8 @@ dataset, its available subsets, and what data they provide.
  - `IR_DATASETS_DL_SKIP_SSL`: Set to `true` to disable checking SSL certificates when downloading files.
    Useful as a short-term solution when SSL certificates expire or are otherwise invalid. Note that this
    does not disable hash verification of the downloaded content.
+ - `IR_DATASETS_SKIP_DISK_FREE`: Set to `true` to disable checks for enough free space on disk before
+   downloading content or otherwise creating large files.
 
 ## Citing
 

@@ -202,3 +202,42 @@ class Migrator:
     def _read_version(self):
         with self._version_file.open('rt') as f:
             return f.read()
+
+
+def check_disk_free(target_path, required_size, message='Insufficient disk space: {target_path} requires {required_size_fmt} but only {free_size_fmt} is available ({missing_size_fmt} more needed)'):
+    """
+    Checks if there is required_size bytes available on the device associated with target_path
+    (or the closest target_path parent that exists if it doesn't exist). If there isn't enough
+    space, throws an error with the specified message (or generic default message).
+
+    The check is skipped if IR_DATASETS_SKIP_DISK_FREE is true.
+    """
+    skip = os.environ.get('IR_DATASETS_SKIP_DISK_FREE', 'false').lower() == 'true'
+    if skip:
+        return
+    path = Path(target_path)
+    while not path.exists():
+        path = path.parent
+    _, _, free_size = shutil.disk_usage(path)
+    if free_size < required_size:
+        missing_size = required_size - free_size
+        missing_size_fmt = format_file_size(missing_size)
+        required_size_fmt = format_file_size(required_size)
+        free_size_fmt = format_file_size(free_size)
+        raise ValueError(message.format(
+            target_path=target_path,
+            required_size=required_size,
+            required_size_fmt=required_size_fmt,
+            missing_size=missing_size,
+            missing_size_fmt=missing_size_fmt,
+            free_size=free_size,
+            free_size_fmt=free_size_fmt))
+
+
+def format_file_size(size):
+    unit = '{:.0f}B'
+    units = ['{:.1f}KB', '{:.1f}MB', '{:.1f}GB', '{:.1f}TB']
+    while units and size > 1000:
+        size = size / 1000
+        unit = units.pop(0)
+    return unit.format(size)
