@@ -51,7 +51,7 @@ class TrecPrel(NamedTuple):
 CONTENT_TAGS = 'TEXT HEADLINE TITLE HL HEAD TTL DD DATE LP LEADPARA'.split()
 
 class TrecDocs(BaseDocs):
-    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None, lang=None, expected_file_count=None):
+    def __init__(self, docs_dlc, encoding=None, path_globs=None, content_tags=CONTENT_TAGS, parser='BS4', namespace=None, lang=None, expected_file_count=None, docstore_size_hint=None):
         self._docs_dlc = docs_dlc
         self._encoding = encoding
         self._path_globs = path_globs
@@ -69,6 +69,7 @@ class TrecDocs(BaseDocs):
         self._docs_namespace = namespace
         self._docs_lang = lang
         self._expected_file_count = expected_file_count
+        self._docstore_size_hint = docstore_size_hint
         if expected_file_count is not None:
             assert self._path_globs is not None, "expected_file_count only supported with path_globs"
 
@@ -198,6 +199,7 @@ class TrecDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            size_hint=self._docstore_size_hint,
         )
 
     def docs_count(self):

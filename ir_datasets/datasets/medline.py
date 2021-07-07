@@ -127,6 +127,7 @@ class MedlineDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            size_hint=15900069519,
         )
 
     def docs_cls(self):

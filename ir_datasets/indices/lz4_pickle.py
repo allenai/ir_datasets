@@ -256,11 +256,12 @@ class Lz4PickleTransaction:
 
 
 class PickleLz4FullStore(Docstore):
-    def __init__(self, path, init_iter_fn, data_cls, lookup_field, index_fields, key_field_prefix=None):
+    def __init__(self, path, init_iter_fn, data_cls, lookup_field, index_fields, key_field_prefix=None, size_hint=None):
         super().__init__(data_cls, lookup_field)
         self.path = path
         self.init_iter_fn = init_iter_fn
         self.lookup = Lz4PickleLookup(path, data_cls, lookup_field, index_fields, key_field_prefix)
+        self.size_hint = size_hint
 
     def get_many_iter(self, keys):
         self.build()
@@ -268,6 +269,8 @@ class PickleLz4FullStore(Docstore):
 
     def build(self):
         if not self.built():
+            if self.size_hint:
+                ir_datasets.util.check_disk_free(self.path, self.size_hint)
             with self.lookup.transaction() as trans, _logger.duration('building docstore'):
                 for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter'):
                     trans.add(doc)

@@ -29,7 +29,7 @@ class MsMarcoDocument(NamedTuple):
 # Use the TREC-formatted docs so we get all the available formatting (namely, line breaks)
 class MsMarcoTrecDocs(TrecDocs):
     def __init__(self, docs_dlc):
-        super().__init__(docs_dlc, parser='text', lang='en')
+        super().__init__(docs_dlc, parser='text', lang='en', docstore_size_hint=14373971970)
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):

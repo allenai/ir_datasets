@@ -105,7 +105,7 @@ def _init():
         affected_files=[base_path/'collection.tsv', base_path/'collection.tsv.pklz4'],
         message='Migrating msmarco-passage (fixing passage encoding)')
 
-    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco', lang='en')
+    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco', lang='en', docstore_size_hint=14373971970)
     collection = migrator(collection)
     subsets = {}
 

@@ -117,7 +117,7 @@ def _init():
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TsvDocs(GzipExtract(dlc['docs']), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True)
+    collection = TsvDocs(GzipExtract(dlc['docs']), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True, docstore_size_hint=12827215492)
     base = Dataset(
         collection,
         documentation('_'))
