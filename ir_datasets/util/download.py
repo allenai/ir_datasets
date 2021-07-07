@@ -35,7 +35,7 @@ class GoogleDriveDownload(BaseDownload):
             'stream': True, # return the response as a stream, rather than loading it all into memory
             'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
             'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
-            'verify': os.environ.get('IR_DATASETS_DL_SIKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
+            'verify': os.environ.get('IR_DATASETS_DL_SKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
         }
         url = self.url
         with _logger.duration('Google Drive verification'), requests.get(**http_args) as response:
@@ -64,7 +64,7 @@ class RequestsDownload(BaseDownload):
             'stream': True, # return the response as a stream, rather than loading it all into memory
             'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
             'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
-            'verify': os.environ.get('IR_DATASETS_DL_SIKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
+            'verify': os.environ.get('IR_DATASETS_DL_SKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
             'cookies': self.cookies,
         }
         done = False
