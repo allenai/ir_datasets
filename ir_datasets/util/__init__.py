@@ -218,7 +218,7 @@ def check_disk_free(target_path, required_size, message='Insufficient disk space
     path = Path(target_path)
     while not path.exists():
         path = path.parent
-    _, _, free_size = shutil.disk_usage(path)
+    _, _, free_size = shutil.disk_usage(str(path))
     if free_size < required_size:
         missing_size = required_size - free_size
         missing_size_fmt = format_file_size(missing_size)
