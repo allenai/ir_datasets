@@ -1,5 +1,4 @@
 import json
-import mwparserfromhell
 import codecs
 from typing import NamedTuple, Dict
 import ir_datasets
