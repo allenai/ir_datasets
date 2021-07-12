@@ -631,17 +631,17 @@
   "docs": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_corpus.json.gz",
     "expected_md5": "4c1e81d120566a493d5fa90b6114bd49",
-    "cache_path": "corpus.json"
+    "cache_path": "corpus.json.gz"
   },
-  "topics": {
+  "dev/topics": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_topics.json.gz",
     "expected_md5": "bdb72f896833d0c87421b6415d895846",
-    "cache_path": "topics.json"
+    "cache_path": "topics.json.gz"
   },
   "metadata": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_metadata.json.gz",
     "expected_md5": "79ed359fe0afa0f67eb39f468d162920",
-    "cache_path": "metadata.json"
+    "cache_path": "metadata.json.gz"
   }
 },
 

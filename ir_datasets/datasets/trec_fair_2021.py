@@ -6,14 +6,13 @@ from ir_datasets.util import GzipExtract, Cache, Lazy
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
 from ir_datasets.formats import BaseQueries, BaseDocs, BaseQrels, TrecQrel
 from ir_datasets.indices import PickleLz4FullStore
-import pyautocorpus
 from itertools import chain
 
 
 _logger = ir_datasets.log.easy()
 
 
-NAME = 'trec_fair_2021'
+NAME = 'trec-fair-2021'
 
 
 class FairTrecDoc(NamedTuple):
@@ -22,14 +21,17 @@ class FairTrecDoc(NamedTuple):
     text: str
     markupfreetext: str
     url: str
-    quality_score: str
-    geographic_locations: str
-    quality_score_disk: str
+    quality_score: Optional[float]
+    geographic_locations: Optional[List(str)]
+    quality_score_disk: Optional[str]
 
 
 class FairTrecQuery(NamedTuple):
     query_id: str
     text: str
+    keywords: list(str)
+    scope: str
+    homepage: str
 
 #    metadata: Dict[str, str]
 
@@ -51,35 +53,44 @@ class FairTrecDocs(BaseDocs):
             for line in stream2:
                 dataContx = json.loads(line) 
                 data2[dataContx["page_id"]] = dataContx
-                
-                
-                
-        
         with self._dlc.stream() as stream1 :
             textifier = pyautocorpus.Textifier()
             for line1 in stream1:
                 data1 = json.loads(line1)
-               
-                
                 match = data2.get(int(data1["id"]))
-              
-                try:
-                    if match:
-                    
-                        plaintext = ""
-                        plaintext = textifier.textify(data1['text'])
-                        yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], str(match['quality_score']), match['geographic_locations'], str(match['quality_score_disc']))
-                    else: 
+                if match:
+                        try:
+                            plaintext = textifier.textify(data1['text'])
+                            yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], str(match['quality_score']), match['geographic_locations'], str(match['quality_score_disc']))
+
+                        except ValueError as err:
+                            message, position = err.args
+                            if message == "Expected markup type 'comment'":
+                                # unmatched <!-- comment tag
+                                # The way Wikipedia renders this is it cuts the article off at this point.
+                                # We'll follow that here, given it's only 22 articles of the 6M.
+                                # (Note: the position is a byte offset, so that's why it encodes/decodes.)
+                                plaintext = textifier.textify(data['text'].encode()[:position].decode())
+                                yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], str(match['quality_score']), match['geographic_locations'], str(match['quality_score_disc']))
+                            else:
+                                raise 
                    
-                        plaintext = ""
-                        plaintext = textifier.textify(data1['text'])
-                        yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], "NA","NA","NA")
-                except ValueError as err:
-                    print("[{} - {}]: {}".format(data1['id'], data1['title'], err))
+                else: 
+                    try:
+                            plaintext = textifier.textify(data1['text'])
+                            yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], "None", "None", "None")
 
-
-  
-              
+                    except ValueError as err:
+                        message, position = err.args
+                        if message == "Expected markup type 'comment'":
+                                # unmatched <!-- comment tag
+                                # The way Wikipedia renders this is it cuts the article off at this point.
+                                # We'll follow that here, given it's only 22 articles of the 6M.
+                                # (Note: the position is a byte offset, so that's why it encodes/decodes.)
+                            plaintext = textifier.textify(data['text'].encode()[:position].decode())
+                            yield FairTrecDoc(data1['id'], data1['title'],data1['text'],plaintext, data1['url'], "None", "None", "None")
+                        else:
+                            raise 
 
     def docs_cls(self):
         return FairTrecDoc
@@ -114,16 +125,7 @@ class FairTrecQueries(BaseQueries):
         with self._dlc.stream() as stream:
             for line in stream:
                 data = json.loads(line)
-                yield FairTrecQuery(data['id'], data['title'])
-
-    def queries_cls(self):
-        return FairTrecQuery
-
-    def queries_namespace(self):
-        return f'{NAME}/{self._name}'
-
-    def queries_lang(self):
-        return 'en'
+                yield FairTrecQuery(data['id'], data['title'], data["keywords"], data["scope"], data["homepage"])
 
 
 class FairTrecQrels(BaseQrels):
@@ -157,22 +159,22 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     base = Dataset(documentation('_'))
+    datasets = {"trec-fair-2021" :"dev" } #here you can add the eval queries later on 
+    subsets = {}
+    
+    for ds, qrels in datasets.items():
+        subsets[ds] = Dataset(
+                FairTrecDocs('docs', GzipExtract(dlc["docs"]), GzipExtract(dlc["metadata"])),
+                FairTrecQueries('queries', Cache(GzipExtract(dlc[str(qrels) + "/topics"]), base_path/'trec-fair-2021'+ str(qrels)/'queries.json')),
+                FairTrecQrels(GzipExtract(dlc[str(qrels)+"topics"])),
+                documentation('trec-fair-2021'))
 
-  
-    dataset = Dataset(
-            FairTrecDocs('docs', GzipExtract(dlc["docs"]), GzipExtract(dlc["metadata"])),
-            FairTrecQueries('queries', Cache(GzipExtract(dlc["topics"]), base_path/'trec_fair_2021'/'queries.json')),
-            FairTrecQrels(GzipExtract(dlc["topics"])),
-            documentation('trec_fair_2021'))
-
-    ir_datasets.registry.register(NAME, dataset)
+        for s in sorted(subsets):
+            
+            ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
 
 
     return dataset
-
-#def qid_filter(subset_qrels):
-#    # NOTE: this must be in a separate function otherwise there can be weird lambda binding problems
-#    return Lazy(lambda: {q.query_id for q in subset_qrels.qrels_iter()})
 
 
 base = _init()

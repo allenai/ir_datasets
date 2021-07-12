@@ -97,3 +97,9 @@ def ijson():
         import ijson
         _cache['ijson'] = ijson
     return _cache['ijson']
+
+def pyautocorpus():
+    if 'pyautocorpus' not in _cache:
+        import pyautocorpus
+        _cache['pyautocorpus'] = pyautocorpus
+    return _cache['pyautocorpus']    
