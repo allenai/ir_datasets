@@ -23,7 +23,7 @@ class FairTrecDoc(NamedTuple):
     doc_id: str
     title: str
     text: str
-    markupfreetext: str
+    marked_up_text: str
     url: str
     quality_score: Optional[float]
     geographic_locations: Optional[List[str]]
@@ -97,7 +97,7 @@ class FairTrecDocs(BaseDocs):
         return self.docs_store().count()
 
     def docs_namespace(self):
-        return f'{NAME}/{self._name}'
+        return NAME
 
     def docs_lang(self):
         return 'en'
@@ -114,6 +114,11 @@ class FairTrecQueries(BaseQueries):
                 data = json.loads(line)
                 yield FairTrecQuery(str(data['id']), data['title'], data["keywords"], data["scope"], data["homepage"])
 
+    def queries_cls(self):
+        return FairTrecQuery
+
+    def queries_lang(self):
+        return 'en'
 
 class FairTrecQrels(BaseQrels):
     def __init__(self, qrels_dlc):
