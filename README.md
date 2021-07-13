@@ -171,6 +171,7 @@ Available datasets include:
  - [NYT](https://ir-datasets.com/nyt.html)
  - [PubMed Central (TREC CDS)](https://ir-datasets.com/pmc.html)
  - [TREC Arabic](https://ir-datasets.com/trec-arabic.html)
+ - [TREC Fair Ranking 2021](https://ir-datasets.com/trec-fair-2021.html)
  - [TREC Mandarin](https://ir-datasets.com/trec-mandarin.html)
  - [TREC Robust 2004](https://ir-datasets.com/trec-robust04.html)
  - [TREC Spanish](https://ir-datasets.com/trec-spanish.html)
@@ -223,5 +224,8 @@ If you use this tool, please cite [our SIGIR resource paper](https://arxiv.org/p
 
 ## Credits
 
+Contributors to this repository:
+
  - Sean MacAvaney (University of Glasgow)
  - Shuo Sun (Johns Hopkins University)
+ - Thomas Jänich (University of Glasgow)
