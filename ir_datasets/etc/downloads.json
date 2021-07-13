@@ -741,16 +741,19 @@
 "trec-fair-2021": {
   "docs": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_corpus.json.gz",
+    "size_hint": 15575740862,
     "expected_md5": "4c1e81d120566a493d5fa90b6114bd49",
     "cache_path": "corpus.json.gz"
   },
   "dev/topics": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_topics.json.gz",
+    "size_hint": 7271598,
     "expected_md5": "bdb72f896833d0c87421b6415d895846",
     "cache_path": "topics.json.gz"
   },
   "metadata": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_metadata.json.gz",
+    "size_hint": 56827296,
     "expected_md5": "ae251e9ae0c9fb3a58c3b12e216dcea7",
     "cache_path": "metadata.json.gz"
   }

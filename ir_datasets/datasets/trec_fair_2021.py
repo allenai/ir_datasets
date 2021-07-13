@@ -89,7 +89,8 @@ class FairTrecDocs(BaseDocs):
             path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
-            lookup_field=field, 
+            lookup_field=field,
+            size_hint=30735927055,
             index_fields=['doc_id']
         )
 
