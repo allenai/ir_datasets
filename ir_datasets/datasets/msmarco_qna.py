@@ -100,12 +100,12 @@ class MsMarcoQnAManager:
         if docs_store.built():
             return # already built
         dochash_lookup = {}
-        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='building msmarco-passage lookup', total=ir_datasets.load('msmarco-passage').docs_count()):
+        for doc in _logger.pbar(ir_datasets.load('msmarco-passage').docs_iter(), desc='building msmarco-passage lookup', total=ir_datasets.load('msmarco-passage').docs_count(), unit='doc'):
             dochash = bytes(hashlib.md5(doc.text.encode()).digest()[:8])
             assert dochash not in dochash_lookup
             dochash_lookup[dochash] = (int(doc.doc_id), {})
         urlhash_lookup = {}
-        for doc in _logger.pbar(ir_datasets.load('msmarco-document').docs_iter(), desc='building msmarco-document lookup', total=ir_datasets.load('msmarco-document').docs_count()):
+        for doc in _logger.pbar(ir_datasets.load('msmarco-document').docs_iter(), desc='building msmarco-document lookup', total=ir_datasets.load('msmarco-document').docs_count(), unit='doc'):
             urlhash = bytes(hashlib.md5(doc.url.encode()).digest()[:8])
             assert urlhash not in urlhash_lookup
             urlhash_lookup[urlhash] = doc.doc_id
@@ -121,7 +121,7 @@ class MsMarcoQnAManager:
         pbar_postfix = {'file': None, 'missing_urls': 0, 'key': None}
         with contextlib.ExitStack() as outer_stack:
             docs_trans = outer_stack.enter_context(docs_store.lookup.transaction())
-            pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix))
+            pbar = outer_stack.enter_context(_logger.pbar_raw(desc='processing qna', postfix=pbar_postfix, unit='item'))
             for dlc, file_str in [(self._train_dlc, 'train'), (self._dev_dlc, 'dev'), (self._eval_dlc, 'eval')]:
                 pbar_postfix['file'] = file_str
                 last_ans_prefix = None
@@ -235,7 +235,7 @@ class MsMarcoQnAManager:
                     else:
                         f_seq = stack.enter_context(open(self._base_path/f'{file_str}.seq', 'rt'))
                         in_files += [f_seq]
-                    for columns in _logger.pbar(zip(*in_files), desc=f'merging {file_str} files'):
+                    for columns in _logger.pbar(zip(*in_files), desc=f'merging {file_str} files', unit='doc'):
                         columns = [x.strip() for x in columns]
                         qid, typ, text = columns[:3]
                         if file_str != 'eval':

@@ -47,7 +47,7 @@ class ExtractQidPid:
 
     def __iter__(self):
         with self._streamer.stream() as stream:
-            for line in _logger.pbar(stream, desc='extracting QID/PID pairs'):
+            for line in _logger.pbar(stream, desc='extracting QID/PID pairs', unit='pair'):
                 qid, did, _, _ = line.split(b'\t')
                 yield qid + b'\t' + did + b'\n'
 

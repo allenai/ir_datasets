@@ -272,7 +272,7 @@ class PickleLz4FullStore(Docstore):
             if self.size_hint:
                 ir_datasets.util.check_disk_free(self.path, self.size_hint)
             with self.lookup.transaction() as trans, _logger.duration('building docstore'):
-                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter'):
+                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc'):
                     trans.add(doc)
 
     def built(self):

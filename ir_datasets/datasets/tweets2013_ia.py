@@ -306,7 +306,7 @@ class Tweets2013IaDocs(BaseDocs):
             inprogress_file.touch(exist_ok=False)
 
             writer = TweetWriter(self._docs_base_path)
-            with _logger.pbar_raw(desc='tweets') as pbar, contextlib.ExitStack() as stack:
+            with _logger.pbar_raw(desc='tweets', unit='tweet') as pbar, contextlib.ExitStack() as stack:
                 # Since the souce files download slowly anyway, download them in parallel (this doesn't seem to reduce the download speed of either file)
                 dlc_streams = [stack.enter_context(dlc.stream()) for dlc in self._docs_dlcs]
                 tar_files = [stack.enter_context(tarfile.open(fileobj=stream, mode='r|')) for stream in dlc_streams]

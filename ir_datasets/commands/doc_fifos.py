@@ -61,7 +61,7 @@ def main(args):
             fifos.append(fifo)
 
         docs_iter = dataset.docs_iter()
-        docs_iter = _logger.pbar(docs_iter, total=dataset.docs_count())
+        docs_iter = _logger.pbar(docs_iter, total=dataset.docs_count(), unit='doc')
 
         print(f'Ready at {d}')
         print(f'To index with Anserini, run:\nIndexCollection -collection JsonCollection -input {d} -threads {args.count} -index <your_index_path> <other_anserini_args>')

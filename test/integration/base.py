@@ -17,7 +17,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs')):
+            for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs', unit='doc')):
                 count += 1
                 if i in items:
                     self._assert_namedtuple(doc, items[i])
@@ -55,7 +55,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries')):
+            for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries', unit='query')):
                 count += 1
                 if i in items:
                     self._assert_namedtuple(query, items[i])
@@ -77,7 +77,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels')):
+            for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels', unit='qrel')):
                 count += 1
                 if i in items:
                     self._assert_namedtuple(qrel, items[i])
@@ -99,7 +99,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs')):
+            for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs', unit='scoreddoc')):
                 count += 1
                 if i in items:
                     self._assert_namedtuple(scoreddoc, items[i])
@@ -121,7 +121,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, docpair in enumerate(_logger.pbar(dataset.docpairs_iter(), f'{dataset_name} docpairs')):
+            for i, docpair in enumerate(_logger.pbar(dataset.docpairs_iter(), f'{dataset_name} docpairs', unit='docpair')):
                 count += 1
                 if i in items:
                     self._assert_namedtuple(docpair, items[i])
@@ -141,7 +141,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             dataset = ir_datasets.load(dataset_name)
         else:
             dataset = dataset_name
-        for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs')):
+        for i, doc in enumerate(_logger.pbar(dataset.docs_iter(), f'{dataset_name} docs', unit='doc')):
             count += 1
             if i in include_idxs:
                 items[i] = doc
@@ -161,7 +161,7 @@ self._test_docs({repr(dataset_name)}{count}, items={self._repr_namedtuples(items
             dataset = ir_datasets.load(dataset_name)
         else:
             dataset = dataset_name
-        for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries')):
+        for i, query in enumerate(_logger.pbar(dataset.queries_iter(), f'{dataset_name} queries', unit='query')):
             count += 1
             if i in (0, 9):
                 items[i] = query
@@ -177,7 +177,7 @@ self._test_queries({repr(dataset_name)}, count={count}, items={self._repr_namedt
             dataset = ir_datasets.load(dataset_name)
         else:
             dataset = dataset_name
-        for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels')):
+        for i, qrel in enumerate(_logger.pbar(dataset.qrels_iter(), f'{dataset_name} qrels', unit='qrel')):
             count += 1
             if i in (0, 9):
                 items[i] = qrel
@@ -193,7 +193,7 @@ self._test_qrels({repr(dataset_name)}, count={count}, items={self._repr_namedtup
             dataset = ir_datasets.load(dataset_name)
         else:
             dataset = dataset_name
-        for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs')):
+        for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs', unit='scoreddoc')):
             count += 1
             if i in (0, 9):
                 items[i] = scoreddoc
@@ -205,7 +205,7 @@ self._test_scoreddocs({repr(dataset_name)}, count={count}, items={self._repr_nam
     def _build_test_docpairs(self, dataset_name):
         items = {}
         count = 0
-        for i, docpair in enumerate(_logger.pbar(ir_datasets.load(dataset_name).docpairs_iter(), f'{dataset_name} docpairs')):
+        for i, docpair in enumerate(_logger.pbar(ir_datasets.load(dataset_name).docpairs_iter(), f'{dataset_name} docpairs', unit='docpair')):
             count += 1
             if i in (0, 9):
                 items[i] = docpair

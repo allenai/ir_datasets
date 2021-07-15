@@ -55,7 +55,7 @@ class NqManager:
         doc_url_to_id = {}
         with contextlib.ExitStack() as stack:
             docs_trans = stack.enter_context(docs_store.lookup.transaction())
-            pbar = stack.enter_context(_logger.pbar_raw(desc='processing nq', postfix=pbar_postfix))
+            pbar = stack.enter_context(_logger.pbar_raw(desc='processing nq', postfix=pbar_postfix, unit='question'))
             train_queries = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'train.queries.tsv', 'wt'))
             train_qrels = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'train.qrels.jsonl', 'wt'))
             train_scoreddocs = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'train.scoreddocs.tsv', 'wt'))

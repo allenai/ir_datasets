@@ -49,7 +49,7 @@ class DprW100Manager:
             f_qrels = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'qrels', 'wt'))
             stream = stack.enter_context(self._dlc.stream())
             qid_counter = itertools.count()
-            for record in _logger.pbar(ijson.items(stream, 'item'), 'building dpr-w100'):
+            for record in _logger.pbar(ijson.items(stream, 'item'), 'building dpr-w100', unit='record'):
                 qid = str(next(qid_counter))
                 f_queries.write('\t'.join([
                     qid,

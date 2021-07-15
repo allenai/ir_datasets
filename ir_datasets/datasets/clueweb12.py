@@ -234,7 +234,7 @@ java -j {extract_path} {source_path}/ {path}/
         if len(os.listdir(rc_dir)) != 0:
             return
         warc = ir_datasets.lazy_libs.warc()
-        with contextlib.ExitStack() as stack, _logger.pbar_raw(desc='building b13 document count cache') as pbar:
+        with contextlib.ExitStack() as stack, _logger.pbar_raw(desc='building b13 document count cache', unit='file') as pbar:
             for d in glob(os.path.join(path, 'ClueWeb12_??')):
                 d = os.path.basename(d)
                 out = stack.enter_context(ir_datasets.util.finialized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))

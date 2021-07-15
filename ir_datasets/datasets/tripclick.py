@@ -98,18 +98,18 @@ class DocPairGenerator:
             _logger.info('tripclick includes docpairs in an expanded format (with raw text). Linking these records back to the query and doc IDs.')
             SPACES = re.compile(r'\s+')
             doc_map = {}
-            for doc in _logger.pbar(self._collection.docs_iter(), desc='build doc lookup'):
+            for doc in _logger.pbar(self._collection.docs_iter(), desc='build doc lookup', unit='doc'):
                 # doctext = f'{doc.title} <eot> {doc.text}'.replace('\t', ' ').replace('\n', ' ').replace('\u2029', ' ').replace('\u2028', ' ').replace('  ', ' ').strip()
                 doctext = SPACES.sub(' ', f'{doc.title} <eot> {doc.text}').strip()
                 dochash = hashlib.md5(doctext.encode()).digest()[:6]
                 doc_map[dochash] = doc.doc_id
             query_map = {}
-            for query in _logger.pbar(self._queries.queries_iter(), desc='build query lookup'):
+            for query in _logger.pbar(self._queries.queries_iter(), desc='build query lookup', unit='query'):
                 queryhash = hashlib.md5(SPACES.sub(' ', query.text).strip().encode()).digest()[:6]
                 query_map[queryhash] = query.query_id
             with ir_datasets.util.finialized_file(self._cache_path, 'wt') as fout, \
                  self._docpair_dlc.stream() as stream, \
-                 _logger.pbar_raw(desc='building docpairs', total=23_222_038) as pbar:
+                 _logger.pbar_raw(desc='building docpairs', total=23_222_038, unit='docpair') as pbar:
                 skipped = 0
                 for line in stream:
                     pbar.update()
