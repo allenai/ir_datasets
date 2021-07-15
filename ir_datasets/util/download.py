@@ -47,10 +47,11 @@ class GoogleDriveDownload(BaseDownload):
         return RequestsDownload(url, self.tries, cookies).stream()
 
 class RequestsDownload(BaseDownload):
-    def __init__(self, url, tries=None, cookies=None):
+    def __init__(self, url, tries=None, cookies=None, headers=None):
         self.url = url
         self.tries = tries
         self.cookies = cookies
+        self.headers = headers
 
     @contextlib.contextmanager
     def stream(self):
@@ -67,6 +68,9 @@ class RequestsDownload(BaseDownload):
             'verify': os.environ.get('IR_DATASETS_DL_SKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
             'cookies': self.cookies,
         }
+        # apply headers if provided
+        if self.headers:
+            http_args['headers'].update(self.headers)
         done = False
         pbar = None
         response = None
@@ -288,6 +292,7 @@ class _DownloadConfig:
         dlc = self.contents()[key]
         sources = []
         cache_path = None
+        download_args = dlc.get('download_args', {})
         if 'cache_path' in dlc:
             if self._base_path:
                 cache_path = os.path.join(self._base_path, dlc['cache_path'])
@@ -300,9 +305,9 @@ class _DownloadConfig:
                              f'to avoid downloading it again: {local_path}')
                 sources.append(LocalDownload(local_path, local_msg, mkdir=False))
             if dlc['url'].startswith('https://drive.google.com/'):
-                sources.append(GoogleDriveDownload(dlc['url']))
+                sources.append(GoogleDriveDownload(dlc['url'], **download_args))
             else:
-                sources.append(RequestsDownload(dlc['url']))
+                sources.append(RequestsDownload(dlc['url'], **download_args))
             if dlc.get('irds_mirror') and dlc.get('expected_md5'):
                 # this file has the irds mirror to fall back on
                 sources.append(RequestsDownload(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))

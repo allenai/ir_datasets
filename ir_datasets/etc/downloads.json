@@ -1587,7 +1587,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco_v2_doc.tar",
     "size_hint": 34648862720,
     "expected_md5": "eea90100409a254fdb157b8e4e349deb",
-    "cache_path": "msmarco_v2_doc.tar"
+    "cache_path": "msmarco_v2_doc.tar",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train_queries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/docv2_train_queries.tsv",
