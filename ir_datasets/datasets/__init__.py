@@ -15,9 +15,10 @@ from . import gov
 from . import gov2
 from . import highwire
 from . import medline
-from . import msmarco_passage
 from . import msmarco_document
 from . import msmarco_document_v2
+from . import msmarco_passage
+from . import msmarco_passage_v2
 from . import msmarco_qna
 from . import nfcorpus
 from . import natural_questions
