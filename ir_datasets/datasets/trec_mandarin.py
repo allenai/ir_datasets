@@ -40,7 +40,7 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
 
-    collection = TrecDocs(dlc['docs'], encoding='GB18030', path_globs=['**/xinhua/x*', '**/peoples-daily/pd*'], namespace=NAME, lang='zh')
+    collection = TrecDocs(dlc['docs'], encoding='GB18030', path_globs=['**/xinhua/x*', '**/peoples-daily/pd*'], namespace=NAME, lang='zh', count_hint=164789)
 
     base = Dataset(collection, documentation('_'))
 

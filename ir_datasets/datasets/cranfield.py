@@ -79,6 +79,7 @@ class CranfieldDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=1400,
         )
 
     def docs_count(self):

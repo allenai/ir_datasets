@@ -27,10 +27,11 @@ class BeirQuery(NamedTuple):
 
 
 class BeirDocs(BaseDocs):
-    def __init__(self, name, dlc):
+    def __init__(self, name, dlc, count_hint=None):
         super().__init__()
         self._name = name
         self._dlc = dlc
+        self._count_hint = count_hint
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -51,6 +52,7 @@ class BeirDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=self._count_hint,
         )
 
     def docs_count(self):
@@ -128,25 +130,25 @@ def _init():
     subsets = {}
 
     benchmarks = {
-        'msmarco': ['train', 'dev', 'test'],
-        'trec-covid': ['test'],
-        'nfcorpus': ['train', 'dev', 'test'],
-        'nq': ['test'],
-        'hotpotqa': ['train', 'dev', 'test'],
-        'fiqa': ['train', 'dev', 'test'],
-        'arguana': ['test'],
-        'webis-touche2020': ['test'],
-        'quora': ['dev', 'test'],
-        'dbpedia-entity': ['dev', 'test'],
-        'scidocs': ['test'],
-        'fever': ['train', 'dev', 'test'],
-        'climate-fever': ['test'],
-        'scifact': ['train', 'test'],
+        'msmarco': (['train', 'dev', 'test'], 8841823),
+        'trec-covid': (['test'], 171332),
+        'nfcorpus': (['train', 'dev', 'test'], 3633),
+        'nq': (['test'], 2681468),
+        'hotpotqa': (['train', 'dev', 'test'], 5233329),
+        'fiqa': (['train', 'dev', 'test'], 57638),
+        'arguana': (['test'], 8674),
+        'webis-touche2020': (['test'], 382545),
+        'quora': (['dev', 'test'], 522931),
+        'dbpedia-entity': (['dev', 'test'], 4635922),
+        'scidocs': (['test'], 25657),
+        'fever': (['train', 'dev', 'test'], 5416568),
+        'climate-fever': (['test'], 5416593),
+        'scifact': (['train', 'test'], 5183),
     }
 
-    for ds, qrels in benchmarks.items():
+    for ds, (qrels, count_hint) in benchmarks.items():
         dlc_ds = dlc[ds]
-        docs = BeirDocs(ds, ZipExtract(dlc_ds, f'{ds}/corpus.jsonl'))
+        docs = BeirDocs(ds, ZipExtract(dlc_ds, f'{ds}/corpus.jsonl'), count_hint=count_hint)
         queries = BeirQueries(ds, Cache(ZipExtract(dlc_ds, f'{ds}/queries.jsonl'), base_path/ds/'queries.json'))
         if len(qrels) == 1:
             subsets[ds] = Dataset(
@@ -171,11 +173,24 @@ def _init():
                     documentation(f'{ds}/{qrel}')
                 )
 
-    cqa = ['android', 'english', 'gaming', 'gis', 'mathematica', 'physics', 'programmers', 'stats', 'tex', 'unix', 'webmasters', 'wordpress']
+    cqa = [
+        ('android', 22998),
+        ('english', 40221),
+        ('gaming', 45301),
+        ('gis', 37637),
+        ('mathematica', 16705),
+        ('physics', 38316),
+        ('programmers', 32176),
+        ('stats', 42269),
+        ('tex', 68184),
+        ('unix', 47382),
+        ('webmasters', 17405),
+        ('wordpress', 48605),
+    ]
     cqa_dlc = dlc['cqadupstack']
-    for ds in cqa:
+    for ds, count_hint in cqa:
         subsets[f'cqadupstack/{ds}'] = Dataset(
-            BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl')),
+            BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl'), count_hint=count_hint),
             BeirQueries(f'cqadupstack/{ds}', Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/queries.jsonl'), base_path/'cqadupstack'/ds/'queries.json'), keep_metadata=['tags']),
             BeirQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
             documentation(f'cqadupstack/{ds}')

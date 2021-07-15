@@ -38,9 +38,17 @@ def _init():
 
     subsets = {}
 
-    for source in ['en1k', 'en59k', 'fr14k','es13k', 'it16k']:
+    sources = [
+        ('en1k', 369721),
+        ('en59k', 2454785),
+        ('fr14k', 736616),
+        ('es13k', 645901),
+        ('it16k', 503012),
+    ]
+
+    for source, count_hint in sources:
         source_dlc = ZipExtractCache(dlc[source], base_path/source)
-        docs = CsvDocs(File(source_dlc, "*/documents.csv"), namespace=source, lang=source[:2])
+        docs = CsvDocs(File(source_dlc, "*/documents.csv"), namespace=source, lang=source[:2], count_hint=count_hint)
         subsets[source] = Dataset(docs, documentation(source))
         for split in ['training', 'validation', 'test']:
             subsets[f'{source}/{split}'] = Dataset(

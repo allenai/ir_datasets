@@ -63,7 +63,7 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     main_dlc = dlc['main']
 
-    collection = TsvDocs(Cache(TarExtract(main_dlc, 'nfcorpus/raw/doc_dump.txt'), base_path/'collection.tsv'), doc_cls=NfCorpusDoc, namespace=NAME, lang='en')
+    collection = TsvDocs(Cache(TarExtract(main_dlc, 'nfcorpus/raw/doc_dump.txt'), base_path/'collection.tsv'), doc_cls=NfCorpusDoc, namespace=NAME, lang='en', count_hint=5371)
     subsets = {}
 
     def read_lines(file):

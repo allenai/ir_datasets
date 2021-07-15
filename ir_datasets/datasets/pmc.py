@@ -54,10 +54,11 @@ class TrecCds2016Query(NamedTuple):
 
 
 class PmcDocs(BaseDocs):
-    def __init__(self, dlcs, path, duplicate_dlcs=[]):
+    def __init__(self, dlcs, path, duplicate_dlcs=[], count_hint=None):
         self._dlcs = dlcs
         self._path = path
         self._duplicate_dlcs = duplicate_dlcs
+        self._count_hint = count_hint
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -107,6 +108,7 @@ class PmcDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=self._count_hint,
         )
 
     def docs_cls(self):
@@ -128,8 +130,8 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 
-    v1_collection = PmcDocs([dlc['v1/source0'], dlc['v1/source1'], dlc['v1/source2'], dlc['v1/source3']], ir_datasets.util.home_path()/NAME/'v1'/'corpus', duplicate_dlcs=[dlc['v1/dup1'], dlc['v1/dup2']])
-    v2_collection = PmcDocs([dlc['v2/source0'], dlc['v2/source1'], dlc['v2/source2'], dlc['v2/source3']], ir_datasets.util.home_path()/NAME/'v2'/'corpus')
+    v1_collection = PmcDocs([dlc['v1/source0'], dlc['v1/source1'], dlc['v1/source2'], dlc['v1/source3']], ir_datasets.util.home_path()/NAME/'v1'/'corpus', duplicate_dlcs=[dlc['v1/dup1'], dlc['v1/dup2']], count_hint=733111)
+    v2_collection = PmcDocs([dlc['v2/source0'], dlc['v2/source1'], dlc['v2/source2'], dlc['v2/source3']], ir_datasets.util.home_path()/NAME/'v2'/'corpus', count_hint=1255260)
     base = Dataset(documentation('_'))
 
     subsets['v1'] = Dataset(v1_collection, documentation('v1'))

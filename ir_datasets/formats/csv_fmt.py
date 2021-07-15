@@ -30,11 +30,12 @@ class _CsvBase:
 
 
 class CsvDocs(_CsvBase, BaseDocs):
-    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None):
+    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, count_hint=None):
         super().__init__(docs_dlc, doc_cls, "docs")
         self._doc_store_index_fields = doc_store_index_fields
         self._docs_namespace = namespace
         self._docs_lang = lang
+        self._count_hint = count_hint
 
     def docs_path(self):
         return self._path()
@@ -54,6 +55,7 @@ class CsvDocs(_CsvBase, BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=fields,
+            count_hint=self._count_hint,
         )
 
     def docs_namespace(self):

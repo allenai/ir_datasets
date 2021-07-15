@@ -9,7 +9,7 @@ import re
 import ir_datasets
 from ir_datasets.util import Cache, TarExtract, IterStream, GzipExtract, Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredScoredDocs, FilteredQrels, FilteredDocPairs, YamlDocumentation
-from ir_datasets.formats import TsvQueries, TsvDocs, TrecQrels, TrecScoredDocs, TsvDocPairs, DocstoreBackedDocs
+from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, TsvDocPairs, DocstoreBackedDocs
 
 _logger = ir_datasets.log.easy()
 
@@ -91,7 +91,7 @@ class MsMarcoQnAManager:
 
     def _internal_docs_store(self):
         if self._docs_store is None:
-            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, MsMarcoQnADoc, 'doc_id', ['doc_id'])
+            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, MsMarcoQnADoc, 'doc_id', ['doc_id'], count_hint=9048606)
         return self._docs_store
 
     def build(self):

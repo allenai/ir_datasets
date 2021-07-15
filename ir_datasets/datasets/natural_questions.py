@@ -43,7 +43,7 @@ class NqManager:
 
     def _internal_docs_store(self):
         if self._docs_store is None:
-            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, NqPassageDoc, 'doc_id', ['doc_id'])
+            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, NqPassageDoc, 'doc_id', ['doc_id'], count_hint=28390850)
         return self._docs_store
 
     def build(self):

@@ -91,6 +91,7 @@ class ClinicalTrialsDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=241006,
         )
 
     def docs_cls(self):

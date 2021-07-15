@@ -103,6 +103,7 @@ class HighwireDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=162259,
         )
 
     def docs_cls(self):

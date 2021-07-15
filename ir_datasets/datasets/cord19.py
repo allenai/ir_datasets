@@ -58,11 +58,12 @@ QTYPE_MAP = {
 
 
 class Cord19Docs(BaseDocs):
-    def __init__(self, streamer, extr_path, date, include_fulltext=False):
+    def __init__(self, streamer, extr_path, date, include_fulltext=False, count_hint=None):
         self._streamer = streamer
         self._extr_path = Path(extr_path)
         self._date = date
         self._include_fulltext = include_fulltext
+        self._count_hint = count_hint
 
     def docs_path(self):
         result = self._streamer.path()
@@ -153,6 +154,7 @@ class Cord19Docs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=self._count_hint,
         )
 
     def docs_count(self):
@@ -170,8 +172,8 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
-    collection = Cord19Docs(dlc['docs/2020-07-16/metadata'], base_path/'2020-07-16', '2020-07-16')
-    collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True)
+    collection = Cord19Docs(dlc['docs/2020-07-16/metadata'], base_path/'2020-07-16', '2020-07-16', count_hint=192509)
+    collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True, count_hint=192509)
 
     queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS)
@@ -183,25 +185,25 @@ def _init():
     subsets['fulltext/trec-covid'] = Dataset(queries, qrels, collection_ft, documentation('fulltext/trec-covid'))
 
     subsets['trec-covid/round1'] = Dataset(
-        Cord19Docs(dlc['docs/2020-04-10/metadata'], base_path/'2020-04-10', '2020-04-10'),
+        Cord19Docs(dlc['docs/2020-04-10/metadata'], base_path/'2020-04-10', '2020-04-10', count_hint=51078),
         TrecXmlQueries(dlc['trec-covid/round1/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-covid/round1/qrels'], QRELS_DEFS),
         documentation('trec-covid/round1'))
 
     subsets['trec-covid/round2'] = Dataset(
-        Cord19Docs(dlc['docs/2020-05-01/metadata'], base_path/'2020-05-01', '2020-05-01'),
+        Cord19Docs(dlc['docs/2020-05-01/metadata'], base_path/'2020-05-01', '2020-05-01', count_hint=59887),
         TrecXmlQueries(dlc['trec-covid/round2/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-covid/round2/qrels'], QRELS_DEFS),
         documentation('trec-covid/round2'))
 
     subsets['trec-covid/round3'] = Dataset(
-        Cord19Docs(dlc['docs/2020-05-19/metadata'], base_path/'2020-05-19', '2020-05-19'),
+        Cord19Docs(dlc['docs/2020-05-19/metadata'], base_path/'2020-05-19', '2020-05-19', count_hint=128492),
         TrecXmlQueries(dlc['trec-covid/round3/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-covid/round3/qrels'], QRELS_DEFS),
         documentation('trec-covid/round3'))
 
     subsets['trec-covid/round4'] = Dataset(
-        Cord19Docs(dlc['docs/2020-06-19/metadata'], base_path/'2020-06-19', '2020-06-19'),
+        Cord19Docs(dlc['docs/2020-06-19/metadata'], base_path/'2020-06-19', '2020-06-19', count_hint=158274),
         TrecXmlQueries(dlc['trec-covid/round4/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-covid/round4/qrels'], QRELS_DEFS),
         documentation('trec-covid/round4'))

@@ -78,9 +78,10 @@ class ConcatFile:
 
 
 class MedlineDocs(BaseDocs):
-    def __init__(self, name, dlcs):
+    def __init__(self, name, dlcs, count_hint=None):
         self._name = name
         self._dlcs = dlcs
+        self._count_hint = count_hint
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -128,6 +129,7 @@ class MedlineDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             size_hint=15900069519,
+            count_hint=self._count_hint,
         )
 
     def docs_cls(self):
@@ -193,8 +195,9 @@ class AacrAscoDocs(BaseDocs):
 
 
 class ConcatDocs(BaseDocs):
-    def __init__(self, docs):
+    def __init__(self, docs, count_hint=None):
         self._docs = docs
+        self._count_hint = count_hint
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -214,6 +217,7 @@ class ConcatDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            count_hint=self._count_hint,
         )
 
     def docs_cls(self):
@@ -237,7 +241,7 @@ def _init():
 
     base = Dataset(documentation('_'))
 
-    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])])
+    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])], count_hint=3672808)
 
     subsets['2004'] = Dataset(collection04, documentation('2004'))
 
@@ -257,7 +261,7 @@ def _init():
     collection17 = ConcatDocs([
         AacrAscoDocs(dlc['2017/aacr_asco_extra']),
         MedlineDocs('2017', [dlc['2017/part1'], dlc['2017/part2'], dlc['2017/part3'], dlc['2017/part4'], dlc['2017/part5']]),
-    ])
+    ], count_hint=26740025)
     subsets['2017'] = Dataset(collection17, documentation('2017'))
 
     subsets['2017/trec-pm-2017'] = Dataset(

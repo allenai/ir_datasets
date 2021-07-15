@@ -130,12 +130,13 @@ class _TsvBase:
 
 
 class TsvDocs(_TsvBase, BaseDocs):
-    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, skip_first_line=False, docstore_size_hint=None):
+    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, skip_first_line=False, docstore_size_hint=None, count_hint=None):
         super().__init__(docs_dlc, doc_cls, "docs", skip_first_line=skip_first_line)
         self._doc_store_index_fields = doc_store_index_fields
         self._docs_namespace = namespace
         self._docs_lang = lang
         self._docstore_size_hint = docstore_size_hint
+        self._count_hint = count_hint
 
     def docs_path(self):
         return self._path()
@@ -156,6 +157,7 @@ class TsvDocs(_TsvBase, BaseDocs):
             lookup_field=field,
             index_fields=fields,
             size_hint=self._docstore_size_hint,
+            count_hint=self._count_hint,
         )
 
     def docs_namespace(self):

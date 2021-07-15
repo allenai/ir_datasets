@@ -138,7 +138,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['benchmark'], parser='tut', path_globs=['**/docs_grp_*.txt'], namespace=NAME, lang='en')
+    collection = TrecDocs(dlc['benchmark'], parser='tut', path_globs=['**/docs_grp_*.txt'], namespace=NAME, lang='en', count_hint=1523878)
     topics_and_qrels = TarExtractAll(dlc['benchmark'], base_path/"topics_and_qrels", path_globs=['**/topics.*.txt', '**/qrels.*.txt'])
     val_runs = TarExtractAll(dlc['dlfiles'], base_path/"val_runs", path_globs=['**/run.trip.BM25.*.val.txt'])
     test_runs = TarExtractAll(dlc['dlfiles_runs_test'], base_path/"test_runs", path_globs=['**/run.trip.BM25.*.test.txt'])

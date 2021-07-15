@@ -91,7 +91,8 @@ class FairTrecDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             size_hint=30735927055,
-            index_fields=['doc_id']
+            index_fields=['doc_id'],
+            count_hint=6280328,
         )
 
     def docs_count(self):

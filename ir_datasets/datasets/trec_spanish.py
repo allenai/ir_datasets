@@ -84,7 +84,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'], namespace=NAME, lang='es')
+    collection = TrecDocs(dlc['docs'], encoding='ISO-8859-1', path_globs=['**/afp_text/af*', '**/infosel_data/ism_*'], namespace=NAME, lang='es', count_hint=120605)
 
     base = Dataset(collection, documentation('_'))
 
