@@ -29,7 +29,8 @@ def walk_path(start_path='.', skips=[]):
                 files.append(fp)
     return total_size, files
 
-def clean(dataset, yes=False, list=False):
+
+def clean(dataset, yes=False, list=False, human=True):
     base_path = os.path.join(ir_datasets.util.home_path()/dataset)
     dlc = DownloadConfig.context(dataset, base_path)
     skips = []
@@ -37,13 +38,16 @@ def clean(dataset, yes=False, list=False):
         if 'instructions' in dl_item and 'cache_path' in dl_item: # non-downloadble item
             skips.append(os.path.join(base_path, dl_item['cache_path']))
     size, files = walk_path(base_path, skips)
-    size_fmt = ir_datasets.util.format_file_size(size)
     files_fmt = f'{len(files)} files'
-    if size > 1_000_000_000: # sizes over 1GB: list in red
-        size_fmt = f'{RED}{size_fmt}{RES}'
+    if human:
+        size_fmt = ir_datasets.util.format_file_size(size)
+        if size > 1_000_000_000: # sizes over 1GB: list in red
+            size_fmt = f'{RED}{size_fmt}{RES}'
+    else:
+        size_fmt = str(size)
     if list:
         if size > 0:
-            print(f'{size_fmt}\t{dataset}\t{files_fmt}')
+            print(f'{size_fmt}\t{files_fmt}\t{dataset}')
         return
     if not yes:
         inp = None
@@ -52,9 +56,12 @@ def clean(dataset, yes=False, list=False):
             if inp in ('l', 'list', 'list files'):
                 for file in files:
                     f_size = os.path.getsize(file)
-                    size_fmt = ir_datasets.util.format_file_size(f_size)
-                    if f_size > 1_000_000_000: # sizes over 1GB: list in red
-                        size_fmt = f'{RED}{size_fmt}{RES}'
+                    if human:
+                        size_fmt = ir_datasets.util.format_file_size(f_size)
+                        if f_size > 1_000_000_000: # sizes over 1GB: list in red
+                            size_fmt = f'{RED}{size_fmt}{RES}'
+                    else:
+                        size_fmt = str(size)
                     print(f'{size_fmt}\t{file}')
             if inp in ('n', 'no'):
                 return
@@ -74,20 +81,21 @@ def main(args):
     parser.add_argument('datasets', nargs='*', help='dataset IDs to clean up')
     parser.add_argument('--yes', '-y', action='store_true', help='automatically say yes to confirmation messages')
     parser.add_argument('--list', '-l', action='store_true', help='lists datasets available for cleanup and their sizes; does not do any cleanup')
+    parser.add_argument('-H', action='store_false', help='output raw sizes, rather than human-readable versions')
 
     args = parser.parse_args(args)
     try:
-        if args.list:
-            if args.datasets:
-                sys.stderr.write('ERROR: Provided both --list and dataset IDs\n')
-                return
-            print('datasets available for cleanup:')
+        if args.datasets:
+            top_level_datasets = {d for d in ir_datasets.registry._registered if '/' not in d}
+            for dataset in args.datasets:
+                if dataset not in top_level_datasets:
+                    print(f'Skipping unknown dataset {dataset}')
+                else:
+                    clean(dataset, args.yes, list=args.list, human=args.H)
+        elif args.list:
             for dataset in ir_datasets.registry._registered:
                 if '/' not in dataset:
-                    clean(dataset, list=True)
-        elif args.datasets:
-            for dataset in args.datasets:
-                clean(dataset, args.yes)
+                    clean(dataset, list=True, human=args.H)
         else:
             sys.stderr.write('ERROR: Please provide either --list, dataset IDs to clean, or --help for more details\n')
     except KeyboardInterrupt:
