@@ -57,12 +57,12 @@ def clean(dataset, yes=False, list=False, human=True):
                 for file in files:
                     f_size = os.path.getsize(file)
                     if human:
-                        size_fmt = ir_datasets.util.format_file_size(f_size)
+                        fsize_fmt = ir_datasets.util.format_file_size(f_size)
                         if f_size > 1_000_000_000: # sizes over 1GB: list in red
-                            size_fmt = f'{RED}{size_fmt}{RES}'
+                            fsize_fmt = f'{RED}{fsize_fmt}{RES}'
                     else:
-                        size_fmt = str(size)
-                    print(f'{size_fmt}\t{file}')
+                        fsize_fmt = str(size)
+                    print(f'{fsize_fmt}\t{file}')
             if inp in ('n', 'no'):
                 return
 
