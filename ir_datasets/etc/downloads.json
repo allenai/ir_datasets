@@ -1765,6 +1765,70 @@
   }
 },
 
+"msmarco-passage-v2": {
+  "passages": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco_v2_passage.tar",
+    "size_hint": 21768192000,
+    "expected_md5": "05946bac48a8ffee62e160213eab3fda",
+    "cache_path": "msmarco_v2_passage.tar",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
+  },
+  "train/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_train_queries.tsv",
+    "size_hint": 11608838,
+    "expected_md5": "1835f44e6792c51aa98eed722a8dcc11",
+    "cache_path": "train/queries.tsv"
+  },
+  "train/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_train_top100.txt.gz",
+    "size_hint": 340634991,
+    "expected_md5": "7cd731ed984fccb2396f11a284cea800",
+    "cache_path": "train/top100.txt.gz"
+  },
+  "train/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_train_qrels.tsv",
+    "size_hint": 11771083,
+    "expected_md5": "abf1fd024b6aca203364d2138c241a6d",
+    "cache_path": "train/qrels.tsv"
+  },
+  "dev1/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev_queries.tsv",
+    "size_hint": 164507,
+    "expected_md5": "0fa4c6d64a653142ade9fc61d7484239",
+    "cache_path": "dev1/queries.tsv"
+  },
+  "dev1/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev_top100.txt.gz",
+    "size_hint": 4882727,
+    "expected_md5": "fee817a3ee273be8623379e5d3108c0b",
+    "cache_path": "dev1/top100.txt.gz"
+  },
+  "dev1/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev_qrels.tsv",
+    "size_hint": 167686,
+    "expected_md5": "e3610e344dac10adee03db1882916adf",
+    "cache_path": "dev1/qrels.tsv"
+  },
+  "dev2/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev2_queries.tsv",
+    "size_hint": 179603,
+    "expected_md5": "565b84dfa7ccd2f4251fa2debea5947a",
+    "cache_path": "dev2/queries.tsv"
+  },
+  "dev2/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev2_top100.txt.gz",
+    "size_hint": 5355464,
+    "expected_md5": "da532bf26169a3a2074fae774471cc9f",
+    "cache_path": "dev2/top100.txt.gz"
+  },
+  "dev2/qrels": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev2_qrels.tsv",
+    "size_hint": 183443,
+    "expected_md5": "04fb0edd7ad8bf26ca8b7d4880c671d1",
+    "cache_path": "dev2/qrels.tsv"
+  }
+},
+
 "msmarco-qna": {
   "train": {
     "url": "https://msmarco.blob.core.windows.net/msmarco/train_v2.1.json.gz",

@@ -36,7 +36,7 @@ class PyTerrierExampleGenerator():
         if self.dataset.docs_lang() != 'en': # TODO: add support for other languages
             return None
         fields = self.dataset.docs_cls()._fields
-        text_content_fields = [f for f in fields if self.dataset.docs_cls().__annotations__[f] is str and f not in ('doc_id', 'marked_up_text', 'source_xml')]
+        text_content_fields = [f for f in fields if self.dataset.docs_cls().__annotations__[f] is str and f not in ('doc_id', 'marked_up_text', 'source_xml', 'msmarco_document_id')]
         text_content_fields_list = ', '.join([f"'{f}'" for f in text_content_fields])
         return Example(code=f'''
 import pyterrier as pt
