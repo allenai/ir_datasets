@@ -745,11 +745,17 @@
     "expected_md5": "4c1e81d120566a493d5fa90b6114bd49",
     "cache_path": "corpus.json.gz"
   },
-  "dev/topics": {
+  "train/topics": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_topics.json.gz",
     "size_hint": 7271598,
     "expected_md5": "bdb72f896833d0c87421b6415d895846",
-    "cache_path": "topics.json.gz"
+    "cache_path": "train/topics.json.gz"
+  },
+  "eval/topics": {
+    "url": "https://drive.google.com/uc?export=download&id=1jGyjB7qOt45jakb32ZtroSkxs5sq5gvU",
+    "size_hint": 6055,
+    "expected_md5": "2e153903c375596914ee9ffdbcefd6a5",
+    "cache_path": "eval/topics.json.gz"
   },
   "metadata": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_metadata.json.gz",

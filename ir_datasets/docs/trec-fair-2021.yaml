@@ -9,9 +9,16 @@ The TREC Fair Ranking track evaluates systems according to how well they fairly 
 </ul>
 '
 
-dev:
+train:
   desc: '
 <p>
-Official dev set.
+Official train set.
+</p>
+'
+
+eval:
+  desc: '
+<p>
+Official eval set.
 </p>
 '

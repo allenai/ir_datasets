@@ -1,7 +1,7 @@
 import re
 import unittest
 from ir_datasets.formats import TrecQrel
-from ir_datasets.datasets.trec_fair_2021 import FairTrecDoc, FairTrecQuery
+from ir_datasets.datasets.trec_fair_2021 import FairTrecDoc, FairTrecQuery, FairTrecEvalQuery
 from .base import DatasetIntegrationTest
 
 
@@ -14,14 +14,19 @@ class TestFairTrec(DatasetIntegrationTest):
         })
 
     def test_queries(self):
-        self._test_queries('trec-fair-2021/dev', count=57, items={
+        self._test_queries('trec-fair-2021/train', count=57, items={
             0: FairTrecQuery('1', 'Agriculture', ['agriculture', 'crops', 'livestock', 'forests', 'farming'], 'This WikiProject strives to develop and improve articles at Wikipedia related to crop production, livestock management, aquaculture, dairy farming and forest management. The project also covers related areas, including both governmental and NGO regulatory agencies, agribusiness, support agencies such as 4H, agricultural products including fertilizers and herbicides, pest management, veterinary medicine and farming equipment and facilities.', 'https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Agriculture'),
             9: FairTrecQuery('10', 'Buddhism', ['buddhism', 'buddha', 'buddhist', 'buddhist temple', 'gautama buddha', 'monk'], 'WikiProject Buddhism is a group of people dedicated to improving Buddhism-related contents in Wikipedia.', 'https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Buddhism'),
             56: FairTrecQuery('57', 'Nigeria', ['nigeria', 'nigerians', 'nigerian languages', 'nigerian history'], 'This WikiProject aims to help coordinate efforts to improve and maintain pages related to: Nigeria, the history of Nigeria, languages of Nigeria, Nigerians, Local government areas of Nigeria', 'https://en.wikipedia.org/wiki/Wikipedia:WikiProject_Nigeria'),
         })
+        self._test_queries('trec-fair-2021/eval', count=49, items={
+            0: FairTrecEvalQuery('101', 'Mathematicians', ['mathematician', 'arithmetician', 'trigonometrician', 'geometer', 'algebraist', 'statistician', 'geometrician', 'number theorist'], 'WikiProject Mathematicians aims to improve Wikipedia coverage of all articles on persons that have notable achievements in the field of mathematics.'),
+            9: FairTrecEvalQuery('110', 'Clean Energy', ['clean energy', 'sustainable energy', 'renewable energy', 'emissions', 'carbon capture', 'carbon storage'], 'Wikiproject Clean Energy aims to improve Wikipedia coverage of all aspects relating to sustainable and renewable energy sources, such as wind, hydro, solar and geothermal energy.'),
+            48: FairTrecEvalQuery('150', 'Street Art', ['street art', 'street performance', 'graffiti', 'busking'], 'This WikiProject aims to improve the coverage and quality of Wikipedia articles relating to street art and its creators. We are interested in both static street art, such as graffiti and murals, and dynamic street performances and theater. Both authorized and unauthorized art is in our scope.'),
+        })
 
     def test_qrels(self):
-        self._test_qrels('trec-fair-2021/dev', count=2185446, items={
+        self._test_qrels('trec-fair-2021/train', count=2185446, items={
             0: TrecQrel("1", "572", 1, "0"),
             9: TrecQrel("1", "4514", 1, "0"),
             2185445: TrecQrel("57", "67253426", 1, "0"),

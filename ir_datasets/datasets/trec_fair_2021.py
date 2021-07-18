@@ -38,6 +38,13 @@ class FairTrecQuery(NamedTuple):
     homepage: str
 
 
+class FairTrecEvalQuery(NamedTuple):
+    query_id: str
+    text: str
+    keywords: List[str]
+    scope: str
+
+
 class FairTrecDocs(BaseDocs):
     def __init__(self, dlc, mlc):
         super().__init__()
@@ -106,18 +113,22 @@ class FairTrecDocs(BaseDocs):
 
 
 class FairTrecQueries(BaseQueries):
-    def __init__(self, dlc):
+    def __init__(self, dlc, qtype):
         super().__init__()
         self._dlc = dlc
+        self._qtype = qtype
 
     def queries_iter(self):
         with self._dlc.stream() as stream:
             for line in stream:
                 data = json.loads(line)
-                yield FairTrecQuery(str(data['id']), data['title'], data["keywords"], data["scope"], data["homepage"])
+                if self._qtype is FairTrecEvalQuery:
+                    yield FairTrecEvalQuery(str(data['id']), data['title'], data["keywords"], data["scope"])
+                elif self._qtype is FairTrecQuery:
+                    yield FairTrecQuery(str(data['id']), data['title'], data["keywords"], data["scope"], data["homepage"])
 
     def queries_cls(self):
-        return FairTrecQuery
+        return self._qtype
 
     def queries_lang(self):
         return 'en'
@@ -155,12 +166,17 @@ def _init():
 
     subsets = {}
 
-    dev_topics = GzipExtract(dlc["dev/topics"])
-    subsets['dev'] = Dataset(
+    train_topics = GzipExtract(dlc["train/topics"])
+    subsets['train'] = Dataset(
         collection,
-        FairTrecQueries(dev_topics),
-        FairTrecQrels(dev_topics),
-        documentation('dev'))
+        FairTrecQueries(train_topics, FairTrecQuery),
+        FairTrecQrels(train_topics),
+        documentation('train'))
+
+    subsets['eval'] = Dataset(
+        collection,
+        FairTrecQueries(GzipExtract(dlc['eval/topics']), FairTrecEvalQuery),
+        documentation('eval'))
 
     ir_datasets.registry.register(NAME, base)
     for s in subsets:
