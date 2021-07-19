@@ -6,6 +6,7 @@ from . import documentation
 from . import build_clueweb_warc_indexes
 from . import build_download_cache
 from . import build_c4_checkpoints
+from . import clean
 
 COMMANDS = {
 	'doc_fifos': doc_fifos.main,
@@ -16,4 +17,5 @@ COMMANDS = {
     'build_clueweb_warc_indexes': build_clueweb_warc_indexes.main,
     'build_c4_checkpoints': build_c4_checkpoints.main,
     'build_download_cache': build_download_cache.main,
+    'clean': clean.main,
 }
