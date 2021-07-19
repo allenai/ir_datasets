@@ -206,6 +206,13 @@ dataset, its available subsets, and what data they provide.
  - `IR_DATASETS_SKIP_DISK_FREE`: Set to `true` to disable checks for enough free space on disk before
    downloading content or otherwise creating large files.
 
+## Datamaestro integration
+
+`ir_datasets` can be used within [datamaestro](https://github.com/experimaestro/datamaestro).
+
+You can install the necessary dependencies with `pip install ir_datasets[datamaestro]` and view 
+[the current documentation](http://datamaestro-ir-datasets.rtfd.io/).
+
 ## Citing
 
 When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset

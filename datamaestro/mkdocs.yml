@@ -1,0 +1,35 @@
+# Configuration
+
+site_name: Information Retrieval Datasets
+site_description: irds Information Retrieval Datasets
+repo_url: https://github.com/allenai/ir_datasets
+
+# Main pages
+nav:
+  - Home: index.md
+  - Types: irds.md
+
+markdown_extensions:
+  - pymdownx.details
+  - pymdownx.superfences
+  - footnotes
+  - admonition
+  - pymdownx.snippets:
+      base_path: .
+  - toc:
+      baselevel: 1
+
+plugins:
+  - datamaestro:
+      repository: irds
+
+  - experimaestro:
+        modules:
+          - ir_datasets.datamaestro: irds.md
+        external:
+          - datamaestro_text: https://datamaestro-text.readthedocs.io/en/latest/experimaestro-mapping.json
+
+# Theme
+theme:
+    name: readthedocs
+    highlightjs: true

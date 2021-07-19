@@ -18,8 +18,10 @@ setuptools.setup(
     install_requires=list(open('requirements.txt')),
     classifiers=[],
     python_requires='>=3.6',
+    extras_require={"datamaestro": ["datamaestro_text>=2021.7.19", "datamaestro>=0.8.0"]},
     entry_points={
         'console_scripts': ['ir_datasets=ir_datasets:main_cli'],
+        'datamaestro.repositories': ['irds=ir_datasets.datamaestro:Repository']
     },
     package_data={
         'ir_datasets': glob('docs/*.yaml') + glob('etc/*.json'),
