@@ -5,6 +5,7 @@ from . import list as list_cmd
 from . import documentation
 from . import build_clueweb_warc_indexes
 from . import build_download_cache
+from . import clean
 
 COMMANDS = {
 	'doc_fifos': doc_fifos.main,
@@ -14,4 +15,5 @@ COMMANDS = {
     'documentation': documentation.main,
     'build_clueweb_warc_indexes': build_clueweb_warc_indexes.main,
     'build_download_cache': build_download_cache.main,
+    'clean': clean.main,
 }

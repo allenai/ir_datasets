@@ -1085,6 +1085,22 @@ until all documents are sent to fifos.
 <p><code>--count</code>: how many fifos to make? Defualts to 1 less than the number of processors (or 1).</p>
 <p><code>--dir</code>: where to put the fifos? Defaults to a new temp directory.</p>
 </div>
+
+<h2 id="export">clean command</h2>
+
+<p>
+This command can be used for cleaning up data that can be re-downloaded or re-generated
+again later. This is helpful for freeing up disk space.
+</p>
+
+<h4><code>ir_datasts clean [dataset-ids ...] [--list] [-y] [-H]</code></h4>
+
+<div class="methodinfo">
+<p><code>[dataset-ids]</code>: one or more top-level dataset IDs to clean up.</p>
+<p><code>--list</code>: list out the sizes of the provided dataset (or all datasets if non are given).</p>
+<p><code>-y</code>: say "yes" to prompt (i.e., confirm delete).</p>
+<p><code>-H</code>: print sizes in total bytes, rather than human-readable format.</p>
+</div>
 ''')
 
 
