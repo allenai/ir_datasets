@@ -135,8 +135,8 @@
   },
   "fever": {
     "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/fever.zip",
-    "size_hint": 1236987954,
-    "expected_md5": "88591ef8eb2913126d0c93ecbde6285f",
+    "size_hint": 1236988269,
+    "expected_md5": "5a818580227bfb4b35bb6fa46d9b6c03",
     "cache_path": "fever/source.zip"
   },
   "climate-fever": {
