@@ -153,6 +153,13 @@
   }
 },
 
+"c4": {
+  "en-noclean/sources": {
+    "instructions": "place sources file",
+    "cache_path": "en-noclean.sources.json"
+  }
+},
+
 "car": {
   "docs": {
     "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz",
