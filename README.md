@@ -153,6 +153,7 @@ Available datasets include:
  - [AQUAINT](https://ir-datasets.com/aquaint.html)
  - [BEIR (benchmark suite)](https://ir-datasets.com/beir.html)
  - [TREC CAR](https://ir-datasets.com/car.html)
+ - [C4](https://ir-datasets.com/c4.html)
  - [ClueWeb09](https://ir-datasets.com/clueweb09.html)
  - [ClueWeb12](https://ir-datasets.com/clueweb12.html)
  - [CLIRMatrix](https://ir-datasets.com/clirmatrix.html)

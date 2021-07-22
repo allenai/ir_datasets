@@ -85,6 +85,30 @@ jobs:
         name: "beir.json"
         path: "beir.json"
 
+  c4:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test
+      env:
+        IR_DATASETS_DL_DISABLE_PBAR: 'true'
+      run: |
+        python -m test.downloads --filter "^c4/" --output "c4.json" --randdelay 60
+    - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defeats the whole purpose)
+      uses: actions/upload-artifact@v2
+      with:
+        name: "c4.json"
+        path: "c4.json"
+
   car:
     runs-on: ubuntu-latest
     steps:
