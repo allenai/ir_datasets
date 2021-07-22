@@ -16,6 +16,16 @@ class TestWikir(DatasetIntegrationTest):
             9: GenericDoc('9', re.compile('^given annually by the academy of motion picture arts and sciences ampas the awards are an internatio.{1001}demy awards the 91st academy awards ceremony honoring the best films of 2018 was held on february 24$', flags=48)),
             2454784: GenericDoc('2456663', re.compile('^he began his career in gay erotic art in 1978 as illustrator and cover artist for barazoku the first.{1018}o appear disconnected from reality on february 18 2003 kimura died at the age of 56 from a pulmonary$', flags=48)),
         })
+        self._test_docs('wikir/en78k', count=2456637, items={
+            0: GenericDoc('0', re.compile('^These institutions are often described as stateless societies although several authors have defined .{41155}nthesis anarchists and others of preserving tacitly statist authoritarian or bureaucratic tendencies$', flags=48)),
+            9: GenericDoc('9', re.compile('^Given annually by the Academy of Motion Picture Arts and Sciences AMPAS the awards are an internatio.{35352}an language it is used generically to refer to any award or award ceremony regardless of which field$', flags=48)),
+            2456636: GenericDoc('2456663', re.compile('^He began his career in gay erotic art in 1978 as illustrator and cover artist for Barazoku the first.{1192}\\-published in 1997 was published shortly after his death His collected works are held by Studio Kaiz$', flags=48)),
+        })
+        self._test_docs('wikir/ens78k', count=2456637, items={
+            0: GenericDoc('0', re.compile('^These institutions are often described as stateless societies although several authors have defined .{41155}nthesis anarchists and others of preserving tacitly statist authoritarian or bureaucratic tendencies$', flags=48)),
+            9: GenericDoc('9', re.compile('^Given annually by the Academy of Motion Picture Arts and Sciences AMPAS the awards are an internatio.{35352}an language it is used generically to refer to any award or award ceremony regardless of which field$', flags=48)),
+            2456636: GenericDoc('2456663', re.compile('^He began his career in gay erotic art in 1978 as illustrator and cover artist for Barazoku the first.{1192}\\-published in 1997 was published shortly after his death His collected works are held by Studio Kaiz$', flags=48)),
+        })
         self._test_docs('wikir/fr14k', count=736616, items={
             0: GenericDoc('0', re.compile('^il est aussi philologue d origine bourbonnaise fils d un notaire de châteaumeillant cher il fait ses.{910}rmé toute une génération de linguistes français parmi lesquels émile benveniste marcel cohen georges$', flags=48)),
             9: GenericDoc('9', re.compile('^ce dernier constituait à l époque de l antiquité un point de passage important sur la route de la so.{949}ndi lieu de la défaite des armées britanniques et rejoint en 1921 la société des nations en 1979 les$', flags=48)),
@@ -62,6 +72,36 @@ class TestWikir(DatasetIntegrationTest):
             0: GenericQuery('1981012', 'canadian folklore'),
             9: GenericQuery('271014', 'sentinel range'),
             999: GenericQuery('73548', 'lanai'),
+        })
+        self._test_queries('wikir/en78k/training', count=62904, items={
+            0: GenericQuery('368996', 'Germersheim'),
+            9: GenericQuery('31044', 'Camp style'),
+            62903: GenericQuery('426311', 'Rajshahi District'),
+        })
+        self._test_queries('wikir/en78k/validation', count=7862, items={
+            0: GenericQuery('1411873', 'Auraiya district'),
+            9: GenericQuery('1459284', '2010 AFL season'),
+            7861: GenericQuery('532819', 'San Carlos canton'),
+        })
+        self._test_queries('wikir/en78k/test', count=7862, items={
+            0: GenericQuery('25182', 'Maria Callas'),
+            9: GenericQuery('124328', "1991 FIFA Women's World Cup"),
+            7861: GenericQuery('382632', 'Davis Mountains'),
+        })
+        self._test_queries('wikir/ens78k/training', count=62904, items={
+            0: GenericQuery('368996', 'Germersheim is a town in the German state of Rhineland-Palatinate'),
+            9: GenericQuery('31044', 'Camp is an aesthetic style and sensibility that regards something'),
+            62903: GenericQuery('426311', 'Rajshahi District is a district in mid-western Bangladesh'),
+        })
+        self._test_queries('wikir/ens78k/validation', count=7862, items={
+            0: GenericQuery('1411873', 'Auraiya district is one of the districts of Uttar Pradesh'),
+            9: GenericQuery('1459284', 'The 2010 Australian Football League season commenced on 25 March'),
+            7861: GenericQuery('532819', 'San Carlos is the 10th canton in the province of'),
+        })
+        self._test_queries('wikir/ens78k/test', count=7862, items={
+            0: GenericQuery('25182', 'Maria Callas Commendatore OMRI December 2 1923 – September 16'),
+            9: GenericQuery('124328', "The 1991 FIFA Women's World Cup was the inaugural FIFA"),
+            7861: GenericQuery('382632', 'The Davis Mountains originally known as Limpia Mountains are a'),
         })
         self._test_queries('wikir/fr14k/training', count=11341, items={
             0: GenericQuery('390701', 'trait biologique'),
@@ -140,6 +180,36 @@ class TestWikir(DatasetIntegrationTest):
             9: TrecQrel('1164242', '788', 1, '0'),
             104714: TrecQrel('73548', '2377038', 1, '0'),
         })
+        self._test_qrels('wikir/en78k/training', count=2435257, items={
+            0: TrecQrel('368996', '368996', 2, '0'),
+            9: TrecQrel('5737', '11828', 1, '0'),
+            2435256: TrecQrel('426311', '2315108', 1, '0'),
+        })
+        self._test_qrels('wikir/en78k/validation', count=271874, items={
+            0: TrecQrel('1411873', '1411873', 2, '0'),
+            9: TrecQrel('1944076', '1944076', 2, '0'),
+            271873: TrecQrel('532819', '2440624', 1, '0'),
+        })
+        self._test_qrels('wikir/en78k/test', count=353060, items={
+            0: TrecQrel('25182', '25182', 2, '0'),
+            9: TrecQrel('174105', '918850', 1, '0'),
+            353059: TrecQrel('382632', '1309518', 1, '0'),
+        })
+        self._test_qrels('wikir/ens78k/training', count=2435257, items={
+            0: TrecQrel('368996', '368996', 2, '0'),
+            9: TrecQrel('5737', '11828', 1, '0'),
+            2435256: TrecQrel('426311', '2315108', 1, '0'),
+        })
+        self._test_qrels('wikir/ens78k/validation', count=271874, items={
+            0: TrecQrel('1411873', '1411873', 2, '0'),
+            9: TrecQrel('1944076', '1944076', 2, '0'),
+            271873: TrecQrel('532819', '2440624', 1, '0'),
+        })
+        self._test_qrels('wikir/ens78k/test', count=353060, items={
+            0: TrecQrel('25182', '25182', 2, '0'),
+            9: TrecQrel('174105', '918850', 1, '0'),
+            353059: TrecQrel('382632', '1309518', 1, '0'),
+        })
         self._test_qrels('wikir/fr14k/training', count=609240, items={
             0: TrecQrel('390701', '390701', 2, '0'),
             9: TrecQrel('289251', '173579', 1, '0'),
@@ -216,6 +286,36 @@ class TestWikir(DatasetIntegrationTest):
             0: GenericScoredDoc('1981012', '1968399', 13.390851551324499),
             9: GenericScoredDoc('1981012', '821056', 8.81720912528983),
             99999: GenericScoredDoc('73548', '818549', 0.0),
+        })
+        self._test_scoreddocs('wikir/en78k/training', count=6284800, items={
+            0: GenericScoredDoc('368996', '1651819', 23.14194046616975),
+            9: GenericScoredDoc('368996', '618593', 17.432096830331467),
+            6284799: GenericScoredDoc('426311', '97253', 15.529782072936454),
+        })
+        self._test_scoreddocs('wikir/en78k/validation', count=785700, items={
+            0: GenericScoredDoc('1411873', '1579044', 29.78805667499762),
+            9: GenericScoredDoc('1411873', '1411879', 19.593174845080704),
+            785699: GenericScoredDoc('532819', '456647', 14.645128248017446),
+        })
+        self._test_scoreddocs('wikir/en78k/test', count=785600, items={
+            0: GenericScoredDoc('25182', '1413822', 26.770190544879753),
+            9: GenericScoredDoc('25182', '567382', 21.329586618874135),
+            785599: GenericScoredDoc('382632', '933740', 11.712924197712407),
+        })
+        self._test_scoreddocs('wikir/ens78k/training', count=6289800, items={
+            0: GenericScoredDoc('368996', '368996', 42.5142628002974),
+            9: GenericScoredDoc('368996', '1628082', 33.412777578029235),
+            6289799: GenericScoredDoc('426311', '852080', 26.43338402309732),
+        })
+        self._test_scoreddocs('wikir/ens78k/validation', count=786100, items={
+            0: GenericScoredDoc('1411873', '1579044', 48.87893849879893),
+            9: GenericScoredDoc('1411873', '2301035', 34.36216854665406),
+            786099: GenericScoredDoc('532819', '678583', 17.237808584137724),
+        })
+        self._test_scoreddocs('wikir/ens78k/test', count=786100, items={
+            0: GenericScoredDoc('25182', '25182', 29.514812932099993),
+            9: GenericScoredDoc('25182', '887295', 23.03166853881259),
+            786099: GenericScoredDoc('382632', '1788341', 17.95820049117319),
         })
         self._test_scoreddocs('wikir/fr14k/training', count=1134100, items={
             0: GenericScoredDoc('390701', '357730', 12.84854585287806),

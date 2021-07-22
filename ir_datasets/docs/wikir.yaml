@@ -78,6 +78,74 @@ Test set of <a class="ds-ref">wikir/en59k</a>. Scoreddocs are the provided BM25 
   bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
 
 
+en78k:
+  desc: '
+<p>
+WikIR for English. This is one of the two versions used in
+<a href="https://aclanthology.org/2020.lrec-1.237.pdf">Frej2020Wikir</a>.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+en78k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/en78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+en78k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/en78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+en78k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/en78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+
+ens78k:
+  desc: '
+<p>
+WikIR for English, using the first sentences of articles as queries. This is one of
+the two versions used in <a href="https://aclanthology.org/2020.lrec-1.237.pdf">Frej2020Wikir</a>.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+ens78k/training:
+  desc: '
+<p>
+Training set of <a class="ds-ref">wikir/ens78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+ens78k/validation:
+  desc: '
+<p>
+Validation set of <a class="ds-ref">wikir/ens78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+ens78k/test:
+  desc: '
+<p>
+Test set of <a class="ds-ref">wikir/ens78k</a>. Scoreddocs are the provided BM25 run.
+</p>
+'
+  bibtex_ids: ['Frej2020Wikir', 'Frej2020MlWikir']
+
+
 fr14k:
   desc: '
 <p>

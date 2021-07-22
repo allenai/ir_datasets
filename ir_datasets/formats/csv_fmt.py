@@ -1,3 +1,4 @@
+import sys
 import codecs
 import contextlib
 import csv
@@ -19,6 +20,7 @@ class _CsvBase:
         return self._dlc.path()
 
     def _iter(self):
+        csv.field_size_limit(sys.maxsize // 1000)
         field_count = len(self._cls._fields)
         with self._dlc.stream() as f:
             f = codecs.getreader('utf8')(f)

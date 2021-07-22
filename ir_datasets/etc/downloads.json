@@ -2682,6 +2682,16 @@
     "size_hint": 1154400672,
     "expected_md5": "c9f7e646e022eea84e6f00e3870ca79b"
   },
+  "en78k": {
+    "url": "https://www.zenodo.org/record/3707606/files/enwikIR.zip?download=1",
+    "size_hint": 4234761118,
+    "expected_md5": "e1a1f7678523032e0be5fedaed6c0740"
+  },
+  "ens78k": {
+    "url": "https://www.zenodo.org/record/3707238/files/enwikIRS.zip?download=1",
+    "size_hint": 4245785781,
+    "expected_md5": "8fd2e530ec9dfd17f3b305ec23122b55"
+  },
   "fr14k": {
     "url": "https://zenodo.org/record/3569718/files/FRwikIR14k.zip?download=1",
     "size_hint": 331209361,
