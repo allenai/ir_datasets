@@ -1,0 +1,27 @@
+_:
+  pretty_name: 'C4'
+  desc: '
+<p>
+A version of <a href="https://www.tensorflow.org/datasets/catalog/c4">Google''s C4 dataset</a>,
+which consists of articles crawled form the web.
+</p>
+'
+
+en-noclean-tr:
+  desc: '
+<p>
+The "en-noclean" train subset of the corpus, consisting of ~1B documents written in English.
+Document IDs are assigned as proposed by the <a href="https://trec-health-misinfo.github.io/">
+TREC Health Misinformation 2021 track</a>.
+</p>
+'
+
+en-noclean-tr/trec-misinfo-2021:
+  desc: '
+<p>
+The TREC Health Misinformation 2021 track.
+</p>
+<ul>
+<li><a href="https://trec-health-misinfo.github.io/">Shared Task Website</a>
+</ul>
+'

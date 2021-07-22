@@ -145,7 +145,7 @@ class DatasetIntegrationTest(unittest.TestCase):
             count += 1
             if i in include_idxs:
                 items[i] = doc
-            if not include_count and i == 1000:
+            if not include_count and ((include_idxs[-1] < 1000 and i == 1000) or (include_idxs[-1] >= 1000 and i == include_idxs[-1])):
                 break
         items[count-1] = doc
         items = {k: self._replace_regex_namedtuple(v) for k, v in items.items()}

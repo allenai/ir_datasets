@@ -153,6 +153,26 @@
   }
 },
 
+"c4": {
+  "en-noclean/sources": {
+    "url": "https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/c4/en.noclean.sources.json.gz",
+    "size_hint": 240518,
+    "expected_md5": "3faf0f3aaf3f0e5bca573e118f815991",
+    "cache_path": "en.noclean.sources.json.gz"
+  },
+  "en-noclean/checkpoints": {
+    "url": "https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/c4/en.noclean.checkpoints.tar.gz",
+    "size_hint": 8983526491,
+    "expected_md5": "eab00c3b5202564da998466198a01298"
+  },
+  "trec-misinfo-2021/queries": {
+    "instructions": "download file from Active Participants section of TREC website here: <https://trec.nist.gov/act_part/tracks/misinfo/misinfo-2021-topics.xml>.\nLink the file here: {path}",
+    "size_hint": 50721,
+    "expected_md5": "c8fd82d3ffea802a1029720b03de443b",
+    "cache_path": "misinfo-2021-topics.xml"
+  }
+},
+
 "car": {
   "docs": {
     "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz",
