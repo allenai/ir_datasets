@@ -299,7 +299,8 @@ class _DownloadConfig:
             else:
                 cache_path = dlc['cache_path']
         if 'url' in dlc:
-            if not dlc.get('skip_local') and dlc.get('expected_md5'):
+            small_file_size = int(os.environ.get('IR_DATASETS_SMALL_FILE_SIZE', '5000000'))
+            if not dlc.get('skip_local') and dlc.get('expected_md5') and not dlc.get('size_hint', small_file_size) < small_file_size:
                 local_path = Path(self.get_download_path()) / dlc['expected_md5']
                 local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it here '
                              f'to avoid downloading it again: {local_path}')

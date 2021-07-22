@@ -206,6 +206,8 @@ dataset, its available subsets, and what data they provide.
    does not disable hash verification of the downloaded content.
  - `IR_DATASETS_SKIP_DISK_FREE`: Set to `true` to disable checks for enough free space on disk before
    downloading content or otherwise creating large files.
+ - `IR_DATASETS_SMALL_FILE_SIZE`: The size of files that are considered "small", in bytes. Instructions for
+   linking small files rather then downloading them are not shown. Defaults to 5000000 (5MB).
 
 ## Citing
 
