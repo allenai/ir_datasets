@@ -5,13 +5,16 @@ import pickle
 from pathlib import Path
 from typing import NamedTuple, Tuple
 import ir_datasets
-from ir_datasets.util import DownloadConfig, Download, RequestsDownload
-from ir_datasets.formats import BaseDocs
+from ir_datasets.util import DownloadConfig, Download, RequestsDownload, TarExtractAll, GzipExtract
+from ir_datasets.formats import BaseDocs, TrecXmlQueries, DocSourceSeekableIter, DocSource, SourceDocIter
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import Docstore
 
+_logger = ir_datasets.log.easy()
 
 NAME = 'c4'
+
+misinfo_map = {'number': 'query_id', 'query': 'text', 'description': 'description', 'narrative': 'narrative', 'disclaimer': 'disclaimer', 'stance': 'stance', 'evidence': 'evidence'}
 
 
 class C4Doc(NamedTuple):
@@ -21,48 +24,14 @@ class C4Doc(NamedTuple):
     timestamp: str
 
 
-
-class DocSourceSeekableIter:
-    def __next__(self) -> NamedTuple:
-        """
-        Returns the next document encountered
-        """
-        raise NotImplementedError()
-
-    def seek(self, pos):
-        """
-        Seeks to the document as `index` pos within the source.
-        """
-        raise NotImplementedError()
-
-    def close(self):
-        """
-        Performs any cleanup work when done with this iterator (e.g., close open files)
-        """
-        pass
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.close()
-
-    def __iter__(self):
-        return self
-
-
-class DocSource:
-    def __len__(self) -> int:
-        """
-        Returns the number of documents in this source
-        """
-        raise NotImplementedError()
-
-    def __iter__(self) -> DocSourceSeekableIter:
-        """
-        Returns a seekable iterator over this source
-        """
-        raise NotImplementedError()
+class MisinfoQuery(NamedTuple):
+    query_id: str
+    text: str
+    description: str
+    narrative: str
+    disclaimer: str
+    stance: str
+    evidence: str
 
 
 class C4Source(DocSource):
@@ -84,7 +53,8 @@ class C4Source(DocSource):
 
     def checkpoints(self):
         if self._checkpoints is None:
-            with ir_datasets.lazy_libs.lz4_frame().frame.open(f'{self.checkpoint_dlc.path()}/{self.name}.chk.pkl.lz4') as f:
+            chk_file_name = self.dlc.path().split('/')[-1] + '.chk.pkl.lz4'
+            with ir_datasets.lazy_libs.lz4_frame().frame.open(os.path.join(self.checkpoint_dlc.path(), chk_file_name)) as f:
                 self._checkpoints = pickle.load(f)
         return self._checkpoints
 
@@ -162,12 +132,14 @@ class C4Docstore(Docstore):
 
 
 class C4Docs(BaseDocs):
-    def __init__(self, sources_dlc, checkpoint_dlc, base_path):
+    def __init__(self, sources_dlc, checkpoint_dlc, base_path, source_name_filter=None, filter_name=''):
         super().__init__()
         self._sources_dlc = sources_dlc
         self._checkpoint_dlc = checkpoint_dlc
         self._sources = None
         self._base_path = Path(base_path)
+        self._source_name_filter = source_name_filter
+        self._filter_name = filter_name
 
     def docs_iter(self):
         return SourceDocIter(self, slice(0, self.docs_count()))
@@ -196,87 +168,30 @@ class C4Docs(BaseDocs):
             sources = []
             with self._sources_dlc.stream() as stream:
                 for source in json.load(stream):
+                    if self._source_name_filter:
+                        if not re.match(self._source_name_filter, source['name']):
+                            continue
                     cache_path = os.path.join(self._base_path, 'en.noclean', source['url'].split('/')[-1])
                     dlc = Download([RequestsDownload(source['url'])], expected_md5=source['expected_md5'], cache_path=cache_path)
-                    sources.append(C4Source(source['name'], dlc, self._checkpoint_dlc, source['doc_count'], source['checkpoint_freq'], source['size_hint'], cache_path))
+                    sources.append(C4Source(source['name'].replace('.json.gz', ''), dlc, self._checkpoint_dlc, source['doc_count'], source['checkpoint_freq'], source['size_hint'], cache_path))
             self._sources = sources
-            if not (self._base_path / 'en.noclean' / '_built').exists():
+            build_flag = self._base_path / 'en.noclean' / f'_built{self._filter_name}'
+            if not build_flag.exists():
                 remaining_size = sum(s.size_hint for s in sources if not os.path.exists(s.cache_path))
                 if remaining_size > 0:
                     _logger.info(f'Will start downloading c4/en-noclean files ({ir_datasets.util.format_file_size(remaining_size)}). '
-                                 f'If you already have a copy, you may link them to {self._base_path / 'en.noclean'} (should contain '
-                                 f'files like c4-train.00000-of-07168.json.gz)'):
+                                 f'If you already have a copy, you may link them to {self._base_path / "en.noclean"} (should contain '
+                                 f'files like c4-train.00000-of-07168.json.gz)')
                     ir_datasets.util.check_disk_free(self._base_path / 'en.noclean', remaining_size)
                 for source in sources:
-                    path = source.path() # downloads if it doesn't already exist
+                    path = source.dlc.path() # downloads if it doesn't already exist
                     # A quick check that should help make sure it's probably correct if the user downloaded
                     # it themselves. (Not much overhead if downloaded ourselves.)
                     true_size = os.path.getsize(path)
                     if true_size != source.size_hint:
-                        raise RuntimeError(f'Expected {path} to be {source.size_hint} B but it was actually {true_size} B.')
-                (self._base_path / 'en.noclean' / '_built').touch()
+                        raise RuntimeError(f'Expected {path} to be {source.size_hint} bytes but it was actually {true_size} bytes.')
+                build_flag.touch()
         return self._sources
-
-
-class SourceDocIter:
-    def __init__(self, docs, slice):
-        self.docs = docs
-        self.next_index = 0
-        self.slice = slice
-        self.current_iter = None
-        self.current_start_idx = 0
-        self.current_end_idx = 0
-        self.sources = docs.docs_source_iter()
-
-    def __next__(self):
-        if self.slice.start >= self.slice.stop:
-            raise StopIteration
-        if self.current_iter is None or self.current_end_idx <= self.slice.start:
-            # First iteration or no docs remaining in this file
-            if self.current_iter is not None:
-                self.current_iter.close()
-                self.current_iter = None
-            # jump ahead to the file that contains the desired index
-            first = True
-            while first or self.current_end_idx < self.slice.start:
-                source = next(self.sources)
-                self.next_index = self.current_end_idx
-                self.current_start_idx = self.current_end_idx
-                self.current_end_idx = self.current_start_idx + len(source)
-                first = False
-            self.current_iter = iter(source)
-        if self.next_index != self.slice.start:
-            self.current_iter.seek(self.slice.start - self.current_start_idx)
-        result = next(self.current_iter)
-        self.next_index += 1
-        self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
-        return result
-
-    def close(self):
-        if self.current_iter is not None:
-            self.current_iter.close()
-        self.current_iter = None
-
-    def __iter__(self):
-        return self
-
-    def __del__(self):
-        self.close()
-
-    def __getitem__(self, key):
-        if isinstance(key, slice):
-            # it[start:stop:step]
-            new_slice = ir_datasets.util.apply_sub_slice(self.slice, key)
-            return SourceDocIter(self.docs, new_slice)
-        elif isinstance(key, int):
-            # it[index]
-            new_slice = ir_datasets.util.slice_idx(self.slice, key)
-            new_it = SourceDocIter(self.docs, new_slice)
-            result = next(new_it, StopIteration)
-            if result is StopIteration:
-                raise IndexError((self.slice, slice(key, key+1), new_slice))
-            return result
-        raise TypeError('key must be int or slice')
 
 
 def _init():
@@ -285,15 +200,20 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    en_noclean_collection = C4Docs(
-        dlc['en-noclean/sources'],
+    en_noclean_tr_collection = C4Docs(
+        GzipExtract(dlc['en-noclean/sources']),
         TarExtractAll(dlc['en-noclean/checkpoints'], base_path / 'en.noclean.checkpoints'),
-        base_path)
+        base_path, source_name_filter=r'en\.noclean\.c4-train', filter_name='train') # exclude validation files (only include train)
     base = Dataset(documentation('_'))
 
-    subsets['en-noclean'] = Dataset(
-        en_noclean_collection,
-        documentation('en-noclean'))
+    subsets['en-noclean-tr'] = Dataset(
+        en_noclean_tr_collection,
+        documentation('en-noclean-tr'))
+
+    subsets['en-noclean-tr/trec-misinfo-2021'] = Dataset(
+        en_noclean_tr_collection,
+        TrecXmlQueries(dlc['trec-misinfo-2021/queries'], qtype=MisinfoQuery, qtype_map=misinfo_map, namespace='trec-misinfo', lang='en'),
+        documentation('en-noclean-tr/trec-misinfo-2021'))
 
     ir_datasets.registry.register(NAME, base)
     for subset in subsets:

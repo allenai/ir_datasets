@@ -2,6 +2,7 @@ import hashlib
 import json
 import types
 from typing import NamedTuple
+import ir_datasets
 
 class GenericDoc(NamedTuple):
     doc_id: str
@@ -211,3 +212,107 @@ class DocstoreBackedDocs(BaseDocs):
 
     def docs_store(self):
         return self._docstore_lazy()
+
+
+class DocSourceSeekableIter:
+    def __next__(self) -> NamedTuple:
+        """
+        Returns the next document encountered
+        """
+        raise NotImplementedError()
+
+    def seek(self, pos):
+        """
+        Seeks to the document as `index` pos within the source.
+        """
+        raise NotImplementedError()
+
+    def close(self):
+        """
+        Performs any cleanup work when done with this iterator (e.g., close open files)
+        """
+        pass
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
+
+    def __iter__(self):
+        return self
+
+
+class DocSource:
+    def __len__(self) -> int:
+        """
+        Returns the number of documents in this source
+        """
+        raise NotImplementedError()
+
+    def __iter__(self) -> DocSourceSeekableIter:
+        """
+        Returns a seekable iterator over this source
+        """
+        raise NotImplementedError()
+
+
+class SourceDocIter:
+    def __init__(self, docs, slice):
+        self.docs = docs
+        self.next_index = 0
+        self.slice = slice
+        self.current_iter = None
+        self.current_start_idx = 0
+        self.current_end_idx = 0
+        self.sources = docs.docs_source_iter()
+
+    def __next__(self):
+        if self.slice.start >= self.slice.stop:
+            raise StopIteration
+        if self.current_iter is None or self.current_end_idx <= self.slice.start:
+            # First iteration or no docs remaining in this file
+            if self.current_iter is not None:
+                self.current_iter.close()
+                self.current_iter = None
+            # jump ahead to the file that contains the desired index
+            first = True
+            while first or self.current_end_idx < self.slice.start:
+                source = next(self.sources)
+                self.next_index = self.current_end_idx
+                self.current_start_idx = self.current_end_idx
+                self.current_end_idx = self.current_start_idx + len(source)
+                first = False
+            self.current_iter = iter(source)
+        if self.next_index != self.slice.start:
+            self.current_iter.seek(self.slice.start - self.current_start_idx)
+        result = next(self.current_iter)
+        self.next_index += 1
+        self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
+        return result
+
+    def close(self):
+        if self.current_iter is not None:
+            self.current_iter.close()
+        self.current_iter = None
+
+    def __iter__(self):
+        return self
+
+    def __del__(self):
+        self.close()
+
+    def __getitem__(self, key):
+        if isinstance(key, slice):
+            # it[start:stop:step]
+            new_slice = ir_datasets.util.apply_sub_slice(self.slice, key)
+            return SourceDocIter(self.docs, new_slice)
+        elif isinstance(key, int):
+            # it[index]
+            new_slice = ir_datasets.util.slice_idx(self.slice, key)
+            new_it = SourceDocIter(self.docs, new_slice)
+            result = next(new_it, StopIteration)
+            if result is StopIteration:
+                raise IndexError((self.slice, slice(key, key+1), new_slice))
+            return result
+        raise TypeError('key must be int or slice')

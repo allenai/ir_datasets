@@ -1,7 +1,10 @@
+import os
 import sys
 import multiprocessing
 from pathlib import Path
 import gzip
+import hashlib
+import json
 import pickle
 import argparse
 import ir_datasets
@@ -34,11 +37,37 @@ def main(args):
     parser.add_argument('source_dir')
     parser.add_argument('output_dir')
     parser.add_argument('--skip_last', action='store_true')
+    parser.add_argument('--sources_file')
     args = parser.parse_args(args)
     source_dir = Path(args.source_dir)
     output_dir = Path(args.output_dir)
-    all_source_files = [f.relative_to(source_dir) for f in source_dir.rglob('*.json.gz')]
+    all_source_files = source_dir.rglob('*.json.gz')
     all_source_files = sorted(all_source_files)
+    if args.sources_file:
+        sources = []
+        for file in _logger.pbar(all_source_files, desc='building sources file', unit='file'):
+            try:
+                count = 0
+                with gzip.open(file, 'rb') as f:
+                    for line in f:
+                        count += 1
+                h = hashlib.new('md5')
+                h.update(open(file, 'rb').read())
+                md5 = h.hexdigest().lower()
+                size = os.path.getsize(file)
+                sources.append({
+                    "name": f"en.noclean.{file.name}",
+                    "url": f"https://huggingface.co/datasets/allenai/c4/resolve/main/en.noclean/{file.name}",
+                    "expected_md5": md5,
+                    "size_hint": size,
+                    "checkpoint_freq": 1500,
+                    "doc_count": count,
+                })
+            except Exception as ex:
+                print(file, ex)
+        with gzip.open(args.sources_file + '.gz', 'wt') as f:
+            json.dump(sources, f)
+    all_source_files = [f.relative_to(source_dir) for f in all_source_files]
     if args.skip_last:
         all_source_files = all_source_files[:-1]
     process_args = [(source_dir/f, output_dir/f'{f}.chk.pkl.lz4') for f in all_source_files]
