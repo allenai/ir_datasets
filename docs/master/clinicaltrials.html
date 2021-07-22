@@ -28,6 +28,7 @@
 <li><a href="#clinicaltrials/2019"><kbd><span class="prefix">clinicaltrials</span>/2019</kbd></a></li>
 <li><a href="#clinicaltrials/2019/trec-pm-2019"><kbd><span class="prefix">clinicaltrials</span>/2019/trec-pm-2019</kbd></a></li>
 <li><a href="#clinicaltrials/2021"><kbd><span class="prefix">clinicaltrials</span>/2021</kbd></a></li>
+<li><a href="#clinicaltrials/2021/trec-ct-2021"><kbd><span class="prefix">clinicaltrials</span>/2021/trec-ct-2021</kbd></a></li>
 </ol>
 <div id="Downloads">
 </div>
@@ -658,7 +659,7 @@
 <h3><kbd class="ds-name select"><span class="str">"clinicaltrials/2021"</span></kbd></h3>
 
 <div class="desc">
- <p> A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from April 2021 for use with the <a href="http://www.trec-cds.org/2021.html">TREC Clinical Trials 2021 Track</a>. </p> <p> Queries for the TREC Clinical Trials 2021 Track will be released later. </p> <ul> <li><a href="http://www.trec-cds.org/2021.html#documents">Dataset information</a></li> </ul> 
+ <p> A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from April 2021 for use with the <a href="http://www.trec-cds.org/2021.html">TREC Clinical Trials 2021 Track</a>. </p> <ul> <li><a href="http://www.trec-cds.org/2021.html#documents">Dataset information</a></li> </ul> 
 </div>
 <div class="tabs">
 <a class="tab" target="clinicaltrials/2021__docs">docs</a>
@@ -698,6 +699,104 @@
 <div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
 <span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
 <span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:clinicaltrials/2021&#39;</span><span class="p">)</span>
+<span class="c1"># Index clinicaltrials/2021</span>
+<span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/clinicaltrials_2021&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span><span class="p">,</span> <span class="s1">&#39;detailed_description&#39;</span><span class="p">,</span> <span class="s1">&#39;eligibility&#39;</span><span class="p">])</span>
+</pre></div>
+<p>You can find more details about PyTerrier indexing <a href="https://pyterrier.readthedocs.io/en/latest/datasets.html#examples">here</a>.</p></div></div>
+</div>
+</div>
+</div>
+
+<hr />
+<div class="dataset" id="clinicaltrials/2021/trec-ct-2021" data-parent="clinicaltrials">
+<h3><kbd class="ds-name select"><span class="str">"clinicaltrials/2021/trec-ct-2021"</span></kbd></h3>
+
+<div class="desc">
+ <p> The TREC Clinical Trials 2021 track. </p> <ul> <li><a href="http://www.trec-cds.org/2021.html">Shared Task Website</a></li> </ul> 
+</div>
+<div class="tabs">
+<a class="tab" target="clinicaltrials/2021/trec-ct-2021__queries">queries</a>
+<div id="clinicaltrials/2021/trec-ct-2021__queries" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<div>Query type:</div>
+<div class="type">
+<div class="type-name">GenericQuery: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">query_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">text</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;clinicaltrials/2021/trec-ct-2021&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">query</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">queries_iter</span><span class="p">():</span>
+    <span class="n">query</span> <span class="c1"># namedtuple&lt;query_id, text&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> clinicaltrials/2021/trec-ct-2021 queries
+</pre></div>
+
+<code class="output">
+
+<div>[query_id]&nbsp;&nbsp;&nbsp;&nbsp;[text]</div>
+<div>...</div>
+
+</code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:clinicaltrials/2021/trec-ct-2021&#39;</span><span class="p">)</span>
+<span class="n">index_ref</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IndexRef</span><span class="o">.</span><span class="n">of</span><span class="p">(</span><span class="s1">&#39;./indices/clinicaltrials_2021&#39;</span><span class="p">)</span> <span class="c1"># assumes you have already built an index</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">BatchRetrieve</span><span class="p">(</span><span class="n">index_ref</span><span class="p">,</span> <span class="n">wmodel</span><span class="o">=</span><span class="s1">&#39;BM25&#39;</span><span class="p">)</span>
+<span class="c1"># (optionally other pipeline components)</span>
+<span class="n">pipeline</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_topics</span><span class="p">())</span>
+</pre></div>
+<p>You can find more details about PyTerrier retrieval <a href="https://pyterrier.readthedocs.io/en/latest/terrier-retrieval.html">here</a>.</p></div></div>
+</div>
+
+<a class="tab" target="clinicaltrials/2021/trec-ct-2021__docs">docs</a>
+<div id="clinicaltrials/2021/trec-ct-2021__docs" class="tab-content">
+<p>Language: <span class="lang-code">en</span></p>
+<p><strong>Note:</strong> Uses docs from <a class="ds-ref">clinicaltrials/2021</a></p>
+<div>Document type:</div>
+<div class="type">
+<div class="type-name">ClinicalTrialsDoc: (<span class="kwd">namedtuple</span>)</div>
+<ol class="type-fields">
+<li data-tuple-idx="0"><span class="">doc_id</span>: <span class="kwd">str</span></li><li data-tuple-idx="1"><span class="">title</span>: <span class="kwd">str</span></li><li data-tuple-idx="2"><span class="">condition</span>: <span class="kwd">str</span></li><li data-tuple-idx="3"><span class="">summary</span>: <span class="kwd">str</span></li><li data-tuple-idx="4"><span class="">detailed_description</span>: <span class="kwd">str</span></li><li data-tuple-idx="5"><span class="">eligibility</span>: <span class="kwd">str</span></li>
+</ol>
+</div>
+<p>Examples:</p><div class="ex-tabs">
+<a class="ex-tab" target="irds-python">Python API</a>
+<div class="ex-tab-content irds-python">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ir_datasets</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">ir_datasets</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="s2">&quot;clinicaltrials/2021/trec-ct-2021&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">doc</span> <span class="ow">in</span> <span class="n">dataset</span><span class="o">.</span><span class="n">docs_iter</span><span class="p">():</span>
+    <span class="n">doc</span> <span class="c1"># namedtuple&lt;doc_id, title, condition, summary, detailed_description, eligibility&gt;</span>
+</pre></div>
+<p>You can find more details about the Python API <a href="python.html">here</a>.</p></div>
+<a class="ex-tab" target="irds-cli">CLI</a>
+<div class="ex-tab-content irds-cli">
+<div class="highlight"><pre><span></span>ir_datasets <span class="nb">export</span> clinicaltrials/2021/trec-ct-2021 docs
+</pre></div>
+
+<code class="output">
+
+<div>[doc_id]&nbsp;&nbsp;&nbsp;&nbsp;[title]&nbsp;&nbsp;&nbsp;&nbsp;[condition]&nbsp;&nbsp;&nbsp;&nbsp;[summary]&nbsp;&nbsp;&nbsp;&nbsp;[detailed_description]&nbsp;&nbsp;&nbsp;&nbsp;[eligibility]</div>
+<div>...</div>
+
+</code>
+<p>You can find more details about the CLI <a href="cli.html">here</a>.</p></div>
+<a class="ex-tab" target="pyterrier">PyTerrier</a>
+<div class="ex-tab-content pyterrier">
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyterrier</span> <span class="k">as</span> <span class="nn">pt</span>
+<span class="n">pt</span><span class="o">.</span><span class="n">init</span><span class="p">()</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">get_dataset</span><span class="p">(</span><span class="s1">&#39;irds:clinicaltrials/2021/trec-ct-2021&#39;</span><span class="p">)</span>
 <span class="c1"># Index clinicaltrials/2021</span>
 <span class="n">indexer</span> <span class="o">=</span> <span class="n">pt</span><span class="o">.</span><span class="n">IterDictIndexer</span><span class="p">(</span><span class="s1">&#39;./indices/clinicaltrials_2021&#39;</span><span class="p">)</span>
 <span class="n">index_ref</span> <span class="o">=</span> <span class="n">indexer</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">dataset</span><span class="o">.</span><span class="n">get_corpus_iter</span><span class="p">(),</span> <span class="n">fields</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;condition&#39;</span><span class="p">,</span> <span class="s1">&#39;summary&#39;</span><span class="p">,</span> <span class="s1">&#39;detailed_description&#39;</span><span class="p">,</span> <span class="s1">&#39;eligibility&#39;</span><span class="p">])</span>

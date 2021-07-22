@@ -25,6 +25,8 @@ QREL_DEFS = {
 
 NAME = 'clinicaltrials'
 
+ct_qmap = {'topic': 'text'}
+
 
 class ClinicalTrialsDoc(NamedTuple):
     doc_id: str
@@ -145,6 +147,11 @@ def _init():
         TrecQrels(dlc['trec-pm-2019/qrels'], QREL_DEFS),
         documentation('trec-pm-2019')
     )
+
+    subsets['2021/trec-ct-2021'] = Dataset(
+        collection21,
+        TrecXmlQueries(dlc['trec-ct-2021/queries'], qtype=GenericQuery, qtype_map=ct_qmap, namespace='trec-pm-2019', lang='en'),
+        documentation('trec-ct-2021'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

@@ -291,6 +291,10 @@ class TrecXmlQueries(BaseQueries):
                         text = topic_el.attrib[attr]
                         field = self._qtype_map[attr]
                         item[self._qtype._fields.index(field)] = text
+                if topic_el.tag in self._qtype_map:
+                    text = ''.join(topic_el.itertext())
+                    field = self._qtype_map[topic_el.tag]
+                    item[self._qtype._fields.index(field)] = text
                 for field_el in topic_el:
                     if field_el.tag in self._qtype_map:
                         text = ''.join(field_el.itertext())

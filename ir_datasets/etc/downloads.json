@@ -273,6 +273,12 @@
     "size_hint": 6302,
     "expected_md5": "bc26cef87e842837daf2e6680d4652c0",
     "cache_path": "trec-pm-2019/queries.xml"
+  },
+  "trec-ct-2021/queries": {
+    "url": "http://www.trec-cds.org/topics2021.xml",
+    "size_hint": 64618,
+    "expected_md5": "6d842b40387d760274447c1f8d7396a8",
+    "cache_path": "trec-ct-2021/queries.xml"
   }
 },
   

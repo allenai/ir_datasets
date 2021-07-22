@@ -77,10 +77,17 @@ The TREC 2019 Precision Medicine clinical trials subtask.
 A snapshot of <a href="https://clinicaltrials.gov/">ClinicalTrials.gov</a> from April 2021
 for use with the <a href="http://www.trec-cds.org/2021.html">TREC Clinical Trials 2021 Track</a>.
 </p>
-<p>
-Queries for the TREC Clinical Trials 2021 Track will be released later.
-</p>
 <ul>
 <li><a href="http://www.trec-cds.org/2021.html#documents">Dataset information</a></li>
+</ul>
+'
+
+trec-ct-2021:
+  desc: '
+<p>
+The TREC Clinical Trials 2021 track.
+</p>
+<ul>
+<li><a href="http://www.trec-cds.org/2021.html">Shared Task Website</a></li>
 </ul>
 '
