@@ -1819,8 +1819,8 @@
   },
   "train/qrels": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_train_qrels.tsv",
-    "size_hint": 11771083,
-    "expected_md5": "abf1fd024b6aca203364d2138c241a6d",
+    "size_hint": 11620946,
+    "expected_md5": "a2e37e9a9c7ca13d6e38be0512a52017",
     "cache_path": "train/qrels.tsv"
   },
   "dev1/queries": {
@@ -1837,8 +1837,8 @@
   },
   "dev1/qrels": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev_qrels.tsv",
-    "size_hint": 167686,
-    "expected_md5": "e3610e344dac10adee03db1882916adf",
+    "size_hint": 165024,
+    "expected_md5": "10f9263260d206d8fb8f13864aea123a",
     "cache_path": "dev1/qrels.tsv"
   },
   "dev2/queries": {
@@ -1855,8 +1855,8 @@
   },
   "dev2/qrels": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/passv2_dev2_qrels.tsv",
-    "size_hint": 183443,
-    "expected_md5": "04fb0edd7ad8bf26ca8b7d4880c671d1",
+    "size_hint": 181612,
+    "expected_md5": "8ed8577fa459d34b59cf69b4daa2baeb",
     "cache_path": "dev2/qrels.tsv"
   }
 },

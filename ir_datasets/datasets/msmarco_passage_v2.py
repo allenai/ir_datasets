@@ -233,22 +233,26 @@ def _init():
     collection = MsMarcoV2Passages(dlc['passages'])
     collection = migrator(collection)
 
+    qrels_migrator = Migrator(base_path/'qrels_version.txt', 'v2',
+        affected_files=[base_path/'train'/'qrels.tsv', base_path/'dev1'/'qrels.tsv', base_path/'dev2'/'qrels.tsv'],
+        message='Updating qrels (task organizers removed duplicates)')
+
     subsets['train'] = Dataset(
         collection,
         TsvQueries(dlc['train/queries'], namespace='msmarco', lang='en'),
-        TrecQrels(dlc['train/qrels'], QRELS_DEFS),
+        qrels_migrator(TrecQrels(dlc['train/qrels'], QRELS_DEFS)),
         TrecScoredDocs(GzipExtract(dlc['train/scoreddocs'])),
     )
     subsets['dev1'] = Dataset(
         collection,
         TsvQueries(dlc['dev1/queries'], namespace='msmarco', lang='en'),
-        TrecQrels(dlc['dev1/qrels'], QRELS_DEFS),
+        qrels_migrator(TrecQrels(dlc['dev1/qrels'], QRELS_DEFS)),
         TrecScoredDocs(GzipExtract(dlc['dev1/scoreddocs'])),
     )
     subsets['dev2'] = Dataset(
         collection,
         TsvQueries(dlc['dev2/queries'], namespace='msmarco', lang='en'),
-        TrecQrels(dlc['dev2/qrels'], QRELS_DEFS),
+        qrels_migrator(TrecQrels(dlc['dev2/qrels'], QRELS_DEFS)),
         TrecScoredDocs(GzipExtract(dlc['dev2/scoreddocs'])),
     )
 

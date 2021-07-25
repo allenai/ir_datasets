@@ -10,6 +10,18 @@ which can be linked up with documents in <a class="ds-ref">msmarco-document-v2</
   <li>Documents: Text extracted from web pages</li>
   <li>Queries: Natural language questions (from query log)</li>
   <li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+</ul>
+<p>
+Change Log
+</p>
+<ul>
+<li>
+On July 21, 2021, the task organizers <a href="https://github.com/microsoft/msmarco/commit/41b3a684ed8ebd4e753250c3687547a77c62e7dd">
+updated the train, dev1, and dev2 qrels</a> to remove duplicate entries from the files. This should not have change results from
+evaluation tools, but may result in non-repeatable results if these files were used in another process (e.g., model training). The
+original qrels file for <a class="ds-ref">msmarco-passage-v2/train</a> can be found
+<a href="https://mirror.ir-datasets.com/abf1fd024b6aca203364d2138c241a6d">here</a> to aid in result repeatability.
+</li>
 </ul>'
   bibtex_ids: ['Bajaj2016Msmarco']
 

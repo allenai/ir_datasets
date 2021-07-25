@@ -31,20 +31,20 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
         })
 
     def test_qrels(self):
-        self._test_qrels('msmarco-passage-v2/train', count=287889, items={
+        self._test_qrels('msmarco-passage-v2/train', count=284212, items={
             0: TrecQrel('1185869', 'msmarco_passage_08_840101254', 1, '0'),
             9: TrecQrel('186154', 'msmarco_passage_02_556351008', 1, '0'),
-            287888: TrecQrel('697642', 'msmarco_passage_05_512118117', 1, '0'),
+            284211: TrecQrel('697642', 'msmarco_passage_05_512118117', 1, '0'),
         })
-        self._test_qrels('msmarco-passage-v2/dev1', count=4074, items={
+        self._test_qrels('msmarco-passage-v2/dev1', count=4009, items={
             0: TrecQrel('763878', 'msmarco_passage_33_459057644', 1, '0'),
             9: TrecQrel('290779', 'msmarco_passage_10_301562908', 1, '0'),
-            4073: TrecQrel('1091692', 'msmarco_passage_23_330102695', 1, '0'),
+            4008: TrecQrel('1091692', 'msmarco_passage_23_330102695', 1, '0'),
         })
-        self._test_qrels('msmarco-passage-v2/dev2', count=4456, items={
+        self._test_qrels('msmarco-passage-v2/dev2', count=4411, items={
             0: TrecQrel('419507', 'msmarco_passage_04_254301507', 1, '0'),
             9: TrecQrel('1087630', 'msmarco_passage_18_685926585', 1, '0'),
-            4455: TrecQrel('961297', 'msmarco_passage_18_858458289', 1, '0'),
+            4410: TrecQrel('961297', 'msmarco_passage_18_858458289', 1, '0'),
         })
 
     def test_scoreddocs(self):
