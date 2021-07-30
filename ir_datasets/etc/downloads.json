@@ -1699,6 +1699,18 @@
     "size_hint": 62387,
     "expected_md5": "06a0a6f29621ee477a093d9dba8e5be9",
     "cache_path": "trec-dl-2020/qrels.gz"
+  },
+  "trec-dl-2021/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2021_queries.tsv",
+    "size_hint": 24585,
+    "expected_md5": "46d863434dda18300f5af33ee29c4b28",
+    "cache_path": "trec-dl-2021/queries.tsv"
+  },
+  "trec-dl-2021/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2021_document_top100.txt.gz",
+    "size_hint": 618228,
+    "expected_md5": "0bc85e3f2a6f798b91e18f0cd4a6bc6b",
+    "cache_path": "trec-dl-2021/top100.trec.gz"
   }
 },
 
@@ -1858,6 +1870,18 @@
     "size_hint": 181612,
     "expected_md5": "8ed8577fa459d34b59cf69b4daa2baeb",
     "cache_path": "dev2/qrels.tsv"
+  },
+  "trec-dl-2021/queries": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2021_queries.tsv",
+    "size_hint": 24585,
+    "expected_md5": "46d863434dda18300f5af33ee29c4b28",
+    "cache_path": "trec-dl-2021/queries.tsv"
+  },
+  "trec-dl-2021/scoreddocs": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2021_passage_top100.txt.gz",
+    "size_hint": 604533,
+    "expected_md5": "e2be2d307da26d1a3f76eb95507672a3",
+    "cache_path": "trec-dl-2021/top100.trec.gz"
   }
 },
 

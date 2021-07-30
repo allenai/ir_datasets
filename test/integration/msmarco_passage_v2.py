@@ -29,6 +29,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: GenericQuery('1048779', 'what is ott media'),
             4280: GenericQuery('1092262', ';liter chemistry definition'),
         })
+        self._test_queries('msmarco-passage-v2/trec-dl-2021', count=477, items={
+            0: GenericQuery('787021', 'what is produced by muscle'),
+            9: GenericQuery('1052368', 'who stabbed dr. martin luther king'),
+            476: GenericQuery('855410', 'what is theraderm used for'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-passage-v2/train', count=284212, items={
@@ -62,6 +67,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             0: GenericScoredDoc('1325', 'msmarco_passage_35_295199374', 20.979799),
             9: GenericScoredDoc('1325', 'msmarco_passage_68_757687820', 18.208799),
             428099: GenericScoredDoc('1102413', 'msmarco_passage_07_48510484', 10.8093),
+        })
+        self._test_scoreddocs('msmarco-passage-v2/trec-dl-2021', count=47700, items={
+            0: GenericScoredDoc('2082', 'msmarco_passage_45_623131157', 19.8207),
+            9: GenericScoredDoc('2082', 'msmarco_passage_30_709623997', 17.350901),
+            47699: GenericScoredDoc('1136769', 'msmarco_passage_06_68704200', 14.8941),
         })
 
 

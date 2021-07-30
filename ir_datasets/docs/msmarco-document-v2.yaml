@@ -82,3 +82,9 @@ Subset of <a class="ds-ref">msmarco-document-v2/trec-dl-2020</a>, only including
 </p>
 '
   bibtex_ids: ['Craswell2020TrecDl', 'Bajaj2016Msmarco']
+
+trec-dl-2021:
+  desc: '
+<p>
+Official topics for the TREC Deep Learning (DL) 2021 shared task.
+'

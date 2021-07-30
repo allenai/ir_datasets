@@ -49,6 +49,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('1105792', 'define: geon'),
             44: GenericQuery('997622', 'where is the show shameless filmed'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2021', count=477, items={
+            0: GenericQuery('787021', 'what is produced by muscle'),
+            9: GenericQuery('1052368', 'who stabbed dr. martin luther king'),
+            476: GenericQuery('855410', 'what is theraderm used for'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -102,6 +107,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('361', 'msmarco_doc_46_1474316753', 6.7154),
             9: GenericScoredDoc('361', 'msmarco_doc_46_1474322309', 6.5316),
             499999: GenericScoredDoc('1102413', 'msmarco_doc_51_471353527', 9.8727),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2021', count=47700, items={
+            0: GenericScoredDoc('2082', 'msmarco_doc_03_1735682452', 15.3067),
+            9: GenericScoredDoc('2082', 'msmarco_doc_01_1320056135', 14.554399),
+            47699: GenericScoredDoc('1136769', 'msmarco_doc_57_1870160943', 15.2451),
         })
 
 

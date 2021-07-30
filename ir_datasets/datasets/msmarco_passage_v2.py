@@ -255,6 +255,11 @@ def _init():
         qrels_migrator(TrecQrels(dlc['dev2/qrels'], QRELS_DEFS)),
         TrecScoredDocs(GzipExtract(dlc['dev2/scoreddocs'])),
     )
+    subsets['trec-dl-2021'] = Dataset(
+        collection,
+        TsvQueries(dlc['trec-dl-2021/queries'], namespace='msmarco', lang='en'),
+        TrecScoredDocs(GzipExtract(dlc['trec-dl-2021/scoreddocs'])),
+    )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation("_")))
     for s in sorted(subsets):

@@ -52,3 +52,9 @@ Official train set with 277,144 queries.
 '
   bibtex_ids: ['Bajaj2016Msmarco']
   official_measures: ['RR@10']
+
+trec-dl-2021:
+  desc: '
+<p>
+Official topics for the TREC Deep Learning (DL) 2021 shared task.
+'
