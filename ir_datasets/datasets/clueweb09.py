@@ -4,7 +4,7 @@ from pathlib import Path
 from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
-from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract, TarExtractAll
+from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, ZipExtract, TarExtractAll
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore

@@ -5,7 +5,7 @@ import pickle
 from pathlib import Path
 from typing import NamedTuple, Tuple
 import ir_datasets
-from ir_datasets.util import DownloadConfig, Download, RequestsDownload, TarExtractAll, GzipExtract
+from ir_datasets.util import DownloadConfig, Download
 from ir_datasets.formats import BaseDocs, TrecXmlQueries, DocSourceSeekableIter, DocSource, SourceDocIter
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import Docstore
@@ -53,9 +53,8 @@ class C4Source(DocSource):
 
     def checkpoints(self):
         if self._checkpoints is None:
-            chk_file_name = self.dlc.path().split('/')[-1] + '.chk.pkl.lz4'
-            with ir_datasets.lazy_libs.lz4_frame().frame.open(os.path.join(self.checkpoint_dlc.path(), chk_file_name)) as f:
-                self._checkpoints = pickle.load(f)
+            with self.checkpoint_dlc.stream() as stream:
+                self._checkpoints = pickle.load(stream)
         return self._checkpoints
 
 
@@ -63,7 +62,7 @@ class C4SourceIter(DocSourceSeekableIter):
     def __init__(self, source):
         self.source = source
         self.idx = 0
-        self.source_f = ir_datasets.lazy_libs.zlib_state().GzipStateFile(self.source.dlc.path())
+        self.source_f = ir_datasets.lazy_libs.zlib_state().GzipStateFile(str(self.source.dlc.path()))
 
     def close(self):
         if self.source_f is not None:
@@ -171,9 +170,11 @@ class C4Docs(BaseDocs):
                     if self._source_name_filter:
                         if not re.match(self._source_name_filter, source['name']):
                             continue
-                    cache_path = os.path.join(self._base_path, 'en.noclean', source['url'].split('/')[-1])
-                    dlc = Download([RequestsDownload(source['url'])], expected_md5=source['expected_md5'], cache_path=cache_path)
-                    sources.append(C4Source(source['name'].replace('.json.gz', ''), dlc, self._checkpoint_dlc, source['doc_count'], source['checkpoint_freq'], source['size_hint'], cache_path))
+                    file_name = source['url'].split('/')[-1]
+                    cache_path = os.path.join(self._base_path, 'en.noclean', file_name)
+                    dlc = Download(source['url']).verify_hash(source['expected_md5']).cache(cache_path)
+                    chk_dlc = self._checkpoint_dlc.join(f'{file_name}.chk.pkl.lz4').un_lz4()
+                    sources.append(C4Source(source['name'].replace('.json.gz', ''), dlc, chk_dlc, source['doc_count'], source['checkpoint_freq'], source['size_hint'], cache_path))
             self._sources = sources
             build_flag = self._base_path / 'en.noclean' / f'_built{self._filter_name}'
             if not build_flag.exists():
@@ -201,8 +202,8 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     en_noclean_tr_collection = C4Docs(
-        GzipExtract(dlc['en-noclean/sources']),
-        TarExtractAll(dlc['en-noclean/checkpoints'], base_path / 'en.noclean.checkpoints'),
+        dlc['en-noclean/sources'].un_gzip(),
+        dlc['en-noclean/checkpoints'].un_tar_all(base_path / 'en.noclean.checkpoints'),
         base_path, source_name_filter=r'en\.noclean\.c4-train', filter_name='train') # exclude validation files (only include train)
     base = Dataset(documentation('_'))
 

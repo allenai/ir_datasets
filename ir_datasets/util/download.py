@@ -1,8 +1,8 @@
 import json
+from urllib.parse import urlparse
 import pkgutil
 import os
 from pathlib import Path
-import atexit
 from collections import deque
 import io
 import shutil
@@ -12,21 +12,21 @@ import ir_datasets
 from ir_datasets import util
 
 
-__all__ = ['Download', 'BaseDownload', 'RequestsDownload']
+__all__ = ['Download', 'GoogleDriveDownload', 'DownloadConfig']
 _logger = ir_datasets.log.easy()
+_ENCOUNTERD_DUAS = set()
 
 
-class BaseDownload:
-    def stream(self):
-        raise NotImplementedError()
-
-
-class GoogleDriveDownload(BaseDownload):
-    def __init__(self, url, tries=None):
+class GoogleDriveDownload(util.fileio.IoStream):
+    def __init__(self, url, tries=None, dua=None):
         self.url = url
         self.tries = tries
+        self.dua = dua
 
     def stream(self):
+        if self.dua is not None and self.dua not in _ENCOUNTERD_DUAS:
+            _logger.info(self.dua)
+            _ENCOUNTERD_DUAS.add(self.dua)
         # For Google Drive, we may get a "large file" warning that means we need to "confirm".
         # This just involves pulling a cookie out of the response and adding it to the URL.
         requests = ir_datasets.lazy_libs.requests()
@@ -44,17 +44,22 @@ class GoogleDriveDownload(BaseDownload):
             for k, v in response.cookies.items():
                 if k.startswith("download_warning"):
                     url += "&confirm=" + v
-        return RequestsDownload(url, self.tries, cookies).stream()
+        return Download(url, self.tries, cookies).stream()
 
-class RequestsDownload(BaseDownload):
-    def __init__(self, url, tries=None, cookies=None, headers=None):
+
+class Download(util.fileio.IoStream):
+    def __init__(self, url, tries=None, cookies=None, headers=None, dua=None):
         self.url = url
         self.tries = tries
         self.cookies = cookies
         self.headers = headers
+        self.dua = dua
 
     @contextlib.contextmanager
     def stream(self):
+        if self.dua is not None and self.dua not in _ENCOUNTERD_DUAS:
+            _logger.info(self.dua)
+            _ENCOUNTERD_DUAS.add(self.dua)
         with io.BufferedReader(util.IterStream(iter(self)), buffer_size=io.DEFAULT_BUFFER_SIZE) as stream:
             yield stream
 
@@ -148,113 +153,33 @@ class RequestsDownload(BaseDownload):
                     yield data
 
     def __repr__(self):
-        return f'RequestsDownload({repr(self.url)}, tries={self.tries})'
+        return f'Download({repr(self.url)}, tries={self.tries})'
 
 
-class LocalDownload(BaseDownload):
+class LocalFile(util.fileio.IoRegularFile):
     def __init__(self, path, message=None, mkdir=True):
         self._path = Path(path)
         if mkdir:
             self._path.parent.mkdir(parents=True, exist_ok=True)
         self._message = message
 
-    def path(self):
-        if not self._path.exists():
+    def path(self, *, hard=True):
+        if hard and not self._path.exists():
             if self._message:
                 _logger.info(self._message)
             raise FileNotFoundError(self._path)
         return self._path
 
-    @contextlib.contextmanager
-    def stream(self):
-        with self.path().open('rb') as f:
-            yield f
+    def __repr__(self):
+        return f'LocalFile({repr(str(self._path))})'
 
-
-_ENCOUNTERD_DUAS = set()
-
-
-def _cleanup_tmp(file):
-    try:
-        os.remove(file.name)
-    except FileNotFoundError:
-        pass
-
-
-class Download:
-    _dua_ctxt = deque([None])
-
-    def __init__(self, mirrors, cache_path=None, expected_md5=None, dua=None, stream=False, size_hint=None):
-        self.mirrors = list(mirrors)
-        self.expected_md5 = expected_md5
-        self.dua = dua or self._dua_ctxt[-1]
-        self._cache_path = cache_path
-        self._stream = stream
-        self._path = None
-        self._size_hint = size_hint
-
-    def path(self):
-        if self._path is not None:
-            return self._path
-
-        if self._cache_path is not None:
-            download_path = self._cache_path
-            if os.path.exists(download_path) and download_path != os.devnull:
-                self._path = download_path
-                return self._path
-        else:
-            tmpfile = tempfile.NamedTemporaryFile(delete=False, dir=util.tmp_path())
-            atexit.register(_cleanup_tmp, tmpfile)
-            download_path = tmpfile.name
-
-        if self.dua is not None and self.dua not in _ENCOUNTERD_DUAS:
-            _logger.info(self.dua)
-            _ENCOUNTERD_DUAS.add(self.dua)
-
-        errors = []
-
-        Path(download_path).parent.mkdir(parents=True, exist_ok=True)
-
-        if self._size_hint:
-            util.check_disk_free(download_path, self._size_hint)
-
-        for mirror in self.mirrors:
-            try:
-                with util.finialized_file(download_path, 'wb') as f:
-                    with mirror.stream() as stream:
-                        stream = util.HashStream(stream, self.expected_md5, algo='md5')
-                        shutil.copyfileobj(stream, f)
-                        break
-            except Exception as e:
-                errors.append((mirror, e))
-                if not isinstance(mirror, LocalDownload):
-                    _logger.warn(f'Download failed: {e}')
-        else:
-            if len(self.mirrors) == 1:
-                raise errors[0][1]
-            if len(self.mirrors) == 2 and isinstance(self.mirrors[0], LocalDownload):
-                raise errors[1][1]
-            raise RuntimeError('All download sources failed', errors)
-        self._path = download_path
-        return self._path
-
-    @contextlib.contextmanager
-    def stream(self):
-        if self._stream:
-            assert len(self.mirrors) == 1, "cannot stream with multiple mirrors"
-            with self.mirrors[0].stream() as stream:
-                stream = util.HashStream(stream, self.expected_md5, algo='md5')
-                yield stream
-        else:
-            with open(self.path(), 'rb') as f:
-                yield f
-
-    @classmethod
-    @contextlib.contextmanager
-    def dua_ctxt(cls, dua):
-        cls._dua_ctxt.append(dua)
-        yield
-        cls._dua_ctxt.pop()
+    def availability(self) -> util.fileio.IoAvailability:
+        if self._path.exists():
+            return util.fileio.IoAvailability.AVAILABLE
+        if self._message is not None:
+            # HACK! Pretend it's actually possible to get it so we can give a message
+            return util.fileio.IoAvailability.PROCURABLE
+        return util.fileio.IoAvailability.UNAVAILABLE
 
 
 class _DownloadConfig:
@@ -290,9 +215,11 @@ class _DownloadConfig:
 
     def __getitem__(self, key):
         dlc = self.contents()[key]
-        sources = []
+        alternatives = []
         cache_path = None
         download_args = dlc.get('download_args', {})
+        if self._dua is not None:
+            download_args['dua'] = self._dua
         if 'cache_path' in dlc:
             if self._base_path:
                 cache_path = os.path.join(self._base_path, dlc['cache_path'])
@@ -302,25 +229,33 @@ class _DownloadConfig:
             small_file_size = int(os.environ.get('IR_DATASETS_SMALL_FILE_SIZE', '5000000'))
             if not dlc.get('skip_local') and dlc.get('expected_md5') and not dlc.get('size_hint', small_file_size) < small_file_size:
                 local_path = Path(self.get_download_path()) / dlc['expected_md5']
-                local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it here '
-                             f'to avoid downloading it again: {local_path}')
-                sources.append(LocalDownload(local_path, local_msg, mkdir=False))
+                file_name = urlparse(dlc["url"]).path.split('/')[-1] or 'file'
+                local_msg = (f'If you have a local copy of {dlc["url"]}, you can symlink it '
+                             f'to avoid downloading it again, e.g.:\n'
+                             f'ln -s /path/to/{file_name} {local_path}')
+                alternatives.append(LocalFile(local_path, local_msg, mkdir=False))
             if dlc['url'].startswith('https://drive.google.com/'):
-                sources.append(GoogleDriveDownload(dlc['url'], **download_args))
+                alternatives.append(GoogleDriveDownload(dlc['url'], **download_args))
             else:
-                sources.append(RequestsDownload(dlc['url'], **download_args))
+                alternatives.append(Download(dlc['url'], **download_args))
             if dlc.get('irds_mirror') and dlc.get('expected_md5'):
                 # this file has the irds mirror to fall back on
-                sources.append(RequestsDownload(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))
+                alternatives.append(Download(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))
         elif 'instructions' in dlc:
             if 'cache_path' in dlc:
                 local_path = Path(cache_path)
             else:
                 local_path = Path(util.home_path()) / 'downloads' / dlc['expected_md5']
-            sources.append(LocalDownload(local_path, dlc['instructions'].format(path=local_path)))
+            alternatives.append(LocalFile(local_path, dlc['instructions'].format(path=local_path)))
         else:
             raise RuntimeError('Must either provide url or instructions')
-        return Download(sources, expected_md5=dlc.get('expected_md5'), cache_path=cache_path, dua=self._dua, stream=dlc.get('stream', False), size_hint=dlc.get('size_hint'))
+        if dlc.get('expected_md5'):
+            alternatives = [a.verify_hash(dlc['expected_md5']) for a in alternatives]
+        if dlc.get('stream', False):
+            assert len(alternatives) == 1, "stream only allows a single source"
+            assert cache_path is None, "no cache_path allowed when stream=True"
+            return alternatives[0]
+        return util.fileio.Alternatives(*alternatives, path=cache_path)
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.json')

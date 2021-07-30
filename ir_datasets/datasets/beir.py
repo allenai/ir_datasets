@@ -148,13 +148,13 @@ def _init():
 
     for ds, (qrels, count_hint) in benchmarks.items():
         dlc_ds = dlc[ds]
-        docs = BeirDocs(ds, ZipExtract(dlc_ds, f'{ds}/corpus.jsonl'), count_hint=count_hint)
-        queries = BeirQueries(ds, Cache(ZipExtract(dlc_ds, f'{ds}/queries.jsonl'), base_path/ds/'queries.json'))
+        docs = BeirDocs(ds, dlc[ds].un_zip(f'{ds}/corpus.jsonl'), count_hint=count_hint)
+        queries = BeirQueries(ds, dlc[ds].un_zip(f'{ds}/queries.jsonl').cache(base_path/ds/'queries.json'))
         if len(qrels) == 1:
             subsets[ds] = Dataset(
                 docs,
                 queries,
-                BeirQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrels[0]}.tsv'), base_path/ds/f'{qrels[0]}.qrels'), qrels_defs={}),
+                BeirQrels(dlc[ds].un_zip(f'{ds}/qrels/{qrels[0]}.tsv').cache(base_path/ds/f'{qrels[0]}.qrels'), qrels_defs={}),
                 documentation(ds)
             )
         else:
@@ -164,7 +164,7 @@ def _init():
                 documentation(ds)
             )
             for qrel in qrels:
-                subset_qrels = BeirQrels(Cache(ZipExtract(dlc_ds, f'{ds}/qrels/{qrel}.tsv'), base_path/ds/f'{qrel}.qrels'), qrels_defs={})
+                subset_qrels = BeirQrels(dlc[ds].un_zip(f'{ds}/qrels/{qrel}.tsv').cache(base_path/ds/f'{qrel}.qrels'), qrels_defs={})
                 subset_qids = qid_filter(subset_qrels)
                 subsets[f'{ds}/{qrel}'] = Dataset(
                     docs,
@@ -190,9 +190,9 @@ def _init():
     cqa_dlc = dlc['cqadupstack']
     for ds, count_hint in cqa:
         subsets[f'cqadupstack/{ds}'] = Dataset(
-            BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl'), count_hint=count_hint),
-            BeirQueries(f'cqadupstack/{ds}', Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/queries.jsonl'), base_path/'cqadupstack'/ds/'queries.json'), keep_metadata=['tags']),
-            BeirQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
+            BeirDocs(f'cqadupstack/{ds}', cqa_dlc.un_zip(f'cqadupstack/{ds}/corpus.jsonl'), count_hint=count_hint),
+            BeirQueries(f'cqadupstack/{ds}', cqa_dlc.un_zip(f'cqadupstack/{ds}/queries.jsonl').cache(base_path/'cqadupstack'/ds/'queries.json'), keep_metadata=['tags']),
+            BeirQrels(cqa_dlc.un_zip(f'cqadupstack/{ds}/qrels/test.tsv').cache(base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
             documentation(f'cqadupstack/{ds}')
         )
 

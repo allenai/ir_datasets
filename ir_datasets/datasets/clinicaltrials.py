@@ -9,7 +9,7 @@ import tarfile
 import zipfile
 import xml.etree.ElementTree as ET
 import ir_datasets
-from ir_datasets.util import DownloadConfig, GzipExtract, ZipExtract
+from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import BaseDocs, BaseQueries, GenericQuery, TrecQrels, TrecXmlQueries
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.indices import PickleLz4FullStore

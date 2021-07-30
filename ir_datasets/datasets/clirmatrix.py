@@ -2,7 +2,7 @@ import contextlib
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.util import GzipExtract, DownloadConfig, _DownloadConfig
+from ir_datasets.util import DownloadConfig, _DownloadConfig
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import TsvDocs, CLIRMatrixQueries, CLIRMatrixQrels
 
@@ -42,7 +42,7 @@ def _init():
     def _docs_initializer(lang_code):
         if lang_code not in _docs_cache:
             dlc = _dlc().context("clirmatrix_docs", base_path)
-            docs = TsvDocs(GzipExtract(dlc[f'docs/{lang_code}']), namespace=f'{NAME}/{lang_code}', lang=lang_code)
+            docs = TsvDocs(dlc[f'docs/{lang_code}'].un_gzip(), namespace=f'{NAME}/{lang_code}', lang=lang_code)
             _docs_cache[lang_code] = docs
         return _docs_cache[lang_code]
 
@@ -53,7 +53,7 @@ def _init():
         if queries_lang: # queries & split are optional
             dlc = _dlc().context(dlc_context, base_path)
             dlc_key = f'queries/{queries_lang}_{docs_lang}/{split}'
-            qrel_dlc = GzipExtract(dlc[dlc_key])
+            qrel_dlc = dlc[dlc_key].un_gzip()
             qrels = CLIRMatrixQrels(qrel_dlc, QRELS_DEFS)
             queries = CLIRMatrixQueries(qrel_dlc, queries_lang)
             components += [queries, qrels]

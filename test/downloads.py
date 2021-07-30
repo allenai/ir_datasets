@@ -67,7 +67,7 @@ class TestDownloads(unittest.TestCase):
                         self.output_data.append(record)
                         start = time.time()
                         try:
-                            download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'], **data.get('download_args', {}))], expected_md5=data['expected_md5'], stream=True)
+                            download = ir_datasets.util.Download(data['url'], **data.get('download_args', {})).verify_hash(data['expected_md5'])
                             with download.stream() as stream:
                                 inp = stream.read(io.DEFAULT_BUFFER_SIZE)
                                 while len(inp) > 0:

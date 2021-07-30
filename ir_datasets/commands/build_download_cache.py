@@ -36,7 +36,7 @@ def _build_cache(data, dir, prefix=''):
             return
         try:
             with ir_datasets.util.finialized_file(cache_path, 'wb') as fout, _logger.duration(prefix):
-                download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], stream=True)
+                download = ir_datasets.util.Download(data['url']).verify_hash(data['expected_md5'])
                 with download.stream() as stream:
                     inp = stream.read(io.DEFAULT_BUFFER_SIZE)
                     while len(inp) > 0:
