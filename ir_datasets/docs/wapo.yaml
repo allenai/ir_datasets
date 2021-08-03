@@ -44,6 +44,46 @@ and a textual caption.
 '
   docs_instructions: *inst
 
+v3:
+  desc: '
+<p>
+Version 3 of the Washington Post collection, consisting of articles published between 2012-2019.
+</p>
+<p>
+The collection is obtained from NIST by requesting it from NIST <a href="https://trec.nist.gov/data/wapost/">here</a>.
+</p>
+<p>
+body contains all body text in plain text format, including paragrphs and multi-media captions.
+body_paras_html contains only source paragraphs and contains HTML markup.
+body_media contains images, videos, tweets, and galeries, along with a link to the content
+and a textual caption.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/wapost/">Collection Website</a></li>
+</ul>
+'
+  docs_instructions: *inst
+
+v4:
+  desc: '
+<p>
+Version 4 of the Washington Post collection, consisting of articles published between 2012-2020.
+</p>
+<p>
+The collection is obtained from NIST by requesting it from NIST <a href="https://trec.nist.gov/data/wapost/">here</a>.
+</p>
+<p>
+body contains all body text in plain text format, including paragrphs and multi-media captions.
+body_paras_html contains only source paragraphs and contains HTML markup.
+body_media contains images, videos, tweets, and galeries, along with a link to the content
+and a textual caption.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/wapost/">Collection Website</a></li>
+</ul>
+'
+  docs_instructions: *inst
+
 v2/trec-core-2018:
   desc: '
 <p>
@@ -89,9 +129,6 @@ v3/trec-news-2020:
 <p>
 The TREC News 2020 Background Linking task. The task is to find relevant background information
 for the provided articles.
-</p>
-<p>
-If you have a copy of the v3 dataset, we would appreciate a pull request to add support!
 </p>
 <ul>
 <li>Queries: Articles via the doc_id field</li>

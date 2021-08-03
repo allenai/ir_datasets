@@ -2637,6 +2637,16 @@
     "expected_md5": "ce6e93f6ce9959b72c2de4f8d12089ab",
     "cache_path": "WashingtonPost.v2.tar.gz"
   },
+  "v3": {
+    "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
+    "expected_md5": "eef2db39c95e0dfa1ca8b53d6ff15143",
+    "cache_path": "WashingtonPost.v3.tar.gz"
+  },
+  "v4": {
+    "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
+    "expected_md5": "b45b8d34393b4df72737c11aa7fb2b3d",
+    "cache_path": "WashingtonPost.v4.tar.gz"
+  },
   "trec-core-2018/queries": {
     "url": "https://trec.nist.gov/data/core/topics2018.txt",
     "irds_mirror": true,

@@ -92,6 +92,12 @@ def lxml_html():
         _cache['lxml_html'] = lxml.html
     return _cache['lxml_html']
 
+def lxml_etree():
+    if 'lxml_etree' not in _cache:
+        import lxml.etree
+        _cache['lxml_etree'] = lxml.etree
+    return _cache['lxml_etree']
+
 def ijson():
     if 'ijson' not in _cache:
         import ijson
@@ -103,3 +109,9 @@ def pyautocorpus():
         import pyautocorpus
         _cache['pyautocorpus'] = pyautocorpus
     return _cache['pyautocorpus']    
+
+def chardet():
+    if 'chardet' not in _cache:
+        import chardet
+        _cache['chardet'] = chardet
+    return _cache['chardet']    
