@@ -1,5 +1,5 @@
 import ir_datasets
-from ir_datasets.commands.example_generators import Example, find_corpus_dataset
+from ir_datasets.commands.example_generators import Example
 
 class CliExampleGenerator():
     def __init__(self, dataset_id):

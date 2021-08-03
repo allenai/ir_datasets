@@ -15,31 +15,50 @@ def load(name):
     return registry[name]
 
 
-def corpus_id(dataset_id: str) -> str:
+def _parent_id(dataset_id: str, entity_type: str) -> str:
     """
-    Maps a dataset_id to a more general ID that shares the same corpus (i.e., docs_handler). For example,
-    "msmarco-document/trec-dl-2019/judged" -> "msmarco-document" or "wikir/en1k/test" -> "wikir/en1k".
-    This is useful when creating shared document resources among multiple subsets, such as
-    an index.
+    Maps a dataset_id to a more general ID that shares the same entity handler (e.g., docs_handler). For example,
+    for docs, "msmarco-document/trec-dl-2019/judged" -> "msmarco-document" or "wikir/en1k/test" -> "wikir/en1k".
+    This is useful when creating shared document resources among multiple subsets, such as an index.
 
     Note: At this time, this function operates by convention; it finds the lowest dataset_id in the
     hierarchy that has the same docs_handler instance. This function may be updated in the future to
     also use explicit links added when datasets are registered.
     """
-    # adapted from https://github.com/Georgetown-IR-Lab/OpenNIR/blob/master/onir/datasets/irds.py#L47
     ds = load(dataset_id)
     segments = dataset_id.split("/")
-    docs_handler = ds.docs_handler()
-    parent_corpus_ds = dataset_id
+    handler = getattr(ds, f'{entity_type}_handler')()
+    parent_ds_id = dataset_id
     while len(segments) > 1:
         segments.pop()
         try:
             parent_ds = load("/".join(segments))
-            if parent_ds.has_docs() and parent_ds.docs_handler() == docs_handler:
-                parent_corpus_ds = "/".join(segments)
+            if getattr(parent_ds, f'has_{entity_type}')() and getattr(parent_ds, f'{entity_type}_handler')() == handler:
+                parent_ds_id = "/".join(segments)
         except KeyError:
             pass # this dataset doesn't exist
-    return parent_corpus_ds
+    return parent_ds_id
+
+
+def docs_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'docs')
+corpus_id = docs_parent_id # legacy
+
+
+def queries_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'queries')
+
+
+def qrels_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'qrels')
+
+
+def scoreddocs_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'scoreddocs')
+
+
+def docpairs_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'docpairs')
 
 
 def create_dataset(docs_tsv=None, queries_tsv=None, qrels_trec=None):
