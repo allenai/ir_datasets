@@ -4,6 +4,8 @@ import types
 from typing import NamedTuple
 import ir_datasets
 
+_logger = ir_datasets.log.easy()
+
 class GenericDoc(NamedTuple):
     doc_id: str
     text: str
@@ -35,7 +37,7 @@ class BaseDocs:
     def __getattr__(self, attr):
         if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
             # Return method bound to this instance
-            return types.MethodType(self.EXTENSIONS[attr], self, type(self))
+            return types.MethodType(self.EXTENSIONS[attr], self)
         raise AttributeError(attr)
 
     def docs_iter(self):
@@ -64,7 +66,7 @@ class BaseQueries:
     def __getattr__(self, attr):
         if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
             # Return method bound to this instance
-            return types.MethodType(self.EXTENSIONS[attr], self, type(self))
+            return types.MethodType(self.EXTENSIONS[attr], self)
         raise AttributeError(attr)
 
     def queries_iter(self):
@@ -171,7 +173,7 @@ BaseQrels.EXTENSIONS['qrels_dict'] = qrels_dict
 def hasher(iter_fn, hashfn=hashlib.md5):
     def wrapped(self):
         h = hashfn()
-        for record in getattr(self, iter_fn):
+        for record in getattr(self, iter_fn)():
             js = [[field, value] for field, value in zip(record._fields, record)]
             h.update(json.dumps(js).encode())
         return h.hexdigest()
@@ -183,6 +185,28 @@ BaseQueries.EXTENSIONS['queries_hash'] = hasher('queries_iter')
 BaseQrels.EXTENSIONS['qrels_hash'] = hasher('qrels_iter')
 BaseScoredDocs.EXTENSIONS['scoreddocs_hash'] = hasher('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_hash'] = hasher('docpairs_iter')
+
+
+def metadataer(iter_fn):
+    def wrapped(self, verbose=True, hashfn=hashlib.sha256):
+        h = hashfn()
+        count = 0
+        it = getattr(self, iter_fn)()
+        if verbose:
+            it = _logger.pbar(it)
+        for record in it:
+            js = [[field, value] for field, value in zip(record._fields, record)]
+            h.update(json.dumps(js).encode())
+            count += 1
+        return {'hash': h.hexdigest(), 'count': count}
+    return wrapped
+
+
+BaseDocs.EXTENSIONS['docs_metadata'] = metadataer('docs_iter')
+BaseQueries.EXTENSIONS['queries_metadata'] = metadataer('queries_iter')
+BaseQrels.EXTENSIONS['qrels_metadata'] = metadataer('qrels_iter')
+BaseScoredDocs.EXTENSIONS['scoreddocs_metadata'] = metadataer('scoreddocs_iter')
+BaseDocPairs.EXTENSIONS['docpairs_metadata'] = metadataer('docpairs_iter')
 
 
 class DocstoreBackedDocs(BaseDocs):
