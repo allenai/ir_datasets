@@ -1,5 +1,5 @@
 import ir_datasets
-from ir_datasets.commands.example_generators import Example, find_corpus_dataset
+from ir_datasets.commands.example_generators import Example
 
 class PyTerrierExampleGenerator():
     # some datasets do not work as one would expect with the default generated code.
@@ -10,7 +10,7 @@ class PyTerrierExampleGenerator():
         self.dataset_id = dataset_id
         self.dataset = ir_datasets.load(dataset_id)
         try:
-            self.pt_ds_path = find_corpus_dataset(dataset_id)
+            self.pt_ds_path = ir_datasets.docs_parent_id(dataset_id)
         except:
             self.pt_ds_path = None
         self.skip = any(self.dataset_id.startswith(p) for p in self.OVERRIDE_PREFIXES)

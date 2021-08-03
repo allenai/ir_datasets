@@ -130,10 +130,14 @@ def generate_dataset(dataset, dataset_id, bibliography):
         if has_any:
             out.write('<div class="tabs">')
         if dataset.has_queries():
-            fields = ", ".join(dataset.queries_cls()._fields)
+            parent_ds = ir_datasets.queries_parent_id(dataset_id)
+            parent_ds_note = ''
+            if parent_ds != dataset_id:
+                parent_ds_note = f'<p>Inherits queries from <a class="ds-ref">{parent_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__queries">queries</a>
 <div id="{dataset_id}__queries" class="tab-content">
+{parent_ds_note}
 <p>Language: {_lang(dataset.queries_lang())}</p>
 <div>Query type:</div>
 {generate_data_format(dataset.queries_cls())}
@@ -141,25 +145,29 @@ def generate_dataset(dataset, dataset_id, bibliography):
 </div>
 ''')
         if dataset.has_docs():
-            corpus_ds = find_corpus_dataset(dataset_id)
-            corpus_ds_note = ''
-            if corpus_ds != dataset_id:
-                corpus_ds_note = f'<p><strong>Note:</strong> Uses docs from <a class="ds-ref">{corpus_ds}</a></p>'
+            parent_ds = ir_datasets.docs_parent_id(dataset_id)
+            parent_ds_note = ''
+            if parent_ds != dataset_id:
+                parent_ds_note = f'<p>Inherits docs from <a class="ds-ref">{parent_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__docs">docs</a>
 <div id="{dataset_id}__docs" class="tab-content">
+{parent_ds_note}
 <p>Language: {_lang(dataset.docs_lang())}</p>
-{corpus_ds_note}
 <div>Document type:</div>
 {generate_data_format(dataset.docs_cls())}
 {generate_examples(generators, 'generate_docs')}
 </div>
 ''')
         if dataset.has_qrels():
-            fields = ", ".join(dataset.qrels_cls()._fields)
+            parent_ds = ir_datasets.qrels_parent_id(dataset_id)
+            parent_ds_note = ''
+            if parent_ds != dataset_id:
+                parent_ds_note = f'<p>Inherits qrels from <a class="ds-ref">{parent_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__qrels">qrels</a>
 <div id="{dataset_id}__qrels" class="tab-content">
+{parent_ds_note}
 <div>Query relevance judgment type:</div>
 {generate_data_format(dataset.qrels_cls())}
 <p>Relevance levels</p>
@@ -168,20 +176,28 @@ def generate_dataset(dataset, dataset_id, bibliography):
 </div>
 ''')
         if dataset.has_scoreddocs():
-            fields = ", ".join(dataset.scoreddocs_cls()._fields)
+            parent_ds = ir_datasets.scoreddocs_parent_id(dataset_id)
+            parent_ds_note = ''
+            if parent_ds != dataset_id:
+                parent_ds_note = f'<p>Inherits scoreddocs from <a class="ds-ref">{parent_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__scoreddocs">scoreddocs</a>
 <div id="{dataset_id}__scoreddocs" class="tab-content">
+{parent_ds_note}
 <div>Scored Document type:</div>
 {generate_data_format(dataset.scoreddocs_cls())}
 {generate_examples(generators, 'generate_scoreddocs')}
 </div>
 ''')
         if dataset.has_docpairs():
-            fields = ", ".join(dataset.docpairs_cls()._fields)
+            parent_ds = ir_datasets.docpairs_parent_id(dataset_id)
+            parent_ds_note = ''
+            if parent_ds != dataset_id:
+                parent_ds_note = f'<p>Inherits docpairs from <a class="ds-ref">{parent_ds}</a></p>'
             out.write(f'''
 <a class="tab" target="{dataset_id}__docpairs">docpairs</a>
 <div id="{dataset_id}__docpairs" class="tab-content">
+{parent_ds_note}
 <div>Document Pair type:</div>
 {generate_data_format(dataset.docpairs_cls())}
 {generate_examples(generators, 'generate_docpairs')}
@@ -251,23 +267,6 @@ def generate_data_access_section(documentation):
 '''
 
 
-def find_corpus_dataset(name):
-    # adapted from https://github.com/Georgetown-IR-Lab/OpenNIR/blob/master/onir/datasets/irds.py#L47
-    ds = ir_datasets.load(name)
-    segments = name.split("/")
-    docs_handler = ds.docs_handler()
-    parent_docs_ds = name
-    while len(segments) > 1:
-        segments = segments[:-1]
-        try:
-            parent_ds = ir_datasets.load("/".join(segments))
-            if parent_ds.has_docs() and parent_ds.docs_handler() == docs_handler:
-                parent_docs_ds = "/".join(segments)
-        except KeyError:
-            pass
-    return parent_docs_ds
-
-
 def generate_data_format(cls):
     if cls in (str, int, float, bytes):
         return f'<span class="kwd">{cls.__name__}</span>'
@@ -330,7 +329,7 @@ def generate_index(out_dir, version, top_level_map):
                     tbody = '</tbody><tbody>'
                     row_id = f' id="{parent}"'
                     jump.append(f'<option value="{parent}">{parent}</option>')
-                index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td class="center">{emoji(dataset, "docs", parent)}</td><td class="center">{emoji(dataset, "queries", parent)}</td><td class="center">{emoji(dataset, "qrels", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "scoreddocs", parent)}</td><td class="center screen-small-hide">{emoji(dataset, "docpairs", parent)}</td></tr>')
+                index.append(f'{tbody}<tr{row_id}><td>{ds_name}</td><td id="{name}-docs" class="center">{emoji(dataset, name, "docs", parent)}</td><td id="{name}-queries" class="center">{emoji(dataset, name, "queries", parent)}</td><td id="{name}-qrels" class="center">{emoji(dataset, name, "qrels", parent)}</td><td id="{name}-scoreddocs" class="center screen-small-hide">{emoji(dataset, name, "scoreddocs", parent)}</td><td id="{name}-docpairs" class="center screen-small-hide">{emoji(dataset, name, "docpairs", parent)}</td></tr>')
         index = '\n'.join(index)
         jump = '\n'.join(jump)
         out.write(f'''
@@ -364,6 +363,7 @@ Install with pip:
 </select>
 <p>✅: Data available as automatic download</p>
 <p>⚠️: Data available from a third party</p>
+<p>⬆️: Data inherited from a parent dataset (highlights which one on hover)</p>
 <table>
 <tbody>
 <tr>
@@ -1536,6 +1536,10 @@ details {
     display: none;
 }
 
+.hl {
+    background-color: #fff9bd;
+}
+
 .highlight .hll { background-color: #ffffcc }
 .highlight  { background: #ffffff; }
 .highlight .c { color: #999988; font-style: italic } /* Comment */
@@ -1739,6 +1743,16 @@ $(document).ready(function() {
         }
         toggleExamples(examples, $target);
     });
+    $(document).on('mouseenter', '[data-highlight]', function(e) {
+        var $target = $(e.target);
+        var hlId = $target.attr('data-highlight');
+        $(document.getElementById(hlId)).addClass('hl');
+    });
+    $(document).on('mouseleave', '[data-highlight]', function(e) {
+        var $target = $(e.target);
+        var hlId = $target.attr('data-highlight');
+        $(document.getElementById(hlId)).removeClass('hl');
+    });
 });
 function toEmoji(test, result) {
     if (test) {
@@ -1833,13 +1847,17 @@ def generate_qrel_defs_table(defs):
 </table>
 '''
 
-def emoji(ds, arg, top_level):
+def emoji(ds, dsid, arg, top_level):
     has = getattr(ds, f'has_{arg}')()
     if has:
-        instructions = hasattr(ds, f'documentation') and ds.documentation().get(f'{arg}_instructions')
-        if instructions:
-            return f'<a href="{top_level}.html#DataAccess" title="{instructions}. Click for details.">⚠️</a>'
-        return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
+        parent = getattr(ir_datasets, f'{arg}_parent_id')(dsid)
+        if parent != dsid:
+            return f'<span style="cursor: help;" title="{arg} inherited from {parent}" data-highlight="{parent}-{arg}">⬆️</span>'
+        else:
+            instructions = hasattr(ds, f'documentation') and ds.documentation().get(f'{arg}_instructions')
+            if instructions:
+                return f'<a href="{top_level}.html#DataAccess" title="{instructions}. Click for details.">⚠️</a>'
+            return f'<span style="cursor: help;" title="{arg} available as automatic download">✅</span>'
     return ''
 
 

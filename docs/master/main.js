@@ -100,6 +100,16 @@ $(document).ready(function() {
         }
         toggleExamples(examples, $target);
     });
+    $(document).on('mouseenter', '[data-highlight]', function(e) {
+        var $target = $(e.target);
+        var hlId = $target.attr('data-highlight');
+        $(document.getElementById(hlId)).addClass('hl');
+    });
+    $(document).on('mouseleave', '[data-highlight]', function(e) {
+        var $target = $(e.target);
+        var hlId = $target.attr('data-highlight');
+        $(document.getElementById(hlId)).removeClass('hl');
+    });
 });
 function toEmoji(test, result) {
     if (test) {
