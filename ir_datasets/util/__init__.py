@@ -14,6 +14,7 @@ from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, 
 from .hash import HashVerificationError, HashVerifier, HashStream
 from .metadata import MetadataComponent, MetadataProvider, default_metadata_provider, count_hint
 from .registry import Registry
+from .html_parsing import sax_html_parser
 
 
 _logger = log.easy()

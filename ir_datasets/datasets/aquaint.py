@@ -26,7 +26,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['aquaint_comp/apw/*/*.gz', 'aquaint_comp/nyt/*/*.gz', 'aquaint_comp/xie/*/*.gz'], namespace=NAME, lang='en', count_hint=ir_datasets.util.count_hint(NAME))
+    collection = TrecDocs(dlc['docs'], encoding='utf8', path_globs=['**/apw/*/*.gz', '**/nyt/*/*.gz', '**/xie/*/*.gz'], namespace=NAME, lang='en', expected_file_count=3344, parser='sax', count_hint=1033461)
 
     base = Dataset(collection, documentation('_'))
 
