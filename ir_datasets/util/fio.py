@@ -16,7 +16,7 @@ import ir_datasets
 from ir_datasets import util
 
 
-__all__ = ['Io', 'IoStream', 'IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'RelativePath', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
+__all__ = ['Fio', 'FioStream', 'IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'RelativePath', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
 
 
 _logger = ir_datasets.log.easy()
@@ -45,19 +45,23 @@ class IterStream(io.RawIOBase):
             return pos    # indicate EOF
 
 
-class IoType(Enum):
+class FioError(IOError):
+    pass
+
+
+class FioType(Enum):
     REGULAR_FILE = 0
     DIRECTORY = 1
     STREAM = 2
 
 
-class IoAvailability(Enum):
+class FioAvailability(Enum):
     UNAVAILABLE = 0
     AVAILABLE = 1
     PROCURABLE = 2
 
 
-class Io:
+class Fio:
     _REGISTERED_CHAINS = {}
     @classmethod
     def register(cls, name, op):
@@ -76,14 +80,14 @@ class Io:
             return self._REGISTERED_CHAINS[attr](self)
         raise AttributeError(attr)
 
-    def io_type(self) -> IoType:
+    def io_type(self) -> FioType:
         raise NotImplementedError()
 
-    def availability(self) -> IoAvailability:
+    def availability(self) -> FioAvailability:
         raise NotImplementedError()
 
 
-class IoChainable:
+class FioChainable:
     CHAIN_NAME = None
     CHAIN_INP_TYPES = None
 
@@ -103,7 +107,7 @@ class IoChainable:
         return f''
 
 
-class IoRegularFile(Io):
+class FioRegularFile(Fio):
     def path(self, *, hard=True) -> Path:
         raise NotImplementedError()
 
@@ -112,61 +116,61 @@ class IoRegularFile(Io):
         with self.path().open('rb') as f:
             yield f
 
-    def io_type(self) -> IoType:
-        return IoType.REGULAR_FILE
+    def io_type(self) -> FioType:
+        return FioType.REGULAR_FILE
 
-    def availability(self) -> IoAvailability:
+    def availability(self) -> FioAvailability:
         if self.path(hard=False).is_file():
-            return IoAvailability.AVAILABLE
-        elif isinstance(self, IoChainable):
+            return FioAvailability.AVAILABLE
+        elif isinstance(self, FioChainable):
             return {
-                IoAvailability.UNAVAILABLE: IoAvailability.UNAVAILABLE,
-                IoAvailability.AVAILABLE: IoAvailability.PROCURABLE,
-                IoAvailability.PROCURABLE: IoAvailability.PROCURABLE,
+                FioAvailability.UNAVAILABLE: FioAvailability.UNAVAILABLE,
+                FioAvailability.AVAILABLE: FioAvailability.PROCURABLE,
+                FioAvailability.PROCURABLE: FioAvailability.PROCURABLE,
             }[self.inp.availability()]
-        return IoAvailability.UNAVAILABLE
+        return FioAvailability.UNAVAILABLE
 
 
-class IoStream(Io):
+class FioStream(Fio):
     def stream(self):
         raise NotImplementedError()
 
-    def io_type(self) -> IoType:
-        return IoType.STREAM
+    def io_type(self) -> FioType:
+        return FioType.STREAM
 
-    def availability(self) -> IoAvailability:
-        if isinstance(self, IoChainable):
+    def availability(self) -> FioAvailability:
+        if isinstance(self, FioChainable):
             return {
-                IoAvailability.UNAVAILABLE: IoAvailability.UNAVAILABLE,
-                IoAvailability.AVAILABLE: IoAvailability.PROCURABLE,
-                IoAvailability.PROCURABLE: IoAvailability.PROCURABLE,
+                FioAvailability.UNAVAILABLE: FioAvailability.UNAVAILABLE,
+                FioAvailability.AVAILABLE: FioAvailability.PROCURABLE,
+                FioAvailability.PROCURABLE: FioAvailability.PROCURABLE,
             }[self.inp.availability()]
-        return IoAvailability.PROCURABLE
+        return FioAvailability.PROCURABLE
 
 
-class IoDirectory(Io):
+class FioDirectory(Fio):
     def path(self, *, hard=True) -> Path:
         raise NotImplementedError()
 
-    def io_type(self) -> IoType:
-        return IoType.DIRECTORY
+    def io_type(self) -> FioType:
+        return FioType.DIRECTORY
 
-    def availability(self) -> IoAvailability:
+    def availability(self) -> FioAvailability:
         if self.path(hard=False).is_dir():
-            return IoAvailability.AVAILABLE
-        elif isinstance(self, IoChainable):
+            return FioAvailability.AVAILABLE
+        elif isinstance(self, FioChainable):
             return {
-                IoAvailability.UNAVAILABLE: IoAvailability.UNAVAILABLE,
-                IoAvailability.AVAILABLE: IoAvailability.PROCURABLE,
-                IoAvailability.PROCURABLE: IoAvailability.PROCURABLE,
+                FioAvailability.UNAVAILABLE: FioAvailability.UNAVAILABLE,
+                FioAvailability.AVAILABLE: FioAvailability.PROCURABLE,
+                FioAvailability.PROCURABLE: FioAvailability.PROCURABLE,
             }[self.inp.availability()]
-        return IoAvailability.UNAVAILABLE
+        return FioAvailability.UNAVAILABLE
 
 
-@Io.register_chainable
-class Cache(IoRegularFile, IoChainable):
+@Fio.register_chainable
+class Cache(FioRegularFile, FioChainable):
     CHAIN_NAME = 'cache'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     def __init__(self, inp, path):
         super().__init__(inp)
         self._path = Path(path)
@@ -202,10 +206,10 @@ class Cache(IoRegularFile, IoChainable):
         return str(self._path)
 
 
-@Io.register_chainable
-class TarExtract(IoStream, IoChainable):
+@Fio.register_chainable
+class TarExtract(FioStream, FioChainable):
     CHAIN_NAME = 'un_tar'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     def __init__(self, inp, tar_path, compression='gz'):
         super().__init__(inp)
         self._tar_path = tar_path
@@ -229,10 +233,10 @@ class TarExtract(IoStream, IoChainable):
         return f'{repr(self._tar_path)}, compression={repr(self._compression)}'
 
 
-@Io.register_chainable
-class TarExtractAll(IoDirectory, IoChainable):
+@Fio.register_chainable
+class TarExtractAll(FioDirectory, FioChainable):
     CHAIN_NAME = 'un_tar_all'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     def __init__(self, inp, extract_path, compression='gz', path_globs=None):
         super().__init__(inp)
         self._extract_path = Path(extract_path)
@@ -262,10 +266,10 @@ class TarExtractAll(IoDirectory, IoChainable):
         return f'{str(self._extract_path)}, compression={repr(self._compression)}, path_globs={repr(self._path_globs)}'
 
 
-@Io.register_chainable
-class RelativePath(IoRegularFile, IoChainable):
+@Fio.register_chainable
+class RelativePath(FioRegularFile, FioChainable):
     CHAIN_NAME = 'join'
-    CHAIN_INP_TYPES = (IoType.DIRECTORY,)
+    CHAIN_INP_TYPES = (FioType.DIRECTORY,)
     def __init__(self, inp, path):
         super().__init__(inp)
         self._path = Path(path)
@@ -276,59 +280,74 @@ class RelativePath(IoRegularFile, IoChainable):
             raise IOError(f'{result} does not exist')
         return result
 
+    def availability(self):
+        if (self.inp.path(hard=False) / self._path).exists():
+            return FioAvailability.AVAILABLE
+        if self.inp.availability() == FioAvailability.AVAILABLE:
+            return FioAvailability.UNAVAILABLE # directory should be there, but the file is not, so this file is unavailable
+        if self.inp.availability() == FioAvailability.PROCURABLE:
+            return FioAvailability.PROCURABLE
+        return FioAvailability.UNAVAILABLE
+
     def _chain_args(self):
         return str(self._path)
 
 
-class ReTar:
-    def __init__(self, streamer, output_file, keep_globs, compression='gz'):
-        self._streamer = streamer
+@Fio.register_chainable
+class ReTar(FioRegularFile, FioChainable):
+    CHAIN_NAME = 'filter_tar'
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
+    def __init__(self, inp, output_file, keep_globs, compression='gz'):
+        super().__init__(inp)
         self._output_file = Path(output_file)
         self._keep_globs = keep_globs
         self._compression = compression
 
-    @contextlib.contextmanager
-    def stream(self):
-        if not self._output_file.exists():
-            with contextlib.ExitStack() as ctxt, self._streamer.stream() as stream:
-                ctxt.enter_context(_logger.duration('re-taring file'))
+    def path(self, *, hard=True):
+        # There may be a way to do this that is fully streamable, but I think in most cases,
+        # we'd want the filtered tar to be directory saved to disk after anway.
+        if hard and not self._output_file.exists():
+            with contextlib.ExitStack() as ctxt, self.inp.stream() as stream:
+                ctxt.enter_context(_logger.duration('filtering tar file'))
                 outf = ctxt.enter_context(util.finialized_file(self._output_file, 'wb'))
-                o_tarf = ctxt.enter_context(tarfile.open(fileobj=outf, mode=f'w|{self._compression or ""}'))
                 # IMPORTANT: open this file in streaming mode (| in mode). This means that the
                 # content need not be written to disk or be fully read.
+                o_tarf = ctxt.enter_context(tarfile.open(fileobj=outf, mode=f'w|{self._compression or ""}'))
                 i_tarf = ctxt.enter_context(tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}'))
                 for block in i_tarf:
                     if any(fnmatch(block.name, g) for g in self._keep_globs):
                         o_tarf.addfile(block, i_tarf.extractfile(block))
                         _logger.info(f'extracted {block.name}')
-        with self._output_file.open('rb') as f:
-            yield f
+        return self._output_file
+
+    def _chain_args(self):
+        return f'{repr(str(self._output_file))}, keep_globs={repr(self._keep_globs)}, compression={repr(self._compression)}'
 
 
-@Io.register_chainable
-class GzipExtract(IoStream, IoChainable):
+@Fio.register_chainable
+class GzipExtract(FioStream, FioChainable):
     CHAIN_NAME = 'un_gzip'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     @contextlib.contextmanager
     def stream(self):
         with self.inp.stream() as stream:
             yield gzip.GzipFile(fileobj=stream)
 
 
-@Io.register_chainable
-class Bz2Extract(IoStream, IoChainable):
+@Fio.register_chainable
+class Bz2Extract(FioStream, FioChainable):
     CHAIN_NAME = 'un_bz2'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     @contextlib.contextmanager
     def stream(self):
         with self.inp.stream() as stream:
             yield bz2.BZ2File(stream)
 
 
-@Io.register_chainable
-class Lz4FrameExtract(IoStream, IoChainable):
+@Fio.register_chainable
+class Lz4FrameExtract(FioStream, FioChainable):
     CHAIN_NAME = 'un_lz4'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     @contextlib.contextmanager
     def stream(self):
         LZ4FrameFile = ir_datasets.lazy_libs.lz4_frame().frame.LZ4FrameFile
@@ -336,10 +355,10 @@ class Lz4FrameExtract(IoStream, IoChainable):
             yield LZ4FrameFile(stream, mode='r')
 
 
-@Io.register_chainable
-class VerifyHash(IoStream, IoChainable):
+@Fio.register_chainable
+class VerifyHash(FioStream, FioChainable):
     CHAIN_NAME = 'verify_hash'
-    CHAIN_INP_TYPES = (IoType.STREAM, IoType.REGULAR_FILE)
+    CHAIN_INP_TYPES = (FioType.STREAM, FioType.REGULAR_FILE)
     def __init__(self, inp, expected, algo='md5'):
         super().__init__(inp)
         self.expected = expected
@@ -354,10 +373,10 @@ class VerifyHash(IoStream, IoChainable):
         return f'expected={repr(self.expected)}, algo={repr(self.algo)}'
 
 
-@Io.register_chainable
-class ZipExtract(IoStream, IoChainable):
+@Fio.register_chainable
+class ZipExtract(FioStream, FioChainable):
     CHAIN_NAME = 'un_zip'
-    CHAIN_INP_TYPES = (IoType.REGULAR_FILE,)
+    CHAIN_INP_TYPES = (FioType.REGULAR_FILE, FioType.STREAM)
     def __init__(self, inp, zip_path):
         super().__init__(inp)
         self.zip_path = zip_path
@@ -366,7 +385,11 @@ class ZipExtract(IoStream, IoChainable):
     def stream(self):
         with contextlib.ExitStack() as ctxt:
             with _logger.duration('opening zip file'):
-                zipf = ctxt.enter_context(ZipFile(self.inp.path()))
+                if self.inp.io_type() == FioType.STREAM:
+                    zipf_inp = ctxt.enter_context(self.inp.stream())
+                elif self.inp.io_type() == FioType.REGULAR_FILE:
+                    zipf_inp = self.inp.path()
+                zipf = ctxt.enter_context(ZipFile(zipf_inp))
                 result = zipf.open(self.zip_path)
             yield result
 
@@ -374,19 +397,26 @@ class ZipExtract(IoStream, IoChainable):
         return repr(self.zip_path)
 
 
-@Io.register_chainable
-class ZipExtractCache(IoDirectory, IoChainable):
+@Fio.register_chainable
+class ZipExtractCache(FioDirectory, FioChainable):
     CHAIN_NAME = 'un_zip_all'
-    CHAIN_INP_TYPES = (IoType.REGULAR_FILE,)
+    CHAIN_INP_TYPES = (FioType.REGULAR_FILE, FioType.STREAM)
     def __init__(self, inp, extract_path):
         super().__init__(inp)
         self.extract_path = Path(extract_path)
 
-    def path(self):
+    def path(self, *, hard=True):
+        if not hard:
+            return self.extract_path
         if not os.path.exists(self.extract_path):
             try:
-                with ZipFile(self.inp.path()) as zipf:
-                    zipf.extractall(self.extract_path)
+                if self.inp.io_type() == FioType.STREAM:
+                    with self.inp.stream() as stream, \
+                         ZipFile(stream) as zipf:
+                        zipf.extractall(self.extract_path)
+                else:
+                    with ZipFile(self.inp.path()) as zipf:
+                        zipf.extractall(self.extract_path)
             except:
                 if os.path.exists(self.extract_path):
                     shutil.rmtree(self.extract_path)
@@ -397,7 +427,7 @@ class ZipExtractCache(IoDirectory, IoChainable):
         return str(self.extract_path)
 
 
-class String(IoStream):
+class String(FioStream):
     def __init__(self, contents):
         if isinstance(contents, str):
             contents = contents.encode() # to bytes
@@ -407,8 +437,8 @@ class String(IoStream):
     def stream(self):
         yield io.BytesIO(self.contents)
 
-    def availability(self) -> IoAvailability:
-        return IoAvailability.AVAILABLE
+    def availability(self) -> FioAvailability:
+        return FioAvailability.AVAILABLE
 
     def __repr__(self):
         if len(self.contents) > 100:
@@ -421,7 +451,7 @@ class String(IoStream):
 StringFile = String # backwards compat.
 
 
-class File(IoRegularFile):
+class File(FioRegularFile):
     def __init__(self, path):
         self._path = Path(path)
 
@@ -434,7 +464,7 @@ class File(IoRegularFile):
         return f'File({repr(str(self._path))})'
 
 
-class Directory(IoDirectory):
+class Directory(FioDirectory):
     def __init__(self, path):
         self._path = Path(path)
 
@@ -447,7 +477,7 @@ class Directory(IoDirectory):
         return f'Directory({repr(str(self._path))})'
 
 
-class Concat(IoStream):
+class Concat(FioStream):
     def __init__(self, *inputs):
         self.inputs = inputs
 
@@ -465,13 +495,13 @@ class Concat(IoStream):
                     yield chunk
 
     def availability(self):
-        max_avail = IoAvailability.AVAILABLE
+        max_avail = FioAvailability.AVAILABLE
         for inp in self.inputs:
             av = inp.availability()
-            if av == IoAvailability.UNAVAILABLE:
+            if av == FioAvailability.UNAVAILABLE:
                 max_avail = av
-            elif av == IoAvailability.PROCURABLE and max_avail == IoAvailability.AVAILABLE:
-                max_avail = IoAvailability.PROCURABLE
+            elif av == FioAvailability.PROCURABLE and max_avail == FioAvailability.AVAILABLE:
+                max_avail = FioAvailability.PROCURABLE
         return max_avail
 
 
@@ -482,7 +512,7 @@ def _cleanup_tmp(file):
         pass
 
 
-class Alternatives(IoRegularFile):
+class Alternatives(FioRegularFile):
     def __init__(self, *alternatives, path=None):
         self.alternatives = alternatives
         self._path = Path(path) if path is not None else None
@@ -499,33 +529,45 @@ class Alternatives(IoRegularFile):
         # first pass: anything that claims to be fully available
         for alt in self.alternatives:
             av = alt.availability()
-            if av == IoAvailability.AVAILABLE:
+            if av == FioAvailability.AVAILABLE:
                 try:
                     self._apply(alt)
                     return self._path
                 except Exception as ex:
-                    exs.append(ex)
+                    wrapper_ex = FioError(f'{alt} failed')
+                    wrapper_ex.__cause__ = ex
+                    if exs:
+                        wrapper_ex.__cause__.__cause__ = exs[-1]
+                    exs.append(wrapper_ex)
             avs.append(av)
         # second pass: anything that can be procured
         for av, alt in zip(avs, self.alternatives):
-            if av == IoAvailability.PROCURABLE:
+            if av == FioAvailability.PROCURABLE:
                 try:
                     self._apply(alt)
                     return self._path
                 except Exception as ex:
-                    exs.append(ex)
+                    wrapper_ex = FioError(f'{alt} failed')
+                    wrapper_ex.__cause__ = ex
+                    if exs:
+                        wrapper_ex.__cause__.__cause__ = exs[-1]
+                    exs.append(wrapper_ex)
+        if len(exs) == 1:
+            raise exs[0]
         top_ex = RuntimeError("all sources unavailable or failed")
         ex = top_ex
-        for e in exs[::-1]:
-            ex.__cause__, ex = e, e
+        if exs:
+            ex.__cause__ = exs[-1]
         raise top_ex
 
     def _apply(self, alt):
         if self._path.is_symlink():
             self._path.unlink()
-        if alt.io_type() == IoType.STREAM:
+        if not self._path.parent.exists():
+            self._path.parent.mkdir(parents=True)
+        if alt.io_type() == FioType.STREAM:
             # special case: just a hash check of an existing file. Link instead of copy & allow user to skip hash check with ctrl+c
-            if isinstance(alt, VerifyHash) and alt.inp.io_type() == IoType.REGULAR_FILE:
+            if isinstance(alt, VerifyHash) and alt.inp.io_type() == FioType.REGULAR_FILE:
                 try:
                     with alt.stream() as stream, \
                          _logger.pbar_raw(desc='verifying hash (ctrl+c to skip)', total=alt.inp.path().stat().st_size, unit='B', unit_scale=True) as pbar:
@@ -536,24 +578,42 @@ class Alternatives(IoRegularFile):
                             pbar.update(len(buf))
                 except KeyboardInterrupt:
                     _logger.info('user skipped hash verification of file')
-                self._path.symlink_to(alt.inp.path()) # link the files
+                target = alt.inp.path()
+                src_parents, tgt_parents = splitpath(self._path), splitpath(target)
+                while src_parents[0] == tgt_parents[0]:
+                    src_parents.pop(0)
+                    tgt_parents.pop(0)
+                for _ in src_parents[:-1]:
+                    tgt_parents = ['..'] + tgt_parents
+                target = Path(*tgt_parents)
+                self._path.symlink_to(target) # link the files
             else:
                 with alt.stream() as stream, \
                      util.finialized_file(self._path, 'wb') as fout:
                     shutil.copyfileobj(stream, fout)
-        elif alt.io_type() == IoType.REGULAR_FILE:
+        elif alt.io_type() == FioType.REGULAR_FILE:
             self._path.symlink_to(alt.path()) # link the file
-        elif alt.io_type() == IoType.DIRECTORY:
+        elif alt.io_type() == FioType.DIRECTORY:
             self._path.symlink_to(alt.path(), target_is_directory=True) # link the directory
         else:
             raise RuntimeError('unknown io_type')
 
-    def availability(self) -> IoAvailability:
-        if self._path.exists():
-            return IoAvailability.AVAILABLE
-        elif any(a.availability() in (IoAvailability.AVAILABLE, IoAvailability.PROCURABLE) for a in self.alternatives):
-            return IoAvailability.PROCURABLE
-        return IoAvailability.UNAVAILABLE
+    def availability(self) -> FioAvailability:
+        if self._path is not None and self._path.exists():
+            return FioAvailability.AVAILABLE
+        elif any(a.availability() in (FioAvailability.AVAILABLE, FioAvailability.PROCURABLE) for a in self.alternatives):
+            return FioAvailability.PROCURABLE
+        return FioAvailability.UNAVAILABLE
 
     def __repr__(self):
         return f'Alternatives({", ".join(repr(a) for a in self.alternatives)}, path={repr(self._path)})'
+
+
+def splitpath(path):
+    parts=[]
+    (path, tail)=os.path.split( path)
+    while path and tail:
+         parts.append( tail)
+         (path,tail)=os.path.split(path)
+    parts.append( os.path.join(path,tail) )
+    return list(map(os.path.normpath, parts))[::-1]

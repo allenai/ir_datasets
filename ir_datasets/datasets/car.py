@@ -97,47 +97,47 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    docs_v15 = CarDocs(TarExtract(dlc['docs'], 'paragraphcorpus/paragraphcorpus.cbor', compression='xz'))
+    docs_v15 = CarDocs(dlc['docs'].un_tar('paragraphcorpus/paragraphcorpus.cbor', compression='xz'))
     base = Dataset(documentation('_'))
 
     subsets['v1.5'] = Dataset(docs_v15, documentation('v1.5'))
 
     subsets['v1.5/trec-y1'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(dlc['trec-y1/queries'], 'benchmarkY1test.public/test.benchmarkY1test.cbor.outlines', compression='xz')),)
+        CarQueries(dlc['trec-y1/queries'].un_tar('benchmarkY1test.public/test.benchmarkY1test.cbor.outlines', compression='xz')),)
     subsets['v1.5/trec-y1/manual'] = Dataset(
         subsets['v1.5/trec-y1'],
-        TrecQrels(TarExtract(dlc['trec-y1/qrels'], 'TREC_CAR_2017_qrels/manual.benchmarkY1test.cbor.hierarchical.qrels'), MANUAL_QRELS))
+        TrecQrels(dlc['trec-y1/qrels'].un_tar('TREC_CAR_2017_qrels/manual.benchmarkY1test.cbor.hierarchical.qrels'), MANUAL_QRELS))
     subsets['v1.5/trec-y1/auto'] = Dataset(
         subsets['v1.5/trec-y1'],
-        TrecQrels(TarExtract(dlc['trec-y1/qrels'], 'TREC_CAR_2017_qrels/automatic.benchmarkY1test.cbor.hierarchical.qrels'), AUTO_QRELS))
+        TrecQrels(dlc['trec-y1/qrels'].un_tar('TREC_CAR_2017_qrels/automatic.benchmarkY1test.cbor.hierarchical.qrels'), AUTO_QRELS))
 
     subsets['v1.5/test200'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(dlc['test200'], 'test200/train.test200.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(dlc['test200'], 'test200/train.test200.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(dlc['test200'].un_tar('test200/train.test200.cbor.outlines', compression='xz')),
+        TrecQrels(dlc['test200'].un_tar('test200/train.test200.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
 
-    train_data = ReTar(dlc['train'], base_path/'train.smaller.tar.xz', ['train/train.fold?.cbor.outlines', 'train/train.fold?.cbor.hierarchical.qrels'], compression='xz')
+    train_data = dlc['train'].filter_tar(base_path/'train.smaller.tar.xz', ['train/train.fold?.cbor.outlines', 'train/train.fold?.cbor.hierarchical.qrels'], compression='xz')
     subsets['v1.5/train/fold0'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(train_data, 'train/train.fold0.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(train_data, 'train/train.fold0.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(train_data.un_tar('train/train.fold0.cbor.outlines', compression='xz')),
+        TrecQrels(train_data.un_tar('train/train.fold0.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
     subsets['v1.5/train/fold1'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(train_data, 'train/train.fold1.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(train_data, 'train/train.fold1.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(train_data.un_tar('train/train.fold1.cbor.outlines', compression='xz')),
+        TrecQrels(train_data.un_tar('train/train.fold1.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
     subsets['v1.5/train/fold2'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(train_data, 'train/train.fold2.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(train_data, 'train/train.fold2.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(train_data.un_tar('train/train.fold2.cbor.outlines', compression='xz')),
+        TrecQrels(train_data.un_tar('train/train.fold2.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
     subsets['v1.5/train/fold3'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(train_data, 'train/train.fold3.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(train_data, 'train/train.fold3.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(train_data.un_tar('train/train.fold3.cbor.outlines', compression='xz')),
+        TrecQrels(train_data.un_tar('train/train.fold3.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
     subsets['v1.5/train/fold4'] = Dataset(
         docs_v15,
-        CarQueries(TarExtract(train_data, 'train/train.fold4.cbor.outlines', compression='xz')),
-        TrecQrels(TarExtract(train_data, 'train/train.fold4.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+        CarQueries(train_data.un_tar('train/train.fold4.cbor.outlines', compression='xz')),
+        TrecQrels(train_data.un_tar('train/train.fold4.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

@@ -206,7 +206,7 @@ def _init():
 
     langs = ['python', 'java', 'go', 'php', 'ruby', 'javascript']
 
-    dlcs = {lang: ZipExtractCache(dlc[lang], base_path/lang) for lang in langs}
+    dlcs = {lang: dlc[lang].un_zip_all(base_path/lang) for lang in langs}
     all_dlcs = [dlcs[lang] for lang in langs]
     base = Dataset(
         CodeSearchNetDocs(all_dlcs),

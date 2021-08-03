@@ -17,7 +17,7 @@ _logger = ir_datasets.log.easy()
 _ENCOUNTERD_DUAS = set()
 
 
-class GoogleDriveDownload(util.fileio.IoStream):
+class GoogleDriveDownload(util.fio.FioStream):
     def __init__(self, url, tries=None, dua=None):
         self.url = url
         self.tries = tries
@@ -47,7 +47,7 @@ class GoogleDriveDownload(util.fileio.IoStream):
         return Download(url, self.tries, cookies).stream()
 
 
-class Download(util.fileio.IoStream):
+class Download(util.fio.FioStream):
     def __init__(self, url, tries=None, cookies=None, headers=None, dua=None):
         self.url = url
         self.tries = tries
@@ -156,7 +156,7 @@ class Download(util.fileio.IoStream):
         return f'Download({repr(self.url)}, tries={self.tries})'
 
 
-class LocalFile(util.fileio.IoRegularFile):
+class LocalFile(util.fio.FioRegularFile):
     def __init__(self, path, message=None, mkdir=True):
         self._path = Path(path)
         if mkdir:
@@ -173,13 +173,13 @@ class LocalFile(util.fileio.IoRegularFile):
     def __repr__(self):
         return f'LocalFile({repr(str(self._path))})'
 
-    def availability(self) -> util.fileio.IoAvailability:
+    def availability(self) -> util.fio.FioAvailability:
         if self._path.exists():
-            return util.fileio.IoAvailability.AVAILABLE
+            return util.fio.FioAvailability.AVAILABLE
         if self._message is not None:
             # HACK! Pretend it's actually possible to get it so we can give a message
-            return util.fileio.IoAvailability.PROCURABLE
-        return util.fileio.IoAvailability.UNAVAILABLE
+            return util.fio.FioAvailability.PROCURABLE
+        return util.fio.FioAvailability.UNAVAILABLE
 
 
 class _DownloadConfig:
@@ -242,10 +242,10 @@ class _DownloadConfig:
                 # this file has the irds mirror to fall back on
                 alternatives.append(Download(f'https://mirror.ir-datasets.com/{dlc["expected_md5"]}'))
         elif 'instructions' in dlc:
-            if 'cache_path' in dlc:
-                local_path = Path(cache_path)
-            else:
+            if 'expected_md5' in dlc:
                 local_path = Path(util.home_path()) / 'downloads' / dlc['expected_md5']
+            else:
+                local_path = Path(cache_path)
             alternatives.append(LocalFile(local_path, dlc['instructions'].format(path=local_path)))
         else:
             raise RuntimeError('Must either provide url or instructions')
@@ -255,7 +255,7 @@ class _DownloadConfig:
             assert len(alternatives) == 1, "stream only allows a single source"
             assert cache_path is None, "no cache_path allowed when stream=True"
             return alternatives[0]
-        return util.fileio.Alternatives(*alternatives, path=cache_path)
+        return util.fio.Alternatives(*alternatives, path=cache_path)
 
 
 DownloadConfig = _DownloadConfig(file='etc/downloads.json')

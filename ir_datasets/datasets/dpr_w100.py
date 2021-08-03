@@ -117,35 +117,35 @@ def _init():
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TsvDocs(GzipExtract(dlc['docs']), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True, docstore_size_hint=12827215492, count_hint=21015324)
+    collection = TsvDocs(dlc['docs'].un_gzip(), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True, docstore_size_hint=12827215492, count_hint=21015324)
     base = Dataset(
         collection,
         documentation('_'))
 
     subsets = {}
 
-    nq_dev_manager = DprW100Manager(GzipExtract(dlc['nq-dev']), base_path/'nq-dev')
+    nq_dev_manager = DprW100Manager(dlc['nq-dev'].un_gzip(), base_path/'nq-dev')
     subsets['natural-questions/dev'] = Dataset(
         collection,
         DprW100Queries(nq_dev_manager.file_ref('queries.tsv')),
         TrecQrels(nq_dev_manager.file_ref('qrels'), QREL_DEFS),
         documentation('natural-questions/dev'))
 
-    nq_train_manager = DprW100Manager(GzipExtract(dlc['nq-train']), base_path/'nq-train')
+    nq_train_manager = DprW100Manager(dlc['nq-train'].un_gzip(), base_path/'nq-train')
     subsets['natural-questions/train'] = Dataset(
         collection,
         DprW100Queries(nq_train_manager.file_ref('queries.tsv')),
         TrecQrels(nq_train_manager.file_ref('qrels'), QREL_DEFS),
         documentation('natural-questions/train'))
 
-    tqa_dev_manager = DprW100Manager(GzipExtract(dlc['tqa-dev']), base_path/'tqa-dev', passage_id_key='psg_id')
+    tqa_dev_manager = DprW100Manager(dlc['tqa-dev'].un_gzip(), base_path/'tqa-dev', passage_id_key='psg_id')
     subsets['trivia-qa/dev'] = Dataset(
         collection,
         DprW100Queries(tqa_dev_manager.file_ref('queries.tsv')),
         TrecQrels(tqa_dev_manager.file_ref('qrels'), QREL_DEFS),
         documentation('trivia-qa/dev'))
 
-    tqa_train_manager = DprW100Manager(GzipExtract(dlc['tqa-train']), base_path/'tqa-train', passage_id_key='psg_id')
+    tqa_train_manager = DprW100Manager(dlc['tqa-train'].un_gzip(), base_path/'tqa-train', passage_id_key='psg_id')
     subsets['trivia-qa/train'] = Dataset(
         collection,
         DprW100Queries(tqa_train_manager.file_ref('queries.tsv')),

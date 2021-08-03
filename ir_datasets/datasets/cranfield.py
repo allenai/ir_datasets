@@ -157,9 +157,9 @@ def _init():
 
     main_dlc = dlc['main']
     base = Dataset(
-        CranfieldDocs(Cache(TarExtract(main_dlc, 'cran.all.1400'), base_path/'docs.txt')),
-        CranfieldQueries(Cache(TarExtract(main_dlc, 'cran.qry'), base_path/'queries.txt')),
-        CranfieldQrels(Cache(TarExtract(main_dlc, 'cranqrel'), base_path/'qrels.txt')),
+        CranfieldDocs(main_dlc.un_tar('cran.all.1400').cache(base_path/'docs.txt')),
+        CranfieldQueries(main_dlc.un_tar('cran.qry').cache(base_path/'queries.txt')),
+        CranfieldQrels(main_dlc.un_tar('cranqrel').cache(base_path/'qrels.txt')),
         documentation('_'),
     )
 
