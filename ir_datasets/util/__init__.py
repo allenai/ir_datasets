@@ -5,6 +5,7 @@ import shutil
 from contextlib import contextmanager
 from threading import Lock
 from pathlib import Path
+import tempfile
 from .. import log
 from .fileio import IterStream, Cache, TarExtract, TarExtractAll, RelativePath, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract
 from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload, _DownloadConfig
@@ -16,14 +17,16 @@ _logger = log.easy()
 
 
 def tmp_path():
-    p = Path(os.environ.get('IR_DATASETS_TMP', '/tmp/ir_datasets/'))
-    p.mkdir(parents=True, exist_ok=True)
+    p = Path(os.environ.get('IR_DATASETS_TMP', os.path.join(tempfile.gettempdir(), 'ir_datasets')))
+    if not p.exists(): # per #107, we likely need both the exists check AND the exist_ok for occasional failures when directory is linked to NFS
+        p.mkdir(parents=True, exist_ok=True)
     return p
 
 
 def home_path():
     p = Path(os.environ.get('IR_DATASETS_HOME', Path.home() / '.ir_datasets'))
-    p.mkdir(parents=True, exist_ok=True)
+    if not p.exists(): # per #107, we likely need both the exists check AND the exist_ok for occasional failures when directory is linked to NFS
+        p.mkdir(parents=True, exist_ok=True)
     return p
 
 
