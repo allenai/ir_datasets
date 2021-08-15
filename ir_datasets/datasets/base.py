@@ -3,6 +3,7 @@ import contextlib
 import itertools
 from pathlib import Path
 import ir_datasets
+from ir_datasets.formats import BaseQueries, BaseQrels, BaseScoredDocs, BaseDocPairs
 
 
 _logger = ir_datasets.log.easy()
@@ -201,14 +202,11 @@ class _BetaPythonApiDocpairs:
         return f'BetaPythonApiDocpairs({repr(self._handler)})'
 
 
-class FilteredQueries:
+class FilteredQueries(BaseQueries):
     def __init__(self, queries_handler, lazy_qids, mode='include'):
         self._queries_handler = queries_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._queries_handler, attr)
 
     def queries_iter(self):
         qids = self._lazy_qids()
@@ -224,14 +222,11 @@ class FilteredQueries:
         return self
 
 
-class FilteredQrels:
+class FilteredQrels(BaseQrels):
     def __init__(self, qrels_handler, lazy_qids, mode='include'):
         self._qrels_handler = qrels_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._qrels_handler, attr)
 
     def qrels_iter(self):
         qids = self._lazy_qids()
@@ -243,18 +238,18 @@ class FilteredQrels:
             if operator(query):
                 yield query
 
+    def qrels_defs(self):
+        return self._qrels_handler.qrels_defs()
+
     def qrels_handler(self):
         return self
 
 
-class FilteredScoredDocs:
+class FilteredScoredDocs(BaseScoredDocs):
     def __init__(self, scoreddocs_handler, lazy_qids, mode='include'):
         self._scoreddocs_handler = scoreddocs_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._scoreddocs_handler, attr)
 
     def scoreddocs_iter(self):
         qids = self._lazy_qids()
@@ -270,14 +265,11 @@ class FilteredScoredDocs:
         return self
 
 
-class FilteredDocPairs:
+class FilteredDocPairs(BaseDocPairs):
     def __init__(self, docpairs_handler, lazy_qids, mode='include'):
         self._docpairs_handler = docpairs_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._docpairs_handler, attr)
 
     def docpairs_iter(self):
         qids = self._lazy_qids()

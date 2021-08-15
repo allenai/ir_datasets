@@ -76,6 +76,19 @@ def create_dataset(docs_tsv=None, queries_tsv=None, qrels_trec=None):
     return datasets.base.Dataset(*components)
 
 
+_metadata_cached = None
+def metadata_cached(ds, entity_type):
+    global _metadata_cached
+    if _metadata_cached is None:
+        import pkgutil, json
+        data = pkgutil.get_data('ir_datasets', 'etc/metadata.json')
+        _metadata_cached = json.loads(data)
+    result = _metadata_cached.get(ds, {}).get(entity_type, {})
+    while '_ref' in result:
+        result = _metadata_cached.get(result['_ref'], {}).get(entity_type, {})
+    return result
+
+
 def main(args):
     import sys
     if len(args) < 1 or args[0] not in commands.COMMANDS:

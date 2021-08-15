@@ -1,6 +1,7 @@
 import hashlib
 import json
 import types
+import itertools
 from typing import NamedTuple
 import ir_datasets
 
@@ -187,24 +188,49 @@ BaseScoredDocs.EXTENSIONS['scoreddocs_hash'] = hasher('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_hash'] = hasher('docpairs_iter')
 
 
-def metadataer(iter_fn):
+def metadataer(iter_fn, metadata_fields=(), count_by_value_field=None):
     def wrapped(self, verbose=True, hashfn=hashlib.sha256):
         h = hashfn()
         count = 0
         it = getattr(self, iter_fn)()
         if verbose:
             it = _logger.pbar(it)
+        field_lens = {f: 0 for f in metadata_fields}
+        field_prefixes = {}
+        count_by_field_values = {}
         for record in it:
             js = [[field, value] for field, value in zip(record._fields, record)]
             h.update(json.dumps(js).encode())
             count += 1
-        return {'hash': h.hexdigest(), 'count': count}
+            for f in metadata_fields:
+                field = getattr(record, f)
+                field_lens[f] = max(field_lens[f], len(field.encode()))
+                if f not in field_prefixes:
+                    field_prefixes[f] = field
+                elif len(field_prefixes[f]) > 0:
+                    field_prefixes[f] = ''.join(x[0] for x in itertools.takewhile(lambda x: x[0] == x[1], zip(field_prefixes[f], field)))
+            if count_by_value_field is not None:
+                count_by_value_field_value = getattr(record, count_by_value_field)
+                if count_by_value_field_value not in count_by_field_values:
+                    count_by_field_values[count_by_value_field_value] = 0
+                count_by_field_values[count_by_value_field_value] += 1
+        result = {'hash': h.hexdigest(), 'count': count}
+        if metadata_fields:
+            result['fields'] = {}
+        for f in metadata_fields:
+            result['fields'][f] = {
+                'max_len': field_lens[f],
+                'common_prefix': field_prefixes[f],
+            }
+        if count_by_value_field is not None:
+            result[f'counts_by_{count_by_value_field}'] = count_by_field_values
+        return result
     return wrapped
 
 
-BaseDocs.EXTENSIONS['docs_metadata'] = metadataer('docs_iter')
+BaseDocs.EXTENSIONS['docs_metadata'] = metadataer('docs_iter', ('doc_id',))
 BaseQueries.EXTENSIONS['queries_metadata'] = metadataer('queries_iter')
-BaseQrels.EXTENSIONS['qrels_metadata'] = metadataer('qrels_iter')
+BaseQrels.EXTENSIONS['qrels_metadata'] = metadataer('qrels_iter', count_by_value_field='relevance')
 BaseScoredDocs.EXTENSIONS['scoreddocs_metadata'] = metadataer('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_metadata'] = metadataer('docpairs_iter')
 

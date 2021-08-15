@@ -28,19 +28,22 @@ def main(args):
             dataset = ir_datasets.load(dsid)
             data.setdefault(dsid, {})
             for e in ['docs', 'queries', 'qrels', 'scoreddocs', 'docpairs']:
-                if getattr(dataset, f'has_{e}')():
-                    if e not in data[dsid]:
-                        parent_id = getattr(ir_datasets, f'{e}_parent_id')(dsid)
-                        if parent_id != dsid:
-                            data[dsid][e] = {'_ref': parent_id}
+                try:
+                    if getattr(dataset, f'has_{e}')():
+                        if e not in data[dsid]:
+                            parent_id = getattr(ir_datasets, f'{e}_parent_id')(dsid)
+                            if parent_id != dsid:
+                                data[dsid][e] = {'_ref': parent_id}
+                            else:
+                                with _logger.duration(f'{dsid} {e}'):
+                                    data[dsid][e] = getattr(dataset, f'{e}_metadata')()
+                            _logger.info(f'{dsid} {e}: {data[dsid][e]}')
                         else:
-                            with _logger.duration(f'{dsid} {e}'):
-                                data[dsid][e] = getattr(dataset, f'{e}_metadata')()
-                        _logger.info(f'{dsid} {e}: {data[dsid][e]}')
-                    else:
-                        _logger.info(f'{dsid} {e} [cached]: {data[dsid][e]}')
-    with args.file.open('wt') as f:
-        json.dump(data, f)
+                            _logger.info(f'{dsid} {e} [cached]: {data[dsid][e]}')
+                except Exception as ex:
+                    _logger.info(f'{dsid} {e} [error]: {ex}')
+            with args.file.open('wt') as f:
+                json.dump(data, f)
 
 
 if __name__ == '__main__':

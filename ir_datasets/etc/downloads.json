@@ -2580,14 +2580,14 @@
 "tweets2013-ia": {
   "docs/feb": {
     "url": "https://archive.org/download/archiveteam-twitter-stream-2013-02/archiveteam-twitter-stream-2013-02.tar",
-    "expected_md5": "e82916d37116c781afff750e2127156f5",
+    "expected_md5": "e82916d37116c781afff750e2127156f",
     "stream": true,
     "skip_local": true,
     "skip_test": true
   },
   "docs/mar": {
     "url": "https://archive.org/download/archiveteam-twitter-stream-2013-03/archiveteam-twitter-stream-2013-03.tar",
-    "expected_md5": "486817a372e03298162daa0e80dc63995",
+    "expected_md5": "486817a372e03298162daa0e80dc6399",
     "stream": true,
     "skip_local": true,
     "skip_test": true

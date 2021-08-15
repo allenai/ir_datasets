@@ -208,31 +208,32 @@ def _init():
 
     dlcs = {lang: ZipExtractCache(dlc[lang], base_path/lang) for lang in langs}
     all_dlcs = [dlcs[lang] for lang in langs]
+    collection = CodeSearchNetDocs(all_dlcs)
     base = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         documentation('_'),
     )
     subsets['train'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'train'),
         CodeSearchNetQrels(all_dlcs, 'train'),
         documentation('train'),
     )
     subsets['valid'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'valid'),
         CodeSearchNetQrels(all_dlcs, 'valid'),
         documentation('valid'),
     )
     subsets['test'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'test'),
         CodeSearchNetQrels(all_dlcs, 'test'),
         documentation('test'),
     )
     challenge_queries = CodeSearchNetChallengeQueries(dlc['challenge/queries'])
     subsets['challenge'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         challenge_queries,
         CodeSearchNetChallengeQrels(dlc['challenge/qrels'], challenge_queries),
         documentation('challenge'),
