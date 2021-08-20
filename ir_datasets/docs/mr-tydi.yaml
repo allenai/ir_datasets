@@ -6,6 +6,9 @@ _:
 A multi-lingual benchmark benchmark suite constructed from the <a href="https://arxiv.org/abs/2003.05002">TyDi QA Benchmark</a>.
 Relevance labels are sparsely assigned based on shallow human annotation.
 </p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2108.08787.pdf">Dataset paper</a></li>
+</ul>
 '
 
 ar:
