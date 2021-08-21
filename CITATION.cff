@@ -1,0 +1,37 @@
+cff-version: 1.2.0
+message: "When using datasets provided by this package, be sure to properly cite them. Bibtex for each dataset can be found on each dataset's documenation page. If you use this tool, please cite our SIGIR resource paper:"
+authors:
+- family-names: "MacAvaney"
+  given-names: "Sean"
+- family-names: "Yates"
+  given-names: "Andrew"
+- family-names: "Feldman"
+  given-names: "Sergey"
+- family-names: "Downey"
+  given-names: "Doug"
+- family-names: "Cohan"
+  given-names: "Arman"
+- family-names: "Goharian"
+  given-names: "Nazli"
+title: "Simplified Data Wrangling with ir_datasets"
+doi: 10.1145/3404835.3463254
+url: "https://github.com/allenai/ir_datasets"
+preferred-citation:
+  type: inproceedings
+  authors:
+  - family-names: "MacAvaney"
+    given-names: "Sean"
+  - family-names: "Yates"
+    given-names: "Andrew"
+  - family-names: "Feldman"
+    given-names: "Sergey"
+  - family-names: "Downey"
+    given-names: "Doug"
+  - family-names: "Cohan"
+    given-names: "Arman"
+  - family-names: "Goharian"
+    given-names: "Nazli"
+  doi: 10.1145/3404835.3463254
+  booktitle: "SIGIR"
+  title: "Simplified Data Wrangling with ir_datasets"
+  year: 2021
