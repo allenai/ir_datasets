@@ -29,6 +29,12 @@ Install via pip:
 pip install ir_datasets
 ```
 
+If you want the main branch, you install as such:
+
+```
+pip install git+https://github.com/allenai/ir_datasets.git
+```
+
 If you want to build from source, use:
 
 ```

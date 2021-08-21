@@ -1495,6 +1495,64 @@
   }
 },
 
+"mr-tydi": {
+  "ar": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-arabic.tar.gz",
+    "expected_md5": "a0dd1e06c27486b09762c033bde42b70",
+    "size_hint": 321016840
+  },
+  "bn": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-bengali.tar.gz",
+    "expected_md5": "06ed183ce7c407f851e5f07370fdbbbb",
+    "size_hint": 59707233
+  },
+  "en": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-english.tar.gz",
+    "expected_md5": "031277b7a7912aedb3a5ae58b93ec2c0",
+    "size_hint": 4964684589
+  },
+  "fi": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-finnish.tar.gz",
+    "expected_md5": "92579475f609bc986aa3eb8260a7328a",
+    "size_hint": 268373209
+  },
+  "id": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-indonesian.tar.gz",
+    "expected_md5": "708610c85ce2953ab281fd66c34d4f84",
+    "size_hint": 168175031
+  },
+  "ja": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-japanese.tar.gz",
+    "expected_md5": "feff865aada3a55cafb8756bd2bf89af",
+    "size_hint": 1054574801
+  },
+  "ko": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-korean.tar.gz",
+    "expected_md5": "ccf88f800e87cb62b735cb283ab6f50c",
+    "size_hint": 222544514
+  },
+  "ru": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-russian.tar.gz",
+    "expected_md5": "fab64459133bc93a0bec2f0559bfb423",
+    "size_hint": 1549150495
+  },
+  "sw": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-swahili.tar.gz",
+    "expected_md5": "1042af38a358bd3a60e0f548f9986f8a",
+    "size_hint": 10452957
+  },
+  "te": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-telugu.tar.gz",
+    "expected_md5": "a2174529c3154fe9fa50179cb1584a0d",
+    "size_hint": 73416550
+  },
+  "th": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-thai.tar.gz",
+    "expected_md5": "351d17d7e8614447f2d350bb736ea718",
+    "size_hint": 112677400
+  }
+},
+
 "msmarco-document": {
   "docs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
