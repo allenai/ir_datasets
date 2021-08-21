@@ -489,7 +489,7 @@ jobs:
         path: "msmarco-document.json"
 
   msmarco-document-v2:
-    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-document-v2'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == 'msmarco-document-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -539,7 +539,7 @@ jobs:
         path: "msmarco-passage.json"
 
   msmarco-passage-v2:
-    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-passage-v2'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == 'msmarco-passage-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -714,7 +714,7 @@ jobs:
         path: "trec-arabic.json"
 
   trec-fair-2021:
-    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-fair-2021'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == 'trec-fair-2021'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
