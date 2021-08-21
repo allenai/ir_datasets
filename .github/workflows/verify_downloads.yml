@@ -314,7 +314,7 @@ jobs:
         path: "cranfield.json"
 
   dpr-w100:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'dpr-w100'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'dpr-w100'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -439,7 +439,7 @@ jobs:
         path: "medline.json"
 
   mr-tydi:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'mr-tydi'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'mr-tydi'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -464,7 +464,7 @@ jobs:
         path: "mr-tydi.json"
 
   msmarco-document:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'msmarco-document'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-document'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -489,7 +489,7 @@ jobs:
         path: "msmarco-document.json"
 
   msmarco-document-v2:
-    if: "!github.event.inputs.releasetype || dataset.event.inputs.releasetype == dataset-document-v2'"
+    if: "!github.event.inputs.|| dataset.event.inputs.releasetype == dataset-document-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -514,7 +514,7 @@ jobs:
         path: "msmarco-document-v2.json"
 
   msmarco-passage:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'msmarco-passage'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-passage'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -539,7 +539,7 @@ jobs:
         path: "msmarco-passage.json"
 
   msmarco-passage-v2:
-    if: "!github.event.inputs.releasetype || dataset.event.inputs.releasetype == dataset-passage-v2'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-passage-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -564,7 +564,7 @@ jobs:
         path: "msmarco-passage-v2.json"
 
   msmarco-qna:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'msmarco-qna'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-qna'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -589,7 +589,7 @@ jobs:
         path: "msmarco-qna.json"
 
   natural-questions:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'natural-questions'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'natural-questions'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -689,7 +689,7 @@ jobs:
         path: "pmc.json"
 
   trec-arabic:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'trec-arabic'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-arabic'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -714,7 +714,7 @@ jobs:
         path: "trec-arabic.json"
 
   trec-fair-2021:
-    if: "!github.event.inputs.releasetype || dataset.event.inputs.releasetype == dataset-fair-2021'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-fair-2021'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -739,7 +739,7 @@ jobs:
         path: "trec-fair-2021.json"
 
   trec-mandarin:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'trec-mandarin'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-mandarin'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -764,7 +764,7 @@ jobs:
         path: "trec-mandarin.json"
 
   trec-robust04:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'trec-robust04'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-robust04'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -789,7 +789,7 @@ jobs:
         path: "trec-robust04.json"
 
   trec-spanish:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'trec-spanish'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-spanish'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -839,7 +839,7 @@ jobs:
         path: "tripclick.json"
 
   tweets2013-ia:
-    if: "!github.event.inputs.releasetype dataset github.event.inputs.releasetype dataset 'tweets2013-ia'"
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'tweets2013-ia'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
