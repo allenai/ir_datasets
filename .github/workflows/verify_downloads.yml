@@ -489,7 +489,7 @@ jobs:
         path: "msmarco-document.json"
 
   msmarco-document-v2:
-    if: "!github.event.inputs.|| dataset.event.inputs.releasetype == dataset-document-v2'"
+    if: "!github.event.inputs.dataset || dataset.event.inputs.dataset == dataset-document-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
