@@ -13,9 +13,11 @@ on:
 
 jobs:
 
-  test:
+  log:
+    runs-on: ubuntu-latest
     steps:
-      - run: |
+    - name: "Log"
+      run: |
         echo "${{ github.event.inputs.dataset }}"
 
   antique:
