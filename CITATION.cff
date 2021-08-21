@@ -17,7 +17,7 @@ title: "Simplified Data Wrangling with ir_datasets"
 doi: 10.1145/3404835.3463254
 url: "https://github.com/allenai/ir_datasets"
 preferred-citation:
-  type: proceedings
+  type: conference-paper
   authors:
   - family-names: "MacAvaney"
     given-names: "Sean"
