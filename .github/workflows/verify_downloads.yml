@@ -13,6 +13,11 @@ on:
 
 jobs:
 
+  test:
+    steps:
+      - run: |
+        echo "${{ github.event.inputs.dataset }}"
+
   antique:
     if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'antique'"
     runs-on: ubuntu-latest
