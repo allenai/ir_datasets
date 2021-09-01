@@ -6,14 +6,15 @@ on:
     - cron: '0 8 * * 0' # run every sunday at (around) 8:00am UTC
   workflow_dispatch:
     inputs:
-      reason:
-        description: 'reason'
-        required: true
+      dataset:
+        description: "Top-level dataset ID to run (or leave blank for all)" 
+        required: false
         default: ''
 
 jobs:
 
   antique:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'antique'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -38,6 +39,7 @@ jobs:
         path: "antique.json"
 
   aquaint:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'aquaint'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -62,6 +64,7 @@ jobs:
         path: "aquaint.json"
 
   beir:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'beir'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -86,6 +89,7 @@ jobs:
         path: "beir.json"
 
   c4:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'c4'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -110,6 +114,7 @@ jobs:
         path: "c4.json"
 
   car:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'car'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -134,6 +139,7 @@ jobs:
         path: "car.json"
 
   clinicaltrials:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'clinicaltrials'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -158,6 +164,7 @@ jobs:
         path: "clinicaltrials.json"
 
   clirmatrix:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'clirmatrix'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -182,6 +189,7 @@ jobs:
         path: "clirmatrix.json"
 
   clueweb09:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'clueweb09'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -206,6 +214,7 @@ jobs:
         path: "clueweb09.json"
 
   clueweb12:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'clueweb12'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -230,6 +239,7 @@ jobs:
         path: "clueweb12.json"
 
   codesearchnet:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'codesearchnet'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -254,6 +264,7 @@ jobs:
         path: "codesearchnet.json"
 
   cord19:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'cord19'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -278,6 +289,7 @@ jobs:
         path: "cord19.json"
 
   cranfield:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'cranfield'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -302,6 +314,7 @@ jobs:
         path: "cranfield.json"
 
   dpr-w100:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'dpr-w100'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -326,6 +339,7 @@ jobs:
         path: "dpr-w100.json"
 
   gov:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'gov'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -350,6 +364,7 @@ jobs:
         path: "gov.json"
 
   gov2:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'gov2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -374,6 +389,7 @@ jobs:
         path: "gov2.json"
 
   highwire:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'highwire'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -398,6 +414,7 @@ jobs:
         path: "highwire.json"
 
   medline:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'medline'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -421,7 +438,33 @@ jobs:
         name: "medline.json"
         path: "medline.json"
 
+  mmarco:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'mmarco'"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test
+      env:
+        IR_DATASETS_DL_DISABLE_PBAR: 'true'
+      run: |
+        python -m test.downloads --filter "^mmarco/" --output "mmarco.json" --randdelay 60
+    - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defeats the whole purpose)
+      uses: actions/upload-artifact@v2
+      with:
+        name: "mmarco.json"
+        path: "mmarco.json"
+
   mr-tydi:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'mr-tydi'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -446,6 +489,7 @@ jobs:
         path: "mr-tydi.json"
 
   msmarco-document:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-document'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -470,6 +514,7 @@ jobs:
         path: "msmarco-document.json"
 
   msmarco-document-v2:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-document-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -494,6 +539,7 @@ jobs:
         path: "msmarco-document-v2.json"
 
   msmarco-passage:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-passage'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -518,6 +564,7 @@ jobs:
         path: "msmarco-passage.json"
 
   msmarco-passage-v2:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-passage-v2'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -542,6 +589,7 @@ jobs:
         path: "msmarco-passage-v2.json"
 
   msmarco-qna:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'msmarco-qna'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -566,6 +614,7 @@ jobs:
         path: "msmarco-qna.json"
 
   natural-questions:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'natural-questions'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -590,6 +639,7 @@ jobs:
         path: "natural-questions.json"
 
   nfcorpus:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'nfcorpus'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -614,6 +664,7 @@ jobs:
         path: "nfcorpus.json"
 
   nyt:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'nyt'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -638,6 +689,7 @@ jobs:
         path: "nyt.json"
 
   pmc:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'pmc'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -662,6 +714,7 @@ jobs:
         path: "pmc.json"
 
   trec-arabic:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-arabic'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -686,6 +739,7 @@ jobs:
         path: "trec-arabic.json"
 
   trec-fair-2021:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-fair-2021'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -710,6 +764,7 @@ jobs:
         path: "trec-fair-2021.json"
 
   trec-mandarin:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-mandarin'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -734,6 +789,7 @@ jobs:
         path: "trec-mandarin.json"
 
   trec-robust04:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-robust04'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -758,6 +814,7 @@ jobs:
         path: "trec-robust04.json"
 
   trec-spanish:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'trec-spanish'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -782,6 +839,7 @@ jobs:
         path: "trec-spanish.json"
 
   tripclick:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'tripclick'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -806,6 +864,7 @@ jobs:
         path: "tripclick.json"
 
   tweets2013-ia:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'tweets2013-ia'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -830,6 +889,7 @@ jobs:
         path: "tweets2013-ia.json"
 
   vaswani:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'vaswani'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -854,6 +914,7 @@ jobs:
         path: "vaswani.json"
 
   wapo:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'wapo'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -878,6 +939,7 @@ jobs:
         path: "wapo.json"
 
   wikir:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'wikir'"
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
