@@ -1647,13 +1647,13 @@
     "cache_path": "portuguese_collection.tsv"
   },
   "pt/queries/dev": {
-    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.dev.txt",
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.dev.tsv",
     "expected_md5": "262ce189e3d57059b2795c16db44bb81",
     "size_hint": 4962136,
     "cache_path": "portuguese_queries.dev.tsv"
   },
   "pt/queries/train": {
-    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.train.txt",
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.train.tsv",
     "expected_md5": "df2ed4ef0bdb93405ba276a92530fc03",
     "size_hint": 39231205,
     "cache_path": "portuguese_queries.train.tsv"
