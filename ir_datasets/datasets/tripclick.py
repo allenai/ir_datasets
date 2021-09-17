@@ -154,7 +154,7 @@ def _init():
         documentation('train/head'))
 
     subsets['train/head/dctr'] = Dataset(
-        TrecQrels(RelativePath(topics_and_qrels, 'benchmark/qrels/qrels.dctr.head.val.txt'), QREL_DCTR_DEFS),
+        TrecQrels(RelativePath(topics_and_qrels, 'benchmark/qrels/qrels.dctr.head.train.txt'), QREL_DCTR_DEFS),
         subsets['train/head'],
         documentation('train/head/dctr'))
 
