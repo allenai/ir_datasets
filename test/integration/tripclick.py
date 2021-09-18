@@ -95,10 +95,10 @@ class TestTripclick(DatasetIntegrationTest):
             9: TrecQrel('8', '1431742', 1, '0'),
             116820: TrecQrel('1630245', '10818871', 1, '0'),
         })
-        self._test_qrels('tripclick/train/head/dctr', count=66812, items={
-            0: TrecQrel('38', '1390633', 2, '0'),
-            9: TrecQrel('38', '7858667', 0, '0'),
-            66811: TrecQrel('1630209', '9358372', 0, '0'),
+        self._test_qrels('tripclick/train/head/dctr', count=128420, items={
+            0: TrecQrel('8', '1398048', 3, '0'),
+            9: TrecQrel('8', '5651514', 1, '0'),
+            128419: TrecQrel('1630245', '9448244', 0, '0'),
         })
         self._test_qrels('tripclick/train/torso', count=966898, items={
             0: TrecQrel('5', '1099235', 1, '0'),
@@ -189,7 +189,6 @@ class TestTripclick(DatasetIntegrationTest):
             9: GenericDocPair('1016988', '7785567', '5019636'),
             23221223: GenericDocPair('3141', '9337445', '9337479'),
         })
-
 
 if __name__ == '__main__':
     unittest.main()
