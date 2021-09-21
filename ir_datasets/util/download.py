@@ -47,11 +47,12 @@ class GoogleDriveDownload(BaseDownload):
         return RequestsDownload(url, self.tries, cookies).stream()
 
 class RequestsDownload(BaseDownload):
-    def __init__(self, url, tries=None, cookies=None, headers=None):
+    def __init__(self, url, tries=None, cookies=None, headers=None, auth=None):
         self.url = url
         self.tries = tries
         self.cookies = cookies
         self.headers = headers
+        self.auth = auth
 
     @contextlib.contextmanager
     def stream(self):
@@ -71,6 +72,8 @@ class RequestsDownload(BaseDownload):
         # apply headers if provided
         if self.headers:
             http_args['headers'].update(self.headers)
+        if self.auth:
+            self._handle_auth(http_args)
         done = False
         pbar = None
         response = None
@@ -149,6 +152,26 @@ class RequestsDownload(BaseDownload):
 
     def __repr__(self):
         return f'RequestsDownload({repr(self.url)}, tries={self.tries})'
+
+    def _handle_auth(self, http_args):
+        auth_dir = util.home_path() / 'auth'
+        if not auth_dir.exists():
+            auth_dir.mkdir(parents=True, exist_ok=True)
+        auth_path = auth_dir / self.auth
+        if auth_path.exists():
+            with auth_path.open('rt') as fin:
+                lines = fin.read().split('\n')
+                if len(lines) < 2:
+                    raise RuntimeError(f'{str(auth_path)} in incorrect format. Set the first line as the username and the second line as the password.')
+                uname, pwd = lines[0].strip(), lines[1].strip()
+                http_args['auth'] = (uname, pwd)
+        else:
+            _logger.info('To download {url}, you need to enter a username and password. To avoid this message in the future, you may '
+                         'also set them in a file''named {auth_path}, with the first line as the username and the second line as the '
+                         'password.'.format(auth_path=str(auth_path), **http_args))
+            uname = input('enter username for {url}: '.format(**http_args))
+            pwd = input('enter password for {url}: '.format(**http_args))
+            http_args['auth'] = (uname, pwd)
 
 
 class LocalDownload(BaseDownload):
@@ -293,6 +316,8 @@ class _DownloadConfig:
         sources = []
         cache_path = None
         download_args = dlc.get('download_args', {})
+        if 'auth' in dlc:
+            download_args['auth'] = dlc['auth']
         if 'cache_path' in dlc:
             if self._base_path:
                 cache_path = os.path.join(self._base_path, dlc['cache_path'])

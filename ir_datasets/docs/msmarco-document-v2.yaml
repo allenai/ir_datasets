@@ -87,4 +87,22 @@ trec-dl-2021:
   desc: '
 <p>
 Official topics for the TREC Deep Learning (DL) 2021 shared task.
+</p>
+<p>
+Note that at this time, qrels are only available to those with TREC active participant login credentials.
+</p>
 '
+  qrels_instructions: &trec_inst "requires TREC active participant login credentials"
+
+trec-dl-2021/judged:
+  desc: '
+<p>
+<a class="ds-ref">msmarco-document-v2/trec-dl-2021</a>, but filtered down to the 57 queries
+with qrels.
+</p>
+<p>
+Note that at this time, this is only available to those with TREC active participant login credentials.
+</p>
+'
+  qrels_instructions: *trec_inst
+  queries_instructions: *trec_inst
