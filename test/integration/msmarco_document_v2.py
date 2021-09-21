@@ -54,6 +54,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('1052368', 'who stabbed dr. martin luther king'),
             476: GenericQuery('855410', 'what is theraderm used for'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2021/judged', count=57, items={
+            0: GenericQuery('2082', 'At about what age do adults normally begin to lose bone mass?'),
+            9: GenericQuery('1104447', 'which kind of continental boundary is formed where two plates move horizontally past one another?'),
+            56: GenericQuery('1040198', 'who is the final arbiter of florida law in instances where there is no federal authority?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -90,6 +95,16 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: TrecQrel('42255', 'msmarco_doc_05_401511459', 0, '0'),
             9: TrecQrel('42255', 'msmarco_doc_10_1361976246', 0, '0'),
             7941: TrecQrel('1136962', 'msmarco_doc_51_164249476', 0, '0'),
+        })
+        self._test_qrels('msmarco-document-v2/trec-dl-2021', count=13058, items={
+            0: TrecQrel('2082', 'msmarco_doc_01_1320020407', 2, '0'),
+            9: TrecQrel('2082', 'msmarco_doc_02_613155504', 1, '0'),
+            13057: TrecQrel('1129560', 'msmarco_doc_59_863449044', 1, '0'),
+        })
+        self._test_qrels('msmarco-document-v2/trec-dl-2021/judged', count=13058, items={
+            0: TrecQrel('2082', 'msmarco_doc_01_1320020407', 2, '0'),
+            9: TrecQrel('2082', 'msmarco_doc_02_613155504', 1, '0'),
+            13057: TrecQrel('1129560', 'msmarco_doc_59_863449044', 1, '0'),
         })
 
     def test_scoreddocs(self):
