@@ -220,7 +220,7 @@ class ClueWeb12b13Extractor:
         message = f'''clueweb12-b13 docs not found. Please either:
 (1) Link docs to {path} if b13 subset already built, or
 (2) Run the following command to build the b13 subset:
-java -j {extract_path} {source_path}/ {path}/
+java -jar {extract_path} {source_path}/ {path}/
 '''
         _logger.info(message)
         raise RuntimeError(message)
