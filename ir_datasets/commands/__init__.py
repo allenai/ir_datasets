@@ -5,6 +5,7 @@ from . import list as list_cmd
 from . import build_clueweb_warc_indexes
 from . import build_download_cache
 from . import build_c4_checkpoints
+from . import aol_doc_downloader
 from . import clean
 
 COMMANDS = {
@@ -16,4 +17,5 @@ COMMANDS = {
     'build_c4_checkpoints': build_c4_checkpoints.main,
     'build_download_cache': build_download_cache.main,
     'clean': clean.main,
+    'aol_doc_downloader': aol_doc_downloader.main,
 }
