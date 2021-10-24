@@ -90,8 +90,8 @@ class DatasetIntegrationTest(unittest.TestCase):
 
             self.assertEqual(0, len(items))
 
-    def _test_scoreddocs(self, dataset_name, count=None, items=None):
-        with self.subTest('scoreddocs', dataset=dataset_name):
+    def _test_qlogs(self, dataset_name, count=None, items=None):
+        with self.subTest('qlogs', dataset=dataset_name):
             if isinstance(dataset_name, str):
                 dataset = ir_datasets.load(dataset_name)
             else:
@@ -99,10 +99,10 @@ class DatasetIntegrationTest(unittest.TestCase):
             expected_count = count
             items = items or {}
             count = 0
-            for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs', unit='scoreddoc')):
+            for i, qlogs in enumerate(_logger.pbar(dataset.qlogs_iter(), f'{dataset_name} qlogs', unit='qlog')):
                 count += 1
                 if i in items:
-                    self._assert_namedtuple(scoreddoc, items[i])
+                    self._assert_namedtuple(qlogs, items[i])
                     del items[i]
                     if expected_count is None and len(items) == 0:
                         break # no point in going further
@@ -211,7 +211,19 @@ self._test_scoreddocs({repr(dataset_name)}, count={count}, items={self._repr_nam
                 items[i] = docpair
         items[count-1] = docpair
         _logger.info(f'''
-self._test_docpairs(i{repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
+self._test_docpairs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
+''')
+
+    def _build_test_qlogs(self, dataset_name):
+        items = {}
+        count = 0
+        for i, qlog in enumerate(_logger.pbar(ir_datasets.load(dataset_name).qlogs_iter(), f'{dataset_name} qlogs', unit='qlogs')):
+            count += 1
+            if i in (0, 9):
+                items[i] = qlog
+        items[count-1] = qlog
+        _logger.info(f'''
+self._test_qlogs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
 ''')
 
     def _assert_namedtuple(self, a, b):

@@ -120,7 +120,13 @@ class AolManager:
         if self._internal_docs_store().built():
             return
         if not (self._base_path/'downloaded_docs'/'_done').exists():
-            raise RuntimeError('Download docs using download.py in aolia-tools')
+            raise RuntimeError('''To use the documents of AOLIA, you will need to run the download script in https://github.com/terrierteam/aolia-tools. To run the script, use the following commands:
+
+git clone https://github.com/terrierteam/aolia-tools
+cd aolia-tools
+pip install -r requirements.txt
+python downloader.py
+''')
         LZ4FrameFile = ir_datasets.lazy_libs.lz4_frame().frame.LZ4FrameFile
         with _logger.pbar_raw(desc='', total=1525535) as pbar, self._internal_docs_store().lookup.transaction() as transaction:
             for file in sorted((self._base_path/'downloaded_docs').glob('*.jsonl.lz4')):
@@ -155,8 +161,8 @@ class AolManager:
                     for line in fin:
                         pbar.update()
                         cols = line.decode().rstrip('\n').split('\t')
-                        if len(cols) == 3:
-                            user_id, query, query_time = cols
+                        if tuple(cols[3:]) == ('', ''):
+                            user_id, query, query_time, _, _ = cols
                             rank, url = None, None
                         else:
                             user_id, query, query_time, rank, url = cols
@@ -166,7 +172,6 @@ class AolManager:
                             f_queries.write(f'{query_id}\t{norm_query}\n')
                             encountered_qids.add(query_id)
                         log_items = []
-                        # session_id = sessionizer.next_session_id(query_id, norm_query, user_id)
                         if url is not None:
                             doc_id = md5(url.encode()).hexdigest()[:DID_LEN]
                             f_qrels.write(f'{query_id}\t{user_id}\t{doc_id}\t1\n')

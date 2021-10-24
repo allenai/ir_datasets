@@ -5,7 +5,6 @@ from . import list as list_cmd
 from . import build_clueweb_warc_indexes
 from . import build_download_cache
 from . import build_c4_checkpoints
-from . import aol_doc_downloader
 from . import clean
 
 COMMANDS = {
