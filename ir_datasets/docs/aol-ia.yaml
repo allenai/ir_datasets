@@ -9,9 +9,9 @@ of the query log (early 2006) via the Internet Archive.
 The query log does not include document or query IDs. These are instead created by ir_datasets.
 Document IDs are assigned using a hash of the URL that appears in the query log. Query IDs are
 assigned using the a hash of the noramlised query. All unique normalized queries are available
-from <kbd>queries</kdb>, and all clicked documents are available from <kbd>qrels</kdb> (iteration
+from <kbd>queries</kbd>, and all clicked documents are available from <kbd>qrels</kbd> (iteration
 value set to the user ID). Full information (including original query) are available from
-<kbd>qlogs</kdb>.
+<kbd>qlogs</kbd>.
 </p>
 '
   bibtex_ids: ['Pass2006Picture']
