@@ -38,7 +38,7 @@
   }
 },
 
-"aol": {
+"aol-ia": {
   "logs": {
     "url": "http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/aol-data.tar.gz",
     "expected_md5": "31cd27ce12c3a3f2df62a38050ce4c0a",
@@ -47,8 +47,8 @@
   },
   "id2wb": {
     "url": "https://macavaney.us/aol.id2wb.tsv.gz",
-    "expected_md5": "c08de0caf94ee5a20291ece5a67565dd",
-    "size_hint": 40099198,
+    "expected_md5": "afbf9b03e1a0fabc9f3fdd5105e6ae5a",
+    "size_hint": 40099187,
     "cache_path": "aol.id2wb.tsv.gz"
   }
 },

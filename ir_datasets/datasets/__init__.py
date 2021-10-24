@@ -1,6 +1,6 @@
 from . import base
 from . import antique
-from . import aol
+from . import aol_ia
 from . import aquaint
 from . import beir
 from . import c4

@@ -35,6 +35,8 @@ QTYPE_MAP = {
     '<title> *': 'text',
 }
 
+Q_HASH_LEN = 11
+
 
 class ConcatQueries(BaseQueries):
     def __init__(self, queries):
@@ -97,6 +99,7 @@ class LogItem(NamedTuple):
 
 class TripClickQlog(NamedTuple):
     session_id: str
+    query_id: str
     query: str
     query_orig: str
     time: datetime
@@ -137,11 +140,21 @@ class TripClickQlogs:
                         items += [LogItem(str(record['DocumentId']), True)]
                     yield TripClickQlog(
                         record['SessionId'],
+                        hashlib.md5(query_norm.encode()).hexdigest()[:Q_HASH_LEN],
                         query_norm,
                         record['Keywords'],
                         datetime.fromtimestamp(int(time)/1000),
                         tuple(items)
                     )
+
+    def qlogs_handler(self):
+        return self
+
+    def qlogs_cls(self):
+        return TripClickQlog
+
+    def qlogs_count(self):
+        return 5_317_350
 
 
 class DocPairGenerator:

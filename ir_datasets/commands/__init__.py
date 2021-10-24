@@ -17,5 +17,4 @@ COMMANDS = {
     'build_c4_checkpoints': build_c4_checkpoints.main,
     'build_download_cache': build_download_cache.main,
     'clean': clean.main,
-    'aol_doc_downloader': aol_doc_downloader.main,
 }
