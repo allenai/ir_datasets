@@ -214,6 +214,26 @@ self._test_scoreddocs({repr(dataset_name)}, count={count}, items={self._repr_nam
 self._test_docpairs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
 ''')
 
+    def _test_scoreddocs(self, dataset_name, count=None, items=None):
+        with self.subTest('scoreddocs', dataset=dataset_name):
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
+            expected_count = count
+            items = items or {}
+            count = 0
+            for i, scoreddoc in enumerate(_logger.pbar(dataset.scoreddocs_iter(), f'{dataset_name} scoreddocs', unit='scoreddoc')):
+                count += 1
+                if i in items:
+                    self._assert_namedtuple(scoreddoc, items[i])
+                    del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
+            if expected_count is not None:
+                self.assertEqual(expected_count, count)
+            self.assertEqual(0, len(items))
+
     def _build_test_qlogs(self, dataset_name):
         items = {}
         count = 0
