@@ -61,6 +61,10 @@ def docpairs_parent_id(dataset_id: str) -> str:
     return _parent_id(dataset_id, 'docpairs')
 
 
+def qlogs_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'qlogs')
+
+
 def create_dataset(docs_tsv=None, queries_tsv=None, qrels_trec=None):
     LocalDownload = util.LocalDownload
     TsvDocs = formats.TsvDocs

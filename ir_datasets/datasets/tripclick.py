@@ -1,11 +1,15 @@
+from pathlib import Path
+import json
 import re
 import os
+import io
 import hashlib
-from typing import NamedTuple
+from datetime import datetime
+from typing import NamedTuple, Tuple
 import contextlib
 import ir_datasets
-from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs
+from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig, Cache, IterStream
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -30,6 +34,8 @@ QTYPE_MAP = {
     '<num> *(Number:)? *': 'query_id',
     '<title> *': 'text',
 }
+
+Q_HASH_LEN = 11
 
 
 class ConcatQueries(BaseQueries):
@@ -84,6 +90,19 @@ class ConcatScoreddocs(BaseScoredDocs):
 
     def scoreddocs_cls(self):
         return self._scoreddocs[0].scoreddocs_cls()
+
+
+def ws_tok(s):
+    s = re.sub('[^A-Za-z0-9 ]', ' ', s)
+    left = 0
+    for m in re.finditer(r"\s+", s):
+        right, next = m.span()
+        if right != left:
+            yield s[left:right]
+        left = next
+    if left != len(s):
+        yield s[left:len(s)]
+
 
 
 class DocPairGenerator:
@@ -143,7 +162,9 @@ def _init():
     val_runs = TarExtractAll(dlc['dlfiles'], base_path/"val_runs", path_globs=['**/run.trip.BM25.*.val.txt'])
     test_runs = TarExtractAll(dlc['dlfiles_runs_test'], base_path/"test_runs", path_globs=['**/run.trip.BM25.*.test.txt'])
 
-    base = Dataset(collection, documentation('_'))
+    base = Dataset(
+        collection,
+        documentation('_'))
 
     ### Train
 
