@@ -49,7 +49,7 @@ class TestDownloads(unittest.TestCase):
     def _test_download_iter(self, data, prefix=''):
         with tmp_environ(IR_DATASETS_DL_TRIES='10'): # give the test up to 10 attempts to download
             if 'url' in data and 'expected_md5' in data:
-                if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False):
+                if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False) and not data.get('auth', False):
                     with self.subTest(prefix):
                         if self.rand_delay is not None:
                             # sleep in range of [0.5, 1.5] * rand_delay seconds

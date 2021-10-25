@@ -38,6 +38,21 @@
   }
 },
 
+"aol-ia": {
+  "logs": {
+    "url": "http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/aol-data.tar.gz",
+    "expected_md5": "31cd27ce12c3a3f2df62a38050ce4c0a",
+    "size_hint": 460331537,
+    "cache_path": "aol-data.tar.gz"
+  },
+  "id2wb": {
+    "url": "https://macavaney.us/aol.id2wb.tsv.gz",
+    "expected_md5": "afbf9b03e1a0fabc9f3fdd5105e6ae5a",
+    "size_hint": 40099187,
+    "cache_path": "aol.id2wb.tsv.gz"
+  }
+},
+
 "aquaint": {
   "docs": {
     "instructions": "The AQUAINT corpus is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2002T31>.\nMore details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -1495,6 +1510,230 @@
   }
 },
 
+"mmarco": {
+  "zh/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/chinese/chinese_collection.tsv",
+    "expected_md5": "d5672e88206038d8a3d261987b3bd788",
+    "size_hint": 2227628877,
+    "cache_path": "chinese_collection.tsv"
+  },
+  "zh/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/chinese/chinese_queries.dev.tsv",
+    "expected_md5": "83820cac1d3e27a7c911d5116ebce558",
+    "size_hint": 4404468,
+    "cache_path": "chinese_queries.dev.tsv"
+  },
+  "zh/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/chinese/chinese_queries.train.tsv",
+    "expected_md5": "21649d058877379bc8184923ab8ec408",
+    "size_hint": 35231242,
+    "cache_path": "chinese_queries.train.tsv"
+  },
+  "fr/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/french/french_collection.tsv",
+    "expected_md5": "941a8e717efb1ab74b9017976c08f73a",
+    "size_hint": 3469351128,
+    "cache_path": "french_collection.tsv"
+  },
+  "fr/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/french/french_queries.dev.tsv",
+    "expected_md5": "a86c46314a0abfb090c542e672bb66e2",
+    "size_hint": 5523530,
+    "cache_path": "french_queries.dev.tsv"
+  },
+  "fr/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/french/french_queries.train.tsv",
+    "expected_md5": "4c9f45b9c7497d6efb44e593d2f5af4d",
+    "size_hint": 43700586,
+    "cache_path": "french_queries.train.tsv"
+  },
+  "de/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/german/german_collection.tsv",
+    "expected_md5": "b0d40bb296c3ec903926243e8397560e",
+    "size_hint": 3417960916,
+    "cache_path": "german_collection.tsv"
+  },
+  "de/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/german/german_queries.dev.tsv",
+    "expected_md5": "8d6383b34cd332f5f21c70c3e6a97579",
+    "size_hint": 5039578,
+    "cache_path": "german_queries.dev.tsv"
+  },
+  "de/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/german/german_queries.train.tsv",
+    "expected_md5": "711b9e9c2163fe07468d6303bbf038f8",
+    "size_hint": 39894960,
+    "cache_path": "german_queries.train.tsv"
+  },
+  "id/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/indonesian/indonesian_collection.tsv",
+    "expected_md5": "5e9fd243bfcf160a1177c898796ae53e",
+    "size_hint": 3118483579,
+    "cache_path": "indonesian_collection.tsv"
+  },
+  "id/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/indonesian/indonesian_queries.dev.tsv",
+    "expected_md5": "3d5f2261edb985d4fe052ed9e379a42a",
+    "size_hint": 4693330,
+    "cache_path": "indonesian_queries.dev.tsv"
+  },
+  "id/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/indonesian/indonesian_queries.train.tsv",
+    "expected_md5": "e74bc49a64adf32d105eeace23dc1a58",
+    "size_hint": 37170090,
+    "cache_path": "indonesian_queries.train.tsv"
+  },
+  "it/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/italian/italian_collection.tsv",
+    "expected_md5": "c87e107fdd99f78a8789c984c96f3e46",
+    "size_hint": 3318354977,
+    "cache_path": "italian_collection.tsv"
+  },
+  "it/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/italian/italian_queries.dev.tsv",
+    "expected_md5": "d9df4b10d892288c81611e7ed74e1549",
+    "size_hint": 5707295,
+    "cache_path": "italian_queries.dev.tsv"
+  },
+  "it/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/italian/italian_queries.train.tsv",
+    "expected_md5": "2aa7e48decfbfbaa327aa01f0d16bc3f",
+    "size_hint": 45148915,
+    "cache_path": "italian_queries.train.tsv"
+  },
+  "ru/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/russian/russian_collection.tsv",
+    "expected_md5": "27f64ca50b1862d285c53a1bcdc26793",
+    "size_hint": 5500129241,
+    "cache_path": "russian_collection.tsv"
+  },
+  "ru/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/russian/russian_queries.dev.tsv",
+    "expected_md5": "4d803553d69f967764360570c3e66c84",
+    "size_hint": 8539431,
+    "cache_path": "russian_queries.dev.tsv"
+  },
+  "ru/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/russian/russian_queries.train.tsv",
+    "expected_md5": "e4c09d563124569a632780c3ed1179b2",
+    "size_hint": 67849583,
+    "cache_path": "russian_queries.train.tsv"
+  },
+  "es/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_collection.tsv",
+    "expected_md5": "c82d3e5998f4cefb5a730a337680fac0",
+    "size_hint": 3382637867,
+    "cache_path": "spanish_collection.tsv"
+  },
+  "es/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.dev.tsv",
+    "expected_md5": "1359d9516bf5dd9bf732012a25e7f536",
+    "size_hint": 5294892,
+    "cache_path": "spanish_queries.dev.tsv"
+  },
+  "es/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.train.tsv",
+    "expected_md5": "676e7011d020383422556d2c4b39b67d",
+    "size_hint": 41890459,
+    "cache_path": "spanish_queries.train.tsv"
+  },
+  "es/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_collection.tsv",
+    "expected_md5": "c82d3e5998f4cefb5a730a337680fac0",
+    "size_hint": 3382637867,
+    "cache_path": "spanish_collection.tsv"
+  },
+  "es/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.dev.tsv",
+    "expected_md5": "1359d9516bf5dd9bf732012a25e7f536",
+    "size_hint": 5294892,
+    "cache_path": "spanish_queries.dev.tsv"
+  },
+  "es/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.train.tsv",
+    "expected_md5": "676e7011d020383422556d2c4b39b67d",
+    "size_hint": 41890459,
+    "cache_path": "spanish_queries.train.tsv"
+  },
+  "pt/docs": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_collection.tsv",
+    "expected_md5": "77260081f0332befa6aa3e6c922b8fb9",
+    "size_hint": 3182982454,
+    "cache_path": "portuguese_collection.tsv"
+  },
+  "pt/queries/dev": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.dev.tsv",
+    "expected_md5": "262ce189e3d57059b2795c16db44bb81",
+    "size_hint": 4962136,
+    "cache_path": "portuguese_queries.dev.tsv"
+  },
+  "pt/queries/train": {
+    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_queries.train.tsv",
+    "expected_md5": "df2ed4ef0bdb93405ba276a92530fc03",
+    "size_hint": 39231205,
+    "cache_path": "portuguese_queries.train.tsv"
+  }
+},
+
+
+"mr-tydi": {
+  "ar": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-arabic.tar.gz",
+    "expected_md5": "a0dd1e06c27486b09762c033bde42b70",
+    "size_hint": 321016840
+  },
+  "bn": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-bengali.tar.gz",
+    "expected_md5": "06ed183ce7c407f851e5f07370fdbbbb",
+    "size_hint": 59707233
+  },
+  "en": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-english.tar.gz",
+    "expected_md5": "031277b7a7912aedb3a5ae58b93ec2c0",
+    "size_hint": 4964684589
+  },
+  "fi": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-finnish.tar.gz",
+    "expected_md5": "92579475f609bc986aa3eb8260a7328a",
+    "size_hint": 268373209
+  },
+  "id": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-indonesian.tar.gz",
+    "expected_md5": "708610c85ce2953ab281fd66c34d4f84",
+    "size_hint": 168175031
+  },
+  "ja": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-japanese.tar.gz",
+    "expected_md5": "feff865aada3a55cafb8756bd2bf89af",
+    "size_hint": 1054574801
+  },
+  "ko": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-korean.tar.gz",
+    "expected_md5": "ccf88f800e87cb62b735cb283ab6f50c",
+    "size_hint": 222544514
+  },
+  "ru": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-russian.tar.gz",
+    "expected_md5": "fab64459133bc93a0bec2f0559bfb423",
+    "size_hint": 1549150495
+  },
+  "sw": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-swahili.tar.gz",
+    "expected_md5": "1042af38a358bd3a60e0f548f9986f8a",
+    "size_hint": 10452957
+  },
+  "te": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-telugu.tar.gz",
+    "expected_md5": "a2174529c3154fe9fa50179cb1584a0d",
+    "size_hint": 73416550
+  },
+  "th": {
+    "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-thai.tar.gz",
+    "expected_md5": "351d17d7e8614447f2d350bb736ea718",
+    "size_hint": 112677400
+  }
+},
+
 "msmarco-document": {
   "docs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
@@ -1711,6 +1950,13 @@
     "size_hint": 618228,
     "expected_md5": "0bc85e3f2a6f798b91e18f0cd4a6bc6b",
     "cache_path": "trec-dl-2021/top100.trec.gz"
+  },
+  "trec-dl-2021/qrels": {
+    "url": "https://trec.nist.gov/act_part/tracks/deep/2021.qrels.docs.final.txt",
+    "size_hint": 478328,
+    "auth": "trec_act_part",
+    "expected_md5": "3b266fdaf27f3775e04028765a4839d3",
+    "cache_path": "trec-dl-2021/qrels"
   }
 },
 
@@ -1882,6 +2128,13 @@
     "size_hint": 604533,
     "expected_md5": "e2be2d307da26d1a3f76eb95507672a3",
     "cache_path": "trec-dl-2021/top100.trec.gz"
+  },
+  "trec-dl-2021/qrels": {
+    "url": "https://trec.nist.gov/act_part/tracks/deep/2021.qrels.pass.final.txt",
+    "size_hint": 433887,
+    "auth": "trec_act_part",
+    "expected_md5": "c5b76ec95b589732edc9040302e22a2b",
+    "cache_path": "trec-dl-2021/qrels"
   }
 },
 
@@ -2552,6 +2805,11 @@
     "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
     "expected_md5": "2b5e98c683a91e19630636b6f83e3b15",
     "cache_path": "dlfiles_runs_test.tar.gz"
+  },
+  "logs": {
+    "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "1d3a548685c2fbef9b2076b0b04ba44f",
+    "cache_path": "logs.tar.gz"
   }
 },
 

@@ -1,3 +1,4 @@
+import re
 import os
 import math
 import functools
@@ -244,3 +245,15 @@ def format_file_size(size):
         size = size / 1000
         unit = units.pop(0)
     return unit.format(size)
+
+
+def ws_tok(s):
+    s = re.sub('[^A-Za-z0-9 ]', ' ', s)
+    left = 0
+    for m in re.finditer(r"\s+", s):
+        right, next = m.span()
+        if right != left:
+            yield s[left:right]
+        left = next
+    if left != len(s):
+        yield s[left:len(s)]

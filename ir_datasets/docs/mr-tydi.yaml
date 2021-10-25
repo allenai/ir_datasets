@@ -1,0 +1,287 @@
+_:
+  pretty_name: 'Mr. TyDi'
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+A multi-lingual benchmark benchmark suite constructed from the <a href="https://arxiv.org/abs/2003.05002">TyDi QA Benchmark</a>.
+Relevance labels are sparsely assigned based on shallow human annotation.
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2108.08787.pdf">Dataset paper</a></li>
+</ul>
+'
+
+ar:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Arabic dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+ar/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Arabic</p>
+'
+ar/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Arabic</p>
+'
+ar/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Arabic</p>
+'
+
+
+bn:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Bengali dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+bn/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Bengali</p>
+'
+bn/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Bengali</p>
+'
+bn/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Bengali</p>
+'
+
+
+en:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete English dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+en/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for English</p>
+'
+en/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for English</p>
+'
+en/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for English</p>
+'
+
+
+fi:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Finnish dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+fi/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Finnish</p>
+'
+fi/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Finnish</p>
+'
+fi/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Finnish</p>
+'
+
+
+id:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Indonesian dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+id/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Indonesian</p>
+'
+id/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Indonesian</p>
+'
+id/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Indonesian</p>
+'
+
+
+ja:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Japanese dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+ja/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Japanese</p>
+'
+ja/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Japanese</p>
+'
+ja/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Japanese</p>
+'
+
+
+ko:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Korean dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+ko/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Korean</p>
+'
+ko/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Korean</p>
+'
+ko/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Korean</p>
+'
+
+
+ru:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Russian dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+ru/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Russian</p>
+'
+ru/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Russian</p>
+'
+ru/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Russian</p>
+'
+
+
+sw:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Swahili dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+sw/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Swahili</p>
+'
+sw/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Swahili</p>
+'
+sw/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Swahili</p>
+'
+
+
+te:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Telugu dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+te/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Telugu</p>
+'
+te/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Telugu</p>
+'
+te/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Telugu</p>
+'
+
+
+th:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>
+Complete Thai dataset, including all train, dev, and test queries and qrels.
+</p>
+'
+
+th/train:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Train set for Thai</p>
+'
+th/dev:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Development set for Thai</p>
+'
+th/test:
+  bibtex_ids: ['Zhang2021MrTyDi', 'Clark2020TyDiQa']
+  desc: '
+<p>Test set for Thai</p>
+'
+

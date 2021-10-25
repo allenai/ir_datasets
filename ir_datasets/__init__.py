@@ -61,6 +61,10 @@ def docpairs_parent_id(dataset_id: str) -> str:
     return _parent_id(dataset_id, 'docpairs')
 
 
+def qlogs_parent_id(dataset_id: str) -> str:
+    return _parent_id(dataset_id, 'qlogs')
+
+
 def create_dataset(docs_tsv=None, queries_tsv=None, qrels_trec=None):
     TsvDocs = formats.TsvDocs
     TsvQueries = formats.TsvQueries
@@ -88,4 +92,4 @@ def main_cli():
     import sys
     main(sys.argv[1:])
 
-__version__ = "0.4.2" # NOTE: keep this in sync with setup.py
+__version__ = "0.4.3" # NOTE: keep this in sync with setup.py

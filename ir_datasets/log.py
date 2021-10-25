@@ -35,7 +35,7 @@ _logger_cache = {}
 
 class Logger:
     def __init__(self, name):
-        self.name = name
+        self.name = name if name else "ir_datasets"
         self._logger = None
 
     def logger(self):

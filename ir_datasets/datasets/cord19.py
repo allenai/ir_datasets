@@ -173,7 +173,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     collection = Cord19Docs(dlc['docs/2020-07-16/metadata'], base_path/'2020-07-16', '2020-07-16', count_hint=192509)
-    collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16', '2020-07-16', include_fulltext=True, count_hint=192509)
+    collection_ft = Cord19Docs(dlc['docs/2020-07-16'], base_path/'2020-07-16.fulltext', '2020-07-16', include_fulltext=True, count_hint=192509)
 
     queries = TrecXmlQueries(dlc['trec-covid/queries'], qtype_map=QTYPE_MAP, namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['trec-covid/qrels'], QRELS_DEFS)
