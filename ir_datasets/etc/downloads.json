@@ -38,6 +38,21 @@
   }
 },
 
+"aol-ia": {
+  "logs": {
+    "url": "http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/aol-data.tar.gz",
+    "expected_md5": "31cd27ce12c3a3f2df62a38050ce4c0a",
+    "size_hint": 460331537,
+    "cache_path": "aol-data.tar.gz"
+  },
+  "id2wb": {
+    "url": "https://macavaney.us/aol.id2wb.tsv.gz",
+    "expected_md5": "afbf9b03e1a0fabc9f3fdd5105e6ae5a",
+    "size_hint": 40099187,
+    "cache_path": "aol.id2wb.tsv.gz"
+  }
+},
+
 "aquaint": {
   "docs": {
     "instructions": "The AQUAINT corpus is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2002T31>.\nMore details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -2796,6 +2811,11 @@
     "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
     "expected_md5": "2b5e98c683a91e19630636b6f83e3b15",
     "cache_path": "dlfiles_runs_test.tar.gz"
+  },
+  "logs": {
+    "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
+    "expected_md5": "1d3a548685c2fbef9b2076b0b04ba44f",
+    "cache_path": "logs.tar.gz"
   }
 },
 

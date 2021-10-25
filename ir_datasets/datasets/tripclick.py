@@ -1,11 +1,15 @@
+from pathlib import Path
+import json
 import re
 import os
+import io
 import hashlib
-from typing import NamedTuple
+from datetime import datetime
+from typing import NamedTuple, Tuple
 import contextlib
 import ir_datasets
-from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs
+from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig, Cache, IterStream
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -30,6 +34,8 @@ QTYPE_MAP = {
     '<num> *(Number:)? *': 'query_id',
     '<title> *': 'text',
 }
+
+Q_HASH_LEN = 11
 
 
 class ConcatQueries(BaseQueries):
@@ -86,6 +92,59 @@ class ConcatScoreddocs(BaseScoredDocs):
         return self._scoreddocs[0].scoreddocs_cls()
 
 
+class LogItem(NamedTuple):
+    doc_id: str
+    clicked: bool
+
+
+class TripClickQlog(NamedTuple):
+    session_id: str
+    query_id: str
+    query: str
+    query_orig: str
+    time: datetime
+    items: Tuple[LogItem, ...]
+
+class TripClickPartialDoc(NamedTuple):
+    doc_id: str
+    title: str
+    url: str
+
+
+class TripClickQlogs:
+    def __init__(self, dlc):
+        self.dlc = dlc
+
+    def qlogs_iter(self):
+        for file in sorted(Path(self.dlc.path()).glob('logs/*.json')):
+            with file.open('rt') as fin:
+                for line in fin:
+                    record = json.loads(line)
+                    time = re.match(r'^/Date\(([0-9]+)\)/$', record['DateCreated']).group(1)
+                    query_norm = re.sub(r'\b(AND|OR)\b', ' ', record['Keywords']).replace('title:', ' ')
+                    query_norm = ' '.join(ir_datasets.util.ws_tok(query_norm))
+                    items = [LogItem(str(did), did == record['DocumentId']) for did in record['Documents']]
+                    if record['DocumentId'] and not any(i.clicked for i in items):
+                        items += [LogItem(str(record['DocumentId']), True)]
+                    yield TripClickQlog(
+                        record['SessionId'],
+                        hashlib.md5(query_norm.encode()).hexdigest()[:Q_HASH_LEN],
+                        query_norm,
+                        record['Keywords'],
+                        datetime.fromtimestamp(int(time)/1000),
+                        tuple(items)
+                    )
+
+    def qlogs_handler(self):
+        return self
+
+    def qlogs_cls(self):
+        return TripClickQlog
+
+    def qlogs_count(self):
+        return 5_317_350
+
+
 class DocPairGenerator:
     def __init__(self, docpair_dlc, collection, queries, cache_path):
         self._docpair_dlc = docpair_dlc
@@ -132,6 +191,50 @@ class DocPairGenerator:
             yield f
 
 
+# The allarticles.txt file (tsv) has a couple of problems, stemming from the fact that titles
+# can include \t and \n characters. This class corrects these problems. It also removed the
+# first (header) line and the final line ("(5196956 rows affected)"), and corrects a few strange
+# things with some URLs.
+class FixAllarticles:
+    def __init__(self, streamer):
+        self._streamer = streamer
+
+    def stream(self):
+        return io.BufferedReader(IterStream(iter(self)), buffer_size=io.DEFAULT_BUFFER_SIZE)
+
+    def __iter__(self):
+        with self._streamer.stream() as stream, \
+             _logger.pbar_raw(desc='fixing allarticles.txt', unit='B', unit_scale=True) as pbar:
+            # NOTE: codecs.getreader is subtly broken here; it sometimes splits lines between special characters (and it's unclear why)
+            next(stream) # remove header
+            did, title, url = None, [], None
+            for line in stream:
+                pbar.update(len(line))
+                line = line.decode().strip()
+                if line == '' or line == '(5196956 rows affected)':
+                    continue
+                cols = line.split('\t')
+                if did is None:
+                    did = cols[0]
+                    assert did.isnumeric(), line
+                    cols = cols[1:]
+                if did in ('9283014', '11088688', '11114797'): # a few special cases where the URL is actually missing. If we don't fix this here, we'll end up messing up subsequent records
+                    yield ('\t'.join([did,  ' '.join(cols), '']) + '\n').encode()
+                    did, title, url = None, [], None
+                if len(cols) > 0:
+                    if cols[-1].startswith('_http'): # some URLs have this strange prefix, remove
+                        cols[-1] = cols[-1][1:]
+                    if cols[-1].startswith('ttp://'):
+                        cols[-1] = 'h' + cols[-1]
+                    if cols[-1].startswith('http') or cols[-1].startswith('file:///C:'):
+                        title += cols[:-1]
+                        url = cols[-1]
+                        yield ('\t'.join([did, ' '.join(title).strip(), url]) + '\n').encode()
+                        did, title, url = None, [], None
+                    else:
+                        title += cols
+
+
 def _init():
     subsets = {}
     base_path = ir_datasets.util.home_path()/NAME
@@ -143,7 +246,14 @@ def _init():
     val_runs = TarExtractAll(dlc['dlfiles'], base_path/"val_runs", path_globs=['**/run.trip.BM25.*.val.txt'])
     test_runs = TarExtractAll(dlc['dlfiles_runs_test'], base_path/"test_runs", path_globs=['**/run.trip.BM25.*.test.txt'])
 
-    base = Dataset(collection, documentation('_'))
+    base = Dataset(
+        collection,
+        documentation('_'))
+
+    subsets['logs'] = Dataset(
+        TsvDocs(Cache(FixAllarticles(TarExtract(dlc['logs'], 'logs/allarticles.txt')), base_path/'allarticles-fixed.tsv'), doc_cls=TripClickPartialDoc, lang='en'),
+        TripClickQlogs(TarExtractAll(dlc['logs'], base_path/'logs', path_globs=['**/*.json'])),
+        documentation('logs'))
 
     ### Train
 

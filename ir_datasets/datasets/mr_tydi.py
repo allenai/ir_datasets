@@ -2,7 +2,7 @@ import json
 import codecs
 from typing import NamedTuple, Dict
 import ir_datasets
-from ir_datasets.util import TarExtractAll, RelativePath, GzipExtract
+from ir_datasets.util import TarExtractAll, RelativePath, GzipExtract, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
 from ir_datasets.formats import TsvQueries, BaseDocs, TrecQrels, GenericDoc
 from ir_datasets.indices import PickleLz4FullStore
@@ -36,7 +36,7 @@ class MrTydiDocs(BaseDocs):
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()/NAME/self._lang}/collection.pklz4',
+            path=f'{ir_datasets.util.home_path()/NAME/self._lang}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -77,9 +77,14 @@ def _init():
         'th': ('mrtydi-v1.0-thai', 568855),
     }
 
+    migrator = Migrator(base_path/'irds_version.txt', 'v2',
+        affected_files=[base_path/lang for lang in langs],
+        message='Migrating mr-tydi (restructuring directory)')
+
     for lang, (file_name, count_hint) in langs.items():
-        dlc_ds = TarExtractAll(dlc[lang], base_path/lang)
+        dlc_ds = TarExtractAll(dlc[lang], f'{base_path/lang}.data')
         docs = MrTydiDocs(GzipExtract(RelativePath(dlc_ds, f'{file_name}/collection/docs.jsonl.gz')), lang, count_hint=count_hint)
+        docs = migrator(docs)
         subsets[lang] = Dataset(
             docs,
             TsvQueries(RelativePath(dlc_ds, f'{file_name}/topic.tsv'), lang=lang),
