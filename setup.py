@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ir_datasets",
-    version="0.4.2", # NOTE: keep this in sync with ir_datasets/__init__.py
+    version="0.4.3", # NOTE: keep this in sync with ir_datasets/__init__.py
     author="Sean MacAvaney",
     author_email="sean.macavaney@glasgow.ac.uk",
     description="provides a common interface to many IR ad-hoc ranking benchmarks, training datasets, etc.",

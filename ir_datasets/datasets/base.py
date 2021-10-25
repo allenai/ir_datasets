@@ -41,6 +41,10 @@ class Dataset:
             if 'docpairs' not in self._beta_apis:
                 self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self.docpairs_handler())
             return self._beta_apis['docpairs']
+        if attr == 'qlogs' and self.has_qlogs():
+            if 'qlogs' not in self._beta_apis:
+                self._beta_apis['qlogs'] = _BetaPythonApiQlogs(self.qlogs_handler())
+            return self._beta_apis['qlogs']
         for cons in self._constituents:
             if hasattr(cons, attr):
                 return getattr(cons, attr)
@@ -58,6 +62,8 @@ class Dataset:
             supplies.append('scoreddocs')
         if self.has_docpairs():
             supplies.append('docpairs')
+        if self.has_qlogs():
+            supplies.append('qlogs')
         supplies = ', '.join(supplies)
         return f'Dataset({supplies})'
 
@@ -82,6 +88,8 @@ class Dataset:
     def has_docpairs(self):
         return hasattr(self, 'docpairs_handler')
 
+    def has_qlogs(self):
+        return hasattr(self, 'qlogs_handler')
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):
@@ -200,6 +208,21 @@ class _BetaPythonApiDocpairs:
 
     def __repr__(self):
         return f'BetaPythonApiDocpairs({repr(self._handler)})'
+
+
+class _BetaPythonApiQlogs:
+    def __init__(self, handler):
+        self._handler = handler
+        self.type = handler.qlogs_cls()
+
+    def __iter__(self):
+        return self._handler.qlogs_iter()
+
+    def __repr__(self):
+        return f'BetaPythonApiQlogs({repr(self._handler)})'
+
+    def __len__(self):
+        return self._handler.qlogs_count()
 
 
 class FilteredQueries(BaseQueries):

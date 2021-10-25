@@ -139,7 +139,14 @@ def _init():
     subsets['trec-dl-2021'] = Dataset(
         collection,
         TsvQueries(dlc['trec-dl-2021/queries'], namespace='msmarco', lang='en'),
+        TrecQrels(dlc['trec-dl-2021/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2021/scoreddocs'])),
+    )
+    dl21_judged = Lazy(lambda: {q.query_id for q in subsets['trec-dl-2021'].qrels_iter()})
+    subsets['trec-dl-2021/judged'] = Dataset(
+        FilteredQueries(subsets['trec-dl-2021'].queries_handler(), dl21_judged),
+        FilteredScoredDocs(subsets['trec-dl-2021'].scoreddocs_handler(), dl21_judged),
+        subsets['trec-dl-2021'],
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation("_")))
