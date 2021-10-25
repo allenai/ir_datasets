@@ -1,6 +1,8 @@
 import re
+import datetime
 import unittest
 from ir_datasets.formats import TrecQrel, TitleUrlTextDoc, GenericQuery, GenericScoredDoc, GenericDocPair
+from ir_datasets.datasets.tripclick import TripClickQlog, TripClickPartialDoc, LogItem
 from .base import DatasetIntegrationTest
 
 
@@ -10,6 +12,11 @@ class TestTripclick(DatasetIntegrationTest):
             0: TitleUrlTextDoc('283040', re.compile(r'^V.*\.$', flags=48), re.compile(r'^http://www.ncb.*85551$', flags=48), re.compile('^BACKGROUND : .* Medical Society\\.\n$', flags=48)),
             9: TitleUrlTextDoc('283070', re.compile(r'^N.*\.$', flags=48), re.compile(r'^http://www.ncb.*t_uids=16775235$', flags=48), re.compile('^BACKGROUND : Res.* Medical Society\\.\n$', flags=48)),
             1523877: TitleUrlTextDoc('11701272', re.compile(r'^M.*m$', flags=48), re.compile(r'^https://www.ncbi.nlm.*58120938564.pdf$', flags=48), re.compile('^OBJECTIVE : To.* of Neurology\\.\n$', flags=48)),
+        })
+        self._test_docs('tripclick/logs', count=5196956, items={
+            0: TripClickPartialDoc('96657', re.compile(r'^Syst.*$', flags=48), re.compile(r'^https://www.journalslibrary.*hta1060/$', flags=48)),
+            9: TripClickPartialDoc('96666', re.compile(r'^Econom.*$', flags=48), re.compile(r'^https://www.journalslibrary..*hta3230/$', flags=48)),
+            5196955: TripClickPartialDoc('11707140', re.compile(r'^Basic Life.*$', flags=48), re.compile(r'^https://covid19evidence.*201021-151716$', flags=48)),
         })
 
     def test_queries(self):
@@ -82,6 +89,15 @@ class TestTripclick(DatasetIntegrationTest):
             0: GenericQuery('4752', re.compile(r'^h.*e$', flags=48)),
             9: GenericQuery('15118', re.compile(r'^i.*n$', flags=48)),
             1174: GenericQuery('1646719', re.compile(r'^p.*e$', flags=48)),
+        })
+
+    def test_qlogs(self):
+        self._test_qlogs('tripclick/logs', count=5317350, items={
+            0: TripClickQlog(re.compile(r'3fjdej.{10}2yccq255', flags=48), re.compile(r'48a.{4}86f2', flags=48), 'community aed', re.compile(r'comm.*d', flags=48), datetime.datetime(2013, 1, 1, 1, 17, 26, 57000), (LogItem('981744', True),)),
+            9: TripClickQlog(re.compile(r'htgqag5.{10}qeult45', flags=48), re.compile(r'd23b.{4}539', flags=48), 'primary wound closure', re.compile(r'prim.*ure', flags=48), datetime.datetime(2013, 1, 1, 2, 15, 33, 930000), (LogItem('1185098', True),)),
+            19: TripClickQlog(re.compile(r'2qmdal45.{10}mbgrro', flags=48), re.compile(r'342.{4}6d4f', flags=48), 'status epilepticus treatment', re.compile(r'\(tit.*atment\)', flags=48), datetime.datetime(2013, 1, 1, 4, 50, 20, 603000), (LogItem('834890', True),)),
+            63: TripClickQlog(re.compile(r'c352x5mog.{10}bup45', flags=48), re.compile(r'e511.{4}6e9', flags=48), 'conjunctivitis medication', re.compile(r'conju.*ication', flags=48), datetime.datetime(2013, 1, 1, 7, 54, 5, 737000), (LogItem('929760', True),)),
+            5317349: TripClickQlog(re.compile(r'vcxwj5.{10}llhur3g0', flags=48), re.compile(r'921.{4}0c8d', flags=48), 'GORD in children', re.compile(r'\(GOR.*dren\)', flags=48), datetime.datetime(2020, 10, 28, 4, 56, 17, 943000), (LogItem('11203043', False), LogItem('11203042', True), LogItem('11203038', False), LogItem('11203041', False), LogItem('9459386', False), LogItem('9007494', False), LogItem('11172888', False), LogItem('9514712', False), LogItem('9159084', False), LogItem('11054069', False), LogItem('9338829', False), LogItem('9338609', False), LogItem('9007349', False), LogItem('9614037', False), LogItem('9184023', False), LogItem('10010303', False), LogItem('11054239', False), LogItem('9616794', False), LogItem('11185267', False), LogItem('11185318', False))),
         })
 
     def test_qrels(self):

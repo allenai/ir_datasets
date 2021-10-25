@@ -85,18 +85,6 @@ class _ManagedDlc:
         return self._path
 
 
-def ws_tok(s):
-    s = re.sub('[^A-Za-z0-9 ]', ' ', s)
-    left = 0
-    for m in re.finditer(r"\s+", s):
-        right, next = m.span()
-        if right != left:
-            yield s[left:right]
-        left = next
-    if left != len(s):
-        yield s[left:len(s)]
-
-
 class AolManager:
     def __init__(self, log_dlcs, id2wb_dlc, base_path):
         self._log_dlcs = log_dlcs
@@ -166,7 +154,7 @@ python downloader.py
                             rank, url = None, None
                         else:
                             user_id, query, query_time, rank, url = cols
-                        norm_query = ' '.join(ws_tok(query))
+                        norm_query = ' '.join(ir_datasets.util.ws_tok(query))
                         query_id = md5(norm_query.encode()).hexdigest()[:QID_LEN]
                         if query_id not in encountered_qids:
                             f_queries.write(f'{query_id}\t{norm_query}\n')
