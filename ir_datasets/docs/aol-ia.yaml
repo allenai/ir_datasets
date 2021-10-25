@@ -1,0 +1,34 @@
+_:
+  pretty_name: 'AOL-IA (Internet Archive)'
+  desc: '
+<p>
+This is a version of the AOL Query Log. Documents use versions that appeared around the time
+of the query log (early 2006) via the Internet Archive.
+</p>
+<p>
+The query log does not include document or query IDs. These are instead created by ir_datasets.
+Document IDs are assigned using a hash of the URL that appears in the query log. Query IDs are
+assigned using the a hash of the noramlised query. All unique normalized queries are available
+from <kbd>queries</kbd>, and all clicked documents are available from <kbd>qrels</kbd> (iteration
+value set to the user ID). Full information (including original query) are available from
+<kbd>qlogs</kbd>.
+</p>
+'
+  bibtex_ids: ['Pass2006Picture']
+  docs_instructions: &inst "docs available using aolia-tools package"
+  data_access: '
+<p>
+To use the documents of this dataset, you will need to run the download
+script in <a href="https://github.com/terrierteam/aolia-tools">aolia-tools</a>.
+To run the script, use the following commands:
+</p>
+<code>
+git clone https://github.com/terrierteam/aolia-tools<br/>
+cd aolia-tools<br/>
+pip install -r requirements.txt<br/>
+python downloader.py<br/>
+</code>
+<p>
+It takes around 2 days to download all documents.
+</p>
+'

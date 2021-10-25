@@ -34,6 +34,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: GenericQuery('1052368', 'who stabbed dr. martin luther king'),
             476: GenericQuery('855410', 'what is theraderm used for'),
         })
+        self._test_queries('msmarco-passage-v2/trec-dl-2021/judged', count=53, items={
+            0: GenericQuery('2082', 'At about what age do adults normally begin to lose bone mass?'),
+            9: GenericQuery('1107704', 'what was the main benefit of a single european currency?'),
+            52: GenericQuery('1040198', 'who is the final arbiter of florida law in instances where there is no federal authority?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-passage-v2/train', count=284212, items={
@@ -50,6 +55,16 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             0: TrecQrel('419507', 'msmarco_passage_04_254301507', 1, '0'),
             9: TrecQrel('1087630', 'msmarco_passage_18_685926585', 1, '0'),
             4410: TrecQrel('961297', 'msmarco_passage_18_858458289', 1, '0'),
+        })
+        self._test_qrels('msmarco-passage-v2/trec-dl-2021', count=10828, items={
+            0: TrecQrel('2082', 'msmarco_passage_01_552803451', 0, '0'),
+            9: TrecQrel('2082', 'msmarco_passage_02_437070914', 3, '0'),
+            10827: TrecQrel('1129560', 'msmarco_passage_68_639912287', 0, '0'),
+        })
+        self._test_qrels('msmarco-passage-v2/trec-dl-2021/judged', count=10828, items={
+            0: TrecQrel('2082', 'msmarco_passage_01_552803451', 0, '0'),
+            9: TrecQrel('2082', 'msmarco_passage_02_437070914', 3, '0'),
+            10827: TrecQrel('1129560', 'msmarco_passage_68_639912287', 0, '0'),
         })
 
     def test_scoreddocs(self):
