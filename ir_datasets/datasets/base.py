@@ -23,27 +23,27 @@ class Dataset:
     def __getattr__(self, attr):
         if attr == 'docs' and self.has_docs():
             if 'docs' not in self._beta_apis:
-                self._beta_apis['docs'] = _BetaPythonApiDocs(self.docs_handler())
+                self._beta_apis['docs'] = _BetaPythonApiDocs(self)
             return self._beta_apis['docs']
         if attr == 'queries' and self.has_queries():
             if 'queries' not in self._beta_apis:
-                self._beta_apis['queries'] = _BetaPythonApiQueries(self.queries_handler())
+                self._beta_apis['queries'] = _BetaPythonApiQueries(self)
             return self._beta_apis['queries']
         if attr == 'qrels' and self.has_qrels():
             if 'qrels' not in self._beta_apis:
-                self._beta_apis['qrels'] = _BetaPythonApiQrels(self.qrels_handler())
+                self._beta_apis['qrels'] = _BetaPythonApiQrels(self)
             return self._beta_apis['qrels']
         if attr == 'scoreddocs' and self.has_scoreddocs():
             if 'scoreddocs' not in self._beta_apis:
-                self._beta_apis['scoreddocs'] = _BetaPythonApiScoreddocs(self.scoreddocs_handler())
+                self._beta_apis['scoreddocs'] = _BetaPythonApiScoreddocs(self)
             return self._beta_apis['scoreddocs']
         if attr == 'docpairs' and self.has_docpairs():
             if 'docpairs' not in self._beta_apis:
-                self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self.docpairs_handler())
+                self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self)
             return self._beta_apis['docpairs']
         if attr == 'qlogs' and self.has_qlogs():
             if 'qlogs' not in self._beta_apis:
-                self._beta_apis['qlogs'] = _BetaPythonApiQlogs(self.qlogs_handler())
+                self._beta_apis['qlogs'] = _BetaPythonApiQlogs(self)
             return self._beta_apis['qlogs']
         for cons in self._constituents:
             if hasattr(cons, attr):
@@ -64,8 +64,10 @@ class Dataset:
             supplies.append('docpairs')
         if self.has_qlogs():
             supplies.append('qlogs')
-        supplies = ', '.join(supplies)
-        return f'Dataset({supplies})'
+        if hasattr(self, 'dataset_id'):
+            return f'Dataset(id={repr(self.dataset_id())}, provides={repr(supplies)})'
+        else:
+            return f'Dataset(provides={repr(supplies)})'
 
     def __dir__(self):
         result = set(dir(super()))

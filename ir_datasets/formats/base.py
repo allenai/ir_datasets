@@ -211,9 +211,8 @@ BaseScoredDocs.EXTENSIONS['scoreddocs_hash'] = hasher('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_hash'] = hasher('docpairs_iter')
 
 
-def metadataer(iter_fn, metadata_fields=(), count_by_value_field=None):
+def _calc_metadata(iter_fn, metadata_fields=(), count_by_value_field=None):
     def wrapped(self, verbose=True, hashfn=hashlib.sha256):
-        h = hashfn()
         count = 0
         it = getattr(self, iter_fn)()
         if verbose:
@@ -222,8 +221,6 @@ def metadataer(iter_fn, metadata_fields=(), count_by_value_field=None):
         field_prefixes = {}
         count_by_field_values = {}
         for record in it:
-            js = [[field, value] for field, value in zip(record._fields, record)]
-            h.update(json.dumps(js).encode())
             count += 1
             for f in metadata_fields:
                 field = getattr(record, f)
@@ -237,7 +234,7 @@ def metadataer(iter_fn, metadata_fields=(), count_by_value_field=None):
                 if count_by_value_field_value not in count_by_field_values:
                     count_by_field_values[count_by_value_field_value] = 0
                 count_by_field_values[count_by_value_field_value] += 1
-        result = {'hash': h.hexdigest(), 'count': count}
+        result = {'count': count}
         if metadata_fields:
             result['fields'] = {}
         for f in metadata_fields:
@@ -246,16 +243,17 @@ def metadataer(iter_fn, metadata_fields=(), count_by_value_field=None):
                 'common_prefix': field_prefixes[f],
             }
         if count_by_value_field is not None:
-            result[f'counts_by_{count_by_value_field}'] = count_by_field_values
+            result.setdefault('fields', {}).setdefault(count_by_value_field, {})['counts_by_value'] = count_by_field_values
         return result
     return wrapped
 
 
-BaseDocs.EXTENSIONS['docs_metadata'] = metadataer('docs_iter', ('doc_id',))
-BaseQueries.EXTENSIONS['queries_metadata'] = metadataer('queries_iter')
-BaseQrels.EXTENSIONS['qrels_metadata'] = metadataer('qrels_iter', count_by_value_field='relevance')
-BaseScoredDocs.EXTENSIONS['scoreddocs_metadata'] = metadataer('scoreddocs_iter')
-BaseDocPairs.EXTENSIONS['docpairs_metadata'] = metadataer('docpairs_iter')
+BaseDocs.EXTENSIONS['docs_calc_metadata'] = _calc_metadata('docs_iter', ('doc_id',))
+BaseQueries.EXTENSIONS['queries_calc_metadata'] = _calc_metadata('queries_iter')
+BaseQrels.EXTENSIONS['qrels_calc_metadata'] = _calc_metadata('qrels_iter', count_by_value_field='relevance')
+BaseScoredDocs.EXTENSIONS['scoreddocs_calc_metadata'] = _calc_metadata('scoreddocs_iter')
+BaseDocPairs.EXTENSIONS['docpairs_calc_metadata'] = _calc_metadata('docpairs_iter')
+BaseQlogs.EXTENSIONS['qlogs_calc_metadata'] = _calc_metadata('qlogs_iter')
 
 
 class DocstoreBackedDocs(BaseDocs):

@@ -1,5 +1,6 @@
 import re
 import ir_datasets
+from .metadata import MetadataProvider
 
 
 __all__ = 'Registry'
@@ -26,12 +27,14 @@ class Registry:
         return iter(self._registered.keys())
 
     def register(self, name, obj):
+        from ..datasets.base import Dataset
         if name in self._registered:
             if self._allow_overwrite:
                 _logger.warn(f"{name} already exists in this registry. Overwriting.")
             else:
                 raise RuntimeError(f"{name} already exists in this registry.")
-        self._registered[name] = obj
+        metadata_provider = MetadataProvider(name)
+        self._registered[name] = Dataset(obj, metadata_provider)
 
     def register_pattern(self, pattern, initializer):
         self._patterns.append((re.compile(pattern), initializer))

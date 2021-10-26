@@ -1,3 +1,4 @@
+import time
 import sys
 import os
 import json
@@ -27,7 +28,8 @@ def main(args):
         if not args.datasets or any(fnmatch(dsid, ds) for ds in args.datasets):
             dataset = ir_datasets.load(dsid)
             data.setdefault(dsid, {})
-            for e in ['docs', 'queries', 'qrels', 'scoreddocs', 'docpairs']:
+            brk = False
+            for e in ir_datasets.ENTITY_TYPES:
                 try:
                     if getattr(dataset, f'has_{e}')():
                         if e not in data[dsid]:
@@ -36,14 +38,21 @@ def main(args):
                                 data[dsid][e] = {'_ref': parent_id}
                             else:
                                 with _logger.duration(f'{dsid} {e}'):
-                                    data[dsid][e] = getattr(dataset, f'{e}_metadata')()
+                                    data[dsid][e] = getattr(dataset, f'{e}_calc_metadata')()
                             _logger.info(f'{dsid} {e}: {data[dsid][e]}')
-                        else:
-                            _logger.info(f'{dsid} {e} [cached]: {data[dsid][e]}')
                 except Exception as ex:
                     _logger.info(f'{dsid} {e} [error]: {ex}')
+                except KeyboardInterrupt:
+                    _logger.info(f'KeyboardInterrupt; skipping. ctrl+c within 0.5sec to stop compute_metadata.')
+                    try:
+                        time.sleep(0.5)
+                    except KeyboardInterrupt:
+                        brk = True
+                        break
             with args.file.open('wt') as f:
                 json.dump(data, f)
+            if brk:
+                break
 
 
 if __name__ == '__main__':
