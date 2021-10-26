@@ -382,10 +382,24 @@ Data pre-processing may be different than what is done in <a class="ds-ref">cord
 webis-touche2020:
   desc: '
 <p>
-A version of the Touchè-2020 dataset, for argument retrieval.
+Original version of the Touchè-2020 dataset, for argument retrieval.
 </p>
+<div class="warn">
+Consider using <a class="ds-ref">beir/webis-touche2020/v2</a> instead; it uses an updated,
+more complete version of the qrels.
+</div>
+<ul>
+<li><a href="https://link.springer.com/chapter/10.1007%2F978-3-030-58219-7_26">Dataset paper</a></li>
+<li><a href="https://webis.de/events/touche-20/">Dataset webiste</a></li>
+</ul>
+'
+  bibtex_ids: ['Bondarenko2020Tuche', 'Thakur2021Beir']
+
+webis-touche2020/v2:
+  desc: '
 <p>
-Negative relevance judgments from the original dataset are replaced with 0.
+Version 2 of the Touchè-2020 dataset, for argument retrieval. This version uses the "corrected" version
+of the qrels, mapped to version 1 of the corpus.
 </p>
 <ul>
 <li><a href="https://link.springer.com/chapter/10.1007%2F978-3-030-58219-7_26">Dataset paper</a></li>
