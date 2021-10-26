@@ -9,7 +9,7 @@ from typing import NamedTuple, Tuple
 import contextlib
 import ir_datasets
 from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig, Cache, IterStream
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -111,7 +111,7 @@ class TripClickPartialDoc(NamedTuple):
     url: str
 
 
-class TripClickQlogs:
+class TripClickQlogs(BaseQlogs):
     def __init__(self, dlc):
         self.dlc = dlc
 
@@ -134,9 +134,6 @@ class TripClickQlogs:
                         datetime.fromtimestamp(int(time)/1000),
                         tuple(items)
                     )
-
-    def qlogs_handler(self):
-        return self
 
     def qlogs_cls(self):
         return TripClickQlog

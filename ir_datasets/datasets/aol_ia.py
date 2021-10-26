@@ -8,7 +8,7 @@ from hashlib import md5
 import ir_datasets
 from typing import NamedTuple, Tuple
 from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract, finialized_file
-from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs
+from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 _logger = ir_datasets.log.easy()
@@ -45,7 +45,7 @@ class AolIaDoc(NamedTuple):
     ia_url: str
 
 
-class AolQlogs:
+class AolQlogs(BaseQlogs):
     def __init__(self, dlc):
         self.dlc = dlc
 
@@ -58,9 +58,6 @@ class AolQlogs:
                     yield pickle.load(fin)
             except EOFError:
                 pass
-
-    def qlogs_handler(self):
-        return self
 
     def qlogs_cls(self):
         return AolQlog

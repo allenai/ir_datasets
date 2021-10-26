@@ -158,6 +158,29 @@ class BaseDocPairs:
         return self
 
 
+class BaseQlogs:
+    PREFIX = 'qlogs_'
+    EXTENSIONS = {}
+
+    def __getattr__(self, attr):
+        if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
+            # Return method bound to this instance
+            return types.MethodType(self.EXTENSIONS[attr], self)
+        raise AttributeError(attr)
+
+    def qlogs_iter(self):
+        raise NotImplementedError()
+
+    def qlogs_cls(self):
+        raise NotImplementedError()
+
+    def qlogs_count(self):
+        raise NotImplementedError()
+
+    def qlogs_handler(self):
+        return self
+
+
 BaseQueries.EXTENSIONS['queries_dict'] = lambda x: {q.query_id: q for q in x.iter_queries()}
 
 

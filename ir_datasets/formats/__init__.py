@@ -1,4 +1,4 @@
-from .base import GenericDoc, GenericQuery, GenericQrel, GenericScoredDoc, GenericDocPair, DocstoreBackedDocs, DocSourceSeekableIter, DocSource, SourceDocIter
+from .base import GenericDoc, GenericQuery, GenericQrel, GenericScoredDoc, GenericDocPair, DocstoreBackedDocs, DocSourceSeekableIter, DocSource, SourceDocIter, BaseQlogs
 from .base import BaseDocs, BaseQueries, BaseQrels, BaseScoredDocs, BaseDocPairs
 from .csv_fmt import CsvDocs, CsvQueries, CsvDocPairs
 from .tsv import TsvDocs, TsvQueries, TsvDocPairs
