@@ -119,10 +119,16 @@
     "cache_path": "arguana/source.zip"
   },
   "webis-touche2020": {
-    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip",
+    "url": "https://macavaney.us/beir-webis-touche2020-v1.zip",
     "size_hint": 227137373,
     "expected_md5": "5ec7f8b18481fc2e9b3964ad1b22dd28",
     "cache_path": "webis-touche2020/source.zip"
+  },
+  "webis-touche2020/v2": {
+    "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/webis-touche2020.zip",
+    "size_hint": 227132363,
+    "expected_md5": "46f650ba5a527fc69e0a6521c5a23563",
+    "cache_path": "webis-touche2020/v2/source.zip"
   },
   "cqadupstack": {
     "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/cqadupstack.zip",
