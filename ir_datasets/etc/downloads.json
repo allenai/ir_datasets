@@ -119,7 +119,7 @@
     "cache_path": "arguana/source.zip"
   },
   "webis-touche2020": {
-    "url": "http://macavaney.us/beir-webis-touche2020-v1.zip",
+    "url": "https://macavaney.us/beir-webis-touche2020-v1.zip",
     "size_hint": 227137373,
     "expected_md5": "5ec7f8b18481fc2e9b3964ad1b22dd28",
     "cache_path": "webis-touche2020/source.zip"
