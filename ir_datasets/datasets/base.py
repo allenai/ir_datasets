@@ -142,9 +142,14 @@ class _BetaPythonApiQueries:
         return f'BetaPythonApiQueries({repr(self._handler)})'
 
     def __len__(self):
-        if self._query_lookup is None:
-            self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
-        return len(self._query_lookup)
+        result = None
+        if hasattr(self._handler, 'queries_count'):
+            result = self._handler.queries_count()
+        if result is None:
+            if self._query_lookup is None:
+                self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
+            result = len(self._query_lookup)
+        return result
 
     def lookup(self, query_ids):
         if self._query_lookup is None:
@@ -183,9 +188,14 @@ class _BetaPythonApiQrels:
         return self._qrels_dict
 
     def __len__(self):
-        if self._qrels_dict is None:
-            self._qrels_dict = self._handler.qrels_dict()
-        return sum(len(x) for x in self._qrels_dict.values())
+        result = None
+        if hasattr(self._handler, 'qrels_count'):
+            result = self._handler.qrels_count()
+        if result is None:
+            if self._qrels_dict is None:
+                self._qrels_dict = self._handler.qrels_dict()
+            result = sum(len(x) for x in self._qrels_dict.values())
+        return result
 
 
 class _BetaPythonApiScoreddocs:
@@ -199,6 +209,14 @@ class _BetaPythonApiScoreddocs:
     def __repr__(self):
         return f'BetaPythonApiScoreddocs({repr(self._handler)})'
 
+    def __len__(self):
+        result = None
+        if hasattr(self._handler, 'scoreddocs_count'):
+            result = self._handler.scoreddocs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.scoreddocs_iter())
+        return result
+
 
 class _BetaPythonApiDocpairs:
     def __init__(self, handler):
@@ -211,6 +229,13 @@ class _BetaPythonApiDocpairs:
     def __repr__(self):
         return f'BetaPythonApiDocpairs({repr(self._handler)})'
 
+    def __len__(self):
+        result = None
+        if hasattr(self._handler, 'docpairs_count'):
+            result = self._handler.docpairs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.docpairs_iter())
+        return result
 
 class _BetaPythonApiQlogs:
     def __init__(self, handler):
@@ -224,7 +249,12 @@ class _BetaPythonApiQlogs:
         return f'BetaPythonApiQlogs({repr(self._handler)})'
 
     def __len__(self):
-        return self._handler.qlogs_count()
+        result = None
+        if hasattr(self._handler, 'qlogs_count'):
+            result = self._handler.qlogs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.qlogs_iter())
+        return result
 
 
 class FilteredQueries(BaseQueries):

@@ -1,3 +1,4 @@
+ENTITY_TYPES = ['docs', 'queries', 'qrels', 'scoreddocs', 'docpairs', 'qlogs']
 from . import lazy_libs
 from . import log
 from . import util
@@ -9,8 +10,6 @@ from . import wrappers
 from . import commands
 
 Dataset = datasets.base.Dataset
-
-ENTITY_TYPES = ['docs', 'queries', 'qrels', 'scoreddocs', 'docpairs', 'qlogs']
 
 def load(name):
     return registry[name]

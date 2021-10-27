@@ -139,7 +139,8 @@ class MedlineDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'
@@ -188,7 +189,8 @@ class AacrAscoDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'
@@ -230,7 +232,8 @@ class ConcatDocs(BaseDocs):
         return self._docs[0].docs_lang()
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
 
 def _init():

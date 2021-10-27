@@ -113,7 +113,8 @@ class HighwireDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'

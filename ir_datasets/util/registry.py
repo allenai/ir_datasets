@@ -33,8 +33,8 @@ class Registry:
                 _logger.warn(f"{name} already exists in this registry. Overwriting.")
             else:
                 raise RuntimeError(f"{name} already exists in this registry.")
-        metadata_provider = MetadataProvider(name)
-        self._registered[name] = Dataset(obj, metadata_provider)
+        metadata_provider = MetadataProvider(name, obj)
+        self._registered[name] = Dataset(metadata_provider, obj)
 
     def register_pattern(self, pattern, initializer):
         self._patterns.append((re.compile(pattern), initializer))

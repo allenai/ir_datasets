@@ -270,7 +270,8 @@ class DocstoreBackedDocs(BaseDocs):
         return iter(self._docstore_lazy())
 
     def docs_count(self):
-        return self._docstore_lazy().count()
+        if self.docs_store().built():
+            return self._docstore_lazy().count()
 
     def docs_cls(self):
         return self._docs_cls

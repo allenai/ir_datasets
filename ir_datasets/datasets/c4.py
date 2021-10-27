@@ -152,7 +152,8 @@ class C4Docs(BaseDocs):
         return C4Docstore(self)
 
     def docs_count(self):
-        return sum(s.doc_count for s in self._docs_sources())
+        if self._sources is not None:
+            return sum(s.doc_count for s in self._docs_sources())
 
     def docs_namespace(self):
         return NAME
