@@ -50,7 +50,13 @@ def main(args):
                         brk = True
                         break
             with args.file.open('wt') as f:
-                json.dump(data, f)
+                # partially-formatted data; one dataset per line
+                f.write('{\n')
+                for i, key in enumerate(sorted(data.keys())):
+                    if i != 0:
+                        f.write(',\n')
+                    f.write(f'  "{key}":{json.dumps(data[key])}')
+                f.write('\n}\n')
             if brk:
                 break
 
