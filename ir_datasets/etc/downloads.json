@@ -1643,24 +1643,6 @@
     "size_hint": 41890459,
     "cache_path": "spanish_queries.train.tsv"
   },
-  "es/docs": {
-    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_collection.tsv",
-    "expected_md5": "c82d3e5998f4cefb5a730a337680fac0",
-    "size_hint": 3382637867,
-    "cache_path": "spanish_collection.tsv"
-  },
-  "es/queries/dev": {
-    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.dev.tsv",
-    "expected_md5": "1359d9516bf5dd9bf732012a25e7f536",
-    "size_hint": 5294892,
-    "cache_path": "spanish_queries.dev.tsv"
-  },
-  "es/queries/train": {
-    "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/spanish/spanish_queries.train.tsv",
-    "expected_md5": "676e7011d020383422556d2c4b39b67d",
-    "size_hint": 41890459,
-    "cache_path": "spanish_queries.train.tsv"
-  },
   "pt/docs": {
     "url": "https://storage.googleapis.com/msmarco-translated/multi_msmarco/portuguese/portuguese_collection.tsv",
     "expected_md5": "77260081f0332befa6aa3e6c922b8fb9",

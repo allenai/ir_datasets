@@ -38,6 +38,31 @@ jobs:
         name: "antique.json"
         path: "antique.json"
 
+  aol-ia:
+    if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'aol-ia'"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+    - name: Test
+      env:
+        IR_DATASETS_DL_DISABLE_PBAR: 'true'
+      run: |
+        python -m test.downloads --filter "^aol-ia/" --output "aol-ia.json" --randdelay 60
+    - name: Upload artifact
+      if: always() # don't skip if the Test step fails (defeats the whole purpose)
+      uses: actions/upload-artifact@v2
+      with:
+        name: "aol-ia.json"
+        path: "aol-ia.json"
+
   aquaint:
     if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'aquaint'"
     runs-on: ubuntu-latest
