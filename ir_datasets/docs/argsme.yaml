@@ -1,0 +1,58 @@
+_:
+  pretty_name: "args.me"
+  desc: '
+<p>
+The args.me corpus comprises 387 740 arguments, crawled from Debatewise, IDebate.org, Debatepedia, Debate.org,
+and from Canadian Parliament discussions.
+</p>
+<p>
+This collection is licensed with the Creative Commons Attribution 4.0 International. Individual rights to the content still apply.
+</p>
+<ul>
+<li><a href="https://args.me/">args.me Search Engine</a></li>
+<li><a href="https://webis.de/downloads/publications/papers/wachsmuth_2017f.pdf">args.me Search Engine Paper</a></li>
+<li><a href="https://webis.de/downloads/publications/papers/ajjour_2019a.pdf">args.me Corpus Paper</a></li>
+<li><a href="https://git.webis.de/code-research/arguana/args/args-framework">GitLab Repository</a></li>
+</ul>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
+
+debateorg:
+  desc: '
+<p>
+Subset of the 338 620 arguments that were crawled from the debate portal Debate.org.
+</p>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
+
+debatepedia:
+  desc: '
+<p>
+Subset of the 21 197 arguments that were crawled from the debate portal Debatepedia.
+</p>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
+
+debatewise:
+  desc: '
+<p>
+Subset of the 14 353 arguments that were crawled from the debate portal Debatewise.
+</p>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
+
+idebate:
+  desc: '
+<p>
+Subset of the 13 522 arguments, that were crawled from the debate portal IDebate.org.
+</p>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
+
+parliamentary:
+  desc: '
+<p>
+Subset of the 48 arguments, that were crawled from Canadian Parliament discussions.
+</p>
+'
+  bibtex_ids: ['Wachsmuth2017Argument', 'Ajjour2019Acquisition']
