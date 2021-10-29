@@ -2,6 +2,7 @@ from . import base
 from . import antique
 from . import aol_ia
 from . import aquaint
+from . import argsme
 from . import beir
 from . import c4
 from . import car
