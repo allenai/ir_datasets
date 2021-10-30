@@ -36,8 +36,8 @@ class NytDocs(BaseDocs):
     def __init__(self, dlc):
         self._dlc = dlc
 
-    def docs_path(self):
-        return self._dlc.path()
+    def docs_path(self, force=True):
+        return self._dlc.path(force)
 
     def docs_cls(self):
         return NytDoc

@@ -262,6 +262,7 @@ class DocstoreBackedDocs(BaseDocs):
     """
     def __init__(self, docstore_lazy, docs_cls=GenericDoc, namespace=None, lang=None):
         self._docstore_lazy = docstore_lazy
+        self._loaded_docstore = False
         self._docs_cls = docs_cls
         self._docs_namespace = namespace
         self._docs_lang = lang
@@ -270,8 +271,8 @@ class DocstoreBackedDocs(BaseDocs):
         return iter(self._docstore_lazy())
 
     def docs_count(self):
-        if self.docs_store().built():
-            return self._docstore_lazy().count()
+        if self._loaded_docstore and self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_cls(self):
         return self._docs_cls
@@ -283,7 +284,9 @@ class DocstoreBackedDocs(BaseDocs):
         return self._docs_lang
 
     def docs_store(self):
-        return self._docstore_lazy()
+        result = self._docstore_lazy()
+        self._loaded_docstore = True
+        return result
 
 
 class DocSourceSeekableIter:

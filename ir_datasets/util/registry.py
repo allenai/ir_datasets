@@ -1,6 +1,6 @@
 import re
 import ir_datasets
-from .metadata import MetadataProvider
+from .metadata import MetadataComponent
 
 
 __all__ = 'Registry'
@@ -18,8 +18,8 @@ class Registry:
             for pattern, initializer in self._patterns:
                 match = pattern.match(key)
                 if match:
-                    dataset = initializer(match.groups())
-                    self._registered[key] = dataset
+                    dataset = initializer(key, match.groups())
+                    self.register(key, dataset)
                     break
         return self._registered[key]
 
@@ -33,8 +33,9 @@ class Registry:
                 _logger.warn(f"{name} already exists in this registry. Overwriting.")
             else:
                 raise RuntimeError(f"{name} already exists in this registry.")
-        metadata_provider = MetadataProvider(name, obj)
-        self._registered[name] = Dataset(metadata_provider, obj)
+        if not hasattr(obj, 'metadata'):
+            obj = Dataset(MetadataComponent(name, obj), obj) # add metadata from default provider
+        self._registered[name] = obj
 
     def register_pattern(self, pattern, initializer):
         self._patterns.append((re.compile(pattern), initializer))

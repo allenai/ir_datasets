@@ -70,7 +70,7 @@ class MsMarcoV2Docs(BaseDocs):
         #     It also reduces the complexity of the code, as it does not require a new docstore
         #     implementation for this dataset, and is just doing the normal procedure.
         return PickleLz4FullStore(
-            path=f'{self._dlc.path()}.pklz4',
+            path=f'{self._dlc.path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,

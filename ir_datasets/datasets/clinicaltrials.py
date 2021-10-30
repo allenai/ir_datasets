@@ -83,12 +83,12 @@ class ClinicalTrialsDocs(BaseDocs):
         eligibility = ''.join(eligibility.itertext()) if eligibility else ''
         return ClinicalTrialsDoc(doc_id, title, condition, summary, detailed_description, eligibility)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/self._name/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,

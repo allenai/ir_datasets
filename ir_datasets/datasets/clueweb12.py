@@ -160,8 +160,8 @@ class ClueWeb12Docs(WarcDocs):
         self.chk_dlc = chk_dlc
         self._docs_warc_file_counts_cache = None
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     def _docs_iter_source_files(self):
         for source_dir in sorted(glob(os.path.join(self.docs_dlc.path(), 'ClueWeb12_*', '*'))):
@@ -210,9 +210,11 @@ class ClueWeb12b13Extractor:
         self.docs_dlc = docs_dlc
         self.extract_jar_dlc = extract_jar_dlc
 
-    def path(self):
+    def path(self, force=True):
         source_path = self.docs_dlc.path()
         path = f'{source_path}-b13'
+        if not force:
+            return path
         if os.path.exists(path):
             self._create_record_counts_if_needed(path)
             return path

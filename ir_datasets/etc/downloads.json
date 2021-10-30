@@ -329,6 +329,12 @@
     "size_hint": 5143717,
     "expected_md5": "371cc532aca236759bd3602eb6ce2181",
     "cache_path": "clirmatrix_downloads.json.gz"
+  },
+  "metadata": {
+    "url": "https://macavaney.us/clirmatrix-metadata-tmp.json.lz4",
+    "size_hint": 2163444,
+    "expected_md5": "e2653eb4112fedc11c8ded4d34bbaca4",
+    "cache_path": "clirmatrix-metadata-tmp.json.lz4"
   }
 },
 

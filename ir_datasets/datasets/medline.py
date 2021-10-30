@@ -118,12 +118,12 @@ class MedlineDocs(BaseDocs):
                     if el.tag in ('PubmedArticle', 'MedlineCitation'):
                         el.clear() # so we don't need to keep it all in memory
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/self._name/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -170,12 +170,12 @@ class AacrAscoDocs(BaseDocs):
                 abstract = file_reader.read().strip()
                 yield MedlineDoc(doc_id, title, abstract)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/'2017'/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -209,12 +209,12 @@ class ConcatDocs(BaseDocs):
         for docs in self._docs:
             yield from docs.docs_iter()
 
-    def docs_path(self):
-        return f'{self._docs[0].docs_path()}.concat'
+    def docs_path(self, force=True):
+        return f'{self._docs[0].docs_path(force)}.concat'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,

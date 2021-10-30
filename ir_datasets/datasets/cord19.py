@@ -65,8 +65,8 @@ class Cord19Docs(BaseDocs):
         self._include_fulltext = include_fulltext
         self._count_hint = count_hint
 
-    def docs_path(self):
-        result = self._streamer.path()
+    def docs_path(self, force=True):
+        result = self._streamer.path(force)
         if self._include_fulltext:
             return f'{result}.fulltext'
         return result
@@ -149,7 +149,7 @@ class Cord19Docs(BaseDocs):
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,

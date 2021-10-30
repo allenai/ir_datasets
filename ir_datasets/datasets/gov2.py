@@ -120,8 +120,8 @@ class Gov2Docs(BaseDocs):
         self._doccount_dlc = doccount_dlc
         self._docs_file_counts_cache = None
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     def _docs_iter_source_files(self):
         dirs = sorted((Path(self.docs_dlc.path()) / 'GOV2_data').glob('GX???'))
@@ -205,7 +205,7 @@ class Gov2Docs(BaseDocs):
 
     def docs_store(self):
         docstore = Gov2Docstore(self)
-        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path()}.cache')
+        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache')
 
     def docs_count(self):
         return sum(self._docs_file_counts().values())
@@ -268,8 +268,8 @@ class Gov2DocCountFile:
         self._path = path
         self._docs_dlc = docs_dlc
 
-    def path(self):
-        if not os.path.exists(self._path):
+    def path(self, force=True):
+        if force and not os.path.exists(self._path):
             docs_urls_path = os.path.join(self._docs_dlc.path(), 'GOV2_extras/url2id.gz')
             result = Counter()
             with _logger.pbar_raw(desc='building doccounts file', total=25205179, unit='doc') as pbar:

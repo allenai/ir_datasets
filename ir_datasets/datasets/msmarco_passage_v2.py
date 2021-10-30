@@ -73,8 +73,8 @@ class MsMarcoV2Passages(BaseDocs):
     def docs_lang(self):
         return 'en'
 
-    def docs_path(self):
-        return self._dlc.path()
+    def docs_path(self, force=True):
+        return self._dlc.path(force)
 
 
 class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
@@ -82,7 +82,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         super().__init__(docs_handler.docs_cls(), 'doc_id')
         self.docs_handler = docs_handler
         self.dlc = docs_handler._dlc
-        self.base_path = docs_handler.docs_path() + '.extracted'
+        self.base_path = docs_handler.docs_path(force=False) + '.extracted'
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
         self.size_hint = 60880127751

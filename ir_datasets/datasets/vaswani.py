@@ -27,8 +27,8 @@ class VaswaniDocs(BaseDocs):
         super().__init__()
         self.docs_dlc = docs_dlc
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):

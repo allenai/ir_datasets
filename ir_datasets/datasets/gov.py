@@ -65,8 +65,8 @@ class GovDocs(BaseDocs):
         super().__init__()
         self.docs_dlc = docs_dlc
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -130,7 +130,7 @@ class GovDocs(BaseDocs):
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -139,7 +139,8 @@ class GovDocs(BaseDocs):
         )
 
     def docs_count(self):
-        return sum(self._docs_file_counts().values())
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME

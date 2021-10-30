@@ -75,23 +75,28 @@ class Dataset:
             result |= set(dir(cons))
         return list(result)
 
+    def has(self, etype: ir_datasets.EntityType) -> bool:
+        etype = ir_datasets.EntityType(etype) # validate & allow strings
+        return hasattr(self, f'{etype.value}_handler')
+
     def has_docs(self):
-        return hasattr(self, 'docs_handler')
+        return self.has(ir_datasets.EntityType.docs)
 
     def has_queries(self):
-        return hasattr(self, 'queries_handler')
+        return self.has(ir_datasets.EntityType.queries)
 
     def has_qrels(self):
-        return hasattr(self, 'qrels_handler')
+        return self.has(ir_datasets.EntityType.qrels)
 
     def has_scoreddocs(self):
-        return hasattr(self, 'scoreddocs_handler')
+        return self.has(ir_datasets.EntityType.scoreddocs)
 
     def has_docpairs(self):
-        return hasattr(self, 'docpairs_handler')
+        return self.has(ir_datasets.EntityType.docpairs)
 
     def has_qlogs(self):
-        return hasattr(self, 'qlogs_handler')
+        return self.has(ir_datasets.EntityType.qlogs)
+
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):
@@ -374,8 +379,8 @@ class ExpectedFile:
         self._expected_md5 = expected_md5
         self._instructions = instructions
 
-    def path(self):
-        if not self._path.exists():
+    def path(self, force=True):
+        if force and not self._path.exists():
             self._path.parent.mkdir(parents=True, exist_ok=True)
             inst = '\n\n' + self._instructions.format(path=self._path) if self._instructions else ''
             raise IOError(f"{self._path} does not exist.{inst}")

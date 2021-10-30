@@ -57,7 +57,7 @@ class WarcDocs(BaseDocs):
                 content_type = ''
             yield WarcDoc(did, url, date, http_headers, body, content_type)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         raise NotImplementedError
 
     def _docs_iter_source_files(self):
@@ -76,7 +76,7 @@ class WarcDocs(BaseDocs):
 
     def docs_store(self):
         docstore = ir_datasets.indices.ClueWebWarcDocstore(self)
-        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path()}.cache')
+        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache')
 
     def docs_cls(self):
         return WarcDoc

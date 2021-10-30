@@ -65,7 +65,7 @@ class ZPickleKeyValueStore:
                 return val
         raise KeyError(f'field={field} not found for key={key}')
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     def __iter__(self):
@@ -153,7 +153,7 @@ class IndexedTsvKeyValueStore:
             return record
         raise KeyError(f'key={key} field={field} not found')
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     def __iter__(self):
@@ -379,7 +379,7 @@ class IndexedTsvDocstore:
         for did, fields in iter(self._store):
             yield self._doc_cls(*(fields[f] for f in self._doc_cls._fields))
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     def file_size(self):

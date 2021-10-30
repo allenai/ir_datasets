@@ -98,7 +98,7 @@ class PmcDocs(BaseDocs):
                     body = '\n'.join(body.itertext()) if body is not None else ''
                     yield PmcDoc(doc_id, journal, title, abstract, body)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return self._path
 
     def docs_store(self, field='doc_id'):

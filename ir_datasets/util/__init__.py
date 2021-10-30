@@ -9,10 +9,10 @@ from pathlib import Path
 import tempfile
 import ir_datasets
 from .. import log
-from .fileio import IterStream, Cache, TarExtract, TarExtractAll, RelativePath, GzipExtract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract
+from .fileio import IterStream, Cache, TarExtract, TarExtractAll, RelativePath, GzipExtract, Lz4Extract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract, PackageDataFile
 from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload, _DownloadConfig
 from .hash import HashVerificationError, HashVerifier, HashStream
-from .metadata import MetadataProvider
+from .metadata import MetadataComponent, MetadataProvider
 from .registry import Registry
 
 

@@ -87,8 +87,9 @@ class _ManagedDlc:
         with open(self._path, 'rb') as f:
             yield f
 
-    def path(self):
-        self._manager.build()
+    def path(self, force=True):
+        if force:
+            self._manager.build()
         return self._path
 
 

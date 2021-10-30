@@ -85,7 +85,7 @@ class ConcatScoreddocs(BaseScoredDocs):
         for q in self._scoreddocs:
             yield from q.scoreddocs_iter()
 
-    def scoreddocs_path(self):
+    def scoreddocs_path(self, force=True):
         return None
 
     def scoreddocs_cls(self):
@@ -149,8 +149,8 @@ class DocPairGenerator:
         self._queries = queries
         self._cache_path = cache_path
 
-    def path(self):
-        if not os.path.exists(self._cache_path):
+    def path(self, force=True):
+        if force and not os.path.exists(self._cache_path):
             _logger.info('tripclick includes docpairs in an expanded format (with raw text). Linking these records back to the query and doc IDs.')
             SPACES = re.compile(r'\s+')
             doc_map = {}
