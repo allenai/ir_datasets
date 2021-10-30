@@ -16,16 +16,21 @@ assignees: ''
 
 <links including data websites, repositories, papers, etc. that would help in adding the dataset.>
 
-**Dataset ID(s):**
+**Dataset ID(s) & supported entities:**
 
-<propose dataset ID(s), and where they fit in the hierarchy>
+ - <propose dataset ID(s), and where they fit in the hierarchy, and specify which entity types each will provide (docs, queries, qrels, scoreddocs, docpairs, qlogs)>
 
-**Supported Entities**
+**Checklist**
 
- - [] docs
- - [] queries
- - [] qrels
- - [] scoreddocs
- - [] docpairs
-
+Mark each task once completed. All should be checked prior to merging a new dataset.
+  
+ - [ ] Dataset definition (in `ir_datasets/datasets/[topid].py`)
+ - [ ] Tests (in `tests/integration/[topid].py`)
+ - [ ] Metadata generated (using `ir_datasets generate_metadata` command, should appear in `ir_datasets/etc/metadata.json`)
+ - [ ] Documentation (in `ir_datasets/etc/[topid].yaml`)
+   - [ ] Documentation generated in https://github.com/seanmacavaney/ir-datasets.com/
+ - [ ] Downloadable content (in `ir_datasets/etc/downloads.json`)
+   - [ ] Download verification action (in `.github/workflows/verify_downloads.yml`). Only one needed per `topid`.
+   - [ ] Any small public files from NIST (or other potentially troublesome files) mirrored in https://github.com/seanmacavaney/irds-mirror/. Mirrored status properly reflected in `downloads.json`.
+  
 **Additional comments/concerns/ideas/etc.**
