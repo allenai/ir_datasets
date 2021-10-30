@@ -1,3 +1,4 @@
+import gzip
 import io
 import random
 import sys
@@ -41,6 +42,17 @@ class TestDownloads(unittest.TestCase):
             data = json.load(f)
         try:
             self._test_download_iter(data)
+
+            # clirmatrix - there's a ton of files, test a few random ones each time
+            if self.dlc_filter == '^clirmatrix/':
+                dlc = ir_datasets.datasets.clirmatrix.DownloadConfig.context('clirmatrix', ir_datasets.util.home_path()/'clirmatrix')
+                with dlc['downloads'].stream() as s:
+                    with gzip.open(s) as g:
+                        clir_dlc = json.load(g)
+                for top_key in clir_dlc.keys():
+                    sub_keys = list(clir_dlc[top_key].keys())
+                    for sub_key in random.sample(sub_keys, 10):
+                        self.output_data.append(self._test_download(clir_dlc[top_key][sub_key], f'clirmatrix/{top_key}/{sub_key}'))
         finally:
             if self.output_path is not None:
                 with open(self.output_path, 'wt') as f:
@@ -50,46 +62,48 @@ class TestDownloads(unittest.TestCase):
         with tmp_environ(IR_DATASETS_DL_TRIES='10'): # give the test up to 10 attempts to download
             if 'url' in data and 'expected_md5' in data:
                 if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False) and not data.get('auth', False):
-                    with self.subTest(prefix):
-                        if self.rand_delay is not None:
-                            # sleep in range of [0.5, 1.5] * rand_delay seconds
-                            time.sleep(random.uniform(self.rand_delay * 0.5, self.rand_delay * 1.5))
-                        record = {
-                            'name': prefix,
-                            'url': data['url'],
-                            'time': datetime.datetime.now().isoformat(),
-                            'duration': None,
-                            'result': 'IN_PROGRESS',
-                            'fail_messagae': None,
-                            'md5': data['expected_md5'],
-                            'size': 0,
-                        }
-                        self.output_data.append(record)
-                        start = time.time()
-                        try:
-                            download = ir_datasets.util.Download(data['url'], **data.get('download_args', {})).verify_hash(data['expected_md5'])
-                            with download.stream() as stream:
-                                inp = stream.read(io.DEFAULT_BUFFER_SIZE)
-                                while len(inp) > 0:
-                                    record['size'] += len(inp)
-                                    inp = stream.read(io.DEFAULT_BUFFER_SIZE)
-                            record['duration'] = time.time() - start
-                            record['result'] = 'PASS'
-                        except KeyboardInterrupt:
-                            record['duration'] = time.time() - start
-                            record['result'] = 'USER_SKIP'
-                            self.skipTest('Test skipped by user')
-                            self.output_data.append({})
-                        except Exception as ex:
-                            record['duration'] = time.time() - start
-                            record['result'] = 'FAIL' if not data.get('irds_mirror') else 'FAIL_BUT_HAS_MIRROR'
-                            record['fail_messagae'] = str(ex)
-                            raise
+                    self.output_data.append(self._test_download(data, prefix))
             elif 'instructions' in data:
                 pass
             else:
                 for key in data.keys():
                     self._test_download_iter(data[key], prefix=f'{prefix}/{key}' if prefix else key)
+
+    def _test_download(self, data, download_id):
+        record = {
+            'name': download_id,
+            'url': data['url'],
+            'time': datetime.datetime.now().isoformat(),
+            'duration': None,
+            'result': 'IN_PROGRESS',
+            'fail_messagae': None,
+            'md5': data['expected_md5'],
+            'size': 0,
+        }
+        with self.subTest(download_id):
+            if self.rand_delay is not None:
+                # sleep in range of [0.5, 1.5] * rand_delay seconds
+                time.sleep(random.uniform(self.rand_delay * 0.5, self.rand_delay * 1.5))
+            start = time.time()
+            try:
+                download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'], **data.get('download_args', {}))], expected_md5=data['expected_md5'], stream=True)
+                with download.stream() as stream:
+                    inp = stream.read(io.DEFAULT_BUFFER_SIZE)
+                    while len(inp) > 0:
+                        record['size'] += len(inp)
+                        inp = stream.read(io.DEFAULT_BUFFER_SIZE)
+                record['duration'] = time.time() - start
+                record['result'] = 'PASS'
+            except KeyboardInterrupt:
+                record['duration'] = time.time() - start
+                record['result'] = 'USER_SKIP'
+                self.skipTest('Test skipped by user')
+            except Exception as ex:
+                record['duration'] = time.time() - start
+                record['result'] = 'FAIL' if not data.get('irds_mirror') else 'FAIL_BUT_HAS_MIRROR'
+                record['fail_messagae'] = str(ex)
+                raise
+        return record
 
 
 if __name__ == '__main__':
