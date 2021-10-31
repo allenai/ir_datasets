@@ -1,6 +1,5 @@
 import re
 import os
-import numpy as np
 import contextlib
 import gzip
 import io
@@ -117,6 +116,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
     def build(self):
         if self.built():
             return
+        np = ir_datasets.lazy_libs.numpy()
         ir_datasets.util.check_disk_free(self.base_path, self.size_hint)
         with _logger.pbar_raw('extracting source documents', total=70, unit='file') as pbar, \
              self.dlc.stream() as stream, \
@@ -155,6 +155,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
 
 class MsMarcoV2PassageIter:
     def __init__(self, docstore, slice):
+        self.np = ir_datasets.lazy_libs.numpy()
         self.docstore = docstore
         self.slice = slice
         self.next_index = 0
@@ -182,7 +183,7 @@ class MsMarcoV2PassageIter:
                     self.current_file_end_idx = self.current_file_start_idx + (os.path.getsize(source_file + '.pos') // 4)
                     first = False
                 self.current_file = open(source_file, 'rb')
-                self.current_pos_mmap = np.memmap(source_file + '.pos', dtype=np.uint32)
+                self.current_pos_mmap = self.np.memmap(source_file + '.pos', dtype=self.np.uint32)
             else:
                 # jump to the position of the next document
                 pos = self.current_pos_mmap[self.slice.start - self.current_file_start_idx]
