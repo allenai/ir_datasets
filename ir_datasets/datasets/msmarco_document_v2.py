@@ -77,7 +77,7 @@ class MsMarcoV2Docs(BaseDocs):
             index_fields=['doc_id'],
             key_field_prefix='msmarco_doc_', # cut down on storage by removing prefix in lookup structure
             size_hint=66500029281,
-            count_hint=11959635,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
         # return MsMArcoV2DocStore(self)
 

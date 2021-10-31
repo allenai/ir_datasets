@@ -1,4 +1,5 @@
 import json
+from typing import Callable, Optional, Dict, Any
 from functools import partial
 import ir_datasets
 from .fileio import PackageDataFile
@@ -44,11 +45,11 @@ class MetadataComponent:
 
 
 class MetadataProvider:
-    def __init__(self, metadata_loader):
+    def __init__(self, metadata_loader: Callable[[], Dict[str, Any]]):
         self._metadata = None
         self._metadata_loader = metadata_loader
 
-    def get_metadata(self, dsid, entity_type: ir_datasets.EntityType):
+    def get_metadata(self, dsid: str, entity_type: ir_datasets.EntityType) -> Dict[str, Any]:
         entity_type = ir_datasets.EntityType(entity_type) # validate & allow strings
         if self._metadata is None:
             self._metadata = self._metadata_loader()
@@ -64,4 +65,21 @@ class MetadataProvider:
                 return json.load(s)
         return wrapped
 
+
 default_metadata_provider = MetadataProvider(MetadataProvider.json_loader(PackageDataFile('etc/metadata.json')))
+
+
+def count_hint(
+    dsid: str,
+    etype: ir_datasets.EntityType = ir_datasets.EntityType.docs,
+    metadata_provier: Optional[MetadataProvider] = None) -> Callable[[], Optional[int]]:
+    """
+    Returns a lambda expression that provides the count from metadata (if available) for
+    the given dataset's etype. This is frequently used to provide a time estimate for
+    building docstores. It returns a lambda expression so that the metadata does not
+    need to be loaded when the package is imported; only when the value is actually
+    requested.
+    """
+    if metadata_provier is None:
+        metadata_provier = default_metadata_provider
+    return lambda: metadata_provier.get_metadata(dsid, etype).get('count')

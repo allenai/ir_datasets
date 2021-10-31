@@ -32,9 +32,10 @@ class CarQuery(NamedTuple):
 
 
 class CarDocs(BaseDocs):
-    def __init__(self, streamer):
+    def __init__(self, streamer, count_hint=None):
         super().__init__()
         self._streamer = streamer
+        self._count_hint = count_hint
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -54,7 +55,7 @@ class CarDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=29678367,
+            count_hint=self._count_hint,
         )
 
     def docs_count(self):
@@ -98,7 +99,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    docs_v15 = CarDocs(TarExtract(dlc['docs'], 'paragraphcorpus/paragraphcorpus.cbor', compression='xz'))
+    docs_v15 = CarDocs(TarExtract(dlc['docs'], 'paragraphcorpus/paragraphcorpus.cbor', compression='xz'), count_hint=ir_datasets.util.count_hint(f'{NAME}/v1.5'))
     base = Dataset(documentation('_'))
 
     subsets['v1.5'] = Dataset(docs_v15, documentation('v1.5'))

@@ -12,7 +12,7 @@ from .. import log
 from .fileio import IterStream, Cache, TarExtract, TarExtractAll, RelativePath, GzipExtract, Lz4Extract, ZipExtract, ZipExtractCache, StringFile, ReTar, Bz2Extract, PackageDataFile
 from .download import Download, DownloadConfig, BaseDownload, RequestsDownload, LocalDownload, _DownloadConfig
 from .hash import HashVerificationError, HashVerifier, HashStream
-from .metadata import MetadataComponent, MetadataProvider
+from .metadata import MetadataComponent, MetadataProvider, default_metadata_provider, count_hint
 from .registry import Registry
 
 

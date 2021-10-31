@@ -65,26 +65,26 @@ def _init():
     subsets = {}
 
     langs = {
-        'ar': ('mrtydi-v1.0-arabic', 2106586),
-        'bn': ('mrtydi-v1.0-bengali', 304059),
-        'en': ('mrtydi-v1.0-english', 32907100),
-        'fi': ('mrtydi-v1.0-finnish', 1908757),
-        'id': ('mrtydi-v1.0-indonesian', 1469399),
-        'ja': ('mrtydi-v1.0-japanese', 7000027),
-        'ko': ('mrtydi-v1.0-korean', 1496126),
-        'ru': ('mrtydi-v1.0-russian', 9597504),
-        'sw': ('mrtydi-v1.0-swahili', 136689),
-        'te': ('mrtydi-v1.0-telugu', 548224),
-        'th': ('mrtydi-v1.0-thai', 568855),
+        'ar': 'mrtydi-v1.0-arabic',
+        'bn': 'mrtydi-v1.0-bengali',
+        'en': 'mrtydi-v1.0-english',
+        'fi': 'mrtydi-v1.0-finnish',
+        'id': 'mrtydi-v1.0-indonesian',
+        'ja': 'mrtydi-v1.0-japanese',
+        'ko': 'mrtydi-v1.0-korean',
+        'ru': 'mrtydi-v1.0-russian',
+        'sw': 'mrtydi-v1.0-swahili',
+        'te': 'mrtydi-v1.0-telugu',
+        'th': 'mrtydi-v1.0-thai',
     }
 
     migrator = Migrator(base_path/'irds_version.txt', 'v2',
         affected_files=[base_path/lang for lang in langs],
         message='Migrating mr-tydi (restructuring directory)')
 
-    for lang, (file_name, count_hint) in langs.items():
+    for lang, file_name in langs.items():
         dlc_ds = TarExtractAll(dlc[lang], f'{base_path/lang}.data')
-        docs = MrTydiDocs(GzipExtract(RelativePath(dlc_ds, f'{file_name}/collection/docs.jsonl.gz')), lang, count_hint=count_hint)
+        docs = MrTydiDocs(GzipExtract(RelativePath(dlc_ds, f'{file_name}/collection/docs.jsonl.gz')), lang, count_hint=ir_datasets.util.count_hint(f'{NAME}/{lang}'))
         docs = migrator(docs)
         subsets[lang] = Dataset(
             docs,

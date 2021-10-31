@@ -38,10 +38,11 @@ class ClinicalTrialsDoc(NamedTuple):
 
 
 class ClinicalTrialsDocs(BaseDocs):
-    def __init__(self, name, dlcs, compress_format='tgz'):
+    def __init__(self, name, dlcs, compress_format='tgz', count_hint=None):
         self._name = name
         self._dlcs = dlcs
         self._compress_format = compress_format
+        self._count_hint = count_hint
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -93,7 +94,7 @@ class ClinicalTrialsDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=241006,
+            count_hint=self._count_hint,
         )
 
     def docs_cls(self):
@@ -118,9 +119,9 @@ def _init():
 
     base = Dataset(documentation('_'))
 
-    collection17 = ClinicalTrialsDocs('2017', [dlc['docs/2017']])
-    collection19 = ClinicalTrialsDocs('2019', [dlc['docs/2019/0'], dlc['docs/2019/1'], dlc['docs/2019/2'], dlc['docs/2019/3']])
-    collection21 = ClinicalTrialsDocs('2021', [dlc['docs/2021/1'], dlc['docs/2021/2'], dlc['docs/2021/3'], dlc['docs/2021/4'], dlc['docs/2021/5']], compress_format='zip')
+    collection17 = ClinicalTrialsDocs('2017', [dlc['docs/2017']], count_hint=ir_datasets.util.count_hint(f'{NAME}/2017'))
+    collection19 = ClinicalTrialsDocs('2019', [dlc['docs/2019/0'], dlc['docs/2019/1'], dlc['docs/2019/2'], dlc['docs/2019/3']], count_hint=ir_datasets.util.count_hint(f'{NAME}/2019'))
+    collection21 = ClinicalTrialsDocs('2021', [dlc['docs/2021/1'], dlc['docs/2021/2'], dlc['docs/2021/3'], dlc['docs/2021/4'], dlc['docs/2021/5']], compress_format='zip', count_hint=ir_datasets.util.count_hint(f'{NAME}/2021'))
 
     subsets['2017'] = Dataset(collection17, documentation('2017'))
 

@@ -25,18 +25,18 @@ def _init():
     subsets = {}
 
     sources = [
-        ('en1k', 'wikIR1k', 369721),
-        ('en59k', 'wikIR59k', 2454785),
-        ('en78k', 'enwikIR', 2454785),
-        ('ens78k', 'enwikIRS', 2454785),
-        ('fr14k', 'FRwikIR14k', 736616),
-        ('es13k', 'ESwikIR13k', 645901),
-        ('it16k', 'ITwikIR16k', 503012),
+        ('en1k', 'wikIR1k'),
+        ('en59k', 'wikIR59k'),
+        ('en78k', 'enwikIR'),
+        ('ens78k', 'enwikIRS'),
+        ('fr14k', 'FRwikIR14k'),
+        ('es13k', 'ESwikIR13k'),
+        ('it16k', 'ITwikIR16k'),
     ]
 
-    for source, zip_dir_name, count_hint in sources:
+    for source, zip_dir_name in sources:
         source_dlc = ZipExtractCache(dlc[source], base_path/source)
-        docs = CsvDocs(RelativePath(source_dlc, f"{zip_dir_name}/documents.csv"), namespace=source, lang=source[:2], count_hint=count_hint, docstore_path=ir_datasets.util.home_path()/NAME/f'{source}.pklz4')
+        docs = CsvDocs(RelativePath(source_dlc, f"{zip_dir_name}/documents.csv"), namespace=source, lang=source[:2], count_hint=ir_datasets.util.count_hint(f'{NAME}/{source}'), docstore_path=ir_datasets.util.home_path()/NAME/f'{source}.pklz4')
         subsets[source] = Dataset(docs, documentation(source))
         for split in ['training', 'validation', 'test']:
             subsets[f'{source}/{split}'] = Dataset(

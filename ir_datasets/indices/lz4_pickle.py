@@ -276,7 +276,10 @@ class PickleLz4FullStore(Docstore):
             if self.size_hint:
                 ir_datasets.util.check_disk_free(self.path, self.size_hint)
             with self.lookup.transaction() as trans, _logger.duration('building docstore'):
-                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc', total=self.count_hint):
+                count_hint = self.count_hint # either a callable or int or None
+                if callable(count_hint):
+                    count_hint = count_hint() # allows for deferred loading of metadata; should return an int or None
+                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc', total=count_hint):
                     trans.add(doc)
 
     def built(self):

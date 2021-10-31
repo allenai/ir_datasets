@@ -101,11 +101,10 @@ def _map_field(field, data):
         return data['metadata'][field]
 
 class BeirDocs(BaseDocs):
-    def __init__(self, name, dlc, doc_type, count_hint=None):
+    def __init__(self, name, dlc, doc_type):
         super().__init__()
         self._name = name
         self._dlc = dlc
-        self._count_hint = count_hint
         self._doc_type = doc_type
 
     def docs_iter(self):
@@ -127,7 +126,7 @@ class BeirDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=self._count_hint,
+            count_hint=ir_datasets.util.count_hint(f'{NAME}/{self._name}'),
         )
 
     def docs_count(self):
@@ -203,30 +202,30 @@ def _init():
     subsets = {}
 
     benchmarks = {
-        'msmarco': (['train', 'dev', 'test'], 8841823, GenericDoc, GenericQuery),
-        'trec-covid': (['test'], 171332, BeirCordDoc, BeirCovidQuery),
-        'nfcorpus': (['train', 'dev', 'test'], 3633, BeirTitleUrlDoc, BeirUrlQuery),
-        'nq': (['test'], 2681468, BeirTitleDoc, GenericQuery),
-        'hotpotqa': (['train', 'dev', 'test'], 5233329, BeirTitleUrlDoc, GenericQuery),
-        'fiqa': (['train', 'dev', 'test'], 57638, GenericDoc, GenericQuery),
-        'arguana': (['test'], 8674, BeirTitleDoc, GenericQuery),
-        'webis-touche2020': (['test'], 382545, BeirToucheDoc, BeirToucheQuery),
-        'webis-touche2020/v2': (['test'], 382545, BeirToucheDoc, BeirToucheQuery),
-        'quora': (['dev', 'test'], 522931, GenericDoc, GenericQuery),
-        'dbpedia-entity': (['dev', 'test'], 4635922, BeirTitleUrlDoc, GenericQuery),
-        'scidocs': (['test'], 25657, BeirSciDoc, BeirSciQuery),
-        'fever': (['train', 'dev', 'test'], 5416568, BeirTitleDoc, GenericQuery),
-        'climate-fever': (['test'], 5416593, BeirTitleDoc, GenericQuery),
-        'scifact': (['train', 'test'], 5183, BeirTitleDoc, GenericQuery),
+        'msmarco': (['train', 'dev', 'test'], GenericDoc, GenericQuery),
+        'trec-covid': (['test'], BeirCordDoc, BeirCovidQuery),
+        'nfcorpus': (['train', 'dev', 'test'], BeirTitleUrlDoc, BeirUrlQuery),
+        'nq': (['test'], BeirTitleDoc, GenericQuery),
+        'hotpotqa': (['train', 'dev', 'test'], BeirTitleUrlDoc, GenericQuery),
+        'fiqa': (['train', 'dev', 'test'], GenericDoc, GenericQuery),
+        'arguana': (['test'], BeirTitleDoc, GenericQuery),
+        'webis-touche2020': (['test'], BeirToucheDoc, BeirToucheQuery),
+        'webis-touche2020/v2': (['test'], BeirToucheDoc, BeirToucheQuery),
+        'quora': (['dev', 'test'], GenericDoc, GenericQuery),
+        'dbpedia-entity': (['dev', 'test'], BeirTitleUrlDoc, GenericQuery),
+        'scidocs': (['test'], BeirSciDoc, BeirSciQuery),
+        'fever': (['train', 'dev', 'test'], BeirTitleDoc, GenericQuery),
+        'climate-fever': (['test'], BeirTitleDoc, GenericQuery),
+        'scifact': (['train', 'test'], BeirTitleDoc, GenericQuery),
     }
 
-    for ds, (qrels, count_hint, doc_type, query_type) in benchmarks.items():
+    for ds, (qrels, doc_type, query_type) in benchmarks.items():
         dlc_ds = dlc[ds]
         ds_zip = ds.split('/')[0]
         docs_migrator = Migrator(base_path/ds/'irds_version.txt', 'v2',
             affected_files=[f'{base_path/ds}/docs.pklz4'],
             message=f'Migrating {NAME}/{ds} (structuring fields)')
-        docs = docs_migrator(BeirDocs(ds, ZipExtract(dlc_ds, f'{ds_zip}/corpus.jsonl'), doc_type, count_hint=count_hint))
+        docs = docs_migrator(BeirDocs(ds, ZipExtract(dlc_ds, f'{ds_zip}/corpus.jsonl'), doc_type))
         queries = BeirQueries(ds, Cache(ZipExtract(dlc_ds, f'{ds_zip}/queries.jsonl'), base_path/ds/'queries.json'), query_type)
         if len(qrels) == 1:
             subsets[ds] = Dataset(
@@ -251,27 +250,14 @@ def _init():
                     documentation(f'{ds}/{qrel}')
                 )
 
-    cqa = [
-        ('android', 22998),
-        ('english', 40221),
-        ('gaming', 45301),
-        ('gis', 37637),
-        ('mathematica', 16705),
-        ('physics', 38316),
-        ('programmers', 32176),
-        ('stats', 42269),
-        ('tex', 68184),
-        ('unix', 47382),
-        ('webmasters', 17405),
-        ('wordpress', 48605),
-    ]
+    cqa = ['android', 'english', 'gaming', 'gis', 'mathematica', 'physics', 'programmers', 'stats', 'tex', 'unix', 'webmasters', 'wordpress']
     cqa_dlc = dlc['cqadupstack']
-    for ds, count_hint in cqa:
+    for ds in cqa:
         docs_migrator = Migrator(base_path/'cqadupstack'/ds/'irds_version.txt', 'v2',
             affected_files=[f'{base_path/"cqadupstack"/ds}/docs.pklz4'],
             message=f'Migrating {NAME}/cqadupstack/{ds} (structuring fields)')
         subsets[f'cqadupstack/{ds}'] = Dataset(
-            docs_migrator(BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl'), BeirCqaDoc, count_hint=count_hint)),
+            docs_migrator(BeirDocs(f'cqadupstack/{ds}', ZipExtract(cqa_dlc, f'cqadupstack/{ds}/corpus.jsonl'), BeirCqaDoc)),
             BeirQueries(f'cqadupstack/{ds}', Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/queries.jsonl'), base_path/'cqadupstack'/ds/'queries.json'), BeirCqaQuery),
             BeirQrels(Cache(ZipExtract(cqa_dlc, f'cqadupstack/{ds}/qrels/test.tsv'), base_path/'cqadupstack'/ds/f'test.qrels'), qrels_defs={}),
             documentation(f'cqadupstack/{ds}')

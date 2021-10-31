@@ -77,7 +77,7 @@ class CodeSearchNetDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=2070536,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):

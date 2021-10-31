@@ -8,6 +8,8 @@ from ir_datasets.formats import TsvQueries, TsvDocs, TrecQrels, TrecScoredDocs, 
 
 _logger = ir_datasets.log.easy()
 
+NAME = 'msmarco-passage'
+
 DUA = ("Please confirm you agree to the MSMARCO data usage agreement found at "
        "<http://www.msmarco.org/dataset.aspx>")
 
@@ -98,14 +100,14 @@ class FixEncoding:
 
 
 def _init():
-    documentation = YamlDocumentation('docs/msmarco-passage.yaml')
-    base_path = ir_datasets.util.home_path()/'msmarco-passage'
-    dlc = DownloadConfig.context('msmarco-passage', base_path, dua=DUA)
+    documentation = YamlDocumentation(f'docs/{NAME}.yaml')
+    base_path = ir_datasets.util.home_path()/NAME
+    dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     migrator = Migrator(base_path/'irds_version.txt', 'v2',
         affected_files=[base_path/'collection.tsv', base_path/'collection.tsv.pklz4'],
-        message='Migrating msmarco-passage (fixing passage encoding)')
+        message=f'Migrating {NAME} (fixing passage encoding)')
 
-    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco', lang='en', docstore_size_hint=14373971970, count_hint=8_841_823)
+    collection = TsvDocs(Cache(FixEncoding(TarExtract(dlc['collectionandqueries'], 'collection.tsv')), base_path/'collection.tsv'), namespace='msmarco', lang='en', docstore_size_hint=14373971970, count_hint=ir_datasets.util.count_hint(NAME))
     collection = migrator(collection)
     subsets = {}
 
@@ -266,9 +268,9 @@ def _init():
         documentation('trec-dl-hard/fold5')
     )
 
-    ir_datasets.registry.register('msmarco-passage', Dataset(collection, documentation('_')))
+    ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
     for s in sorted(subsets):
-        ir_datasets.registry.register(f'msmarco-passage/{s}', Dataset(subsets[s], documentation(s)))
+        ir_datasets.registry.register(f'{NAME}/{s}', Dataset(subsets[s], documentation(s)))
 
     return collection, subsets
 

@@ -244,7 +244,7 @@ def _init():
 
     base = Dataset(documentation('_'))
 
-    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])], count_hint=3672808)
+    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])], count_hint=ir_datasets.util.count_hint(f'{NAME}/2004'))
 
     subsets['2004'] = Dataset(collection04, documentation('2004'))
 
@@ -264,7 +264,7 @@ def _init():
     collection17 = ConcatDocs([
         AacrAscoDocs(dlc['2017/aacr_asco_extra']),
         MedlineDocs('2017', [dlc['2017/part1'], dlc['2017/part2'], dlc['2017/part3'], dlc['2017/part4'], dlc['2017/part5']]),
-    ], count_hint=26740025)
+    ], count_hint=ir_datasets.util.count_hint(f'{NAME}/2017'))
     subsets['2017'] = Dataset(collection17, documentation('2017'))
 
     subsets['2017/trec-pm-2017'] = Dataset(
