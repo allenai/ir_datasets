@@ -132,6 +132,10 @@ class _BetaPythonApiDocs:
         else:
             yield from self._docstore.get_many_iter(doc_ids)
 
+    @property
+    def metadata(self):
+        return self._handler.docs_metadata()
+
 
 class _BetaPythonApiQueries:
     def __init__(self, handler):
@@ -173,6 +177,10 @@ class _BetaPythonApiQueries:
                 if qid in self._query_lookup:
                     yield self._query_lookup[qid]
 
+    @property
+    def metadata(self):
+        return self._handler.queries_metadata()
+
 
 class _BetaPythonApiQrels:
     def __init__(self, handler):
@@ -202,6 +210,10 @@ class _BetaPythonApiQrels:
             result = sum(len(x) for x in self._qrels_dict.values())
         return result
 
+    @property
+    def metadata(self):
+        return self._handler.qrels_metadata()
+
 
 class _BetaPythonApiScoreddocs:
     def __init__(self, handler):
@@ -221,6 +233,10 @@ class _BetaPythonApiScoreddocs:
         if result is None:
             result = sum(1 for _ in self._handler.scoreddocs_iter())
         return result
+
+    @property
+    def metadata(self):
+        return self._handler.scoreddocs_metadata()
 
 
 class _BetaPythonApiDocpairs:
@@ -242,6 +258,11 @@ class _BetaPythonApiDocpairs:
             result = sum(1 for _ in self._handler.docpairs_iter())
         return result
 
+    @property
+    def metadata(self):
+        return self._handler.docpairs_metadata()
+
+
 class _BetaPythonApiQlogs:
     def __init__(self, handler):
         self._handler = handler
@@ -260,6 +281,10 @@ class _BetaPythonApiQlogs:
         if result is None:
             result = sum(1 for _ in self._handler.qlogs_iter())
         return result
+
+    @property
+    def metadata(self):
+        return self._handler.qlogs_metadata()
 
 
 class FilteredQueries(BaseQueries):
