@@ -331,10 +331,10 @@
     "cache_path": "clirmatrix_downloads.json.gz"
   },
   "metadata": {
-    "url": "https://macavaney.us/clirmatrix-metadata-tmp.json.lz4",
-    "size_hint": 2163444,
-    "expected_md5": "e2653eb4112fedc11c8ded4d34bbaca4",
-    "cache_path": "clirmatrix-metadata-tmp.json.lz4"
+    "url": "https://macavaney.us/clirmatrix-metadata.json.lz4",
+    "size_hint": 6517585,
+    "expected_md5": "537510770a139b25dd12684c6711c91a",
+    "cache_path": "clirmatrix-metadata.json.lz4"
   }
 },
 
