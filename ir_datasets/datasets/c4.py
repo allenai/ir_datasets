@@ -142,7 +142,7 @@ class C4Docs(BaseDocs):
         self._filter_name = filter_name
 
     def docs_iter(self):
-        return SourceDocIter(self, slice(0, self.docs_count()))
+        return SourceDocIter(self, slice(0, self.docs_count(force=True)))
 
     def docs_cls(self):
         return C4Doc
@@ -151,8 +151,8 @@ class C4Docs(BaseDocs):
         assert field == 'doc_id'
         return C4Docstore(self)
 
-    def docs_count(self):
-        if self._sources is not None:
+    def docs_count(self, force=False):
+        if force or self._sources is not None:
             return sum(s.doc_count for s in self._docs_sources())
 
     def docs_namespace(self):

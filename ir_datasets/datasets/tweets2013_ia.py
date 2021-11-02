@@ -343,7 +343,7 @@ class Tweets2013IaDocs(BaseDocs):
             inprogress_file.unlink()
 
     def docs_iter(self):
-        return Tweets2013IaDocIter(self, slice(0, self.docs_count()))
+        return Tweets2013IaDocIter(self, slice(0, self.docs_count(force=True)))
 
     def docs_cls(self):
         return TweetDoc
@@ -354,9 +354,9 @@ class Tweets2013IaDocs(BaseDocs):
     def docs_path(self, force=False):
         return self._docs_base_path
 
-    def docs_count(self):
+    def docs_count(self, force=False):
         success_file = Path(self._docs_base_path) / '_success'
-        if success_file.exists():
+        if force or success_file.exists():
             return sum(self._docs_file_counts().values())
 
     def docs_namespace(self):
