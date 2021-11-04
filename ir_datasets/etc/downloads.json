@@ -76,6 +76,16 @@
 },
 
 "argsme": {
+  "1.0": {
+    "url": "https://zenodo.org/record/3274636/files/argsme.zip?download=1",
+    "size_hint": 238078064,
+    "expected_md5": "c2512648f46a403f8e5e1dc96779e357"
+  },
+  "1.0-cleaned": {
+    "url": "https://zenodo.org/record/4139439/files/argsme-1.0-cleaned.zip?download=1",
+    "size_hint": 236787622,
+    "expected_md5": "fb0837103a4860e1d4536174f55b12c3"
+  },
   "2020-04-01/debateorg": {
     "url": "https://zenodo.org/record/3734893/files/debateorg.zip?download=1",
     "size_hint": 1150846141,
