@@ -1,4 +1,5 @@
 from enum import Enum
+from itertools import chain
 from typing import NamedTuple, List, Any, Dict, Optional
 
 from ir_datasets import load
@@ -96,4 +97,57 @@ class ArgsMeArguments(BaseDocs):
         return self._namespace
 
     def docs_lang(self):
+        return self._language
+
+
+class ArgsMeCombinedArguments(BaseDocs):
+    _sources: List[ArgsMeArguments]
+    _namespace: Optional[str]
+    _language: Optional[str]
+    _count_hint: Optional[int]
+
+    def __init__(
+            self,
+            sources: List[ArgsMeArguments],
+            namespace: Optional[str] = None,
+            language: Optional[str] = None,
+            count_hint: Optional[int] = None,
+    ):
+        self._sources = sources
+        self._namespace = namespace
+        self._language = language
+        self._count_hint = count_hint
+
+    def docs_iter(self):
+        return chain(
+            source.docs_iter()
+            for source in self._sources
+        )
+
+    def docs_count(self):
+        assert (sum(
+            source.docs_count()
+            for source in self._sources
+        ) == self._count_hint)
+        return self._count_hint
+
+    def docs_cls(self):
+        assert (all(
+            source.docs_cls() == ArgsMeArgument
+            for source in self._sources
+        ))
+        return ArgsMeArgument
+
+    def docs_namespace(self):
+        assert (all(
+            source.docs_namespace() in self._namespace
+            for source in self._sources
+        ))
+        return self._namespace
+
+    def docs_lang(self):
+        assert (all(
+            source.docs_lang() == self._language
+            for source in self._sources
+        ))
         return self._language
