@@ -6,11 +6,11 @@ from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
 NAME = "argsme"
 
 SUBSETS = {
-    '2020-04-01/debateorg': (338620, "en"),
-    '2020-04-01/debatepedia': (21197, "en"),
-    '2020-04-01/debatewise': (14353, "en"),
-    '2020-04-01/idebate': (13522, "en"),
-    '2020-04-01/parliamentary': (48, "en"),
+    '2020-04-01/debateorg': (338620, "en", "debateorg.json"),
+    '2020-04-01/debatepedia': (21197, "en", "debatepedia.json"),
+    '2020-04-01/debatewise': (14353, "en", "debatewise.json"),
+    '2020-04-01/idebate': (13522, "en", "idebate.json"),
+    '2020-04-01/parliamentary': (48, "en", "parliamentary.json"),
 }
 
 
@@ -28,7 +28,7 @@ def _init():
                 Cache(
                     ZipExtract(
                         download_config[name],
-                        f"{name}.json"
+                        zip_path
                     ),
                     base_path / f"{name}.json"
                 ),
@@ -38,7 +38,7 @@ def _init():
             ),
             documentation(name)
         )
-        for name, (count_hint, language) in SUBSETS.items()
+        for name, (count_hint, language, zip_path) in SUBSETS.items()
     }
 
     registry.register(NAME, base)
