@@ -6,11 +6,11 @@ from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
 NAME = "argsme"
 
 SUBSETS = {
-    'debateorg': (338620, "en"),
-    'debatepedia': (21197, "en"),
-    'debatewise': (14353, "en"),
-    'idebate': (13522, "en"),
-    'parliamentary': (48, "en"),
+    '2020-04-01/debateorg': (338620, "en"),
+    '2020-04-01/debatepedia': (21197, "en"),
+    '2020-04-01/debatewise': (14353, "en"),
+    '2020-04-01/idebate': (13522, "en"),
+    '2020-04-01/parliamentary': (48, "en"),
 }
 
 

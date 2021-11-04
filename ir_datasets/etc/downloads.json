@@ -76,27 +76,27 @@
 },
 
 "argsme": {
-  "debateorg": {
+  "2020-04-01/debateorg": {
     "url": "https://zenodo.org/record/3734893/files/debateorg.zip?download=1",
     "size_hint": 1150846141,
     "expected_md5": "0368ee47ce0ec8bed837c7e22c024493"
   },
-  "debatepedia": {
+  "2020-04-01/debatepedia": {
     "url": "https://zenodo.org/record/3734893/files/debatepedia.zip?download=1",
     "size_hint": 184347726,
     "expected_md5": "bde8e3ed832c19ca5ed8ed1506a862e8"
   },
-  "debatewise": {
+  "2020-04-01/debatewise": {
     "url": "https://zenodo.org/record/3734893/files/debatewise.zip?download=1",
     "size_hint": 77388912,
     "expected_md5": "5e5c498a5f657ed7d02e06016e9ce3b1"
   },
-  "idebate": {
+  "2020-04-01/idebate": {
     "url": "https://zenodo.org/record/3734893/files/idebate.zip?download=1",
     "size_hint": 20241730,
     "expected_md5": "5b888c94cce740f1216c063e5e47c74c"
   },
-  "parliamentary": {
+  "2020-04-01/parliamentary": {
     "url": "https://zenodo.org/record/3734893/files/parliamentary.zip?download=1",
     "size_hint": 27319,
     "expected_md5": "c80d932c953b64fb300f13d0d93096bb"
