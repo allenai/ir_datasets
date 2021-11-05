@@ -62,6 +62,7 @@ def _init():
     # Arguments that are combined versions of other subsets.
     combined_arguments: Dict[str, ArgsMeCombinedArguments] = {
         name: ArgsMeCombinedArguments(
+            base_path / f"{name}.json",
             [arguments[subset_name] for subset_name in subset_names],
             namespace=f"{NAME}/{name}",
             language=language,

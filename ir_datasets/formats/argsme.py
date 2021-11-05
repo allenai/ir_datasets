@@ -1,5 +1,5 @@
 from enum import Enum
-from itertools import chain
+from pathlib import Path
 from typing import NamedTuple, List, Optional
 
 from ijson import items
@@ -139,6 +139,7 @@ class ArgsMeArguments(BaseDocs):
 
 
 class ArgsMeCombinedArguments(BaseDocs):
+    _path: Path
     _sources: List[ArgsMeArguments]
     _namespace: Optional[str]
     _language: Optional[str]
@@ -146,20 +147,34 @@ class ArgsMeCombinedArguments(BaseDocs):
 
     def __init__(
             self,
+            path: Path,
             sources: List[ArgsMeArguments],
             namespace: Optional[str] = None,
             language: Optional[str] = None,
             count_hint: Optional[int] = None,
     ):
+        self._path = path
         self._sources = sources
         self._namespace = namespace
         self._language = language
         self._count_hint = count_hint
 
+    def docs_path(self):
+        return self._path
+
     def docs_iter(self):
-        return chain(
-            source.docs_iter()
-            for source in self._sources
+        for source in self._sources:
+            for argument in source.docs_iter():
+                yield argument
+
+    def docs_store(self, field="id"):
+        return PickleLz4FullStore(
+            path=f"{self.docs_path()}.pklz4",
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=["id"],
+            count_hint=self._count_hint,
         )
 
     def docs_count(self):
