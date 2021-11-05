@@ -14,7 +14,7 @@ class ArgsMeStance(Enum):
     See the corresponding Java source files from the args.me project:
     https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/argument/Stance.java
     """
-    PRO = 2
+    PRO = 1
     CON = 2
 
     @staticmethod
