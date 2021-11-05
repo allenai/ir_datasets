@@ -6,7 +6,7 @@ from ijson import items
 
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices import PickleLz4FullStore
-from ir_datasets.util import Cache
+from ir_datasets.util import Cache, use_docstore
 
 
 class ArgsMeStance(Enum):
@@ -108,6 +108,7 @@ class ArgsMeDocs(BaseDocs):
     def docs_path(self):
         return self._source.path()
 
+    @use_docstore
     def docs_iter(self):
         with self._source.stream() as json_stream:
             argument_jsons = items(json_stream, "arguments.item")
@@ -162,6 +163,7 @@ class ArgsMeCombinedArguments(BaseDocs):
     def docs_path(self):
         return self._path
 
+    @use_docstore
     def docs_iter(self):
         for source in self._sources:
             for argument in source.docs_iter():

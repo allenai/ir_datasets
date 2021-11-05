@@ -51,7 +51,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/1.0-cleaned', count=382545, items={
             0: ArgsMeDoc(
                 doc_id="c67482ba-2019-04-18T13:32:05Z-00000-000",
@@ -97,7 +97,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01', count=387740, items={
             0: ArgsMeDoc(
                 doc_id="Sb38112c8-A443a9828",
@@ -143,7 +143,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01/debateorg', count=338620, items={
             0: ArgsMeDoc(
                 doc_id="Sb38112c8-A443a9828",
@@ -189,7 +189,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01/debatepedia', count=21197, items={
             0: ArgsMeDoc(
                 doc_id="S96f2396e-Aaf079b43",
@@ -235,7 +235,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01/debatewise', count=14353, items={
             0: ArgsMeDoc(
                 doc_id="S5920cdef-A982becb7",
@@ -281,7 +281,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01/idebate', count=13522, items={
             0: ArgsMeDoc(
                 doc_id="Sf9294c83-Af186e851",
@@ -327,7 +327,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
         self._test_docs('argsme/2020-04-01/parliamentary', count=48, items={
             0: ArgsMeDoc(
                 doc_id="S1f6b58eb-A5c530110",
@@ -373,7 +373,7 @@ class TestArgsMe(DatasetIntegrationTest):
                     )
                 ]
             ),
-        }, test_iter_split=False)
+        })
 
 
 if __name__ == '__main__':
