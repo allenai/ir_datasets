@@ -62,7 +62,7 @@ class ArgsMePremise(NamedTuple):
             [
                 ArgsMePremiseAnnotation.from_json(annotation)
                 for annotation in json["annotations"]
-            ],
+            ] if "annotations" in json else [],
         )
 
 
