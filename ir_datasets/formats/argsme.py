@@ -1,8 +1,8 @@
 from enum import Enum
 from itertools import chain
-from typing import NamedTuple, List, Any, Dict, Optional
+from json import load
+from typing import NamedTuple, List, Optional
 
-from ir_datasets import load
 from ir_datasets.formats import BaseDocs
 from ir_datasets.util import Cache
 
@@ -72,7 +72,6 @@ class ArgsMeArgument(NamedTuple):
     id: str
     conclusion: str
     premises: List[ArgsMePremise]
-    context: Dict[str, Any]
 
     @staticmethod
     def from_json(json: dict) -> "ArgsMeArgument":
@@ -83,7 +82,6 @@ class ArgsMeArgument(NamedTuple):
                 ArgsMePremise.from_json(premise)
                 for premise in json["premises"]
             ],
-            json["context"],
         )
 
 
