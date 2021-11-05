@@ -1,8 +1,8 @@
 from itertools import chain
 from typing import Dict
 
-from ir_datasets import Dataset, registry
-from ir_datasets.datasets.base import YamlDocumentation
+from ir_datasets import registry
+from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats.argsme import ArgsMeArguments, ArgsMeCombinedArguments
 from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
 
