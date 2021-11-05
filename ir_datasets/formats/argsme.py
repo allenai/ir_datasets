@@ -1,7 +1,8 @@
 from enum import Enum
 from itertools import chain
-from json import load
 from typing import NamedTuple, List, Optional
+
+from ijson import items
 
 from ir_datasets.formats import BaseDocs
 from ir_datasets.util import Cache
@@ -105,9 +106,10 @@ class ArgsMeArguments(BaseDocs):
 
     def docs_iter(self):
         with self._source.stream() as json_stream:
-            with load(json_stream) as arguments_json:
-                for argument_json in arguments_json:
-                    yield ArgsMeArgument.from_json(argument_json)
+            argument_jsons = items(json_stream, "arguments.item")
+            for argument_json in argument_jsons:
+                argument = ArgsMeArgument.from_json(argument_json)
+                yield argument
 
     def docs_count(self):
         return self._count_hint
