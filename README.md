@@ -238,3 +238,4 @@ Contributors to this repository:
  - Sean MacAvaney (University of Glasgow)
  - Shuo Sun (Johns Hopkins University)
  - Thomas Jänich (University of Glasgow)
+ - Jan Heinrich Reimer (Martin Luther University Halle-Wittenberg)
