@@ -44,7 +44,7 @@ class ArgsMeMode(Enum):
 
 
 class ArgsMeSourceDomain(Enum):
-    debate_org = 1
+    debateorg = 1
     debatepedia = 2
     debatewise = 3
     idebate = 4
@@ -53,7 +53,7 @@ class ArgsMeSourceDomain(Enum):
     @staticmethod
     def from_json(json: str) -> "ArgsMeSourceDomain":
         if json == "debate.org":
-            return ArgsMeSourceDomain.debate_org
+            return ArgsMeSourceDomain.debateorg
         elif json == "debatepedia":
             return ArgsMeSourceDomain.debatepedia
         elif json == "debatewise":
@@ -200,22 +200,22 @@ class ArgsMeDoc(NamedTuple):
             else None
         )
         source_text_conclusion_start = (
-            str(context_json["sourceTextConclusionStart"])
+            int(context_json["sourceTextConclusionStart"])
             if "sourceTextConclusionStart" in context_json
             else None
         )
         source_text_conclusion_end = (
-            str(context_json["sourceTextConclusionEnd"])
+            int(context_json["sourceTextConclusionEnd"])
             if "sourceTextConclusionEnd" in context_json
             else None
         )
         source_text_premise_start = (
-            str(context_json["sourceTextPremiseStart"])
+            int(context_json["sourceTextPremiseStart"])
             if "sourceTextPremiseStart" in context_json
             else None
         )
         source_text_premise_end = (
-            str(context_json["sourceTextPremiseEnd"])
+            int(context_json["sourceTextPremiseEnd"])
             if "sourceTextPremiseEnd" in context_json
             else None
         )
