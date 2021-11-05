@@ -16,8 +16,13 @@ class ArgsMeStance(Enum):
     CON = 2
 
     @staticmethod
-    def from_json(json: dict) -> "ArgsMeStance":
-        raise NotImplementedError()
+    def from_json(json: str) -> "ArgsMeStance":
+        if json == "PRO":
+            return ArgsMeStance.PRO
+        if json == "CON":
+            return ArgsMeStance.CON
+        else:
+            raise ValueError(f"Unknown stance {json}")
 
 
 class ArgsMePremiseAnnotation(NamedTuple):
@@ -31,7 +36,11 @@ class ArgsMePremiseAnnotation(NamedTuple):
 
     @staticmethod
     def from_json(json: dict) -> "ArgsMePremiseAnnotation":
-        raise NotImplementedError()
+        return ArgsMePremiseAnnotation(
+            int(json["start"]),
+            int(json["end"]),
+            str(json["source"]),
+        )
 
 
 class ArgsMePremise(NamedTuple):
@@ -41,11 +50,18 @@ class ArgsMePremise(NamedTuple):
     """
     text: str
     stance: ArgsMeStance
-    annotations: ArgsMePremiseAnnotation
+    annotations: List[ArgsMePremiseAnnotation]
 
     @staticmethod
     def from_json(json: dict) -> "ArgsMePremise":
-        raise NotImplementedError()
+        return ArgsMePremise(
+            str(json["text"]),
+            ArgsMeStance.from_json(json["stance"]),
+            [
+                ArgsMePremiseAnnotation.from_json(annotation)
+                for annotation in json["annotations"]
+            ],
+        )
 
 
 class ArgsMeArgument(NamedTuple):
@@ -60,7 +76,15 @@ class ArgsMeArgument(NamedTuple):
 
     @staticmethod
     def from_json(json: dict) -> "ArgsMeArgument":
-        raise NotImplementedError()
+        return ArgsMeArgument(
+            str(json["id"]),
+            str(json["conclusion"]),
+            [
+                ArgsMePremise.from_json(premise)
+                for premise in json["premises"]
+            ],
+            json["context"],
+        )
 
 
 class ArgsMeArguments(BaseDocs):
