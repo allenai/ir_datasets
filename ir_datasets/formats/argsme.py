@@ -5,6 +5,7 @@ from typing import NamedTuple, List, Optional
 from ijson import items
 
 from ir_datasets.formats import BaseDocs
+from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache
 
 
@@ -104,12 +105,25 @@ class ArgsMeArguments(BaseDocs):
         self._language = language
         self._count_hint = count_hint
 
+    def docs_path(self):
+        return self._source.path()
+
     def docs_iter(self):
         with self._source.stream() as json_stream:
             argument_jsons = items(json_stream, "arguments.item")
             for argument_json in argument_jsons:
                 argument = ArgsMeArgument.from_json(argument_json)
                 yield argument
+
+    def docs_store(self, field="id"):
+        return PickleLz4FullStore(
+            path=f"{self.docs_path()}.pklz4",
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=["id"],
+            count_hint=self._count_hint,
+        )
 
     def docs_count(self):
         return self._count_hint
