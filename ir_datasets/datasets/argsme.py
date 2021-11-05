@@ -3,7 +3,7 @@ from typing import Dict
 
 from ir_datasets import registry
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.formats.argsme import ArgsMeArguments, ArgsMeCombinedArguments
+from ir_datasets.formats.argsme import ArgsMeDocs, ArgsMeCombinedArguments
 from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
 
 NAME = "argsme"
@@ -42,8 +42,8 @@ def _init():
     base = Dataset(documentation('_'))
 
     # Arguments that can be loaded from Zenodo.
-    arguments: Dict[str, ArgsMeArguments] = {
-        name: ArgsMeArguments(
+    arguments: Dict[str, ArgsMeDocs] = {
+        name: ArgsMeDocs(
             Cache(
                 ZipExtract(
                     download_config[name],

@@ -7,6 +7,6 @@ from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
 from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
 from .argsme import (
-    ArgsMeArguments, ArgsMeArgument, ArgsMePremise, ArgsMeStance,
+    ArgsMeDocs, ArgsMeDoc, ArgsMePremise, ArgsMeStance,
     ArgsMePremiseAnnotation
 )

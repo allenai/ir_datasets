@@ -66,18 +66,18 @@ class ArgsMePremise(NamedTuple):
         )
 
 
-class ArgsMeArgument(NamedTuple):
+class ArgsMeDoc(NamedTuple):
     """
     See the corresponding Java source files from the args.me project:
     https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/Argument.java
     """
-    id: str
+    doc_id: str
     conclusion: str
     premises: List[ArgsMePremise]
 
     @staticmethod
-    def from_json(json: dict) -> "ArgsMeArgument":
-        return ArgsMeArgument(
+    def from_json(json: dict) -> "ArgsMeDoc":
+        return ArgsMeDoc(
             str(json["id"]),
             str(json["conclusion"]),
             [
@@ -87,7 +87,7 @@ class ArgsMeArgument(NamedTuple):
         )
 
 
-class ArgsMeArguments(BaseDocs):
+class ArgsMeDocs(BaseDocs):
     _source: Cache
     _namespace: Optional[str]
     _language: Optional[str]
@@ -112,16 +112,16 @@ class ArgsMeArguments(BaseDocs):
         with self._source.stream() as json_stream:
             argument_jsons = items(json_stream, "arguments.item")
             for argument_json in argument_jsons:
-                argument = ArgsMeArgument.from_json(argument_json)
+                argument = ArgsMeDoc.from_json(argument_json)
                 yield argument
 
-    def docs_store(self, field="id"):
+    def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
-            index_fields=["id"],
+            index_fields=["doc_id"],
             count_hint=self._count_hint,
         )
 
@@ -129,7 +129,7 @@ class ArgsMeArguments(BaseDocs):
         return self._count_hint
 
     def docs_cls(self):
-        return ArgsMeArgument
+        return ArgsMeDoc
 
     def docs_namespace(self):
         return self._namespace
@@ -140,7 +140,7 @@ class ArgsMeArguments(BaseDocs):
 
 class ArgsMeCombinedArguments(BaseDocs):
     _path: Path
-    _sources: List[ArgsMeArguments]
+    _sources: List[ArgsMeDocs]
     _namespace: Optional[str]
     _language: Optional[str]
     _count_hint: Optional[int]
@@ -148,7 +148,7 @@ class ArgsMeCombinedArguments(BaseDocs):
     def __init__(
             self,
             path: Path,
-            sources: List[ArgsMeArguments],
+            sources: List[ArgsMeDocs],
             namespace: Optional[str] = None,
             language: Optional[str] = None,
             count_hint: Optional[int] = None,
@@ -167,13 +167,13 @@ class ArgsMeCombinedArguments(BaseDocs):
             for argument in source.docs_iter():
                 yield argument
 
-    def docs_store(self, field="id"):
+    def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
-            index_fields=["id"],
+            index_fields=["doc_id"],
             count_hint=self._count_hint,
         )
 
@@ -186,10 +186,10 @@ class ArgsMeCombinedArguments(BaseDocs):
 
     def docs_cls(self):
         assert (all(
-            source.docs_cls() == ArgsMeArgument
+            source.docs_cls() == ArgsMeDoc
             for source in self._sources
         ))
-        return ArgsMeArgument
+        return ArgsMeDoc
 
     def docs_namespace(self):
         assert (all(
