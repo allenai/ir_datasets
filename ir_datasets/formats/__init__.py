@@ -6,3 +6,7 @@ from .trec import TrecDocs, TrecQueries, TrecXmlQueries, TrecColonQueries, TrecQ
 from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
 from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
+from .argsme import (
+    ArgsMeDocs, ArgsMeDoc, ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain,
+    ArgsMePremise, ArgsMePremiseAnnotation, ArgsMeAspect
+)

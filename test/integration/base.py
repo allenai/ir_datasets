@@ -260,6 +260,8 @@ self._test_qlogs({repr(dataset_name)}, count={count}, items={self._repr_namedtup
                 self.assertRegex(v_b, v_a)
             elif isinstance(v_a, tuple) and isinstance(v_b, tuple):
                 self._assert_namedtuple(v_a, v_b)
+            elif isinstance(v_a, list) and isinstance(v_b, list):
+                self._assert_namedtuple(v_a, v_b)
             else:
                 self.assertEqual(v_a, v_b)
 

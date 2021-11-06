@@ -1,0 +1,120 @@
+_:
+  pretty_name: "args.me"
+  desc: '
+<p>
+The args.me corpus is one of the largest argument resources available
+and contains arguments crawled from debate platforms and parliament discussions.
+</p>
+<ul>
+<li><a href="https://args.me/">args.me Search Engine</a></li>
+<li><a href="https://webis.de/downloads/publications/papers/wachsmuth_2017f.pdf">args.me Search Engine Paper</a></li>
+<li><a href="https://webis.de/downloads/publications/papers/ajjour_2019a.pdf">args.me Corpus Paper</a></li>
+<li><a href="https://git.webis.de/code-research/arguana/args/args-framework">GitLab Repository</a></li>
+</ul>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+1.0:
+  pretty_name: "args.me version 1.0"
+  desc: '
+<p>
+Corpus version 1.0 with 387 606 arguments crawled from Debatewise, IDebate.org, Debatepedia, Debate.org.
+It was released on July 9, 2019 on <a href="https://zenodo.org/record/3274636">Zenodo</a>.
+</p>
+<p>
+This collection is licensed with the
+<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+Individual rights to the content still apply.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+1.0-cleaned:
+  pretty_name: "args.me version 1.0 cleaned"
+  desc: '
+<p>
+Corpus version 1.0-cleaned with 382 545 arguments crawled from Debatewise, IDebate.org, Debatepedia, Debate.org.
+This version contains the same arguments as version 1.0, but cleaned as described in the corresponding publication.
+It was released on October 27, 2020 on <a href="https://zenodo.org/record/4139439">Zenodo</a>.
+</p>
+<p>
+This collection is licensed with the
+<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+Individual rights to the content still apply.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01:
+  pretty_name: "args.me"
+  desc: '
+<p>
+Corpus version 2020-04-01 with 387 740 arguments crawled from Debatewise, IDebate.org, Debatepedia, Debate.org,
+and from Canadian Parliament discussions.
+It was released on April 1, 2020 on <a href="https://zenodo.org/record/3734893">Zenodo</a>.
+</p>
+<p>
+This collection is licensed with the
+<a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+Individual rights to the content still apply.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01/debateorg:
+  desc: '
+<p>
+Subset of the 338 620 arguments from args.me version 2020-04-01 that were crawled from the debate portal Debate.org.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01/debatepedia:
+  desc: '
+<p>
+Subset of the 21 197 arguments from args.me version 2020-04-01 that were crawled from the debate portal Debatepedia.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01/debatewise:
+  desc: '
+<p>
+Subset of the 14 353 arguments from args.me version 2020-04-01 that were crawled from the debate portal Debatewise.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01/idebate:
+  desc: '
+<p>
+Subset of the 13 522 arguments from args.me version 2020-04-01 that were crawled from the debate portal IDebate.org.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
+
+2020-04-01/parliamentary:
+  desc: '
+<p>
+Subset of the 48 arguments from args.me version 2020-04-01 that were crawled from Canadian Parliament discussions.
+</p>
+'
+  bibtex_ids:
+    - 'Wachsmuth2017Argument'
+    - 'Ajjour2019Acquisition'
