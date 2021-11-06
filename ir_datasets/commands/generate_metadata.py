@@ -73,7 +73,7 @@ def main(args):
             dataset = ir_datasets.load(dsid)
             brk = False
             try:
-                _, dataset_metadata = dataset2metadata((dsid, data.get(dsid)))
+                _, dataset_metadata = dataset2metadata((dsid, data.get(dsid, {})))
                 if dataset_metadata is not None:
                     data[dsid] = dataset_metadata
             except KeyboardInterrupt:
