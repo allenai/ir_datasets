@@ -4,8 +4,7 @@ from pathlib import Path
 from re import sub
 from typing import NamedTuple, List, Optional
 
-from ijson import items
-
+from ir_datasets import lazy_libs
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, use_docstore
@@ -314,8 +313,9 @@ class ArgsMeDocs(BaseDocs):
 
     @use_docstore
     def docs_iter(self):
+        ijson = lazy_libs.ijson()
         with self._source.stream() as json_stream:
-            argument_jsons = items(json_stream, "arguments.item")
+            argument_jsons = ijson.items(json_stream, "arguments.item")
             for argument_json in argument_jsons:
                 argument = ArgsMeDoc.from_json(argument_json)
                 yield argument
