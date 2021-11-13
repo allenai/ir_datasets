@@ -63,8 +63,8 @@ class WapoDocs(BaseDocs):
     def __init__(self, dlc):
         self._dlc = dlc
 
-    def docs_path(self):
-        return self._dlc.path()
+    def docs_path(self, force=True):
+        return self._dlc.path(force)
 
     def docs_cls(self):
         return WapoDoc
@@ -137,7 +137,8 @@ class WapoDocs(BaseDocs):
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME

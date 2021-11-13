@@ -5,7 +5,7 @@ from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract, TarExtractAll
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries, BaseQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -46,8 +46,8 @@ class ClueWeb09Docs(WarcDocs):
         self.dirs = dirs or ['ClueWeb09_Arabic_1', 'ClueWeb09_Chinese_1', 'ClueWeb09_Chinese_2', 'ClueWeb09_Chinese_3', 'ClueWeb09_Chinese_4', 'ClueWeb09_English_1', 'ClueWeb09_English_2', 'ClueWeb09_English_3', 'ClueWeb09_English_4', 'ClueWeb09_English_5', 'ClueWeb09_English_6', 'ClueWeb09_English_7', 'ClueWeb09_English_8', 'ClueWeb09_English_9', 'ClueWeb09_English_10', 'ClueWeb09_French_1', 'ClueWeb09_German_1', 'ClueWeb09_Italian_1', 'ClueWeb09_Japanese_1', 'ClueWeb09_Japanese_2', 'ClueWeb09_Korean_1', 'ClueWeb09_Portuguese_1', 'ClueWeb09_Spanish_1', 'ClueWeb09_Spanish_2']
         self._docs_warc_file_counts_cache = None
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     def _docs_iter_source_files(self):
         files = []
@@ -102,12 +102,9 @@ class ClueWeb09Docs(WarcDocs):
         return NAME
 
 
-class CatBQrelFilter:
+class CatBQrelFilter(BaseQrels):
     def __init__(self, qrels_handler):
         self._qrels_handler = qrels_handler
-
-    def __getattr__(self, attr):
-        return getattr(self._qrels_handler, attr)
 
     def qrels_iter(self):
         catb_segs = {'en0000','en0001','en0002','en0003','en0004','en0005','en0006','en0007','en0008','en0009','en0010','en0011','enwp00','enwp01','enwp02','enwp03'}
@@ -116,8 +113,14 @@ class CatBQrelFilter:
             if seg_id in catb_segs:
                 yield qrel
 
-    def qrels_handler(self):
-        return self
+    def qrels_defs(self):
+        return self._qrels_handler.qrels_defs()
+
+    def qrels_cls(self):
+        return self._qrels_handler.qrels_cls()
+
+    def qrels_path(self):
+        return self._qrels_handler.qrels_path()
 
 
 def _init():

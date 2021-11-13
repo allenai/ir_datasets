@@ -28,7 +28,7 @@ def _init():
     dev_qrels = ir_datasets.registry['msmarco-passage/dev'].qrels_handler()
 
     for lang in ['es', 'fr', 'pt', 'it', 'id', 'de', 'ru', 'zh']:
-        collection = TsvDocs(dlc[f'{lang}/docs'], namespace=f'mmarco/{lang}', lang=lang, count_hint=8_841_823)
+        collection = TsvDocs(dlc[f'{lang}/docs'], namespace=f'mmarco/{lang}', lang=lang, count_hint=ir_datasets.util.count_hint(f'{NAME}/{lang}'))
         subsets[f'{lang}'] = Dataset(collection, documentation(f'{lang}'))
         subsets[f'{lang}/train'] = Dataset(
             collection,

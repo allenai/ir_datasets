@@ -77,11 +77,12 @@ class CodeSearchNetDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=2070536,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME
@@ -208,31 +209,32 @@ def _init():
 
     dlcs = {lang: ZipExtractCache(dlc[lang], base_path/lang) for lang in langs}
     all_dlcs = [dlcs[lang] for lang in langs]
+    collection = CodeSearchNetDocs(all_dlcs)
     base = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         documentation('_'),
     )
     subsets['train'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'train'),
         CodeSearchNetQrels(all_dlcs, 'train'),
         documentation('train'),
     )
     subsets['valid'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'valid'),
         CodeSearchNetQrels(all_dlcs, 'valid'),
         documentation('valid'),
     )
     subsets['test'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         CodeSearchNetQueries(all_dlcs, 'test'),
         CodeSearchNetQrels(all_dlcs, 'test'),
         documentation('test'),
     )
     challenge_queries = CodeSearchNetChallengeQueries(dlc['challenge/queries'])
     subsets['challenge'] = Dataset(
-        CodeSearchNetDocs(all_dlcs),
+        collection,
         challenge_queries,
         CodeSearchNetChallengeQrels(dlc['challenge/qrels'], challenge_queries),
         documentation('challenge'),

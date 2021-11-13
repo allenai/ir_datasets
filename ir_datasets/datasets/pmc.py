@@ -98,7 +98,7 @@ class PmcDocs(BaseDocs):
                     body = '\n'.join(body.itertext()) if body is not None else ''
                     yield PmcDoc(doc_id, journal, title, abstract, body)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return self._path
 
     def docs_store(self, field='doc_id'):
@@ -118,7 +118,8 @@ class PmcDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'
@@ -130,8 +131,8 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 
-    v1_collection = PmcDocs([dlc['v1/source0'], dlc['v1/source1'], dlc['v1/source2'], dlc['v1/source3']], ir_datasets.util.home_path()/NAME/'v1'/'corpus', duplicate_dlcs=[dlc['v1/dup1'], dlc['v1/dup2']], count_hint=733111)
-    v2_collection = PmcDocs([dlc['v2/source0'], dlc['v2/source1'], dlc['v2/source2'], dlc['v2/source3']], ir_datasets.util.home_path()/NAME/'v2'/'corpus', count_hint=1255260)
+    v1_collection = PmcDocs([dlc['v1/source0'], dlc['v1/source1'], dlc['v1/source2'], dlc['v1/source3']], ir_datasets.util.home_path()/NAME/'v1'/'corpus', duplicate_dlcs=[dlc['v1/dup1'], dlc['v1/dup2']], count_hint=ir_datasets.util.count_hint(f'{NAME}/v1'))
+    v2_collection = PmcDocs([dlc['v2/source0'], dlc['v2/source1'], dlc['v2/source2'], dlc['v2/source3']], ir_datasets.util.home_path()/NAME/'v2'/'corpus', count_hint=ir_datasets.util.count_hint(f'{NAME}/v2'))
     base = Dataset(documentation('_'))
 
     subsets['v1'] = Dataset(v1_collection, documentation('v1'))

@@ -12,7 +12,7 @@ import ir_datasets
 from ir_datasets import util
 
 
-__all__ = ['IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'RelativePath', 'GzipExtract', 'ZipExtract', 'ZipExtractCache', 'StringFile']
+__all__ = ['IterStream', 'Cache', 'TarExtract', 'TarExtractAll', 'RelativePath', 'GzipExtract', 'Lz4Extract', 'ZipExtract', 'ZipExtractCache', 'StringFile', 'PackageDataFile']
 
 
 _logger = ir_datasets.log.easy()
@@ -79,8 +79,9 @@ class Cache:
         with self._path.open('rb') as f:
             yield f
 
-    def path(self):
-        self.verify()
+    def path(self, force=True):
+        if force:
+            self.verify()
         return self._path
 
 
@@ -112,8 +113,8 @@ class TarExtractAll:
         self._compression = compression
         self._path_globs = path_globs
 
-    def path(self):
-        if not os.path.exists(self._extract_path):
+    def path(self, force=True):
+        if force and not os.path.exists(self._extract_path):
             try:
                 with self._streamer.stream() as stream, tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}') as tarf, \
                      _logger.duration('extracting from tar file'):
@@ -139,8 +140,8 @@ class RelativePath:
         self._streamer = streamer
         self._path = path
 
-    def path(self):
-        return os.path.join(self._streamer.path(), self._path)
+    def path(self, force=True):
+        return os.path.join(self._streamer.path(force), self._path)
 
     @contextlib.contextmanager
     def stream(self):
@@ -199,13 +200,27 @@ class Bz2Extract:
             yield bz2.BZ2File(stream)
 
 
+class Lz4Extract:
+    def __init__(self, streamer):
+        self._streamer = streamer
+
+    def __getattr__(self, attr):
+        return getattr(self._streamer, attr)
+
+    @contextlib.contextmanager
+    def stream(self):
+        lz4 = ir_datasets.lazy_libs.lz4_frame()
+        with self._streamer.stream() as stream:
+            yield lz4.frame.open(stream, 'rb')
+
+
 class ZipExtract:
     def __init__(self, dlc, zip_path):
         self.dlc = dlc
         self.zip_path = zip_path
 
-    def path(self):
-        return self.dlc.path()
+    def path(self, force=True):
+        return self.dlc.path(force)
 
     @contextlib.contextmanager
     def stream(self):
@@ -221,8 +236,8 @@ class ZipExtractCache:
         self.dlc = dlc
         self.extract_path = extract_path
 
-    def path(self):
-        if not os.path.exists(self.extract_path):
+    def path(self, force=True):
+        if force and not os.path.exists(self.extract_path):
             try:
                 with ZipFile(self.dlc.path()) as zipf:
                     zipf.extractall(self.extract_path)
@@ -243,9 +258,24 @@ class StringFile:
         self.contents = contents
         self._path = path
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     @contextlib.contextmanager
     def stream(self):
         yield io.BytesIO(self.contents)
+
+
+class PackageDataFile:
+    def __init__(self, path, package='ir_datasets'):
+        self._package = package
+        self._path = path
+
+    def path(self, force=True):
+        return self._path
+
+    @contextlib.contextmanager
+    def stream(self):
+        import pkgutil
+        data = pkgutil.get_data(self._package, self._path)
+        yield io.BytesIO(data)

@@ -99,11 +99,12 @@ class FairTrecDocs(BaseDocs):
             lookup_field=field,
             size_hint=30735927055,
             index_fields=['doc_id'],
-            count_hint=6280328,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME

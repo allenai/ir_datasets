@@ -100,7 +100,6 @@ class Lz4PickleLookup:
         self._key_idx = doc_cls._fields.index(key_field)
         self._index_fields = list(index_fields)
         self._doc_cls = doc_cls
-        os.makedirs(self._path, exist_ok=True)
         self._bin = None
         self._bin_path = os.path.join(self._path, 'bin')
         self._pos = None
@@ -108,15 +107,12 @@ class Lz4PickleLookup:
         self._idx = None
         self._idx_path = os.path.join(self._path, f'idx.{safe_str(self._key_field)}')
         self._key_field_prefix = key_field_prefix
+        self._meta_path = os.path.join(self._path, 'bin.meta')
 
         # check that the fields match
-        meta_path = os.path.join(self._path, 'bin.meta')
         meta_info = ' '.join(doc_cls._fields)
-        if not os.path.exists(meta_path):
-            with open(meta_path, 'wt') as f:
-                f.write(meta_info)
-        else:
-            with open(meta_path, 'rt') as f:
+        if os.path.exists(self._meta_path):
+            with open(self._meta_path, 'rt') as f:
                 existing_meta = f.read()
             assert existing_meta == meta_info, f"fields do not match; you may need to re-build this store {path}"
 
@@ -159,6 +155,13 @@ class Lz4PickleLookup:
 
     @contextmanager
     def transaction(self):
+        if not os.path.exists(self._path):
+            os.makedirs(self._path, exist_ok=True)
+        if not os.path.exists(self._meta_path):
+            meta_info = ' '.join(self._doc_cls._fields)
+            with open(self._meta_path, 'wt') as f:
+                f.write(meta_info)
+
         with Lz4PickleTransaction(self) as trans:
             yield trans
 
@@ -179,7 +182,7 @@ class Lz4PickleLookup:
             binf.seek(pos)
             yield _read_next(binf, self._doc_cls)
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     def __iter__(self):
@@ -273,7 +276,10 @@ class PickleLz4FullStore(Docstore):
             if self.size_hint:
                 ir_datasets.util.check_disk_free(self.path, self.size_hint)
             with self.lookup.transaction() as trans, _logger.duration('building docstore'):
-                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc', total=self.count_hint):
+                count_hint = self.count_hint # either a callable or int or None
+                if callable(count_hint):
+                    count_hint = count_hint() # allows for deferred loading of metadata; should return an int or None
+                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc', total=count_hint):
                     trans.add(doc)
 
     def built(self):

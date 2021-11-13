@@ -1,8 +1,9 @@
+import json
 import contextlib
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.util import GzipExtract, DownloadConfig, _DownloadConfig
+from ir_datasets.util import GzipExtract, Lz4Extract, DownloadConfig, _DownloadConfig, MetadataProvider, MetadataComponent
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import TsvDocs, CLIRMatrixQueries, CLIRMatrixQrels
 
@@ -28,15 +29,15 @@ def _init():
 
     base_path = ir_datasets.util.home_path()/NAME
 
+    base_dlc = DownloadConfig.context(NAME, base_path)
+
     def _dlc_init():
-        import json, gzip
-        dlc = DownloadConfig.context(NAME, base_path)
-        with gzip.open(dlc['downloads'].path(), 'rb') as f:
-            clirmatrix_dlc = _DownloadConfig(contents = json.load(f))
+        with GzipExtract(base_dlc['downloads']).stream() as f:
+            clirmatrix_dlc = _DownloadConfig(contents=json.load(f))
         return clirmatrix_dlc
 
     _dlc = ir_datasets.util.Lazy(_dlc_init)
-
+    metadata = MetadataProvider(MetadataProvider.json_loader(Lz4Extract(base_dlc['metadata'])))
 
     _docs_cache = {}
     def _docs_initializer(lang_code):
@@ -46,7 +47,7 @@ def _init():
             _docs_cache[lang_code] = docs
         return _docs_cache[lang_code]
 
-    def _initializer(args, dlc_context=None):
+    def _initializer(dsid, args, dlc_context=None):
         docs_lang, queries_lang, split = args
         docs = _docs_initializer(docs_lang)
         components = [docs]
@@ -57,19 +58,21 @@ def _init():
             qrels = CLIRMatrixQrels(qrel_dlc, QRELS_DEFS)
             queries = CLIRMatrixQueries(qrel_dlc, queries_lang)
             components += [queries, qrels]
-        return Dataset(*components)
+        result = Dataset(*components)
+        result = Dataset(MetadataComponent(dsid, result, metadata), result)
+        return result
 
-    def _multi8_initializer(args):
-        return _initializer(args, 'clirmatrix_multi8')
+    def _multi8_initializer(dsid, args):
+        return _initializer(dsid, args, 'clirmatrix_multi8')
 
-    def _bi139_base_initializer(args):
-        return _initializer(args, 'clirmatrix_bi139_base')
+    def _bi139_base_initializer(dsid, args):
+        return _initializer(dsid, args, 'clirmatrix_bi139_base')
 
-    def _bi139_full_initializer(args):
-        return _initializer(args, 'clirmatrix_bi139_full')
+    def _bi139_full_initializer(dsid, args):
+        return _initializer(dsid, args, 'clirmatrix_bi139_full')
 
-    def _corpus_initializer(args):
-        return _initializer((args[0], None, None))
+    def _corpus_initializer(dsid, args):
+        return _initializer(dsid, (args[0], None, None))
 
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 

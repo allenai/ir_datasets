@@ -1,3 +1,4 @@
+import re
 import io
 import os
 import gzip
@@ -64,8 +65,8 @@ class GovDocs(BaseDocs):
         super().__init__()
         self.docs_dlc = docs_dlc
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     def docs_iter(self):
         return iter(self.docs_store())
@@ -80,72 +81,66 @@ class GovDocs(BaseDocs):
         return GovDoc
 
     def _docs_ctxt_iter_gov(self, gov2f):
-        if isinstance(gov2f, (str, Path)):
-            gov2f = gzip.open(gov2f, 'rb')
-        doc = None
-        for line in gov2f:
-            if line == b'<DOC>\n':
-                assert doc is None
-                doc = line
-            elif line == b'</DOC>\n':
-                doc += line
-                yield self._process_gov_doc(doc)
-                doc = None
-            elif doc is not None:
-                doc += line
+        with ExitStack() as stack:
+            if isinstance(gov2f, (str, Path)):
+                gov2f = stack.enter_context(gzip.open(gov2f, 'rb'))
+            inp = bytearray()
+            # incrementally read the input file with read1 -- this ends up being more than twice
+            # as fast as reading the input line-by-line and searching for <DOC> and </DOC> lines
+            inp.extend(gov2f.read1())
+            START, END = b'<DOC>\n', b'</DOC>\n'
+            while inp != b'':
+                inp, next_doc = self._extract_next_block(inp, START, END)
+                while next_doc is not None:
+                    yield self._process_gov_doc(next_doc)
+                    inp, next_doc = self._extract_next_block(inp, START, END)
+                inp.extend(gov2f.read1())
 
     def _process_gov_doc(self, raw_doc):
-        state = 'DOCNO'
-        doc_id = None
-        doc_hdr = None
-        doc_body = b''
-        with io.BytesIO(raw_doc) as f:
-            for line in f:
-                if state == 'DOCNO':
-                    if line.startswith(b'<DOCNO>'):
-                        doc_id = line[len(b'<DOCNO>'):-len(b'</DOCNO>')-1].strip().decode()
-                        state = 'DOCHDR'
-                elif state == 'DOCHDR':
-                    if line == b'<DOCHDR>\n':
-                        doc_hdr = b''
-                    elif line == b'</DOCHDR>\n':
-                        state = 'BODY'
-                    elif doc_hdr is not None:
-                        doc_hdr += line
-                elif state == 'BODY':
-                    if line == b'</DOC>\n':
-                        state = 'DONE'
-                    else:
-                        doc_body += line
-
+        # read the file by exploiting the sequence of blocks in the document -- this ends
+        # up being several times faster than reading line-by-line
+        raw_doc, doc_id = self._extract_next_block(raw_doc, b'<DOCNO>', b'</DOCNO>\n')
+        assert doc_id is not None
+        doc_id = doc_id.strip().decode()
+        doc_body, doc_hdr = self._extract_next_block(raw_doc, b'<DOCHDR>\n', b'</DOCHDR>\n')
+        assert doc_hdr is not None
         for encoding in ['utf8', 'ascii', 'latin1']:
             try:
                 doc_url, doc_hdr = doc_hdr.decode(encoding).split('\n', 1)
                 break
             except UnicodeDecodeError:
                 continue
-        headers = [line.split(':', 1) for line in doc_hdr.split('\n') if ':' in line]
-        headers = {k.lower(): v for k, v in headers}
+        content_type_match = re.search('^content-type:(.*)$', doc_hdr, re.I|re.M)
         content_type = 'text/html' # default to text/html
-        if 'content-type' in headers:
-            content_type = headers['content-type']
-        if ';' in content_type:
-            content_type, _ = content_type.split(';', 1)
+        if content_type_match:
+            content_type = content_type_match.group(1)
+            if ';' in content_type:
+                content_type, _ = content_type.split(';', 1)
         content_type = content_type.strip()
-        return GovDoc(doc_id, doc_url, doc_hdr, doc_body, content_type)
+        return GovDoc(doc_id, doc_url, doc_hdr, bytes(doc_body), content_type)
+
+    def _extract_next_block(self, inp, START, END):
+        # if START and END appear in inp, then return (everything after END in inp, the content between START and END),
+        # or if they don't appear, return (inp, None).
+        i_start = inp.find(START)
+        i_end = inp.find(END)
+        if i_start == -1 or i_end == -1:
+            return inp, None
+        return inp[i_end+len(END):], inp[i_start+len(START):i_end]
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=1247753,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):
-        return sum(self._docs_file_counts().values())
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME

@@ -1,8 +1,11 @@
 import hashlib
 import json
 import types
+import itertools
 from typing import NamedTuple
 import ir_datasets
+
+_logger = ir_datasets.log.easy()
 
 class GenericDoc(NamedTuple):
     doc_id: str
@@ -35,7 +38,7 @@ class BaseDocs:
     def __getattr__(self, attr):
         if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
             # Return method bound to this instance
-            return types.MethodType(self.EXTENSIONS[attr], self, type(self))
+            return types.MethodType(self.EXTENSIONS[attr], self)
         raise AttributeError(attr)
 
     def docs_iter(self):
@@ -64,7 +67,7 @@ class BaseQueries:
     def __getattr__(self, attr):
         if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
             # Return method bound to this instance
-            return types.MethodType(self.EXTENSIONS[attr], self, type(self))
+            return types.MethodType(self.EXTENSIONS[attr], self)
         raise AttributeError(attr)
 
     def queries_iter(self):
@@ -155,6 +158,29 @@ class BaseDocPairs:
         return self
 
 
+class BaseQlogs:
+    PREFIX = 'qlogs_'
+    EXTENSIONS = {}
+
+    def __getattr__(self, attr):
+        if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
+            # Return method bound to this instance
+            return types.MethodType(self.EXTENSIONS[attr], self)
+        raise AttributeError(attr)
+
+    def qlogs_iter(self):
+        raise NotImplementedError()
+
+    def qlogs_cls(self):
+        raise NotImplementedError()
+
+    def qlogs_count(self):
+        raise NotImplementedError()
+
+    def qlogs_handler(self):
+        return self
+
+
 BaseQueries.EXTENSIONS['queries_dict'] = lambda x: {q.query_id: q for q in x.iter_queries()}
 
 
@@ -171,7 +197,7 @@ BaseQrels.EXTENSIONS['qrels_dict'] = qrels_dict
 def hasher(iter_fn, hashfn=hashlib.md5):
     def wrapped(self):
         h = hashfn()
-        for record in getattr(self, iter_fn):
+        for record in getattr(self, iter_fn)():
             js = [[field, value] for field, value in zip(record._fields, record)]
             h.update(json.dumps(js).encode())
         return h.hexdigest()
@@ -185,12 +211,58 @@ BaseScoredDocs.EXTENSIONS['scoreddocs_hash'] = hasher('scoreddocs_iter')
 BaseDocPairs.EXTENSIONS['docpairs_hash'] = hasher('docpairs_iter')
 
 
+def _calc_metadata(iter_fn, metadata_fields=(), count_by_value_field=None):
+    def wrapped(self, verbose=True, hashfn=hashlib.sha256):
+        count = 0
+        it = getattr(self, iter_fn)()
+        if verbose:
+            it = _logger.pbar(it)
+        field_lens = {f: 0 for f in metadata_fields}
+        field_prefixes = {}
+        count_by_field_values = {}
+        for record in it:
+            count += 1
+            for f in metadata_fields:
+                field = getattr(record, f)
+                field_lens[f] = max(field_lens[f], len(field.encode()))
+                if f not in field_prefixes:
+                    field_prefixes[f] = field
+                elif len(field_prefixes[f]) > 0:
+                    field_prefixes[f] = ''.join(x[0] for x in itertools.takewhile(lambda x: x[0] == x[1], zip(field_prefixes[f], field)))
+            if count_by_value_field is not None:
+                count_by_value_field_value = getattr(record, count_by_value_field)
+                if count_by_value_field_value not in count_by_field_values:
+                    count_by_field_values[count_by_value_field_value] = 0
+                count_by_field_values[count_by_value_field_value] += 1
+        result = {'count': count}
+        if metadata_fields:
+            result['fields'] = {}
+        for f in metadata_fields:
+            result['fields'][f] = {
+                'max_len': field_lens[f],
+                'common_prefix': field_prefixes[f],
+            }
+        if count_by_value_field is not None:
+            result.setdefault('fields', {}).setdefault(count_by_value_field, {})['counts_by_value'] = count_by_field_values
+        return result
+    return wrapped
+
+
+BaseDocs.EXTENSIONS['docs_calc_metadata'] = _calc_metadata('docs_iter', ('doc_id',))
+BaseQueries.EXTENSIONS['queries_calc_metadata'] = _calc_metadata('queries_iter')
+BaseQrels.EXTENSIONS['qrels_calc_metadata'] = _calc_metadata('qrels_iter', count_by_value_field='relevance')
+BaseScoredDocs.EXTENSIONS['scoreddocs_calc_metadata'] = _calc_metadata('scoreddocs_iter')
+BaseDocPairs.EXTENSIONS['docpairs_calc_metadata'] = _calc_metadata('docpairs_iter')
+BaseQlogs.EXTENSIONS['qlogs_calc_metadata'] = _calc_metadata('qlogs_iter')
+
+
 class DocstoreBackedDocs(BaseDocs):
     """
     A Docs implementation that defers all operations to a pre-built docstore instance.
     """
     def __init__(self, docstore_lazy, docs_cls=GenericDoc, namespace=None, lang=None):
         self._docstore_lazy = docstore_lazy
+        self._loaded_docstore = False
         self._docs_cls = docs_cls
         self._docs_namespace = namespace
         self._docs_lang = lang
@@ -199,7 +271,8 @@ class DocstoreBackedDocs(BaseDocs):
         return iter(self._docstore_lazy())
 
     def docs_count(self):
-        return self._docstore_lazy().count()
+        if self._loaded_docstore and self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_cls(self):
         return self._docs_cls
@@ -211,7 +284,9 @@ class DocstoreBackedDocs(BaseDocs):
         return self._docs_lang
 
     def docs_store(self):
-        return self._docstore_lazy()
+        result = self._docstore_lazy()
+        self._loaded_docstore = True
+        return result
 
 
 class DocSourceSeekableIter:
