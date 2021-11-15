@@ -12,7 +12,11 @@ from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS, TREC_DL_QRELS_DEFS
+from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS, TREC_DL_QRELS_DEFS
+
+QRELS_DEFS = {
+    1: 'Based on mapping from v1 of MS MARCO'
+}
 
 _logger = ir_datasets.log.easy()
 

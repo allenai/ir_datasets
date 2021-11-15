@@ -3,11 +3,15 @@ import ir_datasets
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
+from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
 
 NAME = 'msmarco-document'
 
 _logger = ir_datasets.log.easy()
+
+QRELS_DEFS = {
+    1: 'Document contains a passage labeled as relevant in msmarco-passage'
+}
 
 TREC_DL_QRELS_DEFS = {
     3: "Perfectly relevant: Document is dedicated to the query, it is worthy of being a top result "

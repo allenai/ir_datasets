@@ -10,12 +10,16 @@ from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
+from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
 from ir_datasets.datasets.msmarco_document import TREC_DL_QRELS_DEFS
 
 _logger = ir_datasets.log.easy()
 
 NAME = 'msmarco-document-v2'
+
+QRELS_DEFS = {
+    1: 'Document contains a passage labeled as relevant in msmarco-passage'
+}
 
 
 class MsMarcoV2Document(NamedTuple):
