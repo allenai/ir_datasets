@@ -2738,6 +2738,36 @@
     "url": "https://webis.de/events/touche-20/touche2020-task2-relevance-withbaseline.qrels",
     "size_hint": 58522,
     "expected_md5": "b230436beb3a9eecbeb19c84ee6c855c"
+  },
+  "2021/task-1/queries": {
+    "url": "https://webis.de/events/touche-21/topics-task-1-only-titles-2021.zip",
+    "size_hint": 1350,
+    "expected_md5": "61bad9cf6bc713a81297cd95cf9e156f"
+  },
+  "2021/task-1/qrels-relevance": {
+    "url": "https://webis.de/events/touche-21/touche-task1-51-100-relevance.qrels",
+    "size_hint": 99736,
+    "expected_md5": "c899bcab9b00fdd28f77d08a1d26298a"
+  },
+  "2021/task-1/qrels-quality": {
+    "url": "https://webis.de/events/touche-21/touche-task1-51-100-quality.qrels",
+    "size_hint": 100087,
+    "expected_md5": "76b4e8348bde353167ce52ffa598a6b1"
+  },
+  "2021/task-2/queries": {
+    "url": "https://webis.de/events/touche-21/topics-task-2-2021.zip",
+    "size_hint": 15532,
+    "expected_md5": "0c06079b327ecd2b4c5971bd17bd0aa3"
+  },
+  "2021/task-2/qrels-relevance": {
+    "url": "https://webis.de/events/touche-21/touche-task2-51-100-relevance.qrels",
+    "size_hint": 68548,
+    "expected_md5": "062bea3b8307ae481876fe31253092b5"
+  },
+  "2021/task-2/qrels-quality": {
+    "url": "https://webis.de/events/touche-21/touche-task2-51-100-quality.qrels",
+    "size_hint": 68548,
+    "expected_md5": "970b48e0c057afaee17a7832100ab67c"
   }
 },
 
