@@ -1,7 +1,8 @@
-from typing import NamedTuple, Any, Optional
+from codecs import getreader
+from typing import NamedTuple, Any, Optional, Dict
 from xml.etree.ElementTree import parse, Element, ElementTree
 
-from ir_datasets.formats import BaseQueries
+from ir_datasets.formats import BaseQueries, BaseQrels, TrecQrel
 
 
 class ToucheQuery(NamedTuple):
@@ -72,3 +73,35 @@ class ToucheQueries(BaseQueries):
 
     def queries_lang(self):
         return self._language
+
+
+class ToucheTrecQrels(BaseQrels):
+    _source: Any
+    _definitions: Dict[int, str]
+
+    def __init__(self, source: Any, definitions: Dict[int, str]):
+        self._source = source
+        self._definitions = definitions
+
+    def qrels_path(self):
+        return self._source.path()
+
+    def qrels_iter(self):
+        with self._source.stream() as file:
+            file = getreader("utf8")(file)
+            for line in file:
+                if line == "\n":
+                    continue  # Ignore blank lines.
+                cols = line.rstrip().split()
+                if len(cols) != 4:
+                    raise RuntimeError(
+                        f"Expected 4 columns but got {len(cols)}."
+                    )
+                qid, it, did, score = cols
+                yield TrecQrel(qid, did, int(float(score)), it)
+
+    def qrels_cls(self):
+        return TrecQrel
+
+    def qrels_defs(self):
+        return self._definitions
