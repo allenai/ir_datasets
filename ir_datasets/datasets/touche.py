@@ -5,7 +5,7 @@ from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import ToucheQueries, TrecQrels, ToucheTrecQrels
 from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
 
-NAME = 'touche'
+NAME = "touche"
 
 CACHE: Dict[str, Tuple[str]] = {
     "2020/task-1/qrels": ("qrels",),
