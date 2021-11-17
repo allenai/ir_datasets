@@ -173,7 +173,7 @@ def _init():
                 cache_files["2021/task-1/qrels-relevance"],
                 QRELS_DEFS_2021_TASK_1_RELEVANCE,
             ),
-            documentation("2021/task-1-relevance"),
+            documentation("2021/task-1/relevance"),
         ),
         f"{NAME}/2021/task-1/quality": Dataset(
             registry["argsme/2020-04-01"].docs_handler(),
@@ -182,7 +182,7 @@ def _init():
                 cache_files["2021/task-1/qrels-quality"],
                 QRELS_DEFS_2021_TASK_1_QUALITY,
             ),
-            documentation("2021/task-1-quality"),
+            documentation("2021/task-1/quality"),
         ),
         f"{NAME}/2021/task-2/relevance": Dataset(
             registry["clueweb12"].docs_handler(),
@@ -191,7 +191,7 @@ def _init():
                 cache_files["2021/task-2/qrels-relevance"],
                 QRELS_DEFS_2021_TASK_2_RELEVANCE,
             ),
-            documentation("2021/task-2-relevance"),
+            documentation("2021/task-2/relevance"),
         ),
         f"{NAME}/2021/task-2/quality": Dataset(
             registry["clueweb12"].docs_handler(),
@@ -200,7 +200,7 @@ def _init():
                 cache_files["2021/task-2/qrels-quality"],
                 QRELS_DEFS_2021_TASK_2_QUALITY,
             ),
-            documentation("2021/task-2-quality"),
+            documentation("2021/task-2/quality"),
         ),
     }
     for name, dataset in task_sub_datasets.items():
