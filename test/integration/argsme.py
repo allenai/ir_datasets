@@ -7,9 +7,9 @@ from ir_datasets.formats import ArgsMeDoc, ArgsMeStance, ArgsMePremise, \
 from test.integration.base import DatasetIntegrationTest
 
 class TestArgsMe(DatasetIntegrationTest):
+    # noinspection PyTypeChecker
     def test_docs(self):
-        # noinspection PyTypeChecker
-        self._test_docs('argsme/1.0', count=387692, items={
+        self._test_docs("argsme/1.0", count=387692, items={
             0: ArgsMeDoc(
                 doc_id="c67482ba-2019-04-18T13:32:05Z-00000-000",
                 conclusion="Contraceptive Forms for High School Students",
@@ -78,7 +78,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=None,
             ),
         })
-        self._test_docs('argsme/1.0-cleaned', count=382545, items={
+        self._test_docs("argsme/1.0-cleaned", count=382545, items={
             0: ArgsMeDoc(
                 doc_id="c67482ba-2019-04-18T13:32:05Z-00000-000",
                 conclusion="Contraceptive Forms for High School Students",
@@ -146,7 +146,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=None,
             ),
         })
-        self._test_docs('argsme/2020-04-01', count=387740, items={
+        self._test_docs("argsme/2020-04-01", count=387740, items={
             0: ArgsMeDoc(
                 doc_id="Sb38112c8-A443a9828",
                 conclusion="school",
@@ -221,7 +221,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.person,
             ),
         })
-        self._test_docs('argsme/2020-04-01/debateorg', count=338620, items={
+        self._test_docs("argsme/2020-04-01/debateorg", count=338620, items={
             0: ArgsMeDoc(
                 doc_id="Sb38112c8-A443a9828",
                 conclusion="school",
@@ -296,7 +296,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.discussion,
             ),
         })
-        self._test_docs('argsme/2020-04-01/debatepedia', count=21197, items={
+        self._test_docs("argsme/2020-04-01/debatepedia", count=21197, items={
             0: ArgsMeDoc(
                 doc_id="S96f2396e-Aaf079b43",
                 conclusion="Mine Ban Treaty (Ottawa Treaty)",
@@ -364,7 +364,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.discussion,
             ),
         })
-        self._test_docs('argsme/2020-04-01/debatewise', count=14353, items={
+        self._test_docs("argsme/2020-04-01/debatewise", count=14353, items={
             0: ArgsMeDoc(
                 doc_id="S5920cdef-A982becb7",
                 conclusion="placebo effect and phenylthiamine",
@@ -445,7 +445,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.discussion,
             ),
         })
-        self._test_docs('argsme/2020-04-01/idebate', count=13522, items={
+        self._test_docs("argsme/2020-04-01/idebate", count=13522, items={
             0: ArgsMeDoc(
                 doc_id="Sf9294c83-Af186e851",
                 conclusion="the War in Iraq was Worth the Cost",
@@ -526,7 +526,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.discussion,
             ),
         })
-        self._test_docs('argsme/2020-04-01/parliamentary', count=48, items={
+        self._test_docs("argsme/2020-04-01/parliamentary", count=48, items={
             0: ArgsMeDoc(
                 doc_id="S1f6b58eb-A5c530110",
                 conclusion=compile("I want them to know that their braids, their dread.{165} boardroom, and yes, even here on Parliament Hill\."),
@@ -616,5 +616,5 @@ class TestArgsMe(DatasetIntegrationTest):
         })
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
