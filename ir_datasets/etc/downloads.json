@@ -2714,20 +2714,20 @@
     "size_hint": 8768,
     "expected_md5": "9605104435165a6b01b737464596eba4"
   },
-  "2020/task-1/qrels-argsme-1.0": {
+  "2020/task-1/qrels": {
+    "url": "https://webis.de/events/touche-21/touche2020-task1-relevance-args-me-corpus-version-2020-04-01-corrected.qrels",
+    "size_hint": 62058,
+    "expected_md5": "6a645e2ebd4f1d6c44da4d9509624598"
+  },
+  "2020/task-1/qrels-argsme-1.0-uncorrected": {
     "url": "https://webis.de/events/touche-20/touche2020-task1-relevance-args-me-corpus-version-1.qrels",
     "size_hint": 145201,
     "expected_md5": "10f043e086818f9159ac37a9ebe5ce5d"
   },
-  "2020/task-1/qrels-argsme-2020-04-01": {
+  "2020/task-1/qrels-argsme-2020-04-01-uncorrected": {
     "url": "https://webis.de/events/touche-20/touche2020-task1-relevance-args-me-corpus-version-2020-04-01.qrels",
     "size_hint": 66283,
     "expected_md5": "6a27d7123423540664ccfe0391e4e417"
-  },
-  "2020/task-1/qrels-argsme-2020-04-01-corrected": {
-    "url": "https://webis.de/events/touche-21/touche2020-task1-relevance-args-me-corpus-version-2020-04-01-corrected.qrels",
-    "size_hint": 62058,
-    "expected_md5": "6a645e2ebd4f1d6c44da4d9509624598"
   },
   "2020/task-2/queries": {
     "url": "https://webis.de/events/touche-20/topics-task-2.zip",
