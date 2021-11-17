@@ -46,12 +46,12 @@ class ToucheQueries(BaseQueries):
             for element in root:
                 element: Element
                 assert element.tag == "topic"
-                number = int(element.findtext("number"))
-                title = element.findtext("title")
+                number = int(element.findtext("number").strip())
+                title = element.findtext("title").strip()
 
                 if self._has_description:
-                    description = element.findtext("description")
-                    narrative = element.findtext("narrative")
+                    description = element.findtext("description").strip()
+                    narrative = element.findtext("narrative").strip()
                     yield ToucheQuery(
                         str(number),
                         title,
