@@ -87,8 +87,13 @@ def _init():
     cache_files.update(cache_zip_files)
 
     # Define and create base dataset.
-    base = Dataset(documentation("_"))
-    registry.register(NAME, base)
+    base_datasets = {
+        NAME: Dataset(documentation("_")),
+        f"{NAME}/2020": Dataset(documentation("2020")),
+        f"{NAME}/2021": Dataset(documentation("2021")),
+    }
+    for name, dataset in base_datasets.items():
+        registry.register(name, dataset)
 
     # Define and create task base datasets.
     task_base_datasets = {
@@ -201,7 +206,7 @@ def _init():
     for name, dataset in task_sub_datasets.items():
         registry.register(name, dataset)
 
-    return base, task_base_datasets, task_sub_datasets
+    return base_datasets, task_base_datasets, task_sub_datasets
 
 
 _init()
