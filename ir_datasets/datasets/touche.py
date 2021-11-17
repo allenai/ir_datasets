@@ -25,12 +25,12 @@ CACHE_ZIP: Dict[str, Tuple[str, str]] = {
 }
 
 QRELS_DEFS_2020_TASK_1: Dict[int, str] = {
-    -2: "spam",
-    1: "low relevance",
-    2: "medium low relevance",
-    3: "medium relevance",
-    4: "medium high relevance",
-    5: "high relevance",
+    -2: "spam, non-argument",
+    1: "very low relevance",
+    2: "low relevance",
+    3: "moderate relevance",
+    4: "high relevance",
+    5: "very high relevance",
 }
 QRELS_DEFS_2020_TASK_2: Dict[int, str] = {
     0: "not relevant",
