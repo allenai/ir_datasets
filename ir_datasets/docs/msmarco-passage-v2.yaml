@@ -31,6 +31,10 @@ dev1:
 <p>
 Official dev1 set with 3,903 queries.
 </p>
+<p>
+Note that that qrels in this dataset are not directly human-assessed; labels from <a class="ds-ref">msmarco-passage</a>
+are mapped to documents via URL, these documents are re-passaged, and then the best approximate match is identified.
+</p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']
   official_measures: ['RR@10']
@@ -40,6 +44,10 @@ dev2:
 <p>
 Official dev2 set with 4,281 queries.
 </p>
+<p>
+Note that that qrels in this dataset are not directly human-assessed; labels from <a class="ds-ref">msmarco-passage</a>
+are mapped to documents via URL, these documents are re-passaged, and then the best approximate match is identified.
+</p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']
   official_measures: ['RR@10']
@@ -48,6 +56,10 @@ train:
   desc: '
 <p>
 Official train set with 277,144 queries.
+</p>
+<p>
+Note that that qrels in this dataset are not directly human-assessed; labels from <a class="ds-ref">msmarco-passage</a>
+are mapped to documents via URL, these documents are re-passaged, and then the best approximate match is identified.
 </p>
 '
   bibtex_ids: ['Bajaj2016Msmarco']

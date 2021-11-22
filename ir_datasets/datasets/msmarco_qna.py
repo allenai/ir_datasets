@@ -91,7 +91,7 @@ class MsMarcoQnAManager:
 
     def _internal_docs_store(self):
         if self._docs_store is None:
-            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, MsMarcoQnADoc, 'doc_id', ['doc_id'], count_hint=9048606)
+            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, MsMarcoQnADoc, 'doc_id', ['doc_id'], count_hint=ir_datasets.util.count_hint(NAME))
         return self._docs_store
 
     def build(self):
@@ -277,8 +277,9 @@ class _ManagedDlc:
         with open(self._path, 'rb') as f:
             yield f
 
-    def path(self):
-        self._manager.build()
+    def path(self, force=True):
+        if force:
+            self._manager.build()
         return self._path
 
 

@@ -87,8 +87,9 @@ class _ManagedDlc:
         with open(self._path, 'rb') as f:
             yield f
 
-    def path(self):
-        self._manager.build()
+    def path(self, force=True):
+        if force:
+            self._manager.build()
         return self._path
 
 
@@ -117,7 +118,7 @@ def _init():
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TsvDocs(GzipExtract(dlc['docs']), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True, docstore_size_hint=12827215492, count_hint=21015324)
+    collection = TsvDocs(GzipExtract(dlc['docs']), doc_cls=DprW100Doc, namespace=NAME, lang='en', skip_first_line=True, docstore_size_hint=12827215492, count_hint=ir_datasets.util.count_hint(NAME))
     base = Dataset(
         collection,
         documentation('_'))

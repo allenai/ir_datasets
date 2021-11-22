@@ -69,7 +69,7 @@ class ZPickleKeyValueStore:
                 return val
         raise KeyError(f'field={field} not found for key={key}')
 
-    def path(self):
+    def path(self, force=True):
         return self._path
 
     def __iter__(self):
@@ -168,5 +168,5 @@ class ZPickleDocStore:
     def __iter__(self):
         return iter(self._store)
 
-    def path(self):
+    def path(self, force=True):
         return self._path

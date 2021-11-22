@@ -1,6 +1,5 @@
 import re
 import os
-import numpy as np
 import contextlib
 import gzip
 import io
@@ -13,7 +12,11 @@ from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS, TREC_DL_QRELS_DEFS
+from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS, TREC_DL_QRELS_DEFS
+
+QRELS_DEFS = {
+    1: 'Based on mapping from v1 of MS MARCO'
+}
 
 _logger = ir_datasets.log.easy()
 
@@ -64,7 +67,8 @@ class MsMarcoV2Passages(BaseDocs):
         return MsMarcoV2DocStore(self)
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME
@@ -72,8 +76,8 @@ class MsMarcoV2Passages(BaseDocs):
     def docs_lang(self):
         return 'en'
 
-    def docs_path(self):
-        return self._dlc.path()
+    def docs_path(self, force=True):
+        return self._dlc.path(force)
 
 
 class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
@@ -81,7 +85,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         super().__init__(docs_handler.docs_cls(), 'doc_id')
         self.docs_handler = docs_handler
         self.dlc = docs_handler._dlc
-        self.base_path = docs_handler.docs_path() + '.extracted'
+        self.base_path = docs_handler.docs_path(force=False) + '.extracted'
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
         self.size_hint = 60880127751
@@ -116,6 +120,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
     def build(self):
         if self.built():
             return
+        np = ir_datasets.lazy_libs.numpy()
         ir_datasets.util.check_disk_free(self.base_path, self.size_hint)
         with _logger.pbar_raw('extracting source documents', total=70, unit='file') as pbar, \
              self.dlc.stream() as stream, \
@@ -154,6 +159,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
 
 class MsMarcoV2PassageIter:
     def __init__(self, docstore, slice):
+        self.np = ir_datasets.lazy_libs.numpy()
         self.docstore = docstore
         self.slice = slice
         self.next_index = 0
@@ -181,7 +187,7 @@ class MsMarcoV2PassageIter:
                     self.current_file_end_idx = self.current_file_start_idx + (os.path.getsize(source_file + '.pos') // 4)
                     first = False
                 self.current_file = open(source_file, 'rb')
-                self.current_pos_mmap = np.memmap(source_file + '.pos', dtype=np.uint32)
+                self.current_pos_mmap = self.np.memmap(source_file + '.pos', dtype=self.np.uint32)
             else:
                 # jump to the position of the next document
                 pos = self.current_pos_mmap[self.slice.start - self.current_file_start_idx]

@@ -118,12 +118,12 @@ class MedlineDocs(BaseDocs):
                     if el.tag in ('PubmedArticle', 'MedlineCitation'):
                         el.clear() # so we don't need to keep it all in memory
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/self._name/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -139,7 +139,8 @@ class MedlineDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'
@@ -169,12 +170,12 @@ class AacrAscoDocs(BaseDocs):
                 abstract = file_reader.read().strip()
                 yield MedlineDoc(doc_id, title, abstract)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/'2017'/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -188,7 +189,8 @@ class AacrAscoDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'
@@ -207,12 +209,12 @@ class ConcatDocs(BaseDocs):
         for docs in self._docs:
             yield from docs.docs_iter()
 
-    def docs_path(self):
-        return f'{self._docs[0].docs_path()}.concat'
+    def docs_path(self, force=True):
+        return f'{self._docs[0].docs_path(force)}.concat'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -230,7 +232,8 @@ class ConcatDocs(BaseDocs):
         return self._docs[0].docs_lang()
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
 
 def _init():
@@ -241,7 +244,7 @@ def _init():
 
     base = Dataset(documentation('_'))
 
-    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])], count_hint=3672808)
+    collection04 = MedlineDocs('2004', [GzipExtract(dlc['2004/a']), GzipExtract(dlc['2004/b']), GzipExtract(dlc['2004/c']), GzipExtract(dlc['2004/d'])], count_hint=ir_datasets.util.count_hint(f'{NAME}/2004'))
 
     subsets['2004'] = Dataset(collection04, documentation('2004'))
 
@@ -261,7 +264,7 @@ def _init():
     collection17 = ConcatDocs([
         AacrAscoDocs(dlc['2017/aacr_asco_extra']),
         MedlineDocs('2017', [dlc['2017/part1'], dlc['2017/part2'], dlc['2017/part3'], dlc['2017/part4'], dlc['2017/part5']]),
-    ], count_hint=26740025)
+    ], count_hint=ir_datasets.util.count_hint(f'{NAME}/2017'))
     subsets['2017'] = Dataset(collection17, documentation('2017'))
 
     subsets['2017/trec-pm-2017'] = Dataset(

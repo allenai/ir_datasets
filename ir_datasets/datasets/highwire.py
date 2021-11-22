@@ -93,17 +93,17 @@ class HighwireDocs(BaseDocs):
                     spans = tuple(HighwireSpan(s, l, lxml_html.document_fromstring(b'<OUTER>' + t + b'</OUTER>').text_content()) for s, l, t in spans)
                     yield HighwireDoc(doc_id, source, title, spans)
 
-    def docs_path(self):
+    def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/'corpus'
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=162259,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_cls(self):
@@ -113,7 +113,8 @@ class HighwireDocs(BaseDocs):
         return NAME
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_lang(self):
         return 'en'

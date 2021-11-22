@@ -118,8 +118,8 @@ class _TsvBase:
         self._datatype = datatype
         self._skip_first_line = skip_first_line
 
-    def _path(self):
-        return self._dlc.path()
+    def _path(self, force=True):
+        return self._dlc.path(force)
 
     def _iter(self):
         stop = None
@@ -138,8 +138,8 @@ class TsvDocs(_TsvBase, BaseDocs):
         self._docstore_size_hint = docstore_size_hint
         self._count_hint = count_hint
 
-    def docs_path(self):
-        return self._path()
+    def docs_path(self, force=True):
+        return self._path(force)
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -151,7 +151,7 @@ class TsvDocs(_TsvBase, BaseDocs):
     def docs_store(self, field='doc_id'):
         fields = (self._doc_store_index_fields or ['doc_id'])
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,

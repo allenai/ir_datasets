@@ -9,7 +9,7 @@ from typing import NamedTuple, Tuple
 import contextlib
 import ir_datasets
 from ir_datasets.util import TarExtract, TarExtractAll, RelativePath, DownloadConfig, Cache, IterStream
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries, GenericQuery, TrecScoredDocs, BaseQueries, TsvDocPairs, BaseQrels, BaseScoredDocs, TsvDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -85,7 +85,7 @@ class ConcatScoreddocs(BaseScoredDocs):
         for q in self._scoreddocs:
             yield from q.scoreddocs_iter()
 
-    def scoreddocs_path(self):
+    def scoreddocs_path(self, force=True):
         return None
 
     def scoreddocs_cls(self):
@@ -111,7 +111,7 @@ class TripClickPartialDoc(NamedTuple):
     url: str
 
 
-class TripClickQlogs:
+class TripClickQlogs(BaseQlogs):
     def __init__(self, dlc):
         self.dlc = dlc
 
@@ -135,9 +135,6 @@ class TripClickQlogs:
                         tuple(items)
                     )
 
-    def qlogs_handler(self):
-        return self
-
     def qlogs_cls(self):
         return TripClickQlog
 
@@ -152,8 +149,8 @@ class DocPairGenerator:
         self._queries = queries
         self._cache_path = cache_path
 
-    def path(self):
-        if not os.path.exists(self._cache_path):
+    def path(self, force=True):
+        if force and not os.path.exists(self._cache_path):
             _logger.info('tripclick includes docpairs in an expanded format (with raw text). Linking these records back to the query and doc IDs.')
             SPACES = re.compile(r'\s+')
             doc_map = {}
@@ -241,7 +238,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection = TrecDocs(dlc['benchmark'], parser='tut', path_globs=['**/docs_grp_*.txt'], namespace=NAME, lang='en', count_hint=1523878)
+    collection = TrecDocs(dlc['benchmark'], parser='tut', path_globs=['**/docs_grp_*.txt'], namespace=NAME, lang='en', count_hint=ir_datasets.util.count_hint(NAME))
     topics_and_qrels = TarExtractAll(dlc['benchmark'], base_path/"topics_and_qrels", path_globs=['**/topics.*.txt', '**/qrels.*.txt'])
     val_runs = TarExtractAll(dlc['dlfiles'], base_path/"val_runs", path_globs=['**/run.trip.BM25.*.val.txt'])
     test_runs = TarExtractAll(dlc['dlfiles_runs_test'], base_path/"test_runs", path_globs=['**/run.trip.BM25.*.test.txt'])
@@ -251,7 +248,7 @@ def _init():
         documentation('_'))
 
     subsets['logs'] = Dataset(
-        TsvDocs(Cache(FixAllarticles(TarExtract(dlc['logs'], 'logs/allarticles.txt')), base_path/'allarticles-fixed.tsv'), doc_cls=TripClickPartialDoc, lang='en'),
+        TsvDocs(Cache(FixAllarticles(TarExtract(dlc['logs'], 'logs/allarticles.txt')), base_path/'allarticles-fixed.tsv'), doc_cls=TripClickPartialDoc, lang='en', count_hint=ir_datasets.util.count_hint(f'{NAME}/logs')),
         TripClickQlogs(TarExtractAll(dlc['logs'], base_path/'logs', path_globs=['**/*.json'])),
         documentation('logs'))
 

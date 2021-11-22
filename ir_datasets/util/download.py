@@ -181,8 +181,8 @@ class LocalDownload(BaseDownload):
             self._path.parent.mkdir(parents=True, exist_ok=True)
         self._message = message
 
-    def path(self):
-        if not self._path.exists():
+    def path(self, force=True):
+        if force and not self._path.exists():
             if self._message:
                 _logger.info(self._message)
             raise FileNotFoundError(self._path)
@@ -216,12 +216,14 @@ class Download:
         self._path = None
         self._size_hint = size_hint
 
-    def path(self):
+    def path(self, force=True):
         if self._path is not None:
             return self._path
 
         if self._cache_path is not None:
             download_path = self._cache_path
+            if not force:
+                return download_path
             if os.path.exists(download_path) and download_path != os.devnull:
                 self._path = download_path
                 return self._path
@@ -229,6 +231,7 @@ class Download:
             tmpfile = tempfile.NamedTemporaryFile(delete=False, dir=util.tmp_path())
             atexit.register(_cleanup_tmp, tmpfile)
             download_path = tmpfile.name
+            # must force in this case, even if user asks not to
 
         if self.dua is not None and self.dua not in _ENCOUNTERD_DUAS:
             _logger.info(self.dua)
