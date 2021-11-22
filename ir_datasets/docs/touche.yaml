@@ -43,7 +43,7 @@ _:
     from a focused crawl of online debate portals (<a class="ds-ref">argsme/2020-04-01</a>).
     </p>
     <p>
-    Documents are judged based on their general topical relevance and for argument quality dimensions.
+    Documents are judged based on their general topical relevance.
     </p>
     <ul>
     <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
@@ -90,7 +90,7 @@ _:
     from the ClueWeb12 that help to answer the comparative question.
     </p>
     <p>
-    Documents are judged based on three dimensions: document relevance, sufficient argumentative support, credibility.
+    Documents are judged based on their general topical relevance.
     </p>
     <ul>
     <li><a href="https://webis.de/events/touche-20/shared-task-2.html">Task 2 website</a></li>
