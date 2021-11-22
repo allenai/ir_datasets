@@ -195,12 +195,10 @@ _:
   pretty_name: "Touché 2021 Task 2: Argument Retrieval for Comparative Questions (Quality)"
   desc: |
     <p>
-    Version of <a class="ds-ref">touche/2021/task-2</a> with judgements based on rhetorical quality,
+    Version of <a class="ds-ref">touche/2021/task-2</a>with judgements based on rhetorical quality,
     i.e., "well-writtenness" of the document:
-    (1) whether a document contains arguments (i.e., argumentative support is provided)
-    and whether the text has a good style of speech (formal language is preferred over informal),
-    (2) whether the text has a proper sentence structure and is easy to read and follow,
-    whether it can be well understood,
+    (1) whether the text has a good style of speech (formal language is preferred over informal),
+    (2) whether the text has a proper sentence structure and is easy to read,
     (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
     </p>
     <ul>
