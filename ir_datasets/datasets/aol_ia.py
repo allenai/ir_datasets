@@ -8,7 +8,7 @@ from hashlib import md5
 import ir_datasets
 from typing import NamedTuple, Tuple
 from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract, finialized_file
-from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs
+from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 _logger = ir_datasets.log.easy()
@@ -45,7 +45,7 @@ class AolIaDoc(NamedTuple):
     ia_url: str
 
 
-class AolQlogs:
+class AolQlogs(BaseQlogs):
     def __init__(self, dlc):
         self.dlc = dlc
 
@@ -58,9 +58,6 @@ class AolQlogs:
                     yield pickle.load(fin)
             except EOFError:
                 pass
-
-    def qlogs_handler(self):
-        return self
 
     def qlogs_cls(self):
         return AolQlog
@@ -80,8 +77,9 @@ class _ManagedDlc:
         with open(self._path, 'rb') as f:
             yield f
 
-    def path(self):
-        self._manager.build()
+    def path(self, force=True):
+        if force:
+            self._manager.build()
         return self._path
 
 
@@ -101,7 +99,7 @@ class AolManager:
 
     def _internal_docs_store(self):
         if self._docs_store is None:
-            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, AolIaDoc, 'doc_id', ['doc_id'], count_hint=1525535)
+            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, AolIaDoc, 'doc_id', ['doc_id'], count_hint=ir_datasets.util.count_hint(NAME))
         return self._docs_store
 
     def _build_docs(self):

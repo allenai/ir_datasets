@@ -74,8 +74,8 @@ class TrecDocs(BaseDocs):
         if expected_file_count is not None:
             assert self._path_globs is not None, "expected_file_count only supported with path_globs"
 
-    def docs_path(self):
-        return self._docs_dlc.path()
+    def docs_path(self, force=True):
+        return self._docs_dlc.path(force)
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -195,7 +195,7 @@ class TrecDocs(BaseDocs):
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{self.docs_path()}.pklz4',
+            path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -205,7 +205,8 @@ class TrecDocs(BaseDocs):
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return self._docs_namespace

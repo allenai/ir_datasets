@@ -3,6 +3,7 @@ import contextlib
 import itertools
 from pathlib import Path
 import ir_datasets
+from ir_datasets.formats import BaseQueries, BaseQrels, BaseScoredDocs, BaseDocPairs
 
 
 _logger = ir_datasets.log.easy()
@@ -22,27 +23,27 @@ class Dataset:
     def __getattr__(self, attr):
         if attr == 'docs' and self.has_docs():
             if 'docs' not in self._beta_apis:
-                self._beta_apis['docs'] = _BetaPythonApiDocs(self.docs_handler())
+                self._beta_apis['docs'] = _BetaPythonApiDocs(self)
             return self._beta_apis['docs']
         if attr == 'queries' and self.has_queries():
             if 'queries' not in self._beta_apis:
-                self._beta_apis['queries'] = _BetaPythonApiQueries(self.queries_handler())
+                self._beta_apis['queries'] = _BetaPythonApiQueries(self)
             return self._beta_apis['queries']
         if attr == 'qrels' and self.has_qrels():
             if 'qrels' not in self._beta_apis:
-                self._beta_apis['qrels'] = _BetaPythonApiQrels(self.qrels_handler())
+                self._beta_apis['qrels'] = _BetaPythonApiQrels(self)
             return self._beta_apis['qrels']
         if attr == 'scoreddocs' and self.has_scoreddocs():
             if 'scoreddocs' not in self._beta_apis:
-                self._beta_apis['scoreddocs'] = _BetaPythonApiScoreddocs(self.scoreddocs_handler())
+                self._beta_apis['scoreddocs'] = _BetaPythonApiScoreddocs(self)
             return self._beta_apis['scoreddocs']
         if attr == 'docpairs' and self.has_docpairs():
             if 'docpairs' not in self._beta_apis:
-                self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self.docpairs_handler())
+                self._beta_apis['docpairs'] = _BetaPythonApiDocpairs(self)
             return self._beta_apis['docpairs']
         if attr == 'qlogs' and self.has_qlogs():
             if 'qlogs' not in self._beta_apis:
-                self._beta_apis['qlogs'] = _BetaPythonApiQlogs(self.qlogs_handler())
+                self._beta_apis['qlogs'] = _BetaPythonApiQlogs(self)
             return self._beta_apis['qlogs']
         for cons in self._constituents:
             if hasattr(cons, attr):
@@ -63,8 +64,10 @@ class Dataset:
             supplies.append('docpairs')
         if self.has_qlogs():
             supplies.append('qlogs')
-        supplies = ', '.join(supplies)
-        return f'Dataset({supplies})'
+        if hasattr(self, 'dataset_id'):
+            return f'Dataset(id={repr(self.dataset_id())}, provides={repr(supplies)})'
+        else:
+            return f'Dataset(provides={repr(supplies)})'
 
     def __dir__(self):
         result = set(dir(super()))
@@ -72,23 +75,28 @@ class Dataset:
             result |= set(dir(cons))
         return list(result)
 
+    def has(self, etype: ir_datasets.EntityType) -> bool:
+        etype = ir_datasets.EntityType(etype) # validate & allow strings
+        return hasattr(self, f'{etype.value}_handler')
+
     def has_docs(self):
-        return hasattr(self, 'docs_handler')
+        return self.has(ir_datasets.EntityType.docs)
 
     def has_queries(self):
-        return hasattr(self, 'queries_handler')
+        return self.has(ir_datasets.EntityType.queries)
 
     def has_qrels(self):
-        return hasattr(self, 'qrels_handler')
+        return self.has(ir_datasets.EntityType.qrels)
 
     def has_scoreddocs(self):
-        return hasattr(self, 'scoreddocs_handler')
+        return self.has(ir_datasets.EntityType.scoreddocs)
 
     def has_docpairs(self):
-        return hasattr(self, 'docpairs_handler')
+        return self.has(ir_datasets.EntityType.docpairs)
 
     def has_qlogs(self):
-        return hasattr(self, 'qlogs_handler')
+        return self.has(ir_datasets.EntityType.qlogs)
+
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):
@@ -124,6 +132,10 @@ class _BetaPythonApiDocs:
         else:
             yield from self._docstore.get_many_iter(doc_ids)
 
+    @property
+    def metadata(self):
+        return self._handler.docs_metadata()
+
 
 class _BetaPythonApiQueries:
     def __init__(self, handler):
@@ -139,9 +151,14 @@ class _BetaPythonApiQueries:
         return f'BetaPythonApiQueries({repr(self._handler)})'
 
     def __len__(self):
-        if self._query_lookup is None:
-            self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
-        return len(self._query_lookup)
+        result = None
+        if hasattr(self._handler, 'queries_count'):
+            result = self._handler.queries_count()
+        if result is None:
+            if self._query_lookup is None:
+                self._query_lookup = {q.query_id: q for q in self._handler.queries_iter()}
+            result = len(self._query_lookup)
+        return result
 
     def lookup(self, query_ids):
         if self._query_lookup is None:
@@ -159,6 +176,10 @@ class _BetaPythonApiQueries:
             for qid in query_ids:
                 if qid in self._query_lookup:
                     yield self._query_lookup[qid]
+
+    @property
+    def metadata(self):
+        return self._handler.queries_metadata()
 
 
 class _BetaPythonApiQrels:
@@ -180,9 +201,18 @@ class _BetaPythonApiQrels:
         return self._qrels_dict
 
     def __len__(self):
-        if self._qrels_dict is None:
-            self._qrels_dict = self._handler.qrels_dict()
-        return sum(len(x) for x in self._qrels_dict.values())
+        result = None
+        if hasattr(self._handler, 'qrels_count'):
+            result = self._handler.qrels_count()
+        if result is None:
+            if self._qrels_dict is None:
+                self._qrels_dict = self._handler.qrels_dict()
+            result = sum(len(x) for x in self._qrels_dict.values())
+        return result
+
+    @property
+    def metadata(self):
+        return self._handler.qrels_metadata()
 
 
 class _BetaPythonApiScoreddocs:
@@ -196,6 +226,18 @@ class _BetaPythonApiScoreddocs:
     def __repr__(self):
         return f'BetaPythonApiScoreddocs({repr(self._handler)})'
 
+    def __len__(self):
+        result = None
+        if hasattr(self._handler, 'scoreddocs_count'):
+            result = self._handler.scoreddocs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.scoreddocs_iter())
+        return result
+
+    @property
+    def metadata(self):
+        return self._handler.scoreddocs_metadata()
+
 
 class _BetaPythonApiDocpairs:
     def __init__(self, handler):
@@ -207,6 +249,18 @@ class _BetaPythonApiDocpairs:
 
     def __repr__(self):
         return f'BetaPythonApiDocpairs({repr(self._handler)})'
+
+    def __len__(self):
+        result = None
+        if hasattr(self._handler, 'docpairs_count'):
+            result = self._handler.docpairs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.docpairs_iter())
+        return result
+
+    @property
+    def metadata(self):
+        return self._handler.docpairs_metadata()
 
 
 class _BetaPythonApiQlogs:
@@ -221,17 +275,23 @@ class _BetaPythonApiQlogs:
         return f'BetaPythonApiQlogs({repr(self._handler)})'
 
     def __len__(self):
-        return self._handler.qlogs_count()
+        result = None
+        if hasattr(self._handler, 'qlogs_count'):
+            result = self._handler.qlogs_count()
+        if result is None:
+            result = sum(1 for _ in self._handler.qlogs_iter())
+        return result
+
+    @property
+    def metadata(self):
+        return self._handler.qlogs_metadata()
 
 
-class FilteredQueries:
+class FilteredQueries(BaseQueries):
     def __init__(self, queries_handler, lazy_qids, mode='include'):
         self._queries_handler = queries_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._queries_handler, attr)
 
     def queries_iter(self):
         qids = self._lazy_qids()
@@ -247,14 +307,11 @@ class FilteredQueries:
         return self
 
 
-class FilteredQrels:
+class FilteredQrels(BaseQrels):
     def __init__(self, qrels_handler, lazy_qids, mode='include'):
         self._qrels_handler = qrels_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._qrels_handler, attr)
 
     def qrels_iter(self):
         qids = self._lazy_qids()
@@ -266,18 +323,18 @@ class FilteredQrels:
             if operator(query):
                 yield query
 
+    def qrels_defs(self):
+        return self._qrels_handler.qrels_defs()
+
     def qrels_handler(self):
         return self
 
 
-class FilteredScoredDocs:
+class FilteredScoredDocs(BaseScoredDocs):
     def __init__(self, scoreddocs_handler, lazy_qids, mode='include'):
         self._scoreddocs_handler = scoreddocs_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._scoreddocs_handler, attr)
 
     def scoreddocs_iter(self):
         qids = self._lazy_qids()
@@ -293,14 +350,11 @@ class FilteredScoredDocs:
         return self
 
 
-class FilteredDocPairs:
+class FilteredDocPairs(BaseDocPairs):
     def __init__(self, docpairs_handler, lazy_qids, mode='include'):
         self._docpairs_handler = docpairs_handler
         self._lazy_qids = lazy_qids
         self._mode = mode
-
-    def __getattr__(self, attr):
-        return getattr(self._docpairs_handler, attr)
 
     def docpairs_iter(self):
         qids = self._lazy_qids()
@@ -350,8 +404,8 @@ class ExpectedFile:
         self._expected_md5 = expected_md5
         self._instructions = instructions
 
-    def path(self):
-        if not self._path.exists():
+    def path(self, force=True):
+        if force and not self._path.exists():
             self._path.parent.mkdir(parents=True, exist_ok=True)
             inst = '\n\n' + self._instructions.format(path=self._path) if self._instructions else ''
             raise IOError(f"{self._path} does not exist.{inst}")

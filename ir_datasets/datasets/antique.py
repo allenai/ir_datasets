@@ -33,7 +33,7 @@ def _init():
     documentation = YamlDocumentation('docs/antique.yaml')
     base_path = ir_datasets.util.home_path() / NAME
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
-    collection = TsvDocs(dlc['docs'], namespace=NAME, lang='en', count_hint=403_666)
+    collection = TsvDocs(dlc['docs'], namespace=NAME, lang='en', count_hint=ir_datasets.util.count_hint(NAME))
 
     subsets = {}
     for subset in ('train', 'test'):

@@ -45,8 +45,8 @@ class CranfieldDocs(BaseDocs):
         super().__init__()
         self.docs_dlc = docs_dlc
 
-    def docs_path(self):
-        return self.docs_dlc.path()
+    def docs_path(self, force=True):
+        return self.docs_dlc.path(force)
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -79,11 +79,12 @@ class CranfieldDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=1400,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace():
         return NAME

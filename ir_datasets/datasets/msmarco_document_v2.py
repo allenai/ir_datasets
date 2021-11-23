@@ -10,12 +10,16 @@ from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
-from ir_datasets.datasets.msmarco_passage import DUA, QRELS_DEFS, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
+from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
 from ir_datasets.datasets.msmarco_document import TREC_DL_QRELS_DEFS
 
 _logger = ir_datasets.log.easy()
 
 NAME = 'msmarco-document-v2'
+
+QRELS_DEFS = {
+    1: 'Document contains a passage labeled as relevant in msmarco-passage'
+}
 
 
 class MsMarcoV2Document(NamedTuple):
@@ -70,19 +74,20 @@ class MsMarcoV2Docs(BaseDocs):
         #     It also reduces the complexity of the code, as it does not require a new docstore
         #     implementation for this dataset, and is just doing the normal procedure.
         return PickleLz4FullStore(
-            path=f'{self._dlc.path()}.pklz4',
+            path=f'{self._dlc.path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
             key_field_prefix='msmarco_doc_', # cut down on storage by removing prefix in lookup structure
             size_hint=66500029281,
-            count_hint=11959635,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
         # return MsMArcoV2DocStore(self)
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME

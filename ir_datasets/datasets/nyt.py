@@ -36,8 +36,8 @@ class NytDocs(BaseDocs):
     def __init__(self, dlc):
         self._dlc = dlc
 
-    def docs_path(self):
-        return self._dlc.path()
+    def docs_path(self, force=True):
+        return self._dlc.path(force)
 
     def docs_cls(self):
         return NytDoc
@@ -74,11 +74,12 @@ class NytDocs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            count_hint=1864661,
+            count_hint=ir_datasets.util.count_hint(NAME),
         )
 
     def docs_count(self):
-        return self.docs_store().count()
+        if self.docs_store().built():
+            return self.docs_store().count()
 
     def docs_namespace(self):
         return NAME
