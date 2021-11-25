@@ -84,6 +84,12 @@ def _init():
         )
     }
 
+    # NOTE: the following datasets are defined in touche.py:
+    #  - argsme/1.0/touche-2020-task-1/uncorrected
+    #  - argsme/2020-04-01/touche-2020-task-1
+    #  - argsme/2020-04-01/touche-2020-task-1/uncorrected
+    #  - argsme/2020-04-01/touche-2021-task-1
+
     # Register datasets.
     registry.register(NAME, base)
     for name, arguments in datasets.items():

@@ -1,0 +1,154 @@
+2020/task-1:
+  pretty_name: "Touché 2020 Task 1: Argument Retrieval for Controversial Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    eventually come to a point where one side will challenge the other with a why-question,
+    which is a prompt to justify one's stance.
+    Thus, technologies for argument mining and argumentation processing are maturing at a rapid pace,
+    giving rise for the first time to argument retrieval.
+    Touché 2020 is the first lab on Argument Retrieval at CLEF 2020 featuring two tasks.
+    </p>
+    <p>
+    Given a question on a controversial topic, retrieve relevant arguments
+    from a focused crawl of online debate portals (<a class="ds-ref">argsme/2020-04-01</a>).
+    </p>
+    <p>
+    Documents are judged based on their general topical relevance.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
+    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2020Touche'
+    - 'Wachsmuth2017Quality'
+
+2020/task-1/argsme-1.0/uncorrected:
+  pretty_name: "Touché 2020 Task 1: Argument Retrieval for Controversial Questions (Uncorrected Labels, args.me 1.0)"
+  desc: |
+    <p>
+    Version of <a class="ds-ref">argsme/2020-04-01/touche-2020-task-1</a> that uses the <a class="ds-ref">argsme/1.0</a> corpus
+    with uncorrected relevance judgements derived from crowdworkers.
+    This dataset's relevance judgements should <em>not</em> be used without preprocessing.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
+    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2020Touche'
+    - 'Wachsmuth2017Quality'
+
+2020/task-1/argsme-2020-04-01/uncorrected:
+  pretty_name: "Touché 2020 Task 1: Argument Retrieval for Controversial Questions (Uncorrected Labels, args.me 2020-04-01)"
+  desc: |
+    <p>
+    Version of <a class="ds-ref">argsme/2020-04-01/touche-2020-task-1</a> that uses
+    uncorrected relevance judgements derived from crowdworkers.
+    This dataset's relevance judgements should <em>not</em> be used without preprocessing.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
+    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2020Touche'
+    - 'Wachsmuth2017Quality'
+
+2020/task-2:
+  pretty_name: "Touché 2020 Task 2: Argument Retrieval for Comparative Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    eventually come to a point where one side will challenge the other with a why-question,
+    which is a prompt to justify one's stance.
+    Thus, technologies for argument mining and argumentation processing are maturing at a rapid pace,
+    giving rise for the first time to argument retrieval.
+    Touché 2020 is the first lab on Argument Retrieval at CLEF 2020 featuring two tasks.
+    </p>
+    <p>
+    Given a comparative question, retrieve and rank documents
+    from the ClueWeb12 that help to answer the comparative question.
+    </p>
+    <p>
+    Documents are judged based on their general topical relevance.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-20/shared-task-2.html">Task 2 website</a></li>
+    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2020Touche'
+    - 'Braunstain2016Support'
+    - 'Rafalak2014Credibility'
+
+2021/task-1:
+  pretty_name: "Touché 2021 Task 1: Argument Retrieval for Controversial Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    often come to a point where one side challenges the other with a why-question,
+    which is a prompt to justify some stance based on arguments.
+    Since technologies for argument mining are maturing at a rapid pace,
+    also ad-hoc argument retrieval becomes a feasible task in reach.
+    Touché 2021 is the second lab on argument retrieval at CLEF 2021 featuring two tasks.
+    </p>
+    <p>
+    Given a question on a controversial topic, retrieve relevant arguments
+    from a focused crawl of online debate portals (<a class="ds-ref">argsme/2020-04-01</a>).
+    </p>
+    <p>
+    Documents are judged based on their general topical relevance and for rhetorical quality,
+    i.e., "well-writtenness" of the document:
+    (1) whether the text has a good style of speech (formal language is preferred over informal),
+    (2) whether the text has a proper sentence structure and is easy to read,
+    (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-21/shared-task-1.html">Task 1 website</a></li>
+    <li><a href="https://webis.de/events/touche-21/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-85251-1_28">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2021Touche'
+
+2021/task-2:
+  pretty_name: "Touché 2021 Task 2: Argument Retrieval for Comparative Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    often come to a point where one side challenges the other with a why-question,
+    which is a prompt to justify some stance based on arguments.
+    Since technologies for argument mining are maturing at a rapid pace,
+    also ad-hoc argument retrieval becomes a feasible task in reach.
+    Touché 2021 is the second lab on argument retrieval at CLEF 2021 featuring two tasks.
+    </p>
+    <p>
+    Given a comparative question, retrieve and rank documents
+    from the ClueWeb12 that help to answer the comparative question.
+    </p>
+    <p>
+    Documents are judged based on their general topical relevance and for rhetorical quality,
+    i.e., "well-writtenness" of the document:
+    (1) whether the text has a good style of speech (formal language is preferred over informal),
+    (2) whether the text has a proper sentence structure and is easy to read,
+    (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
+    </p>
+    <ul>
+    <li><a href="https://webis.de/events/touche-21/shared-task-2.html">Task 2 website</a></li>
+    <li><a href="https://webis.de/events/touche-21/">Lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-85251-1_28">Overview paper</a></li>
+    <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
+    </ul>
+  bibtex_ids:
+    - 'Bondarenko2021Touche'

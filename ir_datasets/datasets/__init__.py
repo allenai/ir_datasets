@@ -29,6 +29,7 @@ from . import nfcorpus
 from . import natural_questions
 from . import nyt
 from . import pmc
+from . import touche
 from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish
