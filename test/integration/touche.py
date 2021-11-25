@@ -1,7 +1,8 @@
 from unittest import main
 from re import compile
 
-from ir_datasets.formats import ToucheQuery, TrecQrel, ToucheSimpleQuery
+from ir_datasets.formats import ToucheQuery, TrecQrel, ToucheTitleQuery
+from ir_datasets.formats.touche import ToucheQualityQrel
 from test.integration.base import DatasetIntegrationTest
 
 
@@ -10,7 +11,7 @@ class TestTouche(DatasetIntegrationTest):
     # noinspection PyTypeChecker
     def test_queries(self):
         self._test_queries(
-            "touche/2020/task-1",
+            "argsme/2020-04-01/touche-2020-task-1",
             count=49,
             items={
                 0: ToucheQuery(
@@ -28,7 +29,43 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_queries(
-            "touche/2020/task-2",
+            "argsme/1.0/touche-2020-task-1/uncorrected",
+            count=49,
+            items={
+                0: ToucheQuery(
+                    query_id="1",
+                    title="Should teachers get tenure?",
+                    description=compile("A user has heard that some countries do give teach.{159}teachers vs. university professors is of interest\."),
+                    narrative=compile("Highly relevant arguments make a clear statement a.{181}the situation of teachers' financial independence\."),
+                ),
+                48: ToucheQuery(
+                    query_id="50",
+                    title="Should everyone get a universal basic income?",
+                    description=compile("Redistribution of wealth is a fundamental concept .{93}ver, a user wonders whether this truly would help\."),
+                    narrative=compile("Highly relevant arguments take a clear stance towa.{134}mentioning universal basic income only in passing\."),
+                ),
+            }
+        )
+        self._test_queries(
+            "argsme/2020-04-01/touche-2020-task-1/uncorrected",
+            count=49,
+            items={
+                0: ToucheQuery(
+                    query_id="1",
+                    title="Should teachers get tenure?",
+                    description=compile("A user has heard that some countries do give teach.{159}teachers vs. university professors is of interest\."),
+                    narrative=compile("Highly relevant arguments make a clear statement a.{181}the situation of teachers' financial independence\."),
+                ),
+                48: ToucheQuery(
+                    query_id="50",
+                    title="Should everyone get a universal basic income?",
+                    description=compile("Redistribution of wealth is a fundamental concept .{93}ver, a user wonders whether this truly would help\."),
+                    narrative=compile("Highly relevant arguments take a clear stance towa.{134}mentioning universal basic income only in passing\."),
+                ),
+            }
+        )
+        self._test_queries(
+            "clueweb12/touche-2020-task-2",
             count=50,
             items={
                 0: ToucheQuery(
@@ -46,21 +83,21 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_queries(
-            "touche/2021/task-1",
+            "argsme/2020-04-01/touche-2021-task-1",
             count=50,
             items={
-                0: ToucheSimpleQuery(
+                0: ToucheTitleQuery(
                     query_id="51",
                     title="Do we need sex education in schools?"
                 ),
-                49: ToucheSimpleQuery(
+                49: ToucheTitleQuery(
                     query_id="100",
                     title="Do we need cash?"
                 ),
             }
         )
         self._test_queries(
-            "touche/2021/task-2",
+            "clueweb12/touche-2021-task-2",
             count=50,
             items={
                 0: ToucheQuery(
@@ -80,7 +117,7 @@ class TestTouche(DatasetIntegrationTest):
 
     def test_qrels(self):
         self._test_qrels(
-            "touche/2020/task-1",
+            "argsme/2020-04-01/touche-2020-task-1",
             count=2298,
             items={
                 0: TrecQrel(
@@ -98,7 +135,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "touche/2020/task-1/argsme-1.0-uncorrected",
+            "argsme/1.0/touche-2020-task-1/uncorrected",
             count=2964,
             items={
                 0: TrecQrel(
@@ -116,7 +153,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "touche/2020/task-1/argsme-2020-04-01-uncorrected",
+            "argsme/2020-04-01/touche-2020-task-1/uncorrected",
             count=2298,
             items={
                 0: TrecQrel(
@@ -134,7 +171,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "touche/2020/task-2",
+            "clueweb12/touche-2020-task-2",
             count=1783,
             items={
                 0: TrecQrel(
@@ -152,73 +189,41 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "touche/2021/task-1/relevance",
+            "argsme/2020-04-01/touche-2021-task-1",
             count=3711,
             items={
-                0: TrecQrel(
+                0: ToucheQualityQrel(
                     query_id="94",
                     doc_id="S522c7c3b-A8a87130b",
                     relevance=2,
+                    quality=2,
                     iteration="0"
                 ),
-                3710: TrecQrel(
+                3710: ToucheQualityQrel(
                     query_id="91",
                     doc_id="Sf0770da-A760eca8e",
                     relevance=0,
+                    quality=1,
                     iteration="0"
                 ),
             }
         )
         self._test_qrels(
-            "touche/2021/task-1/quality",
-            count=3711,
-            items={
-                0: TrecQrel(
-                    query_id="94",
-                    doc_id="S522c7c3b-A8a87130b",
-                    relevance=2,
-                    iteration="0"
-                ),
-                3710: TrecQrel(
-                    query_id="91",
-                    doc_id="Sf0770da-A760eca8e",
-                    relevance=1,
-                    iteration="0"
-                ),
-            }
-        )
-        self._test_qrels(
-            "touche/2021/task-2/relevance",
+            "clueweb12/touche-2021-task-2",
             count=2076,
             items={
-                0: TrecQrel(
+                0: ToucheQualityQrel(
                     query_id="54",
                     doc_id="clueweb12-0205wb-64-11095",
                     relevance=0,
+                    quality=0,
                     iteration="0"
                 ),
-                2075: TrecQrel(
+                2075: ToucheQualityQrel(
                     query_id="86",
                     doc_id="clueweb12-0008wb-85-29079",
                     relevance=0,
-                    iteration="0"
-                ),
-            }
-        )
-        self._test_qrels(
-            "touche/2021/task-2/quality",
-            count=2076,
-            items={
-                0: TrecQrel(
-                    query_id="54",
-                    doc_id="clueweb12-0205wb-64-11095",
-                    relevance=0,
-                    iteration="0"
-                ),
-                2075: TrecQrel(
-                    query_id="86",
-                    doc_id="clueweb12-0008wb-85-29079",
-                    relevance=0,
+                    quality=0,
                     iteration="0"
                 ),
             }

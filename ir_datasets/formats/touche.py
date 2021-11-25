@@ -12,9 +12,17 @@ class ToucheQuery(NamedTuple):
     narrative: str
 
 
-class ToucheSimpleQuery(NamedTuple):
+class ToucheTitleQuery(NamedTuple):
     query_id: str
     title: str
+
+
+class ToucheQualityQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    quality: int
+    iteration: str
 
 
 class ToucheQueries(BaseQueries):
@@ -60,13 +68,13 @@ class ToucheQueries(BaseQueries):
                         narrative,
                     )
                 else:
-                    yield ToucheSimpleQuery(
+                    yield ToucheTitleQuery(
                         str(number),
                         title,
                     )
 
     def queries_cls(self):
-        return ToucheQuery if self._has_description else ToucheSimpleQuery
+        return ToucheQuery if self._has_description else ToucheTitleQuery
 
     def queries_namespace(self):
         return self._namespace
@@ -75,7 +83,7 @@ class ToucheQueries(BaseQueries):
         return self._language
 
 
-class ToucheTrecQrels(BaseQrels):
+class ToucheQrels(BaseQrels):
     _source: Any
     _definitions: Dict[int, str]
 
@@ -105,3 +113,41 @@ class ToucheTrecQrels(BaseQrels):
 
     def qrels_defs(self):
         return self._definitions
+
+
+class ToucheQualityQrels(BaseQrels):
+    _source_relevance: ToucheQrels
+    _source_quality: ToucheQrels
+
+    def __init__(self, source_relevance: ToucheQrels,
+                 source_quality: ToucheQrels):
+        self._source_relevance = source_relevance
+        self._source_quality = source_quality
+
+    def qrels_path(self):
+        return self._source_relevance.path()
+
+    def qrels_iter(self):
+        iterator = zip(
+            self._source_relevance.qrels_iter(),
+            self._source_quality.qrels_iter(),
+        )
+        for qrel_relevance, qrel_quality in iterator:
+            qrel_relevance: TrecQrel
+            qrel_quality: TrecQrel
+            assert qrel_relevance.query_id == qrel_quality.query_id
+            assert qrel_relevance.doc_id == qrel_quality.doc_id
+            assert qrel_relevance.iteration == qrel_quality.iteration
+            yield ToucheQualityQrel(
+                qrel_relevance.query_id,
+                qrel_relevance.doc_id,
+                qrel_relevance.relevance,
+                qrel_quality.relevance,
+                qrel_relevance.iteration,
+            )
+
+    def qrels_cls(self):
+        return ToucheQualityQrel
+
+    def qrels_defs(self):
+        return self._source_relevance.qrels_defs()
