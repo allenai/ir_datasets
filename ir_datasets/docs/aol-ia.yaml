@@ -14,7 +14,7 @@ value set to the user ID). Full information (including original query) are avail
 <kbd>qlogs</kbd>.
 </p>
 '
-  bibtex_ids: ['Pass2006Picture']
+  bibtex_ids: ['Pass2006Picture', 'MacAvaney2022Reproducing']
   docs_instructions: &inst "docs available using aolia-tools package"
   data_access: '
 <p>
