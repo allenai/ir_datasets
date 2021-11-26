@@ -49,30 +49,30 @@ both ways in the past.) If ir_datasets does not find the files it is expecting, 
 
 fold1:
   desc: '
-<p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
   docs_instructions: *inst
   bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold2:
   desc: '
-<p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
   docs_instructions: *inst
   bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold3:
   desc: '
-<p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
   docs_instructions: *inst
   bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold4:
   desc: '
-<p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
   docs_instructions: *inst
   bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
 
 fold5:
   desc: '
-<p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerious works</p>'
+<p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
   docs_instructions: *inst
   bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
