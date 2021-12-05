@@ -113,11 +113,11 @@ class TrecDocs(BaseDocs):
 
     def _docs_iter(self, path):
         if Path(path).is_file():
-            spath = str(path)
-            if spath.endswith('.gz'):
+            path_suffix = Path(path).suffix.lower()
+            if path_suffix == '.gz':
                 with gzip.open(path, 'rb') as f:
                     yield from self._parser(f)
-            elif any(spath.endswith(ext) for ext in ['.z', '.0z', '.1z', '.2z']):
+            elif path_suffix in ['.z', '.0z', '.1z', '.2z']:
                 # unix "compress" command encoding
                 unlzw3 = ir_datasets.lazy_libs.unlzw3()
                 with io.BytesIO(unlzw3.unlzw(path)) as f:
