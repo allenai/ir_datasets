@@ -17,7 +17,7 @@ setuptools.setup(
     packages=setuptools.find_packages(include=['ir_datasets', 'ir_datasets.*']),
     install_requires=list(open('requirements.txt')),
     classifiers=[],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     entry_points={
         'console_scripts': ['ir_datasets=ir_datasets:main_cli'],
     },

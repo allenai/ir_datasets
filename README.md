@@ -44,7 +44,7 @@ $ python setup.py bdist_wheel
 $ pip install dist/ir_datasets-*.whl
 ```
 
-Tested with python versions 3.6 and 3.7
+Tested with python versions 3.7, 3.8, 3.9, and 3.10. (Mininum python version is 3.7.)
 
 ## Features
 
