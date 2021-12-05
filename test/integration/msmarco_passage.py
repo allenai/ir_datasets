@@ -256,17 +256,12 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: GenericScoredDoc(query_id='540814', doc_id='1609172', score=0.0),
             119010: GenericScoredDoc(query_id='908661', doc_id='8839164', score=0.0)
         })
-        self._test_scoreddocs('msmarco-passage/dev', count=6668967, items={
+        self._test_scoreddocs('msmarco-passage/dev/small', count=6668967, items={
             0: GenericScoredDoc(query_id='188714', doc_id='1000052', score=0.0),
             9: GenericScoredDoc(query_id='345453', doc_id='1000327', score=0.0),
             6668966: GenericScoredDoc(query_id='36473', doc_id='999956', score=0.0)
         })
-        self._test_scoreddocs('msmarco-passage/dev/judged', count=6668967, items={
-            0: GenericScoredDoc(query_id='188714', doc_id='1000052', score=0.0),
-            9: GenericScoredDoc(query_id='345453', doc_id='1000327', score=0.0),
-            6668966: GenericScoredDoc(query_id='36473', doc_id='999956', score=0.0)
-        })
-        self._test_scoreddocs('msmarco-passage/eval', count=6515736, items={
+        self._test_scoreddocs('msmarco-passage/eval/small', count=6515736, items={
             0: GenericScoredDoc(query_id='992904', doc_id='1000038', score=0.0),
             9: GenericScoredDoc(query_id='1114402', doc_id='1000236', score=0.0),
             6515735: GenericScoredDoc(query_id='30677', doc_id='999956', score=0.0)

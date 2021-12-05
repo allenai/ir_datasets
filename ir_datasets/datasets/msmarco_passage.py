@@ -123,24 +123,24 @@ def _init():
         collection,
         TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.dev.tsv'), base_path/'dev/queries.tsv'), namespace='msmarco', lang='en'),
         TrecQrels(dlc['dev/qrels'], QRELS_DEFS),
-        TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['dev/scoreddocs'], 'top1000.dev')), base_path/'dev/ms.run')),
     )
 
     subsets['dev/small'] = Dataset(
         collection,
         TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.dev.small.tsv'), base_path/'dev/small/queries.tsv'), namespace='msmarco', lang='en'),
         TrecQrels(Cache(TarExtract(dlc['collectionandqueries'], 'qrels.dev.small.tsv'), base_path/'dev/small/qrels'), QRELS_DEFS),
+        TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['dev/scoreddocs'], 'top1000.dev')), base_path/'dev/ms.run')),
     )
 
     subsets['eval'] = Dataset(
         collection,
         TsvQueries(Cache(TarExtract(dlc['queries'], 'queries.eval.tsv'), base_path/'eval/queries.tsv'), namespace='msmarco', lang='en'),
-        TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['eval/scoreddocs'], 'top1000.eval')), base_path/'eval/ms.run')),
     )
 
     subsets['eval/small'] = Dataset(
         collection,
         TsvQueries(Cache(TarExtract(dlc['collectionandqueries'], 'queries.eval.small.tsv'), base_path/'eval/small/queries.tsv'), namespace='msmarco', lang='en'),
+        TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['eval/scoreddocs'], 'top1000.eval')), base_path/'eval/ms.run')),
     )
 
     subsets['trec-dl-2019'] = Dataset(
@@ -169,7 +169,6 @@ def _init():
     dev_judged = Lazy(lambda: {q.query_id for q in subsets['dev'].qrels_iter()})
     subsets['dev/judged'] = Dataset(
         FilteredQueries(subsets['dev'].queries_handler(), dev_judged),
-        FilteredScoredDocs(subsets['dev'].scoreddocs_handler(), dev_judged),
         subsets['dev'],
     )
 
