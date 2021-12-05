@@ -102,4 +102,10 @@ def pyautocorpus():
     if 'pyautocorpus' not in _cache:
         import pyautocorpus
         _cache['pyautocorpus'] = pyautocorpus
-    return _cache['pyautocorpus']    
+    return _cache['pyautocorpus']
+
+def unlzw3():
+    if 'unlzw3' not in _cache:
+        import unlzw3
+        _cache['unlzw3'] = unlzw3
+    return _cache['unlzw3']
