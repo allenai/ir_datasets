@@ -1581,7 +1581,7 @@
     "cache_path": "chinese_queries.dev.v1.1.tsv"
   },
   "zh/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/blob/main/data/v1.1/queries/train/chinese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1.1/queries/train/chinese_queries.train.tsv",
     "expected_md5": "21649d058877379bc8184923ab8ec408",
     "size_hint": 35231242,
     "cache_path": "chinese_queries.train.tsv"
