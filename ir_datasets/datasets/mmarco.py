@@ -40,6 +40,18 @@ def _init():
             TsvQueries(dlc[f'{lang}/queries/dev'], namespace=f'mmarco/{lang}', lang=lang),
             dev_qrels,
             documentation(f'{lang}/dev'))
+        if lang in ('zh', 'pt'):
+            subsets[f'{lang}/dev/v1.1'] = Dataset(
+                collection,
+                TsvQueries(dlc[f'{lang}/queries/dev/v1.1'], namespace=f'mmarco/{lang}', lang=lang),
+                dev_qrels,
+                documentation(f'{lang}/dev/v1.1'))
+        if lang in ('pt',):
+            subsets[f'{lang}/train/v1.1'] = Dataset(
+                collection,
+                TsvQueries(dlc[f'{lang}/queries/train/v1.1'], namespace=f'mmarco/{lang}', lang=lang),
+                train_qrels,
+                documentation(f'{lang}/train/v1.1'))
 
     ir_datasets.registry.register(NAME, Dataset(documentation('_')))
     for s in sorted(subsets):

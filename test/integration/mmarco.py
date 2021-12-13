@@ -75,12 +75,28 @@ class TestMMarco(DatasetIntegrationTest):
         self._test_queries('mmarco/pt/train', count=811690, items={
             0: GenericQuery('121352', 'Definir extremo'),
             9: GenericQuery('492875', 'Temperatura do desinfectante'),
+            760: GenericQuery('1009273', 'Qual evangelista se tornou um ateu depois de realizar muitas reuniões?'),
+            761: GenericQuery('1009273', 'O nome dele era Chuck...'),
             811689: GenericQuery('50393', 'Benefícios de ferver limão e beber suco.'),
         })
         self._test_queries('mmarco/pt/dev', count=101619, items={
             0: GenericQuery('1048578', 'custo de piscinas intermináveis / spa de banho'),
             9: GenericQuery('1048587', 'O que é patrono?'),
+            29: GenericQuery('52', 'Pneumo é um prefixo que significa ar.'),
+            30: GenericQuery('52', 'Sabendo disso, explique por que essa condição é chamada pneumotórax.'),
             101618: GenericQuery('524285', 'Esteira inclinada significando'),
+        })
+        self._test_queries('mmarco/pt/train/v1.1', count=808731, items={
+            0: GenericQuery('121352', 'Definir extremo'),
+            9: GenericQuery('492875', 'Temperatura do desinfectante'),
+            760: GenericQuery('1009273', 'Qual evangelista se tornou um ateu depois de realizar muitas reuniões? O nome dele era Chuck...'),
+            808730: GenericQuery('50393', 'Benefícios de ferver limão e beber suco.'),
+        })
+        self._test_queries('mmarco/pt/dev/v1.1', count=101093, items={
+            0: GenericQuery('1048578', 'custo de piscinas intermináveis / spa de banho'),
+            9: GenericQuery('1048587', 'O que é patrono?'),
+            29: GenericQuery('52', 'Pneumo é um prefixo que significa ar. Sabendo disso, explique por que essa condição é chamada pneumotórax.'),
+            101092: GenericQuery('524285', 'Esteira inclinada significando'),
         })
         self._test_queries('mmarco/it/train', count=808731, items={
             0: GenericQuery('121352', "L'ente creditizio definisce l'estremo"),
@@ -129,6 +145,13 @@ class TestMMarco(DatasetIntegrationTest):
         })
         self._test_queries('mmarco/zh/dev', count=101093, items={
             0: GenericQuery('1048578', '無止境的池塘/游泳垃圾邮件的成本'),
+            1: GenericQuery('1048579', ''),
+            9: GenericQuery('1048587', '什么是赞助人?'),
+            101092: GenericQuery('524285', '踢踏机嵌入的含義Name'),
+        })
+        self._test_queries('mmarco/zh/dev/v1.1', count=101093, items={
+            0: GenericQuery('1048578', '無止境的池塘/游泳垃圾邮件的成本'),
+            1: GenericQuery('1048579', ' . '),
             9: GenericQuery('1048587', '什么是赞助人?'),
             101092: GenericQuery('524285', '踢踏机嵌入的含義Name'),
         })
@@ -174,6 +197,26 @@ class TestMMarco(DatasetIntegrationTest):
             9: TrecQrel('300674', '7067032', 1, '0'),
             59272: TrecQrel('371455', '8009476', 1, '0'),
         })
+        self._test_qrels('mmarco/pt/train', count=532761, items={
+            0: TrecQrel('1185869', '0', 1, '0'),
+            9: TrecQrel('186154', '1160', 1, '0'),
+            532760: TrecQrel('405466', '8841735', 1, '0'),
+        })
+        self._test_qrels('mmarco/pt/dev', count=59273, items={
+            0: TrecQrel('1102432', '2026790', 1, '0'),
+            9: TrecQrel('300674', '7067032', 1, '0'),
+            59272: TrecQrel('371455', '8009476', 1, '0'),
+        })
+        self._test_qrels('mmarco/pt/train/v1.1', count=532761, items={
+            0: TrecQrel('1185869', '0', 1, '0'),
+            9: TrecQrel('186154', '1160', 1, '0'),
+            532760: TrecQrel('405466', '8841735', 1, '0'),
+        })
+        self._test_qrels('mmarco/pt/dev/v1.1', count=59273, items={
+            0: TrecQrel('1102432', '2026790', 1, '0'),
+            9: TrecQrel('300674', '7067032', 1, '0'),
+            59272: TrecQrel('371455', '8009476', 1, '0'),
+        })
         self._test_qrels('mmarco/de/train', count=532761, items={
             0: TrecQrel('1185869', '0', 1, '0'),
             9: TrecQrel('186154', '1160', 1, '0'),
@@ -200,6 +243,11 @@ class TestMMarco(DatasetIntegrationTest):
             532760: TrecQrel('405466', '8841735', 1, '0'),
         })
         self._test_qrels('mmarco/zh/dev', count=59273, items={
+            0: TrecQrel('1102432', '2026790', 1, '0'),
+            9: TrecQrel('300674', '7067032', 1, '0'),
+            59272: TrecQrel('371455', '8009476', 1, '0'),
+        })
+        self._test_qrels('mmarco/zh/dev/v1.1', count=59273, items={
             0: TrecQrel('1102432', '2026790', 1, '0'),
             9: TrecQrel('300674', '7067032', 1, '0'),
             59272: TrecQrel('371455', '8009476', 1, '0'),
