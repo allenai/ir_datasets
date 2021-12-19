@@ -39,3 +39,15 @@ class Registry:
 
     def register_pattern(self, pattern, initializer):
         self._patterns.append((re.compile(pattern), initializer))
+
+    def __contains__(self, key):
+        if key in self._registered:
+            return True
+        for pattern, initializer in self._patterns:
+            match = pattern.match(key)
+            if match:
+                return True
+        return False
+
+    def __del__(self, key):
+        del self._registered[key]

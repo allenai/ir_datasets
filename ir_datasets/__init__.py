@@ -6,20 +6,24 @@ class EntityType(Enum):
     scoreddocs = "scoreddocs"
     docpairs = "docpairs"
     qlogs = "qlogs"
+
+from . import util
+registry = util.Registry()
+
+def load(name):
+    return registry[name]
+
 from . import lazy_libs
 from . import log
-from . import util
 from . import formats
-registry = util.Registry()
 from . import datasets
 from . import indices
 from . import wrappers
 from . import commands
 
-Dataset = datasets.base.Dataset
+create_local_dataset = datasets.create_local_dataset
 
-def load(name):
-    return registry[name]
+Dataset = datasets.base.Dataset
 
 
 def parent_id(dataset_id: str, entity_type: EntityType) -> str:

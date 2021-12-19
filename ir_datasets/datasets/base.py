@@ -97,6 +97,10 @@ class Dataset:
     def has_qlogs(self):
         return self.has(ir_datasets.EntityType.qlogs)
 
+    def handler(self, etype: ir_datasets.EntityType):
+        etype = ir_datasets.EntityType(etype) # validate & allow strings
+        return getattr(self, f'{etype.value}_handler')()
+
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):

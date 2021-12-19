@@ -40,3 +40,5 @@ from . import vaswani
 from . import wapo
 from . import wikir
 from . import trec_fair_2021
+
+from .local import iter_local_datasets, create_local_dataset, delete_local_dataset
