@@ -15,7 +15,13 @@ allow quick lookups of documents by ID.
 A command line interface is also available.
 
 You can find a list of datasets and their features [here](https://ir-datasets.com/).
-Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull request! 
+Want a new dataset, added functionality, or a bug fixed? Feel free to post an issue or make a pull request!
+
+**ir_datasets in numbers:**
+ - **400+** datasets & subsets
+ - **450+** monitored downloadable files
+ - **100** mirrored downloads
+
 
 ## Getting Started
 
