@@ -34,10 +34,27 @@ Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
+zh/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Chinese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
 zh/dev/v1.1:
   desc: '
 <p>
 Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Chinese.
+</p>
+<p>
+Version 1.1 of this file includes manual corrections from the authorss of the translated files. <a href="https://github.com/unicamp-dl/mMARCO/issues/8#issuecomment-992810293">See discussion here</a>.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+zh/dev/small/v1.1:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Chinese.
 </p>
 <p>
 Version 1.1 of this file includes manual corrections from the authorss of the translated files. <a href="https://github.com/unicamp-dl/mMARCO/issues/8#issuecomment-992810293">See discussion here</a>.
@@ -65,6 +82,13 @@ Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
+fr/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into French.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
 de:
   desc: '
 <p>
@@ -83,6 +107,13 @@ de/dev:
   desc: '
 <p>
 Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into German.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+de/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into German.
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
@@ -107,6 +138,13 @@ Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
+id/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Indonesian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
 it:
   desc: '
 <p>
@@ -125,6 +163,13 @@ it/dev:
   desc: '
 <p>
 Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Italian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+it/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Italian.
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
@@ -149,6 +194,13 @@ Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
+ru/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Russian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
 es:
   desc: '
 <p>
@@ -167,6 +219,13 @@ es/dev:
   desc: '
 <p>
 Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Spanish.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+es/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Spanish.
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
@@ -191,10 +250,10 @@ Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
-pt/train:
+pt/dev/small:
   desc: '
 <p>
-Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Portuguese.
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Portuguese.
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
 
@@ -202,6 +261,17 @@ pt/dev/v1.1:
   desc: '
 <p>
 Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Portuguese.
+</p>
+<p>
+Version 1.1 of this file includes manual corrections from the authorss of the translated files. <a href="https://github.com/unicamp-dl/mMARCO/issues/8#issuecomment-992810293">See discussion here</a>.
+It also removes some duplicated query IDs.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+pt/dev/small/v1.1:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Portuguese.
 </p>
 <p>
 Version 1.1 of this file includes manual corrections from the authorss of the translated files. <a href="https://github.com/unicamp-dl/mMARCO/issues/8#issuecomment-992810293">See discussion here</a>.

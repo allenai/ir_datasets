@@ -11,7 +11,7 @@ _logger = ir_datasets.log.easy()
 
 class Dataset:
     def __init__(self, *constituents):
-        self._constituents = constituents
+        self._constituents = [c for c in constituents if c is not None]
         self._beta_apis = {}
 
     def __getstate__(self):
