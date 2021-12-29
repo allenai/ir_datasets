@@ -19,6 +19,7 @@ from . import gov2
 from . import highwire
 from . import medline
 from . import mmarco
+from . import movielens
 from . import mr_tydi
 from . import msmarco_document
 from . import msmarco_document_v2

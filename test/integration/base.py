@@ -134,6 +134,28 @@ class DatasetIntegrationTest(unittest.TestCase):
 
             self.assertEqual(0, len(items))
 
+    def _test_actions(self, dataset_name, count=None, items=None):
+        with self.subTest('actions', dataset=dataset_name):
+            if isinstance(dataset_name, str):
+                dataset = ir_datasets.load(dataset_name)
+            else:
+                dataset = dataset_name
+            expected_count = count
+            items = items or {}
+            count = 0
+            for i, action in enumerate(_logger.pbar(dataset.actions_iter(), f'{dataset_name} actions', unit='action')):
+                count += 1
+                if i in items:
+                    self._assert_namedtuple(action, items[i])
+                    del items[i]
+                    if expected_count is None and len(items) == 0:
+                        break # no point in going further
+
+            if expected_count is not None:
+                self.assertEqual(expected_count, count)
+
+            self.assertEqual(0, len(items))
+
     def _build_test_docs(self, dataset_name, include_count=True, include_idxs=(0, 9)):
         items = {}
         count = 0
@@ -212,6 +234,18 @@ self._test_scoreddocs({repr(dataset_name)}, count={count}, items={self._repr_nam
         items[count-1] = docpair
         _logger.info(f'''
 self._test_docpairs({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
+''')
+
+    def _build_test_actions(self, dataset_name):
+        items = {}
+        count = 0
+        for i, docpair in enumerate(_logger.pbar(ir_datasets.load(dataset_name).actions_iter(), f'{dataset_name} actions', unit='action')):
+            count += 1
+            if i in (0, 9):
+                items[i] = docpair
+        items[count-1] = docpair
+        _logger.info(f'''
+self._test_actions({repr(dataset_name)}, count={count}, items={self._repr_namedtuples(items)})
 ''')
 
     def _test_scoreddocs(self, dataset_name, count=None, items=None):

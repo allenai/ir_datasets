@@ -181,6 +181,29 @@ class BaseQlogs:
         return self
 
 
+class BaseActions:
+    PREFIX = 'actions_'
+    EXTENSIONS = {}
+
+    def __getattr__(self, attr):
+        if attr.startswith(self.PREFIX) and attr in self.EXTENSIONS:
+            # Return method bound to this instance
+            return types.MethodType(self.EXTENSIONS[attr], self)
+        raise AttributeError(attr)
+
+    def actions_iter(self):
+        raise NotImplementedError()
+
+    def actions_cls(self):
+        raise NotImplementedError()
+
+    def actions_count(self):
+        raise NotImplementedError()
+
+    def actions_handler(self):
+        return self
+
+
 BaseQueries.EXTENSIONS['queries_dict'] = lambda x: {q.query_id: q for q in x.iter_queries()}
 
 

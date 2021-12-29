@@ -1792,6 +1792,15 @@
   }
 },
 
+"movielens": {
+  "100k": {
+    "url": "http://files.grouplens.org/datasets/movielens/ml-100k.zip",
+    "expected_md5": "0e33842e24a9c977be4e0107933c0723",
+    "size_hint": 4924029,
+    "cache_path": "ml-100k.zip"
+  }
+},
+
 
 "mr-tydi": {
   "ar": {

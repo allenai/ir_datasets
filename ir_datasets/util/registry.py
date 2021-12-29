@@ -49,5 +49,5 @@ class Registry:
                 return True
         return False
 
-    def __del__(self, key):
+    def __delitem__(self, key):
         del self._registered[key]

@@ -1,11 +1,20 @@
 from enum import Enum
 class EntityType(Enum):
+    # common for adhoc retrieval datasets
     docs = "docs"
     queries = "queries"
     qrels = "qrels"
+
+    # uncommon for adhoc retrieval datasets
     scoreddocs = "scoreddocs"
     docpairs = "docpairs"
     qlogs = "qlogs"
+
+    # common for recsys datasets
+    users = "users"
+    items = "users"
+    actions = "actions"
+
 
 from . import util
 registry = util.Registry()
