@@ -239,6 +239,12 @@
     "expected_md5": "4d006dd67cbc11541ed7f87b875cb990",
     "cache_path": "docs.tar.xz"
   },
+  "docs/v2.0": {
+    "url": "http://trec-car.cs.unh.edu/datareleases/v2.0/paragraphCorpus.v2.0.tar.xz",
+    "size_hint": 5085726092,
+    "expected_md5": "a404e9256d763ddcacc3da1e34de466a",
+    "cache_path": "paragraphCorpus.v2.0.tar.xz"
+  },
   "trec-y1/queries": {
     "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/benchmarkY1test.public-v1.5.tar.xz",
     "size_hint": 40508,

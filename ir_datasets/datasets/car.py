@@ -100,6 +100,7 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     docs_v15 = CarDocs(TarExtract(dlc['docs'], 'paragraphcorpus/paragraphcorpus.cbor', compression='xz'), count_hint=ir_datasets.util.count_hint(f'{NAME}/v1.5'))
+    docs_v20 = CarDocs(TarExtract(dlc['docs/v2.0'], 'paragraphCorpus/dedup.articles-paragraphs.cbor', compression='xz'), count_hint=ir_datasets.util.count_hint(f'{NAME}/v2.0'))
     base = Dataset(documentation('_'))
 
     subsets['v1.5'] = Dataset(docs_v15, documentation('v1.5'))
@@ -140,6 +141,8 @@ def _init():
         docs_v15,
         CarQueries(TarExtract(train_data, 'train/train.fold4.cbor.outlines', compression='xz')),
         TrecQrels(TarExtract(train_data, 'train/train.fold4.cbor.hierarchical.qrels', compression='xz'), AUTO_QRELS))
+
+    subsets['v2.0'] = Dataset(docs_v20, documentation('v2.0'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
