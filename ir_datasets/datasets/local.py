@@ -23,11 +23,6 @@ class BaseLocal:
         self._etype = etype
         self._cls_ = None
 
-    def __getattr__(self, attr):
-        if attr.startswith(f'{self._etype.value}_'):
-            return getattr(self, attr[len(self._etype.value):])
-        raise AttributeError(attr)
-
     def _iter(self):
         cls = self._cls()
         lz4_frame = ir_datasets.lazy_libs.lz4_frame().frame
@@ -110,10 +105,28 @@ class LocalQueries(BaseLocal, BaseQueries):
     def __init__(self, path):
         super().__init__(path, EntityType.queries)
 
+    def queries_iter(self):
+        return self._iter()
+
+    def queries_count(self):
+        return self._count()
+
+    def queries_cls(self):
+        return self._cls()
+
 
 class LocalQrels(BaseLocal, BaseQrels):
     def __init__(self, path):
         super().__init__(path, EntityType.qrels)
+
+    def qrels_iter(self):
+        return self._iter()
+
+    def qrels_count(self):
+        return self._count()
+
+    def qrels_cls(self):
+        return self._cls()
 
     def qrels_defs(self):
         return {}
@@ -123,15 +136,42 @@ class LocalScoredDocs(BaseLocal, BaseScoredDocs):
     def __init__(self, path):
         super().__init__(path, EntityType.scoreddocs)
 
+    def scoreddocs_iter(self):
+        return self._iter()
+
+    def scoreddocs_count(self):
+        return self._count()
+
+    def scoreddocs_cls(self):
+        return self._cls()
+
 
 class LocalDocpairs(BaseLocal, BaseDocPairs):
     def __init__(self, path):
         super().__init__(path, EntityType.docpairs)
 
+    def docpairs_iter(self):
+        return self._iter()
+
+    def docpairs_count(self):
+        return self._count()
+
+    def docpairs_cls(self):
+        return self._cls()
+
 
 class LocalQlogs(BaseLocal, BaseQlogs):
     def __init__(self, path):
         super().__init__(path, EntityType.qlogs)
+
+    def qlogs_iter(self):
+        return self._iter()
+
+    def qlogs_count(self):
+        return self._count()
+
+    def qlogs_cls(self):
+        return self._cls()
 
 
 PROVIDERS = {
