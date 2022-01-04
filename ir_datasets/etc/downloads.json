@@ -2904,6 +2904,69 @@
   }
 },
 
+"trec-cast": {
+  "marco_dupes": {
+    "url": "http://boston.lti.cs.cmu.edu/Services/treccast19/duplicate_list_v1.0.txt",
+    "size_hint": 131116975,
+    "expected_md5": "071d789ce7d8ebab4392dec62c5d17b7",
+    "cache_path": "marco_duplicate_list_v1.0.txt"
+  },
+  "wapo_dupes": {
+    "url": "http://boston.lti.cs.cmu.edu/Services/treccast19/wapo_duplicate_list_v1.0.txt",
+    "size_hint": 497283320,
+    "expected_md5": "3f221bdd3a44d1850d698041a8cdd2bc",
+    "cache_path": "wapo_duplicate_list_v1.0.txt"
+  },
+  "2019/train/queries": {
+    "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2019/data/training/train_topics_v1.0.json",
+    "size_hint": 32800,
+    "expected_md5": "2017389f5bbea04478574c6e84d65482",
+    "cache_path": "2019/train_topics_v1.0.json"
+  },
+  "2019/train/qrels": {
+    "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2019/data/training/train_topics_mod.qrel",
+    "size_hint": 80964,
+    "expected_md5": "84af27620dfc009f1f76a58e3d9d6c40",
+    "cache_path": "2019/train_topics_mod.qrel"
+  },
+  "2019/train/scoreddocs": {
+    "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/train_topics.teIn",
+    "size_hint": 14766212,
+    "expected_md5": "83bdb720e0c469390004598091021901",
+    "cache_path": "2019/train_topics.teIn"
+  },
+  "2019/eval/queries": {
+    "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2019/data/evaluation/evaluation_topics_v1.0.json",
+    "size_hint": 57204,
+    "expected_md5": "362283885194feefcab8441d2bb24f7c",
+    "cache_path": "2019/evaluation_topics_v1.0.json"
+  },
+  "2019/eval/qrels": {
+    "url": "https://trec.nist.gov/data/cast/2019qrels.txt",
+    "size_hint": 1138032,
+    "expected_md5": "aab238105020c4cd55fae60dedfa9f1e",
+    "cache_path": "2019/2019qrels.txt"
+  },
+  "2019/eval/scoreddocs": {
+    "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/test_topics.teIn",
+    "size_hint": 27691171,
+    "expected_md5": "4c3958c09edab1b46474a337590c1ecd",
+    "cache_path": "2019/test_topics.teIn"
+  },
+  "2020/queries": {
+    "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2020/2020_manual_evaluation_topics_v1.0.json",
+    "size_hint": 78998,
+    "expected_md5": "98ae2be2c82e294895a83e76b4133e19",
+    "cache_path": "2020/2020_manual_evaluation_topics_v1.0.json"
+  },
+  "2020/qrels": {
+    "url": "https://trec.nist.gov/data/cast/2020qrels.txt",
+    "size_hint": 1563427,
+    "expected_md5": "de6a8406217945bdbf1da304214ef60c",
+    "cache_path": "2020/2020qrels.txt"
+  }
+},
+
 "trec-mandarin": {
   "docs": {
     "instructions": "The dataset is based on the TREC Mandarin corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T52>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
