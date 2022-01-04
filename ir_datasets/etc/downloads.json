@@ -2943,6 +2943,7 @@
   },
   "2019/eval/qrels": {
     "url": "https://trec.nist.gov/data/cast/2019qrels.txt",
+    "irds_mirror": true,
     "size_hint": 1138032,
     "expected_md5": "aab238105020c4cd55fae60dedfa9f1e",
     "cache_path": "2019/2019qrels.txt"
@@ -2961,6 +2962,7 @@
   },
   "2020/qrels": {
     "url": "https://trec.nist.gov/data/cast/2020qrels.txt",
+    "irds_mirror": true,
     "size_hint": 1563427,
     "expected_md5": "de6a8406217945bdbf1da304214ef60c",
     "cache_path": "2020/2020qrels.txt"
