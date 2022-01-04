@@ -205,6 +205,12 @@ class TestTripclick(DatasetIntegrationTest):
             9: GenericDocPair('1016988', '7785567', '5019636'),
             23221223: GenericDocPair('3141', '9337445', '9337479'),
         })
+        self._test_docpairs('tripclick/train/hofstaetter-triples', count=10000000, items={
+            0: GenericDocPair('1064190', '1435361', '9317735'),
+            9: GenericDocPair('1053769', '7796753', '10783812'),
+            9999999: GenericDocPair('1219267', '9260879', '1194457'),
+        })
+
 
 if __name__ == '__main__':
     unittest.main()
