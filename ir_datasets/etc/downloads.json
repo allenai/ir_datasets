@@ -2990,6 +2990,12 @@
     "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
     "expected_md5": "1d3a548685c2fbef9b2076b0b04ba44f",
     "cache_path": "logs.tar.gz"
+  },
+  "hofstaetter-triples": {
+    "url": "https://huggingface.co/datasets/sebastian-hofstaetter/tripclick-training/resolve/main/improved_tripclick_train_triple-ids.tsv",
+    "size_hint": 233053452,
+    "expected_md5": "8d70808ec06570e02bc4014ed033b5d0",
+    "cache_path": "improved_tripclick_train_triple-ids.tsv"
   }
 },
 

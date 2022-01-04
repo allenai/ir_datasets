@@ -293,6 +293,12 @@ def _init():
         ]),
         TsvDocPairs(train_docpairs),
         documentation('train'))
+    subsets['train/hofstaetter-triples'] = Dataset(
+        collection,
+        train_queries,
+        subsets['train'].qrels_handler(),
+        TsvDocPairs(dlc['hofstaetter-triples']),
+        documentation('train/hofstaetter-triples'))
 
     ### Val
 
