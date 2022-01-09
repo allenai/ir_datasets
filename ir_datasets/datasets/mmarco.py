@@ -69,6 +69,27 @@ def _init():
                 train_docparis,
                 documentation(f'{lang}/train/v1.1'))
 
+    for lang in ['ar', 'zh', 'dt', 'fr', 'de', 'hi', 'id', 'it', 'ja', 'pt', 'ru', 'es', 'vi']:
+        collection = TsvDocs(dlc[f'v2/{lang}/docs'], namespace=f'mmarco/{lang}', lang=lang, count_hint=ir_datasets.util.count_hint(f'{NAME}/v2/{lang}'))
+        subsets[f'v2/{lang}'] = Dataset(collection, documentation(f'v2/{lang}'))
+        subsets[f'v2/{lang}/train'] = Dataset(
+            collection,
+            TsvQueries(dlc[f'v2/{lang}/queries/train'], namespace=f'mmarco/v2/{lang}', lang=lang),
+            train_qrels,
+            train_docparis,
+            documentation(f'v2/{lang}/train'))
+        subsets[f'v2/{lang}/dev'] = Dataset(
+            collection,
+            TsvQueries(dlc[f'v2/{lang}/queries/dev'], namespace=f'v2/mmarco/{lang}', lang=lang),
+            dev_qrels,
+            documentation(f'v2/{lang}/dev'))
+        subsets[f'v2/{lang}/dev/small'] = Dataset(
+            collection,
+            FilteredQueries(subsets[f'v2/{lang}/dev'].queries_handler(), small_dev_qids, mode='include'),
+            dev_small_qrels,
+            TrecScoredDocs(dlc[f'v2/{lang}/scoreddocs/dev'], negate_score=True),
+            documentation(f'v2/{lang}/dev/small'))
+
     ir_datasets.registry.register(NAME, Dataset(documentation('_')))
     for s in sorted(subsets):
         ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
