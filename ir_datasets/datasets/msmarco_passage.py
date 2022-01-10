@@ -1,3 +1,4 @@
+import hashlib
 import io
 import codecs
 import re
@@ -99,6 +100,60 @@ class FixEncoding:
                 yield line.encode()
 
 
+# Converts "small triples" MS files to "qid/pos_did/neg_did" format to remove tons of redundant storage.
+class MapSmallTriplesQidPid:
+    def __init__(self, streamer, corpus_stream, queries_handler):
+        self._streamer = streamer
+        self._corpus_stream = corpus_stream # note: must use raw topics here beacuse this file also includes the broken text found in the corpus file
+        self._queries_handler = queries_handler
+
+    def stream(self):
+        return io.BufferedReader(IterStream(iter(self)), buffer_size=io.DEFAULT_BUFFER_SIZE)
+
+    def __iter__(self):
+        # Strangely, in this file, the query text is mangled, even though the query source file isn't.
+        # So we need to apply the encoding fix that's normally applied to the docs to the queries here.
+        SUS = '[\x80-\xff]'
+        regexes = [
+            re.compile(f'(...{SUS}|..{SUS}.|.{SUS}..|{SUS}...)'),
+            re.compile(f'(..{SUS}|.{SUS}.|{SUS}..)'),
+            re.compile(f'(.{SUS}|{SUS}.)'),
+        ]
+        passagehash_did_map = {}
+        with self._corpus_stream.stream() as fin:
+            for line in _logger.pbar(fin, desc='build d text lookup (step 1 of 3)', total=8841823):
+                did, contents = line.rstrip(b'\n').split(b'\t')
+                content_hash = hashlib.md5(contents).digest()[:7] # 7 byte version results in no collisions & reduces memory
+                assert content_hash not in passagehash_did_map
+                passagehash_did_map[bytes(content_hash)] = int(did) # int did reduces memory
+        queryhash_qid_map = {}
+        for query in _logger.pbar(self._queries_handler.queries_iter(), desc='build q text lookup (step 2 of 3)', total=808731):
+            query_hash = hashlib.md5(query.text.encode()).digest()[:6] # 6 byte version results in no collisions & reduces memory
+            assert query_hash not in queryhash_qid_map
+            queryhash_qid_map[bytes(query_hash)] = int(query.query_id) # int qid reduces memory
+        with self._streamer.stream() as fin:
+            for line in _logger.pbar(fin, desc='map d/q text to IDs (step 3 of 3)', total=39780811):
+                query, doc1, doc2 = line.rstrip(b'\n').split(b'\t')
+                query = query.decode('utf8')
+                for regex in regexes:
+                    pos = 0
+                    while pos < len(query):
+                        match = regex.search(query, pos=pos)
+                        if not match:
+                            break
+                        try:
+                            fixed = match.group().encode('latin1').decode('utf8')
+                            if len(fixed) == 1:
+                                query = query[:match.start()] + fixed + query[match.end():]
+                        except UnicodeError:
+                            pass
+                        pos = match.start() + 1
+                query_hash = hashlib.md5(query.encode()).digest()[:6]
+                doc1_hash = hashlib.md5(doc1).digest()[:7]
+                doc2_hash = hashlib.md5(doc2).digest()[:7]
+                yield f'{queryhash_qid_map[query_hash]}\t{passagehash_did_map[doc1_hash]}\t{passagehash_did_map[doc2_hash]}\n'.encode()
+
+
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.home_path()/NAME
@@ -117,6 +172,22 @@ def _init():
         TrecQrels(dlc['train/qrels'], QRELS_DEFS),
         TsvDocPairs(GzipExtract(dlc['train/docpairs'])),
         TrecScoredDocs(Cache(ExtractQidPid(TarExtract(dlc['train/scoreddocs'], 'top1000.train.txt')), base_path/'train/ms.run')),
+    )
+
+    subsets['train/triples-v2'] = Dataset(
+        collection,
+        subsets['train'].queries_handler(),
+        subsets['train'].qrels_handler(),
+        TsvDocPairs(GzipExtract(dlc['train/docpairs/v2'])),
+        subsets['train'].scoreddocs_handler(),
+    )
+
+    subsets['train/triples-small'] = Dataset(
+        collection,
+        subsets['train'].queries_handler(),
+        subsets['train'].qrels_handler(),
+        TsvDocPairs(Cache(MapSmallTriplesQidPid(TarExtract(dlc['train/docpairs/small'], 'triples.train.small.tsv'), TarExtract(dlc['collectionandqueries'], 'collection.tsv'), subsets['train'].queries_handler()), base_path/'train/small.triples.qidpid.tsv')),
+        subsets['train'].scoreddocs_handler(),
     )
 
     subsets['dev'] = Dataset(

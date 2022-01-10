@@ -102,6 +102,38 @@ docpairs provides access to the "official" sequence for pairwise training.
   official_measures: ['RR@10']
 
 
+train/triples-v2:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, but with version 2 of the triples file.
+</p>
+<p>
+This version of the triples file includes rows that were accidently missing from version 1 of the
+file (see discussion <a href="https://github.com/microsoft/MSMARCO-Passage-Ranking/commit/4695a71c6c76ce85c07a51c0f12690cab19abbb0">here</a>).
+</p>
+<p>
+Note that this is sorted by the IDs in the file, so you probably would not want to use it unless
+you first shuffle it before usage. <a href="https://github.com/microsoft/MSMARCO-Passage-Ranking/issues/21">We opened an issue</a>
+suggesting that a third version of the file is provided that is shuffled so that the order is consistent across groups
+using the data, but at this time, no such file exists in an official capacity.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
+
+train/triples-small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, but with the "small" triples file (a 10% sample of the full file).
+</p>
+<p>
+Note that to save on storage space (27GB), the contents of the file are mapped to their corresponding query and document IDs.
+This process takes a few minutes to run the first time the triples are requested.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
+
 train/judged:
   desc: '
 <p>

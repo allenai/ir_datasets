@@ -2108,6 +2108,17 @@
     "expected_md5": "215a5204288820672f5e9451d9e202c5",
     "cache_path": "train/docpairs.tsv.gz"
   },
+  "train/docpairs/v2": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.2.tsv.gz",
+    "size_hint": 1841693309,
+    "expected_md5": "219083e80a0a751c08b968c2f31a4e0b",
+    "cache_path": "train/qidpidtriples.train.full.2.tsv.gz"
+  },
+  "train/docpairs/small": {
+    "url": "https://msmarco.blob.core.windows.net/msmarcoranking/triples.train.small.tar.gz",
+    "size_hint": 7930881353,
+    "expected_md5": "c13bf99ff23ca691105ad12eab837f84"
+  },
   "train/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.train.tar.gz",
     "size_hint": 11519984492,
