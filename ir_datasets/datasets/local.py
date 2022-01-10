@@ -224,7 +224,13 @@ def create_local_dataset(dataset_id, **sources):
         registry = []
     registry.append(dataset_record)
     with ir_datasets.util.finialized_file(registry_path, 'wt') as fout:
-        json.dump(registry, fout)
+        fout.write('[\n')
+        for item in registry:
+            fout.write('  ' + json.dumps(item))
+            if item != registry[-1]:
+                fout.write(',')
+            fout.write('\n')
+        fout.write(']\n')
     return dataset
 
 
@@ -242,12 +248,18 @@ def delete_local_dataset(dataset_id, remove_files=True):
                     del ir_datasets.registry[dataset_id]
                 except KeyError:
                     pass
-            if remove_files:
-                with logger.duration(f'Removing {dataset["id"]} at {str(BASE_PATH/dataset["path"])}'):
-                    shutil.rmtree(BASE_PATH/dataset['path'])
+                if remove_files:
+                    with logger.duration(f'Removing {dataset["id"]} at {str(BASE_PATH/dataset["path"])}'):
+                        shutil.rmtree(BASE_PATH/dataset['path'])
             if changed:
                 with ir_datasets.util.finialized_file(registry_path, 'wt') as fout:
-                    json.dump(registry, fout)
+                    fout.write('[\n')
+                    for item in registry:
+                        fout.write('  ' + json.dumps(item))
+                        if item != registry[-1]:
+                            fout.write(',')
+                        fout.write('\n')
+                    fout.write(']\n')
 
 
 def iter_local_datasets():

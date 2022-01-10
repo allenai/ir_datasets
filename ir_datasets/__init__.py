@@ -22,6 +22,8 @@ from . import wrappers
 from . import commands
 
 create_local_dataset = datasets.create_local_dataset
+delete_local_dataset = datasets.delete_local_dataset
+iter_local_datasets = datasets.iter_local_datasets
 
 Dataset = datasets.base.Dataset
 
