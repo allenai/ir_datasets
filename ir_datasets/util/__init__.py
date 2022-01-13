@@ -201,7 +201,7 @@ class Migrator:
                                     os.unlink(file)
                                 else:
                                     shutil.rmtree(file)
-                        with self._version_file.open('wt') as f:
+                        with self._version_file.open('wt', encoding='utf8') as f:
                             f.write(self._version)
                     self._state = 'OK'
                 return fn(*args, **kwargs)
