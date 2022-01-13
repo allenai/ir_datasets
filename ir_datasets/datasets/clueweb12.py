@@ -239,7 +239,7 @@ java -jar {extract_path} {source_path}/ {path}/
         with contextlib.ExitStack() as stack, _logger.pbar_raw(desc='building b13 document count cache', unit='file') as pbar:
             for d in glob(os.path.join(path, 'ClueWeb12_??')):
                 d = os.path.basename(d)
-                out = stack.enter_context(ir_datasets.util.finialized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))
+                out = stack.enter_context(ir_datasets.util.finalized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))
                 for file in sorted(glob(os.path.join(path, d, '*', '*.warc.gz'))):
                     shortf = file[-24:]
                     with gzip.open(file, 'rb') as f, warc.WARCFile(fileobj=f) as warcf:

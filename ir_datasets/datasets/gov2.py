@@ -280,7 +280,7 @@ class Gov2DocCountFile:
                         file = f'{d}/{f}.gz'
                         result[file] += 1
                         pbar.update()
-                with ir_datasets.util.finialized_file(self._path, 'wt') as fout:
+                with ir_datasets.util.finalized_file(self._path, 'wt') as fout:
                     for file in sorted(result):
                         fout.write(f'{file}\t{result[file]}\n')
         return self._path

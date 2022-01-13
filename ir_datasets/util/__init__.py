@@ -34,7 +34,7 @@ def home_path():
 
 
 @contextmanager
-def finialized_file(path, mode):
+def finalized_file(path, mode):
     encoding = 'utf8' if 't' in mode else None
     if path == os.devnull:
         with open(path, mode, encoding=encoding) as f:
@@ -50,6 +50,8 @@ def finialized_file(path, mode):
             except:
                 pass # ignore
             raise
+
+finialized_file = finalized_file # support old name of function w/ typo
 
 
 class Lazy:

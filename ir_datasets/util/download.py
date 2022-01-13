@@ -246,7 +246,7 @@ class Download:
 
         for mirror in self.mirrors:
             try:
-                with util.finialized_file(download_path, 'wb') as f:
+                with util.finalized_file(download_path, 'wb') as f:
                     with mirror.stream() as stream:
                         stream = util.HashStream(stream, self.expected_md5, algo='md5')
                         shutil.copyfileobj(stream, f)

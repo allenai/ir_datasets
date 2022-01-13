@@ -79,7 +79,7 @@ class ClueWebWarcIndex:
         last_chekpoint_pos = 0
         with self.zlib_state.GzipStateFile(self.source_path, keep_last_state=True) as f, \
              warc.WARCFile(fileobj=f) as f_warc, \
-             ir_datasets.util.finialized_file(self.index_path, 'wb') as f_tmp, \
+             ir_datasets.util.finalized_file(self.index_path, 'wb') as f_tmp, \
              WarcIndexFile(f_tmp, 'wb') as f_chk:
             doc_idx = 0
             for doc in f_warc:

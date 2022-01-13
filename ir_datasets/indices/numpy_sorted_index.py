@@ -38,7 +38,7 @@ class NumpySortedIndex:
         self.mmap_keys[:] = keys[:]
         self.mmap_poss = self.np.memmap(f'{self.path}.pos', dtype=poss.dtype, mode='w+', shape=poss.shape)
         self.mmap_poss[:] = poss[:]
-        with ir_datasets.util.finialized_file(f'{self.path}.meta', 'wt') as f:
+        with ir_datasets.util.finalized_file(f'{self.path}.meta', 'wt') as f:
             f.write(f'{self.keylen} {self.doccount}')
         self.transaction = None
 

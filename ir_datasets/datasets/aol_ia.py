@@ -7,7 +7,7 @@ from collections import Counter
 from hashlib import md5
 import ir_datasets
 from typing import NamedTuple, Tuple
-from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract, finialized_file
+from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract, finalized_file
 from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
@@ -136,9 +136,9 @@ python downloader.py
         lz4_frame = ir_datasets.lazy_libs.lz4_frame().frame
 
         encountered_qids = set()
-        with finialized_file(self._base_path/'queries.tsv', 'wt') as f_queries, \
-             finialized_file(self._base_path/'qrels', 'wt') as f_qrels, \
-             finialized_file(self._base_path/'log.pkl.lz4', 'wb') as f_log, \
+        with finalized_file(self._base_path/'queries.tsv', 'wt') as f_queries, \
+             finalized_file(self._base_path/'qrels', 'wt') as f_qrels, \
+             finalized_file(self._base_path/'log.pkl.lz4', 'wb') as f_log, \
              lz4_frame.LZ4FrameFile(f_log, 'wb') as f_log, \
              _logger.pbar_raw(desc=f'preparing {NAME} log lines', total=36389567) as pbar:
             for dlc in self._log_dlcs:

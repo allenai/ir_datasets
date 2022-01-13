@@ -163,7 +163,7 @@ class DocPairGenerator:
             for query in _logger.pbar(self._queries.queries_iter(), desc='build query lookup', unit='query'):
                 queryhash = hashlib.md5(SPACES.sub(' ', query.text).strip().encode()).digest()[:6]
                 query_map[queryhash] = query.query_id
-            with ir_datasets.util.finialized_file(self._cache_path, 'wt') as fout, \
+            with ir_datasets.util.finalized_file(self._cache_path, 'wt') as fout, \
                  self._docpair_dlc.stream() as stream, \
                  _logger.pbar_raw(desc='building docpairs', total=23_222_038, unit='docpair') as pbar:
                 skipped = 0

@@ -45,8 +45,8 @@ class DprW100Manager:
             return # already built
 
         with contextlib.ExitStack() as stack:
-            f_queries = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'queries.tsv', 'wt'))
-            f_qrels = stack.enter_context(ir_datasets.util.finialized_file(self._base_path/'qrels', 'wt'))
+            f_queries = stack.enter_context(ir_datasets.util.finalized_file(self._base_path/'queries.tsv', 'wt'))
+            f_qrels = stack.enter_context(ir_datasets.util.finalized_file(self._base_path/'qrels', 'wt'))
             stream = stack.enter_context(self._dlc.stream())
             qid_counter = itertools.count()
             for record in _logger.pbar(ijson.items(stream, 'item'), 'building dpr-w100', unit='record'):
