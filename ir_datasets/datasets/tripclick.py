@@ -117,7 +117,7 @@ class TripClickQlogs(BaseQlogs):
 
     def qlogs_iter(self):
         for file in sorted(Path(self.dlc.path()).glob('logs/*.json')):
-            with file.open('rt') as fin:
+            with file.open('rt', encoding='utf8') as fin:
                 for line in fin:
                     record = json.loads(line)
                     time = re.match(r'^/Date\(([0-9]+)\)/$', record['DateCreated']).group(1)

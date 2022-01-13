@@ -193,7 +193,7 @@ class ClueWeb12Docs(WarcDocs):
             result = {}
             for counts_file in glob(os.path.join(self.docs_dlc.path(), 'recordcounts', '*.txt')):
                 d = os.path.basename(counts_file)[:-len('_counts.txt')]
-                with open(counts_file, 'rt') as f:
+                with open(counts_file, 'rt', encoding='utf8') as f:
                     for line in f:
                         file, count = line.strip().split()
                         file = os.path.join(self.docs_dlc.path(), d, file[2:])

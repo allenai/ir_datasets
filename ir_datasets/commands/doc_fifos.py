@@ -66,7 +66,7 @@ def main(args):
         print(f'Ready at {d}')
         print(f'To index with Anserini, run:\nIndexCollection -collection JsonCollection -input {d} -threads {args.count} -index <your_index_path> <other_anserini_args>')
 
-        fifos = [stack.enter_context(open(f, 'wt')) for f in fifos]
+        fifos = [stack.enter_context(open(f, 'wt', encoding='utf8')) for f in fifos]
 
         ready = None
         for doc in docs_iter:

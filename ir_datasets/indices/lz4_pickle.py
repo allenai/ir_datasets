@@ -112,7 +112,7 @@ class Lz4PickleLookup:
         # check that the fields match
         meta_info = ' '.join(doc_cls._fields)
         if os.path.exists(self._meta_path):
-            with open(self._meta_path, 'rt') as f:
+            with open(self._meta_path, 'rt', encoding='utf8') as f:
                 existing_meta = f.read()
             assert existing_meta == meta_info, f"fields do not match; you may need to re-build this store {path}"
 
@@ -159,7 +159,7 @@ class Lz4PickleLookup:
             os.makedirs(self._path, exist_ok=True)
         if not os.path.exists(self._meta_path):
             meta_info = ' '.join(self._doc_cls._fields)
-            with open(self._meta_path, 'wt') as f:
+            with open(self._meta_path, 'wt', encoding='utf8') as f:
                 f.write(meta_info)
 
         with Lz4PickleTransaction(self) as trans:

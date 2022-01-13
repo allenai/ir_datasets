@@ -38,7 +38,7 @@ class TestDownloads(unittest.TestCase):
     output_data = []
 
     def test_downloads(self):
-        with open('ir_datasets/etc/downloads.json') as f:
+        with open('ir_datasets/etc/downloads.json', 'rt', encoding='utf8') as f:
             data = json.load(f)
         try:
             self._test_download_iter(data)
@@ -55,7 +55,7 @@ class TestDownloads(unittest.TestCase):
                         self.output_data.append(self._test_download(clir_dlc[top_key][sub_key], f'clirmatrix/{top_key}/{sub_key}'))
         finally:
             if self.output_path is not None:
-                with open(self.output_path, 'wt') as f:
+                with open(self.output_path, 'wt', encoding='utf8') as f:
                     json.dump(self.output_data, f)
 
     def _test_download_iter(self, data, prefix=''):

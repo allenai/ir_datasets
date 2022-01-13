@@ -35,12 +35,13 @@ def home_path():
 
 @contextmanager
 def finialized_file(path, mode):
+    encoding = 'utf8' if 't' in mode else None
     if path == os.devnull:
-        with open(path, mode) as f:
+        with open(path, mode, encoding=encoding) as f:
             yield f
     else:
         try:
-            with open(f'{path}.tmp', mode) as f:
+            with open(f'{path}.tmp', mode, encoding=encoding) as f:
                 yield f
             os.replace(f'{path}.tmp', path)
         except:
@@ -206,7 +207,7 @@ class Migrator:
         return fn
 
     def _read_version(self):
-        with self._version_file.open('rt') as f:
+        with self._version_file.open('rt', encoding='utf8') as f:
             return f.read()
 
 

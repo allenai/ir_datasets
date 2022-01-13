@@ -273,7 +273,7 @@ class Gov2DocCountFile:
             docs_urls_path = os.path.join(self._docs_dlc.path(), 'GOV2_extras/url2id.gz')
             result = Counter()
             with _logger.pbar_raw(desc='building doccounts file', total=25205179, unit='doc') as pbar:
-                with gzip.open(docs_urls_path, 'rt') as fin:
+                with gzip.open(docs_urls_path, 'rt', encoding='utf8') as fin:
                     for line in fin:
                         url, doc_id = line.rstrip().split()
                         d, f, i = doc_id.split('-') # formatted like: GX024-52-0546388

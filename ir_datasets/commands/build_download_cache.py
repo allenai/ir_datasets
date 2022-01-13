@@ -63,7 +63,7 @@ def main(args):
     parser.add_argument('--retries', default='10')
     args = parser.parse_args(args)
 
-    with open('ir_datasets/etc/downloads.json') as f:
+    with open('ir_datasets/etc/downloads.json', 'rt', encoding='utf8') as f:
         data = json.load(f)
     with tmp_environ(IR_DATASETS_DL_TRIES=args.retries):
         _build_cache(data, args.dir)

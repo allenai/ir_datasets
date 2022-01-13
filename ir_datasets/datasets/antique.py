@@ -56,7 +56,7 @@ def _init():
     disallow_list = dlc['disallow_list']
     def disllow_qids():
         with disallow_list.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             return {l.rstrip() for l in stream}
     disllow_qids = Lazy(disllow_qids)
     subsets['test/non-offensive'] = Dataset(

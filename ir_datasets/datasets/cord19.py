@@ -109,7 +109,7 @@ class Cord19Docs(BaseDocs):
                         'custom_license': tarfile.open(fileobj=ctxt.push((self._extr_path/self._date/'custom_license.tar.gz').open('rb'))),
                     }
             if self._include_fulltext:
-                csv_reader = ctxt.push((self._extr_path/self._date/'metadata.csv').open('rt'))
+                csv_reader = ctxt.push((self._extr_path/self._date/'metadata.csv').open('rt', encoding='utf8'))
             else:
                 csv_reader = ctxt.enter_context(self._streamer.stream())
                 csv_reader = codecs.getreader('utf8')(csv_reader)

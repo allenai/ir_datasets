@@ -55,7 +55,7 @@ class CodeSearchNetDocs(BaseDocs):
         for dlc in self.docs_dlcs:
             base_path = Path(dlc.path())
             for file in sorted(base_path.glob('**/*.gz')):
-                with gzip.open(file, 'rt') as f:
+                with gzip.open(file, 'rt', encoding='utf8') as f:
                     for line in f:
                         data = json.loads(line)
                         yield CodeSearchNetDoc(
@@ -101,7 +101,7 @@ class CodeSearchNetQueries(BaseQueries):
         for dlc in self.queries_dlcs:
             base_path = Path(dlc.path())
             for file in sorted(base_path.glob(f'**/{self.split}/*.gz')):
-                with gzip.open(file, 'rt') as f:
+                with gzip.open(file, 'rt', encoding='utf8') as f:
                     for line in f:
                         data = json.loads(line)
                         yield GenericQuery(
@@ -129,7 +129,7 @@ class CodeSearchNetQrels(BaseQrels):
         for dlc in self.qrels_dlcs:
             base_path = Path(dlc.path())
             for file in sorted(base_path.glob(f'**/{self.split}/*.gz')):
-                with gzip.open(file, 'rt') as f:
+                with gzip.open(file, 'rt', encoding='utf8') as f:
                     for line in f:
                         data = json.loads(line)
                         yield TrecQrel(
@@ -159,7 +159,7 @@ class CodeSearchNetChallengeQueries(BaseQueries):
 
     def queries_iter(self):
         with self.queries_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for i, line in enumerate(stream):
                 if i == 0:
                     continue # skip first (header) line
@@ -184,7 +184,7 @@ class CodeSearchNetChallengeQrels(BaseQrels):
     def qrels_iter(self):
         query_map = {q.text: q.query_id for q in self._queries_handler.queries_iter()}
         with self.qrels_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for data in csv.DictReader(stream):
                 yield CodeSearchNetChallengeQrel(
                     query_id=query_map[data['Query']],

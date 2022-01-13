@@ -90,7 +90,7 @@ class RequestsDownload(BaseDownload):
                             dlen = int(dlen)
                         fmt = '{desc}: {percentage:3.1f}%{r_bar}'
                         if os.environ.get('IR_DATASETS_DL_DISABLE_PBAR', '').lower() == 'true':
-                            pbar_f = stack.enter_context(open(os.devnull, 'w')) # still maintain the pbar, but write to /dev/null
+                            pbar_f = stack.enter_context(open(os.devnull, 'wt', encoding='utf8')) # still maintain the pbar, but write to /dev/null
                         else:
                             pbar_f = None # defaults to stderr
                         pbar = stack.enter_context(_logger.pbar_raw(desc=self.url, total=dlen, unit='B', unit_scale=True, bar_format=fmt, file=pbar_f))
@@ -159,7 +159,7 @@ class RequestsDownload(BaseDownload):
             auth_dir.mkdir(parents=True, exist_ok=True)
         auth_path = auth_dir / self.auth
         if auth_path.exists():
-            with auth_path.open('rt') as fin:
+            with auth_path.open('rt', encoding='utf8') as fin:
                 lines = fin.read().split('\n')
                 if len(lines) < 2:
                     raise RuntimeError(f'{str(auth_path)} in incorrect format. Set the first line as the username and the second line as the password.')

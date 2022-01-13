@@ -86,7 +86,7 @@ class ClueWeb09Docs(WarcDocs):
             result = {}
             for d in self.dirs:
                 counts_file = os.path.join(self.docs_dlc.path(), f'record_counts/{d}_counts.txt')
-                with open(counts_file, 'rt') as f:
+                with open(counts_file, 'rt', encoding='utf8') as f:
                     for line in f:
                         file, count = line.strip().split()
                         # Fixing bug in record_counts: en0054 is under ClueWeb09_English_4, not _5
