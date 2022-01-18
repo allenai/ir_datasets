@@ -2390,6 +2390,21 @@
   }
 },
 
+"msmarco-document-anchor-text": {
+  "v1": {
+    "url": "https://huggingface.co/datasets/webis/ms-marco-anchor-text/resolve/main/ms-marco-v1/anchor-text-concatenated/common-crawl-union-2016-to-2021-to-ms-marco-v1.jsonl.gz",
+    "size_hint": 400048860,
+    "expected_md5": "b5127529c05475b589dd6ea0ae6f1381",
+    "cache_path": "anchor-text-concatenated-v1.jsonl.gz"
+  },
+  "v2": {
+    "url": "https://huggingface.co/datasets/webis/ms-marco-anchor-text/resolve/main/ms-marco-v2/anchor-text-concatenated/common-crawl-union-2016-to-2021-to-ms-marco-v2.jsonl.gz",
+    "size_hint": 735891684,
+    "expected_md5": "24e65380796d75faea5d528fe6ef9d09",
+    "cache_path": "anchor-text-concatenated-v2.jsonl.gz"
+  }
+},
+
 "msmarco-passage": {
   "collectionandqueries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
