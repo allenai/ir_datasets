@@ -3,7 +3,7 @@ import gzip
 import io
 from pathlib import Path
 import json
-from typing import NamedTuple, Tuple
+from typing import NamedTuple, Tuple, List
 import tarfile
 import ir_datasets
 from ir_datasets.indices import PickleLz4FullStore
@@ -96,6 +96,50 @@ class MsMarcoV2Docs(BaseDocs):
         return 'en'
 
 
+
+class MsMarcoV2AnchorTextDocument(NamedTuple):
+    doc_id: str
+    text: str
+    anchors: List[str]
+
+
+class MsMarcoV2AnchorTextDocs(BaseDocs):
+    def __init__(self, dlc, count_hint):
+        super().__init__()
+        self._dlc = dlc
+        self._count_hint = count_hint
+
+    @ir_datasets.util.use_docstore
+    def docs_iter(self):
+        with self._dlc.stream() as stream:
+            for line in stream:
+                data = json.loads(line)
+                yield MsMarcoV2AnchorTextDocument(data['id'], ' '.join(data['anchors']), data['anchors'])
+
+    def docs_cls(self):
+        return MsMarcoV2AnchorTextDocument
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()}/{NAME}/anchor-text.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+            count_hint=self._count_hint,
+        )
+
+    def docs_count(self):
+        if self.docs_store().built():
+            return self.docs_store().count()
+
+    def docs_namespace(self):
+        return f'{NAME}/anchor-text'
+
+    def docs_lang(self):
+        return 'en'
+
+
 def _init():
     base_path = ir_datasets.util.home_path()/NAME
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
@@ -152,6 +196,14 @@ def _init():
         FilteredQueries(subsets['trec-dl-2021'].queries_handler(), dl21_judged),
         FilteredScoredDocs(subsets['trec-dl-2021'].scoreddocs_handler(), dl21_judged),
         subsets['trec-dl-2021'],
+    )
+
+    subsets['anchor-text'] = Dataset(
+        MsMarcoV2AnchorTextDocs(
+            Cache(GzipExtract(dlc['anchor-text']), base_path / "anchor-text.json"),
+            count_hint=4821244
+        ),
+        documentation('anchor-text')
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation("_")))
