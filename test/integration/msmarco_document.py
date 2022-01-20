@@ -1,6 +1,6 @@
 import re
 import unittest
-from ir_datasets.datasets.msmarco_document import MsMarcoDocument
+from ir_datasets.datasets.msmarco_document import MsMarcoDocument, MsMarcoAnchorTextDocument
 from ir_datasets.formats import GenericQuery, TrecQrel, GenericScoredDoc
 from .base import DatasetIntegrationTest
 
@@ -184,6 +184,12 @@ class TestMsMarcoDocument(DatasetIntegrationTest):
             0: GenericScoredDoc(query_id='1049519', doc_id='D3466', score=-5.57078),
             9: GenericScoredDoc(query_id='1049519', doc_id='D1497292', score=-6.00984),
             19999: GenericScoredDoc(query_id='808400', doc_id='D1316047', score=-5.55934)
+        })
+
+    def test_anchor_text(self):
+        self._test_docs("msmarco-document/anchor-text", count=1703834, items={
+            0: MsMarcoAnchorTextDocument('D2292456', 'Database Administrator Database Administrator Database Administrator', ['Database Administrator', 'Database Administrator', 'Database Administrator']),
+            1703833: MsMarcoAnchorTextDocument('D3498137', 'Legal Dictionary derail Legal Dictionary derail derail derail derail derail derail derail derail derail Legal Dictionary derail Legal Legal derail Legal Dictionary derail derail derail derail derail Legal Legal derail derail', ['Legal Dictionary', 'derail', 'Legal Dictionary', 'derail', 'derail', 'derail', 'derail', 'derail', 'derail', 'derail', 'derail', 'derail', 'Legal Dictionary', 'derail', 'Legal', 'Legal', 'derail', 'Legal Dictionary', 'derail', 'derail', 'derail', 'derail', 'derail', 'Legal', 'Legal', 'derail', 'derail']),
         })
 
 

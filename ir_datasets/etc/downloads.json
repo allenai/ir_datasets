@@ -2280,6 +2280,12 @@
     "size_hint": 173803,
     "expected_md5": "06dfe71d497e081a7c4c1294979edb7d",
     "cache_path": "trec-dl-hard/qrels"
+  },
+  "anchor-text": {
+    "url": "https://huggingface.co/datasets/webis/ms-marco-anchor-text/resolve/main/ms-marco-v1/anchor-text/common-crawl-union-2016-to-2021-to-ms-marco-v1.jsonl.gz",
+    "size_hint": 407851729,
+    "expected_md5": "4f7af19c455976f7c2606b97ffb7a89f",
+    "cache_path": "anchor-text-separate-v1.jsonl.gz"
   }
 },
 
@@ -2387,6 +2393,12 @@
     "auth": "trec_act_part",
     "expected_md5": "3b266fdaf27f3775e04028765a4839d3",
     "cache_path": "trec-dl-2021/qrels"
+  },
+  "anchor-text": {
+    "url": "https://huggingface.co/datasets/webis/ms-marco-anchor-text/resolve/main/ms-marco-v2/anchor-text/common-crawl-union-2016-to-2021-to-ms-marco-v2.jsonl.gz",
+    "size_hint": 751699569,
+    "expected_md5": "8b96dbaf4efcae08e0ee307e03f3434d",
+    "cache_path": "anchor-text-separate-v2.jsonl.gz"
   }
 },
 
