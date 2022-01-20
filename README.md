@@ -239,3 +239,4 @@ Contributors to this repository:
  - Shuo Sun (Johns Hopkins University)
  - Thomas Jänich (University of Glasgow)
  - Jan Heinrich Reimer (Martin Luther University Halle-Wittenberg)
+ - Maik Fröbe (Martin Luther University Halle-Wittenberg)
