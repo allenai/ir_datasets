@@ -163,59 +163,61 @@ def _init():
     MARCO = prefixer('msmarco-passage', 'MARCO')
     CAR = prefixer('car/v2.0', 'CAR')
 
-    docs_2019 = CastDocs('docs_2019', [
+    docs_v0 = CastDocs('docs_v0', [
         ('WAPO', WAPO_v2, dlc['wapo_dupes']),
         ('MARCO', MARCO, dlc['marco_dupes']),
         ('CAR', CAR, None),
     ])
 
-    docs_2020 = CastDocs('docs_2020', [
+    docs_v1 = CastDocs('docs_v1', [
         ('MARCO', MARCO, dlc['marco_dupes']),
         ('CAR', CAR, None),
     ])
 
     base = Dataset(documentation('_'))
 
-    subsets['2019'] = Dataset(docs_2019)
+    subsets['v0'] = Dataset(docs_v0)
 
-    subsets['2019/train'] = Dataset(
-        docs_2019,
+    subsets['v0/train'] = Dataset(
+        docs_v0,
         CastQueries(dlc['2019/train/queries'], Cast2019Query),
         TrecQrels(dlc['2019/train/qrels'], QRELS_DEFS_TRAIN),
         TrecScoredDocs(dlc['2019/train/scoreddocs'])
     )
-    qids_train_2019 = Lazy(lambda: {q.query_id for q in subsets['2019/train'].qrels_iter()})
-    subsets['2019/train/judged'] = Dataset(
-        docs_2019,
-        FilteredQueries(subsets['2019/train'].queries_handler(), qids_train_2019),
-        subsets['2019/train'].qrels_handler(),
-        FilteredScoredDocs(subsets['2019/train'].scoreddocs_handler(), qids_train_2019),
+    qids_train_v0 = Lazy(lambda: {q.query_id for q in subsets['v0/train'].qrels_iter()})
+    subsets['v0/train/judged'] = Dataset(
+        docs_v0,
+        FilteredQueries(subsets['v0/train'].queries_handler(), qids_train_v0),
+        subsets['v0/train'].qrels_handler(),
+        FilteredScoredDocs(subsets['v0/train'].scoreddocs_handler(), qids_train_v0),
     )
 
-    subsets['2019/eval'] = Dataset(
-        docs_2019,
+    subsets['v1'] = Dataset(docs_v1)
+
+    subsets['v1/2019'] = Dataset(
+        docs_v1,
         CastQueries(dlc['2019/eval/queries'], Cast2019Query),
         TrecQrels(dlc['2019/eval/qrels'], QRELS_DEFS),
         TrecScoredDocs(dlc['2019/eval/scoreddocs'])
     )
-    qids_eval_2019 = Lazy(lambda: {q.query_id for q in subsets['2019/eval'].qrels_iter()})
-    subsets['2019/eval/judged'] = Dataset(
-        docs_2019,
-        FilteredQueries(subsets['2019/eval'].queries_handler(), qids_eval_2019),
-        subsets['2019/eval'].qrels_handler(),
-        FilteredScoredDocs(subsets['2019/eval'].scoreddocs_handler(), qids_eval_2019),
+    qids_2019 = Lazy(lambda: {q.query_id for q in subsets['v1/2019'].qrels_iter()})
+    subsets['v1/2019/judged'] = Dataset(
+        docs_v1,
+        FilteredQueries(subsets['v1/2019'].queries_handler(), qids_2019),
+        subsets['v1/2019'].qrels_handler(),
+        FilteredScoredDocs(subsets['v1/2019'].scoreddocs_handler(), qids_2019),
     )
 
-    subsets['2020'] = Dataset(
-        docs_2020,
+    subsets['v1/2020'] = Dataset(
+        docs_v1,
         CastQueries(dlc['2020/queries'], Cast2020Query),
         TrecQrels(dlc['2020/qrels'], QRELS_DEFS),
     )
-    qids_eval_2020 = Lazy(lambda: {q.query_id for q in subsets['2020'].qrels_iter()})
-    subsets['2020/judged'] = Dataset(
-        docs_2020,
-        FilteredQueries(subsets['2020'].queries_handler(), qids_eval_2020),
-        subsets['2020'].qrels_handler(),
+    qids_2020 = Lazy(lambda: {q.query_id for q in subsets['v1/2020'].qrels_iter()})
+    subsets['v1/2020/judged'] = Dataset(
+        docs_v1,
+        FilteredQueries(subsets['v1/2020'].queries_handler(), qids_2020),
+        subsets['v1/2020'].qrels_handler(),
     )
 
     ir_datasets.registry.register(NAME, base)
