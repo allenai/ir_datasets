@@ -100,7 +100,7 @@ class TestTrecCast(DatasetIntegrationTest):
             9: GenericScoredDoc('31_1', 'MARCO_291004', -5.88053),
             478999: GenericScoredDoc('80_10', 'CAR_268dcb1c6bc4326f81500513e0ad9d11acb2a693', -5.23496),
         })
-        self._test_scoreddocs('trec-cast/v1/2019/eval', count=173000, items={
+        self._test_scoreddocs('trec-cast/v1/2019/judged', count=173000, items={
             0: GenericScoredDoc('31_1', 'MARCO_789620', -5.71312),
             9: GenericScoredDoc('31_1', 'MARCO_291004', -5.88053),
             172999: GenericScoredDoc('79_9', 'MARCO_1431776', -6.75024),
