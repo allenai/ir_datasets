@@ -1,8 +1,10 @@
-from typing import NamedTuple
+from typing import NamedTuple, List
+import json
 import ir_datasets
+from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
-from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs
+from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
 from ir_datasets.datasets.msmarco_passage import DUA, DL_HARD_QIDS_BYFOLD, DL_HARD_QIDS
 
 NAME = 'msmarco-document'
@@ -55,6 +57,49 @@ class MsMarcoTrecDocs(TrecDocs):
 
     def docs_namespace(self):
         return NAME
+
+
+class MsMarcoAnchorTextDocument(NamedTuple):
+    doc_id: str
+    text: str
+    anchors: List[str]
+
+
+class MsMarcoAnchorTextDocs(BaseDocs):
+    def __init__(self, dlc, count_hint):
+        super().__init__()
+        self._dlc = dlc
+        self._count_hint = count_hint
+
+    @ir_datasets.util.use_docstore
+    def docs_iter(self):
+        with self._dlc.stream() as stream:
+            for line in stream:
+                data = json.loads(line)
+                yield MsMarcoAnchorTextDocument(data['id'], ' '.join(data['anchors']), data['anchors'])
+
+    def docs_cls(self):
+        return MsMarcoAnchorTextDocument
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()}/{NAME}/anchor-text.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+            count_hint=self._count_hint,
+        )
+
+    def docs_count(self):
+        if self.docs_store().built():
+            return self.docs_store().count()
+
+    def docs_namespace(self):
+        return f'{NAME}/anchor-text'
+
+    def docs_lang(self):
+        return 'en'
 
 
 def _init():
@@ -167,6 +212,14 @@ def _init():
         FilteredQueries(dl_hard_base_queries, hard_qids),
         FilteredQrels(subsets['trec-dl-hard'], hard_qids),
         documentation('trec-dl-hard/fold5')
+    )
+    
+    subsets['anchor-text'] = Dataset(
+        MsMarcoAnchorTextDocs(
+            Cache(GzipExtract(dlc['anchor-text']), base_path / "anchor-text.json"),
+            count_hint=1703834
+        ),
+        documentation('anchor-text')
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation("_")))

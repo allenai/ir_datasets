@@ -217,18 +217,26 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
 
 
     def test_msmarco_passage_docpairs(self):
-        with self.subTest(subset='msmarco-passage/train'):
-            self._test_docpairs('msmarco-passage/train', count=269919004, items={
-                0: GenericDocPair(query_id='662731', doc_id_a='193249', doc_id_b='2975302'),
-                9: GenericDocPair(query_id='411362', doc_id_a='31018', doc_id_b='4238671'),
-                269919003: GenericDocPair(query_id='88228', doc_id_a='5117891', doc_id_b='7075853')
-            })
-        with self.subTest(subset='msmarco-passage/train/judged'):
-            self._test_docpairs('msmarco-passage/train/judged', count=269919004, items={
-                0: GenericDocPair(query_id='662731', doc_id_a='193249', doc_id_b='2975302'),
-                9: GenericDocPair(query_id='411362', doc_id_a='31018', doc_id_b='4238671'),
-                269919003: GenericDocPair(query_id='88228', doc_id_a='5117891', doc_id_b='7075853')
-            })
+        self._test_docpairs('msmarco-passage/train', count=269919004, items={
+            0: GenericDocPair(query_id='662731', doc_id_a='193249', doc_id_b='2975302'),
+            9: GenericDocPair(query_id='411362', doc_id_a='31018', doc_id_b='4238671'),
+            269919003: GenericDocPair(query_id='88228', doc_id_a='5117891', doc_id_b='7075853')
+        })
+        self._test_docpairs('msmarco-passage/train/judged', count=269919004, items={
+            0: GenericDocPair(query_id='662731', doc_id_a='193249', doc_id_b='2975302'),
+            9: GenericDocPair(query_id='411362', doc_id_a='31018', doc_id_b='4238671'),
+            269919003: GenericDocPair(query_id='88228', doc_id_a='5117891', doc_id_b='7075853')
+        })
+        self._test_docpairs('msmarco-passage/train/triples-v2', count=397768673, items={
+            0: GenericDocPair('1000094', '5399011', '4239068'),
+            9: GenericDocPair('1000094', '5399011', '6686526'),
+            397768672: GenericDocPair('999511', '1108465', '2605718'),
+        })
+        self._test_docpairs('msmarco-passage/train/triples-small', count=39780811, items={
+            0: GenericDocPair('400296', '1540783', '3518497'),
+            9: GenericDocPair('189845', '1051356', '4238671'),
+            39780810: GenericDocPair('749547', '394235', '7655192'),
+        })
 
     def test_msmarco_passage_scoreddocs(self):
         self._test_scoreddocs('msmarco-passage/train', count=478002393, items={

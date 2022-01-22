@@ -289,3 +289,367 @@ Version 1.1 of this file includes manual corrections from the authorss of the tr
 It also removes some duplicated query IDs.
 </p>'
   bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ar:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Arabic.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ar/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Arabic.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ar/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Arabic.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ar/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Arabic.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/de:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into German.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/de/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into German.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/de/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into German.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/de/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into German.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/dt:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Dutch.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/dt/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Dutch.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/dt/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Dutch.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/dt/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Dutch.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/es:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Spanish.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/es/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Spanish.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/es/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Spanish.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/es/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Spanish.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/fr:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into French.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/fr/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into French.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/fr/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into French.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/fr/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into French.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/hi:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Hindi.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/hi/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Hindi.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/hi/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Hindi.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/hi/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Hindi.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/id:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Indonesian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/id/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Indonesian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/id/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Indonesian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/id/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Indonesian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/it:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Italian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/it/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Italian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/it/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Italian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/it/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Italian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ja:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Japanese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ja/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Japanese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ja/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Japanese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ja/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Japanese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/pt:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Portuguese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/pt/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Portuguese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/pt/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Portuguese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/pt/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Portuguese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ru:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Russian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ru/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Russian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ru/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Russian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/ru/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Russian.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/vi:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Vietnamese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/vi/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Vietnamese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/vi/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Vietnamese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/vi/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Vietnamese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/zh:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage</a>, with queries and documents translated into Chinese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/zh/dev:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev</a>, with queries and documents translated into Chinese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/zh/dev/small:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/dev/small</a>, with queries and documents translated into Chinese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']
+
+v2/zh/train:
+  desc: '
+<p>
+Version of <a class="ds-ref">msmarco-passage/train</a>, with queries and documents translated into Chinese.
+</p>'
+  bibtex_ids: ['Bonifacio2021MMarco']

@@ -83,6 +83,21 @@ A small number of docpairs could not be mapped back, so they are skipped.
   docpairs_instructions: *docpairs_inst
   bibtex_ids: ['Rekabsaz2021TripClick']
 
+train/hofstaetter-triples:
+  desc: '
+<p>
+A version of <a class="ds-ref">tripclick/train</a> that replaces the original (noisy) training
+triples (docpairs) with those sampled from BM25 instead, as suggested by Hofstätter et al (2022).
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2201.00365.pdf">Paper</a></li>
+</ul>
+'
+  docs_instructions: *docs_inst
+  queries_instructions: *queries_inst
+  qrels_instructions: *qrels_inst
+  bibtex_ids: ['Rekabsaz2021TripClick', 'Hofstaetter2022TripClick']
+
 train/head:
   desc: '
 <p>
