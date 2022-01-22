@@ -13,7 +13,7 @@ The TREC Conversational Assistance Track (CAsT) is a benchmark for Conversationa
 </ul>'
   data_access: '
 <p>
-To use version 0 and version 2 of the corpus, you need a copy of the <a href="https://trec.nist.gov/data/wapost/">Washington Post Collection</a>,
+To use version 0 of the corpus, you need a copy of the <a href="https://trec.nist.gov/data/wapost/">Washington Post Collection</a>,
 provided by NIST.
 </p>
 <p>
@@ -25,10 +25,10 @@ with NIST. It can take some time to process, but you will end up with a password
 For the v0 corpus, the source file required is <kbd>WashingtonPost.v2.tar.gz</kbd>.
 ir_datasets expects the above file to be copied/linked under <kbd>~/.ir_datasets/wapo/WashingtonPost.v2.tar.gz</kbd>.
 </p>
-<p>
+<!--<p>
 For the v2 corpus, the source file required is <kbd>WashingtonPost.v4.tar.gz</kbd>.
 ir_datasets expects the above file to be copied/linked under <kbd>~/.ir_datasets/wapo/WashingtonPost.v4.tar.gz</kbd>.
-</p>
+</p>-->
 '
 
 
@@ -44,7 +44,7 @@ corpus was not included for scoring in the final version due to "an error in the
 document ids," and Washington Post documents were removed from participating systems. As such,
 <a class="ds-ref">trec-cast/v1</a> (which doesn''t include the Washington Post) should be used for
 the 2019 version of the task. However, this version still can be used for the training set
-(<a class="ds-ref">trec-cast/v1/train</a>) or for attempting to replicate the original submissions
+(<a class="ds-ref">trec-cast/v0/train</a>) or for replicating the original submissions
 to the track (prior to the removal of Washingotn Post documents).
 </p>
 <ul>
