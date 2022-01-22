@@ -1,0 +1,112 @@
+_:
+  pretty_name: 'TREC CAsT (Conversational Assistance)'
+  desc: '
+<p>
+The TREC Conversational Assistance Track (CAsT) is a benchmark for Conversational Information Seeking
+(CIS) models.
+</p>
+<ul>
+<li>Documents: Passages from Wikipedia (TREC CAR or KILT), MS MARCO, and/or the Washington Post (depending on year)</li>
+<li>Queries: raw utterences in sequence, manual/automatic re-writing of queries (depending on year)</li>
+<li>Relevance: Deep judgments</li>
+<li><a href="https://www.treccast.ai/">Track Website</a></li>
+</ul>'
+  data_access: '
+<p>
+To use version 0 of the corpus, you need a copy of the <a href="https://trec.nist.gov/data/wapost/">Washington Post Collection</a>,
+provided by NIST.
+</p>
+<p>
+Your organization may already have a copy. If this is the case, you may only need to complete a new
+"Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement"
+with NIST. It can take some time to process, but you will end up with a password-protected download link.
+</p>
+<p>
+For the v0 corpus, the source file required is <kbd>WashingtonPost.v2.tar.gz</kbd>.
+ir_datasets expects the above file to be copied/linked under <kbd>~/.ir_datasets/wapo/WashingtonPost.v2.tar.gz</kbd>.
+</p>
+<!--<p>
+For the v2 corpus, the source file required is <kbd>WashingtonPost.v4.tar.gz</kbd>.
+ir_datasets expects the above file to be copied/linked under <kbd>~/.ir_datasets/wapo/WashingtonPost.v4.tar.gz</kbd>.
+</p>-->
+'
+
+
+v0:
+  desc: '
+<p>
+Version 0 of the TREC CAsT corpus. This version uses documents from the Washington Post (version 2), TREC CAR (version 2),
+and MS MARCO passage (version 1).
+</p>
+<p>
+This corpus was originally meant to be used for evaluation of the 2019 task, but the Washington Post
+corpus was not included for scoring in the final version due to "an error in the process led to ambiguous
+document ids," and Washington Post documents were removed from participating systems. As such,
+<a class="ds-ref">trec-cast/v1</a> (which doesn''t include the Washington Post) should be used for
+the 2019 version of the task. However, this version still can be used for the training set
+(<a class="ds-ref">trec-cast/v0/train</a>) or for replicating the original submissions
+to the track (prior to the removal of Washingotn Post documents).
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2003.13624.pdf">Task Overview Paper</a></li>
+</ul>'
+  docs_instructions: &inst "WaPo docs available from NIST"
+  bibtex_ids: ['Dalton2019Cast']
+
+v0/train:
+  desc: '
+<p>
+Training set provided by TREC CAsT 2019.
+</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Dalton2019Cast']
+
+v0/train/judged:
+  desc: '
+<p>
+<a class="ds-ref">trec-cast/2019/train</a>, but with queries that do not appear in the qrels removed.
+</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Dalton2019Cast']
+
+v1:
+  desc: '
+<p>
+Version 1 of the TREC CAsT corpus. This version uses documents from the TREC CAR (version 2) and MS MARCO passage
+(version 1). This version of the corpus was used for TREC CAsT 2019 and 2020.
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2003.13624.pdf">Task Overview Paper</a></li>
+</ul>'
+  bibtex_ids: ['Dalton2019Cast']
+
+v1/2019:
+  desc: '
+<p>
+Official evaluation set for TREC CAsT 2019.
+</p>'
+  bibtex_ids: ['Dalton2019Cast']
+
+v1/2019/judged:
+  desc: '
+<p>
+<a class="ds-ref">trec-cast/v1/2019</a>, but with queries that do not appear in the qrels removed.
+</p>'
+  bibtex_ids: ['Dalton2019Cast']
+
+v1/2020:
+  desc: '
+<p>
+Official evaluation set for TREC CAsT 2020.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec29/papers/OVERVIEW.C.pdf">Task Overview Paper</a></li>
+</ul>'
+  bibtex_ids: ['Dalton2020Cast']
+
+v1/2020/judged:
+  desc: '
+<p>
+<a class="ds-ref">trec-cast/v1/2020</a>, but with queries that do not appear in the qrels removed.
+</p>'
+  bibtex_ids: ['Dalton2020Cast']

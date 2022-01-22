@@ -40,3 +40,4 @@ from . import vaswani
 from . import wapo
 from . import wikir
 from . import trec_fair_2021
+from . import trec_cast # must be after wapo,car,msmarco_passage
