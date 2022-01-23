@@ -18,11 +18,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Checkout ir-datasets.com repo
-      uses: actions/checkout@v2
-      with:
-        repository: seanmacavaney/ir-datasets.com
-        path: ir-datasets.com
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
@@ -35,19 +30,13 @@ jobs:
       env:
         IR_DATASETS_DL_DISABLE_PBAR: 'true'
       run: |
-        python -m test.downloads --filter "^antique/" --output "./ir-datasets.com/docs/dlc/antique.json" --randdelay 60
+        python -m test.downloads --filter "^antique/" --output "antique.json" --randdelay 60
     - name: Upload artifact
       if: always() # don't skip if the Test step fails (defeats the whole purpose)
       uses: actions/upload-artifact@v2
       with:
         name: "antique.json"
         path: "antique.json"
-    - uses: EndBug/add-and-commit@v8
-      if: always() # don't skip if the Test step fails (defeats the whole purpose)
-      with:
-        message: 'from verify_downloads'
-        add: 'docs/*.json'
-        cwd: './ir-datasets.com/'
 
   aol-ia:
     if: "!github.event.inputs.dataset || github.event.inputs.dataset == 'aol-ia'"
