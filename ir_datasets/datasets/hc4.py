@@ -2,6 +2,7 @@ from typing import Dict, NamedTuple
 import json
 import ir_datasets
 from ir_datasets.formats.base import BaseDocs, BaseQueries
+from ir_datasets.indices.lz4_pickle import PickleLz4FullStore
 from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import TrecQrels, GenericDoc
 from ir_datasets.formats.tsv import FileLineIter
@@ -21,18 +22,13 @@ DOC_COUNTS = {
     'ru': 4721064
 }
 
-class HC4Doc(GenericDoc):
+class HC4Doc:
+    id: str
     title: str
+    text: str
     url: str
     date: str
     cc_file: str
-
-
-def _parse_line_as_hc4doc(line):
-    line = json.loads(line)
-    line['doc_id'] = line['id']
-    del line['id']
-    return HC4Doc(**line)
 
 
 class HC4Docs(BaseDocs):
@@ -48,7 +44,17 @@ class HC4Docs(BaseDocs):
     @ir_datasets.util.use_docstore
     def docs_iter(self):
         line_iter = FileLineIter(self._docs_dlc, start=0, stop=self._count, step=1)
-        return map(_parse_line_as_hc4doc, line_iter)
+        return map(lambda line: HC4Doc(**json.loads(line)), line_iter)
+
+    def docs_store(self):
+        return PickleLz4FullStore(
+            path=f'{self.docs_path(force=False)}.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field='id',
+            index_fields=['id'],
+            count_hint=self._count,
+        )
 
     def docs_cls(self):
         return HC4Doc
