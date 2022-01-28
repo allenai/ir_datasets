@@ -3586,74 +3586,74 @@
 
 "hc4": {
   "train/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/train.topics.v1-0.jsonl",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
     "size_hint": 104898,
     "expected_md5": "5f564d2e28b55be04bebb5247d675a54"
   },
   "dev/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/dev.topics.v1-0.jsonl",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/dev.topics.v1-0.jsonl",
     "size_hint": 81444,
     "expected_md5": "a9486194c5072d6ea5ce3ef0109b0558"
   },
   "test/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/test.topics.v1-0.jsonl",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/test.topics.v1-0.jsonl",
     "size_hint": 964434,
     "expected_md5": "45d7473c1f870fc4281ce0084af44cd2"
   },
   "fa/docs": {
     "instructions": "[Placeholder]",
-    "cache_path": "corpus"
+    "cache_path": "fas/hc4_docs.jsonl"
   },
   "fa/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/fas/train.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/train.qrels.v1-0.txt",
     "size_hint": 5152,
     "expected_md5": "4a343957837ce996a7275a71a30ed806"
   },
   "fa/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/fas/dev.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/dev.qrels.v1-0.txt",
     "size_hint": 24574,
     "expected_md5": "d66b62e3733a66b151f895e2f57ee144"
   },
   "fa/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/fas/test.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/test.qrels.v1-0.txt",
     "size_hint": 113490,
     "expected_md5": "842c307e3e01a688897fadefc7a9672f"
   },
   "zh/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/zho/train.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
     "size_hint": 15686,
     "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987"
   },
   "zh/docs": {
     "instructions": "[Placeholder]",
-    "cache_path": "corpus"
+    "cache_path": "zho/hc4_docs.jsonl"
   },
   "zh/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/zho/dev.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/dev.qrels.v1-0.txt",
     "size_hint": 20126,
     "expected_md5": "f252fb5edeee1fa38ccc8ee1c2a6e6f0"
   },
   "zh/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/zho/test.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/test.qrels.v1-0.txt",
     "size_hint": 123795,
     "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea"
   },
   "ru/docs": {
     "instructions": "[Placeholder]",
-    "cache_path": "corpus"
+    "cache_path": "rus/hc4_docs.jsonl"
   },
   "ru/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/rus/train.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/train.qrels.v1-0.txt",
     "size_hint": 4232,
     "expected_md5": "2e2c52e404a6ee0fe676cb88d63c26bb"
   },
   "ru/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/rus/dev.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/dev.qrels.v1-0.txt",
     "size_hint": 11532,
     "expected_md5": "24305749fd39fb0392be171e76ef2510"
   },
   "ru/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resouces/hc4/rus/test.qrels.v1-0.txt",
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/test.qrels.v1-0.txt",
     "size_hint": 133650,
     "expected_md5": "1d1112350a11289496426ea558c321a2"
   }

@@ -4,8 +4,7 @@ import ir_datasets
 from ir_datasets.formats.base import BaseDocs, BaseQueries
 from ir_datasets.indices.lz4_pickle import PickleLz4FullStore
 from ir_datasets.util import DownloadConfig
-from ir_datasets.formats import TrecQrels, GenericDoc
-from ir_datasets.formats.tsv import FileLineIter
+from ir_datasets.formats import TrecQrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 NAME = 'hc4'
@@ -17,17 +16,17 @@ LANG_CODE_CONVERT = {
 }
 
 DOC_COUNTS = {
-    'zh': 646305,
-    'fa': 486486,
+    'zh': 646809,
+    'fa': 486684,
     'ru': 4721064
 }
 
-class HC4Doc:
-    id: str
+class HC4Doc(NamedTuple):
+    doc_id: str
     title: str
     text: str
     url: str
-    date: str
+    time: str
     cc_file: str
 
 
@@ -43,16 +42,20 @@ class HC4Docs(BaseDocs):
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
-        line_iter = FileLineIter(self._docs_dlc, start=0, stop=self._count, step=1)
-        return map(lambda line: HC4Doc(**json.loads(line)), line_iter)
+        with self._docs_dlc.stream() as f:
+            for line in f:
+                line = json.loads(line)
+                line['doc_id'] = line['id']
+                del line['id']
+                yield HC4Doc(**line)
 
     def docs_store(self):
         return PickleLz4FullStore(
             path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
-            lookup_field='id',
-            index_fields=['id'],
+            lookup_field='doc_id',
+            index_fields=['doc_id'],
             count_hint=self._count,
         )
 
@@ -103,7 +106,7 @@ class HC4Queries(BaseQueries):
         with self._queries_dlc.stream() as f:
             for line in f:
                 line = json.loads(line)
-                if self._subset_lang_hc4 in line['lang_supported']:
+                if self._subset_lang_hc4 in line['languages_with_qrels']:
                     yield self._produce_query(line)
     
     def _produce_query(self, line):
@@ -125,9 +128,9 @@ class HC4Queries(BaseQueries):
             mt_title=resources['mt']['topic_title'],
             mt_description=resources['mt']['topic_description'],
             narrative=line['narratives'][self._subset_lang_hc4],
-            report=line['reports']['text'],
-            report_url=line['reports']['url'],
-            report_date=line['reports']['date'],
+            report=line['report']['text'],
+            report_url=line['report']['url'],
+            report_date=line['report']['date'],
             translation_lang=self._subset_lang
         )
 
@@ -148,14 +151,12 @@ def _init():
 
     for lang in ['zh', 'fa', 'ru']:
         subsets[lang] = Dataset(
-            HC4Docs(dlc[f'{LANG_CODE_CONVERT[lang]}/docs']),
-            documentation(lang)
+            HC4Docs(dlc[f'{lang}/docs'], subset_lang=lang)
         )
         for sep in ['train', 'dev', 'test']:
             subsets[f'{lang}/{sep}'] = Dataset(
-                HC4Queries(dlc[f'{sep}/topics']),
-                TrecQrels(dlc[f'{lang}/{sep}/qrels'], QREL_DEFS),
-                documentation(f'{lang}/{sep}')
+                HC4Queries(dlc[f'{sep}/topics'], subset_lang=lang),
+                TrecQrels(dlc[f'{lang}/{sep}/qrels'], QREL_DEFS)
             )
     
     ir_datasets.registry.register(NAME, base)
