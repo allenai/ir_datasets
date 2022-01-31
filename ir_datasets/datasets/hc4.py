@@ -17,7 +17,7 @@ LANG_CODE_CONVERT = {
 
 DOC_COUNTS = {
     'zh': 646305,
-    'fa': 486684,
+    'fa': 486486,
     'ru': 4721064
 }
 

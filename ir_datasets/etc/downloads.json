@@ -3588,17 +3588,17 @@
   "train/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
     "size_hint": 104898,
-    "expected_md5": "5f564d2e28b55be04bebb5247d675a54"
+    "expected_md5": "cf3a43c4085e28ce03f37704771e0e36"
   },
   "dev/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/dev.topics.v1-0.jsonl",
     "size_hint": 81444,
-    "expected_md5": "a9486194c5072d6ea5ce3ef0109b0558"
+    "expected_md5": "4c34c546c3e90de4733c3c9411ce9c6d"
   },
   "test/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/test.topics.v1-0.jsonl",
     "size_hint": 964434,
-    "expected_md5": "45d7473c1f870fc4281ce0084af44cd2"
+    "expected_md5": "a311237913a7335d45fe261e9ff7f11e"
   },
   "fa/docs": {
     "instructions": "[Placeholder]",
