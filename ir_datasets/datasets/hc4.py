@@ -80,7 +80,7 @@ class HC4Query(NamedTuple):
     ht_description: str
     mt_title: str
     mt_description: str
-    narrative: Dict[str, str]
+    narrative_by_relevance: Dict[str, str]
     report: str
     report_url: str
     report_date: str
@@ -127,7 +127,7 @@ class HC4Queries(BaseQueries):
             ht_description=resources['ht']['topic_description'],
             mt_title=resources['mt']['topic_title'],
             mt_description=resources['mt']['topic_description'],
-            narrative=line['narratives'][self._subset_lang_hc4],
+            narrative_by_relevance=line['narratives'][self._subset_lang_hc4],
             report=line['report']['text'],
             report_url=line['report']['url'],
             report_date=line['report']['date'],
