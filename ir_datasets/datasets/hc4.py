@@ -157,7 +157,8 @@ def _init():
         for sep in ['train', 'dev', 'test']:
             subsets[f'{lang}/{sep}'] = Dataset(
                 HC4Queries(dlc[f'{sep}/topics'], subset_lang=lang),
-                TrecQrels(dlc[f'{lang}/{sep}/qrels'], QREL_DEFS)
+                TrecQrels(dlc[f'{lang}/{sep}/qrels'], QREL_DEFS),
+                documentation(f'{lang}/{sep}'),
             )
     
     ir_datasets.registry.register(NAME, base)
