@@ -150,12 +150,14 @@ def _init():
     base = Dataset(documentation('_')) # dummy top level ds
 
     for lang in ['zh', 'fa', 'ru']:
+        lang_docs = HC4Docs(dlc[f'{lang}/docs'], subset_lang=lang)
         subsets[lang] = Dataset(
-            HC4Docs(dlc[f'{lang}/docs'], subset_lang=lang),
+            lang_docs,
             documentation(lang)
         )
         for sep in ['train', 'dev', 'test']:
             subsets[f'{lang}/{sep}'] = Dataset(
+                lang_docs,
                 HC4Queries(dlc[f'{sep}/topics'], subset_lang=lang),
                 TrecQrels(dlc[f'{lang}/{sep}/qrels'], QREL_DEFS),
                 documentation(f'{lang}/{sep}'),
