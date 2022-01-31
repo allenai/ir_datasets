@@ -3601,7 +3601,7 @@
     "expected_md5": "a311237913a7335d45fe261e9ff7f11e"
   },
   "fa/docs": {
-    "instructions": "[Placeholder]",
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "fas/hc4_docs.jsonl"
   },
   "fa/train/qrels": {
@@ -3625,7 +3625,7 @@
     "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987"
   },
   "zh/docs": {
-    "instructions": "[Placeholder]",
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "zho/hc4_docs.jsonl"
   },
   "zh/dev/qrels": {
@@ -3639,7 +3639,7 @@
     "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea"
   },
   "ru/docs": {
-    "instructions": "[Placeholder]",
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "rus/hc4_docs.jsonl"
   },
   "ru/train/qrels": {

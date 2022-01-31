@@ -151,7 +151,8 @@ def _init():
 
     for lang in ['zh', 'fa', 'ru']:
         subsets[lang] = Dataset(
-            HC4Docs(dlc[f'{lang}/docs'], subset_lang=lang)
+            HC4Docs(dlc[f'{lang}/docs'], subset_lang=lang),
+            documentation(lang)
         )
         for sep in ['train', 'dev', 'test']:
             subsets[f'{lang}/{sep}'] = Dataset(

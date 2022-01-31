@@ -21,6 +21,13 @@ python download_documents.py --storage ~/.ir_datasets/hc4/ \ <br/>
                              --jobs {number of process} \ <br/>
                              --check_hash <br/>
 </code>
+After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
+modify the ordering of the collection to match the original specified ordering in the id files. 
+<code>
+python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \
+                             --id_file ./resources/hc4/{lang}/ids*.jsonl.gz \
+                             --check_hash
+</code>
 You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/hc4/</kbd>.
 </p>
 
@@ -37,4 +44,31 @@ You can also store the documents in other directory and create a soft link for <
   <li><a href="https://github.com/hltcoe/HC4">Repository</a></li>
   <li><a href="https://arxiv.org/abs/2201.09992">Dataset Paper</a></li>
 </ul>'
+  bibtex_ids: ['Lawrie2022HC4']
+
+zh:
+  pretty_name: 'Chinese collection of HC4'
+  dec: '
+The Chinese collection contains English queries and Chinese documents for retrieval. 
+Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Chinese is available. 
+'
+  bibtex_ids: ['Lawrie2022HC4']
+
+fa:
+  pretty_name: 'Persian collection of HC4'
+  dec: '
+The Persian collection contains English queries and Persian documents for retrieval. 
+Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Persian is available. 
+'
+  bibtex_ids: ['Lawrie2022HC4']
+
+ru:
+  pretty_name: 'Russian collection of HC4'
+  dec: '
+The Russian collection contains English queries and Russian documents for retrieval. 
+Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Russian is available. 
+'
   bibtex_ids: ['Lawrie2022HC4']
