@@ -6,6 +6,21 @@ HC4 is a new suite of test collections for ad hoc Cross-Language Information Ret
 with Common Crawl News documents in Chinese, Persian, and Russian, topics in English and in 
 the document languages, and graded relevance judgments.
 </p>
+<ul>
+  <li>Documents: Web pages from Common Crawl in Chinese, Persian, and Russian.</li>
+  <li>
+  Queries: English TREC-style title/description queries. Narrative field contains an example passage for each relevance level.
+  Human and machine translation of the titles and descriptions in the target language (i.e., document language) are provided in the query object. 
+  (Titles and descriptions are machine-translated into all three target languages even in the laguages that they are not assessed to facillate CLIR 
+  other than English-to-X pairs, e.g., Persian-to-Chinese. Please refer to the original dataset repository for these additional resources.)
+  </li>
+  <li>Report: Each query comes with an English report that is designed to be written by professional searchers prior to the search.</li>
+  <li>Qrels: Documents are judged in three levels of relevance. Please refer to the dataset paper for the full definition of the levels. </li>
+  <li><a href="https://github.com/hltcoe/HC4">Repository</a></li>
+  <li><a href="https://arxiv.org/abs/2201.09992">Dataset Paper</a></li>
+</ul>'
+  bibtex_ids: ['Lawrie2022HC4']
+  data_access: '
 <p>
 To access the docuemnts of this dataset, you will need to download the documents from Common Crawl. 
 The script for downloading and validating the documents are in <a href="https://github.com/hltcoe/HC4">HLTCOE/HC4</a>. 
@@ -30,21 +45,7 @@ python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \
 </code>
 You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/hc4/</kbd>.
 </p>
-
-<ul>
-  <li>Documents: Web pages from Common Crawl in Chinese, Persian, and Russian.</li>
-  <li>
-  Queries: English TREC-style title/description queries. Narrative field contains an example passage for each relevance level.
-  Human and machine translation of the titles and descriptions in the target language (i.e., document language) are provided in the query object. 
-  (Titles and descriptions are machine-translated into all three target languages even in the laguages that they are not assessed to facillate CLIR 
-  other than English-to-X pairs, e.g., Persian-to-Chinese. Please refer to the original dataset repository for these additional resources.)
-  </li>
-  <li>Report: Each query comes with an English report that is designed to be written by professional searchers prior to the search.</li>
-  <li>Qrels: Documents are judged in three levels of relevance. Please refer to the dataset paper for the full definition of the levels. </li>
-  <li><a href="https://github.com/hltcoe/HC4">Repository</a></li>
-  <li><a href="https://arxiv.org/abs/2201.09992">Dataset Paper</a></li>
-</ul>'
-  bibtex_ids: ['Lawrie2022HC4']
+'
 
 zh:
   pretty_name: 'Chinese collection of HC4'
