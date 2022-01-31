@@ -42,8 +42,8 @@ After download, please also post-process the downloaded file to verify all and o
 modify the ordering of the collection to match the original specified ordering in the id files. 
 </p>
 <code>
-python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \
-                             --id_file ./resources/hc4/{lang}/ids*.jsonl.gz \
+python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \ <br/>
+                             --id_file ./resources/hc4/{lang}/ids*.jsonl.gz \ <br/>
                              --check_hash
 </code>
 <p>
