@@ -1,5 +1,5 @@
 _:
-  pretty_name: 'HC4: A New Suite of Test Collections for Ad Hoc CLIR'
+  pretty_name: 'HC4 (HLTCOE CLIR Common-Crawl Collection)'
   desc: '
 <p>
 HC4 is a new suite of test collections for ad hoc Cross-Language Information Retrieval (CLIR), 
@@ -52,7 +52,6 @@ You can also store the documents in other directory and create a soft link for <
 '
 
 zh:
-  pretty_name: 'Chinese collection of HC4'
   desc: '
 <p>
 The Chinese collection contains English queries and Chinese documents for retrieval. 
@@ -87,7 +86,6 @@ Test split of <a class="ds-ref">hc4/zh</a>.
   bibtex_ids: ['Lawrie2022HC4']
 
 fa:
-  pretty_name: 'Persian collection of HC4'
   desc: '
 <p>
 The Persian collection contains English queries and Persian documents for retrieval. 
@@ -122,7 +120,6 @@ Test split of <a class="ds-ref">hc4/fa</a>.
   bibtex_ids: ['Lawrie2022HC4']
 
 ru:
-  pretty_name: 'Russian collection of HC4'
   desc: '
 <p>
 The Russian collection contains English queries and Russian documents for retrieval. 
