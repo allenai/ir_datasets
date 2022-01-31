@@ -50,80 +50,104 @@ You can also store the documents in other directory and create a soft link for <
 zh:
   pretty_name: 'Chinese collection of HC4'
   desc: '
+<p>
 The Chinese collection contains English queries and Chinese documents for retrieval. 
 Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
 assuming the machine query tranlstion into Chinese is available. 
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/train:
   desc: '
+<p>
 Train split of <a class="ds-ref">hc4/zh</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/dev:
   desc: '
+<p>
 Development split of <a class="ds-ref">hc4/zh</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/test:
   desc: '
+<p>
 Test split of <a class="ds-ref">hc4/zh</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 fa:
   pretty_name: 'Persian collection of HC4'
   desc: '
+<p>
 The Persian collection contains English queries and Persian documents for retrieval. 
 Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
 assuming the machine query tranlstion into Persian is available. 
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/train:
   desc: '
+<p>
 Train split of <a class="ds-ref">hc4/fa</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/dev:
   desc: '
+<p>
 Development split of <a class="ds-ref">hc4/fa</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/test:
   desc: '
+<p>
 Test split of <a class="ds-ref">hc4/fa</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 ru:
   pretty_name: 'Russian collection of HC4'
   desc: '
+<p>
 The Russian collection contains English queries and Russian documents for retrieval. 
 Human and machine translated queries are provided in the query object for running monolingual retrieval or cross-language retrival 
 assuming the machine query tranlstion into Russian is available. 
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/train:
   desc: '
+<p>
 Train split of <a class="ds-ref">hc4/ru</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/dev:
   desc: '
+<p>
 Development split of <a class="ds-ref">hc4/ru</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/test:
   desc: '
+<p>
 Test split of <a class="ds-ref">hc4/ru</a>.
+</p>
 '
   bibtex_ids: ['Lawrie2022HC4']
