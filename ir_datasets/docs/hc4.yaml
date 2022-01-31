@@ -25,6 +25,7 @@ the document languages, and graded relevance judgments.
 To access the docuemnts of this dataset, you will need to download the documents from Common Crawl. 
 The script for downloading and validating the documents are in <a href="https://github.com/hltcoe/HC4">HLTCOE/HC4</a>. 
 Please use the following command to download the documents:
+</p>
 <code>
 git clone https://github.com/hltcoe/HC4<br/>
 cd HC4<br/>
@@ -36,13 +37,16 @@ python download_documents.py --storage ~/.ir_datasets/hc4/ \ <br/>
                              --jobs {number of process} \ <br/>
                              --check_hash <br/>
 </code>
+<p>
 After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
 modify the ordering of the collection to match the original specified ordering in the id files. 
+</p>
 <code>
 python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \
                              --id_file ./resources/hc4/{lang}/ids*.jsonl.gz \
                              --check_hash
 </code>
+<p>
 You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/hc4/</kbd>.
 </p>
 '
