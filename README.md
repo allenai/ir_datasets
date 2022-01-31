@@ -168,6 +168,7 @@ Available datasets include:
  - [DPR Wiki100](https://ir-datasets.com/dpr-w100.html)
  - [GOV](https://ir-datasets.com/gov.html)
  - [GOV2](https://ir-datasets.com/gov2.html)
+ - [HC4](https://ir-datasets.com/hc4.html)
  - [Highwire (TREC Genomics 2006-07)](https://ir-datasets.com/highwire.html)
  - [Medline](https://ir-datasets.com/medline.html)
  - [MSMARCO (document)](https://ir-datasets.com/msmarco-document.html)
