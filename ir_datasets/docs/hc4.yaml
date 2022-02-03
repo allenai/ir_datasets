@@ -41,7 +41,7 @@ After download, please also post-process the downloaded file to verify all and o
 modify the ordering of the collection to match the original specified ordering in the id files. 
 </p>
 <code>
-for lang in zho fas rus; do
+for lang in zho fas rus; do <br/>
 &nbsp;&nbsp;python fix_document_order.py --hc4_file ~/.ir_datasets/hc4/$lang/hc4_docs.jsonl \ <br/>
 &nbsp;&nbsp;                             --id_file ./resources/hc4/$lang/ids*.jsonl.gz \ <br/>
 &nbsp;&nbsp;                             --check_hash <br/>
