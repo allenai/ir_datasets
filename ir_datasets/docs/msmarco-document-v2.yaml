@@ -108,3 +108,12 @@ Note that at this time, this is only available to those with TREC active partici
   qrels_instructions: *trec_inst
   queries_instructions: *trec_inst
   official_measures: ['AP@100', 'nDCG@10', 'P@10', 'RR(rel=2)']
+
+anchor-text:
+  pretty_name: "Anchor Text for version 2 of MS Marco"
+  desc: '
+<p>
+For version 2 of MS MARCO, the anchor text collection enriches 4,821,244 documents with anchor text extracted from six Common Crawl snapshots. To keep the collection size reasonable, we sampled 1,000 anchor texts for documents with more than 1,000 anchor texts (this sampling yields that all anchor text is included for 97% of the documents). The <code>text</code> field contains the anchor texts concatenated and the <code>anchors</code> field contains the anchor texts as list. The raw dataset with additional information (roughly 100GB) is <a href="https://github.com/webis-de/ecir22-anchor-text">available online</a>.
+</p>
+'
+  bibtex_ids: ['Froebe2022Anchors']

@@ -6,14 +6,19 @@ from .base import DatasetIntegrationTest
 
 
 class TestCar(DatasetIntegrationTest):
-    def test_car_docs(self):
+    def test_docs(self):
         self._test_docs('car/v1.5', count=29678367, items={
             0: GenericDoc('0000000e7e72cafb61a9f356b7dceb25c5e028db', re.compile("^Ukraine was one of the most dangerous places for journalists in the world during the euromaidan demo.{311}ened in Donetsk in April 2014\\. In July 2014 a firebomb was thrown at the TV channel ''112 Ukraine''\\.$", flags=48)),
             9: GenericDoc('000006d5c22f4efbb6b963ea819e976a4b28600b', re.compile('^To mark the 40th anniversary of "Bohemian Rhapsody", the song was released on a limited edition 12" .{174}on CD, DVD \\& Blu\\-ray\\. This includes the first ever live recorded performance of "Bohemian Rhapsody"\\.$', flags=48)),
             29678366: GenericDoc('ffffffb9eec6224bef5da06e829eef59a37748c6', re.compile('^Fisher recommended Louis as First Sea Lord: "He is the most capable administrator in the Admiralty\'s.{472}that would prepare the navy\'s plans in case of war\\. He was promoted to full admiral on 13 July 1912\\.$', flags=48)),
         })
+        self._test_docs('car/v2.0', count=29794697, items={
+            0: GenericDoc('00000047dc43083f49b68399c6deeed5c0e81c1f', re.compile('^On 28 October 1943, Fuller sailed from Efate, New Hebrides, for the initial landings on Bougainville.{456}damage, and twice more during the following month and a half carried reinforcements to Bougainville\\.$', flags=48)),
+            9: GenericDoc('0000070402dbaf074bc1e3ba487036322ef8ce86', re.compile('^In 1662, the then Governor of Jamaica, Lord Windsor, received royal instructions to protect  the "Ca.{527} its landward side to five feet on its seaward side, with the walls being about five feet in height\\.$', flags=48)),
+            29794696: GenericDoc('ffffffb9eec6224bef5da06e829eef59a37748c6', re.compile('^Fisher recommended Louis as First Sea Lord: "He is the most capable administrator in the Admiralty\'s.{472}that would prepare the navy\'s plans in case of war\\. He was promoted to full admiral on 13 July 1912\\.$', flags=48)),
+        })
 
-    def test_car_queries(self):
+    def test_queries(self):
         self._test_queries('car/v1.5/trec-y1', count=2287, items={
             0: CarQuery('Fudge/History', 'Fudge History', 'Fudge', ('History',)),
             9: CarQuery('Glass%20ceiling/Glass%20Ceiling%20Index', 'Glass ceiling Glass Ceiling Index', 'Glass ceiling', ('Glass Ceiling Index',)),
@@ -50,7 +55,7 @@ class TestCar(DatasetIntegrationTest):
             468788: CarQuery('Manchester%20International%20Organ%20Competition/1986%20-%20Fifth%20competition', 'Manchester International Organ Competition 1986 - Fifth competition', 'Manchester International Organ Competition', ('1986 - Fifth competition',)),
         })
 
-    def test_car_qrels(self):
+    def test_qrels(self):
         self._test_qrels('car/v1.5/trec-y1/auto', count=5820, items={
             0: TrecQrel('Aftertaste/Aftertaste%20processing%20in%20the%20cerebral%20cortex', '38c1bd25ddca2705164677a3f598c46df85afba7', 1, '0'),
             9: TrecQrel('Aftertaste/Temporal%20taste%20perception', '8a41a87100d139bb9c108c8cab2ac3baaabea3ce', 1, '0'),

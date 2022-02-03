@@ -1,6 +1,6 @@
 import re
 import unittest
-from ir_datasets.datasets.msmarco_document_v2 import MsMarcoV2Document
+from ir_datasets.datasets.msmarco_document_v2 import MsMarcoV2Document, MsMarcoV2AnchorTextDocument
 from ir_datasets.formats import GenericQuery, TrecQrel, GenericScoredDoc
 from .base import DatasetIntegrationTest
 
@@ -127,6 +127,12 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('2082', 'msmarco_doc_03_1735682452', 15.3067),
             9: GenericScoredDoc('2082', 'msmarco_doc_01_1320056135', 14.554399),
             47699: GenericScoredDoc('1136769', 'msmarco_doc_57_1870160943', 15.2451),
+        })
+
+    def test_anchor_text(self):
+        self._test_docs("msmarco-document-v2/anchor-text", count=4821244, items={
+            0: MsMarcoV2AnchorTextDocument('msmarco_doc_53_1505820116', 'this simple tutorial', ['this simple tutorial']),
+            4821243: MsMarcoV2AnchorTextDocument('msmarco_doc_43_1173903097', 'Emily Deschanel Biography for Emily Deschanel Emily Deschanel \u2013 Biography http://www.imdb.com/name/nm0221043/bio Biography for Emily Deschanel Emily Deschanel \u2013 Biography Emily Deschanel http://www.imdb.com/name/nm0221043/bio http://www.imdb.com/name/nm0221043/bio', ['Emily Deschanel', 'Biography for Emily Deschanel', 'Emily Deschanel \u2013 Biography', 'http://www.imdb.com/name/nm0221043/bio', 'Biography for Emily Deschanel', 'Emily Deschanel \u2013 Biography', 'Emily Deschanel', 'http://www.imdb.com/name/nm0221043/bio', 'http://www.imdb.com/name/nm0221043/bio']),
         })
 
 

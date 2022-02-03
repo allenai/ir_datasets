@@ -92,3 +92,11 @@ pages (i.e., paragraphs under a header are assumed relevant.)
 </p>
 '
   bibtex_ids: ['Dietz2017TrecCar', 'Dietz2017Car']
+
+v2.0:
+  desc: '
+<p>
+Version 2.0 of the TREC CAR dataset.
+</p>
+'
+  bibtex_ids: ['Dietz2017Car']

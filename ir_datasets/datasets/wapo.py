@@ -74,6 +74,53 @@ class WapoDocs(BaseDocs):
 
     def _docs_iter(self):
         BeautifulSoup = ir_datasets.lazy_libs.bs4().BeautifulSoup
+        for doc_json in self.docs_wapo_raw_iter():
+            body = ''
+            kicker = ''
+            body_paras_html = []
+            body_media = []
+            for content in doc_json['contents']:
+                if content is None:
+                    continue
+                if content.get('type') == 'kicker':
+                    assert content['mime'] == 'text/plain'
+                    if content['content'] is not None:
+                        kicker += content['content'] + '\n'
+                elif content.get('type') == 'sanitized_html':
+                    if content.get('content') is not None:
+                        body_paras_html.append(content['content'])
+                        if content.get('mime') == 'text/html':
+                            body += BeautifulSoup(content['content'], 'lxml-xml').get_text() + '\n'
+                        else:
+                            body += content['content'] + '\n'
+                elif content.get('type') in ['image', 'tweet', 'video', 'gallery']:
+                    url = {
+                        'image': lambda: content['imageURL'],
+                        'video': lambda: content['contenturl'],
+                        'gallery': lambda: content['contenturl'],
+                        'tweet': lambda: f"https://twitter.com/{content['content']['user']['screen_name']}/status/{content['content']['id_str']}",
+                    }[content['type']]()
+                    text = {
+                        'image': lambda: content.get('fullcaption'),
+                        'video': lambda: content.get('blurb'),
+                        'gallery': lambda: content.get('blurb'),
+                        'tweet': lambda: content['content']['text'],
+                    }[content['type']]()
+                    body_media.append(WapoDocMedia(content['type'], url, text))
+                    if text is not None:
+                        body += text + '\n'
+            yield WapoDoc(
+                doc_json['id'],
+                doc_json['article_url'],
+                doc_json['title'],
+                doc_json['author'],
+                doc_json['published_date'],
+                kicker.rstrip('\n'),
+                body.rstrip('\n'),
+                tuple(body_paras_html),
+                tuple(body_media))
+
+    def docs_wapo_raw_iter(self):
         with self._dlc.stream() as stream:
             with tarfile.open(fileobj=stream, mode='r|gz') as tarf:
                 for member in tarf:
@@ -82,50 +129,7 @@ class WapoDocs(BaseDocs):
                     file = tarf.extractfile(member)
                     for line in file:
                         doc_json = json.loads(line)
-                        body = ''
-                        kicker = ''
-                        body_paras_html = []
-                        body_media = []
-                        for content in doc_json['contents']:
-                            if content is None:
-                                continue
-                            if content.get('type') == 'kicker':
-                                assert content['mime'] == 'text/plain'
-                                if content['content'] is not None:
-                                    kicker += content['content'] + '\n'
-                            elif content.get('type') == 'sanitized_html':
-                                if content.get('content') is not None:
-                                    body_paras_html.append(content['content'])
-                                    if content.get('mime') == 'text/html':
-                                        body += BeautifulSoup(content['content'], 'lxml-xml').get_text() + '\n'
-                                    else:
-                                        body += content['content'] + '\n'
-                            elif content.get('type') in ['image', 'tweet', 'video', 'gallery']:
-                                url = {
-                                    'image': lambda: content['imageURL'],
-                                    'video': lambda: content['contenturl'],
-                                    'gallery': lambda: content['contenturl'],
-                                    'tweet': lambda: f"https://twitter.com/{content['content']['user']['screen_name']}/status/{content['content']['id_str']}",
-                                }[content['type']]()
-                                text = {
-                                    'image': lambda: content.get('fullcaption'),
-                                    'video': lambda: content.get('blurb'),
-                                    'gallery': lambda: content.get('blurb'),
-                                    'tweet': lambda: content['content']['text'],
-                                }[content['type']]()
-                                body_media.append(WapoDocMedia(content['type'], url, text))
-                                if text is not None:
-                                    body += text + '\n'
-                        yield WapoDoc(
-                            doc_json['id'],
-                            doc_json['article_url'],
-                            doc_json['title'],
-                            doc_json['author'],
-                            doc_json['published_date'],
-                            kicker.rstrip('\n'),
-                            body.rstrip('\n'),
-                            tuple(body_paras_html),
-                            tuple(body_media))
+                        yield doc_json
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(

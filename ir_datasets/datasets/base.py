@@ -310,6 +310,9 @@ class FilteredQueries(BaseQueries):
     def queries_handler(self):
         return self
 
+    def queries_lang(self):
+        return self._queries_handler.queries_lang()
+
 
 class FilteredQrels(BaseQrels):
     def __init__(self, qrels_handler, lazy_qids, mode='include'):

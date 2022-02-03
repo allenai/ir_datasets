@@ -399,8 +399,9 @@ class TrecPrels(TrecQrels):
 
 
 class TrecScoredDocs(BaseScoredDocs):
-    def __init__(self, scoreddocs_dlc):
+    def __init__(self, scoreddocs_dlc, negate_score=False):
         self._scoreddocs_dlc = scoreddocs_dlc
+        self._negate_score = negate_score
 
     def scoreddocs_path(self):
         return self._scoreddocs_dlc.path()
@@ -411,7 +412,12 @@ class TrecScoredDocs(BaseScoredDocs):
             for line in f:
                 cols = line.rstrip().split()
                 if len(cols) == 6:
-                    qid, _, did, _, score, _ = cols
+                    qid, _, did, _, score, _ = cols # TREC-style (qid iteration did score rank score runtag
                 elif len(cols) == 2:
-                    qid, did, score = *cols, '0'
-                yield GenericScoredDoc(qid, did, float(score))
+                    qid, did, score = *cols, '0' # MS MARCO-style (qid did -- only)
+                elif len(cols) == 3:
+                    qid, did, score = cols # MMARCO-style (qid did score)
+                score = float(score)
+                if self._negate_score:
+                    score = -score
+                yield GenericScoredDoc(qid, did, score)
