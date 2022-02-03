@@ -34,17 +34,18 @@ python download_documents.py --storage ~/.ir_datasets/hc4/ \ <br/>
                              --zho ./resources/hc4/zho/ids.jsonl.gz \ <br/>
                              --fas ./resources/hc4/fas/ids.jsonl.gz \ <br/>
                              --rus ./resources/hc4/rus/ids.*.jsonl.gz \ <br/>
-                             --jobs {number of process} \ <br/>
-                             --check_hash <br/>
+                             --jobs {number of process}<br/>
 </code>
 <p>
 After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
 modify the ordering of the collection to match the original specified ordering in the id files. 
 </p>
 <code>
-python fix_document_order.py --hc4_file ./data/{lang}/hc4_docs.jsonl \ <br/>
-                             --id_file ./resources/hc4/{lang}/ids*.jsonl.gz \ <br/>
-                             --check_hash
+for lang in zho fas rus; do
+&nbsp;&nbsp;python fix_document_order.py --hc4_file ~/.ir_datasets/hc4/$lang/hc4_docs.jsonl \ <br/>
+&nbsp;&nbsp;                             --id_file ./resources/hc4/$lang/ids*.jsonl.gz \ <br/>
+&nbsp;&nbsp;                             --check_hash <br/>
+done
 </code>
 <p>
 You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/hc4/</kbd>.
