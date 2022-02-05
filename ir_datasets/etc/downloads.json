@@ -1452,6 +1452,15 @@
   }
 },
 
+"lotte": {
+  "source": {
+    "url": "https://downloads.cs.stanford.edu/nlp/data/colbert/colbertv2/lotte.tar.gz",
+    "size_hint": 3576167599,
+    "expected_md5": "3b2e88b1d66933627462950b4c3f5d0f",
+    "cache_path": "lotte.tar.gz"
+  }
+},
+
 "medline": {
   "2004/a": {
     "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_A.gz",

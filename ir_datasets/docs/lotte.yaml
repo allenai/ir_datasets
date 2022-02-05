@@ -1,0 +1,332 @@
+_:
+  pretty_name: 'LoTTE'
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+LoTTE (Long-Tail Topic-stratified Evaluation) is a set of test collections focused on
+out-of-domain evaluation. It consists of data from several StackExchanges, with relevance
+assumed by either by upvotes (at least 1) or being selected as the accepted answer by the
+question''s author.
+</p>
+<p>
+Note that the dev and test corpora are disjoint to avoid leakage.
+</p>
+<ul>
+  <li>Documents: Answers to StackExchange questions</li>
+  <li>Queries: Natural language questions</li>
+  <li><a href="https://arxiv.org/pdf/2112.01488.pdf">Dataset Paper</a></li>
+</ul>
+'
+
+
+lifestyle/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from lifestyle-focused forums, including bicycles, coffee, crafts, diy, gardening, lifehacks, mechanics, music, outdoors, parenting, pets, sports, and travel.
+</p>
+'
+
+lifestyle/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/lifestyle/dev</a>.
+</p>
+'
+
+lifestyle/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/lifestyle/dev</a>.
+</p>
+'
+
+lifestyle/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Queries and answers from lifestyle-focused forums, including bicycles, coffee, crafts, diy, gardening, lifehacks, mechanics, music, outdoors, parenting, pets, sports, and travel.
+</p>
+'
+
+lifestyle/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/lifestyle/test</a>.
+</p>
+'
+
+lifestyle/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/lifestyle/test</a>.
+</p>
+'
+
+pooled/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Combined version of <a class="ds-ref">lotte/lifestyle/dev</a>, <a class="ds-ref">lotte/recreation/dev</a>, <a class="ds-ref">lotte/science/dev</a>, <a class="ds-ref">lotte/technology/dev</a>, and <a class="ds-ref">lotte/writing/dev</a>.
+</p>
+'
+
+pooled/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/pooled/dev</a>.
+</p>
+'
+
+pooled/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/pooled/dev</a>.
+</p>
+'
+
+pooled/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Combined version of <a class="ds-ref">lotte/lifestyle/test</a>, <a class="ds-ref">lotte/recreation/test</a>, <a class="ds-ref">lotte/science/test</a>, <a class="ds-ref">lotte/technology/test</a>, and <a class="ds-ref">lotte/writing/test</a>.
+</p>
+'
+
+pooled/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/pooled/test</a>.
+</p>
+'
+
+pooled/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/pooled/test</a>.
+</p>
+'
+
+recreation/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from recreation-focused forums, including anime, boardgames, gaming, movies, photo, rpg, and scifi.
+</p>
+'
+
+recreation/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/recreation/dev</a>.
+</p>
+'
+
+recreation/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/recreation/dev</a>.
+</p>
+'
+
+recreation/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from recreation-focused forums, including anime, boardgames, gaming, movies, photo, rpg, and scifi.
+</p>
+'
+
+recreation/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/recreation/test</a>.
+</p>
+'
+
+recreation/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/recreation/test</a>.
+</p>
+'
+
+science/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from science-focused forums, including academia, astronomy, biology, chemistry, datasciene, earthscience, engineering, math, philosophy, physics, and stats.
+</p>
+'
+
+science/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/science/dev</a>.
+</p>
+'
+
+science/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/science/dev</a>.
+</p>
+'
+
+science/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from science-focused forums, including academia, astronomy, biology, chemistry, datasciene, earthscience, engineering, math, philosophy, physics, and stats.
+</p>
+'
+
+science/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/science/test</a>.
+</p>
+'
+
+science/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/science/test</a>.
+</p>
+'
+
+technology/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from technology-focused forums, including android, apple, askubuntu, electronics, networkengineering, security, serverfault, softwareengineering, superuser, unix, and webapps.
+</p>
+'
+
+technology/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/technology/dev</a>.
+</p>
+'
+
+technology/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/technology/dev</a>.
+</p>
+'
+
+technology/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from technology-focused forums, including android, apple, askubuntu, electronics, networkengineering, security, serverfault, softwareengineering, superuser, unix, and webapps.
+</p>
+'
+
+technology/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/technology/test</a>.
+</p>
+'
+
+technology/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/technology/test</a>.
+</p>
+'
+
+writing/dev:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from writing-focused forums, including ell, english, linguistics, literature, worldbuilding, and writing.
+</p>
+'
+
+writing/dev/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/writing/dev</a>.
+</p>
+'
+
+writing/dev/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/writing/dev</a>.
+</p>
+'
+
+writing/test:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  desc: '
+<p>
+Answers from writing-focused forums, including ell, english, linguistics, literature, worldbuilding, and writing.
+</p>
+'
+
+writing/test/forum:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Forum queries for <a class="ds-ref">lotte/writing/test</a>.
+</p>
+'
+
+writing/test/search:
+  bibtex_ids: ['Santhanam2021ColBERTv2']
+  official_measures: ['Success@5']
+  desc: '
+<p>
+Search queries for <a class="ds-ref">lotte/writing/test</a>.
+</p>
+'
