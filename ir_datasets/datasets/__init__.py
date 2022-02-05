@@ -17,6 +17,7 @@ from . import codesearchnet
 from . import gov
 from . import gov2
 from . import highwire
+from . import lotte
 from . import medline
 from . import mmarco
 from . import mr_tydi
