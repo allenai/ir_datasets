@@ -1,1 +1,4 @@
 # This action has moved to <https://github.com/seanmacavaney/ir-datasets.com/blob/master/.github/workflows/verify_downloads.yml>
+name: Downloadable Content
+
+on: {}
