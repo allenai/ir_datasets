@@ -1,4 +1,11 @@
 # This action has moved to <https://github.com/seanmacavaney/ir-datasets.com/blob/master/.github/workflows/verify_downloads.yml>
 name: Downloadable Content
 
-on: {}
+on:
+  workflow_dispatch: {}
+
+jobs:
+  nil:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
