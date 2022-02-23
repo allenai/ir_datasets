@@ -1578,7 +1578,7 @@
 
 "mmarco": {
   "zh/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/chinese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/chinese_collection.tsv",
     "expected_md5": "d5672e88206038d8a3d261987b3bd788",
     "size_hint": 2227628877,
     "cache_path": "chinese_collection.tsv"
@@ -1590,169 +1590,169 @@
     "cache_path": "chinese_queries.dev.tsv"
   },
   "zh/queries/dev/v1.1": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/chinese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/chinese_queries.dev.tsv",
     "expected_md5": "9ea0d3e92aaf87d65c07c297893d0ff6",
     "size_hint": 4410653,
     "cache_path": "chinese_queries.dev.v1.1.tsv"
   },
   "zh/scoreddocs/dev/v1.1": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_chinese-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_chinese-trec.txt",
     "expected_md5": "36655599b6d0d0ae95dd49baa2e15acc",
     "size_hint": 41505364,
     "cache_path": "run.bm25_chinese-trec.txt"
   },
   "zh/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/chinese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/chinese_queries.train.tsv",
     "expected_md5": "21649d058877379bc8184923ab8ec408",
     "size_hint": 35231242,
     "cache_path": "chinese_queries.train.tsv"
   },
   "fr/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/french_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/french_collection.tsv",
     "expected_md5": "941a8e717efb1ab74b9017976c08f73a",
     "size_hint": 3469351128,
     "cache_path": "french_collection.tsv"
   },
   "fr/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/french_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/french_queries.dev.tsv",
     "expected_md5": "a86c46314a0abfb090c542e672bb66e2",
     "size_hint": 5523530,
     "cache_path": "french_queries.dev.tsv"
   },
   "fr/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_french-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_french-trec.txt",
     "expected_md5": "44df2483ab31dd269f99e0f2e925df29",
     "size_hint": 272726176,
     "cache_path": "run.bm25_french-trec.txt"
   },
   "fr/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/french_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/french_queries.train.tsv",
     "expected_md5": "4c9f45b9c7497d6efb44e593d2f5af4d",
     "size_hint": 43700586,
     "cache_path": "french_queries.train.tsv"
   },
   "de/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/german_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/german_collection.tsv",
     "expected_md5": "b0d40bb296c3ec903926243e8397560e",
     "size_hint": 3417960916,
     "cache_path": "german_collection.tsv"
   },
   "de/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/german_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/german_queries.dev.tsv",
     "expected_md5": "8d6383b34cd332f5f21c70c3e6a97579",
     "size_hint": 5039578,
     "cache_path": "german_queries.dev.tsv"
   },
   "de/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_german-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_german-trec.txt",
     "expected_md5": "2e9fd71f8bb9770ef86971cacf7e9119",
     "size_hint": 264681166,
     "cache_path": "run.bm25_german-trec.txt"
   },
   "de/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/german_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/german_queries.train.tsv",
     "expected_md5": "711b9e9c2163fe07468d6303bbf038f8",
     "size_hint": 39894960,
     "cache_path": "german_queries.train.tsv"
   },
   "id/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/indonesian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/indonesian_collection.tsv",
     "expected_md5": "5e9fd243bfcf160a1177c898796ae53e",
     "size_hint": 3118483579,
     "cache_path": "indonesian_collection.tsv"
   },
   "id/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/indonesian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/indonesian_queries.dev.tsv",
     "expected_md5": "3d5f2261edb985d4fe052ed9e379a42a",
     "size_hint": 4693330,
     "cache_path": "indonesian_queries.dev.tsv"
   },
   "id/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_indonesian-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_indonesian-trec.txt",
     "expected_md5": "4c8b58801af5d691f489b3bb4765ec79",
     "size_hint": 275468922,
     "cache_path": "run.bm25_indonesian-trec.txt"
   },
   "id/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/indonesian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/indonesian_queries.train.tsv",
     "expected_md5": "e74bc49a64adf32d105eeace23dc1a58",
     "size_hint": 37170090,
     "cache_path": "indonesian_queries.train.tsv"
   },
   "it/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/italian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/italian_collection.tsv",
     "expected_md5": "c87e107fdd99f78a8789c984c96f3e46",
     "size_hint": 3318354977,
     "cache_path": "italian_collection.tsv"
   },
   "it/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/italian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/italian_queries.dev.tsv",
     "expected_md5": "d9df4b10d892288c81611e7ed74e1549",
     "size_hint": 5707295,
     "cache_path": "italian_queries.dev.tsv"
   },
   "it/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_italian-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_italian-trec.txt",
     "expected_md5": "b1635aa57fb329b441cab2bda35c6883",
     "size_hint": 280099315,
     "cache_path": "run.bm25_italian-trec.txt"
   },
   "it/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/italian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/italian_queries.train.tsv",
     "expected_md5": "2aa7e48decfbfbaa327aa01f0d16bc3f",
     "size_hint": 45148915,
     "cache_path": "italian_queries.train.tsv"
   },
   "ru/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/russian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/russian_collection.tsv",
     "expected_md5": "27f64ca50b1862d285c53a1bcdc26793",
     "size_hint": 5500129241,
     "cache_path": "russian_collection.tsv"
   },
   "ru/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/russian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/russian_queries.dev.tsv",
     "expected_md5": "4d803553d69f967764360570c3e66c84",
     "size_hint": 8539431,
     "cache_path": "russian_queries.dev.tsv"
   },
   "ru/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_russian-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_russian-trec.txt",
     "expected_md5": "1f8daf67b9624146dbe5a392000f78f3",
     "size_hint": 279699867,
     "cache_path": "run.bm25_russian-trec.txt"
   },
   "ru/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/russian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/russian_queries.train.tsv",
     "expected_md5": "e4c09d563124569a632780c3ed1179b2",
     "size_hint": 67849583,
     "cache_path": "russian_queries.train.tsv"
   },
   "es/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/spanish_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/spanish_collection.tsv",
     "expected_md5": "c82d3e5998f4cefb5a730a337680fac0",
     "size_hint": 3382637867,
     "cache_path": "spanish_collection.tsv"
   },
   "es/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/spanish_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/spanish_queries.dev.tsv",
     "expected_md5": "1359d9516bf5dd9bf732012a25e7f536",
     "size_hint": 5294892,
     "cache_path": "spanish_queries.dev.tsv"
   },
   "es/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_spanish-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_spanish-trec.txt",
     "expected_md5": "fe545532f65b952d538ac6bda169c196",
     "size_hint": 272702362,
     "cache_path": "run.bm25_spanish-trec.txt"
   },
   "es/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/spanish_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/spanish_queries.train.tsv",
     "expected_md5": "676e7011d020383422556d2c4b39b67d",
     "size_hint": 41890459,
     "cache_path": "spanish_queries.train.tsv"
   },
   "pt/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/collections/portuguese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/portuguese_collection.tsv",
     "expected_md5": "77260081f0332befa6aa3e6c922b8fb9",
     "size_hint": 3182982454,
     "cache_path": "portuguese_collection.tsv"
@@ -1770,19 +1770,19 @@
     "cache_path": "portuguese_queries.train.tsv"
   },
   "pt/queries/dev/v1.1": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/dev/portuguese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/dev/portuguese_queries.dev.tsv",
     "expected_md5": "4210db124ff1e3b7c803b9cb666c5e44",
     "size_hint": 4958298,
     "cache_path": "portuguese_queries.dev.v1.1.tsv"
   },
   "pt/scoreddocs/dev/v1.1": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/runs/run.bm25_portuguese-trec.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/runs/run.bm25_portuguese-trec.txt",
     "expected_md5": "8f8e6ecd4761bd2355f126ab289f57ca",
     "size_hint": 280708499,
     "cache_path": "run.bm25_portuguese-trec.txt"
   },
   "pt/queries/train/v1.1": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v1/queries/train/portuguese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/queries/train/portuguese_queries.train.tsv",
     "expected_md5": "c253c476ff1ad1d51bae169cea180acd",
     "size_hint": 39210147,
     "cache_path": "portuguese_queries.train.v1.1.tsv"
@@ -1807,313 +1807,313 @@
   },
 
   "v2/ar/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/arabic_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/arabic_collection.tsv",
     "expected_md5": "b73406ce3a3d31edea240603d031be7a",
     "size_hint": 4664307196,
     "cache_path": "v2/arabic_collection.tsv"
   },
   "v2/zh/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/chinese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/chinese_collection.tsv",
     "expected_md5": "d176049b56f65bd49248003b9ea8b2b0",
     "size_hint": 2720255044,
     "cache_path": "v2/chinese_collection.tsv"
   },
   "v2/dt/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/dutch_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/dutch_collection.tsv",
     "expected_md5": "4a29599f160d0a696c7c3d3010da1912",
     "size_hint": 3362632528,
     "cache_path": "v2/dutch_collection.tsv"
   },
   "v2/fr/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/french_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/french_collection.tsv",
     "expected_md5": "44fd86303b47d2c8c2f9f547cd67686f",
     "size_hint": 3656218984,
     "cache_path": "v2/french_collection.tsv"
   },
   "v2/de/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/german_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/german_collection.tsv",
     "expected_md5": "dfedd22fef7e7e44966994e06cd7ec57",
     "size_hint": 3488187566,
     "cache_path": "v2/german_collection.tsv"
   },
   "v2/hi/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/hindi_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/hindi_collection.tsv",
     "expected_md5": "4551a71b468cc109b1f985f6b1c3afe0",
     "size_hint": 7649320531,
     "cache_path": "v2/hindi_collection.tsv"
   },
   "v2/id/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/indonesian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/indonesian_collection.tsv",
     "expected_md5": "d1ba5ff9788f9b11b497e3f75749409c",
     "size_hint": 3297783371,
     "cache_path": "v2/indonesian_collection.tsv"
   },
   "v2/it/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/italian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/italian_collection.tsv",
     "expected_md5": "9c3aa4c4342074e8d37d75c9ffe5f22e",
     "size_hint": 3444092853,
     "cache_path": "v2/italian_collection.tsv"
   },
   "v2/ja/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/japanese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/japanese_collection.tsv",
     "expected_md5": "85614bd4dac3aa221c0b657d5cc71695",
     "size_hint": 3924982422,
     "cache_path": "v2/japanese_collection.tsv"
   },
   "v2/pt/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/portuguese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/portuguese_collection.tsv",
     "expected_md5": "dde80fa2cc5782cae4c40d1127e51958",
     "size_hint": 3431011785,
     "cache_path": "v2/portuguese_collection.tsv"
   },
   "v2/ru/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/russian_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/russian_collection.tsv",
     "expected_md5": "9a0cef71748039a6112b0775592eb84d",
     "size_hint": 5769514997,
     "cache_path": "v2/russian_collection.tsv"
   },
   "v2/es/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/spanish_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/spanish_collection.tsv",
     "expected_md5": "a9eac6b39239121795171da8c86db932",
     "size_hint": 3571559558,
     "cache_path": "v2/spanish_collection.tsv"
   },
   "v2/vi/docs": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/collections/vietnamese_collection.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/vietnamese_collection.tsv",
     "expected_md5": "dd68020237857a508e7abe2250dad28b",
     "size_hint": 4140054533,
     "cache_path": "v2/vietnamese_collection.tsv"
   },
   "v2/ar/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_arabic-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_arabic-msmarco.txt",
     "expected_md5": "fc130f6ba64e7d0029c7697525ab728c",
     "size_hint": 130628203,
     "cache_path": "v2/run.bm25_arabic-msmarco.txt"
   },
   "v2/zh/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_chinese-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_chinese-msmarco.txt",
     "expected_md5": "cad0177b9211526795630801ec219a36",
     "size_hint": 133131838,
     "cache_path": "v2/run.bm25_chinese-msmarco.txt"
   },
   "v2/dt/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_dutch-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_dutch-msmarco.txt",
     "expected_md5": "4263908d9dfcdcd9ddb681cb529ca794",
     "size_hint": 126028515,
     "cache_path": "v2/run.bm25_dutch-msmarco.txt"
   },
   "v2/fr/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_french-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_french-msmarco.txt",
     "expected_md5": "12d5e2d412905dbfa0c188a7c01e2a6a",
     "size_hint": 130311130,
     "cache_path": "v2/run.bm25_french-msmarco.txt"
   },
   "v2/de/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_german-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_german-msmarco.txt",
     "expected_md5": "2a7ac8fc322c2ee9f0869f3de055d832",
     "size_hint": 125641364,
     "cache_path": "v2/run.bm25_german-msmarco.txt"
   },
   "v2/hi/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_hindi-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_hindi-msmarco.txt",
     "expected_md5": "befe2edc072bba1fe02dae27dd91b586",
     "size_hint": 132794501,
     "cache_path": "v2/run.bm25_hindi-msmarco.txt"
   },
   "v2/id/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_indonesian-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_indonesian-msmarco.txt",
     "expected_md5": "50da2b41f7286152aef97279f4a604e6",
     "size_hint": 129538847,
     "cache_path": "v2/run.bm25_indonesian-msmarco.txt"
   },
   "v2/it/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_italian-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_italian-msmarco.txt",
     "expected_md5": "966ed936d26b0bf54feb4ccd83a8757c",
     "size_hint": 132615737,
     "cache_path": "v2/run.bm25_italian-msmarco.txt"
   },
   "v2/ja/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_japanese-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_japanese-msmarco.txt",
     "expected_md5": "a3908dd2cec7c1d66008eab3b455b4d6",
     "size_hint": 130027238,
     "cache_path": "v2/run.bm25_japanese-msmarco.txt"
   },
   "v2/pt/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_portuguese-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_portuguese-msmarco.txt",
     "expected_md5": "2cb2166103a874f6a7c364764ee5a9fe",
     "size_hint": 133067761,
     "cache_path": "v2/run.bm25_portuguese-msmarco.txt"
   },
   "v2/ru/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_russian-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_russian-msmarco.txt",
     "expected_md5": "b0f3de7ab4bb72bea524775816327df8",
     "size_hint": 132235194,
     "cache_path": "v2/run.bm25_russian-msmarco.txt"
   },
   "v2/es/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_spanish-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_spanish-msmarco.txt",
     "expected_md5": "35f59b4fd0f6c81099ed36d82ead36e8",
     "size_hint": 129268683,
     "cache_path": "v2/run.bm25_spanish-msmarco.txt"
   },
   "v2/vi/scoreddocs/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/runs/run.bm25_vietnamese-msmarco.txt",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/runs/run.bm25_vietnamese-msmarco.txt",
     "expected_md5": "1b5691e13e7c3053f825fcf47f663ea5",
     "size_hint": 133077756,
     "cache_path": "v2/run.bm25_vietnamese-msmarco.txt"
   },
   "v2/ar/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/arabic_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/arabic_queries.dev.tsv",
     "expected_md5": "d93efe298008c35389afacb3d9fedb06",
     "size_hint": 6545729,
     "cache_path": "v2/arabic.queries.dev.tsv"
   },
   "v2/zh/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/chinese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/chinese_queries.dev.tsv",
     "expected_md5": "30c76201ecddb05d9b125a5f0ef5a6bb",
     "size_hint": 4002662,
     "cache_path": "v2/chinese.queries.dev.tsv"
   },
   "v2/dt/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/dutch_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/dutch_queries.dev.tsv",
     "expected_md5": "5bcc4ba604106fd6bb7e17030fcdc033",
     "size_hint": 4828536,
     "cache_path": "v2/dutch.queries.dev.tsv"
   },
   "v2/fr/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/french_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/french_queries.dev.tsv",
     "expected_md5": "c2a393af030f845041b85b44ca60680a",
     "size_hint": 5408487,
     "cache_path": "v2/french.queries.dev.tsv"
   },
   "v2/de/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/german_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/german_queries.dev.tsv",
     "expected_md5": "b420bdc83096caa07bd06667658d08c7",
     "size_hint": 4975836,
     "cache_path": "v2/german.queries.dev.tsv"
   },
   "v2/hi/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/hindi_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/hindi_queries.dev.tsv",
     "expected_md5": "880ec0423ebc6345450d86c030d29f1b",
     "size_hint": 10389233,
     "cache_path": "v2/hindi.queries.dev.tsv"
   },
   "v2/id/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/indonesian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/indonesian_queries.dev.tsv",
     "expected_md5": "2f9d37e7baaf7a3834af2d84ddafa376",
     "size_hint": 4660699,
     "cache_path": "v2/indonesian.queries.dev.tsv"
   },
   "v2/it/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/italian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/italian_queries.dev.tsv",
     "expected_md5": "9172fc14d18b1181d7f6c3120a66a8f9",
     "size_hint": 5044211,
     "cache_path": "v2/italian.queries.dev.tsv"
   },
   "v2/ja/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/japanese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/japanese_queries.dev.tsv",
     "expected_md5": "23c86ba93c63891a95382d8e8198199f",
     "size_hint": 5823193,
     "cache_path": "v2/japanese.queries.dev.tsv"
   },
   "v2/pt/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/portuguese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/portuguese_queries.dev.tsv",
     "expected_md5": "73fb7009307c6aecd661184bce75cb5d",
     "size_hint": 4966328,
     "cache_path": "v2/portuguese.queries.dev.tsv"
   },
   "v2/ru/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/russian_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/russian_queries.dev.tsv",
     "expected_md5": "b1fe46eea62d4c5c3776c1bc7c38034e",
     "size_hint": 7853062,
     "cache_path": "v2/russian.queries.dev.tsv"
   },
   "v2/es/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/spanish_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/spanish_queries.dev.tsv",
     "expected_md5": "b2f3c62c6d71700b9af610e7a29fef61",
     "size_hint": 5241697,
     "cache_path": "v2/spanish.queries.dev.tsv"
   },
   "v2/vi/queries/dev": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/dev/vietnamese_queries.dev.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/dev/vietnamese_queries.dev.tsv",
     "expected_md5": "99df771fa60888632dca02431998cec5",
     "size_hint": 5775517,
     "cache_path": "v2/vietnamese.queries.dev.tsv"
   },
   "v2/ar/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/arabic_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/arabic_queries.train.tsv",
     "expected_md5": "08ab9eed247819db2f1f013f7e06f0d6",
     "size_hint": 51869220,
     "cache_path": "v2/arabic.queries.train.tsv"
   },
   "v2/zh/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/chinese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/chinese_queries.train.tsv",
     "expected_md5": "166018bdb4d1a279c5083897d7f6752d",
     "size_hint": 31567548,
     "cache_path": "v2/chinese.queries.train.tsv"
   },
   "v2/dt/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/dutch_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/dutch_queries.train.tsv",
     "expected_md5": "6c304cf6dbdaff18a876cc6012168d30",
     "size_hint": 38224557,
     "cache_path": "v2/dutch.queries.train.tsv"
   },
   "v2/fr/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/french_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/french_queries.train.tsv",
     "expected_md5": "cbedd13e92ad9d70d049e0262e6956dd",
     "size_hint": 42857975,
     "cache_path": "v2/french.queries.train.tsv"
   },
   "v2/de/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/german_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/german_queries.train.tsv",
     "expected_md5": "41461df4fd61a98d76d846daa2b797c2",
     "size_hint": 39404290,
     "cache_path": "v2/german.queries.train.tsv"
   },
   "v2/hi/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/hindi_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/hindi_queries.train.tsv",
     "expected_md5": "b41f3f58b7c11ade80966276ceed50a8",
     "size_hint": 82511017,
     "cache_path": "v2/hindi.queries.train.tsv"
   },
   "v2/id/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/indonesian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/indonesian_queries.train.tsv",
     "expected_md5": "5684c5bab64544f3ed62b050bdcf477d",
     "size_hint": 36857620,
     "cache_path": "v2/indonesian.queries.train.tsv"
   },
   "v2/it/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/italian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/italian_queries.train.tsv",
     "expected_md5": "d40f32b4a4fb30c938e4b09adc1d1d81",
     "size_hint": 39923771,
     "cache_path": "v2/italian.queries.train.tsv"
   },
   "v2/ja/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/japanese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/japanese_queries.train.tsv",
     "expected_md5": "eeea5ea876f96eeeb66fb7f8d29055c9",
     "size_hint": 46027536,
     "cache_path": "v2/japanese.queries.train.tsv"
   },
   "v2/pt/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/portuguese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/portuguese_queries.train.tsv",
     "expected_md5": "816a2b07fe7067d438f785ee9bd8ef88",
     "size_hint": 39281063,
     "cache_path": "v2/portuguese.queries.train.tsv"
   },
   "v2/ru/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/russian_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/russian_queries.train.tsv",
     "expected_md5": "9f9a76edc95fb91477683c610d287327",
     "size_hint": 62396828,
     "cache_path": "v2/russian.queries.train.tsv"
   },
   "v2/es/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/spanish_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/spanish_queries.train.tsv",
     "expected_md5": "7f54a66db9c928b1245dd0709e6b1caf",
     "size_hint": 41464870,
     "cache_path": "v2/spanish.queries.train.tsv"
   },
   "v2/vi/queries/train": {
-    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/v2/queries/train/vietnamese_queries.train.tsv",
+    "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/queries/train/vietnamese_queries.train.tsv",
     "expected_md5": "af28d1dde86c5bdd27751e3a14a55252",
     "size_hint": 45651702,
     "cache_path": "v2/vietnamese.queries.train.tsv"
