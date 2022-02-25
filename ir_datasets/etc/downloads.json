@@ -364,6 +364,12 @@
     "size_hint": 64618,
     "expected_md5": "6d842b40387d760274447c1f8d7396a8",
     "cache_path": "trec-ct-2021/queries.xml"
+  },
+  "trec-ct-2021/qrels": {
+    "url": "https://trec.nist.gov/data/trials/qrels2021.txt",
+    "size_hint": 676496,
+    "expected_md5": "0335d95c58d5f5fd9bc730bccb60ca90",
+    "cache_path": "trec-ct-2021/qrels"
   }
 },
   

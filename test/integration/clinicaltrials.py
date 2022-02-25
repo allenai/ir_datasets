@@ -66,6 +66,11 @@ class TestClinicalTrials(DatasetIntegrationTest):
             9: TrecQrel('1', 'NCT00119249', 1, '0'),
             12995: TrecQrel('40', 'NCT03955640', 0, '0'),
         })
+        self._test_qrels('clinicaltrials/2021/trec-ct-2021', count=35832, items={
+            0: TrecQrel('1', 'NCT00002569', 1, '0'),
+            9: TrecQrel('1', 'NCT00003466', 0, '0'),
+            35831: TrecQrel('75', 'NCT04858074', 1, '0'),
+        })
 
 if __name__ == '__main__':
     unittest.main()
