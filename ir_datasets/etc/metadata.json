@@ -189,6 +189,7 @@
   "highwire": {"docs": {"count": 162259, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}},
   "highwire/trec-genomics-2006": {"docs": {"_ref": "highwire"}, "queries": {"count": 28}, "qrels": {"count": 27999, "fields": {"relevance": {"counts_by_value": {"0": 24934, "1": 1237, "2": 1828}}}}},
   "highwire/trec-genomics-2007": {"docs": {"_ref": "highwire"}, "queries": {"count": 36}, "qrels": {"count": 35996, "fields": {"relevance": {"counts_by_value": {"0": 31501, "1": 4495}}}}},
+  "kilt": {"docs": {"count": 5903530, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}},
   "lotte": {},
   "lotte/lifestyle/dev": {"docs": {"count": 268893, "fields": {"doc_id": {"max_len": 6, "common_prefix": ""}}}},
   "lotte/lifestyle/dev/forum": {"docs": {"_ref": "lotte/lifestyle/dev"}, "queries": {"count": 2076}, "qrels": {"count": 12823, "fields": {"relevance": {"counts_by_value": {"1": 12823}}}}},

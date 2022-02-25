@@ -1,0 +1,14 @@
+_:
+  pretty_name: 'KILT'
+  desc: '
+<p>
+KILT is a corpus used for various "knowledge intensive language tasks".
+</p>
+<ul>
+<li>Documents: Wikipedia articles</li>
+<li><a href="https://github.com/facebookresearch/KILT">Repository</a></li>
+<li><a href="https://arxiv.org/abs/2009.02252">Paper</a></li>
+<li><a href="https://ai.facebook.com/tools/kilt/">Leaderboard</a></li>
+</ul>
+'
+  bibtex_ids: ['petroni-etal-2021-kilt']
