@@ -355,9 +355,10 @@ class TrecColonQueries(BaseQueries):
 
 
 class TrecQrels(BaseQrels):
-    def __init__(self, qrels_dlc, qrels_defs):
+    def __init__(self, qrels_dlc, qrels_defs, format_3col=False):
         self._qrels_dlc = qrels_dlc
         self._qrels_defs = qrels_defs
+        self._format_3col = format_3col
 
     def qrels_path(self):
         return self._qrels_dlc.path()
@@ -369,9 +370,15 @@ class TrecQrels(BaseQrels):
                 if line == '\n':
                     continue # ignore blank lines
                 cols = line.rstrip().split()
-                if len(cols) != 4:
-                    raise RuntimeError(f'expected 4 columns, got {len(cols)}')
-                qid, it, did, score = cols
+                if self._format_3col:
+                    if len(cols) != 3:
+                        raise RuntimeError(f'expected 3 columns, got {len(cols)}')
+                    qid, did, score = cols
+                    it = 'Q0'
+                else:
+                    if len(cols) != 4:
+                        raise RuntimeError(f'expected 4 columns, got {len(cols)}')
+                    qid, it, did, score = cols
                 yield TrecQrel(qid, did, int(score), it)
 
     def qrels_cls(self):

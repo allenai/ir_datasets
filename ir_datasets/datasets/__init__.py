@@ -10,6 +10,7 @@ from . import clinicaltrials
 from . import clirmatrix
 from . import clueweb09
 from . import clueweb12
+from . import codec
 from . import cord19
 from . import cranfield
 from . import dpr_w100
