@@ -74,7 +74,6 @@ Official topics for the TREC Deep Learning (DL) 2021 shared task.
 Note that at this time, qrels are only available to those with TREC active participant login credentials.
 </p>
 '
-  qrels_instructions: &trec_inst "requires TREC active participant login credentials"
   official_measures: ['AP@100', 'nDCG@10', 'P(rel=2)@10', 'RR(rel=2)']
 
 trec-dl-2021/judged:
@@ -87,6 +86,4 @@ with qrels.
 Note that at this time, this is only available to those with TREC active participant login credentials.
 </p>
 '
-  queries_instructions: *trec_inst
-  qrels_instructions: *trec_inst
   official_measures: ['AP@100', 'nDCG@10', 'P(rel=2)@10', 'RR(rel=2)']

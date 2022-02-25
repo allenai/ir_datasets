@@ -23,6 +23,12 @@ QREL_DEFS = {
     2: 'definitely relevant'
 }
 
+QREL_DEFS_2021 = {
+    0: 'Not Relevant',
+    1: 'Excluded',
+    2: 'Eligible',
+}
+
 NAME = 'clinicaltrials'
 
 ct_qmap = {'topic': 'text'}
@@ -153,6 +159,7 @@ def _init():
     subsets['2021/trec-ct-2021'] = Dataset(
         collection21,
         TrecXmlQueries(dlc['trec-ct-2021/queries'], qtype=GenericQuery, qtype_map=ct_qmap, namespace='trec-pm-2019', lang='en'),
+        TrecQrels(dlc['trec-ct-2021/qrels'], QREL_DEFS_2021),
         documentation('trec-ct-2021'))
 
     ir_datasets.registry.register(NAME, base)
