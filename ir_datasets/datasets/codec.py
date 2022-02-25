@@ -19,6 +19,9 @@ QREL_DEFS = {
 }
 
 
+DOMAINS = ['economics', 'history', 'politics']
+
+
 class CodecQuery(NamedTuple):
     query_id: str
     query: str
@@ -64,7 +67,7 @@ def _init():
 
     subsets = {}
 
-    for domain in ['economics', 'history', 'politics']:
+    for domain in DOMAINS:
         queries_handler = CodecQueries(dlc['topics'], qid_filter=domain)
         subsets[domain] = Dataset(
             queries_handler,

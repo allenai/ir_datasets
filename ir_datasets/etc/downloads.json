@@ -1480,6 +1480,12 @@
     "size_hint": 37318876722,
     "expected_md5": "d1dca62aa6ba889d2e842182e3114af5",
     "cache_path": "kilt_knowledgesource.json"
+  },
+  "codec/qrels": {
+    "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_entity_judgments.txt",
+    "size_hint": 224727,
+    "expected_md5": "b43ce953f749df5c973dca7a21093784",
+    "cache_path": "codec/raw_entity_judgments.txt"
   }
 },
 

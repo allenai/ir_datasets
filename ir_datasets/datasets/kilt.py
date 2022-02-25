@@ -3,14 +3,23 @@ import codecs
 from typing import NamedTuple, Tuple
 import ir_datasets
 from ir_datasets.util import TarExtractAll, Cache, RelativePath, Lazy, Migrator
-from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
-from ir_datasets.formats import BaseDocs
+from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQrels
+from ir_datasets.formats import BaseDocs, TrecQrels
 from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.datasets import codec
 
 _logger = ir_datasets.log.easy()
 
 
 NAME = 'kilt'
+
+
+CODEC_QREL_DEFS = {
+    3: 'Very Valuable. It is absolutely critical to understand what this entity is for understanding this topic.',
+    2: 'Somewhat valuable. It is important to understand what this entity is for understanding this topic.',
+    1: 'Not Valuable. It is useful to understand what this entity is for understanding this topic.',
+    0: 'Not Relevant. This entity is not useful or on topic.',
+}
 
 
 class KiltDocAnchor(NamedTuple):
@@ -104,11 +113,26 @@ def _init():
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
+    corpus = KiltDocs(dlc['knowledgesource'], count_hint=5903530)
+
     base = Dataset(
-        KiltDocs(dlc['knowledgesource'], count_hint=5903530),
+        corpus,
         documentation('_'))
 
     subsets = {}
+
+    subsets['codec'] = Dataset(
+        corpus,
+        codec.base.queries_handler(),
+        TrecQrels(dlc['codec/qrels'], CODEC_QREL_DEFS, format_3col=True),
+        documentation('codec'))
+
+    for domain in codec.DOMAINS:
+        queries_handler = codec.subsets[domain]
+        subsets[f'codec/{domain}'] = Dataset(
+            queries_handler,
+            FilteredQrels(subsets['codec'].qrels_handler(), codec.filter_qids(domain, queries_handler), mode='include'),
+            documentation(f'codec/{domain}'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
