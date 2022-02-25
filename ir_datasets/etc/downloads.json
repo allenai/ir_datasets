@@ -1452,6 +1452,15 @@
   }
 },
 
+"kilt": {
+  "knowledgesource": {
+    "url": "http://dl.fbaipublicfiles.com/KILT/kilt_knowledgesource.json",
+    "size_hint": 37318876722,
+    "expected_md5": "d1dca62aa6ba889d2e842182e3114af5",
+    "cache_path": "kilt_knowledgesource.json"
+  }
+},
+
 "lotte": {
   "source": {
     "url": "https://downloads.cs.stanford.edu/nlp/data/colbert/colbertv2/lotte.tar.gz",
