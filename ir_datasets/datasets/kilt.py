@@ -130,6 +130,7 @@ def _init():
     for domain in codec.DOMAINS:
         queries_handler = codec.subsets[domain]
         subsets[f'codec/{domain}'] = Dataset(
+            corpus,
             queries_handler,
             FilteredQrels(subsets['codec'].qrels_handler(), codec.filter_qids(domain, queries_handler), mode='include'),
             documentation(f'codec/{domain}'))

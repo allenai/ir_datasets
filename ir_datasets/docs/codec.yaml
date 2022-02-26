@@ -1,0 +1,34 @@
+_:
+  pretty_name: 'CODEC'
+  desc: '
+<p>
+CODEC Document Ranking sub-task.
+</p>
+<ul>
+<li>Documents: curated web articles</li>
+<li>Queries: challenging, entity-focused queries</li>
+<li><a href="https://github.com/grill-lab/CODEC">Task Repository</a></li>
+<li>See also: <a class="ds-ref">kilt/codec</a>, the entity ranking subtask</li>
+</ul>
+'
+
+economics:
+  desc: '
+<p>
+Subset of <a class="ds-ref">codec</a> that only contains topics about economics.
+</p>
+'
+
+history:
+  desc: '
+<p>
+Subset of <a class="ds-ref">codec</a> that only contains topics about history.
+</p>
+'
+
+politics:
+  desc: '
+<p>
+Subset of <a class="ds-ref">codec</a> that only contains topics about politics.
+</p>
+'
