@@ -637,6 +637,21 @@
   }
 },
 
+"codec": {
+  "topics": {
+    "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/topics/topics.json",
+    "size_hint": 40331,
+    "expected_md5": "b3373f51c9906f09d0fae6e337650c71",
+    "cache_path": "topics.json"
+  },
+  "qrels": {
+    "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_document_judgments.txt",
+    "size_hint": 239015,
+    "expected_md5": "c3af699c89758e0d7448e2ef78d3a5b8",
+    "cache_path": "document.qrels"
+  }
+},
+
 "codesearchnet": {
   "python": {
     "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip",
@@ -1465,6 +1480,12 @@
     "size_hint": 37318876722,
     "expected_md5": "d1dca62aa6ba889d2e842182e3114af5",
     "cache_path": "kilt_knowledgesource.json"
+  },
+  "codec/qrels": {
+    "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_entity_judgments.txt",
+    "size_hint": 224727,
+    "expected_md5": "b43ce953f749df5c973dca7a21093784",
+    "cache_path": "codec/raw_entity_judgments.txt"
   }
 },
 
