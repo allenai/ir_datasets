@@ -28,12 +28,15 @@ def decode_html(body, headers=None):
                 pass # continue on to next encoding -- utf8 will always be found
 
 
-def sax_html_parser(body, headers=None, title_separate=True):
+def sax_html_parser(body, headers=None, title_separate=True, force_encoding=None, title_tag='title'):
     etree = ir_datasets.lazy_libs.lxml_html().etree
-    sax = SaxExtractor(title_separate=title_separate)
+    sax = SaxExtractor(title_separate=title_separate, title_tag=title_tag)
     parser = etree.HTMLParser(target=sax)
     if isinstance(body, bytes):
-        body = decode_html(body, headers)
+        if force_encoding is None:
+            body = decode_html(body, headers)
+        else:
+            body = body.decode(force_encoding, errors='ignore')
     parser.feed(body)
     parser.close()
     if title_separate:
@@ -43,10 +46,11 @@ def sax_html_parser(body, headers=None, title_separate=True):
 
 class SaxExtractor:
     IGNORE_TAGS = {'noscript', 'meta', 'input', 'script', 'style'}
-    def __init__(self, title_separate=True):
+    def __init__(self, title_separate=True, title_tag='title'):
         self.text = []
         self.title = '' if title_separate else None
         self.ignore_tag_stack = deque()
+        self.title_tag = title_tag
         self.title_separate = title_separate
         self.in_title = False
 
@@ -71,14 +75,14 @@ class SaxExtractor:
         tag = tag.lower()
         if tag in self.IGNORE_TAGS:
             self.ignore_tag_stack.append(tag)
-        elif self.title_separate and tag == 'title':
+        elif self.title_separate and tag == self.title_tag:
             self.in_title = True
 
     def end(self, tag):
         tag = tag.lower()
         while self.ignore_tag_stack and self.ignore_tag_stack[-1] == tag:
             self.ignore_tag_stack.pop()
-        if self.title_separate and tag == 'title':
+        if self.title_separate and tag == self.title_tag:
             self.in_title = False
 
     def close(self):
