@@ -1,0 +1,85 @@
+_:
+  pretty_name: 'TREC Disks 4 and 5'
+  desc: '
+<p>
+</p>
+'
+  docs_instructions: &inst "docs available from NIST"
+  data_access: '
+<p>
+To use this dataset, you need a copy of <a href="https://trec.nist.gov/data/cd45/index.html">TREC
+disks 4 and 5</a>, provided by NIST.
+</p>
+<p>
+Your organization may already have a copy. If this is the case, you may only need to complete a new
+"Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement"
+with NIST. It can take some time to process, but you will end up with a password-protected download link.
+</p>
+<p>
+ir_datasets needs the following directories from the source:
+</p>
+<ul>
+<li><kbd>FBIS</kbd></li>
+<li><kbd>FR94</kbd></li>
+<li><kbd>FT</kbd></li>
+<li><kbd>LATIMES</kbd></li>
+</ul>
+<p>
+ir_datasets expects the above directories to be copied/linked under <kbd>~/.ir_datasets/trec-robust04/trec45</kbd>.
+The source document files themselves can either be compressed or uncompressed (it seems they have been distributed
+both ways in the past.) If ir_datasets does not find the files it is expecting, it will raise an error.
+</p>
+<p>
+</p>
+'
+
+nocr/trec-robust-2004:
+  desc: '
+<p>
+The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by
+focusing on poorly performing topics."
+</p>
+<p>
+The TREC Robust document collection is from TREC disks 4 and 5. Due to the
+copyrighted nature of the  documents, this collection is for research use only, which requires
+agreements to be filed with NIST. See details <a href="https://trec.nist.gov/data/cd45/index.html">here</a>.
+</p>
+<ul>
+<li>Documents: News articles</li>
+<li>Queries: keyword queries, descriptions, narratives</li>
+<li>Relevance: Deep judgments</li>
+<li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li>
+<li>See also: <a class="ds-ref">aquaint/trec-robust-2005</a></li>
+</ul>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold1:
+  desc: '
+<p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold2:
+  desc: '
+<p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold3:
+  desc: '
+<p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold4:
+  desc: '
+<p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold5:
+  desc: '
+<p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees2004Robust', 'Huston2014ACO']

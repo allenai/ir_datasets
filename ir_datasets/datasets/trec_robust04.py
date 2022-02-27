@@ -27,7 +27,7 @@ FOLDS = {
 }
 
 
-DEPRECATED_MESSAGE = '{} is deprecated. Consider using {} instead, which uses provides better parsing of the corpus.'
+DEPRECATED_MESSAGE = '{} is deprecated. Consider using {} instead, which provides better parsing of the corpus.'
 
 
 def _init():
