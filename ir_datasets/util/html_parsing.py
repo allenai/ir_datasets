@@ -28,9 +28,11 @@ def decode_html(body, headers=None):
                 pass # continue on to next encoding -- utf8 will always be found
 
 
-def sax_html_parser(body, headers=None, title_separate=True, force_encoding=None, title_tag='title'):
+def sax_html_parser(body, headers=None, force_encoding=None, fields=None):
+    if fields is None:
+        fields = [{'title'}, None]
     etree = ir_datasets.lazy_libs.lxml_html().etree
-    sax = SaxExtractor(title_separate=title_separate, title_tag=title_tag)
+    sax = SaxExtractor(fields=fields)
     parser = etree.HTMLParser(target=sax)
     if isinstance(body, bytes):
         if force_encoding is None:
@@ -39,51 +41,53 @@ def sax_html_parser(body, headers=None, title_separate=True, force_encoding=None
             body = body.decode(force_encoding, errors='ignore')
     parser.feed(body)
     parser.close()
-    if title_separate:
-        return sax.title, str(sax)
-    return str(sax)
+    return sax.get_values()
 
 
 class SaxExtractor:
     IGNORE_TAGS = {'noscript', 'meta', 'input', 'script', 'style'}
-    def __init__(self, title_separate=True, title_tag='title'):
-        self.text = []
-        self.title = '' if title_separate else None
+    def __init__(self, fields):
+        self.fields = fields
+        self.field_values = [[] for _ in fields]
+        self.field_stacks = [deque() if f is not None else None for f in fields]
         self.ignore_tag_stack = deque()
-        self.title_tag = title_tag
-        self.title_separate = title_separate
-        self.in_title = False
 
-    def __str__(self):
-        # Join and clean up the text
-        res = ''.join(self.text)
+    def get_values(self):
+        return tuple(self._join_text(v) for v in self.field_values)
+
+    def _join_text(self, text):
+        res = ''.join(text)
         res = res.replace('\r\n', '\n').replace('\r', '\n') # CR/LF normalisation
         res = res.replace('\t', ' ') # tab/space normalisation
         res = re.sub('\n +', '\n', res) # remove spaces from start of lines
         res = re.sub(' +\n', '\n', res) # remove spaces from end of lines
         res = re.sub('\n{2,}', '\n', res) # collapse multiple empty lines
         res = re.sub(' {2,}', ' ', res)  # collapse multiple spaces
-        return res
+        return res.strip() # remove final leading/trailing whitespace
 
     def data(self, data):
-        if self.in_title:
-            self.title += data
-        elif not self.ignore_tag_stack:
-            self.text.append(data)
+        if not self.ignore_tag_stack:
+            any_match = False
+            for vals, stack in zip(self.field_values, self.field_stacks):
+                if (stack is None and not any_match) or stack:
+                    vals.append(data)
+                    any_match = True
 
     def start(self, tag, attrs):
         tag = tag.lower()
+        for tags, stack in zip(self.fields, self.field_stacks):
+            if tags is not None and tag in tags:
+                stack.append(tag)
         if tag in self.IGNORE_TAGS:
             self.ignore_tag_stack.append(tag)
-        elif self.title_separate and tag == self.title_tag:
-            self.in_title = True
 
     def end(self, tag):
         tag = tag.lower()
-        while self.ignore_tag_stack and self.ignore_tag_stack[-1] == tag:
+        for stack in self.field_stacks:
+            if stack and stack[-1] == tag:
+                stack.pop()
+        if self.ignore_tag_stack and self.ignore_tag_stack[-1] == tag:
             self.ignore_tag_stack.pop()
-        if self.title_separate and tag == self.title_tag:
-            self.in_title = False
 
     def close(self):
         pass

@@ -50,13 +50,9 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(ir_datasets.util.html_parsing.decode_html(b'<meta charset="iso8859-1"/>\xa3'), '<meta charset="iso8859-1"/>£')
 
     def test_sax_html_parser(self):
-        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="utf-8"/>\xc2\xa3', title_separate=False), '£')
         self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="utf-8"/>\xc2\xa3'), ('', '£'))
-        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="iso8859-1"/>\xa3', title_separate=False), '£')
         self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="iso8859-1"/>\xa3'), ('', '£'))
-        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<title>Some <span>text</span></title>\n<body><script>this is all discarded <div></script><style a="b">so is this</style><div><span>other </span>  \xc2\xa3<span>stuff</span>!</div>   \n\n\r\ntext&gt;&#62;&#x3E;</body>'), ('Some text', '\nother £stuff!\ntext>>>'))
-        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<title>Some <span>text</span></title>\n<body><script>this is all discarded <div></script><style a="b">so is this</style><div><span>other </span>  \xc2\xa3<span>stuff</span>!</div>   \n\n\r\ntext&gt;&#62;&#x3E;</body>', title_separate=False), 'Some text\nother £stuff!\ntext>>>')
-        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<HEADLINE>Some <span>text</span></HEADLINE>\n<TEXT><script>this is all discarded <div></script><style a="b">so is this</style><div><span>other </span>  \xc2\xa3<span>stuff</span>!</div>   \n\n\r\ntext&gt;&#62;&#x3E;</TEXT>', title_tag='headline'), ('Some text', '\nother £stuff!\ntext>>>'))
+        self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<title>Some <span>text</span></title>\n<body><script>this is all discarded <div></script><style a="b">so is this</style><div><span>other </span>  \xc2\xa3<span>stuff</span>!</div>   \n\n\r\ntext&gt;&#62;&#x3E;</body>'), ('Some text', 'other £stuff!\ntext>>>'))
 
 
 if __name__ == '__main__':

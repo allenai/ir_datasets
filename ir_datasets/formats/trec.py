@@ -23,6 +23,12 @@ class TitleUrlTextDoc(NamedTuple):
     url: str
     text: str
 
+class TrecParsedDoc(NamedTuple):
+    doc_id: str
+    title: str
+    body: str
+    marked_up_doc: bytes
+
 class TrecQuery(NamedTuple):
     query_id: str
     title: str
@@ -60,11 +66,13 @@ class TrecDocs(BaseDocs):
             'BS4': self._parser_bs,
             'text': self._parser_text,
             'tut': self._parser_tut,
+            'sax': self._parser_sax,
         }[parser]
         self._doc = {
             'BS4': TrecDoc,
             'text': GenericDoc,
             'tut': TitleUrlTextDoc,
+            'sax': TrecParsedDoc,
         }[parser]
         self._docs_namespace = namespace
         self._docs_lang = lang
@@ -195,6 +203,25 @@ class TrecDocs(BaseDocs):
                     doc_text += line
                 if line.startswith('<TEXT>'):
                     in_tag = True
+
+    def _parser_sax(self, stream):
+        field_defs = []
+        field_defs.append({'docno'})
+        field_defs.append({'headline', 'title', 'h3', 'h4'})
+        field_defs.append({c.lower() for c in CONTENT_TAGS} - field_defs[-1])
+        buffer = bytearray()
+        while True:
+            if b'\n</DOC>' not in buffer:
+                chunk = stream.read1()
+                if chunk == b'':
+                    break
+                buffer.extend(chunk)
+            else:
+                idx = buffer.index(b'\n</DOC>')
+                full_doc = bytes(buffer[:idx+7])
+                doc_id, title, body = ir_datasets.util.html_parsing.sax_html_parser2(full_doc, force_encoding=self._encoding or 'utf8', fields=field_defs)
+                yield TrecParsedDoc(doc_id, title, body, full_doc.strip())
+                del buffer[:idx+7]
 
     def docs_cls(self):
         return self._doc
@@ -364,7 +391,14 @@ class TrecQrels(BaseQrels):
         return self._qrels_dlc.path()
 
     def qrels_iter(self):
-        with self._qrels_dlc.stream() as f:
+        if isinstance(self._qrels_dlc, list):
+            for dlc in self._qrels_dlc:
+                yield from self._qrels_internal_iter(dlc)
+        else:
+            yield from self._qrels_internal_iter(self._qrels_dlc)
+
+    def _qrels_internal_iter(self, dlc):
+        with dlc.stream() as f:
             f = codecs.getreader('utf8')(f)
             for line in f:
                 if line == '\n':

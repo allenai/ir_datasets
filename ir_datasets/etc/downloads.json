@@ -822,6 +822,56 @@
   }
 },
 
+"disks45": {
+  "docs": {
+    "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
+    "irds_mirror": true,
+    "cache_path": "corpus"
+  },
+  "queries": {
+    "url": "https://trec.nist.gov/data/robust/04.testset.gz",
+    "irds_mirror": true,
+    "size_hint": 34293,
+    "expected_md5": "5eac3d774a2f87da61c08a94f945beff",
+    "cache_path": "04.testset.gz"
+  },
+  "qrels": {
+    "url": "https://trec.nist.gov/data/robust/qrels.robust2004.txt",
+    "irds_mirror": true,
+    "size_hint": 6543541,
+    "expected_md5": "123c2a0ba2ec31178cb1050995dcfdfa",
+    "cache_path": "qrels.robust2004.txt"
+  },
+  "trec8-qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.trec8.adhoc.parts1-5.tar.gz",
+    "irds_mirror": true,
+    "size_hint": 325935,
+    "expected_md5": "ce1cfa80b29746d2a5eeddab268d4f6a",
+    "cache_path": "qrels.trec8.adhoc.parts1-5.tar.gz"
+  },
+  "trec8-queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/topics.401-450.gz",
+    "irds_mirror": true,
+    "size_hint": 6946,
+    "expected_md5": "daaafb700eed76f61a6e9e4b0dcc40c8",
+    "cache_path": "topics.401-450.gz"
+  },
+  "trec7-qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.trec7.adhoc.parts1-5.tar.gz",
+    "irds_mirror": true,
+    "size_hint": 307120,
+    "expected_md5": "43def30d4f4b33a830ae67e3dce19023",
+    "cache_path": "qrels.trec7.adhoc.parts1-5.tar.gz"
+  },
+  "trec7-queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/topics.351-400.gz",
+    "irds_mirror": true,
+    "size_hint": 7400,
+    "expected_md5": "fdee3f7e37e173fd6fcdc00fbe1fc671",
+    "cache_path": "topics.351-400.gz"
+  }
+},
+
 "dpr-w100": {
   "docs": {
     "url": "https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz",
