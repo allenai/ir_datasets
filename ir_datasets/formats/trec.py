@@ -219,7 +219,7 @@ class TrecDocs(BaseDocs):
             else:
                 idx = buffer.index(b'\n</DOC>')
                 full_doc = bytes(buffer[:idx+7])
-                doc_id, title, body = ir_datasets.util.html_parsing.sax_html_parser2(full_doc, force_encoding=self._encoding or 'utf8', fields=field_defs)
+                doc_id, title, body = ir_datasets.util.html_parsing.sax_html_parser(full_doc, force_encoding=self._encoding or 'utf8', fields=field_defs)
                 yield TrecParsedDoc(doc_id, title, body, full_doc.strip())
                 del buffer[:idx+7]
 
