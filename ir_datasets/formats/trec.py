@@ -3,6 +3,7 @@ import codecs
 import tarfile
 import re
 import gzip
+from glob import glob as fnglob
 import xml.etree.ElementTree as ET
 from fnmatch import fnmatch
 from pathlib import Path
@@ -91,7 +92,10 @@ class TrecDocs(BaseDocs):
             if self._path_globs:
                 file_count = 0
                 for glob in sorted(self._path_globs):
-                    for path in sorted(Path(self._docs_dlc.path()).glob(glob)):
+                    glob_path = str(Path(self._docs_dlc.path())/glob)
+                    # IMPORTANT: cannot use Path().glob() here because the recusive ** will not follow symlinks.
+                    # Need to use glob.glob instead with recursive=True flag.
+                    for path in sorted(fnglob(glob_path, recursive=True)):
                         file_count += 1
                         yield from self._docs_iter(path)
                 if self._expected_file_count is not None:
