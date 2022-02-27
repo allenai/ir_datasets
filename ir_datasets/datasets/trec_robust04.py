@@ -1,7 +1,7 @@
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig
 from ir_datasets.formats import TrecQrels, TrecDocs, TrecQueries
-from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
+from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation, Deprecated
 
 
 NAME = 'trec-robust04'
@@ -27,6 +27,9 @@ FOLDS = {
 }
 
 
+DEPRECATED_MESSAGE = '{} is deprecated. Consider using {} instead, which uses provides better parsing of the corpus.'
+
+
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.home_path()/NAME
@@ -38,7 +41,12 @@ def _init():
     queries = TrecQueries(GzipExtract(dlc['queries']), namespace=NAME, lang='en')
     qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
 
-    base = Dataset(collection, queries, qrels, documentation('_'))
+    base = Dataset(
+        collection,
+        queries,
+        qrels,
+        documentation('_'),
+        Deprecated(DEPRECATED_MESSAGE.format(NAME, f'disks45/nocr/trec-robust-2004')))
 
     for fold in FOLDS:
         qid_filter = make_filter(fold)
@@ -46,7 +54,8 @@ def _init():
             FilteredQueries(queries, qid_filter),
             FilteredQrels(qrels, qid_filter),
             collection,
-            documentation(fold))
+            documentation(fold),
+            Deprecated(DEPRECATED_MESSAGE.format(f'{NAME}/{fold}', f'disks45/nocr/trec-robust-2004/{fold}')))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
