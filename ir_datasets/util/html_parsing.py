@@ -1,49 +1,94 @@
+from collections import deque
+import re
 import io
-import chardet
 import ir_datasets
 
 
-def sax_html_parser(body):
+def find_charset(text):
+    if text is None:
+        return None
+    if isinstance(text, str):
+        text = text.encode()
+    try:
+        idx = text.index(b'charset=')
+        match = re.match(b'charset= *["\']?([a-zA-Z0-9-_]+)', text[idx:])
+        if match:
+            return match.group(1).decode(errors='ignore')
+    except ValueError:
+        pass
+    return None
+
+
+def decode_html(body, headers=None):
+    for encoding in [find_charset(body), find_charset(headers), 'utf8']:
+        if encoding is not None:
+            try:
+                return body.decode(encoding, errors='ignore')
+            except LookupError: # charset not found
+                pass # continue on to next encoding -- utf8 will always be found
+
+
+def sax_html_parser(body, headers=None, title_separate=True):
     etree = ir_datasets.lazy_libs.lxml_html().etree
-    sax = SaxExtractor()
+    sax = SaxExtractor(title_separate=title_separate)
     parser = etree.HTMLParser(target=sax)
     if isinstance(body, bytes):
-        encoding = chardet.detect(body)['encoding'] or 'utf8'
-        cdc = codecs.lookup(encoding)
-        while body:
-            text, count = cdc.decode(body, 'ignore')
-            parser.feed(text)
-            body = body[count:]
-    else:
-        parser.feed(body)
+        body = decode_html(body, headers)
+    parser.feed(body)
     parser.close()
+    if title_separate:
+        return sax.title, str(sax)
     return str(sax)
+
 
 class SaxExtractor:
     IGNORE_TAGS = {'noscript', 'meta', 'input', 'script', 'style'}
-    def __init__(self):
-        self.text = io.StringIO()
-        self.ignore_tag_stack = []
+    def __init__(self, title_separate=True):
+        self.text = []
+        self.title = '' if title_separate else None
+        self.ignore_tag_stack = deque()
+        self.title_separate = title_separate
+        self.in_title = False
+
     def __str__(self):
-        self.text.seek(0)
-        return self.text.read()
+        # Join and clean up the text
+        res = ''.join(self.text)
+        res = res.replace('\r\n', '\n').replace('\r', '\n') # CR/LF normalisation
+        res = res.replace('\t', ' ') # tab/space normalisation
+        res = re.sub('\n +', '\n', res) # remove spaces from start of lines
+        res = re.sub(' +\n', '\n', res) # remove spaces from end of lines
+        res = re.sub('\n{2,}', '\n', res) # collapse multiple empty lines
+        res = re.sub(' {2,}', ' ', res)  # collapse multiple spaces
+        return res
+
     def data(self, data):
-        if not self.ignore_tag_stack:
-            self.text.write(data)
+        if self.in_title:
+            self.title += data
+        elif not self.ignore_tag_stack:
+            self.text.append(data)
+
     def start(self, tag, attrs):
         tag = tag.lower()
         if tag in self.IGNORE_TAGS:
             self.ignore_tag_stack.append(tag)
+        elif self.title_separate and tag == 'title':
+            self.in_title = True
+
     def end(self, tag):
         tag = tag.lower()
-        if tag in self.IGNORE_TAGS:
-            while self.ignore_tag_stack and self.ignore_tag_stack.pop() != tag:
-                pass
+        while self.ignore_tag_stack and self.ignore_tag_stack[-1] == tag:
+            self.ignore_tag_stack.pop()
+        if self.title_separate and tag == 'title':
+            self.in_title = False
+
     def close(self):
         pass
+
     def comment(self, data):
         pass
+
     def doctype(self, *args):
         pass
+
     def pi(self, *args):
         pass
