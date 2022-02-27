@@ -17,13 +17,6 @@ class TrecDoc(NamedTuple):
     text: str
     marked_up_doc: str
 
-class ParsedTrecDoc(NamedTuple):
-    doc_id: str
-    marked_up_doc: str
-    @property
-    def text(self):
-        return ir_datasets.util.sax_html_parser(self.marked_up_doc)
-
 class TitleUrlTextDoc(NamedTuple):
     doc_id: str
     title: str
@@ -65,13 +58,11 @@ class TrecDocs(BaseDocs):
         self._content_tags = content_tags
         self._parser = {
             'BS4': self._parser_bs,
-            'sax': self._parser_sax,
             'text': self._parser_text,
             'tut': self._parser_tut,
         }[parser]
         self._doc = {
             'BS4': TrecDoc,
-            'sax': ParsedTrecDoc,
             'text': GenericDoc,
             'tut': TitleUrlTextDoc,
         }[parser]
@@ -150,28 +141,6 @@ class TrecDocs(BaseDocs):
                 soup = BeautifulSoup(f'<OUTER>\n{doc_markup}\n</OUTER>', 'lxml')
                 text = soup.get_text()
                 yield TrecDoc(doc_id, text, doc_markup)
-                doc_id, doc_markup = None, ''
-            else:
-                if in_tag:
-                    doc_markup += line
-                if line.startswith('</'):
-                    if any(line.startswith(f'</{tag}>') for tag in self._content_tags):
-                        in_tag -= 1
-                if line.startswith('<'):
-                    if any(line.startswith(f'<{tag}>') for tag in self._content_tags):
-                        in_tag += 1
-                        if in_tag == 1:
-                            doc_markup += line
-
-    def _parser_sax(self, stream):
-        f = codecs.getreader(self._encoding or 'utf8')(stream, errors='replace')
-        doc_id, doc_markup = None, ''
-        in_tag = False
-        for line in f:
-            if line.startswith('<DOCNO>'):
-                doc_id = line.replace('<DOCNO>', '').replace('</DOCNO>\n', '').strip()
-            elif line == '</DOC>\n':
-                yield ParsedTrecDoc(doc_id, doc_markup)
                 doc_id, doc_markup = None, ''
             else:
                 if in_tag:
