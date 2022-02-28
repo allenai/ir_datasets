@@ -13,6 +13,11 @@ QREL_DEFS = {
     0: 'not relevant',
 }
 
+QREL_DEFS_TREC78 = {
+    1: 'relevant',
+    0: 'not relevant',
+}
+
 DUA = ("Please confirm you agree to the TREC data usage agreement found at "
        "<https://trec.nist.gov/data/cd45/index.html>")
 
@@ -33,10 +38,17 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     subsets = {}
 
-    collection_nocr = TrecDocs(dlc['docs'], path_globs=['**/FBIS/FB*', '**/FR94/??/FR*', '**/FT/*/FT*', '**/LATIMES/LA*'], namespace=NAME, lang='en', expected_file_count=2295, count_hint=ir_datasets.util.count_hint(NAME), parser='sax')
+    collection_nocr = TrecDocs(dlc['docs'],
+        path_globs=['**/FBIS/FB*', '**/FR94/??/FR*', '**/FT/*/FT*', '**/LATIMES/LA*'],
+        namespace=NAME,
+        lang='en',
+        expected_file_count=2295,
+        count_hint=ir_datasets.util.count_hint(NAME),
+        parser='sax',
+        docstore_path=base_path/'corpus.nocr.pklz4')
 
-    robust_queries = TrecQueries(GzipExtract(dlc['queries']), namespace=NAME, lang='en')
-    robust_qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
+    robust_queries = TrecQueries(GzipExtract(dlc['robust04-queries']), namespace=NAME, lang='en')
+    robust_qrels = TrecQrels(dlc['robust04-qrels'], QREL_DEFS)
 
     base = Dataset(documentation('_'))
 
@@ -60,7 +72,7 @@ def _init():
 
     subsets['nocr/trec8'] = Dataset(
         collection_nocr,
-        TrecQrels(TarExtract(dlc['trec8-qrels'], 'qrels.trec8.adhoc.parts1-5'), QREL_DEFS),
+        TrecQrels(TarExtract(dlc['trec8-qrels'], 'qrels.trec8.adhoc.parts1-5'), QREL_DEFS_TREC78),
         TrecQueries(GzipExtract(dlc['trec8-queries']), namespace=NAME, lang='en'),
         documentation('nocr/trec8'))
 
@@ -72,7 +84,7 @@ def _init():
             GzipExtract(TarExtract(dlc['trec7-qrels'], 'qrels.trec7.adhoc.part3.gz')),
             GzipExtract(TarExtract(dlc['trec7-qrels'], 'qrels.trec7.adhoc.part4.gz')),
             GzipExtract(TarExtract(dlc['trec7-qrels'], 'qrels.trec7.adhoc.part5.gz')),
-        ], QREL_DEFS),
+        ], QREL_DEFS_TREC78),
         TrecQueries(GzipExtract(dlc['trec7-queries']), namespace=NAME, lang='en'),
         documentation('nocr/trec7'))
 

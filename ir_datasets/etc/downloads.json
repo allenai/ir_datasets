@@ -825,17 +825,16 @@
 "disks45": {
   "docs": {
     "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
-    "irds_mirror": true,
     "cache_path": "corpus"
   },
-  "queries": {
+  "robust04-queries": {
     "url": "https://trec.nist.gov/data/robust/04.testset.gz",
     "irds_mirror": true,
     "size_hint": 34293,
     "expected_md5": "5eac3d774a2f87da61c08a94f945beff",
     "cache_path": "04.testset.gz"
   },
-  "qrels": {
+  "robust04-qrels": {
     "url": "https://trec.nist.gov/data/robust/qrels.robust2004.txt",
     "irds_mirror": true,
     "size_hint": 6543541,
