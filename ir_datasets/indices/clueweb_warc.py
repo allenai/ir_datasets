@@ -106,9 +106,9 @@ class ClueWebWarcIndex:
             f = stack.enter_context(self.zlib_state.GzipStateFile(self.source_path))
             f_chk = stack.enter_context(WarcIndexFile(self.index_path, 'rb'))
             state, pos, out_offset = None, None, None
-            while doc_ids and f_chk:
+            while doc_ids:
                 next_doc_id = f_chk.peek_doc_id()
-                if doc_ids[0] < next_doc_id:
+                if doc_ids[0] < next_doc_id or next_doc_id == '':
                     if state is not None:
                         f.zseek(pos, state)
                         f.read(out_offset)
@@ -119,12 +119,13 @@ class ClueWebWarcIndex:
                             if doc.doc_id == doc_ids[0]:
                                 yield doc
                             doc_ids = doc_ids[1:] # pop -- either not found or found
-                            if not doc_ids or doc_ids[0] >= next_doc_id:
+                            if not doc_ids or (next_doc_id != '' and doc_ids[0] >= next_doc_id):
                                 brk = True
                                 break
                         if brk:
                             break
-                doc_id, doc_idx, state, pos, out_offset = f_chk.read()
+                if doc_ids and f_chk:
+                    doc_id, doc_idx, state, pos, out_offset = f_chk.read()
 
 
 
