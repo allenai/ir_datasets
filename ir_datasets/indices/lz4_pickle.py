@@ -51,6 +51,7 @@ class Lz4PickleIter:
 
     def __next__(self):
         if self.slice.start >= self.slice.stop:
+            self.clear()
             raise StopIteration
         if self.bin is None:
             self.bin = open(self.lookup._bin_path, 'rb')
@@ -70,6 +71,9 @@ class Lz4PickleIter:
         return self
 
     def __del__(self):
+        self.clear()
+
+    def clear(self):
         if self.bin is not None:
             self.bin.close()
             self.bin = None
