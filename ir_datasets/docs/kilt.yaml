@@ -1,0 +1,46 @@
+_:
+  pretty_name: 'KILT'
+  desc: '
+<p>
+KILT is a corpus used for various "knowledge intensive language tasks".
+</p>
+<ul>
+<li>Documents: Wikipedia articles</li>
+<li><a href="https://github.com/facebookresearch/KILT">Repository</a></li>
+<li><a href="https://arxiv.org/abs/2009.02252">Paper</a></li>
+<li><a href="https://ai.facebook.com/tools/kilt/">Leaderboard</a></li>
+</ul>
+'
+  bibtex_ids: ['petroni-etal-2021-kilt']
+
+codec:
+  desc: '
+<p>
+CODEC Entity Ranking sub-task.
+</p>
+<ul>
+<li><a href="https://github.com/grill-lab/CODEC">Task Repository</a></li>
+<li>See also: <a class="ds-ref">codec</a>, the document ranking subtask</li>
+</ul>
+'
+
+codec/economics:
+  desc: '
+<p>
+Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about economics.
+</p>
+'
+
+codec/history:
+  desc: '
+<p>
+Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about history.
+</p>
+'
+
+codec/politics:
+  desc: '
+<p>
+Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about politics.
+</p>
+'

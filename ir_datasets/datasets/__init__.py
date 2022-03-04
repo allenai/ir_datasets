@@ -10,13 +10,17 @@ from . import clinicaltrials
 from . import clirmatrix
 from . import clueweb09
 from . import clueweb12
+from . import codec
 from . import cord19
 from . import cranfield
+from . import disks45
 from . import dpr_w100
 from . import codesearchnet
 from . import gov
 from . import gov2
 from . import highwire
+from . import kilt
+from . import lotte
 from . import medline
 from . import mmarco
 from . import mr_tydi

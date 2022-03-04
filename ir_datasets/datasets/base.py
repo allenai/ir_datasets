@@ -405,6 +405,14 @@ class YamlDocumentationProvider:
         return {}
 
 
+class Deprecated:
+    def __init__(self, message):
+        self._message = message
+
+    def deprecated(self):
+        return self._message
+
+
 class ExpectedFile:
     def __init__(self, path, expected_md5=None, instructions=None):
         self._path = Path(path)
