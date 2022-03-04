@@ -56,7 +56,10 @@ class TestLocal(unittest.TestCase):
             self.assertEqual(test_qrels[2].doc_id, '2')
             self.assertEqual(test_qrels[2].relevance, 0)
         finally:
+            import gc
+            gc.collect()
             ir_datasets.delete_local_dataset('_testlocal')
+            gc.collect()
             ir_datasets.delete_local_dataset('_testlocal/subset')
 
 
