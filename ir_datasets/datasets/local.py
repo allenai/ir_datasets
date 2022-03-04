@@ -246,6 +246,7 @@ def delete_local_dataset(dataset_id, remove_files=True):
                 changed = True
                 try:
                     ds = ir_datasets.registry[dataset_id]
+                    ds.clear_cache()
                     del ir_datasets.registry[dataset_id]
                     del ds # clean up this dataset (e.g., close open files)
                 except KeyError:

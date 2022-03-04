@@ -101,6 +101,12 @@ class Dataset:
         etype = ir_datasets.EntityType(etype) # validate & allow strings
         return getattr(self, f'{etype.value}_handler')()
 
+    def clear_cache(self):
+        self._beta_apis.clear()
+        for c in self._constituents:
+            if hasattr(c, 'clear_cache'):
+                c.clear_cache()
+
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):
