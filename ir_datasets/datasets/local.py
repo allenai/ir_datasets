@@ -245,9 +245,9 @@ def delete_local_dataset(dataset_id, remove_files=True):
                 registry.remove(dataset)
                 changed = True
                 try:
-                    dataset = ir_datasets.registry[dataset_id]
+                    ds = ir_datasets.registry[dataset_id]
                     del ir_datasets.registry[dataset_id]
-                    del dataset # clean up this dataset (e.g., close open files)
+                    del ds # clean up this dataset (e.g., close open files)
                 except KeyError:
                     pass
                 if remove_files:
