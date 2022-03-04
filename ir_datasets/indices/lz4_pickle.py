@@ -150,6 +150,9 @@ class Lz4PickleLookup:
             os.remove(self._pos_path)
         NumpySortedIndex(self._idx_path).clear()
 
+    def clear_cache(self):
+        self.close()
+
     def __del__(self):
         self.close()
 
