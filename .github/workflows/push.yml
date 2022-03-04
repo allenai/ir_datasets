@@ -51,6 +51,6 @@ jobs:
       shell: cmd
       run: |
         pip install pytest
-        pytest test\util.py test\metadata.py test\integration\dummy.py test\integration\vaswani.py test\formats\
+        pytest test\util.py test\metadata.py test\integration\dummy.py test\integration\vaswani.py test\formats\ test\test_local.py
       env:
         PATH: 'C:/Program Files/zlib/bin/'
