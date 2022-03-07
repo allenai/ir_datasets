@@ -3683,17 +3683,20 @@
   "train/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
     "size_hint": 104898,
-    "expected_md5": "cf3a43c4085e28ce03f37704771e0e36"
+    "expected_md5": "cf3a43c4085e28ce03f37704771e0e36",
+    "cache_path": "train.topics.v1-0.jsonl"
   },
   "dev/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/dev.topics.v1-0.jsonl",
     "size_hint": 81444,
-    "expected_md5": "4c34c546c3e90de4733c3c9411ce9c6d"
+    "expected_md5": "4c34c546c3e90de4733c3c9411ce9c6d",
+    "cache_path": "dev.topics.v1-0.jsonl"
   },
   "test/topics": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/test.topics.v1-0.jsonl",
     "size_hint": 964434,
-    "expected_md5": "a311237913a7335d45fe261e9ff7f11e"
+    "expected_md5": "a311237913a7335d45fe261e9ff7f11e",
+    "cache_path": "test.topics.v1-0.jsonl"
   },
   "fa/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
@@ -3702,36 +3705,42 @@
   "fa/train/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/train.qrels.v1-0.txt",
     "size_hint": 5152,
-    "expected_md5": "4a343957837ce996a7275a71a30ed806"
+    "expected_md5": "4a343957837ce996a7275a71a30ed806",
+    "cache_path": "fas/train.qrels.v1-0.txt"
   },
   "fa/dev/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/dev.qrels.v1-0.txt",
     "size_hint": 24574,
-    "expected_md5": "d66b62e3733a66b151f895e2f57ee144"
+    "expected_md5": "d66b62e3733a66b151f895e2f57ee144",
+    "cache_path": "fas/dev.qrels.v1-0.txt"
   },
   "fa/test/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/test.qrels.v1-0.txt",
     "size_hint": 113490,
-    "expected_md5": "842c307e3e01a688897fadefc7a9672f"
-  },
-  "zh/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
-    "size_hint": 15686,
-    "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987"
+    "expected_md5": "842c307e3e01a688897fadefc7a9672f",
+    "cache_path": "fas/test.qrels.v1-0.txt"
   },
   "zh/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "zho/hc4_docs.jsonl"
   },
+  "zh/train/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
+    "size_hint": 15686,
+    "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987",
+    "cache_path": "zho/train.qrels.v1-0.txt"
+  },
   "zh/dev/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/dev.qrels.v1-0.txt",
     "size_hint": 20126,
-    "expected_md5": "f252fb5edeee1fa38ccc8ee1c2a6e6f0"
+    "expected_md5": "f252fb5edeee1fa38ccc8ee1c2a6e6f0",
+    "cache_path": "zho/dev.qrels.v1-0.txt"
   },
   "zh/test/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/test.qrels.v1-0.txt",
     "size_hint": 123795,
-    "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea"
+    "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea",
+    "cache_path": "zho/test.qrels.v1-0.txt"
   },
   "ru/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
@@ -3740,17 +3749,20 @@
   "ru/train/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/train.qrels.v1-0.txt",
     "size_hint": 4232,
-    "expected_md5": "2e2c52e404a6ee0fe676cb88d63c26bb"
+    "expected_md5": "2e2c52e404a6ee0fe676cb88d63c26bb",
+    "cache_path": "rus/train.qrels.v1-0.txt"
   },
   "ru/dev/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/dev.qrels.v1-0.txt",
     "size_hint": 11532,
-    "expected_md5": "24305749fd39fb0392be171e76ef2510"
+    "expected_md5": "24305749fd39fb0392be171e76ef2510",
+    "cache_path": "rus/dev.qrels.v1-0.txt"
   },
   "ru/test/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/test.qrels.v1-0.txt",
     "size_hint": 133650,
-    "expected_md5": "1d1112350a11289496426ea558c321a2"
+    "expected_md5": "1d1112350a11289496426ea558c321a2",
+    "cache_path": "rus/test.qrels.v1-0.txt"
   }
 }
 }
