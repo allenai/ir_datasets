@@ -42,6 +42,7 @@ from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
 from . import wapo
+from . import wikiclir
 from . import wikir
 from . import trec_fair_2021
 from . import trec_cast # must be after wapo,car,msmarco_passage
