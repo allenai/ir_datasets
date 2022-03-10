@@ -3641,6 +3641,14 @@
   }
 },
 
+"wikiclir": {
+  "source": {
+    "url": "https://www.cs.jhu.edu/~kevinduh/a/wikiclir2018/wiki-clir.tar.gz",
+    "size_hint": 7036445773,
+    "expected_md5": "705abb611eb8cbab9ced2b8767a3bdb6"
+  }
+},
+
 "wikir": {
   "en1k": {
     "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1",
