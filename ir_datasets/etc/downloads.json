@@ -3772,5 +3772,20 @@
     "expected_md5": "1d1112350a11289496426ea558c321a2",
     "cache_path": "rus/test.qrels.v1-0.txt"
   }
+},
+
+"neuclir": {
+  "22/fa/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}/22/",
+    "cache_path": "22/fas/docs.jsonl"
+  },
+  "22/zh/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}/22/",
+    "cache_path": "22/zho/docs.jsonl"
+  },
+  "22/ru/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}/22/",
+    "cache_path": "22/rus/docs.jsonl"
+  }
 }
 }
