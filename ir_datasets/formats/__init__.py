@@ -13,3 +13,5 @@ from .argsme import (
     ArgsMeDocs, ArgsMeDoc, ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain,
     ArgsMePremise, ArgsMePremiseAnnotation, ArgsMeAspect
 )
+
+from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries
