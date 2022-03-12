@@ -34,22 +34,28 @@ class ExctractedCCDocs(BaseDocs):
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
-        with self._docs_dlc.stream() as f:
-            for line in f:
-                line = json.loads(line)
-                line['doc_id'] = line['id']
-                del line['id']
-                yield ExctractedCCDoc(**line)
+        yield from self._internal_docs_iter()
+
+    def _doc_store_path(self):
+        return self.docs_path(force=False)
 
     def docs_store(self):
         return PickleLz4FullStore(
-            path=f'{self.docs_path(force=False)}.pklz4',
+            path=f'{self._doc_store_path()}.pklz4',
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
             lookup_field='doc_id',
             index_fields=['doc_id'],
             count_hint=self._count,
         )
+    
+    def _internal_docs_iter(self):
+        with self._docs_dlc.stream() as f:
+            for line in f:
+                line = json.loads(line)
+                line['doc_id'] = line['id']
+                del line['id']
+                yield ExctractedCCDoc(**line)
 
     def docs_cls(self):
         return ExctractedCCDoc
@@ -80,14 +86,14 @@ class ExctractedCCQuery(NamedTuple):
 
 class ExctractedCCQueries(BaseQueries):
     def __init__(self, queries_dlc, subset_lang, namespace=None):
-        self._queries_dlc = queries_dlc
+        self._queries_dlc = queries_dlc if isinstance(queries_dlc, list) else [queries_dlc]
         self._subset_lang = subset_lang
         self._namespace = namespace
 
         self._subset_lang_three = LANG_CODE_CONVERT[self._subset_lang]
     
     def queries_path(self):
-        return self._queries_dlc.path()
+        return [ dlc.path() for dlc in self._queries_dlc ]
     
     def queries_cls(self):
         return ExctractedCCQuery
@@ -96,7 +102,11 @@ class ExctractedCCQueries(BaseQueries):
         return self._namespace
     
     def queries_iter(self):
-        with self._queries_dlc.stream() as f:
+        for dlc in self._queries_dlc:
+            yield from self._internal_queries_iter(dlc)
+    
+    def _internal_queries_iter(self, dlc):
+        with dlc.stream() as f:
             for line in f:
                 line = json.loads(line)
                 if self._subset_lang_three in line['languages_with_qrels']:

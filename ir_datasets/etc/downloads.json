@@ -1160,6 +1160,12 @@
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "fas/hc4_docs.jsonl"
   },
+  "fa/docs/ids": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/ids.jsonl.gz",
+    "hint_hint": 21890148,
+    "expected_md5": "553e510633c30ce783c22ed37471ed3a",
+    "cache_path": "fas/ids.jsonl.gz"
+  },
   "fa/train/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/train.qrels.v1-0.txt",
     "size_hint": 5152,
@@ -1182,6 +1188,12 @@
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "zho/hc4_docs.jsonl"
   },
+  "zh/docs/ids": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/ids.jsonl.gz",
+    "size_hint": 29051136,
+    "expected_md5": "d4ee35f9ca55c0416fe439d4f41a9e2a",
+    "cache_path": "zho/ids.jsonl.gz"
+  },
   "zh/train/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
     "size_hint": 15686,
@@ -1203,6 +1215,54 @@
   "ru/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
     "cache_path": "rus/hc4_docs.jsonl"
+  },
+  "ru/docs/ids/0": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.0.jsonl.gz",
+    "size_hint": 26794412,
+    "expected_md5": "4763df966f6ea953c731ef2d572044e5",
+    "cache_path": "rus/ids.0.jsonl.gz"
+  },
+  "ru/docs/ids/1": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.1.jsonl.gz",
+    "size_hint": 26784412,
+    "expected_md5": "c19fb0dd1aceb0f6fd02f92818fa55b7",
+    "cache_path": "rus/ids.1.jsonl.gz"
+  },
+  "ru/docs/ids/2": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.2.jsonl.gz",
+    "size_hint": 26771449,
+    "expected_md5": "41d6db2ae68b8a4a1e2b371e4f5fe7a8",
+    "cache_path": "rus/ids.2.jsonl.gz"
+  },
+  "ru/docs/ids/3": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.3.jsonl.gz",
+    "size_hint": 26765684,
+    "expected_md5": "e3d20167c9fdce77e633b3ea0421cb51",
+    "cache_path": "rus/ids.3.jsonl.gz"
+  },
+  "ru/docs/ids/4": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.4.jsonl.gz",
+    "size_hint": 26790863,
+    "expected_md5": "54db61aec1a4585ce172c39111725be7",
+    "cache_path": "rus/ids.4.jsonl.gz"
+  },
+  "ru/docs/ids/5": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.5.jsonl.gz",
+    "size_hint": 26802522,
+    "expected_md5": "ba8a7bace2df0be82f80f7ae84f736d5",
+    "cache_path": "rus/ids.5.jsonl.gz"
+  },
+  "ru/docs/ids/6": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.6.jsonl.gz",
+    "size_hint": 26793985,
+    "expected_md5": "9ada14526d375e2c7aaf95be80f8a043",
+    "cache_path": "rus/ids.6.jsonl.gz"
+  },
+  "ru/docs/ids/7": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.7.jsonl.gz",
+    "size_hint": 23266384,
+    "expected_md5": "8555423b846aaf097527017cf8eda94c",
+    "cache_path": "rus/ids.7.jsonl.gz"
   },
   "ru/train/qrels": {
     "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/train.qrels.v1-0.txt",
