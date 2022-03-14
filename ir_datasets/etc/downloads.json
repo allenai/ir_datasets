@@ -3260,17 +3260,17 @@
 
 
 "neuclir": {
-  "22/fa/docs": {
+  "1/fa/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "22/fas/docs.jsonl"
+    "cache_path": "1/fas/docs.jsonl"
   },
-  "22/zh/docs": {
+  "1/zh/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "22/zho/docs.jsonl"
+    "cache_path": "1/zho/docs.jsonl"
   },
-  "22/ru/docs": {
+  "1/ru/docs": {
     "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "22/rus/docs.jsonl"
+    "cache_path": "1/rus/docs.jsonl"
   }
 },
 

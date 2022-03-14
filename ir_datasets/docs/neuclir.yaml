@@ -1,5 +1,5 @@
-22:
-  pretty_name: 'NeuCLIR 2022 Collection'
+1:
+  pretty_name: 'NeuCLIR Collection 1'
   desc: '
 <p>
 This is the dataset created for <a href="https://neuclir.github.io/">TREC 2022 NeuCLIR Track</a>. 
@@ -31,7 +31,7 @@ Please use the following command to download the documents:
 git clone https://github.com/NeuCLIR/download-collection<br/>
 cd download-collection<br/>
 pip install -r requirements.txt<br/>
-python download_documents.py --storage ~/.ir_datasets/neuclir/22 \ <br/>
+python download_documents.py --storage ~/.ir_datasets/neuclir/1 \ <br/>
                              --zho ./resource/zho/ids.jsonl.gz \ <br/>
                              --fas ./resource/fas/ids.jsonl.gz \ <br/>
                              --rus ./resource/rus/ids.*.jsonl.gz \ <br/>
@@ -43,7 +43,7 @@ modify the ordering of the collection to match the original specified ordering i
 </p>
 <code>
 for lang in zho fas rus; do <br/>
-&nbsp;&nbsp;python fix_document_order.py --raw_download_file ~/.ir_datasets/neuclir/22/$lang/docs.jsonl \ <br/>
+&nbsp;&nbsp;python fix_document_order.py --raw_download_file ~/.ir_datasets/neuclir/1/$lang/docs.jsonl \ <br/>
 &nbsp;&nbsp;                             --id_file ./resource/$lang/ids*.jsonl.gz \ <br/>
 &nbsp;&nbsp;                             --check_hash <br/>
 done

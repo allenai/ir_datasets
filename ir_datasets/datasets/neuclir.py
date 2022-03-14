@@ -71,21 +71,21 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     base = Dataset() # dummy top level ds
-    subsets["22"] = Dataset(documentation('22')) # dummy year level ds
+    subsets["1"] = Dataset(documentation('1')) # dummy year level ds
 
-    # For NeuCLIR 2022
+    # For NeuCLIR Collection 1
     for lang in ['zh', 'fa', 'ru']:
-        lang_docs = ExctractedCCDocs(dlc[f'22/{lang}/docs'], subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang])
-        subsets[f"22/{lang}"] = Dataset(
+        lang_docs = ExctractedCCDocs(dlc[f'1/{lang}/docs'], subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang])
+        subsets[f"1/{lang}"] = Dataset(
             lang_docs,
-            documentation(f"22/{lang}")
+            documentation(f"1/{lang}")
         )
         include_doc_id_dlc = hc4_dlc[f'{lang}/docs/ids'] if lang != 'ru' else tuple([ hc4_dlc[f'{lang}/docs/ids/{i}'] for i in range(8) ])
-        subsets[f"22/{lang}/hc4-filtered"] = Dataset(
-            FilteredExctractedCCDocs(dlc[f'22/{lang}/docs'], subset_lang=lang, namespace=NAME, include_doc_id_dlc=include_doc_id_dlc),
+        subsets[f"1/{lang}/hc4-filtered"] = Dataset(
+            FilteredExctractedCCDocs(dlc[f'1/{lang}/docs'], subset_lang=lang, namespace=NAME, include_doc_id_dlc=include_doc_id_dlc),
             ExctractedCCQueries([hc4_dlc[f'dev/topics'], hc4_dlc[f'test/topics']], subset_lang=lang, namespace=NAME),
             FilteredTrecQrels([ hc4_dlc[f'{lang}/dev/qrels'], hc4_dlc[f'{lang}/test/qrels'] ], QREL_DEFS, include_doc_id_dlc=include_doc_id_dlc),
-            documentation(f"22/{lang}/hc4-filtered")
+            documentation(f"1/{lang}/hc4-filtered")
         )
     
     ir_datasets.registry.register(NAME, base)
