@@ -70,7 +70,7 @@ def _init():
     hc4_dlc = DownloadConfig.context(HC4_NAME, ir_datasets.util.home_path()/HC4_NAME)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    base = Dataset() # dummy top level ds
+    base = Dataset(documentation('_')) # dummy top level ds
     subsets["1"] = Dataset(documentation('1')) # dummy year level ds
 
     # For NeuCLIR Collection 1
