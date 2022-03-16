@@ -58,7 +58,7 @@ class TestDownloads(unittest.TestCase):
                     sub_keys = list(clir_dlc[top_key].keys())
                     for sub_key in random.sample(sub_keys, 10):
                         res = self._test_download(clir_dlc[top_key][sub_key], f'clirmatrix/{top_key}/{sub_key}')
-                        if res['status'] != 'HEAD_SKIP':
+                        if res['result'] != 'HEAD_SKIP':
                             self.output_data.append(res)
         finally:
             if self.output_path is not None:
@@ -69,7 +69,9 @@ class TestDownloads(unittest.TestCase):
         with tmp_environ(IR_DATASETS_DL_TRIES='10'): # give the test up to 10 attempts to download
             if 'url' in data and 'expected_md5' in data:
                 if self.dlc_filter is None or re.search(self.dlc_filter, prefix) and not data.get('skip_test', False) and not data.get('auth', False):
-                    self.output_data.append(self._test_download(data, prefix))
+                    res = self._test_download(data, prefix)
+                    if res['result'] != 'HEAD_SKIP':
+                        self.output_data.append(res)
             elif 'instructions' in data:
                 pass
             else:
