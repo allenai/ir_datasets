@@ -1,3 +1,4 @@
+import requests
 import gzip
 import io
 import random
@@ -12,6 +13,9 @@ import unittest
 import argparse
 import json
 import ir_datasets
+
+
+logger = ir_datasets.log.easy()
 
 
 @contextmanager
@@ -36,6 +40,7 @@ class TestDownloads(unittest.TestCase):
     output_path = None
     rand_delay = None # useful for being nice to servers when running tests by adding a random delay between tests
     output_data = []
+    head_precheck = False
 
     def test_downloads(self):
         with open('ir_datasets/etc/downloads.json') as f:
@@ -52,7 +57,9 @@ class TestDownloads(unittest.TestCase):
                 for top_key in clir_dlc.keys():
                     sub_keys = list(clir_dlc[top_key].keys())
                     for sub_key in random.sample(sub_keys, 10):
-                        self.output_data.append(self._test_download(clir_dlc[top_key][sub_key], f'clirmatrix/{top_key}/{sub_key}'))
+                        res = self._test_download(clir_dlc[top_key][sub_key], f'clirmatrix/{top_key}/{sub_key}')
+                        if res['status'] != 'HEAD_SKIP':
+                            self.output_data.append(res)
         finally:
             if self.output_path is not None:
                 with open(self.output_path, 'wt') as f:
@@ -85,6 +92,14 @@ class TestDownloads(unittest.TestCase):
                 # sleep in range of [0.5, 1.5] * rand_delay seconds
                 time.sleep(random.uniform(self.rand_delay * 0.5, self.rand_delay * 1.5))
             start = time.time()
+            if self.head_precheck:
+                try:
+                    requests.head(data['url'], allow_redirects=True).raise_for_status()
+                    logger.info('HEAD request for {url} successful'.format(**data))
+                    record['result'] = 'HEAD_SKIP'
+                    return record # skip if HEAD request passes
+                except:
+                    logger.info('HEAD request for {url} failed; verifying download'.format(**data))
             try:
                 download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'], **data.get('download_args', {}))], expected_md5=data['expected_md5'], stream=True)
                 with download.stream() as stream:
@@ -120,4 +135,8 @@ if __name__ == '__main__':
         if arg == '--randdelay':
             TestDownloads.rand_delay = float(argv[i+1])
             argv = argv[:i] + argv[i+2:]
+    for i, arg in enumerate(argv):
+        if arg == '--head_precheck':
+            TestDownloads.head_precheck = True
+            argv = argv[:i] + argv[i+1:]
     unittest.main(argv=argv)
