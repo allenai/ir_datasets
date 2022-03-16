@@ -2713,6 +2713,15 @@
   }
 },
 
+"neumarco": {
+  "main": {
+    "url": "https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/dlawrie1_jh_edu/EQcICtPaSqFNoCZHtoeZszoB7FC362BvaPvieUSk2j30tA?download=1",
+    "size_hint": 3723728998,
+    "expected_md5": "733181c211959a7c09c695bfcddaea54",
+    "cache_path": "neuMSMARCO.tar.gz"
+  }
+},
+
 "nfcorpus": {
   "main": {
     "url": "https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz",
