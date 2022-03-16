@@ -1,5 +1,5 @@
-1:
-  pretty_name: 'NeuCLIR Collection 1'
+_:
+  pretty_name: 'NeuCLIR Corpus'
   desc: '
 <p>
 This is the dataset created for <a href="https://neuclir.github.io/">TREC 2022 NeuCLIR Track</a>. 
@@ -53,7 +53,14 @@ You can also store the documents in other directory and create a soft link for <
 </p>
 '
 
-zh:
+1:
+  desc: '
+<p>
+Version 1 of the NeuCLIR corpus.
+</p>
+'
+
+1/zh:
   desc: '
 <p>
 The Chinese collection contains English queries (to be released) and Chinese documents for retrieval. 
@@ -62,7 +69,7 @@ assuming the machine query tranlstion into Chinese is available.
 </p>
 '
 
-zh/hc4-filtered:
+1/zh/hc4-filtered:
   desc: '
 <p>
 Subset of the Chinse collection that intersect with HC4. 
@@ -71,7 +78,7 @@ The 60 queries are the <a class="ds-ref">hc4/zh/dev</a> and <a class="ds-ref">hc
 '
   bibtex_ids: ['Lawrie2022HC4']
 
-fa:
+1/fa:
   desc: '
 <p>
 The Persian collection contains English queries (to be released) and Persian documents for retrieval. 
@@ -80,7 +87,7 @@ assuming the machine query tranlstion into Persian is available.
 </p>
 '
 
-fa/hc4-filtered:
+1/fa/hc4-filtered:
   desc: '
 <p>
 Subset of the Persian collection that intersect with HC4. 
@@ -90,7 +97,7 @@ The 60 queries are the <a class="ds-ref">hc4/fa/dev</a> and <a class="ds-ref">hc
   bibtex_ids: ['Lawrie2022HC4']
 
 
-ru:
+1/ru:
   desc: '
 <p>
 The Russian collection contains English queries (to be released) and Russian documents for retrieval. 
@@ -99,7 +106,7 @@ assuming the machine query tranlstion into Russian is available.
 </p>
 '
 
-ru/hc4-filtered:
+1/ru/hc4-filtered:
   desc: '
 <p>
 Subset of the Russian collection that intersect with HC4. 
