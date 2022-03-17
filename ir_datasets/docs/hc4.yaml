@@ -60,6 +60,7 @@ Human and machine translated queries are provided in the query object for runnin
 assuming the machine query tranlstion into Chinese is available. 
 </p>
 '
+  docs_instructions: &inst "docs available using https://github.com/hltcoe/HC4 package"
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/train:
@@ -68,6 +69,7 @@ zh/train:
 Train split of <a class="ds-ref">hc4/zh</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/dev:
@@ -76,6 +78,7 @@ zh/dev:
 Development split of <a class="ds-ref">hc4/zh</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 zh/test:
@@ -84,6 +87,7 @@ zh/test:
 Test split of <a class="ds-ref">hc4/zh</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 fa:
@@ -94,6 +98,7 @@ Human and machine translated queries are provided in the query object for runnin
 assuming the machine query tranlstion into Persian is available. 
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/train:
@@ -102,6 +107,7 @@ fa/train:
 Train split of <a class="ds-ref">hc4/fa</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/dev:
@@ -110,6 +116,7 @@ fa/dev:
 Development split of <a class="ds-ref">hc4/fa</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 fa/test:
@@ -118,6 +125,7 @@ fa/test:
 Test split of <a class="ds-ref">hc4/fa</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 ru:
@@ -128,6 +136,7 @@ Human and machine translated queries are provided in the query object for runnin
 assuming the machine query tranlstion into Russian is available. 
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/train:
@@ -136,6 +145,7 @@ ru/train:
 Train split of <a class="ds-ref">hc4/ru</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/dev:
@@ -144,6 +154,7 @@ ru/dev:
 Development split of <a class="ds-ref">hc4/ru</a>.
 </p>
 '
+  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 ru/test:
