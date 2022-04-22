@@ -3750,6 +3750,15 @@
   }
 },
 
+"wands": {
+  "docs": {
+    "url": "https://raw.githubusercontent.com/wayfair/WANDS/main/dataset/product.csv",
+    "expected_md5": "357462b38bc66363e95c9c6178f042f8",
+    "size_hint": 90621131,
+    "cache_path": "product.csv"
+  }
+},
+
 "wapo": {
   "v2": {
     "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",

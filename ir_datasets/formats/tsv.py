@@ -81,9 +81,10 @@ class FileLineIter:
 
 
 class TsvIter:
-    def __init__(self, cls, line_iter):
+    def __init__(self, cls, line_iter, cast_types=False):
         self.cls = cls
         self.line_iter = line_iter
+        self.cast_types = cast_types
 
     def __iter__(self):
         return self
@@ -104,19 +105,22 @@ class TsvIter:
         else:
             if len(cols) != len(self.cls._fields):
                 raise RuntimeError(f'expected {len(self.cls._fields)} fields, got {len(cols)}')
+        if self.cast_types:
+            ...
         return self.cls(*cols)
 
     def __getitem__(self, key):
-        return TsvIter(self.cls, self.line_iter[key])
+        return TsvIter(self.cls, self.line_iter[key], self.cast_types)
 
 
 class _TsvBase:
-    def __init__(self, dlc, cls, datatype, skip_first_line=False):
+    def __init__(self, dlc, cls, datatype, skip_first_line=False, cast_types=False):
         super().__init__()
         self._dlc = dlc
         self._cls = cls
         self._datatype = datatype
         self._skip_first_line = skip_first_line
+        self._cast_types = cast_types
 
     def _path(self, force=True):
         return self._dlc.path(force)
@@ -126,12 +130,12 @@ class _TsvBase:
         if hasattr(self, f'{self._datatype}_count'):
             stop = getattr(self, f'{self._datatype}_count')()
         start = 1 if self._skip_first_line else 0
-        return TsvIter(self._cls, FileLineIter(self._dlc, start=start, stop=stop, step=1))
+        return TsvIter(self._cls, FileLineIter(self._dlc, start=start, stop=stop, step=1), cast_types=self._cast_types)
 
 
 class TsvDocs(_TsvBase, BaseDocs):
-    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, skip_first_line=False, docstore_size_hint=None, count_hint=None):
-        super().__init__(docs_dlc, doc_cls, "docs", skip_first_line=skip_first_line)
+    def __init__(self, docs_dlc, doc_cls=GenericDoc, doc_store_index_fields=None, namespace=None, lang=None, skip_first_line=False, docstore_size_hint=None, count_hint=None, cast_types=False):
+        super().__init__(docs_dlc, doc_cls, "docs", skip_first_line=skip_first_line, cast_types=cast_types)
         self._doc_store_index_fields = doc_store_index_fields
         self._docs_namespace = namespace
         self._docs_lang = lang
