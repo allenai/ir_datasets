@@ -37,7 +37,7 @@ The TREC Genomics Track 2004 benchmark. Contains 50 queries with article-level r
 trec-genomics-2005:
   desc: '
 <p>
-The TREC Genomics Track 2005 benchmark. Contains 36 queries with passage-level relevance judgments.
+The TREC Genomics Track 2005 benchmark. Contains 50 queries with article-level relevance judgments.
 </p>
 <ul>
 <li>Documents: Biomedical article titles and abstracts</li>
