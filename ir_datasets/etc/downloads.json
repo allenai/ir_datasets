@@ -2418,7 +2418,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
     "size_hint": 8501799926,
     "expected_md5": "d4863e4f342982b51b9a8fc668b2d0c0",
-    "cache_path": "collection.tsv.gz"
+    "cache_path": "collection.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/queries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-queries.tsv.gz",
@@ -2522,7 +2523,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-top100.gz",
     "size_hint": 10724320629,
     "expected_md5": "118d0884638fd405e111157a124ef0b2",
-    "cache_path": "orcas/ms.run.gz"
+    "cache_path": "orcas/ms.run.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "trec-dl-hard/qrels": {
     "url": "https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels",
@@ -2656,7 +2658,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
     "size_hint": 1057717952,
     "expected_md5": "31644046b18952c1386cd4564ba2ae69",
-    "cache_path": "collectionandqueries.tar.gz"
+    "cache_path": "collectionandqueries.tar.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "queries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz",
@@ -2680,23 +2683,27 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.tsv.gz",
     "size_hint": 2633557579,
     "expected_md5": "215a5204288820672f5e9451d9e202c5",
-    "cache_path": "train/docpairs.tsv.gz"
+    "cache_path": "train/docpairs.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/docpairs/v2": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.2.tsv.gz",
     "size_hint": 1841693309,
     "expected_md5": "219083e80a0a751c08b968c2f31a4e0b",
-    "cache_path": "train/qidpidtriples.train.full.2.tsv.gz"
+    "cache_path": "train/qidpidtriples.train.full.2.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/docpairs/small": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/triples.train.small.tar.gz",
     "size_hint": 7930881353,
-    "expected_md5": "c13bf99ff23ca691105ad12eab837f84"
+    "expected_md5": "c13bf99ff23ca691105ad12eab837f84",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.train.tar.gz",
     "size_hint": 11519984492,
-    "expected_md5": "d99fdbd5b2ea84af8aa23194a3263052"
+    "expected_md5": "d99fdbd5b2ea84af8aa23194a3263052",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "dev/qrels": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qrels.dev.tsv",
@@ -2707,12 +2714,14 @@
   "dev/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.dev.tar.gz",
     "size_hint": 687414398,
-    "expected_md5": "8c140662bdf123a98fbfe3bb174c5831"
+    "expected_md5": "8c140662bdf123a98fbfe3bb174c5831",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "eval/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.eval.tar.gz",
     "size_hint": 673440221,
-    "expected_md5": "73778cd99f6e0632d12d0b5731b20a02"
+    "expected_md5": "73778cd99f6e0632d12d0b5731b20a02",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "trec-dl-2019/qrels": {
     "url": "https://trec.nist.gov/data/deep/2019qrels-pass.txt",
