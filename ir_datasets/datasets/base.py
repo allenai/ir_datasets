@@ -97,6 +97,19 @@ class Dataset:
     def has_qlogs(self):
         return self.has(ir_datasets.EntityType.qlogs)
 
+    def handler(self, etype: ir_datasets.EntityType):
+        etype = ir_datasets.EntityType(etype) # validate & allow strings
+        return getattr(self, f'{etype.value}_handler')()
+
+    def clear_cache(self):
+        for bapi in self._beta_apis.values():
+            if hasattr(bapi, 'clear_cache'):
+                bapi.clear_cache()
+        self._beta_apis.clear()
+        for c in self._constituents:
+            if hasattr(c, 'clear_cache'):
+                c.clear_cache()
+
 
 class _BetaPythonApiDocs:
     def __init__(self, handler):
@@ -135,6 +148,11 @@ class _BetaPythonApiDocs:
     @property
     def metadata(self):
         return self._handler.docs_metadata()
+
+    def clear_cache(self):
+        if self._docstore is not None and hasattr(self._docstore, 'clear_cache'):
+            self._docstore.clear_cache()
+        self._docstore = None
 
 
 class _BetaPythonApiQueries:

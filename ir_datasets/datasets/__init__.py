@@ -46,6 +46,8 @@ from . import wapo
 from . import wikiclir
 from . import wikir
 from . import trec_fair_2021
+
+from .local import iter_local_datasets, create_local_dataset, delete_local_dataset
 from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
 from . import neuclir # must be after hc4
