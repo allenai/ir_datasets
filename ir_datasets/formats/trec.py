@@ -126,20 +126,20 @@ class TrecDocs(BaseDocs):
 
     def _docs_iter(self, path):
         if Path(path).is_file():
-            path_suffix = Path(path).suffix.lower()
-            if path_suffix == '.gz':
+            path_suffix = Path(path).suffix
+            if path_suffix.lower() == '.gz' or path_suffix == '.z':
                 with gzip.open(path, 'rb') as f:
                     yield from self._parser(f)
-            elif path_suffix in ['.z', '.0z', '.1z', '.2z']:
+            elif path_suffix in ['.Z', '.0Z', '.1Z', '.2Z']:
                 # unix "compress" command encoding
                 unlzw3 = ir_datasets.lazy_libs.unlzw3()
-                with io.BytesIO(unlzw3.unlzw(path)) as f:
+                with io.BytesIO(unlzw3.unlzw(Path(path))) as f:
                     yield from self._parser(f)
             else:
                 with open(path, 'rb') as f:
                     yield from self._parser(f)
         elif Path(path).is_dir():
-            for child in path.iterdir():
+            for child in sorted(Path(path).iterdir()):
                 yield from self._docs_iter(child)
 
     def _parser_bs(self, stream):
