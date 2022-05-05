@@ -151,13 +151,16 @@ More body text
 
         for source in ['plaintext_noext', 'plaintext_txt', 'plaintext_uc_txt', 'gzip_gz', 'gzip_z', 'gzip_uc_gz', 'compress_uc_z', 'compress_uc_0z']:
             with self.subTest(source):
+                print(source, "no paths")
                 docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}')))
                 self.assertEqual(list(docs.docs_iter()), expected_results)
 
+                print(source, "paths")
                 docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}')), path_globs=['F*'])
                 self.assertEqual(list(docs.docs_iter()), expected_results)
 
                 if source in ['plaintext_noext', 'plaintext_txt', 'plaintext_uc_txt', 'gzip_gz']:
+                    print(source, "tarfile")
                     docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}.tar.gz')), path_globs=['*/F*'])
                     self.assertEqual(list(docs.docs_iter()), expected_results)
 
