@@ -136,7 +136,7 @@ class TrecDocs(BaseDocs):
                 with io.BytesIO(unlzw3.unlzw(path)) as f:
                     yield from self._parser(f)
             else:
-                with path.open('rb') as f:
+                with open(path, 'rb') as f:
                     yield from self._parser(f)
         elif Path(path).is_dir():
             for child in path.iterdir():
