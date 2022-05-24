@@ -1,0 +1,240 @@
+_:
+  pretty_name: "WikiCLIR"
+  desc: '
+<p>
+A Cross-Language IR (CLIR) collection between English queries and other language documents,
+built from Wikipedia.
+</p>
+<ul>
+<li><a href="https://www.cs.jhu.edu/~kevinduh/papers/sasaki18letor.pdf">Dataset Paper</a></li>
+<li><a href="https://www.cs.jhu.edu/~kevinduh/a/wikiclir2018/">Dataset Information</a></li>
+</ul>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ar:
+  desc: '
+<p>
+WikiCLIR with Arabic documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ca:
+  desc: '
+<p>
+WikiCLIR with Catalan documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+zh:
+  desc: '
+<p>
+WikiCLIR with Chinese documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+cs:
+  desc: '
+<p>
+WikiCLIR with Czech documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+nl:
+  desc: '
+<p>
+WikiCLIR with Dutch documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+fi:
+  desc: '
+<p>
+WikiCLIR with Finnish documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+fr:
+  desc: '
+<p>
+WikiCLIR with French documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+de:
+  desc: '
+<p>
+WikiCLIR with German documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+it:
+  desc: '
+<p>
+WikiCLIR with Italian documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ja:
+  desc: '
+<p>
+WikiCLIR with Japanese documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ko:
+  desc: '
+<p>
+WikiCLIR with Korean documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+no:
+  desc: '
+<p>
+WikiCLIR with Norwegian (Nynorsk) documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+nn:
+  desc: '
+<p>
+WikiCLIR with Norwegian (Bokmål) documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+pl:
+  desc: '
+<p>
+WikiCLIR with Polish documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+pt:
+  desc: '
+<p>
+WikiCLIR with Portuguese documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ro:
+  desc: '
+<p>
+WikiCLIR with Romanian documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+ru:
+  desc: '
+<p>
+WikiCLIR with Russian documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+en-simple:
+  desc: '
+<p>
+WikiCLIR with Simple English documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+es:
+  desc: '
+<p>
+WikiCLIR with Spanish documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+sw:
+  desc: '
+<p>
+WikiCLIR with Swahili documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+sv:
+  desc: '
+<p>
+WikiCLIR with Swedish documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+tl:
+  desc: '
+<p>
+WikiCLIR with Tagalog documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+tr:
+  desc: '
+<p>
+WikiCLIR with Turkish documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+uk:
+  desc: '
+<p>
+WikiCLIR with Ukrainian documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+
+vi:
+  desc: '
+<p>
+WikiCLIR with Vietnamese documents.
+</p>
+'
+  bibtex_ids:
+    - 'sasaki-etal-2018-cross'
+

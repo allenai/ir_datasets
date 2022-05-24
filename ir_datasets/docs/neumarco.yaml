@@ -1,0 +1,105 @@
+_:
+  pretty_name: "neuMARCO"
+  desc: '
+<p>
+A version of <a class="ds-ref">msmarco-passage</a> for cross-language
+information retrieval, provided by <a href="https://hltcoe.jhu.edu/">JHU HLTCOE</a> with documents
+translated to other langauges using a <a href="https://www.amazon.science/publications/sockeye-2-a-toolkit-for-neural-machine-translation">
+Sockeye 2</a> translation model.
+</p>
+<ul>
+<li>Documents: Web passages using machine translation to English</li>
+<li>Queries: Natural-language web queries in English</li>
+</ul>
+'
+
+fa:
+  desc: '
+<p>The <a class="ds-ref">msmarco-passage</a> corpus, translated to Persian (Farsi).</p>
+'
+
+fa/dev:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev</a>, with the corpus translated to Persian (Farsi).</p>
+'
+
+fa/dev/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/judged</a>, with the corpus translated to Persian (Farsi).</p>
+'
+
+fa/dev/small:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/small</a>, with the corpus translated to Persian (Farsi).</p>
+'
+
+fa/train:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train</a>, with the corpus translated to Persian (Farsi).</p>
+'
+
+fa/train/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train/judged</a>, with the corpus translated to Persian (Farsi).</p>
+'
+
+ru:
+  desc: '
+<p>The <a class="ds-ref">msmarco-passage</a> corpus, translated to Russian.</p>
+'
+
+ru/dev:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev</a>, with the corpus translated to Russian.</p>
+'
+
+ru/dev/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/judged</a>, with the corpus translated to Russian.</p>
+'
+
+ru/dev/small:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/small</a>, with the corpus translated to Russian.</p>
+'
+
+ru/train:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train</a>, with the corpus translated to Russian.</p>
+'
+
+ru/train/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train/judged</a>, with the corpus translated to Russian.</p>
+'
+
+zh:
+  desc: '
+<p>The <a class="ds-ref">msmarco-passage</a> corpus, translated to Chinese.</p>
+'
+
+zh/dev:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev</a>, with the corpus translated to Chinese.</p>
+'
+
+zh/dev/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/judged</a>, with the corpus translated to Chinese.</p>
+'
+
+zh/dev/small:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/dev/small</a>, with the corpus translated to Chinese.</p>
+'
+
+zh/train:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train</a>, with the corpus translated to Chinese.</p>
+'
+
+zh/train/judged:
+  desc: '
+<p>A version of <a class="ds-ref">msmarco-passage/train/judged</a>, with the corpus translated to Chinese.</p>
+'
+

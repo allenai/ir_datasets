@@ -13,6 +13,7 @@ from . import clueweb12
 from . import codec
 from . import cord19
 from . import cranfield
+from . import disks45
 from . import dpr_w100
 from . import codesearchnet
 from . import gov
@@ -28,6 +29,7 @@ from . import msmarco_document_v2
 from . import msmarco_passage
 from . import msmarco_passage_v2
 from . import msmarco_qna
+from . import neumarco
 from . import nfcorpus
 from . import natural_questions
 from . import nyt
@@ -41,7 +43,9 @@ from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
 from . import wapo
+from . import wikiclir
 from . import wikir
 from . import trec_fair_2021
 from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
+from . import neuclir # must be after hc4

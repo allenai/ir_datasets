@@ -1,0 +1,126 @@
+_:
+  pretty_name: 'TREC Disks 4 and 5'
+  desc: '
+<p>
+TREC Disks 4 and 5, including documents from the Financial Times, the Congressional Record,
+the Federal Register, the Foreign Broadcast Information Service, and the Los Angeles Times.
+</p>
+<p>
+This dataset is a placeholder for the complete collection, but at this time, only the version
+of the dataset without the Congressional Record (<a class="ds-ref">disks45/nocr</a>) are provided.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/cd45/">Information and access to TREC Disks 4 and 5.</a></li>
+</ul>
+'
+  docs_instructions: &inst "docs available from NIST"
+  data_access: '
+<p>
+To use this dataset, you need a copy of <a href="https://trec.nist.gov/data/cd45/index.html">TREC
+Disks 4 and 5</a>, provided by NIST.
+</p>
+<p>
+Your organization may already have a copy. If this is the case, you may only need to complete a new
+"Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement"
+with NIST. It can take some time to process, but you will end up with a password-protected download link.
+</p>
+<p>
+ir_datasets needs the following directories from the source:
+</p>
+<ul>
+<li><kbd>FBIS</kbd></li>
+<li><kbd>FR94</kbd></li>
+<li><kbd>FT</kbd></li>
+<li><kbd>LATIMES</kbd></li>
+</ul>
+<p>
+ir_datasets expects the above directories to be copied/linked under <kbd>~/.ir_datasets/disks45/corpus</kbd>.
+The source document files themselves can either be compressed or uncompressed (it seems they have been distributed
+both ways in the past.) If ir_datasets does not find the files it is expecting, it will raise an error.
+</p>
+'
+
+nocr:
+  desc: '
+<p>
+A version of <a class="ds-ref">disks45</a> without the Congressional Record. This is the typical setting for
+tasks like TREC 7, TREC 8, and TREC Robust 2004.
+</p>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45']
+
+nocr/trec-robust-2004:
+  desc: '
+<p>
+The TREC Robust retrieval task focuses on "improving the consistency of retrieval technology by
+focusing on poorly performing topics."
+</p>
+<p>
+The TREC Robust document collection is from TREC disks 4 and 5. Due to the
+copyrighted nature of the  documents, this collection is for research use only, which requires
+agreements to be filed with NIST. See details <a href="https://trec.nist.gov/data/cd45/index.html">here</a>.
+</p>
+<ul>
+<li>Documents: News articles</li>
+<li>Queries: keyword queries, descriptions, narratives</li>
+<li>Relevance: Deep judgments</li>
+<li><a href="https://trec.nist.gov/pubs/trec13/papers/ROBUST.OVERVIEW.pdf">Task Overview Paper</a></li>
+<li>See also: <a class="ds-ref">aquaint/trec-robust-2005</a></li>
+</ul>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold1:
+  desc: '
+<p>Robust04 Fold 1 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold2:
+  desc: '
+<p>Robust04 Fold 2 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold3:
+  desc: '
+<p>Robust04 Fold 3 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold4:
+  desc: '
+<p>Robust04 Fold 4 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec-robust-2004/fold5:
+  desc: '
+<p>Robust04 Fold 5 (Title) proposed by Huston &amp; Croft (2014) and used in numerous works</p>'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees2004Robust', 'Huston2014ACO']
+
+nocr/trec7:
+  desc: '
+<p>
+The TREC 7 Adhoc Retrieval track.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec7/papers/overview_7.pdf.gz">Task Overview Paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees1998Trec7']
+
+nocr/trec8:
+  desc: '
+<p>
+The TREC 8 Adhoc Retrieval track.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec8/papers/overview_8.pdf">Task Overview Paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Voorhees1996Disks45', 'Voorhees1999Trec8']

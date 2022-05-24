@@ -822,6 +822,55 @@
   }
 },
 
+"disks45": {
+  "docs": {
+    "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
+    "cache_path": "corpus"
+  },
+  "robust04-queries": {
+    "url": "https://trec.nist.gov/data/robust/04.testset.gz",
+    "irds_mirror": true,
+    "size_hint": 34293,
+    "expected_md5": "5eac3d774a2f87da61c08a94f945beff",
+    "cache_path": "04.testset.gz"
+  },
+  "robust04-qrels": {
+    "url": "https://trec.nist.gov/data/robust/qrels.robust2004.txt",
+    "irds_mirror": true,
+    "size_hint": 6543541,
+    "expected_md5": "123c2a0ba2ec31178cb1050995dcfdfa",
+    "cache_path": "qrels.robust2004.txt"
+  },
+  "trec8-qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.trec8.adhoc.parts1-5.tar.gz",
+    "irds_mirror": true,
+    "size_hint": 325935,
+    "expected_md5": "ce1cfa80b29746d2a5eeddab268d4f6a",
+    "cache_path": "qrels.trec8.adhoc.parts1-5.tar.gz"
+  },
+  "trec8-queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/topics.401-450.gz",
+    "irds_mirror": true,
+    "size_hint": 6946,
+    "expected_md5": "daaafb700eed76f61a6e9e4b0dcc40c8",
+    "cache_path": "topics.401-450.gz"
+  },
+  "trec7-qrels": {
+    "url": "https://trec.nist.gov/data/qrels_eng/qrels.trec7.adhoc.parts1-5.tar.gz",
+    "irds_mirror": true,
+    "size_hint": 307120,
+    "expected_md5": "43def30d4f4b33a830ae67e3dce19023",
+    "cache_path": "qrels.trec7.adhoc.parts1-5.tar.gz"
+  },
+  "trec7-queries": {
+    "url": "https://trec.nist.gov/data/topics_eng/topics.351-400.gz",
+    "irds_mirror": true,
+    "size_hint": 7400,
+    "expected_md5": "fdee3f7e37e173fd6fcdc00fbe1fc671",
+    "cache_path": "topics.351-400.gz"
+  }
+},
+
 "dpr-w100": {
   "docs": {
     "url": "https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz",
@@ -1084,6 +1133,154 @@
     "size_hint": 459172,
     "expected_md5": "dae403e1834e87cba1babbef71b73714",
     "cache_path": "trec-mq-2008/prels.tar.gz"
+  }
+},
+
+
+"hc4": {
+  "train/topics": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
+    "size_hint": 104898,
+    "expected_md5": "cf3a43c4085e28ce03f37704771e0e36",
+    "cache_path": "train.topics.v1-0.jsonl"
+  },
+  "dev/topics": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/dev.topics.v1-0.jsonl",
+    "size_hint": 81444,
+    "expected_md5": "4c34c546c3e90de4733c3c9411ce9c6d",
+    "cache_path": "dev.topics.v1-0.jsonl"
+  },
+  "test/topics": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/test.topics.v1-0.jsonl",
+    "size_hint": 964434,
+    "expected_md5": "a311237913a7335d45fe261e9ff7f11e",
+    "cache_path": "test.topics.v1-0.jsonl"
+  },
+  "fa/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "fas/hc4_docs.jsonl"
+  },
+  "fa/docs/ids": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/ids.jsonl.gz",
+    "hint_hint": 21890148,
+    "expected_md5": "553e510633c30ce783c22ed37471ed3a",
+    "cache_path": "fas/ids.jsonl.gz"
+  },
+  "fa/train/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/train.qrels.v1-0.txt",
+    "size_hint": 5152,
+    "expected_md5": "4a343957837ce996a7275a71a30ed806",
+    "cache_path": "fas/train.qrels.v1-0.txt"
+  },
+  "fa/dev/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/dev.qrels.v1-0.txt",
+    "size_hint": 24574,
+    "expected_md5": "d66b62e3733a66b151f895e2f57ee144",
+    "cache_path": "fas/dev.qrels.v1-0.txt"
+  },
+  "fa/test/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/test.qrels.v1-0.txt",
+    "size_hint": 113490,
+    "expected_md5": "842c307e3e01a688897fadefc7a9672f",
+    "cache_path": "fas/test.qrels.v1-0.txt"
+  },
+  "zh/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "zho/hc4_docs.jsonl"
+  },
+  "zh/docs/ids": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/ids.jsonl.gz",
+    "size_hint": 29051136,
+    "expected_md5": "d4ee35f9ca55c0416fe439d4f41a9e2a",
+    "cache_path": "zho/ids.jsonl.gz"
+  },
+  "zh/train/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
+    "size_hint": 15686,
+    "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987",
+    "cache_path": "zho/train.qrels.v1-0.txt"
+  },
+  "zh/dev/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/dev.qrels.v1-0.txt",
+    "size_hint": 20126,
+    "expected_md5": "f252fb5edeee1fa38ccc8ee1c2a6e6f0",
+    "cache_path": "zho/dev.qrels.v1-0.txt"
+  },
+  "zh/test/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/test.qrels.v1-0.txt",
+    "size_hint": 123795,
+    "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea",
+    "cache_path": "zho/test.qrels.v1-0.txt"
+  },
+  "ru/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "rus/hc4_docs.jsonl"
+  },
+  "ru/docs/ids/0": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.0.jsonl.gz",
+    "size_hint": 26794412,
+    "expected_md5": "4763df966f6ea953c731ef2d572044e5",
+    "cache_path": "rus/ids.0.jsonl.gz"
+  },
+  "ru/docs/ids/1": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.1.jsonl.gz",
+    "size_hint": 26784412,
+    "expected_md5": "c19fb0dd1aceb0f6fd02f92818fa55b7",
+    "cache_path": "rus/ids.1.jsonl.gz"
+  },
+  "ru/docs/ids/2": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.2.jsonl.gz",
+    "size_hint": 26771449,
+    "expected_md5": "41d6db2ae68b8a4a1e2b371e4f5fe7a8",
+    "cache_path": "rus/ids.2.jsonl.gz"
+  },
+  "ru/docs/ids/3": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.3.jsonl.gz",
+    "size_hint": 26765684,
+    "expected_md5": "e3d20167c9fdce77e633b3ea0421cb51",
+    "cache_path": "rus/ids.3.jsonl.gz"
+  },
+  "ru/docs/ids/4": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.4.jsonl.gz",
+    "size_hint": 26790863,
+    "expected_md5": "54db61aec1a4585ce172c39111725be7",
+    "cache_path": "rus/ids.4.jsonl.gz"
+  },
+  "ru/docs/ids/5": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.5.jsonl.gz",
+    "size_hint": 26802522,
+    "expected_md5": "ba8a7bace2df0be82f80f7ae84f736d5",
+    "cache_path": "rus/ids.5.jsonl.gz"
+  },
+  "ru/docs/ids/6": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.6.jsonl.gz",
+    "size_hint": 26793985,
+    "expected_md5": "9ada14526d375e2c7aaf95be80f8a043",
+    "cache_path": "rus/ids.6.jsonl.gz"
+  },
+  "ru/docs/ids/7": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.7.jsonl.gz",
+    "size_hint": 23266384,
+    "expected_md5": "8555423b846aaf097527017cf8eda94c",
+    "cache_path": "rus/ids.7.jsonl.gz"
+  },
+  "ru/train/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/train.qrels.v1-0.txt",
+    "size_hint": 4232,
+    "expected_md5": "2e2c52e404a6ee0fe676cb88d63c26bb",
+    "cache_path": "rus/train.qrels.v1-0.txt"
+  },
+  "ru/dev/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/dev.qrels.v1-0.txt",
+    "size_hint": 11532,
+    "expected_md5": "24305749fd39fb0392be171e76ef2510",
+    "cache_path": "rus/dev.qrels.v1-0.txt"
+  },
+  "ru/test/qrels": {
+    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/test.qrels.v1-0.txt",
+    "size_hint": 133650,
+    "expected_md5": "1d1112350a11289496426ea558c321a2",
+    "cache_path": "rus/test.qrels.v1-0.txt"
   }
 },
 
@@ -2221,7 +2418,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
     "size_hint": 8501799926,
     "expected_md5": "d4863e4f342982b51b9a8fc668b2d0c0",
-    "cache_path": "collection.tsv.gz"
+    "cache_path": "collection.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/queries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-doctrain-queries.tsv.gz",
@@ -2325,7 +2523,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/orcas-doctrain-top100.gz",
     "size_hint": 10724320629,
     "expected_md5": "118d0884638fd405e111157a124ef0b2",
-    "cache_path": "orcas/ms.run.gz"
+    "cache_path": "orcas/ms.run.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "trec-dl-hard/qrels": {
     "url": "https://raw.githubusercontent.com/grill-lab/DL-Hard/main/dataset/dl_hard-doc.qrels",
@@ -2459,7 +2658,8 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
     "size_hint": 1057717952,
     "expected_md5": "31644046b18952c1386cd4564ba2ae69",
-    "cache_path": "collectionandqueries.tar.gz"
+    "cache_path": "collectionandqueries.tar.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "queries": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/queries.tar.gz",
@@ -2483,23 +2683,27 @@
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.tsv.gz",
     "size_hint": 2633557579,
     "expected_md5": "215a5204288820672f5e9451d9e202c5",
-    "cache_path": "train/docpairs.tsv.gz"
+    "cache_path": "train/docpairs.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/docpairs/v2": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qidpidtriples.train.full.2.tsv.gz",
     "size_hint": 1841693309,
     "expected_md5": "219083e80a0a751c08b968c2f31a4e0b",
-    "cache_path": "train/qidpidtriples.train.full.2.tsv.gz"
+    "cache_path": "train/qidpidtriples.train.full.2.tsv.gz",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/docpairs/small": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/triples.train.small.tar.gz",
     "size_hint": 7930881353,
-    "expected_md5": "c13bf99ff23ca691105ad12eab837f84"
+    "expected_md5": "c13bf99ff23ca691105ad12eab837f84",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "train/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.train.tar.gz",
     "size_hint": 11519984492,
-    "expected_md5": "d99fdbd5b2ea84af8aa23194a3263052"
+    "expected_md5": "d99fdbd5b2ea84af8aa23194a3263052",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "dev/qrels": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/qrels.dev.tsv",
@@ -2510,12 +2714,14 @@
   "dev/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.dev.tar.gz",
     "size_hint": 687414398,
-    "expected_md5": "8c140662bdf123a98fbfe3bb174c5831"
+    "expected_md5": "8c140662bdf123a98fbfe3bb174c5831",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "eval/scoreddocs": {
     "url": "https://msmarco.blob.core.windows.net/msmarcoranking/top1000.eval.tar.gz",
     "size_hint": 673440221,
-    "expected_md5": "73778cd99f6e0632d12d0b5731b20a02"
+    "expected_md5": "73778cd99f6e0632d12d0b5731b20a02",
+    "download_args": {"headers": {"X-Ms-Version": "2019-12-12"}}
   },
   "trec-dl-2019/qrels": {
     "url": "https://trec.nist.gov/data/deep/2019qrels-pass.txt",
@@ -2661,6 +2867,15 @@
     "size_hint": 133851237,
     "expected_md5": "5fcca9336c7486498c3e1cf81fa89f74",
     "cache_path": "eval_v2.1_public.json.gz"
+  }
+},
+
+"neumarco": {
+  "main": {
+    "url": "https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/dlawrie1_jh_edu/EQcICtPaSqFNoCZHtoeZszoB7FC362BvaPvieUSk2j30tA?download=1",
+    "size_hint": 3723728998,
+    "expected_md5": "733181c211959a7c09c695bfcddaea54",
+    "cache_path": "neuMSMARCO.tar.gz"
   }
 },
 
@@ -3058,6 +3273,22 @@
     "expected_md5": "d6aaa8706626d4b6210e4f9bc6ffe265",
     "stream": true,
     "skip_local": true
+  }
+},
+
+
+"neuclir": {
+  "1/fa/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "1/fas/docs.jsonl"
+  },
+  "1/zh/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "1/zho/docs.jsonl"
+  },
+  "1/ru/docs": {
+    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+    "cache_path": "1/rus/docs.jsonl"
   }
 },
 
@@ -3592,6 +3823,14 @@
   }
 },
 
+"wikiclir": {
+  "source": {
+    "url": "https://www.cs.jhu.edu/~kevinduh/a/wikiclir2018/wiki-clir.tar.gz",
+    "size_hint": 7036445773,
+    "expected_md5": "705abb611eb8cbab9ced2b8767a3bdb6"
+  }
+},
+
 "wikir": {
   "en1k": {
     "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1",
@@ -3627,81 +3866,6 @@
     "url": "https://zenodo.org/record/3569732/files/ITwikIR16k.zip?download=1",
     "size_hint": 248875419,
     "expected_md5": "e9c5b81c9df6fdc0e2986fa8ffb8ff12"
-  }
-},
-
-"hc4": {
-  "train/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
-    "size_hint": 104898,
-    "expected_md5": "cf3a43c4085e28ce03f37704771e0e36"
-  },
-  "dev/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/dev.topics.v1-0.jsonl",
-    "size_hint": 81444,
-    "expected_md5": "4c34c546c3e90de4733c3c9411ce9c6d"
-  },
-  "test/topics": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/test.topics.v1-0.jsonl",
-    "size_hint": 964434,
-    "expected_md5": "a311237913a7335d45fe261e9ff7f11e"
-  },
-  "fa/docs": {
-    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "fas/hc4_docs.jsonl"
-  },
-  "fa/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/train.qrels.v1-0.txt",
-    "size_hint": 5152,
-    "expected_md5": "4a343957837ce996a7275a71a30ed806"
-  },
-  "fa/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/dev.qrels.v1-0.txt",
-    "size_hint": 24574,
-    "expected_md5": "d66b62e3733a66b151f895e2f57ee144"
-  },
-  "fa/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/test.qrels.v1-0.txt",
-    "size_hint": 113490,
-    "expected_md5": "842c307e3e01a688897fadefc7a9672f"
-  },
-  "zh/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/train.qrels.v1-0.txt",
-    "size_hint": 15686,
-    "expected_md5": "67d956dcc5b373ae8b6ce5f360b03987"
-  },
-  "zh/docs": {
-    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "zho/hc4_docs.jsonl"
-  },
-  "zh/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/dev.qrels.v1-0.txt",
-    "size_hint": 20126,
-    "expected_md5": "f252fb5edeee1fa38ccc8ee1c2a6e6f0"
-  },
-  "zh/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/test.qrels.v1-0.txt",
-    "size_hint": 123795,
-    "expected_md5": "1bc5cfcefc49805884142b8b32f1a6ea"
-  },
-  "ru/docs": {
-    "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-    "cache_path": "rus/hc4_docs.jsonl"
-  },
-  "ru/train/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/train.qrels.v1-0.txt",
-    "size_hint": 4232,
-    "expected_md5": "2e2c52e404a6ee0fe676cb88d63c26bb"
-  },
-  "ru/dev/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/dev.qrels.v1-0.txt",
-    "size_hint": 11532,
-    "expected_md5": "24305749fd39fb0392be171e76ef2510"
-  },
-  "ru/test/qrels": {
-    "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/test.qrels.v1-0.txt",
-    "size_hint": 133650,
-    "expected_md5": "1d1112350a11289496426ea558c321a2"
   }
 }
 }

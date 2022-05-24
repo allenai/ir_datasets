@@ -1,0 +1,123 @@
+_:
+  pretty_name: 'NeuCLIR Corpus'
+  desc: '
+<p>
+This is the dataset created for <a href="https://neuclir.github.io/">TREC 2022 NeuCLIR Track</a>. 
+Topics will be developed and released by June 2022 by NIST. 
+Relevance judgements will be available after the evaluation (around November). 
+</p>
+<p>
+The collection designed to be similar to [HC4] and a large portion of documents from HC4 are ported to this collection.
+Users can conduct experiemnts on this collection with queries and qrels in HC4 for development. 
+</p>
+<ul>
+  <li>Documents: Web pages from Common Crawl in Chinese, Persian, and Russian.</li>
+  <li>
+  Queries: (To be released) English TREC-style title/description queries. Narrative field contains an example passage for each relevance level.
+  Human and machine translation of the titles and descriptions in the target language (i.e., document language) are provided in the query object. 
+  </li>
+  <li>Qrels: (To be released)  Documents are judged in three levels of relevance. Please refer to the dataset paper for the full definition of the levels. </li>
+  <li>See also: <a class="ds-ref">hc4</a></li>
+  <li><a href="https://neuclir.github.io/">NeuCLIR Track Website</a></li>
+  <li><a href="https://github.com/NeuCLIR/download-collection">Collection Repository</a></li>
+</ul>'
+  data_access: '
+<p>
+To access the docuemnts of this dataset, you will need to download the documents from Common Crawl. 
+The script for downloading and validating the documents are in <a href="https://github.com/NeuCLIR/download-collection">NeuCLIR/download-collection </a>. 
+Please use the following command to download the documents:
+</p>
+<code>
+git clone https://github.com/NeuCLIR/download-collection<br/>
+cd download-collection<br/>
+pip install -r requirements.txt<br/>
+python download_documents.py --storage ~/.ir_datasets/neuclir/1 \ <br/>
+                             --zho ./resource/zho/ids.jsonl.gz \ <br/>
+                             --fas ./resource/fas/ids.jsonl.gz \ <br/>
+                             --rus ./resource/rus/ids.*.jsonl.gz \ <br/>
+                             --jobs {number of process}<br/>
+</code>
+<p>
+After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
+modify the ordering of the collection to match the original specified ordering in the id files. 
+</p>
+<code>
+for lang in zho fas rus; do <br/>
+&nbsp;&nbsp;python fix_document_order.py --raw_download_file ~/.ir_datasets/neuclir/1/$lang/docs.jsonl \ <br/>
+&nbsp;&nbsp;                             --id_file ./resource/$lang/ids*.jsonl.gz \ <br/>
+&nbsp;&nbsp;                             --check_hash <br/>
+done
+</code>
+<p>
+You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/neuclir/22/</kbd>.
+</p>
+'
+
+1:
+  desc: '
+<p>
+Version 1 of the NeuCLIR corpus.
+</p>
+'
+
+1/zh:
+  desc: '
+<p>
+The Chinese collection contains English queries (to be released) and Chinese documents for retrieval. 
+Human and machine translated queries will be provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Chinese is available. 
+</p>
+'
+  docs_instructions: &inst "docs available using https://github.com/NeuCLIR/download-collection package"
+
+1/zh/hc4-filtered:
+  desc: '
+<p>
+Subset of the Chinse collection that intersect with HC4. 
+The 60 queries are the <a class="ds-ref">hc4/zh/dev</a> and <a class="ds-ref">hc4/zh/test</a> sets combined. 
+</p>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Lawrie2022HC4']
+
+1/fa:
+  desc: '
+<p>
+The Persian collection contains English queries (to be released) and Persian documents for retrieval. 
+Human and machine translated queries will be provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Persian is available. 
+</p>
+'
+  docs_instructions: *inst
+
+1/fa/hc4-filtered:
+  desc: '
+<p>
+Subset of the Persian collection that intersect with HC4. 
+The 60 queries are the <a class="ds-ref">hc4/fa/dev</a> and <a class="ds-ref">hc4/fa/test</a> sets combined. 
+</p>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Lawrie2022HC4']
+
+
+1/ru:
+  desc: '
+<p>
+The Russian collection contains English queries (to be released) and Russian documents for retrieval. 
+Human and machine translated queries will be provided in the query object for running monolingual retrieval or cross-language retrival 
+assuming the machine query tranlstion into Russian is available. 
+</p>
+'
+  docs_instructions: *inst
+
+1/ru/hc4-filtered:
+  desc: '
+<p>
+Subset of the Russian collection that intersect with HC4. 
+The 54 queries are the <a class="ds-ref">hc4/ru/dev</a> and <a class="ds-ref">hc4/ru/test</a> sets combined. 
+</p>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['Lawrie2022HC4']
+

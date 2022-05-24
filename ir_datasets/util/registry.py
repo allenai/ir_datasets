@@ -1,3 +1,4 @@
+import os
 import re
 import ir_datasets
 from .metadata import MetadataComponent
@@ -21,7 +22,11 @@ class Registry:
                     dataset = initializer(key, match.groups())
                     self.register(key, dataset)
                     break
-        return self._registered[key]
+        result = self._registered[key]
+        if hasattr(result, 'deprecated'):
+            if os.environ.get('IR_DATASETS_SKIP_DEPRECATED_WARNING', '').lower() != 'true':
+                _logger.info(result.deprecated())
+        return result
 
     def __iter__(self):
         return iter(self._registered.keys())
