@@ -25,7 +25,8 @@ DOMAINS = ['economics', 'history', 'politics']
 class CodecQuery(NamedTuple):
     query_id: str
     query: str
-    narrative: str
+    domain: str
+    guidelines: str
 
 
 class CodecQueries(BaseQueries):
@@ -39,7 +40,7 @@ class CodecQueries(BaseQueries):
             data = json.load(stream)
             for qid, query in data.items():
                 if self._qid_filter is None or qid.startswith(self._qid_filter):
-                    yield CodecQuery(qid, query['Query'], query['Narrative'])
+                    yield CodecQuery(qid, query['Query'], query['Domain'], query['Guidelines'])
 
     def queries_cls(self):
         return CodecQuery
@@ -62,7 +63,7 @@ def _init():
 
     base = Dataset(
         CodecQueries(dlc['topics']),
-        TrecQrels(dlc['qrels'], QREL_DEFS, format_3col=True),
+        TrecQrels(dlc['qrels'], QREL_DEFS),
         documentation('_'))
 
     subsets = {}
