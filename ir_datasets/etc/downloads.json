@@ -638,17 +638,21 @@
 },
 
 "codec": {
+  "documents": {
+    "instructions": "The CODEC document collection is available on request (see here: <https://github.com/grill-lab/CODEC>). Once downloaded, move/link the comets_documents.jsonl file to {path}.",
+    "cache_path": "v1/comets_documents.jsonl"
+  },
   "topics": {
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/topics/topics.json",
     "size_hint": 47192,
     "expected_md5": "f75e4733693588449f68f7fdceb02ec9",
-    "cache_path": "topics.v1.json"
+    "cache_path": "v1/topics.json"
   },
   "qrels": {
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_document_judgments.txt",
     "size_hint": 306976,
     "expected_md5": "7200606d6dc573abe2dd93160d5a5ab5",
-    "cache_path": "document.v1.qrels"
+    "cache_path": "v1/document.qrels"
   }
 },
 
@@ -1682,7 +1686,7 @@
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_entity_judgments.txt",
     "size_hint": 282367,
     "expected_md5": "51781fd0de5f7ca6b537222e4001e8ba",
-    "cache_path": "codec/raw_entity_judgments.v1.txt"
+    "cache_path": "codec/v1/raw_entity_judgments.txt"
   }
 },
 

@@ -1,11 +1,18 @@
 import re
 import unittest
-from ir_datasets.datasets.codec import CodecQuery
+from ir_datasets.datasets.codec import CodecQuery, CodecDoc
 from ir_datasets.formats import TrecQrel
 from .base import DatasetIntegrationTest
 
 
 class TestCodec(DatasetIntegrationTest):
+    def test_docs(self):
+        self._test_docs('codec', count=729824, items={
+            0: CodecDoc('5f8fddcc5a1a25d5fce9ec5e331ba8dd', "Apple's Tim Cook calls for calm heads on China, US trade", re.compile("^Apple's Tim Cook calls for calm heads on China, US trade\nApple CEO Tim Cook\\.Getty Images\nApple Chief.{2099}d last year when he called for China to increase trade and continue opening itself up to the world\\.\n$", flags=48), 'https://www.cnbc.com/2018/03/24/apples-tim-cook-calls-for-calm-heads-on-china-us-trade.html'),
+            9: CodecDoc('ac2c854a75425587461307c506c48330', 'Buying the yen to protect against a trade war is ‘pretty peculiar,’ wealth manager says', re.compile('^Buying the yen to protect against a trade war is ‘pretty peculiar,’ wealth manager says\nVIDEO3:5803:.{2303}d that it would look to be exempted from the metal tariffs, though they came into effect on Friday\\.\n$', flags=48), 'https://www.cnbc.com/2018/03/26/yen-to-protect-against-a-trade-war-is-wrong.html?__source=twitter%7Cmain'),
+            729823: CodecDoc('2dc726c7c5de68b9766e35336fa214a0', 'Damped vibration', re.compile('^Damped vibration\nThe simple harmonic oscillations discussed above continue forever, at constant ampl.{103}tors behave somewhat differently, however\\. Harmonic oscillations tend to die away as time goes on\\.…\n$', flags=48), 'https://www.britannica.com/science/damped-vibration'),
+        })
+
     def test_queries(self):
         self._test_queries('codec', count=42, items={
             0: CodecQuery('economics-1', "How has the UK's Open Banking Regulation benefited challenger banks?", 'finance', 'UK’s Open Banking regulation, which has parallels to the EU’s second payment service directive (PSD2), went live in January 2018. This piece of legislation “will require banks to open their payments infrastructure and customer data assets to third parties”. As a result, banks no longer have a monopoly on user data if clients grant permission. \n\nChallenger banks are small, recently created retail banks that compete directly with the longer-established banks in the UK. Specifically, seeking market share from the "big four" UK retail banks (Barclays, HSBC, Lloyds Banking Group, and NatWest Group). The banks distinguish themselves from the historic banks by modern financial technology practices, such as online-only operations, that avoid the costs and complexities of traditional banking. The largest UK-operating challenger banks include Atom Bank, Revolut, Starling, N26, and Tide.\n\nRelevant documents and entities will discuss how challenger banks have used open banking to develop new products or capture market share from traditional retail banks in the UK.'),
