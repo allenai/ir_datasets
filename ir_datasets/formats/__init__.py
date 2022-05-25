@@ -15,3 +15,4 @@ from .argsme import (
 )
 
 from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries
+from .jsonl import JsonlDocs
