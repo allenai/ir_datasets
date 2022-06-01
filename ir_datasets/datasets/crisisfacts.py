@@ -1,0 +1,210 @@
+import json
+import contextlib
+import requests
+import io
+import codecs
+import itertools
+import ir_datasets
+from typing import NamedTuple
+from ir_datasets import util
+from ir_datasets.util import DownloadConfig, TarExtract, Cache
+from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
+from ir_datasets.formats import GenericDoc, GenericQuery, TrecQrel
+from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.datasets.base import Dataset, YamlDocumentation
+
+
+_logger = ir_datasets.log.easy()
+
+NAME = 'crisisfacts'
+
+base_url = "http://demos.terrier.org/crisisfacts"
+
+
+class CrisisFactsApiDownload:
+    def __init__(self, url_path, eventNumber, requestDate, stream=True):
+        self.url_path = url_path
+        self.eventNumber = eventNumber
+        self.requestDate = requestDate
+        self._stream = stream
+
+    def register(self):
+        API_ENDPOINT = base_url+"/register"
+
+        data = {
+            'eventID': self.eventNumber,
+            'requestDate': self.requestDate,
+            **self._handle_auth(),
+        }
+
+        with _logger.duration('requesting access key'):
+            r = requests.post(url = API_ENDPOINT, json=data)
+            r.raise_for_status()
+
+            result = r.json()
+
+            if result['accessKey'] is None:
+                raise RuntimeError("Error registering: {message}".format(**result))
+            return result['accessKey']
+
+    @contextlib.contextmanager
+    def stream(self):
+        with io.BufferedReader(util.IterStream(iter(self)), buffer_size=io.DEFAULT_BUFFER_SIZE) as stream:
+            yield stream
+
+    def __iter__(self):
+        accessKey = self.register()
+        endOfStream = False
+        while (not endOfStream): # we are going to iteratively request data until there is none left
+            if not self._stream:
+                endOfStream = True
+            API_ENDPOINT = base_url + self.url_path
+            PARAMS = {'accessKey':accessKey}
+            r = requests.get(url = API_ENDPOINT, params = PARAMS)
+            r.raise_for_status()
+            if r.content:
+                yield r.content
+                yield b'\n'
+            else:
+                endOfStream = True
+
+    def _handle_auth(self):
+        auth_dir = util.home_path() / 'auth'
+        if not auth_dir.exists():
+            auth_dir.mkdir(parents=True, exist_ok=True)
+        auth_path = auth_dir / 'crisisfacts.json'
+        if auth_path.exists():
+            with auth_path.open('rt') as fin:
+                return json.load(fin)
+        else:
+            _logger.info('To download crisisfacts data, you need to provide your institution, contact person, email, and institution type.\n\nTo avoid this message in the future, you may '
+                         'also set them in a file named {auth_path}, in the format of {{"institution": "", "contactname": "", "email": "", "institutiontype": ""}}.'.format(auth_path=str(auth_path)))
+            institution = input('institution: ')
+            contactname = input('contactname: ')
+            email = input('email: ')
+            institutiontype = input('institutiontype: ')
+            return {'institution': institution, 'contactname': contactname, 'email': email, 'institutiontype': institutiontype}
+
+
+
+class JsonlDocs(BaseDocs):
+    def __init__(self, name, dlc, doc_type, field_map):
+        super().__init__()
+        self._name = name
+        self._dlc = dlc
+        self._doc_type = doc_type
+        self._field_map = field_map
+
+    def docs_iter(self):
+        return iter(self.docs_store())
+
+    def _docs_iter_first(self):
+        with self._dlc.stream() as stream:
+            for line in stream:
+                for doc in json.loads(line):
+                    yield self._doc_type(**{dest: doc[src] for dest, src in self._field_map.items()})
+
+    def docs_cls(self):
+        return self._doc_type
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()/NAME/self._name}/docs.pklz4',
+            init_iter_fn=self._docs_iter_first,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=['doc_id'],
+            count_hint=ir_datasets.util.count_hint(f'{NAME}/{self._name}'),
+        )
+
+    def docs_count(self):
+        if self.docs_store().built():
+            return self.docs_store().count()
+
+    def docs_namespace(self):
+        return NAME
+
+
+class CrisisFactsQueries(BaseQueries):
+    def __init__(self, dlc):
+        super().__init__()
+        self._dlc = dlc
+
+    def queries_iter(self):
+        with self._dlc.stream() as f:
+            data = json.load(f)
+            event = data['event']
+            for query in data['queries']:
+                yield CrisisFactsQuery(
+                    query['queryID'],
+                    query['query'],
+                    query['trecisCategoryMapping'],
+                    event["eventID"],
+                    event["title"],
+                    event["dataset"],
+                    event["description"],
+                    event["trecisID"],
+                    event["type"],
+                    event["url"],
+                )
+
+    def queries_cls(self):
+        return CrisisFactsQuery
+
+    def queries_count(self):
+        return sum(1 for _ in self.queries_iter())
+
+    def queries_namespace(self):
+        return NAME
+
+    def queries_lang(self):
+        return 'en'
+
+
+class CrisisFactsStreamDoc(NamedTuple):
+    doc_id: str
+    event: str
+    text: str
+    source_type: str
+    unix_timestamp: int
+    def default_text(self):
+        return self.text
+
+
+class CrisisFactsQuery(NamedTuple):
+    query_id: str
+    text: str
+    trecis_category_mapping: str
+    event_id: str
+    event_title: str
+    event_dataset: str
+    event_description: str
+    event_trecis_id: str
+    event_type: str
+    event_url: str
+
+def _init():
+    documentation = YamlDocumentation(f'docs/{NAME}.yaml')
+    base_path = ir_datasets.util.home_path()/NAME
+    subsets = {}
+
+    base = Dataset(
+        documentation('_'),
+    )
+
+    subsets = {}
+    for date in ['2017-12-07']:
+        for stream in ['001']:
+            subsets[f'{date}/{stream}'] = Dataset(
+                JsonlDocs(f'{date}/{stream}', CrisisFactsApiDownload("/stream", stream, date), CrisisFactsStreamDoc, {"doc_id": "streamID", "event": "event", "source_type": "sourceType", "text": "text", "unix_timestamp": "unixTimestamp"}),
+                CrisisFactsQueries(Cache(CrisisFactsApiDownload("/queries", stream, date, stream=False), base_path/date/stream/'queries.json')),
+            )
+
+    ir_datasets.registry.register(NAME, base)
+    for s in sorted(subsets):
+        ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
+
+    return base, subsets
+
+
+base, subsets = _init()
