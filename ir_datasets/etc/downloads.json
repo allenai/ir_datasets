@@ -3530,6 +3530,12 @@
     "expected_md5": "3f221bdd3a44d1850d698041a8cdd2bc",
     "cache_path": "wapo_duplicate_list_v1.0.txt"
   },
+  "v3/dupes": {
+    "url": "https://github.com/daltonj/treccastweb/raw/master/2022/duplicate_files/all_duplicates.txt",
+    "size_hint": 21506576,
+    "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+    "cache_path": "v3/all_duplicates.txt"
+  },
   "2019/train/queries": {
     "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2019/data/training/train_topics_v1.0.json",
     "size_hint": 32800,
@@ -3764,6 +3770,11 @@
     "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
     "expected_md5": "ce6e93f6ce9959b72c2de4f8d12089ab",
     "cache_path": "WashingtonPost.v2.tar.gz"
+  },
+  "v4": {
+    "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
+    "expected_md5": "b45b8d34393b4df72737c11aa7fb2b3d",
+    "cache_path": "WashingtonPost.v4.tar.gz"
   },
   "trec-core-2018/queries": {
     "url": "https://trec.nist.gov/data/core/topics2018.txt",
