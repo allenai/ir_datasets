@@ -93,6 +93,7 @@
   "clinicaltrials/2019/trec-pm-2019": {"docs": {"_ref": "clinicaltrials/2019"}, "queries": {"count": 40}, "qrels": {"count": 12996, "fields": {"relevance": {"counts_by_value": {"0": 10811, "1": 1700, "2": 485}}}}},
   "clinicaltrials/2021": {"docs": {"count": 375580, "fields": {"doc_id": {"max_len": 11, "common_prefix": "NCT0"}}}},
   "clinicaltrials/2021/trec-ct-2021": {"docs": {"_ref": "clinicaltrials/2021"}, "queries": {"count": 75}, "qrels": {"count": 35832, "fields": {"relevance": {"counts_by_value": {"1": 6019, "0": 24243, "2": 5570}}}}},
+  "clinicaltrials/2021/trec-ct-2022": {"docs": {"_ref": "clinicaltrials/2021"}, "queries": {"count": 50}},
   "clirmatrix": {},
   "clueweb09": {"docs": {"count": 1040859705, "fields": {"doc_id": {"max_len": 25, "common_prefix": "clueweb09-"}}}},
   "clueweb09/ar": {"docs": {"count": 29192662, "fields": {"doc_id": {"max_len": 25, "common_prefix": "clueweb09-ar000"}}}},
