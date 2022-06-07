@@ -158,9 +158,14 @@ def _init():
 
     subsets['2021/trec-ct-2021'] = Dataset(
         collection21,
-        TrecXmlQueries(dlc['trec-ct-2021/queries'], qtype=GenericQuery, qtype_map=ct_qmap, namespace='trec-pm-2019', lang='en'),
+        TrecXmlQueries(dlc['trec-ct-2021/queries'], qtype=GenericQuery, qtype_map=ct_qmap, namespace='trec-ct-2021', lang='en'),
         TrecQrels(dlc['trec-ct-2021/qrels'], QREL_DEFS_2021),
         documentation('trec-ct-2021'))
+
+    subsets['2021/trec-ct-2022'] = Dataset(
+        collection21,
+        TrecXmlQueries(dlc['trec-ct-2022/queries'], qtype=GenericQuery, qtype_map=ct_qmap, namespace='trec-ct-2022', lang='en'),
+        documentation('trec-ct-2022'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
