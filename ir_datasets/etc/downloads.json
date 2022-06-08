@@ -371,6 +371,12 @@
     "size_hint": 676496,
     "expected_md5": "0335d95c58d5f5fd9bc730bccb60ca90",
     "cache_path": "trec-ct-2021/qrels"
+  },
+  "trec-ct-2022/queries": {
+    "url": "https://www.trec-cds.org/topics2022.xml",
+    "size_hint": 32423,
+    "expected_md5": "73bcb3985a17fd60d786f5d8f5a0bb2e",
+    "cache_path": "trec-ct-2022/queries.xml"
   }
 },
   
@@ -638,17 +644,21 @@
 },
 
 "codec": {
+  "documents": {
+    "instructions": "The CODEC document collection is available on request (see here: <https://github.com/grill-lab/CODEC>). Once downloaded, move/link the comets_documents.jsonl file to {path}.",
+    "cache_path": "v1/comets_documents.jsonl"
+  },
   "topics": {
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/topics/topics.json",
-    "size_hint": 40331,
-    "expected_md5": "b3373f51c9906f09d0fae6e337650c71",
-    "cache_path": "topics.json"
+    "size_hint": 47192,
+    "expected_md5": "f75e4733693588449f68f7fdceb02ec9",
+    "cache_path": "v1/topics.json"
   },
   "qrels": {
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_document_judgments.txt",
-    "size_hint": 239015,
-    "expected_md5": "c3af699c89758e0d7448e2ef78d3a5b8",
-    "cache_path": "document.qrels"
+    "size_hint": 306976,
+    "expected_md5": "7200606d6dc573abe2dd93160d5a5ab5",
+    "cache_path": "v1/document.qrels"
   }
 },
 
@@ -906,30 +916,54 @@
 
 
 
-"trec-fair-2021": {
-  "docs": {
+"trec-fair": {
+  "2021/docs": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_corpus.json.gz",
     "size_hint": 15575740862,
     "expected_md5": "4c1e81d120566a493d5fa90b6114bd49",
-    "cache_path": "corpus.json.gz"
+    "cache_path": "2021/corpus.json.gz"
   },
-  "train/topics": {
+  "2021/train/topics": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_topics.json.gz",
     "size_hint": 7271598,
     "expected_md5": "bdb72f896833d0c87421b6415d895846",
-    "cache_path": "train/topics.json.gz"
+    "cache_path": "2021/train/topics.json.gz"
   },
-  "eval/topics": {
+  "2021/eval/topics": {
     "url": "https://drive.google.com/uc?export=download&id=1jGyjB7qOt45jakb32ZtroSkxs5sq5gvU",
     "size_hint": 6055,
     "expected_md5": "2e153903c375596914ee9ffdbcefd6a5",
-    "cache_path": "eval/topics.json.gz"
+    "cache_path": "2021/eval/topics.json.gz"
   },
-  "metadata": {
+  "2021/eval/qrels": {
+    "url": "https://trec.nist.gov/data/fair/2021-eval-topics-with-qrels.json.gz",
+    "size_hint": 120050,
+    "expected_md5": "50068634036c00adb54e8be9314bf37c",
+    "cache_path": "2021/eval/topics-with-qrels.json.gz"
+  },
+  "2021/metadata": {
     "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_metadata.json.gz",
     "size_hint": 56827296,
     "expected_md5": "ae251e9ae0c9fb3a58c3b12e216dcea7",
-    "cache_path": "metadata.json.gz"
+    "cache_path": "2021/metadata.json.gz"
+  },
+  "2022/docs": {
+    "url": "https://data.boisestate.edu/library/Ekstrand/TRECFairRanking/corpus/trec_corpus_20220301_plain.json.gz",
+    "size_hint": 7677063809,
+    "expected_md5": "54661197940765ed5129f0bb0d459a99",
+    "cache_path": "2022/trec_corpus_20220301_plain.json.gz"
+  },
+  "2022/metadata": {
+    "url": "https://data.boisestate.edu/library/Ekstrand/TRECFairRanking/2022/trec_2022_articles_discrete.json.gz",
+    "size_hint": 236812182,
+    "expected_md5": "af48525886bae53205f4b64435ae81f2",
+    "cache_path": "2022/trec_2022_articles_discrete.json.gz"
+  },
+  "2022/train/topics": {
+    "url": "https://data.boisestate.edu/library/Ekstrand/TRECFairRanking/2022/trec_2022_train_reldocs.jsonl",
+    "size_hint": 18018410,
+    "expected_md5": "d132b4cc8c6c75525479728321db5176",
+    "cache_path": "2022/trec_2022_train_reldocs.jsonl"
   }
 },
 
@@ -1680,9 +1714,9 @@
   },
   "codec/qrels": {
     "url": "https://raw.githubusercontent.com/grill-lab/CODEC/main/raw_judgments/raw_entity_judgments.txt",
-    "size_hint": 224727,
-    "expected_md5": "b43ce953f749df5c973dca7a21093784",
-    "cache_path": "codec/raw_entity_judgments.txt"
+    "size_hint": 282367,
+    "expected_md5": "51781fd0de5f7ca6b537222e4001e8ba",
+    "cache_path": "codec/v1/raw_entity_judgments.txt"
   }
 },
 

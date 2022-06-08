@@ -127,7 +127,7 @@ def _init():
     subsets['codec'] = Dataset(
         corpus,
         codec.base.queries_handler(),
-        TrecQrels(dlc['codec/qrels'], CODEC_QREL_DEFS, format_3col=True),
+        TrecQrels(dlc['codec/qrels'], CODEC_QREL_DEFS),
         documentation('codec'))
 
     for domain in codec.DOMAINS:

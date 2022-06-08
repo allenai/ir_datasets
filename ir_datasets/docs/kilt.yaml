@@ -23,6 +23,7 @@ CODEC Entity Ranking sub-task.
 <li>See also: <a class="ds-ref">codec</a>, the document ranking subtask</li>
 </ul>
 '
+  bibtex_ids: ['mackie2022codec']
 
 codec/economics:
   desc: '
@@ -30,6 +31,7 @@ codec/economics:
 Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about economics.
 </p>
 '
+  bibtex_ids: ['mackie2022codec']
 
 codec/history:
   desc: '
@@ -37,6 +39,7 @@ codec/history:
 Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about history.
 </p>
 '
+  bibtex_ids: ['mackie2022codec']
 
 codec/politics:
   desc: '
@@ -44,3 +47,4 @@ codec/politics:
 Subset of <a class="ds-ref">kilt/codec</a> that only contains topics about politics.
 </p>
 '
+  bibtex_ids: ['mackie2022codec']
