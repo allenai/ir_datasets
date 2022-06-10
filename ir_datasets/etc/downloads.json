@@ -507,6 +507,13 @@
     "expected_md5": "44aa6300f9df4a77f7205c574afb9c2d",
     "cache_path": "trec-web-2013/qrels.adhoc"
   },
+  "trec-web-2013/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/2013/qrels.all.txt",
+    "irds_mirror": true,
+    "size_hint": 1598265,
+    "expected_md5": "741e76258543ad47ae75030363be13a9",
+    "cache_path": "trec-web-2013/qrels.all"
+  },
   "trec-web-2014/queries": {
     "url": "https://trec.nist.gov/data/web/2014/trec2014-topics.xml",
     "irds_mirror": true,
@@ -520,6 +527,13 @@
     "size_hint": 491247,
     "expected_md5": "afa1db71680acf71283adc7846282a44",
     "cache_path": "trec-web-2014/qrels.adhoc"
+  },
+  "trec-web-2014/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/2014/qrels.all.txt",
+    "irds_mirror": true,
+    "size_hint": 1492061,
+    "expected_md5": "085256d18544cd3e34b9fa9cc29ae513",
+    "cache_path": "trec-web-2014/qrels.all"
   },
   "ntcir-www-1/queries": {
     "url": "http://www.thuir.cn/ntcirwww/files/eng.queries.xml.zip",
