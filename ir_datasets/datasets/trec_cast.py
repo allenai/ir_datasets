@@ -199,7 +199,7 @@ class CastPassageDocstore(ir_datasets.indices.Docstore):
             if pid.count('-') >= 1:
                 did, idx = pid.rsplit('-', 1)
                 if idx.isnumeric():
-                    did2pids[did].add(int(idx))
+                    did2pids[did].add(int(idx)-1)
         for doc in self._docs_docstore.get_many_iter(did2pids.keys()):
             for idx in did2pids[doc.doc_id]:
                 if len(doc.passages) > idx:
@@ -281,18 +281,28 @@ def _spacy_make_passages(doc):
     passage_size = 250
     passages = []
 
-    current_passage_word_count = 0
     current_passage = ''
+    current_passage_word_count = 0
 
-    for sent in doc.sents:
-        if current_passage_word_count >= (passage_size * 0.67):
+    for sentence in doc.sents:
+        word_count = len(sentence)
+        if word_count >= passage_size:
+            if current_passage:
+                passages.extend([current_passage, sentence.text])
+            else:
+                passages.append(sentence.text)
+
+        elif word_count + current_passage_word_count > passage_size:
             passages.append(current_passage)
-            current_passage = ''
-            current_passage_word_count = 0
-        current_passage += sent.text + ' '
-        current_passage_word_count += len([tok for tok in sent])
+            current_passage = sentence.text
+            current_passage_word_count = word_count
+        else:
+            current_passage += sentence.text + ' '
+            current_passage_word_count += word_count
 
-    passages.append(current_passage[:-1])
+    if current_passage:
+        passages.append(current_passage)
+
     doc = spacy.tokens.Doc(doc.vocab) # Drop all data from the doc; we only need the passages. This saves a lot of time serialising
     doc._.passages = passages
     return doc
@@ -322,11 +332,10 @@ def _init():
         nlp.add_pipe("make_passages", last=True)
         if text_extractor is None:
             text_extractor = lambda x: x
-        sanitized = re.compile('<.*?>')
         def wrapped(docs):
             docs1, docs2 = itertools.tee(docs)
-            for nlp_doc, doc in zip(nlp.pipe((re.sub(sanitized, '', d.passages) for d in docs1), n_process=15), docs2):
-                yield doc._replace(passages=tuple(CastPassage(f'{doc.doc_id}-{i}', p, text_extractor(p)) for i, p in enumerate(nlp_doc._.passages)))
+            for nlp_doc, doc in zip(nlp.pipe((d.passages for d in docs1), n_process=15), docs2):
+                yield doc._replace(passages=tuple(CastPassage(f'{doc.doc_id}-{i+1}', p, text_extractor(p)) for i, p in enumerate(nlp_doc._.passages)))
         return wrapped
 
     def wapo_converter(dsid):
@@ -352,6 +361,7 @@ def _init():
 
     def wapo_v4_converter(dsid):
         def core_iter():
+            CLEANR = re.compile('<.*?>')
             dup_dids = set()
             for data in ir_datasets.load(dsid).docs_handler().docs_wapo_raw_iter():
                 if data["id"] in dup_dids:
@@ -360,49 +370,44 @@ def _init():
 
                 doc_id = 'WAPO_' + str(data['id'])
 
-                title = 'No Title'
-                if data['title'] != None:
-                    title = data['title'].replace("\n", " ")
+                title = data.get('title', 'No Title')
 
-                url = '/#'
                 if data["article_url"]:
                     if "www.washingtonpost.com" not in data["article_url"]:
                         url = "https://www.washingtonpost.com" + data['article_url']
                     else:
                         url = data['article_url']
+                else:
+                    url = ''
 
                 body = ''
-                try:
+                if data.get('contents') and len(data['contents']) > 0:
                     for item in data['contents']:
-                        if 'subtype' in item and item['subtype'] == 'paragraph':
+                        # if item is not None and item.get('subtype') == 'paragraph':
+                        if item is not None and item.get('subtype') == 'paragraph':
                             body += ' ' + item['content']
-                except:
-                    body += 'No body'
-                yield CastDoc(doc_id, title, url, body)
-        def wrapped():
-            return spacy_passager_batch()(core_iter())
-        return wrapped
+                body = re.sub(CLEANR, '', body)
+                body = body.replace('\n', ' ').strip()
+                if body:
+                    yield CastDoc(doc_id, title, url, body)
+        return lambda: spacy_passager_batch()(core_iter())
 
     def kilt_converter(dsid):
         def core_iter():
             for doc in ir_datasets.load(dsid).docs_handler().docs_kilt_raw_iter():
                 doc_id = 'KILT_' + doc['wikipedia_id']
                 title = doc['wikipedia_title']
-                body = ' '.join(doc['text'])
+                body = ' '.join(doc['text']).replace('\n', ' ').strip()
                 url = doc['history']['url']
                 yield CastDoc(doc_id, title, url, body)
-        def wrapped():
-            return spacy_passager_batch()(core_iter())
-        return wrapped
+        yield lambda: spacy_passager_batch()(core_iter())
 
     def marco_v2_converter(dsid):
         def core_iter():
             for doc in ir_datasets.load(dsid).docs:
                 doc_id = 'MARCO_' + doc.doc_id[len('msmarco_doc_'):]
-                yield CastDoc(doc_id, doc.title, doc.url, doc.body)
-        def wrapped():
-            return spacy_passager_batch()(core_iter())
-        return wrapped
+                yield CastDoc(doc_id, doc.title, doc.url, doc.body.replace('\n', ' ').strip())
+        return lambda: spacy_passager_batch()(core_iter())
 
     def prefixer(dsid, prefix):
         def wrapped():
@@ -486,12 +491,14 @@ def _init():
     ], global_dupes=dlc['v3/dupes'], docs_cls=CastDoc, count_hint=5903530)
 
     subsets['v3/kilt'] = Dataset(docs_v3_kilt)
+    subsets['v3/kilt/psgs'] = Dataset(CastPasageDocs(docs_v3_kilt, 999999999999))
 
-    docs_v3_kilt = CastDocs('deleteme_docs_v3_marco', [
+    docs_v3_marco = CastDocs('deleteme_docs_v3_marco', [
         ('MARCO', MARCO_V2, None),
     ], global_dupes=dlc['v3/dupes'], docs_cls=CastDoc)
 
-    subsets['v3/marco'] = Dataset(docs_v3_kilt)
+    subsets['v3/marco'] = Dataset(docs_v3_marco)
+    subsets['v3/marco/psgs'] = Dataset(CastPasageDocs(docs_v3_marco, 999999999999))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
