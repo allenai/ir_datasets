@@ -126,10 +126,20 @@ class TestClueWeb12(DatasetIntegrationTest):
             9: TrecQrel('201', 'clueweb12-0108wb-22-26598', 0, '0'),
             14473: TrecQrel('250', 'clueweb12-1914wb-21-25488', 0, '0'),
         })
+        self._test_qrels('clueweb12/trec-web-2013/diversity', count=46985, items={
+            0: TrecSubQrel('201', 'clueweb12-0000tw-05-12114', 1, '1'),
+            9: TrecSubQrel('201', 'clueweb12-0108wb-22-26598', 0, '1'),
+            46984: TrecSubQrel('250', 'clueweb12-1914wb-21-25488', 0, '0'),
+        })
         self._test_qrels('clueweb12/trec-web-2014', count=14432, items={
             0: TrecQrel('251', 'clueweb12-0000tw-34-04382', 1, '0'),
             9: TrecQrel('251', 'clueweb12-0000wb-90-35684', 1, '0'),
             14431: TrecQrel('300', 'clueweb12-1911wb-40-07107', 0, '0'),
+        })
+        self._test_qrels('clueweb12/trec-web-2014/diversity', count=43840, items={
+            0: TrecSubQrel('251', 'clueweb12-0000tw-34-04382', 1, '0'),
+            9: TrecSubQrel('251', 'clueweb12-0000wb-90-35684', 1, '0'),
+            43839: TrecSubQrel('300', 'clueweb12-1911wb-40-07107', 0, '0'),
         })
         self._test_qrels('clueweb12/b13/ntcir-www-1', count=25465, items={
             0: TrecQrel('0001', 'clueweb12-0000wb-16-36432', 3, '0'),
