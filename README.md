@@ -242,3 +242,4 @@ Contributors to this repository:
  - Jan Heinrich Reimer (Martin Luther University Halle-Wittenberg)
  - Maik Fröbe (Martin Luther University Halle-Wittenberg)
  - Eugene Yang (Johns Hopkins University)
+ - Augustin Godinot (NAVERLABS Europe, ENS Paris-Saclay)
