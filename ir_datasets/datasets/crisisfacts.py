@@ -193,11 +193,21 @@ def _init():
     )
 
     subsets = {}
-    for date in ['2017-12-07']:
-        for stream in ['001']:
-            subsets[f'{date}/{stream}'] = Dataset(
-                JsonlDocs(f'{date}/{stream}', CrisisFactsApiDownload("/stream", stream, date), CrisisFactsStreamDoc, {"doc_id": "streamID", "event": "event", "source_type": "sourceType", "text": "text", "unix_timestamp": "unixTimestamp"}),
-                CrisisFactsQueries(Cache(CrisisFactsApiDownload("/queries", stream, date, stream=False), base_path/date/stream/'queries.json')),
+    event_date_map = {
+        '001': ['2017-12-07', '2017-12-08', '2017-12-09', '2017-12-10', '2017-12-11', '2017-12-12', '2017-12-13', '2017-12-14', '2017-12-15'],
+        '002': ['2018-07-25', '2018-07-26', '2018-07-27', '2018-07-28', '2018-07-29', '2018-07-30'],
+        '003': ['2018-08-06', '2018-08-07', '2018-08-08', '2018-08-09', '2018-08-10', '2018-08-12', '2018-08-13'],
+        '004': ['2018-09-01', '2018-09-04', '2018-09-05', '2018-09-07', '2018-09-08', '2018-09-09', '2018-09-10', '2018-09-11', '2018-09-12', '2018-09-13', '2018-09-14', '2018-09-15', '2018-09-16', '2018-09-17', '2018-09-18'],
+        '005': ['2018-05-27', '2018-05-28', '2018-05-29', '2018-05-30'],
+        '006': ['2019-10-10', '2019-10-11', '2019-10-12', '2019-10-13'],
+        '007': ['2020-08-27', '2020-08-28'],
+        '008': ['2020-09-11', '2020-09-12', '2020-09-13', '2020-09-14', '2020-09-15', '2020-09-16', '2020-09-17', '2020-09-18'],
+    }
+    for event, dates in event_date_map.items():
+        for date in dates:
+            subsets[f'{event}/{date}'] = Dataset(
+                JsonlDocs(f'{event}/{date}', CrisisFactsApiDownload("/stream", event, date), CrisisFactsStreamDoc, {"doc_id": "streamID", "event": "event", "source_type": "sourceType", "text": "text", "unix_timestamp": "unixTimestamp"}),
+                CrisisFactsQueries(Cache(CrisisFactsApiDownload("/queries", event, date, stream=False), base_path/date/event/'queries.json')),
             )
 
     ir_datasets.registry.register(NAME, base)
