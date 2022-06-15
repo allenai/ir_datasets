@@ -11,6 +11,20 @@ CODEC Document Ranking sub-task.
 <li>See also: <a class="ds-ref">kilt/codec</a>, the entity ranking subtask</li>
 </ul>
 '
+  docs_instructions: &inst "docs available from dataset authors"
+  data_access: '
+<p>
+To use this dataset, you need a copy the document corpus from <a href="https://github.com/grill-lab/CODEC">here</a>.
+</p>
+<p>
+The process involves emailing a dataset author, who will provide instructions for downloading
+the dataset.
+</p>
+<p>
+ir_datasets expects the source file to be copied/linked under <kbd>~/.ir_datasets/codec/v1/comets_documents.jsonl</kbd>.
+</p>
+'
+  bibtex_ids: ['mackie2022codec']
 
 economics:
   desc: '
@@ -18,6 +32,8 @@ economics:
 Subset of <a class="ds-ref">codec</a> that only contains topics about economics.
 </p>
 '
+  docs_instructions: *inst
+  bibtex_ids: ['mackie2022codec']
 
 history:
   desc: '
@@ -25,6 +41,8 @@ history:
 Subset of <a class="ds-ref">codec</a> that only contains topics about history.
 </p>
 '
+  docs_instructions: *inst
+  bibtex_ids: ['mackie2022codec']
 
 politics:
   desc: '
@@ -32,3 +50,5 @@ politics:
 Subset of <a class="ds-ref">codec</a> that only contains topics about politics.
 </p>
 '
+  docs_instructions: *inst
+  bibtex_ids: ['mackie2022codec']

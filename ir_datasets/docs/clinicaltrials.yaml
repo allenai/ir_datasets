@@ -91,3 +91,13 @@ The TREC Clinical Trials 2021 track.
 <li><a href="http://www.trec-cds.org/2021.html">Shared Task Website</a></li>
 </ul>
 '
+
+trec-ct-2022:
+  desc: '
+<p>
+The TREC Clinical Trials 2022 track.
+</p>
+<ul>
+<li><a href="https://www.trec-cds.org/2022.html">Shared Task Website</a></li>
+</ul>
+'

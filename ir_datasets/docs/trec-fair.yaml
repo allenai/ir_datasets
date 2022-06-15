@@ -1,0 +1,51 @@
+_:
+  pretty_name: "TREC Fair Ranking"
+  desc: '
+<p>
+The TREC Fair Ranking track evaluates systems according to how well they fairly rank documents.
+</p>
+<ul>
+<li><a href="https://fair-trec.github.io/">Website</a></li>
+</ul>
+'
+
+2021:
+  desc: '
+<p>
+The TREC Fair Ranking 2021 track focuses on fairly prioritising Wikimedia articles for editing to provide a fair exposure to articles from different groups.
+</p>
+<ul>
+<li><a href="https://fair-trec.github.io/2021/">2021 Track Website</a></li>
+</ul>
+'
+
+2021/train:
+  desc: '
+<p>
+Official TREC Fair Ranking 2021 train set.
+</p>
+'
+
+2021/eval:
+  desc: '
+<p>
+Official TREC Fair Ranking 2021 evaluation set.
+</p>
+'
+
+2022:
+  desc: '
+<p>
+The TREC Fair Ranking 2022 track focuses on fairly prioritising Wikimedia articles for editing to provide a fair exposure to articles from different groups.
+</p>
+<ul>
+<li><a href="https://fair-trec.github.io/">2022 Track Website</a></li>
+</ul>
+'
+
+2022/train:
+  desc: '
+<p>
+Official TREC Fair Ranking 2022 train set.
+</p>
+'

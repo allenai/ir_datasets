@@ -2,7 +2,7 @@ import json
 from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import Lazy
-from ir_datasets.formats import BaseQueries, TrecQrels
+from ir_datasets.formats import BaseQueries, TrecQrels, JsonlDocs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQrels
 
 _logger = ir_datasets.log.easy()
@@ -22,10 +22,19 @@ QREL_DEFS = {
 DOMAINS = ['economics', 'history', 'politics']
 
 
+class CodecDoc(NamedTuple):
+    doc_id: str
+    title: str
+    text: str
+    url: str
+    def default_text(self):
+        return f'{self.title} {self.text}'
+
 class CodecQuery(NamedTuple):
     query_id: str
     query: str
-    narrative: str
+    domain: str
+    guidelines: str
 
 
 class CodecQueries(BaseQueries):
@@ -39,7 +48,7 @@ class CodecQueries(BaseQueries):
             data = json.load(stream)
             for qid, query in data.items():
                 if self._qid_filter is None or qid.startswith(self._qid_filter):
-                    yield CodecQuery(qid, query['Query'], query['Narrative'])
+                    yield CodecQuery(qid, query['Query'], query['Domain'], query['Guidelines'])
 
     def queries_cls(self):
         return CodecQuery
@@ -60,9 +69,12 @@ def _init():
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
+    corpus = JsonlDocs(dlc['documents'], doc_cls=CodecDoc, mapping={'doc_id': "id", "title": "title", "text": "contents", "url": "url"}, lang='en', count_hint=729824)
+
     base = Dataset(
+        corpus,
         CodecQueries(dlc['topics']),
-        TrecQrels(dlc['qrels'], QREL_DEFS, format_3col=True),
+        TrecQrels(dlc['qrels'], QREL_DEFS),
         documentation('_'))
 
     subsets = {}
@@ -70,6 +82,7 @@ def _init():
     for domain in DOMAINS:
         queries_handler = CodecQueries(dlc['topics'], qid_filter=domain)
         subsets[domain] = Dataset(
+            corpus,
             queries_handler,
             FilteredQrels(base.qrels_handler(), filter_qids(domain, queries_handler), mode='include'),
             documentation(domain))
