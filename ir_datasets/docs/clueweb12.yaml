@@ -58,10 +58,36 @@ The TREC Web Track 2013 ad-hoc ranking benchmark. Contains 50 queries with deep 
   docs_instructions: *inst
   bibtex_ids: ['CollinsThompson2013TrecWeb']
 
+trec-web-2013/diversity:
+  desc: '
+<p>
+The TREC Web Track 2013 diverse ranking benchmark. Contains 50 queries with deep subtopic relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web2013.html">Shared task site</a></li>
+<li><a href="https://trec.nist.gov/pubs/trec22/papers/WEB.OVERVIEW.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['CollinsThompson2013TrecWeb']
+
 trec-web-2014:
   desc: '
 <p>
 The TREC Web Track 2014 ad-hoc ranking benchmark. Contains 50 queries with deep relevance judgments.
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li>
+<li><a href="http://www-personal.umich.edu/~kevynct/pubs/trec-web-2014-overview.pdf">Shared task paper</a></li>
+</ul>
+'
+  docs_instructions: *inst
+  bibtex_ids: ['CollinsThompson2014TrecWeb']
+
+trec-web-2014/diversity:
+  desc: '
+<p>
+The TREC Web Track 2014 diverse ranking benchmark. Contains 50 queries with deep subtopic relevance judgments.
 </p>
 <ul>
 <li><a href="https://trec.nist.gov/data/web2014.html">Shared task site</a></li>
