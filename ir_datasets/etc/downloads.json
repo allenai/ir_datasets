@@ -419,6 +419,13 @@
     "expected_md5": "3afdef86adf3211629182e3380f9e751",
     "cache_path": "trec-web-2009/prels.gz"
   },
+  "trec-web-2009/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/09/qrels.diversity.gz",
+    "irds_mirror": true,
+    "size_hint": 166538,
+    "expected_md5": "0a3fb04bfdaa1551d8960d862e925c9e",
+    "cache_path": "trec-web-2009/qrels.all.gz"
+  },
   "trec-web-2010/queries": {
     "url": "https://trec.nist.gov/data/web/10/wt2010-topics.xml",
     "irds_mirror": true,
@@ -432,6 +439,13 @@
     "size_hint": 837288,
     "expected_md5": "8a22083b0370d6ac799e1e779110de06",
     "cache_path": "trec-web-2010/qrels"
+  },
+  "trec-web-2010/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/10/10.diversity-qrels.final",
+    "irds_mirror": true,
+    "size_hint": 297198,
+    "expected_md5": "0a78c8bf7a809039a1fc9013a4bfe4eb",
+    "cache_path": "trec-web-2010/qrels.all"
   },
   "trec-web-2011/queries": {
     "url": "https://trec.nist.gov/data/web/11/full-topics.xml",
@@ -447,6 +461,13 @@
     "expected_md5": "7844c8a9cc3a4b6f740d45e56013693d",
     "cache_path": "trec-web-2011/qrels"
   },
+  "trec-web-2011/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/11/qrels.diversity",
+    "irds_mirror": true,
+    "size_hint": 2208947,
+    "expected_md5": "b88c1d42afbbbc5a4a776dd3f0b905c2",
+    "cache_path": "trec-web-2011/qrels.all"
+  },
   "trec-web-2012/queries": {
     "url": "https://trec.nist.gov/data/web/12/full-topics.xml",
     "irds_mirror": true,
@@ -460,6 +481,13 @@
     "size_hint": 610948,
     "expected_md5": "079723ba3e955269f0de6254c4bec180",
     "cache_path": "trec-web-2012/qrels"
+  },
+  "trec-web-2012/qrels.all": {
+    "url": "https://trec.nist.gov/data/web/12/qrels.diversity",
+    "irds_mirror": true,
+    "size_hint": 2124769,
+    "expected_md5": "bbfde42fc4bc502b19aec5dcc6922faa",
+    "cache_path": "trec-web-2012/qrels.all"
   },
   "trec-mq-2009/queries": {
     "url": "https://trec.nist.gov/data/million.query/09/09.mq.topics.20001-60000.gz",

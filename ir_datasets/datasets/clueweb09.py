@@ -5,7 +5,7 @@ from typing import NamedTuple, Tuple
 from glob import glob
 import ir_datasets
 from ir_datasets.util import GzipExtract, Lazy, DownloadConfig, TarExtract, Cache, Bz2Extract, ZipExtract, TarExtractAll
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries, BaseQrels
+from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubQrels, TrecSubQrel, TrecSubtopic, TrecPrel, TrecPrels, TrecColonQueries, BaseQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -26,6 +26,11 @@ QREL_DEFS_09 = {
     2: 'highly relevant',
     1: 'relevant',
     0: 'not relevant',
+}
+
+SQREL_DEFS_09 = {
+    1: 'relevant',
+    0: 'not relevant'
 }
 
 
@@ -162,11 +167,22 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09),
         documentation('trec-web-2009'))
+    # NOTE: Contains positive (1) and negative (0) judgements at subtopic level
+    subsets['en/trec-web-2009/diversity'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        TrecSubQrels(GzipExtract(dlc['trec-web-2009/qrels.all']), SQREL_DEFS_09),
+        documentation('trec-web-2009'))
 
     subsets['en/trec-web-2010'] = Dataset(
         collection_en,
         TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS),
+        documentation('trec-web-2010'))
+    subsets['en/trec-web-2010/diversity'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        TrecSubQrels(dlc['trec-web-2010/qrels.all'], QREL_DEFS),
         documentation('trec-web-2010'))
 
     subsets['en/trec-web-2011'] = Dataset(
@@ -174,11 +190,21 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2011'))
+    subsets['en/trec-web-2011/diversity'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        TrecSubQrels(dlc['trec-web-2011/qrels.all'], QREL_DEFS),
+        documentation('trec-web-2011'))
 
     subsets['en/trec-web-2012'] = Dataset(
         collection_en,
         TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS),
+        documentation('trec-web-2012'))
+    subsets['en/trec-web-2012/diversity'] = Dataset(
+        collection_en,
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        TrecSubQrels(dlc['trec-web-2012/qrels.all'], QREL_DEFS),
         documentation('trec-web-2012'))
 
     subsets['catb/trec-web-2009'] = Dataset(
@@ -186,11 +212,21 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecPrels(GzipExtract(dlc['trec-web-2009/qrels.adhoc']), QREL_DEFS_09)),
         documentation('trec-web-2009'))
+    subsets['catb/trec-web-2009/diversity'] = Dataset(
+        collection_catb,
+        TrecXmlQueries(dlc['trec-web-2009/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        CatBQrelFilter(TrecSubQrels(GzipExtract(dlc['trec-web-2009/qrels.all']), SQREL_DEFS_09)),
+        documentation('trec-web-2009'))
 
     subsets['catb/trec-web-2010'] = Dataset(
         collection_catb,
         TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2010/qrels.adhoc'], QREL_DEFS)),
+        documentation('trec-web-2010'))
+    subsets['catb/trec-web-2010/diversity'] = Dataset(
+        collection_catb,
+        TrecXmlQueries(dlc['trec-web-2010/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        CatBQrelFilter(TrecSubQrels(dlc['trec-web-2010/qrels.all'], QREL_DEFS)),
         documentation('trec-web-2010'))
 
     subsets['catb/trec-web-2011'] = Dataset(
@@ -198,11 +234,21 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2011/qrels.adhoc'], QREL_DEFS)),
         documentation('trec-web-2011'))
+    subsets['catb/trec-web-2011/diversity'] = Dataset(
+        collection_catb,
+        TrecXmlQueries(dlc['trec-web-2011/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        CatBQrelFilter(TrecSubQrels(dlc['trec-web-2011/qrels.all'], QREL_DEFS)),
+        documentation('trec-web-2011'))
 
     subsets['catb/trec-web-2012'] = Dataset(
         collection_catb,
         TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
         CatBQrelFilter(TrecQrels(dlc['trec-web-2012/qrels.adhoc'], QREL_DEFS)),
+        documentation('trec-web-2012'))
+    subsets['catb/trec-web-2012/diversity'] = Dataset(
+        collection_catb,
+        TrecXmlQueries(dlc['trec-web-2012/queries'], qtype=TrecWebTrackQuery, namespace=NAME, lang='en'),
+        CatBQrelFilter(TrecSubQrels(dlc['trec-web-2012/qrels.all'], QREL_DEFS)),
         documentation('trec-web-2012'))
 
     subsets['trec-mq-2009'] = Dataset(
