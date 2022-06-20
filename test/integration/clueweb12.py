@@ -2,7 +2,7 @@ import re
 import unittest
 import ir_datasets
 from ir_datasets.datasets.clueweb12 import TrecWebTrackQuery, NtcirQuery, MisinfoQrel, MisinfoQuery, EhealthQrel
-from ir_datasets.formats import TrecQrel, TrecSubtopic, GenericDoc, GenericQuery, WarcDoc
+from ir_datasets.formats import TrecQrel, TrecSubtopic, GenericDoc, GenericQuery, WarcDoc, TrecSubQrel
 from .base import DatasetIntegrationTest
 
 
