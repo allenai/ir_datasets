@@ -5,7 +5,7 @@ import io
 import codecs
 import itertools
 import ir_datasets
-from typing import NamedTuple
+from typing import NamedTuple, Dict, Any
 from ir_datasets import util
 from ir_datasets.util import DownloadConfig, TarExtract, Cache
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
@@ -138,6 +138,7 @@ class CrisisFactsQueries(BaseQueries):
                 yield CrisisFactsQuery(
                     query['queryID'],
                     query['query'],
+                    query['indicativeTerms'],
                     query['trecisCategoryMapping'],
                     event["eventID"],
                     event["title"],
@@ -165,6 +166,7 @@ class CrisisFactsStreamDoc(NamedTuple):
     doc_id: str
     event: str
     text: str
+    source: Dict[str, Any]
     source_type: str
     unix_timestamp: int
     def default_text(self):
@@ -174,6 +176,7 @@ class CrisisFactsStreamDoc(NamedTuple):
 class CrisisFactsQuery(NamedTuple):
     query_id: str
     text: str
+    indicative_terms: str
     trecis_category_mapping: str
     event_id: str
     event_title: str
@@ -206,7 +209,7 @@ def _init():
     for event, dates in event_date_map.items():
         for date in dates:
             subsets[f'{event}/{date}'] = Dataset(
-                JsonlDocs(f'{event}/{date}', CrisisFactsApiDownload("/stream", event, date), CrisisFactsStreamDoc, {"doc_id": "streamID", "event": "event", "source_type": "sourceType", "text": "text", "unix_timestamp": "unixTimestamp"}),
+                JsonlDocs(f'{event}/{date}', CrisisFactsApiDownload("/stream", event, date), CrisisFactsStreamDoc, {"doc_id": "streamID", "event": "event", "source_type": "sourceType", "source": "source", "text": "text", "unix_timestamp": "unixTimestamp"}),
                 CrisisFactsQueries(Cache(CrisisFactsApiDownload("/queries", event, date, stream=False), base_path/date/event/'queries.json')),
             )
 
