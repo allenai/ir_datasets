@@ -47,6 +47,12 @@ class TrecQrel(NamedTuple):
     relevance: int
     iteration: str
 
+class TrecSubQrel(NamedTuple):
+    query_id: str
+    doc_id: str
+    relevance: int
+    subtopic_id: str
+
 class TrecPrel(NamedTuple):
     query_id: str
     doc_id: str
@@ -446,6 +452,41 @@ class TrecPrels(TrecQrels):
 
     def qrels_cls(self):
         return TrecPrel
+
+
+class TrecSubQrels(BaseQrels):
+    def __init__(self, qrels_dlc, qrels_defs):
+        self._qrels_dlc = qrels_dlc
+        self._qrels_defs = qrels_defs
+
+    def qrels_path(self):
+        return self._qrels_dlc.path()
+
+    def qrels_iter(self):
+        if isinstance(self._qrels_dlc, list):
+            for dlc in self._qrels_dlc:
+                yield from self._qrels_internal_iter(dlc)
+        else:
+            yield from self._qrels_internal_iter(self._qrels_dlc)
+
+    def _qrels_internal_iter(self, dlc):
+        with dlc.stream() as f:
+            f = codecs.getreader('utf8')(f)
+            for line in f:
+                if line == '\n':
+                    continue # ignore blank lines
+                cols = line.rstrip().split()
+               
+                if len(cols) != 4:
+                    raise RuntimeError(f'expected 4 columns, got {len(cols)}')
+                qid, sid, did, score = cols
+                yield TrecSubQrel(qid, did, int(score), sid)
+
+    def qrels_cls(self):
+        return TrecSubQrel
+
+    def qrels_defs(self):
+        return self._qrels_defs
 
 
 class TrecScoredDocs(BaseScoredDocs):
