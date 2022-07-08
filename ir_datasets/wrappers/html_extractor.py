@@ -73,6 +73,7 @@ class HtmlDocExtractor:
 
 class HtmlDocExtractorDocStoreWrapper(ir_datasets.indices.Docstore):
     def __init__(self, docstore, extractor):
+        super().__init__(docstore._doc_cls, docstore._id_field)
         self.docstore = docstore
         self.extractor = extractor
 
