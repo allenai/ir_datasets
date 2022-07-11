@@ -71,3 +71,25 @@ class JsonlDocs(_JsonlBase, BaseDocs):
 
     def docs_lang(self):
         return self._docs_lang
+
+
+class JsonlQueries(_JsonlBase, BaseDocs):
+    def __init__(self, query_dlcs, query_cls=GenericQuery, mapping=None, lang=None, namespaec=None):
+        super().__init__(query_dlcs, query_cls, "queries", mapping)
+        self._queries_lang = lang
+        self._queries_namespace = namespaec
+
+    def queries_path(self, force=True):
+        return self._path(force)
+
+    def queries_iter(self):
+        return self._iter()
+
+    def queries_cls(self):
+        return self._cls
+
+    def queries_namespace(self):
+        return self._queries_namespace
+
+    def queries_lang(self):
+        return self._docs_lang

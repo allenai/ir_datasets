@@ -1747,6 +1747,15 @@
   }
 },
 
+"istella22": {
+  "source": {
+    "url": "http://hpc.isti.cnr.it/~nardini/istella22-dataset/istella22.tar.gz",
+    "size_hint": 26499490813,
+    "expected_md5": "c2e49dca9730fbb14164ed890756dc1d",
+    "cache_path": "istella22.tar.gz"
+  }
+},
+
 "kilt": {
   "knowledgesource": {
     "url": "http://dl.fbaipublicfiles.com/KILT/kilt_knowledgesource.json",
