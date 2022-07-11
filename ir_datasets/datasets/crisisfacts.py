@@ -60,7 +60,7 @@ class CrisisFactsApiDownload:
                 endOfStream = True
             API_ENDPOINT = base_url + self.url_path
             PARAMS = {'accessKey':accessKey}
-            r = requests.get(url = API_ENDPOINT, params = PARAMS)
+            r = requests.get(url = API_ENDPOINT, params = PARAMS, timeout=60) # longer timeout than default
             r.raise_for_status()
             if r.content:
                 yield r.content
