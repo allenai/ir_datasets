@@ -19,6 +19,7 @@ from . import codesearchnet
 from . import gov
 from . import gov2
 from . import highwire
+from . import istella22
 from . import kilt
 from . import lotte
 from . import medline
