@@ -215,7 +215,7 @@
   "highwire/trec-genomics-2006": {"docs": {"_ref": "highwire"}, "queries": {"count": 28}, "qrels": {"count": 27999, "fields": {"relevance": {"counts_by_value": {"0": 24934, "1": 1237, "2": 1828}}}}},
   "highwire/trec-genomics-2007": {"docs": {"_ref": "highwire"}, "queries": {"count": 36}, "qrels": {"count": 35996, "fields": {"relevance": {"counts_by_value": {"0": 31501, "1": 4495}}}}},
   "istella22": {"docs": {"count": 8421456, "fields": {"doc_id": {"max_len": 16, "common_prefix": "1990"}}}},
-  "istella22/test": {"docs": {"_ref": "istella22"}, "qrels": {"count": 10693, "fields": {"relevance": {"counts_by_value": {"3": 2573, "4": 1040, "1": 6070, "2": 1010}}}}},
+  "istella22/test": {"docs": {"_ref": "istella22"}, "qrels": {"count": 10693, "fields": {"relevance": {"counts_by_value": {"3": 2573, "4": 1040, "1": 6070, "2": 1010}}}}, "queries": {"count": 2198}},
   "istella22/test/fold1": {"docs": {"_ref": "istella22"}, "queries": {"count": 440}, "qrels": {"count": 2164, "fields": {"relevance": {"counts_by_value": {"4": 194, "1": 1209, "3": 560, "2": 201}}}}},
   "istella22/test/fold2": {"docs": {"_ref": "istella22"}, "queries": {"count": 440}, "qrels": {"count": 2140, "fields": {"relevance": {"counts_by_value": {"3": 493, "1": 1251, "4": 200, "2": 196}}}}},
   "istella22/test/fold3": {"docs": {"_ref": "istella22"}, "queries": {"count": 440}, "qrels": {"count": 2197, "fields": {"relevance": {"counts_by_value": {"3": 532, "1": 1242, "4": 207, "2": 216}}}}},
