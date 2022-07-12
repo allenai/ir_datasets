@@ -73,7 +73,7 @@ class JsonlDocs(_JsonlBase, BaseDocs):
         return self._docs_lang
 
 
-class JsonlQueries(_JsonlBase, BaseDocs):
+class JsonlQueries(_JsonlBase, BaseQueries):
     def __init__(self, query_dlcs, query_cls=GenericQuery, mapping=None, lang=None, namespaec=None):
         super().__init__(query_dlcs, query_cls, "queries", mapping)
         self._queries_lang = lang
@@ -92,4 +92,4 @@ class JsonlQueries(_JsonlBase, BaseDocs):
         return self._queries_namespace
 
     def queries_lang(self):
-        return self._docs_lang
+        return self._queries_lang

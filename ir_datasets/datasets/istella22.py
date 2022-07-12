@@ -21,7 +21,7 @@ class Istella22Doc(NamedTuple):
 
 
 NAME = 'istella22'
-QREL_DEFS = {1: '', 2: '', 3: '', 4: ''}
+QREL_DEFS = {1: 'Least relevant', 2: 'Somewhat relevant', 3: 'Mostly relevant', 4: 'Perfectly relevant'}
 
 DUA = ("To use the Istella22 dataset, you must read and accept the Istella22 Licence Agreement, found here: "
        "<http://quickrank.isti.cnr.it/istella22-dataset/>")
