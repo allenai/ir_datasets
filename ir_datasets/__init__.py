@@ -101,4 +101,4 @@ def main_cli():
     import sys
     main(sys.argv[1:])
 
-__version__ = "0.5.2" # NOTE: keep this in sync with setup.py
+__version__ = "0.5.3" # NOTE: keep this in sync with setup.py
