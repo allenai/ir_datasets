@@ -272,6 +272,11 @@ def _init():
         FilteredScoredDocs(subsets['trec-dl-2021'].scoreddocs_handler(), dl21_judged),
         subsets['trec-dl-2021'],
     )
+    subsets['trec-dl-2022'] = Dataset(
+        collection,
+        TsvQueries(dlc['trec-dl-2022/queries'], namespace='msmarco', lang='en'),
+        TrecScoredDocs(GzipExtract(dlc['trec-dl-2022/scoreddocs'])),
+    )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation("_")))
     for s in sorted(subsets):

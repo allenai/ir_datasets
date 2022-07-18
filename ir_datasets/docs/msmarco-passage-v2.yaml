@@ -77,3 +77,10 @@ with qrels.
 </p>
 '
   official_measures: ['AP@100', 'nDCG@10', 'P(rel=2)@10', 'RR(rel=2)']
+
+trec-dl-2022:
+  desc: '
+<p>
+Official topics for the TREC Deep Learning (DL) 2022 shared task.
+</p>
+'
