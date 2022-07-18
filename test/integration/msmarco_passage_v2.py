@@ -39,6 +39,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: GenericQuery('1107704', 'what was the main benefit of a single european currency?'),
             52: GenericQuery('1040198', 'who is the final arbiter of florida law in instances where there is no federal authority?'),
         })
+        self._test_queries('msmarco-passage-v2/trec-dl-2022', count=500, items={
+            0: GenericQuery('588', '1099 b cost basis i sell specific shares'),
+            9: GenericQuery('77640', "can you get a master's degree in tefl"),
+            499: GenericQuery('2056473', 'is a dairy farm considered as an agriculture'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-passage-v2/train', count=284212, items={
@@ -87,6 +92,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             0: GenericScoredDoc('2082', 'msmarco_passage_45_623131157', 19.8207),
             9: GenericScoredDoc('2082', 'msmarco_passage_30_709623997', 17.350901),
             47699: GenericScoredDoc('1136769', 'msmarco_passage_06_68704200', 14.8941),
+        })
+        self._test_scoreddocs('msmarco-passage-v2/trec-dl-2022', count=50000, items={
+            0: GenericScoredDoc('588', 'msmarco_passage_30_337959223', 18.762699),
+            9: GenericScoredDoc('588', 'msmarco_passage_10_355039123', 17.7628),
+            49999: GenericScoredDoc('2056473', 'msmarco_passage_17_225374709', 12.147499),
         })
 
 

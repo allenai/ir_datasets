@@ -59,6 +59,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('1104447', 'which kind of continental boundary is formed where two plates move horizontally past one another?'),
             56: GenericQuery('1040198', 'who is the final arbiter of florida law in instances where there is no federal authority?'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2022', count=500, items={
+            0: GenericQuery('588', '1099 b cost basis i sell specific shares'),
+            9: GenericQuery('77640', "can you get a master's degree in tefl"),
+            499: GenericQuery('2056473', 'is a dairy farm considered as an agriculture'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -127,6 +132,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('2082', 'msmarco_doc_03_1735682452', 15.3067),
             9: GenericScoredDoc('2082', 'msmarco_doc_01_1320056135', 14.554399),
             47699: GenericScoredDoc('1136769', 'msmarco_doc_57_1870160943', 15.2451),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2022', count=50000, items={
+            0: GenericScoredDoc('588', 'msmarco_doc_01_1675156368', 16.856501),
+            9: GenericScoredDoc('588', 'msmarco_doc_44_970138133', 16.118099),
+            49999: GenericScoredDoc('2056473', 'msmarco_doc_58_500974264', 10.868498),
         })
 
     def test_anchor_text(self):
