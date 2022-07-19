@@ -77,37 +77,37 @@
 
 "argsme": {
   "1.0": {
-    "url": "https://zenodo.org/record/3274636/files/argsme.zip?download=1",
+    "url": "https://zenodo.org/record/3274636/files/argsme.zip",
     "size_hint": 238078064,
     "expected_md5": "c2512648f46a403f8e5e1dc96779e357"
   },
   "1.0-cleaned": {
-    "url": "https://zenodo.org/record/4139439/files/argsme-1.0-cleaned.zip?download=1",
+    "url": "https://zenodo.org/record/4139439/files/argsme-1.0-cleaned.zip",
     "size_hint": 236787622,
     "expected_md5": "fb0837103a4860e1d4536174f55b12c3"
   },
   "2020-04-01/debateorg": {
-    "url": "https://zenodo.org/record/3734893/files/debateorg.zip?download=1",
+    "url": "https://zenodo.org/record/3734893/files/debateorg.zip",
     "size_hint": 1150846141,
     "expected_md5": "0368ee47ce0ec8bed837c7e22c024493"
   },
   "2020-04-01/debatepedia": {
-    "url": "https://zenodo.org/record/3734893/files/debatepedia.zip?download=1",
+    "url": "https://zenodo.org/record/3734893/files/debatepedia.zip",
     "size_hint": 184347726,
     "expected_md5": "bde8e3ed832c19ca5ed8ed1506a862e8"
   },
   "2020-04-01/debatewise": {
-    "url": "https://zenodo.org/record/3734893/files/debatewise.zip?download=1",
+    "url": "https://zenodo.org/record/3734893/files/debatewise.zip",
     "size_hint": 77388912,
     "expected_md5": "5e5c498a5f657ed7d02e06016e9ce3b1"
   },
   "2020-04-01/idebate": {
-    "url": "https://zenodo.org/record/3734893/files/idebate.zip?download=1",
+    "url": "https://zenodo.org/record/3734893/files/idebate.zip",
     "size_hint": 20241730,
     "expected_md5": "5b888c94cce740f1216c063e5e47c74c"
   },
   "2020-04-01/parliamentary": {
-    "url": "https://zenodo.org/record/3734893/files/parliamentary.zip?download=1",
+    "url": "https://zenodo.org/record/3734893/files/parliamentary.zip",
     "size_hint": 27319,
     "expected_md5": "c80d932c953b64fb300f13d0d93096bb"
   }
@@ -3942,37 +3942,37 @@
 
 "wikir": {
   "en1k": {
-    "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip?download=1",
+    "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip",
     "size_hint": 164995559,
     "expected_md5": "554299bca984640cb283d6ba55753608"
   },
   "en59k": {
-    "url": "https://zenodo.org/record/3557342/files/wikIR59k.zip?download=1",
+    "url": "https://zenodo.org/record/3557342/files/wikIR59k.zip",
     "size_hint": 1154400672,
     "expected_md5": "c9f7e646e022eea84e6f00e3870ca79b"
   },
   "en78k": {
-    "url": "https://www.zenodo.org/record/3707606/files/enwikIR.zip?download=1",
+    "url": "https://www.zenodo.org/record/3707606/files/enwikIR.zip",
     "size_hint": 4234761118,
     "expected_md5": "e1a1f7678523032e0be5fedaed6c0740"
   },
   "ens78k": {
-    "url": "https://www.zenodo.org/record/3707238/files/enwikIRS.zip?download=1",
+    "url": "https://www.zenodo.org/record/3707238/files/enwikIRS.zip",
     "size_hint": 4245785781,
     "expected_md5": "8fd2e530ec9dfd17f3b305ec23122b55"
   },
   "fr14k": {
-    "url": "https://zenodo.org/record/3569718/files/FRwikIR14k.zip?download=1",
+    "url": "https://zenodo.org/record/3569718/files/FRwikIR14k.zip",
     "size_hint": 331209361,
     "expected_md5": "0bf8a8965b1a550ad3604a9ddd5c6bbe"
   },
   "es13k": {
-    "url": "https://zenodo.org/record/3569724/files/ESwikIR13k.zip?download=1",
+    "url": "https://zenodo.org/record/3569724/files/ESwikIR13k.zip",
     "size_hint": 299523201,
     "expected_md5": "4847eeffbf261d3877da86f5ccae4e43"
   },
   "it16k": {
-    "url": "https://zenodo.org/record/3569732/files/ITwikIR16k.zip?download=1",
+    "url": "https://zenodo.org/record/3569732/files/ITwikIR16k.zip",
     "size_hint": 248875419,
     "expected_md5": "e9c5b81c9df6fdc0e2986fa8ffb8ff12"
   }
