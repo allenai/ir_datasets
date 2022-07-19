@@ -18,6 +18,10 @@ def bs4_extract(html):
             output += '{} '.format(t)
     return output
 
+def inscriptis_extract(html):
+    get_text = ir_datasets.lazy_libs.inscriptis().get_text
+    return get_text(html.decode("utf-8",'ignore'))
+
 
 class HtmlDocIter:
     def __init__(self, it, extractor):
@@ -119,7 +123,8 @@ def _doc_map_it(it, extractor):
 def _doc_map(args):
     doc, field_content_type, extractor, docs_cls = args
     extractor = {
-        'bs4': bs4_extract
+        'bs4': bs4_extract,
+        'inscriptis': inscriptis_extract,
     }[extractor]
     result = list(doc)
     any_updates = False
