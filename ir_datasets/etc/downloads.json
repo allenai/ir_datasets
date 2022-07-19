@@ -3529,62 +3529,62 @@
 
 "touche": {
   "2020/task-1/queries": {
-    "url": "https://webis.de/events/touche-20/topics-task-1.zip",
+    "url": "https://zenodo.org/record/6862281/files/topics-task-1.zip",
     "size_hint": 8768,
     "expected_md5": "9605104435165a6b01b737464596eba4"
   },
   "2020/task-1/qrels": {
-    "url": "https://webis.de/events/touche-21/touche2020-task1-relevance-args-me-corpus-version-2020-04-01-corrected.qrels",
+    "url": "https://zenodo.org/record/6862281/files/touche2020-task1-relevance-args-me-corpus-version-2020-04-01-corrected.qrels",
     "size_hint": 62058,
     "expected_md5": "6a645e2ebd4f1d6c44da4d9509624598"
   },
   "2020/task-1/qrels-argsme-1.0-uncorrected": {
-    "url": "https://webis.de/events/touche-20/touche2020-task1-relevance-args-me-corpus-version-1.qrels",
+    "url": "https://zenodo.org/record/6862281/files/touche2020-task1-relevance-args-me-corpus-version-1.qrels",
     "size_hint": 145201,
     "expected_md5": "10f043e086818f9159ac37a9ebe5ce5d"
   },
   "2020/task-1/qrels-argsme-2020-04-01-uncorrected": {
-    "url": "https://webis.de/events/touche-20/touche2020-task1-relevance-args-me-corpus-version-2020-04-01.qrels",
+    "url": "https://zenodo.org/record/6862281/files/touche2020-task1-relevance-args-me-corpus-version-2020-04-01.qrels",
     "size_hint": 66283,
     "expected_md5": "6a27d7123423540664ccfe0391e4e417"
   },
   "2020/task-2/queries": {
-    "url": "https://webis.de/events/touche-20/topics-task-2.zip",
+    "url": "https://zenodo.org/record/6797876/files/topics-task-2.zip",
     "size_hint": 17279,
     "expected_md5": "8de387d753ee8289a9f02346b63e12e4"
   },
   "2020/task-2/qrels": {
-    "url": "https://webis.de/events/touche-20/touche2020-task2-relevance-withbaseline.qrels",
+    "url": "https://zenodo.org/record/6797876/files/touche2020-task2-relevance-withbaseline.qrels",
     "size_hint": 58522,
     "expected_md5": "b230436beb3a9eecbeb19c84ee6c855c"
   },
   "2021/task-1/queries": {
-    "url": "https://webis.de/events/touche-21/topics-task-1-only-titles-2021.zip",
+    "url": "https://zenodo.org/record/6798216/files/topics-task-1-only-titles-2021.zip",
     "size_hint": 1350,
     "expected_md5": "61bad9cf6bc713a81297cd95cf9e156f"
   },
   "2021/task-1/qrels-relevance": {
-    "url": "https://webis.de/events/touche-21/touche-task1-51-100-relevance.qrels",
+    "url": "https://zenodo.org/record/6798216/files/touche-task1-51-100-relevance.qrels",
     "size_hint": 99736,
     "expected_md5": "76b4e8348bde353167ce52ffa598a6b1"
   },
   "2021/task-1/qrels-quality": {
-    "url": "https://webis.de/events/touche-21/touche-task1-51-100-quality.qrels",
+    "url": "https://zenodo.org/record/6798216/files/touche-task1-51-100-quality.qrels",
     "size_hint": 100087,
     "expected_md5": "c899bcab9b00fdd28f77d08a1d26298a"
   },
   "2021/task-2/queries": {
-    "url": "https://webis.de/events/touche-21/topics-task-2-2021.zip",
+    "url": "https://zenodo.org/record/6798217/files/topics-task-2-2021.zip",
     "size_hint": 15532,
     "expected_md5": "0c06079b327ecd2b4c5971bd17bd0aa3"
   },
   "2021/task-2/qrels-relevance": {
-    "url": "https://webis.de/events/touche-21/touche-task2-51-100-relevance.qrels",
+    "url": "https://zenodo.org/record/6798217/files/touche-task2-51-100-relevance.qrels",
     "size_hint": 68548,
     "expected_md5": "970b48e0c057afaee17a7832100ab67c"
   },
   "2021/task-2/qrels-quality": {
-    "url": "https://webis.de/events/touche-21/touche-task2-51-100-quality.qrels",
+    "url": "https://zenodo.org/record/6798217/files/touche-task2-51-100-quality.qrels",
     "size_hint": 68548,
     "expected_md5": "062bea3b8307ae481876fe31253092b5"
   }
