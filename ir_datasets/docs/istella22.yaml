@@ -12,7 +12,7 @@ is solely for non-commercial use</b>.
 </p>
 <ul>
 <li><a href="https://dl.acm.org/doi/abs/10.1145/3477495.3531740">Paper</a></li>
-<li><a href="http://quickrank.isti.cnr.it/istella22-dataset/">Website</a></li>
+<li><a href="https://istella.ai/data/istella22-dataset/">Website</a></li>
 </ul>
 '
   bibtex_ids: ['Dato2022Istella']
