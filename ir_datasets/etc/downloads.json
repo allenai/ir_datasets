@@ -3648,7 +3648,7 @@
     "size_hint": 31089,
     "expected_md5": "83a9cb2290f867199d6de9c73eeacf43"
   },
-  "2022/task-3/qrels-relevance": {
+  "2022/task-3/qrels": {
     "url": "https://zenodo.org/record/6873575/files/touche-task3-001-050-relevance.qrels",
     "size_hint": 558028,
     "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
@@ -3667,7 +3667,7 @@
     "url": "https://zenodo.org/record/6873575/files/touche22-image-search-png-images.zip",
     "size_hint": 17851724760,
     "expected_md5": "e2965b221248ba23a288135f757efae1"
-  },
+  }
 },
 
 "trec-arabic": {
