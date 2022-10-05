@@ -1,5 +1,6 @@
 from enum import Enum
 from io import TextIOWrapper
+from itertools import takewhile
 from json import loads
 from re import compile
 from typing import NamedTuple, Any, Optional, Dict, List, Tuple
@@ -94,7 +95,7 @@ class ToucheImageNode(NamedTuple):
     visible: bool
     id: Optional[str]
     classes: List[str]
-    position: Tuple[int, int, int, int]  # left top right bottom
+    position: Tuple[float, float, float, float]  # left top right bottom
     text: Optional[str]
     css: Dict[str, str]
 
@@ -267,34 +268,53 @@ class ToucheComparativeQueries(BaseQueries):
 class ToucheQrels(BaseQrels):
     _source: Any
     _definitions: Dict[int, str]
+    _allow_float_score: bool = False
 
-    def __init__(self, source: Any, definitions: Dict[int, str]):
+    def __init__(
+            self,
+            source: Any,
+            definitions: Dict[int, str],
+            allow_float_score: bool = False,
+    ):
         self._source = source
         self._definitions = definitions
+        self._allow_float_score = allow_float_score
 
     def qrels_path(self):
         return self._source.path()
 
     def qrels_iter(self):
+        print(self._source.path())
         with self._source.stream() as file:
-            lines = (
-                line.rstrip()
-                for line in TextIOWrapper(file)
-                if line != "\n"  # Ignore blank lines.
-            )
-
-            for line in lines:
-                cols = line.split()
-                if len(cols) != 4:
-                    raise ValueError(f"Expected 4 relevance columns but got {len(cols)}.")
-                qid, it, did, score = cols
-
-                yield TrecQrel(
-                    query_id=qid,
-                    doc_id=did,
-                    relevance=int(score),
-                    iteration=it,
+            with TextIOWrapper(file) as lines:
+                lines = (
+                    line.rstrip()
+                    for line in lines
+                    if line != "\n"  # Ignore blank lines.
                 )
+
+                for line in lines:
+                    cols = line.split()
+                    if len(cols) != 4:
+                        raise ValueError(
+                            f"Expected 4 relevance columns "
+                            f"but got {len(cols)}."
+                        )
+                    qid, it, did, score = cols
+
+                    if self._allow_float_score:
+                        score = float(score)
+                        if not score.is_integer():
+                            raise ValueError(
+                                f"Non-integer relevance score {score}."
+                            )
+
+                    yield TrecQrel(
+                        query_id=qid,
+                        doc_id=did,
+                        relevance=int(score),
+                        iteration=it,
+                    )
 
     def qrels_cls(self):
         return TrecQrel
@@ -308,7 +328,12 @@ class ToucheQualityQrels(BaseQrels):
     _source_quality: Any
     _definitions: Dict[int, str]
 
-    def __init__(self, source: Any, source_quality: Any, definitions: Dict[int, str]):
+    def __init__(
+            self,
+            source: Any,
+            source_quality: Any,
+            definitions: Dict[int, str],
+    ):
         self._source = source
         self._source_quality = source_quality
         self._definitions = definitions
@@ -317,45 +342,64 @@ class ToucheQualityQrels(BaseQrels):
         return self._source.path()
 
     def qrels_iter(self):
-        with self._source.stream() as file, self._source_quality.stream() as file_quality:
-            lines = (
-                line.rstrip() 
-                for line in TextIOWrapper(file)
-                if line != "\n"  # Ignore blank lines.
-            )
-            lines_quality = (
-                line.rstrip() 
-                for line in TextIOWrapper(file_quality)
-                if line != "\n"  # Ignore blank lines.
-            )
-            zipped_lines = zip(lines, lines_quality)
-
-            for zipped_line in zipped_lines:
-                line, line_quality = zipped_line
-
-                cols = line.split()
-                if len(cols) != 4:
-                    raise ValueError(f"Expected 4 relevance columns but got {len(cols)}.")
-                qid, it, did, score = cols
-
-                cols_quality = line_quality.split()
-                if len(cols_quality) != 4:
-                    raise ValueError(f"Expected 4 quality columns but got {len(cols_quality)}.")
-                qid_quality, it_quality, did_quality, score_quality = cols_quality
-                if qid_quality != qid:
-                    raise ValueError(f"Quality query {qid_quality} does not match relevance query {qid}.")
-                if did_quality != did:
-                    raise ValueError(f"Quality document {did_quality} does not match relevance document {did}.")
-                if it_quality != it:
-                    raise ValueError(f"Quality iteration {it_quality} does not match relevance iteration {it}.")
-
-                yield ToucheQualityQrel(
-                    query_id=qid,
-                    doc_id=did,
-                    relevance=int(score),
-                    quality=int(score_quality),
-                    iteration=it,
+        with self._source.stream() as file, \
+                self._source_quality.stream() as file_quality:
+            with TextIOWrapper(file) as lines, \
+                    TextIOWrapper(file_quality) as lines_quality:
+                lines = (
+                    line.rstrip()
+                    for line in lines
+                    if line != "\n"  # Ignore blank lines.
                 )
+                lines_quality = (
+                    line.rstrip()
+                    for line in lines_quality
+                    if line != "\n"  # Ignore blank lines.
+                )
+                zipped_lines = zip(lines, lines_quality)
+
+                for zipped_line in zipped_lines:
+                    line, line_quality = zipped_line
+
+                    cols = line.split()
+                    if len(cols) != 4:
+                        raise ValueError(
+                            f"Expected 4 relevance columns "
+                            f"but got {len(cols)}."
+                        )
+                    qid, it, did, score = cols
+
+                    cols_quality = line_quality.split()
+                    if len(cols_quality) != 4:
+                        raise ValueError(
+                            f"Expected 4 quality columns "
+                            f"but got {len(cols_quality)}."
+                        )
+                    qid_quality, it_quality, did_quality, score_quality \
+                        = cols_quality
+                    if qid_quality != qid:
+                        raise ValueError(
+                            f"Quality query {qid_quality} does not match "
+                            f"relevance query {qid}."
+                        )
+                    if did_quality != did:
+                        raise ValueError(
+                            f"Quality document {did_quality} does not match "
+                            f"relevance document {did}."
+                        )
+                    if it_quality != it:
+                        raise ValueError(
+                            f"Quality iteration {it_quality} does not match "
+                            f"relevance iteration {it}."
+                        )
+
+                    yield ToucheQualityQrel(
+                        query_id=qid,
+                        doc_id=did,
+                        relevance=int(score),
+                        quality=int(score_quality),
+                        iteration=it,
+                    )
 
     def qrels_cls(self):
         return ToucheQualityQrel
@@ -370,7 +414,13 @@ class ToucheQualityCoherenceQrels(BaseQrels):
     _source_coherence: Any
     _definitions: Dict[int, str]
 
-    def __init__(self, source: Any, source_quality: Any, source_coherence: Any, definitions: Dict[int, str]):
+    def __init__(
+            self,
+            source: Any,
+            source_quality: Any,
+            source_coherence: Any,
+            definitions: Dict[int, str],
+    ):
         self._source = source
         self._source_quality = source_quality
         self._source_coherence = source_coherence
@@ -380,62 +430,98 @@ class ToucheQualityCoherenceQrels(BaseQrels):
         return self._source.path()
 
     def qrels_iter(self):
-        with self._source.stream() as file, self._source_quality.stream() as file_quality, self._source_coherence.stream() as file_coherence:
-            lines = (
-                line.rstrip() 
-                for line in TextIOWrapper(file)
-                if line != "\n"  # Ignore blank lines.
-            )
-            lines_quality = (
-                line.rstrip() 
-                for line in TextIOWrapper(file_quality)
-                if line != "\n"  # Ignore blank lines.
-            )
-            lines_coherence = (
-                line.rstrip() 
-                for line in TextIOWrapper(file_coherence)
-                if line != "\n"  # Ignore blank lines.
-            )
-            zipped_lines = zip(lines, lines_quality, lines_coherence)
-
-            for zipped_line in zipped_lines:
-                line, line_quality, line_coherence = zipped_line
-
-                cols = line.split()
-                if len(cols) != 4:
-                    raise ValueError(f"Expected 4 relevance columns but got {len(cols)}.")
-                qid, it, did, score = cols
-
-                cols_quality = line_quality.split()
-                if len(cols_quality) != 4:
-                    raise ValueError(f"Expected 4 quality columns but got {len(cols_quality)}.")
-                qid_quality, it_quality, did_quality, score_quality = cols_quality
-                if qid_quality != qid:
-                    raise ValueError(f"Quality query {qid_quality} does not match relevance query {qid}.")
-                if did_quality != did:
-                    raise ValueError(f"Quality document {did_quality} does not match relevance document {did}.")
-                if it_quality != it:
-                    raise ValueError(f"Quality iteration {it_quality} does not match relevance iteration {it}.")
-
-                cols_coherence = line_coherence.split()
-                if len(cols_coherence) != 4:
-                    raise ValueError(f"Expected 4 coherence columns but got {len(cols_coherence)}.")
-                qid_coherence, it_coherence, did_coherence, score_coherence = cols_coherence
-                if qid_coherence != qid:
-                    raise ValueError(f"Coherence query {qid_coherence} does not match relevance query {qid}.")
-                if did_coherence != did:
-                    raise ValueError(f"Coherence document {did_coherence} does not match relevance document {did}.")
-                if it_coherence != it:
-                    raise ValueError(f"Coherence iteration {it_coherence} does not match relevance iteration {it}.")
-
-                yield ToucheQualityCoherenceQrel(
-                    query_id=qid,
-                    doc_id=did,
-                    relevance=int(score),
-                    quality=int(score_quality),
-                    coherence=int(score_coherence),
-                    iteration=it,
+        with self._source.stream() as file, \
+                self._source_quality.stream() as file_quality, \
+                self._source_coherence.stream() as file_coherence:
+            with TextIOWrapper(file) as lines, \
+                    TextIOWrapper(file_quality) as lines_quality, \
+                    TextIOWrapper(file_coherence) as lines_coherence:
+                lines = (
+                    line.rstrip()
+                    for line in lines
+                    if line != "\n"  # Ignore blank lines.
                 )
+                lines_quality = (
+                    line.rstrip()
+                    for line in lines_quality
+                    if line != "\n"  # Ignore blank lines.
+                )
+                lines_coherence = (
+                    line.rstrip()
+                    for line in lines_coherence
+                    if line != "\n"  # Ignore blank lines.
+                )
+                zipped_lines = zip(lines, lines_quality, lines_coherence)
+
+                for zipped_line in zipped_lines:
+                    line, line_quality, line_coherence = zipped_line
+
+                    cols = line.split()
+                    if len(cols) != 4:
+                        raise ValueError(
+                            f"Expected 4 relevance columns "
+                            f"but got {len(cols)}."
+                        )
+                    qid, it, did, score = cols
+
+                    cols_quality = line_quality.split()
+                    if len(cols_quality) != 4:
+                        raise ValueError(
+                            f"Expected 4 quality columns "
+                            f"but got {len(cols_quality)}."
+                        )
+                    qid_quality, it_quality, did_quality, score_quality \
+                        = cols_quality
+                    if qid_quality != qid:
+                        raise ValueError(
+                            f"Quality query {qid_quality} does not match "
+                            f"relevance query {qid}."
+                        )
+                    if did_quality != did:
+                        raise ValueError(
+                            f"Quality document {did_quality} does not match "
+                            f"relevance document {did}."
+                        )
+                    if it_quality != it:
+                        raise ValueError(
+                            f"Quality iteration {it_quality} does not match "
+                            f"relevance iteration {it}."
+                        )
+
+                    cols_coherence = line_coherence.split()
+                    if len(cols_coherence) != 4:
+                        raise ValueError(
+                            f"Expected 4 coherence columns "
+                            f"but got {len(cols_coherence)}."
+                        )
+                    qid_coherence, it_coherence, did_coherence, \
+                    score_coherence = cols_coherence
+                    if qid_coherence != qid:
+                        raise ValueError(
+                            f"Coherence query {qid_coherence} does not match "
+                            f"relevance query {qid}."
+                        )
+                    if did_coherence != did:
+                        raise ValueError(
+                            f"Coherence document {did_coherence} "
+                            f"does not match "
+                            f"relevance document {did}."
+                        )
+                    if it_coherence != it:
+                        raise ValueError(
+                            f"Coherence iteration {it_coherence} "
+                            f"does not match "
+                            f"relevance iteration {it}."
+                        )
+
+                    yield ToucheQualityCoherenceQrel(
+                        query_id=qid,
+                        doc_id=did,
+                        relevance=int(score),
+                        quality=int(score_quality),
+                        coherence=int(score_coherence),
+                        iteration=it,
+                    )
 
     def qrels_cls(self):
         return ToucheQualityCoherenceQrel
@@ -450,7 +536,13 @@ class ToucheQualityComparativeStanceQrels(BaseQrels):
     _source_stance: Any
     _definitions: Dict[int, str]
 
-    def __init__(self, source: Any, source_quality: Any, source_stance: Any, definitions: Dict[int, str]):
+    def __init__(
+            self,
+            source: Any,
+            source_quality: Any,
+            source_stance: Any,
+            definitions: Dict[int, str],
+    ):
         self._source = source
         self._source_quality = source_quality
         self._source_stance = source_stance
@@ -460,62 +552,96 @@ class ToucheQualityComparativeStanceQrels(BaseQrels):
         return self._source.path()
 
     def qrels_iter(self):
-        with self._source.stream() as file, self._source_quality.stream() as file_quality, self._source_stance.stream() as file_stance:
-            lines = (
-                line.rstrip() 
-                for line in TextIOWrapper(file)
-                if line != "\n"  # Ignore blank lines.
-            )
-            lines_quality = (
-                line.rstrip() 
-                for line in TextIOWrapper(file_quality)
-                if line != "\n"  # Ignore blank lines.
-            )
-            lines_stance = (
-                line.rstrip() 
-                for line in TextIOWrapper(file_stance)
-                if line != "\n"  # Ignore blank lines.
-            )
-            zipped_lines = zip(lines, lines_quality, lines_stance)
-
-            for zipped_line in zipped_lines:
-                line, line_quality, line_stance = zipped_line
-
-                cols = line.split()
-                if len(cols) != 4:
-                    raise ValueError(f"Expected 4 relevance columns but got {len(cols)}.")
-                qid, it, did, score = cols
-
-                cols_quality = line_quality.split()
-                if len(cols_quality) != 4:
-                    raise ValueError(f"Expected 4 quality columns but got {len(cols_quality)}.")
-                qid_quality, it_quality, did_quality, score_quality = cols_quality
-                if qid_quality != qid:
-                    raise ValueError(f"Quality query {qid_quality} does not match relevance query {qid}.")
-                if did_quality != did:
-                    raise ValueError(f"Quality document {did_quality} does not match relevance document {did}.")
-                if it_quality != it:
-                    raise ValueError(f"Quality iteration {it_quality} does not match relevance iteration {it}.")
-
-                cols_stance = line_stance.split()
-                if len(cols_stance) != 4:
-                    raise ValueError(f"Expected 4 stance columns but got {len(cols_stance)}.")
-                qid_stance, it_stance, did_stance, score_stance = cols_stance
-                if qid_stance != qid:
-                    raise ValueError(f"Stance query {qid_stance} does not match relevance query {qid}.")
-                if did_stance != did:
-                    raise ValueError(f"Stance document {did_stance} does not match relevance document {did}.")
-                if it_stance != it:
-                    raise ValueError(f"Stance iteration {it_stance} does not match relevance iteration {it}.")
-
-                yield ToucheQualityComparativeStanceQrel(
-                    query_id=qid,
-                    doc_id=did,
-                    relevance=int(score),
-                    quality=int(score_quality),
-                    stance=ToucheComparativeStance(score_stance),
-                    iteration=it,
+        with self._source.stream() as file, \
+                self._source_quality.stream() as file_quality, \
+                self._source_stance.stream() as file_stance:
+            with TextIOWrapper(file) as lines, \
+                    TextIOWrapper(file_quality) as lines_quality, \
+                    TextIOWrapper(file_stance) as lines_stance:
+                lines = (
+                    line.rstrip()
+                    for line in lines
+                    if line != "\n"  # Ignore blank lines.
                 )
+                lines_quality = (
+                    line.rstrip()
+                    for line in lines_quality
+                    if line != "\n"  # Ignore blank lines.
+                )
+                lines_stance = (
+                    line.rstrip()
+                    for line in lines_stance
+                    if line != "\n"  # Ignore blank lines.
+                )
+                zipped_lines = zip(lines, lines_quality, lines_stance)
+
+                for zipped_line in zipped_lines:
+                    line, line_quality, line_stance = zipped_line
+
+                    cols = line.split()
+                    if len(cols) != 4:
+                        raise ValueError(
+                            f"Expected 4 relevance columns "
+                            f"but got {len(cols)}."
+                        )
+                    qid, it, did, score = cols
+
+                    cols_quality = line_quality.split()
+                    if len(cols_quality) != 4:
+                        raise ValueError(
+                            f"Expected 4 quality columns "
+                            f"but got {len(cols_quality)}."
+                        )
+                    qid_quality, it_quality, did_quality, score_quality \
+                        = cols_quality
+                    if qid_quality != qid:
+                        raise ValueError(
+                            f"Quality query {qid_quality} does not match "
+                            f"relevance query {qid}."
+                        )
+                    if did_quality != did:
+                        raise ValueError(
+                            f"Quality document {did_quality} does not match "
+                            f"relevance document {did}."
+                        )
+                    if it_quality != it:
+                        raise ValueError(
+                            f"Quality iteration {it_quality} does not match "
+                            f"relevance iteration {it}."
+                        )
+
+                    cols_stance = line_stance.split()
+                    if len(cols_stance) != 4:
+                        raise ValueError(
+                            f"Expected 4 stance columns "
+                            f"but got {len(cols_stance)}."
+                        )
+                    qid_stance, it_stance, did_stance, score_stance = \
+                        cols_stance
+                    if qid_stance != qid:
+                        raise ValueError(
+                            f"Stance query {qid_stance} does not match "
+                            f"relevance query {qid}."
+                        )
+                    if did_stance != did:
+                        raise ValueError(
+                            f"Stance document {did_stance} does not match "
+                            f"relevance document {did}."
+                        )
+                    if it_stance != it:
+                        raise ValueError(
+                            f"Stance iteration {it_stance} does not match "
+                            f"relevance iteration {it}."
+                        )
+
+                    yield ToucheQualityComparativeStanceQrel(
+                        query_id=qid,
+                        doc_id=did,
+                        relevance=int(score),
+                        quality=int(score_quality),
+                        stance=ToucheComparativeStance(score_stance),
+                        iteration=it,
+                    )
 
     def qrels_cls(self):
         return ToucheQualityComparativeStanceQrel
@@ -537,24 +663,28 @@ class ToucheControversialStanceQrels(BaseQrels):
 
     def qrels_iter(self):
         with self._source.stream() as file:
-            lines = (
-                line.rstrip()
-                for line in TextIOWrapper(file)
-                if line != "\n"  # Ignore blank lines.
-            )
-
-            for line in lines:
-                cols = line.split()
-                if len(cols) != 4:
-                    raise ValueError(f"Expected 4 relevance and stance columns but got {len(cols)}.")
-                qid, stance, did, score = cols
-
-                yield ToucheControversialStanceQrel(
-                    query_id=qid,
-                    doc_id=did,
-                    relevance=int(score),
-                    stance=ToucheControversialStance(stance),
+            with TextIOWrapper(file) as lines:
+                lines = (
+                    line.rstrip()
+                    for line in lines
+                    if line != "\n"  # Ignore blank lines.
                 )
+
+                for line in lines:
+                    cols = line.split()
+                    if len(cols) != 4:
+                        raise ValueError(
+                            f"Expected 4 relevance and stance columns "
+                            f"but got {len(cols)}."
+                        )
+                    qid, stance, did, score = cols
+
+                    yield ToucheControversialStanceQrel(
+                        query_id=qid,
+                        doc_id=did,
+                        relevance=int(score),
+                        stance=ToucheControversialStance(stance),
+                    )
 
     def qrels_cls(self):
         return TrecQrel
@@ -587,14 +717,14 @@ class TouchePassageDocs(BaseDocs):
     @use_docstore
     def docs_iter(self):
         with self._source.stream() as file:
-            lines = TextIOWrapper(file)
-            for line in lines:
-                json = loads(line)
-                yield TouchePassageDoc(
-                    doc_id=json["id"],
-                    text=json["contents"],
-                    chatnoir_url=json["chatNoirUrl"],
-                )
+            with TextIOWrapper(file) as lines:
+                for line in lines:
+                    json = loads(line)
+                    yield TouchePassageDoc(
+                        doc_id=json["id"],
+                        text=json["contents"],
+                        chatnoir_url=json["chatNoirUrl"],
+                    )
 
     def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(
@@ -620,7 +750,10 @@ class TouchePassageDocs(BaseDocs):
 
 
 _PATTERN_IMAGE = compile("images/I[0-9a-f]{2}/I[0-9a-f]{16}/")
-_PATTERN_PAGE = compile("images/I[0-9a-f]{2}/I[0-9a-f]{16}/pages/P[0-9a-f]{16}/")
+_PATTERN_PAGE = compile(
+    "images/I[0-9a-f]{2}/I[0-9a-f]{16}/pages/P[0-9a-f]{16}/"
+)
+
 
 class ToucheImageDocs(BaseDocs):
     _source: Cache
@@ -651,30 +784,60 @@ class ToucheImageDocs(BaseDocs):
 
     @use_docstore
     def docs_iter(self):
-        with self._source.stream() as file, self._source_nodes.stream() as file_nodes, self._source_png.stream() as file_png:
-            with ZipFile(file) as zip_file, ZipFile(file_nodes) as zip_file_nodes, ZipFile(file_png) as zip_file_png:
+        with self._source.stream() as file, \
+                self._source_nodes.stream() as file_nodes, \
+                self._source_png.stream() as file_png:
+            with ZipFile(file) as zip_file, \
+                    ZipFile(file_nodes) as zip_file_nodes, \
+                    ZipFile(file_png) as zip_file_png:
                 paths = {
                     *zip_file.namelist(),
                     *zip_file_nodes.namelist(),
                     *zip_file_png.namelist(),
                 }
-                image_paths = {
+                paths = sorted(paths)
+                image_paths = [
                     path
                     for path in paths
                     if _PATTERN_IMAGE.fullmatch(path)
-                }
-                for image_path in image_paths:
-                    page_paths = {
-                        path
-                        for path in paths
-                        if path.startswith(image_path) and _PATTERN_PAGE.fullmatch(path)
-                    }
-                    pages: List[ToucheImagePage] = []
-                    for page_path in page_paths:
-                        with zip_file.open(f"{page_path}rankings.jsonl") as rankings_file:
+                ]
+
+                def _parse_node(json: dict) -> ToucheImageNode:
+                    position_json = json["position"]
+                    if isinstance(position_json, str):
+                        position_json = loads(position_json)
+                    return ToucheImageNode(
+                        xpath=json["xPath"],
+                        visible=bool(json["visible"]),
+                        id=(
+                            json["id"]
+                            if "id" in json else None
+                        ),
+                        classes=(
+                            json["classes"]
+                            if "classes" in json else []
+                        ),
+                        position=(
+                            float(position_json[0]),
+                            float(position_json[1]),
+                            float(position_json[2]),
+                            float(position_json[3]),
+                        ),
+                        text=(
+                            json["text"]
+                            if "text" in json else None
+                        ),
+                        css=json["css"] if "css" in json else {},
+                    )
+
+                def _parse_page(page_path: str) -> ToucheImagePage:
+                    with zip_file.open(
+                            f"{page_path}rankings.jsonl"
+                    ) as rankings_file:
+                        with TextIOWrapper(rankings_file) as lines:
                             rankings_json = (
                                 loads(line)
-                                for line in TextIOWrapper(rankings_file)
+                                for line in lines
                             )
                             rankings = [
                                 ToucheImageRanking(
@@ -684,60 +847,79 @@ class ToucheImageDocs(BaseDocs):
                                 )
                                 for json in rankings_json
                             ]
-                        with zip_file_nodes.open(f"{page_path}snapshot/nodes.jsonl") as nodes_file:
+                    with zip_file_nodes.open(
+                            f"{page_path}snapshot/nodes.jsonl"
+                    ) as nodes_file:
+                        with TextIOWrapper(nodes_file) as lines:
                             nodes_json = (
                                 loads(line)
-                                for line in TextIOWrapper(nodes_file)
+                                for line in lines
                             )
-
                             nodes = [
-                                ToucheImageNode(
-                                    xpath=json["xPath"],
-                                    visible=bool(json["visible"]),
-                                    id=json["id"] if "id" in json else None,
-                                    classes=json["classes"] if "classes" in json else [],
-                                    position=(
-                                        int(json["position"][0]),
-                                        int(json["position"][1]),
-                                        int(json["position"][2]),
-                                        int(json["position"][3]),
-                                    ),
-                                    text=json["text"] if "text" in json else None,
-                                    css=json["css"] if "css" in json else {},
-                                )
+                                _parse_node(json)
                                 for json in nodes_json
                             ]
-                        with zip_file.open(f"{page_path}snapshot/image-xpath.txt") as xpaths_file:
+                    with zip_file.open(
+                            f"{page_path}snapshot/image-xpath.txt"
+                    ) as xpaths_file:
+                        with TextIOWrapper(xpaths_file) as lines:
                             xpaths = [
                                 line
-                                for line in TextIOWrapper(xpaths_file)
+                                for line in lines
                             ]
-                        pages.append(ToucheImagePage(
-                            page_id=page_path.split("/")[-1],
-                            url=zip_file.read(f"{page_path}page-url.txt").decode().strip(),
-                            rankings=rankings,
-                            dom_html=zip_file.read(f"{page_path}snapshot/dom.html"),
-                            xpaths=xpaths,
-                            nodes=nodes,
-                            # Mentioned in the dataset description but not included in the Zenodo dataset.
-                            # screenshot_png=zip_file_screenshots.read(f"{page_path}snapshot/screenshot.png"),
-                            text=zip_file.read(f"{page_path}snapshot/text.txt").decode(),
-                            # Mentioned in the dataset description but not included in the Zenodo dataset.
-                            # warc_gz=zip_file_archives.read(f"{page_path}snapshot/web-archive.warc.gz"),
-                        ))
-
-
-                    yield ToucheImageDoc(
-                        doc_id=image_path.split("/")[-1],
-                        png=zip_file_png.read(f"{image_path}image.png"),
-                        webp=zip_file.read(f"{image_path}image.webp"),
-                        url=zip_file.read(f"{image_path}image-url.txt").decode().strip(),
-                        phash=zip_file.read(f"{image_path}image-phash.txt").decode().strip(),
-                        pages=pages,
+                    return ToucheImagePage(
+                        page_id=page_path.split("/")[-2],
+                        url=zip_file.read(
+                            f"{page_path}page-url.txt"
+                        ).decode().strip(),
+                        rankings=rankings,
+                        dom_html=zip_file.read(
+                            f"{page_path}snapshot/dom.html"
+                        ),
+                        xpaths=xpaths,
+                        nodes=nodes,
+                        # Mentioned in the dataset description
+                        # but not included in the Zenodo dataset.
+                        # screenshot_png=zip_file_screenshots.read(
+                        #     f"{page_path}snapshot/screenshot.png"
+                        # ),
+                        text=zip_file.read(
+                            f"{page_path}snapshot/text.txt"
+                        ).decode(),
+                        # Mentioned in the dataset description
+                        # but not included in the Zenodo dataset.
+                        # warc_gz=zip_file_archives.read(
+                        #     f"{page_path}snapshot/web-archive.warc.gz"
+                        # ),
                     )
 
+                for index, image_path in enumerate(image_paths):
+                    page_paths = list(takewhile(
+                        lambda path: path.startswith(image_path),
+                        paths[index:],
+                    ))
+                    page_paths = [
+                        path
+                        for path in page_paths
+                        if _PATTERN_PAGE.fullmatch(path)
+                    ]
+                    pages: List[ToucheImagePage] = [
+                        _parse_page(page_path)
+                        for page_path in page_paths
+                    ]
 
-
+                    yield ToucheImageDoc(
+                        doc_id=image_path.split("/")[-2],
+                        png=zip_file_png.read(f"{image_path}image.png"),
+                        webp=zip_file.read(f"{image_path}image.webp"),
+                        url=zip_file.read(
+                            f"{image_path}image-url.txt"
+                        ).decode().strip(),
+                        phash=zip_file.read(
+                            f"{image_path}image-phash.txt"
+                        ).decode().strip(),
+                        pages=pages,
+                    )
 
     def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(

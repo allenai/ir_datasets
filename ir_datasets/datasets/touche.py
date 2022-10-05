@@ -175,7 +175,7 @@ def _init():
                 cached_download("2022/task-3/images-png", "zip"),
                 namespace=f"{NAME}/{NAME}-2022-task-3",
                 language="en",
-                count_hint=20000,
+                count_hint=23841,
             ),
             ToucheQueries(
                 cached_download("2022/task-3/queries", "xml"),
@@ -200,6 +200,7 @@ def _init():
             ToucheQrels(
                 cached_download("2020/task-1/qrels-argsme-1.0-uncorrected", "qrels"),
                 QRELS_DEFS_2020_TASK_1,
+                allow_float_score=True,
             ),
             documentation("2020/task-1/argsme-1.0/uncorrected"),
         ),
@@ -209,6 +210,7 @@ def _init():
             ToucheQrels(
                 cached_download("2020/task-1/qrels-argsme-2020-04-01-uncorrected", "qrels"),
                 QRELS_DEFS_2020_TASK_1,
+                allow_float_score=True,
             ),
             documentation("2020/task-1/argsme-2020-04-01/uncorrected"),
         ),
