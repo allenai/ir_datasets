@@ -3,8 +3,8 @@ from typing import Dict
 
 from ir_datasets import registry
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.formats.argsme import ArgsMeDocs, ArgsMeCombinedArguments
-from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract
+from ir_datasets.formats import ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
+from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract, TarExtract
 
 NAME = "argsme"
 
@@ -16,6 +16,10 @@ SUBSETS = {
     '2020-04-01/debatewise': (14353, "en", "debatewise.json"),
     '2020-04-01/idebate': (13522, "en", "idebate.json"),
     '2020-04-01/parliamentary': (48, "en", "parliamentary.json"),
+}
+
+PROCESSED_SUBSETS = {
+    '2020-04-01/processed': (365408, "en", "args_processed.csv"),
 }
 
 COMBINED_SUBSETS = {
@@ -59,9 +63,27 @@ def _init():
         in SUBSETS.items()
     }
 
+    # Processed arguments that can be loaded from Zenodo.
+    processed_arguments: Dict[str, ArgsMeProcessedDocs] = {
+        name.replace("/", "-"): ArgsMeProcessedDocs(
+            Cache(
+                TarExtract(
+                    download_config[name],
+                    zip_path
+                ),
+                base_path / f"{name}.json"
+            ),
+            namespace=f"{NAME}/{name}",
+            language=language,
+            count_hint=count_hint
+        )
+        for name, (count_hint, language, zip_path)
+        in PROCESSED_SUBSETS.items()
+    }
+
     # Arguments that are combined versions of other subsets.
-    combined_arguments: Dict[str, ArgsMeCombinedArguments] = {
-        name: ArgsMeCombinedArguments(
+    combined_arguments: Dict[str, ArgsMeCombinedDocs] = {
+        name: ArgsMeCombinedDocs(
             base_path / f"{name}.json",
             [arguments[subset_name] for subset_name in subset_names],
             namespace=f"{NAME}/{name}",
@@ -80,7 +102,8 @@ def _init():
         )
         for name, arguments in chain(
             arguments.items(),
-            combined_arguments.items()
+            processed_arguments.items(),
+            combined_arguments.items(),
         )
     }
 
