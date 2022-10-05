@@ -388,6 +388,7 @@ def _init():
     # NOTE: the following datasets are defined in touche.py:
     # - clueweb12/touche-2020-task-2
     # - clueweb12/touche-2021-task-2
+    # - clueweb12/touche-2022-task-2
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

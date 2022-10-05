@@ -112,6 +112,7 @@ def _init():
     #  - argsme/2020-04-01/touche-2020-task-1
     #  - argsme/2020-04-01/touche-2020-task-1/uncorrected
     #  - argsme/2020-04-01/touche-2021-task-1
+    #  - argsme/2020-04-01-processed/touche-2022-task-1
 
     # Register datasets.
     registry.register(NAME, base)
