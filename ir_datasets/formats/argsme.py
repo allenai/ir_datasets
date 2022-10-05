@@ -1,7 +1,11 @@
+from ast import literal_eval
+from csv import DictReader, field_size_limit
 from datetime import datetime
 from enum import Enum
+from io import TextIOWrapper
 from pathlib import Path
 from re import sub
+from sys import maxsize
 from typing import NamedTuple, List, Optional
 
 from ir_datasets import lazy_libs
@@ -343,7 +347,64 @@ class ArgsMeDocs(BaseDocs):
         return self._language
 
 
-class ArgsMeCombinedArguments(BaseDocs):
+class ArgsMeProcessedDocs(BaseDocs):
+    _source: Cache
+    _namespace: Optional[str]
+    _language: Optional[str]
+    _count_hint: Optional[int]
+
+    def __init__(
+            self,
+            cache: Cache,
+            namespace: Optional[str] = None,
+            language: Optional[str] = None,
+            count_hint: Optional[int] = None,
+    ):
+        self._source = cache
+        self._namespace = namespace
+        self._language = language
+        self._count_hint = count_hint
+
+    def docs_path(self):
+        return self._source.path()
+
+    @use_docstore
+    def docs_iter(self):
+        with self._source.stream() as csv_stream:
+            lines = TextIOWrapper(csv_stream)
+            field_size_limit(maxsize)
+            reader = DictReader(lines)
+            for argument_csv in reader:
+                argument_csv["premises"] = literal_eval(
+                    argument_csv["premises"])
+                argument_csv["context"] = literal_eval(argument_csv["context"])
+                argument = ArgsMeDoc.from_json(argument_csv)
+                yield argument
+
+    def docs_store(self, field="doc_id"):
+        return PickleLz4FullStore(
+            path=f"{self.docs_path()}.pklz4",
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=["doc_id"],
+            count_hint=self._count_hint,
+        )
+
+    def docs_count(self):
+        return self._count_hint
+
+    def docs_cls(self):
+        return ArgsMeDoc
+
+    def docs_namespace(self):
+        return self._namespace
+
+    def docs_lang(self):
+        return self._language
+
+
+class ArgsMeCombinedDocs(BaseDocs):
     _path: Path
     _sources: List[ArgsMeDocs]
     _namespace: Optional[str]

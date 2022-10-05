@@ -9,10 +9,6 @@ from .touche import (
 from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
 from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
-from .argsme import (
-    ArgsMeDocs, ArgsMeDoc, ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain,
-    ArgsMePremise, ArgsMePremiseAnnotation, ArgsMeAspect
-)
-
+from .argsme import ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain, ArgsMePremiseAnnotation, ArgsMePremise, ArgsMeAspect, ArgsMeDoc, ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
 from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries
 from .jsonl import JsonlDocs, JsonlQueries
