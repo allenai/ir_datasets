@@ -214,7 +214,7 @@
   bibtex_ids:
     - Bondarenko2022Touche
 
-2022/task-2-expanded-doc-t5-query:
+2022/task-2/expanded-doc-t5-query:
   pretty_name: "Touché 2022 Task 2: Argument Retrieval for Comparative Questions (Expanded)"
   desc: |
     <p>
@@ -235,7 +235,7 @@
     Touché 2022 is the third lab on argument retrieval at CLEF 2022 featuring three tasks.
     </p>
     <p>
-    Given a controversial topic, the task is to retrieve images (from web pages) for each stance (pro/con) that show support for that stance.
+    Given a controversial topic, the task is to retrieve images (from <a class="ds-ref">touche-image-search/2022-06-13</a>) for each stance (pro/con) that show support for that stance.
     </p>
     <p>
     Systems are evaluated on Touché topics 1-50 by the ratio of images among the 20 retrieved images for each topic (10 images for each stance) that are all three: relevant to the topic, argumentative, and have the associated stance.

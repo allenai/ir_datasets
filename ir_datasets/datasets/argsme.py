@@ -65,7 +65,7 @@ def _init():
 
     # Processed arguments that can be loaded from Zenodo.
     processed_arguments: Dict[str, ArgsMeProcessedDocs] = {
-        name.replace("/", "-"): ArgsMeProcessedDocs(
+        name: ArgsMeProcessedDocs(
             Cache(
                 TarExtract(
                     download_config[name],

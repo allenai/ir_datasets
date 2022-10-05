@@ -5,7 +5,7 @@ from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import ToucheQueries, ToucheTitleQueries, \
     ToucheComparativeQueries, ToucheQrels, ToucheQualityQrels, \
     ToucheQualityComparativeStanceQrels, ToucheControversialStanceQrels, \
-    ToucheQualityCoherenceQrels, TouchePassageDocs, ToucheImageDocs
+    ToucheQualityCoherenceQrels, TouchePassageDocs
 from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract, GzipExtract
 
 NAME = "touche"
@@ -133,8 +133,8 @@ def _init():
             ),
             documentation("2021/task-2"),
         ),
-        f"argsme/2020-04-01-processed/{NAME}-2022-task-1": Dataset(
-            registry["argsme/2020-04-01-processed"].docs_handler(),
+        f"argsme/2020-04-01/processed/{NAME}-2022-task-1": Dataset(
+            registry["argsme/2020-04-01/processed"].docs_handler(),
             ToucheQueries(
                 cached_download("2022/task-1/queries", "xml"),
                 namespace=f"argsme/2020-04-01-processed/{NAME}-2022-task-1",
@@ -168,15 +168,8 @@ def _init():
             ),
             documentation("2022/task-2"),
         ),
-        f"{NAME}/{NAME}-2022-task-3": Dataset(
-            ToucheImageDocs(
-                cached_download("2022/task-3/images-main", "zip"),
-                cached_download("2022/task-3/images-nodes", "zip"),
-                cached_download("2022/task-3/images-png", "zip"),
-                namespace=f"{NAME}/{NAME}-2022-task-3",
-                language="en",
-                count_hint=23841,
-            ),
+        f"touche-image/2022-06-13/{NAME}-2022-task-3": Dataset(
+            registry["touche-image/2022-06-13"].docs_handler(),
             ToucheQueries(
                 cached_download("2022/task-3/queries", "xml"),
                 namespace=f"{NAME}/{NAME}-2022-task-3",
@@ -214,7 +207,7 @@ def _init():
             ),
             documentation("2020/task-1/argsme-2020-04-01/uncorrected"),
         ),
-        f"clueweb12/{NAME}-2022-task-2-expanded-doc-t5-query": Dataset(
+        f"clueweb12/{NAME}-2022-task-2/expanded-doc-t5-query": Dataset(
             TouchePassageDocs(
                 cached_gzip_download("2022/task-2/passages-expanded-doc-t5-query", "jsonl"),
                 namespace=f"clueweb12/{NAME}-2022-task-2",
@@ -223,7 +216,7 @@ def _init():
             ),
             registry[f"clueweb12/{NAME}-2022-task-2"].queries_handler(),
             registry[f"clueweb12/{NAME}-2022-task-2"].qrels_handler(),
-            documentation("2022/task-2-expanded-doc-t5-query"),
+            documentation("2022/task-2/expanded-doc-t5-query"),
         ),
     }
     for name, dataset in task_sub_datasets.items():

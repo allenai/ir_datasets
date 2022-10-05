@@ -3,8 +3,8 @@ from re import compile
 
 from ir_datasets.formats import ToucheQuery, TrecQrel, ToucheTitleQuery, \
     ToucheComparativeQuery, ToucheQualityQrel, ToucheQualityCoherenceQrel, \
-    ToucheImageDoc, \
-    ToucheQualityComparativeStanceQrel, ToucheComparativeStance, ToucheControversialStanceQrel, ToucheControversialStance
+    ToucheQualityComparativeStanceQrel, ToucheComparativeStance, \
+    ToucheControversialStanceQrel, ToucheControversialStance
 from test.integration.base import DatasetIntegrationTest
 
 
@@ -117,7 +117,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_queries(
-            "argsme/2020-04-01-processed/touche-2022-task-1",
+            "argsme/2020-04-01/processed/touche-2022-task-1",
             count=50,
             items={
                 0: ToucheQuery(
@@ -155,7 +155,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_queries(
-            "touche/touche-2022-task-3",
+            "touche-image/2022-06-13/touche-2022-task-3",
             count=50,
             items={
                 0: ToucheQuery(
@@ -288,7 +288,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "argsme/2020-04-01-processed/touche-2022-task-1",
+            "argsme/2020-04-01/processed/touche-2022-task-1",
             count=6841,
             items={
                 0: ToucheQualityCoherenceQrel(
@@ -332,7 +332,7 @@ class TestTouche(DatasetIntegrationTest):
             }
         )
         self._test_qrels(
-            "touche/touche-2022-task-3",
+            "touche-image/2022-06-13/touche-2022-task-3",
             count=19821,
             items={
                 0: ToucheControversialStanceQrel(
@@ -349,27 +349,6 @@ class TestTouche(DatasetIntegrationTest):
                 ),
             }
         )
-
-    # noinspection PyTypeChecker
-    def test_docs(self):
-        self._test_docs("touche/touche-2022-task-3", count=23841, items={
-            0: ToucheImageDoc(
-                doc_id="I000330ba4ea0ad13",
-                png=compile(b"\x89PNG.*"),
-                webp=compile(b"RIFF\xd0\xf3\x05\x00WEBPVP8.*"),
-                url="https://www.e-dmj.org/upload//thumbnails/dmj-2020-0258f3.jpg",
-                phash="1000000011001011011101010011101010010111011010101000011101101100",
-                pages=[]
-            ),
-            23840: ToucheImageDoc(
-                doc_id="Iffff8be6926a808e",
-                png=compile(b"\x89PNG.*"),
-                webp=compile(b"RIFF\x0e\\+\x00\x00WEBPVP8.*"),
-                url="https://assets.pewresearch.org/wp-content/uploads/sites/11/2012/07/death-penalty-2011-1.png",
-                phash="0001011011111110101001010100010110101011101000101111000001110000",
-                pages=[]
-            ),
-        })
 
 
 if __name__ == "__main__":

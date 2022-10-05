@@ -615,7 +615,7 @@ class TestArgsMe(DatasetIntegrationTest):
                 mode=ArgsMeMode.person,
             ),
         })
-        self._test_docs("argsme/2020-04-01-processed", count=365408, items={
+        self._test_docs("argsme/2020-04-01/processed", count=365408, items={
             0: ArgsMeDoc(
                 doc_id="Sf9294c83-Af186e851",
                 conclusion="the War in Iraq was Worth the Cost",

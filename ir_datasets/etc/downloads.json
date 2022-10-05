@@ -3652,18 +3652,21 @@
     "url": "https://zenodo.org/record/6873575/files/touche-task3-001-050-relevance.qrels",
     "size_hint": 558028,
     "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
-  },
-  "2022/task-3/images-main": {
+  }
+},
+
+"touche-image": {
+  "2022-06-13/images-main": {
     "url": "https://zenodo.org/record/6873575/files/touche22-image-search-main.zip",
     "size_hint": 4498749006,
     "expected_md5": "e59b1c724d976af27596b5c8ad310fd5"
   },
-  "2022/task-3/images-nodes": {
+  "2022-06-13/images-nodes": {
     "url": "https://zenodo.org/record/6873575/files/touche22-image-search-nodes.zip",
     "size_hint": 5424503960,
     "expected_md5": "97b7117d02668fa3e93095d277efd56b"
   },
-  "2022/task-3/images-png": {
+  "2022-06-13/images-png": {
     "url": "https://zenodo.org/record/6873575/files/touche22-image-search-png-images.zip",
     "size_hint": 17851724760,
     "expected_md5": "e2965b221248ba23a288135f757efae1"
