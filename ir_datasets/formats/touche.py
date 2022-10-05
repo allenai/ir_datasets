@@ -92,9 +92,10 @@ class ToucheImageRanking(NamedTuple):
 class ToucheImageNode(NamedTuple):
     xpath: str
     visible: bool
+    id: Optional[str]
     classes: List[str]
     position: Tuple[int, int, int, int]  # left top right bottom
-    text: str
+    text: Optional[str]
     css: Dict[str, str]
 
 
@@ -693,15 +694,16 @@ class ToucheImageDocs(BaseDocs):
                                 ToucheImageNode(
                                     xpath=json["xPath"],
                                     visible=bool(json["visible"]),
-                                    classes=json["classes"],
+                                    id=json["id"] if "id" in json else None,
+                                    classes=json["classes"] if "classes" in json else [],
                                     position=(
                                         int(json["position"][0]),
                                         int(json["position"][1]),
                                         int(json["position"][2]),
                                         int(json["position"][3]),
                                     ),
-                                    text=json["text"],
-                                    css=json["css"],
+                                    text=json["text"] if "text" in json else None,
+                                    css=json["css"] if "css" in json else {},
                                 )
                                 for json in nodes_json
                             ]
@@ -725,7 +727,7 @@ class ToucheImageDocs(BaseDocs):
                         ))
 
 
-                    return ToucheImageDoc(
+                    yield ToucheImageDoc(
                         doc_id=image_path.split("/")[-1],
                         png=zip_file_png.read(f"{image_path}image.png"),
                         webp=zip_file.read(f"{image_path}image.webp"),
