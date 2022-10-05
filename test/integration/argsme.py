@@ -3,7 +3,8 @@ from re import compile
 from unittest import main
 
 from ir_datasets.formats import ArgsMeDoc, ArgsMeStance, ArgsMePremise, \
-    ArgsMeSourceDomain, ArgsMeMode, ArgsMeAspect
+    ArgsMeSourceDomain, ArgsMeMode, ArgsMeAspect, ArgsMeProcessedDoc
+from ir_datasets.formats.argsme import ArgsMeSentence
 from test.integration.base import DatasetIntegrationTest
 
 
@@ -616,7 +617,7 @@ class TestArgsMe(DatasetIntegrationTest):
             ),
         })
         self._test_docs("argsme/2020-04-01/processed", count=365408, items={
-            0: ArgsMeDoc(
+            0: ArgsMeProcessedDoc(
                 doc_id="Sf9294c83-Af186e851",
                 conclusion="the War in Iraq was Worth the Cost",
                 premises=[
@@ -648,8 +649,18 @@ class TestArgsMe(DatasetIntegrationTest):
                 author_organization=None,
                 author_role=None,
                 mode=ArgsMeMode.discussion,
+                sentences=[
+                    ArgsMeSentence(
+                        id="Sf9294c83-Af186e851__PREMISE__1",
+                        text="His removal provides stability and security not only for Iraq but for the Middle East as a region"
+                    ),
+                    ArgsMeSentence(
+                        id="Sf9294c83-Af186e851__CONC__1",
+                        text="the War in Iraq was Worth the Cost"
+                    )
+                ],
             ),
-            365407: ArgsMeDoc(
+            365407: ArgsMeProcessedDoc(
                 doc_id="S148bb110-A119d66b0",
                 conclusion="Environmental impact of barages is ugly.",
                 premises=[
@@ -681,6 +692,20 @@ class TestArgsMe(DatasetIntegrationTest):
                 author_organization=None,
                 author_role=None,
                 mode=ArgsMeMode.discussion,
+                sentences=[
+                    ArgsMeSentence(
+                        id="S148bb110-A119d66b0__PREMISE__1",
+                        text="Barages are fairly massive objects, like Dams, that obstruct the natural flow of water and can, subsequently, have harmful environmental impacts."
+                    ),
+                    ArgsMeSentence(
+                        id="S148bb110-A119d66b0__PREMISE__2",
+                        text="These effects can be very ugly, causing frustration among locals and possibly reduced property values and tourism."
+                    ), ArgsMeSentence(
+                        id="S148bb110-A119d66b0__CONC__1",
+                        text="Environmental impact of barages is ugly."
+                    )
+                ]
+                ,
             ),
         })
 

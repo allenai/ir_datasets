@@ -8,6 +8,6 @@ from .touche_image import ToucheImageRanking, ToucheImageNode, ToucheImagePage, 
 from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
 from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
-from .argsme import ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain, ArgsMePremiseAnnotation, ArgsMePremise, ArgsMeAspect, ArgsMeDoc, ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
+from .argsme import ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain, ArgsMePremiseAnnotation, ArgsMePremise, ArgsMeAspect, ArgsMeDoc, ArgsMeProcessedDoc, ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
 from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries
 from .jsonl import JsonlDocs, JsonlQueries

@@ -122,6 +122,18 @@ class ArgsMeAspect(NamedTuple):
         return ArgsMeAspect(name, weight, normalized_weight, rank)
 
 
+class ArgsMeSentence(NamedTuple):
+    id: str
+    text: str
+
+    @staticmethod
+    def from_json(json: dict) -> "ArgsMeSentence":
+        return ArgsMeSentence(
+            str(json["sent_id"]),
+            str(json["sent_text"]),
+        )
+
+
 class ArgsMeDoc(NamedTuple):
     """
     See the corresponding Java source files from the args.me project:
@@ -294,6 +306,54 @@ class ArgsMeDoc(NamedTuple):
         )
 
 
+class ArgsMeProcessedDoc(NamedTuple):
+    """
+    See the corresponding Java source files from the args.me project:
+    https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/Argument.java
+    https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/argument/Premise.java
+    """
+    doc_id: str
+    conclusion: str
+    premises: List[ArgsMePremise]
+    premises_texts: str  # Premises texts concatenated with spaces.
+    aspects: List[ArgsMeAspect]
+    aspects_names: str  # Aspects namews concatenated with spaces.
+    source_id: str
+    source_title: str
+    source_url: Optional[str]
+    source_previous_argument_id: Optional[str]
+    source_next_argument_id: Optional[str]
+    source_domain: Optional[ArgsMeSourceDomain]
+    source_text: Optional[str]
+    source_text_conclusion_start: Optional[int]
+    source_text_conclusion_end: Optional[int]
+    source_text_premise_start: Optional[int]
+    source_text_premise_end: Optional[int]
+    topic: str  # Topic or discussion title.
+    acquisition: datetime
+    date: Optional[datetime]
+    author: Optional[str]
+    author_image_url: Optional[str]
+    author_organization: Optional[str]
+    author_role: Optional[str]
+    mode: Optional[ArgsMeMode]
+    sentences: List[ArgsMeSentence]
+
+    @staticmethod
+    def from_csv(csv: dict) -> "ArgsMeProcessedDoc":
+        csv["premises"] = literal_eval(csv["premises"])
+        csv["context"] = literal_eval(csv["context"])
+        doc = ArgsMeDoc.from_json(csv)
+        sentences = [
+            ArgsMeSentence.from_json(json)
+            for json in literal_eval(csv["sentences"])
+        ]
+        return ArgsMeProcessedDoc(
+            *doc,
+            sentences=sentences,
+        )
+
+
 class ArgsMeDocs(BaseDocs):
     _source: Cache
     _namespace: Optional[str]
@@ -375,10 +435,7 @@ class ArgsMeProcessedDocs(BaseDocs):
             field_size_limit(maxsize)
             reader = DictReader(lines)
             for argument_csv in reader:
-                argument_csv["premises"] = literal_eval(
-                    argument_csv["premises"])
-                argument_csv["context"] = literal_eval(argument_csv["context"])
-                argument = ArgsMeDoc.from_json(argument_csv)
+                argument = ArgsMeProcessedDoc.from_csv(argument_csv)
                 yield argument
 
     def docs_store(self, field="doc_id"):
@@ -395,7 +452,7 @@ class ArgsMeProcessedDocs(BaseDocs):
         return self._count_hint
 
     def docs_cls(self):
-        return ArgsMeDoc
+        return ArgsMeProcessedDoc
 
     def docs_namespace(self):
         return self._namespace

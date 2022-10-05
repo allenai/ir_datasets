@@ -111,7 +111,7 @@ _:
     - Wachsmuth2017Argument
     - Ajjour2019Acquisition
 
-2020-04-01-processed:
+2020-04-01/processed:
   desc: |
     <p>
     Pre-processed version of <a class="ds-ref">argsme/2020-04-01</a> where each argument is split into sentences.
