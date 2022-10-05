@@ -23,8 +23,8 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2020Touche'
-    - 'Wachsmuth2017Quality'
+    - Bondarenko2020Touche
+    - Wachsmuth2017Quality
 
 2020/task-1/argsme-1.0/uncorrected:
   pretty_name: "Touché 2020 Task 1: Argument Retrieval for Controversial Questions (Uncorrected Labels, args.me 1.0)"
@@ -41,8 +41,8 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2020Touche'
-    - 'Wachsmuth2017Quality'
+    - Bondarenko2020Touche
+    - Wachsmuth2017Quality
 
 2020/task-1/argsme-2020-04-01/uncorrected:
   pretty_name: "Touché 2020 Task 1: Argument Retrieval for Controversial Questions (Uncorrected Labels, args.me 2020-04-01)"
@@ -59,8 +59,8 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2020Touche'
-    - 'Wachsmuth2017Quality'
+    - Bondarenko2020Touche
+    - Wachsmuth2017Quality
 
 2020/task-2:
   pretty_name: "Touché 2020 Task 2: Argument Retrieval for Comparative Questions"
@@ -87,9 +87,9 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2020Touche'
-    - 'Braunstain2016Support'
-    - 'Rafalak2014Credibility'
+    - Bondarenko2020Touche
+    - Braunstain2016Support
+    - Rafalak2014Credibility
 
 2021/task-1:
   pretty_name: "Touché 2021 Task 1: Argument Retrieval for Controversial Questions"
@@ -120,7 +120,7 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2021Touche'
+    - Bondarenko2021Touche
 
 2021/task-2:
   pretty_name: "Touché 2021 Task 2: Argument Retrieval for Comparative Questions"
@@ -151,4 +151,4 @@
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
     </ul>
   bibtex_ids:
-    - 'Bondarenko2021Touche'
+    - Bondarenko2021Touche
