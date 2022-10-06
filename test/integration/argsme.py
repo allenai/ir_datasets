@@ -1,10 +1,12 @@
 from datetime import datetime
-from unittest import main
 from re import compile
+from unittest import main
 
 from ir_datasets.formats import ArgsMeDoc, ArgsMeStance, ArgsMePremise, \
-    ArgsMeSourceDomain, ArgsMeMode, ArgsMeAspect
+    ArgsMeSourceDomain, ArgsMeMode, ArgsMeAspect, ArgsMeProcessedDoc
+from ir_datasets.formats.argsme import ArgsMeSentence
 from test.integration.base import DatasetIntegrationTest
+
 
 class TestArgsMe(DatasetIntegrationTest):
     # noinspection PyTypeChecker
@@ -612,6 +614,98 @@ class TestArgsMe(DatasetIntegrationTest):
                 author_organization="Reform",
                 author_role="Opposition",
                 mode=ArgsMeMode.person,
+            ),
+        })
+        self._test_docs("argsme/2020-04-01/processed", count=365408, items={
+            0: ArgsMeProcessedDoc(
+                doc_id="Sf9294c83-Af186e851",
+                conclusion="the War in Iraq was Worth the Cost",
+                premises=[
+                    ArgsMePremise(
+                        text=compile("His removal provides stability and .{21} Iraq but for the Middle East as a region"),
+                        stance=ArgsMeStance.PRO,
+                        annotations=[],
+                    ),
+                ],
+                premises_texts=compile("His removal provides stability and .{21} Iraq but for the Middle East as a region"),
+                aspects=[],
+                aspects_names="",
+                source_id="Sf9294c83",
+                source_title="This House Believes that the War in Iraq was Worth the Cost | idebate.org",
+                source_url="https://idebate.org/debatabase/international-middle-east-politics-terrorism-warpeace/house-believes-war-iraq-was-worth",
+                source_previous_argument_id=None,
+                source_next_argument_id=None,
+                source_domain=ArgsMeSourceDomain.idebate,
+                source_text=compile("idebate.org Educational and informative news and .{17542} Facebook Login with Twitter "),
+                source_text_conclusion_start=196,
+                source_text_conclusion_end=230,
+                source_text_premise_start=8137,
+                source_text_premise_end=8234,
+                topic="the War in Iraq was Worth the Cost",
+                acquisition=datetime.fromisoformat("2019-04-19T12:40:25+00:00"),
+                date=None,
+                author=None,
+                author_image_url=None,
+                author_organization=None,
+                author_role=None,
+                mode=ArgsMeMode.discussion,
+                sentences=[
+                    ArgsMeSentence(
+                        id="Sf9294c83-Af186e851__PREMISE__1",
+                        text="His removal provides stability and security not only for Iraq but for the Middle East as a region"
+                    ),
+                    ArgsMeSentence(
+                        id="Sf9294c83-Af186e851__CONC__1",
+                        text="the War in Iraq was Worth the Cost"
+                    )
+                ],
+            ),
+            365407: ArgsMeProcessedDoc(
+                doc_id="S148bb110-A119d66b0",
+                conclusion="Environmental impact of barages is ugly.",
+                premises=[
+                    ArgsMePremise(
+                        text=compile("Barages are fairly massive objects, like .{190} property values and tourism."),
+                        stance=ArgsMeStance.PRO,
+                        annotations=[]
+                    )
+                ],
+                premises_texts=compile("Barages are fairly massive objects, like .{190} property values and tourism."),
+                aspects=[],
+                aspects_names="",
+                source_id="S148bb110",
+                source_title="Debate: Tidal energy - Debatepedia",
+                source_url="http://www.debatepedia.org/en/index.php/Debate:_Tidal_energy",
+                source_previous_argument_id=None,
+                source_next_argument_id=None,
+                source_domain=ArgsMeSourceDomain.debatepedia,
+                source_text=compile("Welcome to Debatepedia! \| About \| Help \| FAQ \| Media Kit Personal .{28131} with the site\?\xa0 Edit Close . "),
+                source_text_conclusion_start=22030,
+                source_text_conclusion_end=22070,
+                source_text_premise_start=22070,
+                source_text_premise_end=22331,
+                topic="Tidal energy",
+                acquisition=datetime.fromisoformat("2019-04-17T11:47:38+00:00"),
+                date=None,
+                author=None,
+                author_image_url=None,
+                author_organization=None,
+                author_role=None,
+                mode=ArgsMeMode.discussion,
+                sentences=[
+                    ArgsMeSentence(
+                        id="S148bb110-A119d66b0__PREMISE__1",
+                        text="Barages are fairly massive objects, like Dams, that obstruct the natural flow of water and can, subsequently, have harmful environmental impacts."
+                    ),
+                    ArgsMeSentence(
+                        id="S148bb110-A119d66b0__PREMISE__2",
+                        text="These effects can be very ugly, causing frustration among locals and possibly reduced property values and tourism."
+                    ), ArgsMeSentence(
+                        id="S148bb110-A119d66b0__CONC__1",
+                        text="Environmental impact of barages is ugly."
+                    )
+                ]
+                ,
             ),
         })
 

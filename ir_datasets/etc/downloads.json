@@ -110,6 +110,11 @@
     "url": "https://zenodo.org/record/3734893/files/parliamentary.zip",
     "size_hint": 27319,
     "expected_md5": "c80d932c953b64fb300f13d0d93096bb"
+  },
+  "2020-04-01/processed": {
+    "url": "https://zenodo.org/record/6873574/files/args_processed_04_01.tar.gz",
+    "size_hint": 1547009833,
+    "expected_md5": "43bfce957df69bf59b3d59744eb73ded"
   }
 },
 
@@ -3587,6 +3592,84 @@
     "url": "https://zenodo.org/record/6798217/files/touche-task2-51-100-quality.qrels",
     "size_hint": 68548,
     "expected_md5": "062bea3b8307ae481876fe31253092b5"
+  },
+  "2022/task-1/queries": {
+    "url": "https://zenodo.org/record/6873574/files/topics.xml",
+    "size_hint": 31089,
+    "expected_md5": "83a9cb2290f867199d6de9c73eeacf43"
+  },
+  "2022/task-1/qrels-relevance": {
+    "url": "https://zenodo.org/record/6873574/files/touche-task1-2022-relevance-dedup.qrels",
+    "size_hint": 482162,
+    "expected_md5": "658e5c13d8e5a80371d73ee1b04499bc"
+  },
+  "2022/task-1/qrels-quality": {
+    "url": "https://zenodo.org/record/6873574/files/touche-task1-2022-quality-dedup.qrels",
+    "size_hint": 482162,
+    "expected_md5": "8d12dac4ca8dfc0693ab34c926e87c1b"
+  },
+  "2022/task-1/qrels-coherence": {
+    "url": "https://zenodo.org/record/6873574/files/touche-task1-2022-coherence-dedup.qrels",
+    "size_hint": 482162,
+    "expected_md5": "5389bb1df02d3ba54a458eb969cbc5e9"
+  },
+  "2022/task-2/queries": {
+    "url": "https://zenodo.org/record/6873567/files/topics-task2-2022.zip",
+    "size_hint": 17203,
+    "expected_md5": "fafbb6352be108419535aaed83fc5762"
+  },
+  "2022/task-2/qrels-relevance": {
+    "url": "https://zenodo.org/record/6873567/files/touche-task2-2022-relevance.qrels",
+    "size_hint": 78379,
+    "expected_md5": "dcdd1031ce2e0830ae76d7b21fca2579"
+  },
+  "2022/task-2/qrels-quality": {
+    "url": "https://zenodo.org/record/6873567/files/touche-task2-2022-quality.qrels",
+    "size_hint": 78379,
+    "expected_md5": "adf28c877efcd94954263b392714cb60"
+  },
+  "2022/task-2/qrels-stance": {
+    "url": "https://zenodo.org/record/6873567/files/touche-task2-2022-stance.qrels",
+    "size_hint": 84891,
+    "expected_md5": "ac9afec4eb590877df9c94dd8d931a37"
+  },
+  "2022/task-2/passages": {
+    "url": "https://zenodo.org/record/6873567/files/touche-task2-passages-version-002.jsonl.gz",
+    "size_hint": 285743369,
+    "expected_md5": "ed4d6104b78986849c59bbc470464cec"
+  },
+  "2022/task-2/passages-expanded-doc-t5-query": {
+    "url": "https://zenodo.org/record/6873567/files/touche-task2-passages-version-002-expanded-with-doc-t5-query.jsonl.gz",
+    "size_hint": 300736532,
+    "expected_md5": "062452996389a320b83ce274df82cf4b"
+  },
+  "2022/task-3/queries": {
+    "url": "https://zenodo.org/record/6873575/files/topics.xml",
+    "size_hint": 31089,
+    "expected_md5": "83a9cb2290f867199d6de9c73eeacf43"
+  },
+  "2022/task-3/qrels": {
+    "url": "https://zenodo.org/record/6873575/files/touche-task3-001-050-relevance.qrels",
+    "size_hint": 558028,
+    "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
+  }
+},
+
+"touche-image": {
+  "2022-06-13/images-main": {
+    "url": "https://zenodo.org/record/6873575/files/touche22-image-search-main.zip",
+    "size_hint": 4498749006,
+    "expected_md5": "e59b1c724d976af27596b5c8ad310fd5"
+  },
+  "2022-06-13/images-nodes": {
+    "url": "https://zenodo.org/record/6873575/files/touche22-image-search-nodes.zip",
+    "size_hint": 5424503960,
+    "expected_md5": "97b7117d02668fa3e93095d277efd56b"
+  },
+  "2022-06-13/images-png": {
+    "url": "https://zenodo.org/record/6873575/files/touche22-image-search-png-images.zip",
+    "size_hint": 17851724760,
+    "expected_md5": "e2965b221248ba23a288135f757efae1"
   }
 },
 
