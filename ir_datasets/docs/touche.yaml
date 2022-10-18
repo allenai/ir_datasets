@@ -17,8 +17,8 @@
     Documents are judged based on their general topical relevance.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
-    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
@@ -35,8 +35,8 @@
     This dataset's relevance judgements should <em>not</em> be used without preprocessing.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
-    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
@@ -53,8 +53,8 @@
     This dataset's relevance judgements should <em>not</em> be used without preprocessing.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-20/shared-task-1.html">Task 1 website</a></li>
-    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
@@ -81,8 +81,8 @@
     Documents are judged based on their general topical relevance.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-20/shared-task-2.html">Task 2 website</a></li>
-    <li><a href="https://webis.de/events/touche-20/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web/argument-retrieval-for-comparative-questions">Task 2 website</a></li>
+    <li><a href="https://touche.webis.de/clef20/touche20-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-58219-7_26">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI90NnCLg9f4g32KLuOfPXR4">Workshop videos</a></li>
     </ul>
@@ -114,8 +114,8 @@
     (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-21/shared-task-1.html">Task 1 website</a></li>
-    <li><a href="https://webis.de/events/touche-21/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef21/touche21-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef21/touche21-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-85251-1_28">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
     </ul>
@@ -145,8 +145,8 @@
     (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
     </p>
     <ul>
-    <li><a href="https://webis.de/events/touche-21/shared-task-2.html">Task 2 website</a></li>
-    <li><a href="https://webis.de/events/touche-21/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef21/touche21-web/argument-retrieval-for-comparative-questions">Task 2 website</a></li>
+    <li><a href="https://touche.webis.de/clef21/touche21-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-85251-1_28">Overview paper</a></li>
     <li><a href="https://www.youtube.com/playlist?list=PLgD1TOdHQCI8FDfYnzcjbsf26RIatNgM3">Workshop videos</a></li>
     </ul>
@@ -165,7 +165,8 @@
     Touché 2022 is the third lab on argument retrieval at CLEF 2022 featuring three tasks.
     </p>
     <p>
-    Given a query about a controversial topic, retrieve and rank a relevant pair of sentences from a collection of arguments (<a class="ds-ref">argsme/2020-04-01-processed</a>).
+    Given a query about a controversial topic, retrieve and rank a relevant pair of sentences 
+    from a collection of arguments (<a class="ds-ref">argsme/2020-04-01-processed</a>).
     </p>
     <p>
     Documents are judged based on their general topical relevance and for rhetorical quality,
@@ -175,8 +176,8 @@
     (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
     </p>
     <ul>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/argument-retrieval-for-controversial-questions.html">Task 1 website</a></li>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-99739-7_43">Overview paper</a></li>
     </ul>
   bibtex_ids:
@@ -194,7 +195,9 @@
     Touché 2022 is the third lab on argument retrieval at CLEF 2022 featuring three tasks.
     </p>
     <p>
-    Given a comparative topic and a collection of documents, the task is to retrieve relevant argumentative passages for either compared object or for both and to detect their respective stances with respect to the object they talk about.
+    Given a comparative topic and a collection of documents, the task is to retrieve relevant argumentative passages 
+    for either compared object or for both and to detect their respective stances 
+    with respect to the object they talk about.
     </p>
     <p>
     Documents are judged based on their general topical relevance and for rhetorical quality,
@@ -204,11 +207,15 @@
     (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
     </p>
     <p>
-    Additionally, classify the stance of the retrieved text passages towards the compared objects in questions. For instance, in the question <i>Who is a better friend, a cat or a dog?</i> the terms <i>cat</i> and <i>dog</i> are the comparison objects. An answer candidate like <i>Cats can be quite affectionate and attentive, and thus are good friends</i> should be classified as pro the <i>cat</i> object, while <i>Cats are less faithful than dogs</i> as supporting the <i>dog</i> object.
+    Additionally, the stance of the retrieved text passages towards the compared objects in questions is judged. 
+    For instance, in the question <i>Who is a better friend, a cat or a dog?</i> the terms <i>cat</i> and <i>dog</i> 
+    are the comparison objects. An answer candidate like <i>Cats can be quite affectionate and attentive, 
+    and thus are good friends</i> should be classified as pro the <i>cat</i> object, 
+    while <i>Cats are less faithful than dogs</i> as supporting the <i>dog</i> object.
     </p>
     <ul>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/argument-retrieval-for-comparative-questions.html">Task 2 website</a></li>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/argument-retrieval-for-comparative-questions">Task 2 website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-99739-7_43">Overview paper</a></li>
     </ul>
   bibtex_ids:
@@ -218,7 +225,8 @@
   pretty_name: "Touché 2022 Task 2: Argument Retrieval for Comparative Questions (Expanded)"
   desc: |
     <p>
-    Pre-processed version of <a class="ds-ref">clueweb12/touche-2022-task-2</a> where each passage has been expanded with queries generated using DocT5Query.
+    Pre-processed version of <a class="ds-ref">clueweb12/touche-2022-task-2</a> where each passage 
+    has been expanded with queries generated using DocT5Query.
     </p>
   bibtex_ids:
     - Bondarenko2022Touche
@@ -235,14 +243,16 @@
     Touché 2022 is the third lab on argument retrieval at CLEF 2022 featuring three tasks.
     </p>
     <p>
-    Given a controversial topic, the task is to retrieve images (from <a class="ds-ref">touche-image-search/2022-06-13</a>) for each stance (pro/con) that show support for that stance.
+    Systems are evaluated on 50 topics by the ratio of images among the 20 retrieved images 
+    for each topic (10 images for each stance) that are all three: 
+    relevant to the topic, argumentative, and have the associated stance.
     </p>
     <p>
     Systems are evaluated on Touché topics 1-50 by the ratio of images among the 20 retrieved images for each topic (10 images for each stance) that are all three: relevant to the topic, argumentative, and have the associated stance.
     </p>
     <ul>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/image-retrieval-for-arguments.html">Task 3 website</a></li>
-    <li><a href="https://touche.webis.de/clef22/touche22-web/">Lab website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/image-retrieval-for-arguments">Task 3 website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web">Lab website</a></li>
     <li><a href="https://doi.org/10.1007/978-3-030-99739-7_43">Overview paper</a></li>
     </ul>
   bibtex_ids:
@@ -250,3 +260,100 @@
     - Kiesel2021Image
     - Dimitrov2021SemEval
     - Yanai2007Image
+
+2023/task-1:
+  pretty_name: "Touché 2023 Task 1: Argument Retrieval for Controversial Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    often come to a point where one side challenges the other with a why-question,
+    which is a prompt to justify some stance based on arguments.
+    Since technologies for argument mining are maturing at a rapid pace,
+    also ad-hoc argument retrieval becomes a feasible task in reach.
+    Touché 2023 is the fourth lab on argument retrieval at CLEF 2023 featuring three tasks.
+    </p>
+    <p>
+    Given a query about a controversial topic, retrieve and rank a relevant pair of documents 
+    from the ClueWeb22 (<a class="ds-ref">clueweb22</a>).
+    </p>
+    <p>
+    Documents are judged based on their general topical relevance and for rhetorical quality,
+    i.e., "well-writtenness" of the document:
+    (1) whether the text has a good style of speech (formal language is preferred over informal),
+    (2) whether the text has a proper sentence structure and is easy to read,
+    (3) whether it includes profanity, has typos, and makes use of other detrimental style choices.
+    </p>
+    <ul>
+    <li><a href="https://touche.webis.de/clef23/touche23-web/argument-retrieval-for-controversial-questions">Task 1 website</a></li>
+    <li><a href="https://touche.webis.de/clef23/touche23-web">Lab website</a></li>
+    </ul>
+
+2023/task-1/bm25-top1000:
+  pretty_name: "Touché 2023 Task 1: Argument Retrieval for Controversial Questions (BM25 top-1000)"
+  desc: |
+    <p>
+    Re-ranking sub-task for <a class="ds-ref">clueweb22/touche-2023-task-1</a> where the candidate documents are
+    the top-1000 documents retrieved using BM25 from the ClueWeb22 (<a class="ds-ref">clueweb22</a>).
+    </p>
+
+2023/task-2:
+  pretty_name: "Touché 2023 Task 2: Causal Retrieval"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    often come to a point where one side challenges the other with a why-question,
+    which is a prompt to justify some stance based on arguments.
+    Since technologies for argument mining are maturing at a rapid pace,
+    also ad-hoc argument retrieval becomes a feasible task in reach.
+    Touché 2023 is the fourth lab on argument retrieval at CLEF 2023 featuring three tasks.
+    </p>
+    <p>
+    Given a comparative topic the task is to TODO
+    from the ClueWeb22 (<a class="ds-ref">clueweb22</a>).
+    </p>
+    <p>
+    Documents are judged based on TODO.
+    </p>
+    <ul>
+    <li><a href="https://touche.webis.de/clef23/touche23-web/causal-retrieval">Task 2 website</a></li>
+    <li><a href="https://touche.webis.de/clef23/touche23-web">Lab website</a></li>
+    </ul>
+
+2023/task-2/bm25-top1000:
+  pretty_name: "Touché 2023 Task 2: Causal Retrieval (BM25 top-1000)"
+  desc: |
+    <p>
+    Re-ranking sub-task for <a class="ds-ref">clueweb22/touche-2023-task-2</a> where the candidate documents are
+    the top-1000 documents retrieved using BM25 from the ClueWeb22 (<a class="ds-ref">clueweb22</a>).
+    </p>
+
+2023/task-3:
+  pretty_name: "Touché 2023 Task 3: Argument Retrieval for Comparative Questions"
+  desc: |
+    <p>
+    Decision making processes, be it at the societal or at the personal level,
+    often come to a point where one side challenges the other with a why-question,
+    which is a prompt to justify some stance based on arguments.
+    Since technologies for argument mining are maturing at a rapid pace,
+    also ad-hoc argument retrieval becomes a feasible task in reach.
+    Touché 2023 is the fourth lab on argument retrieval at CLEF 2023 featuring three tasks.
+    </p>
+    <p>
+    Given a controversial topic, the task is to retrieve images 
+    (from <a class="ds-ref">touche-image-search/2022-06-13</a>) 
+    for each stance (pro/con) that show support for that stance.
+    </p>
+    <p>
+    Systems are evaluated on 50 topics by the ratio of images among the 20 retrieved images 
+    for each topic (10 images for each stance) that are all three: 
+    relevant to the topic, argumentative, and have the associated stance.
+    </p>
+    <ul>
+    <li><a href="https://touche.webis.de/clef23/touche23-web/image-retrieval-for-arguments">Task 3 website</a></li>
+    <li><a href="https://touche.webis.de/clef23/touche23-web">Lab website</a></li>
+    </ul>
+  bibtex_ids:
+    - Kiesel2021Image
+    - Dimitrov2021SemEval
+    - Yanai2007Image
+

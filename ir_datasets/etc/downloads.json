@@ -3652,6 +3652,26 @@
     "url": "https://zenodo.org/record/6873575/files/touche-task3-001-050-relevance.qrels",
     "size_hint": 558028,
     "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
+  },
+  "2023/task-1/documents/bm25-top1000": {
+    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "size_hint": 99999999,
+    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
+  },
+  "2023/task-2/queries": {
+    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "size_hint": 99999999,
+    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
+  },
+  "2023/task-2/documents/bm25-top1000": {
+    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "size_hint": 99999999,
+    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
+  },
+  "2023/task-3/queries": {
+    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
+    "size_hint": 99999999,
+    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
   }
 },
 
