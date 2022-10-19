@@ -359,3 +359,113 @@ class DocId:
             f"{self.file:0>2}",
             f"{self.doc:0>5}",
         ])
+
+
+# Readers for parsing the base record types from iterators of IO streams.
+
+
+ENCODING = "utf8"
+
+
+def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
+    with ConcatIOWrapper.from_iterable(files) as file:
+        with TextIOWrapper(file, encoding=ENCODING) as text_file:
+            for line in text_file:
+                json = loads(line)
+                yield _Txt(
+                    doc_id=json["ClueWeb22-ID"],
+                    url=json["URL"],
+                    url_hash=json["URL-hash"],
+                    language=json["Language"],
+                    text=json["Clean-Text"],
+                )
+
+
+# Only import the heavy warc library for type checking.
+if TYPE_CHECKING:
+    from warc import WARCRecord
+else:
+    WARCRecord = Any
+
+
+def _parse_vdom_list(document: WARCRecord, key: str) -> Sequence[int]:
+    vdom_list = document.header.get(key, "").split()
+    return [int(vdom) for vdom in vdom_list]
+
+
+def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
+    # Only import the heavy warc library for type checking,
+    # otherwise load the library lazily.
+    if TYPE_CHECKING:
+        from warc import WARCFile
+    else:
+        WARCFile = warc().WARCFile
+
+    with ConcatIOWrapper.from_iterable(files) as file:
+        with WARCFile(fileobj=file) as warc_file:
+            documents: Iterable[WARCRecord] = warc_file
+            documents = (
+                document for document in documents
+                if document.type == "response"
+            )
+            for document in documents:
+                doc_id = document["ClueWeb22-ID"]
+                url = document.url
+                url_hash = document["URL-Hash"]
+                language = document["Language"]
+                date = datetime.fromisoformat(document.date)
+                vdom_heading = _parse_vdom_list(document, "VDOM-Heading")
+                vdom_list = _parse_vdom_list(document, "VDOM-List")
+                vdom_passage = _parse_vdom_list(document, "VDOM-Passage")
+                vdom_primary = _parse_vdom_list(document, "VDOM-Primary")
+                vdom_table = _parse_vdom_list(document, "VDOM-Table")
+                vdom_title = _parse_vdom_list(document, "VDOM-Title")
+                vdom_paragraph = _parse_vdom_list(document, "VDOM-Paragraph")
+                html: bytes = document.payload.read()
+                yield _Html(
+                    doc_id=doc_id,
+                    url=url,
+                    url_hash=url_hash,
+                    language=language,
+                    date=date,
+                    html=html,
+                    vdom_heading=vdom_heading,
+                    vdom_list=vdom_list,
+                    vdom_passage=vdom_passage,
+                    vdom_primary=vdom_primary,
+                    vdom_table=vdom_table,
+                    vdom_title=vdom_title,
+                    vdom_paragraph=vdom_paragraph,
+                )
+
+
+def _parse_anchor(json: Sequence[str]) -> Anchor:
+    return Anchor(
+        url=json[0],
+        url_hash=json[1],
+        text=json[2],
+        language=json[4],
+    )
+
+
+def _read_link(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
+    with ConcatIOWrapper.from_iterable(files) as file:
+        with TextIOWrapper(file, encoding=ENCODING) as text_file:
+            for line in text_file:
+                json = loads(line)
+                yield _Link(
+                    doc_id=json["ClueWeb22-ID"],
+                    url=json["url"],
+                    url_hash=json["urlhash"],
+                    anchors=[
+                        _parse_anchor(anchor) for anchor in json["anchors"]
+                    ],
+                )
+
+
+def _read_vdom(files: Iterator[IO[bytes]]) -> Iterator[_Vdom]:
+    raise NotImplementedError()
+
+
+def _read_jpg(files: Iterator[IO[bytes]]) -> Iterator[_Jpg]:
+    raise NotImplementedError()
