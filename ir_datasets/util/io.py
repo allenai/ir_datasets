@@ -1,4 +1,3 @@
-from abc import ABC
 from io import BytesIO, UnsupportedOperation
 from itertools import tee, chain
 from types import TracebackType
@@ -9,7 +8,7 @@ from typing import (
 _OffsetIOWrapperSelf = TypeVar("_OffsetIOWrapperSelf", bound="OffsetIOWrapper")
 
 
-class OffsetIOWrapper(IO[bytes], ABC):
+class OffsetIOWrapper(IO[bytes]):
     """
     Basic read-only file wrapper to read a file's content
     only inside specific offset ranges.
@@ -169,7 +168,7 @@ class OffsetIOWrapper(IO[bytes], ABC):
 _ConcatIOWrapperSelf = TypeVar("_ConcatIOWrapperSelf", bound="ConcatIOWrapper")
 
 
-class ConcatIOWrapper(IO[bytes], ABC):
+class ConcatIOWrapper(IO[bytes]):
     """
     Basic read-only wrapper to read the concatenated contents
     of multiple files.
