@@ -2,7 +2,8 @@ from io import BytesIO, UnsupportedOperation
 from itertools import tee, chain
 from types import TracebackType
 from typing import (
-    IO, Iterable, Iterator, Optional, Tuple, Sequence, Type, TypeVar, Container
+    IO, Iterable, Iterator, Optional, Tuple, Sequence, Type, TypeVar,
+    Container, List
 )
 
 _OffsetIOWrapperSelf = TypeVar("_OffsetIOWrapperSelf", bound="OffsetIOWrapper")
@@ -119,7 +120,7 @@ class OffsetIOWrapper(IO[bytes]):
     def readline(self, limit: int = ...) -> bytes:
         raise UnsupportedOperation()
 
-    def readlines(self, hint: int = ...) -> list[bytes]:
+    def readlines(self, hint: int = ...) -> List[bytes]:
         raise UnsupportedOperation()
 
     def seek(self, offset: int, whence: int = ...) -> int:
@@ -226,7 +227,7 @@ class ConcatIOWrapper(IO[bytes]):
     def readline(self, limit: int = ...) -> bytes:
         raise UnsupportedOperation()
 
-    def readlines(self, hint: int = ...) -> list[bytes]:
+    def readlines(self, hint: int = ...) -> List[bytes]:
         raise UnsupportedOperation()
 
     def seek(self, offset: int, whence: int = ...) -> int:
