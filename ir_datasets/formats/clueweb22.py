@@ -6,7 +6,7 @@ from json import loads
 from os.path import join
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable
+    TYPE_CHECKING, Iterable, Callable
 )
 
 from ir_datasets.lazy_libs import warc
@@ -86,6 +86,8 @@ class _Jpg(NamedTuple):
     url_hash: str
     # TODO how to parse?
 
+
+_AnyRecord = TypeVar("_AnyRecord", _Txt, _Html, _Link, _Vdom, _Jpg)
 
 # Readers for parsing the base record types from iterators of IO streams.
 
@@ -368,9 +370,9 @@ class FormatInfo(NamedTuple):
     """
     File extension of files within the compressed archive.
     """
-    record_type: Type[Any]
+    reader: Callable[[Iterator[IO[bytes]]], Iterator[_AnyRecord]]
     """
-    Type of a record for one single document.
+    Reader for parsing records from the decompressed files.
     """
 
 
@@ -382,42 +384,42 @@ class Format(Enum):
         extension=".warc.gz",
         compression=Compression.GZIP,
         compression_extension=None,
-        record_type=_Html,
+        reader=_read_html,
     )
     INLINK = FormatInfo(
         id="inlink",
         extension=".json.gz",
         compression=Compression.GZIP,
         compression_extension=None,
-        record_type=_Link,
+        reader=_read_link,
     )
     OUTLINK = FormatInfo(
         id="outlink",
         extension=".json.gz",
         compression=Compression.GZIP,
         compression_extension=None,
-        record_type=_Link,
+        reader=_read_link,
     )
     TXT = FormatInfo(
         id="txt",
         extension=".json.gz",
         compression=Compression.GZIP,
         compression_extension=None,
-        record_type=_Txt,
+        reader=_read_txt,
     )
     JPG = FormatInfo(
         id="jpg",
         extension=NotImplemented,
         compression=NotImplemented,
         compression_extension=NotImplemented,
-        record_type=_Jpg,
+        reader=_read_jpg,
     )
     VDOM = FormatInfo(
         id="vdom",
         extension=".zip",
         compression=Compression.ZIP,
         compression_extension=".bin",
-        record_type=_Vdom,
+        reader=_read_vdom,
     )
 
 
