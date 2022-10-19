@@ -2,7 +2,7 @@ from io import BytesIO, UnsupportedOperation
 from itertools import tee, chain
 from types import TracebackType
 from typing import (
-    IO, Iterable, Iterator, Optional, Tuple, Sequence, Type, TypeVar
+    IO, Iterable, Iterator, Optional, Tuple, Sequence, Type, TypeVar, Container
 )
 
 _OffsetIOWrapperSelf = TypeVar("_OffsetIOWrapperSelf", bound="OffsetIOWrapper")
@@ -38,11 +38,8 @@ class OffsetIOWrapper(IO[bytes]):
             cls: Type[_OffsetIOWrapperSelf],
             file: IO[bytes],
             offsets: Iterator[int],
-            indices: Iterable[int],
+            indices: Container[int],
     ) -> _OffsetIOWrapperSelf:
-        # Copy unique indices as set.
-        indices = set(indices)
-
         # Create start and end offset iterators by copying
         # the original offsets iterator and shifting the end offset iterator
         # so that it points to the next index's start
