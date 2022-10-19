@@ -179,7 +179,11 @@ class ConcatIOWrapper(IO[bytes]):
     _current: Optional[IO[bytes]]
 
     def __init__(self, *files: IO[bytes]) -> None:
-        self._files = iter(files)
+        if len(files) == 1 and isinstance(files, Iterable):
+            files: Sequence[Iterable[IO[bytes]]]
+            self._files = iter(files[0])
+        else:
+            self._files = iter(files)
         self._current = next(self._files, None)
 
     @classmethod
@@ -187,10 +191,7 @@ class ConcatIOWrapper(IO[bytes]):
             cls: Type[_OffsetIOWrapperSelf],
             files: Iterable[IO[bytes]],
     ) -> _OffsetIOWrapperSelf:
-        instance = cls()
-        instance._all_files = iter(files)
-        instance._current = next(instance._all_files, None)
-        return instance
+        return cls(files)
 
     def close(self) -> None:
         while self._current is not None:
