@@ -469,3 +469,93 @@ def _read_vdom(files: Iterator[IO[bytes]]) -> Iterator[_Vdom]:
 
 def _read_jpg(files: Iterator[IO[bytes]]) -> Iterator[_Jpg]:
     raise NotImplementedError()
+
+
+# Combining iterators to construct documents from base records.from
+
+
+def _iter_ldoc(txt_iterator: Iterator[_Txt]) -> Iterator[LDoc]:
+    for txt in txt_iterator:
+        yield LDoc(
+            doc_id=txt.doc_id,
+            url=txt.url,
+            url_hash=txt.url_hash,
+            language=txt.language,
+            text=txt.text,
+        )
+
+
+def _iter_adoc(
+        txt_iterator: Iterator[_Txt],
+        html_iterator: Iterator[_Html],
+        inlink_iterator: Iterator[_Link],
+        outlink_iterator: Iterator[_Link],
+        vdom_iterator: Iterator[_Vdom],
+) -> Iterator[ADoc]:
+    zipped = zip(
+        txt_iterator,
+        html_iterator,
+        inlink_iterator,
+        outlink_iterator,
+        vdom_iterator,
+    )
+    for txt, html, inlink, outlink, vdom in zipped:
+        assert txt.doc_id == html.doc_id == inlink.doc_id == outlink.doc_id == vdom.doc_id
+        assert txt.url == html.url == inlink.url == outlink.url == vdom.url
+        assert txt.url_hash == html.url_hash == inlink.url_hash == outlink.url_hash == vdom.url_hash
+        assert txt.language == html.language
+        yield ADoc(
+            doc_id=txt.doc_id,
+            url=txt.url,
+            url_hash=txt.url_hash,
+            language=txt.language,
+            text=txt.text,
+            date=html.date,
+            html=html.html,
+            vdom_heading=html.vdom_heading,
+            vdom_list=html.vdom_list,
+            vdom_passage=html.vdom_passage,
+            vdom_primary=html.vdom_primary,
+            vdom_table=html.vdom_table,
+            vdom_title=html.vdom_title,
+            vdom_paragraph=html.vdom_paragraph,
+            inlink_anchors=inlink.anchors,
+            outlink_anchors=outlink.anchors,
+        )
+
+
+def _iter_bdoc(
+        txt_iterator: Iterator[_Txt],
+        html_iterator: Iterator[_Html],
+        inlink_iterator: Iterator[_Link],
+        outlink_iterator: Iterator[_Link],
+        vdom_iterator: Iterator[_Vdom],
+        jpg_iterator: Iterator[_Jpg],
+) -> Iterator[BDoc]:
+    zipped = zip(
+        txt_iterator,
+        html_iterator,
+        inlink_iterator,
+        outlink_iterator,
+        vdom_iterator,
+        jpg_iterator,
+    )
+    for txt, html, inlink, outlink, vdom, jpg in zipped:
+        yield BDoc(
+            doc_id=txt.doc_id,
+            url=txt.url,
+            url_hash=txt.url_hash,
+            language=txt.language,
+            text=txt.text,
+            date=html.date,
+            html=html.html,
+            vdom_heading=html.vdom_heading,
+            vdom_list=html.vdom_list,
+            vdom_passage=html.vdom_passage,
+            vdom_primary=html.vdom_primary,
+            vdom_table=html.vdom_table,
+            vdom_title=html.vdom_title,
+            vdom_paragraph=html.vdom_paragraph,
+            inlink_anchors=inlink.anchors,
+            outlink_anchors=outlink.anchors,
+        )
