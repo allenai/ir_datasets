@@ -179,22 +179,22 @@ class ConcatIOWrapper(IO[bytes]):
 
     def __init__(self, *files: IO[bytes]) -> None:
         self._files = iter(files)
-        self._open_next()
+        self._current = next(self._files, None)
 
     @classmethod
     def from_iterable(
             cls: Type[_OffsetIOWrapperSelf],
             files: Iterable[IO[bytes]],
     ) -> _OffsetIOWrapperSelf:
-        return cls(*files)
-
-    def _open_next(self) -> None:
-        self._current = next(self._files, None)
+        instance = cls()
+        instance._all_files = iter(files)
+        instance._current = next(instance._all_files, None)
+        return instance
 
     def close(self) -> None:
         while self._current is not None:
             self._current.close()
-            self._open_next()
+            self._current = next(self._files, None)
 
     def fileno(self) -> int:
         raise UnsupportedOperation()
@@ -216,7 +216,7 @@ class ConcatIOWrapper(IO[bytes]):
                 if n != 0 and current_len == 0:
                     # Stream is exhausted. Advance to next stream in queue.
                     self._current.close()
-                    self._open_next()
+                    self._current = next(self._files, None)
             result = buffer.getvalue()
         return result
 
