@@ -372,7 +372,7 @@ class FormatInfo(NamedTuple):
     """
     reader: Callable[[Iterator[IO[bytes]]], Iterator[_AnyRecord]]
     """
-    Reader for parsing records from the decompressed files.
+    Function for reading records from the decompressed files.
     """
 
 
@@ -469,6 +469,12 @@ class SubsetInfo(NamedTuple):
     """
     Type of one single document.
     """
+    combiner: Callable[[...], Iterator[AnyDoc]]
+    """
+    Function for combining iterables of the different format records 
+    to documents. The record iterators are passed to the function 
+    in the same order as specified in the ``formats`` field.
+    """
 
 
 class Subset(Enum):
@@ -477,21 +483,24 @@ class Subset(Enum):
         id="L",
         tag="l",
         formats=[Format.TXT],
-        doc_type=LDoc
+        doc_type=LDoc,
+        combiner=_combine_l_docs
     ),
     A = SubsetInfo(
         id="A",
         tag="a",
         formats=[Format.TXT, Format.HTML, Format.INLINK, Format.OUTLINK,
                  Format.VDOM],
-        doc_type=ADoc
+        doc_type=ADoc,
+        combiner=_combine_a_docs
     ),
     B = SubsetInfo(
         id="B",
         tag="b",
         formats=[Format.TXT, Format.HTML, Format.INLINK, Format.OUTLINK,
                  Format.VDOM, Format.JPG],
-        doc_type=BDoc
+        doc_type=BDoc,
+        combiner=_combine_b_docs
     ),
 
 
