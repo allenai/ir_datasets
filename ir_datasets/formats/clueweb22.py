@@ -1,3 +1,4 @@
+from contextlib import ExitStack
 from datetime import datetime
 from enum import Enum
 from functools import cached_property
@@ -6,7 +7,7 @@ from json import loads
 from os.path import join
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable, Callable
+    TYPE_CHECKING, Iterable, Callable, ContextManager
 )
 
 from ir_datasets.lazy_libs import warc
@@ -570,3 +571,33 @@ class DocId:
             f"{self.file:0>2}",
             f"{self.doc:0>5}",
         ])
+
+
+# Iterator classes for accessing multiple documents.
+
+
+class ClueWeb22Iterable(Iterable[AnyDoc]):
+    subset: Final[Subset]
+    files: Final[Callable[[Format], ContextManager[Iterator[IO[bytes]]]]]
+
+    def __init__(
+            self,
+            subset: Subset,
+            files: Callable[[Format], ContextManager[Iterator[IO[bytes]]]],
+    ):
+        self.subset = subset
+        self.files = files
+
+    def __iter__(self) -> Iterator[AnyDoc]:
+        formats = self.subset.value.formats
+        with ExitStack() as stack:
+            format_files: Sequence[Iterator[IO[bytes]]] = [
+                stack.enter_context(self.files(format))
+                for format in formats
+            ]
+            format_records: Sequence[Iterator[_AnyRecord]] = [
+                format.value.reader(files)
+                for format, files in zip(formats, format_files)
+            ]
+            documents = self.subset.value.combiner(*format_records)
+            yield from documents
