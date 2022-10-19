@@ -1,6 +1,8 @@
 from datetime import datetime
 from enum import Enum
-from typing import NamedTuple, Sequence, TypeVar, Optional, Type, Any
+from functools import cached_property
+from os.path import join
+from typing import NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final
 
 
 # Base records corresponding to the file types listed
@@ -281,3 +283,71 @@ class Subset(Enum):
                  Format.VDOM, Format.JPG],
         doc_type=BDoc
     ),
+
+
+# Utility classes
+
+
+MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
+MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
+
+
+class DocId:
+    """
+    ClueWeb22 document ID as described
+    at https://lemurproject.org/clueweb22/docspecs.php#DocIds.
+
+    This class can be used to check the ID format and decompose it
+    into its individual components, e.g., to construct a file path.
+    """
+
+    language: str
+    stream: int
+    subdirectory: int
+    file: int
+    doc: int
+
+    def __init__(self, doc_id: str):
+        parts = doc_id.split("-")
+        if len(parts) != 4:
+            raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
+        dataset, subdirectory, file, doc_index = parts
+        if dataset != "clueweb22":
+            raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
+
+        self.language = subdirectory[:-4]
+        if not any(
+                self.language == language.value.id for language in Language
+        ):
+            raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
+
+        self.stream_id = int(subdirectory[-4:-2])
+
+        self.subdirectory = int(subdirectory[-2:])
+        if self.subdirectory > MAX_SUBDIRECTORIES_PER_STREAM:
+            raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
+
+        self.file = int(file)
+        if self.file > MAX_FILES_PER_SUBDIRECTORY:
+            raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
+
+    @cached_property
+    def path(self) -> str:
+        language_path = self.language
+        stream_path = f"{language_path}{self.stream_id:0>2}"
+        subdirectory_path = f"{stream_path}{self.subdirectory:0>2}"
+        file_path = f"{subdirectory_path}-{self.file:0>2}"
+        return join(
+            language_path,
+            stream_path,
+            subdirectory_path,
+            file_path
+        )
+
+    def __str__(self) -> str:
+        return "-".join([
+            "clueweb22",
+            f"{self.language}{self.stream_id:0>2}{self.subdirectory:0>2}",
+            f"{self.file:0>2}",
+            f"{self.doc:0>5}",
+        ])
