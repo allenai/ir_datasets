@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import NamedTuple, Sequence
+from typing import NamedTuple, Sequence, TypeVar
 
 
 class _Txt(NamedTuple):
@@ -70,3 +70,52 @@ class _Jpg(NamedTuple):
     url: str
     url_hash: str
     # TODO how to parse?
+
+
+class LDoc(NamedTuple):
+    doc_id: str
+    url: str
+    url_hash: str
+    language: str
+    text: str
+
+
+class ADoc(NamedTuple):
+    doc_id: str
+    url: str
+    url_hash: str
+    language: str
+    text: str
+    date: datetime
+    html: bytes
+    vdom_heading: Sequence[int]
+    vdom_list: Sequence[int]
+    vdom_passage: Sequence[int]
+    vdom_primary: Sequence[int]
+    vdom_table: Sequence[int]
+    vdom_title: Sequence[int]
+    vdom_paragraph: Sequence[int]
+    inlink_anchors: Sequence[Anchor]
+    outlink_anchors: Sequence[Anchor]
+
+
+class BDoc(NamedTuple):
+    doc_id: str
+    url: str
+    url_hash: str
+    language: str
+    text: str
+    date: datetime
+    html: bytes
+    vdom_heading: Sequence[int]
+    vdom_list: Sequence[int]
+    vdom_passage: Sequence[int]
+    vdom_primary: Sequence[int]
+    vdom_table: Sequence[int]
+    vdom_title: Sequence[int]
+    vdom_paragraph: Sequence[int]
+    inlink_anchors: Sequence[Anchor]
+    outlink_anchors: Sequence[Anchor]
+
+
+AnyDoc = TypeVar("AnyDoc", LDoc, ADoc, BDoc)
