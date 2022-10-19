@@ -1,8 +1,16 @@
 from datetime import datetime
 from enum import Enum
 from functools import cached_property
+from io import TextIOWrapper
+from json import loads
 from os.path import join
-from typing import NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final
+from typing import (
+    NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
+    TYPE_CHECKING, Iterable
+)
+
+from ir_datasets.lazy_libs import warc
+from ir_datasets.util.io import ConcatIOWrapper
 
 
 # Base records corresponding to the file types listed
