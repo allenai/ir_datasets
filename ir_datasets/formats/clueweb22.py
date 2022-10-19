@@ -2,6 +2,9 @@ from datetime import datetime
 from typing import NamedTuple, Sequence, TypeVar
 
 
+# Base records corresponding to the file types listed
+# at https://lemurproject.org/clueweb22/docspecs.php
+
 class _Txt(NamedTuple):
     """
     Record from the ``txt`` subdir.
@@ -70,6 +73,10 @@ class _Jpg(NamedTuple):
     url: str
     url_hash: str
     # TODO how to parse?
+
+
+# Doc records corresponding to the fields available for each subset listed
+# at https://lemurproject.org/clueweb22/obtain.php and in the SIRIP paper.
 
 
 class LDoc(NamedTuple):
