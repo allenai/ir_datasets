@@ -30,6 +30,13 @@ def bs4():
     return _cache['bs4']
 
 
+def inscriptis():
+    if 'inscriptis' not in _cache:
+        import inscriptis
+        _cache['inscriptis'] = inscriptis
+    return _cache['inscriptis']
+
+
 def yaml():
     if 'yaml' not in _cache:
         import yaml
