@@ -64,6 +64,93 @@ l:
   bibtex_ids:
     - OverwijkXC22
 
+l/de:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only German-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/en:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only English-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/es:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Spanish-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/fr:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only French-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/it:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Italian-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/ja:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Japanese-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/nl:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Dutch-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/po:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Polish-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/pt:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Portugese-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/zh:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with only Simplified Chinese-language documents.
+    </p>
+  docs_instructions: *inst
+
+l/other-languages:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset without documents from the following languages:
+    <span class="lang-code">de</span>, 
+    <span class="lang-code">en</span>, 
+    <span class="lang-code">es</span>, 
+    <span class="lang-code">fr</span>, 
+    <span class="lang-code">it</span>, 
+    <span class="lang-code">ja</span>, 
+    <span class="lang-code">nl</span>, 
+    <span class="lang-code">po</span>, 
+    <span class="lang-code">pt</span>, 
+    <span class="lang-code">zh</span>
+    </p>
+  docs_instructions: *inst
+
 a:
   desc: |
     <p>
@@ -72,8 +159,93 @@ a:
     This subset provides HTML, clean text, and semantic analysis.
     </p>
   docs_instructions: *inst
-  bibtex_ids:
-    - OverwijkXC22
+
+a/de:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only German-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/en:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only English-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/es:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Spanish-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/fr:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only French-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/it:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Italian-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/ja:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Japanese-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/nl:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Dutch-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/po:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Polish-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/pt:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Portugese-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/zh:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with only Simplified Chinese-language documents.
+    </p>
+  docs_instructions: *inst
+
+a/other-languages:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset without documents from the following languages:
+    <span class="lang-code">de</span>, 
+    <span class="lang-code">en</span>, 
+    <span class="lang-code">es</span>, 
+    <span class="lang-code">fr</span>, 
+    <span class="lang-code">it</span>, 
+    <span class="lang-code">ja</span>, 
+    <span class="lang-code">nl</span>, 
+    <span class="lang-code">po</span>, 
+    <span class="lang-code">pt</span>, 
+    <span class="lang-code">zh</span>
+    </p>
+  docs_instructions: *inst
 
 b:
   desc: |
@@ -83,5 +255,90 @@ b:
     This subset provides HTML, clean text, semantic analysis, and screenshots.
     </p>
   docs_instructions: *inst
-  bibtex_ids:
-    - OverwijkXC22
+
+b/de:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only German-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/en:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only English-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/es:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Spanish-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/fr:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only French-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/it:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Italian-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/ja:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Japanese-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/nl:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Dutch-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/po:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Polish-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/pt:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Portugese-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/zh:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with only Simplified Chinese-language documents.
+    </p>
+  docs_instructions: *inst
+
+b/other-languages:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset without documents from the following languages:
+    <span class="lang-code">de</span>, 
+    <span class="lang-code">en</span>, 
+    <span class="lang-code">es</span>, 
+    <span class="lang-code">fr</span>, 
+    <span class="lang-code">it</span>, 
+    <span class="lang-code">ja</span>, 
+    <span class="lang-code">nl</span>, 
+    <span class="lang-code">po</span>, 
+    <span class="lang-code">pt</span>, 
+    <span class="lang-code">zh</span>
+    </p>
+  docs_instructions: *inst
