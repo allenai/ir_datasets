@@ -28,6 +28,7 @@ from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
 MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
 MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
 OFFSETS_FILE_EXTENSION: Final[str] = ".offsets"
+ENCODING = "utf8"
 
 
 # Base records corresponding to the file types listed
@@ -106,10 +107,8 @@ class _Jpg(NamedTuple):
 
 _AnyRecord = TypeVar("_AnyRecord", _Txt, _Html, _Link, _Vdom, _Jpg)
 
+
 # Readers for parsing the base record types from iterators of IO streams.
-
-
-ENCODING = "utf8"
 
 
 def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
@@ -128,6 +127,7 @@ def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
 
 # Only import the heavy warc library for type checking.
 if TYPE_CHECKING:
+    # noinspection PyPackageRequirements (listed as warc3-wet)
     from warc import WARCRecord
 else:
     WARCRecord = Any
@@ -142,8 +142,10 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
     # Only import the heavy warc library for type checking,
     # otherwise load the library lazily.
     if TYPE_CHECKING:
+        # noinspection PyPackageRequirements (listed as warc3-wet)
         from warc import WARCFile
     else:
+        # noinspection PyPep8Naming (due to export from lazy lib)
         WARCFile = warc().WARCFile
 
     with ConcatIOWrapper.from_iterable(files) as file:
@@ -220,7 +222,7 @@ def _read_jpg(files: Iterator[IO[bytes]]) -> Iterator[_Jpg]:
 # at https://lemurproject.org/clueweb22/obtain.php and in the SIRIP paper.
 
 
-class LDoc(NamedTuple):
+class ClueWeb22LDoc(NamedTuple):
     doc_id: str
     url: str
     url_hash: str
@@ -228,26 +230,7 @@ class LDoc(NamedTuple):
     text: str
 
 
-class ADoc(NamedTuple):
-    doc_id: str
-    url: str
-    url_hash: str
-    language: str
-    text: str
-    date: datetime
-    html: bytes
-    vdom_heading: Sequence[int]
-    vdom_list: Sequence[int]
-    vdom_passage: Sequence[int]
-    vdom_primary: Sequence[int]
-    vdom_table: Sequence[int]
-    vdom_title: Sequence[int]
-    vdom_paragraph: Sequence[int]
-    inlink_anchors: Sequence[Anchor]
-    outlink_anchors: Sequence[Anchor]
-
-
-class BDoc(NamedTuple):
+class ClueWeb22ADoc(NamedTuple):
     doc_id: str
     url: str
     url_hash: str
@@ -266,15 +249,34 @@ class BDoc(NamedTuple):
     outlink_anchors: Sequence[Anchor]
 
 
-AnyDoc = TypeVar("AnyDoc", LDoc, ADoc, BDoc)
+class ClueWeb22BDoc(NamedTuple):
+    doc_id: str
+    url: str
+    url_hash: str
+    language: str
+    text: str
+    date: datetime
+    html: bytes
+    vdom_heading: Sequence[int]
+    vdom_list: Sequence[int]
+    vdom_passage: Sequence[int]
+    vdom_primary: Sequence[int]
+    vdom_table: Sequence[int]
+    vdom_title: Sequence[int]
+    vdom_paragraph: Sequence[int]
+    inlink_anchors: Sequence[Anchor]
+    outlink_anchors: Sequence[Anchor]
+
+
+AnyDoc = TypeVar("AnyDoc", ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc)
 
 
 # Combining iterators to construct documents from base records.from
 
 
-def _combine_l_docs(txt_iterator: Iterator[_Txt]) -> Iterator[LDoc]:
+def _combine_l_docs(txt_iterator: Iterator[_Txt]) -> Iterator[ClueWeb22LDoc]:
     for txt in txt_iterator:
-        yield LDoc(
+        yield ClueWeb22LDoc(
             doc_id=txt.doc_id,
             url=txt.url,
             url_hash=txt.url_hash,
@@ -289,7 +291,7 @@ def _combine_a_docs(
         inlink_iterator: Iterator[_Link],
         outlink_iterator: Iterator[_Link],
         vdom_iterator: Iterator[_Vdom],
-) -> Iterator[ADoc]:
+) -> Iterator[ClueWeb22ADoc]:
     zipped = zip(
         txt_iterator,
         html_iterator,
@@ -298,11 +300,13 @@ def _combine_a_docs(
         vdom_iterator,
     )
     for txt, html, inlink, outlink, vdom in zipped:
-        assert txt.doc_id == html.doc_id == inlink.doc_id == outlink.doc_id == vdom.doc_id
+        assert txt.doc_id == html.doc_id == inlink.doc_id == \
+               outlink.doc_id == vdom.doc_id
         assert txt.url == html.url == inlink.url == outlink.url == vdom.url
-        assert txt.url_hash == html.url_hash == inlink.url_hash == outlink.url_hash == vdom.url_hash
+        assert txt.url_hash == html.url_hash == inlink.url_hash == \
+               outlink.url_hash == vdom.url_hash
         assert txt.language == html.language
-        yield ADoc(
+        yield ClueWeb22ADoc(
             doc_id=txt.doc_id,
             url=txt.url,
             url_hash=txt.url_hash,
@@ -329,7 +333,7 @@ def _combine_b_docs(
         outlink_iterator: Iterator[_Link],
         vdom_iterator: Iterator[_Vdom],
         jpg_iterator: Iterator[_Jpg],
-) -> Iterator[BDoc]:
+) -> Iterator[ClueWeb22BDoc]:
     zipped = zip(
         txt_iterator,
         html_iterator,
@@ -339,7 +343,7 @@ def _combine_b_docs(
         jpg_iterator,
     )
     for txt, html, inlink, outlink, vdom, jpg in zipped:
-        yield BDoc(
+        yield ClueWeb22BDoc(
             doc_id=txt.doc_id,
             url=txt.url,
             url_hash=txt.url_hash,
@@ -363,12 +367,12 @@ def _combine_b_docs(
 # of files and compression types.
 
 
-class Compression(Enum):
+class ClueWeb22Compression(Enum):
     GZIP = 1
     ZIP = 2
 
 
-class FormatInfo(NamedTuple):
+class _FormatInfo(NamedTuple):
     id: str
     """
     ClueWeb22 format as described 
@@ -378,7 +382,7 @@ class FormatInfo(NamedTuple):
     """
     File extension of a single compressed file.
     """
-    compression: Compression
+    compression: ClueWeb22Compression
     """
     Compression form as described 
     at https://lemurproject.org/clueweb22/docspecs.php#Compression
@@ -393,54 +397,54 @@ class FormatInfo(NamedTuple):
     """
 
 
-class Format(Enum):
-    value: FormatInfo
+class ClueWeb22Format(Enum):
+    value: _FormatInfo
 
-    HTML = FormatInfo(
+    HTML = _FormatInfo(
         id="html",
         extension=".warc.gz",
-        compression=Compression.GZIP,
+        compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_html,
     )
-    INLINK = FormatInfo(
+    INLINK = _FormatInfo(
         id="inlink",
         extension=".json.gz",
-        compression=Compression.GZIP,
+        compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_link,
     )
-    OUTLINK = FormatInfo(
+    OUTLINK = _FormatInfo(
         id="outlink",
         extension=".json.gz",
-        compression=Compression.GZIP,
+        compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_link,
     )
-    TXT = FormatInfo(
+    TXT = _FormatInfo(
         id="txt",
         extension=".json.gz",
-        compression=Compression.GZIP,
+        compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_txt,
     )
-    JPG = FormatInfo(
+    JPG = _FormatInfo(
         id="jpg",
         extension=NotImplemented,
         compression=NotImplemented,
         compression_extension=NotImplemented,
         reader=_read_jpg,
     )
-    VDOM = FormatInfo(
+    VDOM = _FormatInfo(
         id="vdom",
         extension=".zip",
-        compression=Compression.ZIP,
+        compression=ClueWeb22Compression.ZIP,
         compression_extension=".bin",
         reader=_read_vdom,
     )
 
 
-class LanguageInfo(NamedTuple):
+class _LanguageInfo(NamedTuple):
     id: str
     """
     ClueWeb22 language ID as described 
@@ -452,23 +456,23 @@ class LanguageInfo(NamedTuple):
     """
 
 
-class Language(Enum):
-    value: LanguageInfo
+class ClueWeb22Language(Enum):
+    value: _LanguageInfo
 
-    DE = LanguageInfo(id="de", tag="de")
-    EN = LanguageInfo(id="en", tag="en")
-    ES = LanguageInfo(id="es", tag="es")
-    FR = LanguageInfo(id="fr", tag="fr")
-    IT = LanguageInfo(id="it", tag="it")
-    JA = LanguageInfo(id="ja", tag="ja")
-    NL = LanguageInfo(id="nl", tag="nl")
-    PO = LanguageInfo(id="po", tag="po")
-    PT = LanguageInfo(id="pt", tag="pt")
-    ZH = LanguageInfo(id="zh_chs", tag="zh")
-    OTHER = LanguageInfo(id="other", tag="other-languages")
+    DE = _LanguageInfo(id="de", tag="de")
+    EN = _LanguageInfo(id="en", tag="en")
+    ES = _LanguageInfo(id="es", tag="es")
+    FR = _LanguageInfo(id="fr", tag="fr")
+    IT = _LanguageInfo(id="it", tag="it")
+    JA = _LanguageInfo(id="ja", tag="ja")
+    NL = _LanguageInfo(id="nl", tag="nl")
+    PO = _LanguageInfo(id="po", tag="po")
+    PT = _LanguageInfo(id="pt", tag="pt")
+    ZH = _LanguageInfo(id="zh_chs", tag="zh")
+    OTHER = _LanguageInfo(id="other", tag="other-languages")
 
 
-class SubsetInfo(NamedTuple):
+class _SubsetInfo(NamedTuple):
     id: str
     """
     ClueWeb22 subset name as described 
@@ -478,7 +482,7 @@ class SubsetInfo(NamedTuple):
     """
     Shorthand to be used as suffix in the dataset ID.
     """
-    formats: Sequence[Format]
+    formats: Sequence[ClueWeb22Format]
     """
     Required formats for constructing a document for this subset.
     """
@@ -494,29 +498,40 @@ class SubsetInfo(NamedTuple):
     """
 
 
-class Subset(Enum):
-    value: SubsetInfo
-    L = SubsetInfo(
+class ClueWeb22Subset(Enum):
+    value: _SubsetInfo
+    L = _SubsetInfo(
         id="L",
         tag="l",
-        formats=[Format.TXT],
-        doc_type=LDoc,
+        formats=[ClueWeb22Format.TXT],
+        doc_type=ClueWeb22LDoc,
         combiner=_combine_l_docs
     ),
-    A = SubsetInfo(
+    A = _SubsetInfo(
         id="A",
         tag="a",
-        formats=[Format.TXT, Format.HTML, Format.INLINK, Format.OUTLINK,
-                 Format.VDOM],
-        doc_type=ADoc,
+        formats=[
+            ClueWeb22Format.TXT,
+            ClueWeb22Format.HTML,
+            ClueWeb22Format.INLINK,
+            ClueWeb22Format.OUTLINK,
+            ClueWeb22Format.VDOM
+        ],
+        doc_type=ClueWeb22ADoc,
         combiner=_combine_a_docs
     ),
-    B = SubsetInfo(
+    B = _SubsetInfo(
         id="B",
         tag="b",
-        formats=[Format.TXT, Format.HTML, Format.INLINK, Format.OUTLINK,
-                 Format.VDOM, Format.JPG],
-        doc_type=BDoc,
+        formats=[
+            ClueWeb22Format.TXT,
+            ClueWeb22Format.HTML,
+            ClueWeb22Format.INLINK,
+            ClueWeb22Format.OUTLINK,
+            ClueWeb22Format.VDOM,
+            ClueWeb22Format.JPG
+        ],
+        doc_type=ClueWeb22BDoc,
         combiner=_combine_b_docs
     ),
 
@@ -549,7 +564,8 @@ class _ClueWeb22DocId:
 
         self.language = subdirectory[:-4]
         if not any(
-                self.language == language.value.id for language in Language
+                self.language == language.value.id
+                for language in ClueWeb22Language
         ):
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
@@ -589,13 +605,17 @@ class _ClueWeb22DocId:
 
 
 class _ClueWeb22Iterable(Iterable[AnyDoc]):
-    subset: Final[Subset]
-    files: Final[Callable[[Format], ContextManager[Iterator[IO[bytes]]]]]
+    subset: Final[ClueWeb22Subset]
+    files: Final[Callable[
+        [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
+    ]]
 
     def __init__(
             self,
-            subset: Subset,
-            files: Callable[[Format], ContextManager[Iterator[IO[bytes]]]],
+            subset: ClueWeb22Subset,
+            files: Callable[
+                [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
+            ],
     ):
         self.subset = subset
         self.files = files
@@ -618,8 +638,8 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
 class ClueWeb22Docs(BaseDocs):
     name: Final[str]
     source: Final[Download]
-    subset: Final[Subset]
-    language: Final[Optional[Language]]
+    subset: Final[ClueWeb22Subset]
+    language: Final[Optional[ClueWeb22Language]]
 
     # TODO Filter files by subset
 
@@ -627,8 +647,8 @@ class ClueWeb22Docs(BaseDocs):
             self,
             name: str,
             source: Download,
-            subset: Subset,
-            language: Optional[Language] = None,
+            subset: ClueWeb22Subset,
+            language: Optional[ClueWeb22Language] = None,
     ):
         super().__init__()
         self.name = name
@@ -674,12 +694,12 @@ class ClueWeb22Docs(BaseDocs):
                     result[path] = int(count)
         return result
 
-    def _file_paths(self, format: Format) -> Sequence[Path]:
-        languages: Iterable[Language]
+    def _file_paths(self, format: ClueWeb22Format) -> Sequence[Path]:
+        languages: Iterable[ClueWeb22Language]
         if self.language is not None:
             languages = {self.language}
         else:
-            languages = {language for language in Language}
+            languages = {language for language in ClueWeb22Language}
         language_ids = {language.value.id for language in languages}
         return sorted(
             *self.path.glob(join(
@@ -694,18 +714,18 @@ class ClueWeb22Docs(BaseDocs):
         )
 
     @contextmanager
-    def _files(self, format: Format) -> Iterator[IO[bytes]]:
+    def _files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format)
             for file_path in file_paths:
                 with file_path.open("rb") as file:
                     compression = format.value.compression
                     compression_extension = format.value.compression_extension
-                    if compression == Compression.GZIP:
+                    if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
                         with GzipFile("rb", fileobj=file) as gzip_file:
                             yield gzip_file
-                    elif compression == Compression.ZIP:
+                    elif compression == ClueWeb22Compression.ZIP:
                         assert compression_extension is not None
                         with ZipFile(file, "r") as zip_file:
                             for name in zip_file.namelist():
@@ -743,7 +763,7 @@ class ClueWeb22Docstore(Docstore):
 
     def _file_paths(
             self,
-            format: Format,
+            format: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[Tuple[Path, AbstractSet[_ClueWeb22DocId]]]:
         if self.docs.language is not None:
@@ -761,7 +781,8 @@ class ClueWeb22Docstore(Docstore):
 
         format_path = self.docs.path / format.value.id
 
-        file_path_to_doc_ids: Mapping[Path, MutableSet[_ClueWeb22DocId]] = defaultdict(
+        file_path_to_doc_ids: Mapping[
+            Path, MutableSet[_ClueWeb22DocId]] = defaultdict(
             lambda: set()
         )
         for doc_id in doc_ids:
@@ -776,7 +797,7 @@ class ClueWeb22Docstore(Docstore):
     @contextmanager
     def _files(
             self,
-            format: Format,
+            format: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[IO[bytes]]:
         def generator() -> Iterator[IO[bytes]]:
@@ -785,7 +806,7 @@ class ClueWeb22Docstore(Docstore):
                 with file_path.open("rb") as file:
                     compression = format.value.compression
                     compression_extension = format.value.compression_extension
-                    if compression == Compression.GZIP:
+                    if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
 
                         # Determine indices of documents within the file.
@@ -813,7 +834,7 @@ class ClueWeb22Docstore(Docstore):
                             with GzipFile("rb", fileobj=file) as gzip_file:
                                 yield gzip_file
 
-                    elif compression == Compression.ZIP:
+                    elif compression == ClueWeb22Compression.ZIP:
                         assert compression_extension is not None
                         with ZipFile(file, "r") as zip_file:
                             names = {
@@ -844,7 +865,7 @@ class ClueWeb22Docstore(Docstore):
             for doc_id in doc_ids
         }
 
-        def files(format: Format) -> Iterator[IO[bytes]]:
+        def files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
             return self._files(format, doc_ids)
 
         return iter(_ClueWeb22Iterable(self.docs.subset, self._files))
