@@ -1,16 +1,22 @@
-from contextlib import ExitStack
+from contextlib import ExitStack, contextmanager
 from datetime import datetime
 from enum import Enum
 from functools import cached_property
+from gzip import GzipFile
 from io import TextIOWrapper
 from json import loads
+from os import PathLike
 from os.path import join
+from pathlib import Path
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable, Callable, ContextManager
+    TYPE_CHECKING, Iterable, Callable, ContextManager, Mapping, Union
 )
+from zipfile import ZipFile
 
+from ir_datasets.formats import BaseDocs
 from ir_datasets.lazy_libs import warc
+from ir_datasets.util import Download
 from ir_datasets.util.io import ConcatIOWrapper
 
 
@@ -601,3 +607,122 @@ class ClueWeb22Iterable(Iterable[AnyDoc]):
             ]
             documents = self.subset.value.combiner(*format_records)
             yield from documents
+
+
+class ClueWeb22Docs(BaseDocs):
+    name: Final[str]
+    source: Final[Download]
+    subset: Final[Subset]
+    language: Final[Optional[Language]]
+
+    # TODO Filter files by subset
+
+    def __init__(
+            self,
+            name: str,
+            source: Download,
+            subset: Subset,
+            language: Optional[Language] = None,
+    ):
+        super().__init__()
+        self.name = name
+        self.source = source
+        self.subset = subset
+        self.language = language
+
+    def docs_path(self, force: bool = True) -> Union[str, PathLike[str]]:
+        return self.source.path(force)
+
+    @cached_property
+    def path(self) -> Path:
+        return Path(self.source.path())
+
+    @cached_property
+    def readme(self) -> str:
+        readme_path = self.path / "README.txt"
+        with readme_path.open("rt", encoding=ENCODING) as file:
+            return file.read()
+
+    @cached_property
+    def version(self) -> int:
+        version_files = list(self.path.glob("version_*"))
+        assert len(version_files) == 1
+        return int(version_files[0].name.split("_")[1])
+
+    @cached_property
+    def _checksums(self) -> NotImplemented:
+        checksums_dir = self.path / "checksums"
+        raise NotImplementedError()
+
+    @cached_property
+    def _record_counts(self) -> Mapping[Path, int]:
+        record_counts_dir = self.path / "recordcounts"
+        result = {}
+        for counts_file in record_counts_dir.glob("*_counts.txt"):
+            dir_name = counts_file.name[:-len("_counts.txt")]
+            dir_path = self.path / dir_name
+            with open(counts_file, "rt", encoding=ENCODING) as file:
+                for line in file:
+                    file, count = line.strip().split()
+                    path = dir_path / file[2:]
+                    result[path] = int(count)
+        return result
+
+    def _file_paths(self, format: Format) -> Sequence[Path]:
+        languages: Iterable[Language]
+        if self.language is not None:
+            languages = {self.language}
+        else:
+            languages = {language for language in Language}
+        language_ids = {language.value.id for language in languages}
+        return sorted(
+            *self.path.glob(join(
+                format.value.id,
+                language_id,
+                f"{language_id}[0-9][0-9]",
+                f"{language_id}[0-9][0-9][0-9][0-9]",
+                f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
+                f".{format.value.extension}",
+            ))
+            for language_id in language_ids
+        )
+
+    @contextmanager
+    def _files(self, format: Format) -> Iterator[IO[bytes]]:
+        def generator() -> Iterator[IO[bytes]]:
+            file_paths = self._file_paths(format)
+            for file_path in file_paths:
+                with file_path.open("rb") as file:
+                    compression = format.value.compression
+                    compression_extension = format.value.compression_extension
+                    if compression == Compression.GZIP:
+                        assert compression_extension is None
+                        with GzipFile("rb", fileobj=file) as gzip_file:
+                            yield gzip_file
+                    elif compression == Compression.ZIP:
+                        assert compression_extension is not None
+                        with ZipFile(file, "r") as zip_file:
+                            for name in zip_file.namelist():
+                                if name.endswith(compression_extension):
+                                    yield zip_file.open(name, "r")
+                    else:
+                        raise ValueError(
+                            f"Unknown compression format: {compression}"
+                        )
+
+        yield generator()
+
+    def docs_iter(self) -> Iterator[AnyDoc]:
+        return iter(ClueWeb22Iterable(self.subset, self._files))
+
+    def docs_cls(self) -> Type[AnyDoc]:
+        return self.subset.value.doc_type
+
+    def docs_count(self) -> int:
+        return sum(self._record_counts.values())
+
+    def docs_namespace(self) -> str:
+        names = [self.name, self.subset.value.tag]
+        if self.language is not None:
+            names.append(self.language.value.tag)
+        return "/".join(names)
