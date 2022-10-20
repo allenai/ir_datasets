@@ -1,0 +1,87 @@
+_:
+  pretty_name: 'ClueWeb12'
+  desc: |
+    <p>
+    The ClueWeb22 dataset contains 10&nbsp;billion web pages.
+    It was developed by the Lemur Project and the Microsoft Corporation.
+    </p>
+    <p>
+    Novel characteristics compared with earlier ClueWeb datasets 
+    (<a class="ds-ref">clueweb09</a> and <a class="ds-ref">clueweb12</a>):
+    </p>
+    <ul>
+      <li>It is much larger.</li>
+      <li>Documents are of higher quality.</li>
+      <li>Documents are provided in several formats (HTML, clean text, screen shots).</li>
+      <li>Document outlink and inlink data is provided in a convenient format.</li>
+      <li>Document page analyses are provided that reveal where on a page text was displayed, 
+        and what was near it.</li>
+      <li>The dataset includes a large set of crowdsourced queries and shallow relevance assessments 
+        (a pseudo search log).</li>
+    </ul>
+    <p>
+    The dataset is obtained for a fee from the Carnegie Mellon University, and is shipped as hard drives. 
+    More information is provided <a href="https://lemurproject.org/clueweb22/obtain.php">here</a>.
+    </p>
+    <ul>
+    <li><a href="https://lemurproject.org/clueweb22/">Dataset site</a></li>
+    </ul>
+  docs_instructions: &inst "Documents available from the Carnegie Mellon University"
+  data_access: |
+    <p>
+    To use this dataset, you need a copy of <a href="https://lemurproject.org/clueweb22/">ClueWeb22</a>,
+    provided by the Carnegie Mellon University.
+    </p>
+    <p>
+    Your organization may already have a copy. If this is the case, you may only need to complete a new
+    "Individual Argeement". Otherwise, your organization will need to file the "Organizational agreement"
+    and pay a fee to the Carnegie Mellon University to get a copy. The data are provided as hard drives that are 
+    shipped to you.
+    </p>
+    <p>
+    Once you have the data, ir_datasets will need the directories that look like the following:
+    </p>
+    <ul>
+    <li><kbd>ClueWeb22_00</kbd></li>
+    <li><kbd>ClueWeb22_01</kbd></li>
+    <li><kbd>...</kbd></li>
+    <li><kbd>ClueWeb22_XX</kbd></li>
+    </ul>
+    <p>
+    ir_datasets expects the above directories to be copied/linked under <kbd>~/.ir_datasets/clueweb22/corpus</kbd>.
+    </p>
+  bibtex_ids:
+    - OverwijkXC22
+
+l:
+  desc: |
+    <p>
+    Category L subset of the ClueWeb22 dataset with 10B mixed head-tail web pages 
+    (5B in English, 5B in other languages; 100% of the whole dataset).
+    This subset provides only clean text.
+    </p>
+  docs_instructions: *inst
+  bibtex_ids:
+    - OverwijkXC22
+
+a:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with 2B mostly head web pages 
+    (1B in English, 1B in other languages; 20% of the whole dataset).
+    This subset provides HTML, clean text, and semantic analysis.
+    </p>
+  docs_instructions: *inst
+  bibtex_ids:
+    - OverwijkXC22
+
+b:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with 200M most popular web pages 
+    (100M in English, 100M in other languages; 2% of the whole dataset).
+    This subset provides HTML, clean text, semantic analysis, and screenshots.
+    </p>
+  docs_instructions: *inst
+  bibtex_ids:
+    - OverwijkXC22
