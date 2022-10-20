@@ -1,3 +1,4 @@
+from collections import defaultdict
 from contextlib import ExitStack, contextmanager
 from datetime import datetime
 from enum import Enum
@@ -10,14 +11,23 @@ from os.path import join
 from pathlib import Path
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable, Callable, ContextManager, Mapping, Union
+    TYPE_CHECKING, Iterable, Callable, ContextManager, Mapping, Union,
+    AbstractSet, MutableSet, Tuple
 )
 from zipfile import ZipFile
 
 from ir_datasets.formats import BaseDocs
+from ir_datasets.indices import Docstore
 from ir_datasets.lazy_libs import warc
 from ir_datasets.util import Download
-from ir_datasets.util.io import ConcatIOWrapper
+from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
+
+# Constants and constraints.
+
+
+MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
+MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
+OFFSETS_FILE_EXTENSION: Final[str] = ".offsets"
 
 
 # Base records corresponding to the file types listed
@@ -514,10 +524,6 @@ class Subset(Enum):
 # Utility classes
 
 
-MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
-MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
-
-
 class DocId:
     """
     ClueWeb22 document ID as described
@@ -726,3 +732,119 @@ class ClueWeb22Docs(BaseDocs):
         if self.language is not None:
             names.append(self.language.value.tag)
         return "/".join(names)
+
+
+class ClueWeb22Docstore(Docstore):
+    docs: Final[ClueWeb22Docs]
+
+    def __init__(self, docs: ClueWeb22Docs):
+        super().__init__(docs.docs_cls(), "doc_id")
+        self.docs = docs
+
+    def _file_paths(
+            self,
+            format: Format,
+            doc_ids: Iterable[DocId],
+    ) -> Iterator[Tuple[Path, AbstractSet[DocId]]]:
+        if self.docs.language is not None:
+            invalid_doc_ids = {
+                doc_id
+                for doc_id in doc_ids
+                if doc_id.language != self.docs.language.value.id
+            }
+            if len(invalid_doc_ids) > 0:
+                raise ValueError(
+                    f"The following document IDs don't match "
+                    f"the dataset's language ({self.docs.language.value.id}): "
+                    f"{invalid_doc_ids}"
+                )
+
+        format_path = self.docs.path / format.value.id
+
+        file_path_to_doc_ids: Mapping[Path, MutableSet[DocId]] = defaultdict(
+            lambda: set()
+        )
+        for doc_id in doc_ids:
+            file_path = format_path / f"{doc_id.path}.{format.value.extension}"
+            file_path_to_doc_ids[file_path].add(doc_id)
+
+        return (
+            (file_path, file_path_doc_ids)
+            for file_path, file_path_doc_ids in file_path_to_doc_ids.items()
+        )
+
+    @contextmanager
+    def _files(
+            self,
+            format: Format,
+            doc_ids: Iterable[DocId],
+    ) -> Iterator[IO[bytes]]:
+        def generator() -> Iterator[IO[bytes]]:
+            file_paths = self._file_paths(format, doc_ids)
+            for file_path, file_path_doc_ids in file_paths:
+                with file_path.open("rb") as file:
+                    compression = format.value.compression
+                    compression_extension = format.value.compression_extension
+                    if compression == Compression.GZIP:
+                        assert compression_extension is None
+
+                        # Determine indices of documents within the file.
+                        indices = {
+                            doc_id.doc
+                            for doc_id in file_path_doc_ids
+                        }
+
+                        # Read offsets:
+                        offsets_file_path = file_path.with_name(
+                            file_path.name + OFFSETS_FILE_EXTENSION
+                        )
+                        with offsets_file_path.open(
+                                "rt", encoding=ENCODING) as offsets_file:
+                            offsets = (
+                                int(line)
+                                for line in offsets_file
+                            )
+                            # Wrap file to skip unneeded offsets.
+                            file = OffsetIOWrapper.from_offsets(
+                                file, offsets, indices
+                            )
+
+                            # Decompress the wrapped file.
+                            with GzipFile("rb", fileobj=file) as gzip_file:
+                                yield gzip_file
+
+                    elif compression == Compression.ZIP:
+                        assert compression_extension is not None
+                        with ZipFile(file, "r") as zip_file:
+                            names = {
+                                f"{doc_id}{compression_extension}"
+                                for doc_id in file_path_doc_ids
+                            }
+                            missing_names = names.difference(
+                                zip_file.namelist()
+                            )
+                            if len(missing_names) > 0:
+                                raise RuntimeError(
+                                    f"Zip archive at {file_path} is missing "
+                                    f"files: {missing_names}"
+                                )
+
+                            for name in names:
+                                yield zip_file.open(name, "r")
+                    else:
+                        raise ValueError(
+                            f"Unknown compression format: {compression}"
+                        )
+
+        yield generator()
+
+    def get_many_iter(self, doc_ids: Iterable[str]) -> Iterator[AnyDoc]:
+        doc_ids: AbstractSet[DocId] = {
+            DocId(doc_id)
+            for doc_id in doc_ids
+        }
+
+        def files(format: Format) -> Iterator[IO[bytes]]:
+            return self._files(format, doc_ids)
+
+        return iter(ClueWeb22Iterable(self.docs.subset, self._files))
