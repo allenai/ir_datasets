@@ -524,7 +524,7 @@ class Subset(Enum):
 # Utility classes
 
 
-class DocId:
+class _ClueWeb22DocId:
     """
     ClueWeb22 document ID as described
     at https://lemurproject.org/clueweb22/docspecs.php#DocIds.
@@ -588,7 +588,7 @@ class DocId:
 # Iterator classes for accessing multiple documents.
 
 
-class ClueWeb22Iterable(Iterable[AnyDoc]):
+class _ClueWeb22Iterable(Iterable[AnyDoc]):
     subset: Final[Subset]
     files: Final[Callable[[Format], ContextManager[Iterator[IO[bytes]]]]]
 
@@ -719,7 +719,7 @@ class ClueWeb22Docs(BaseDocs):
         yield generator()
 
     def docs_iter(self) -> Iterator[AnyDoc]:
-        return iter(ClueWeb22Iterable(self.subset, self._files))
+        return iter(_ClueWeb22Iterable(self.subset, self._files))
 
     def docs_cls(self) -> Type[AnyDoc]:
         return self.subset.value.doc_type
@@ -744,8 +744,8 @@ class ClueWeb22Docstore(Docstore):
     def _file_paths(
             self,
             format: Format,
-            doc_ids: Iterable[DocId],
-    ) -> Iterator[Tuple[Path, AbstractSet[DocId]]]:
+            doc_ids: Iterable[_ClueWeb22DocId],
+    ) -> Iterator[Tuple[Path, AbstractSet[_ClueWeb22DocId]]]:
         if self.docs.language is not None:
             invalid_doc_ids = {
                 doc_id
@@ -761,7 +761,7 @@ class ClueWeb22Docstore(Docstore):
 
         format_path = self.docs.path / format.value.id
 
-        file_path_to_doc_ids: Mapping[Path, MutableSet[DocId]] = defaultdict(
+        file_path_to_doc_ids: Mapping[Path, MutableSet[_ClueWeb22DocId]] = defaultdict(
             lambda: set()
         )
         for doc_id in doc_ids:
@@ -777,7 +777,7 @@ class ClueWeb22Docstore(Docstore):
     def _files(
             self,
             format: Format,
-            doc_ids: Iterable[DocId],
+            doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[IO[bytes]]:
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format, doc_ids)
@@ -839,12 +839,12 @@ class ClueWeb22Docstore(Docstore):
         yield generator()
 
     def get_many_iter(self, doc_ids: Iterable[str]) -> Iterator[AnyDoc]:
-        doc_ids: AbstractSet[DocId] = {
-            DocId(doc_id)
+        doc_ids: AbstractSet[_ClueWeb22DocId] = {
+            _ClueWeb22DocId(doc_id)
             for doc_id in doc_ids
         }
 
         def files(format: Format) -> Iterator[IO[bytes]]:
             return self._files(format, doc_ids)
 
-        return iter(ClueWeb22Iterable(self.docs.subset, self._files))
+        return iter(_ClueWeb22Iterable(self.docs.subset, self._files))
