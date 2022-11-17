@@ -27,6 +27,11 @@ class Cord19Doc(NamedTuple):
     doi: str
     date: str
     abstract: str
+    def default_text(self):
+        """
+        title + abstract
+        """
+        return f'{self.title} {self.abstract}'
 
 
 class Cord19FullTextSection(NamedTuple):
@@ -41,6 +46,12 @@ class Cord19FullTextDoc(NamedTuple):
     date: str
     abstract: str
     body: Tuple[Cord19FullTextSection, ...]
+    def default_text(self):
+        """
+        title + abstract + body
+        """
+        body = ' '.join(f'{b.title} {b.text}' for b in self.body)
+        return f'{self.title} {self.abstract} {body}'
 
 
 

@@ -29,6 +29,11 @@ class CarQuery(NamedTuple):
     text: str
     title: str
     headings: Tuple[str, ...]
+    def default_text(self):
+        """
+        text (which is title + headings)
+        """
+        return self.text
 
 
 class CarDocs(BaseDocs):
