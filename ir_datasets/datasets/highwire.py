@@ -36,6 +36,11 @@ class HighwireDoc(NamedTuple):
     journal: str
     title: str
     spans: Tuple[HighwireSpan, ...]
+    def default_text(self):
+        """
+        title + spans
+        """
+        return self.title + ' ' + ' '.join(s.text for s in self.spans)
 
 
 class TrecGenomicsQrel(NamedTuple):

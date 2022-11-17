@@ -36,6 +36,11 @@ class MedlineDoc(NamedTuple):
     doc_id: str
     title: str
     abstract: str
+    def default_text(self):
+        """
+        title + abstract
+        """
+        return f'{self.title} {self.abstract}'
 
 
 class TrecGenomicsQuery(NamedTuple):
