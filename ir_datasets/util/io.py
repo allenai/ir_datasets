@@ -202,7 +202,7 @@ class ConcatIOWrapper(IO[bytes]):
         raise UnsupportedOperation()
 
     def flush(self) -> None:
-        raise UnsupportedOperation()
+        self._current.flush()
 
     def isatty(self) -> bool:
         raise UnsupportedOperation()
