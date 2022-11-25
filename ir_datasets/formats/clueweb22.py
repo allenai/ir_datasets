@@ -831,9 +831,12 @@ class ClueWeb22Docstore(Docstore):
                         }
 
                         # Read offsets:
-                        offsets_file_path = file_path.with_name(
-                            file_path.name + OFFSETS_FILE_EXTENSION
+                        offsets_name = (
+                                file_path.name.removesuffix(
+                                    format.value.extension
+                                ) + OFFSETS_FILE_EXTENSION
                         )
+                        offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
                                 "rt", encoding=ENCODING) as offsets_file:
                             offsets = (
