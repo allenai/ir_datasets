@@ -747,6 +747,9 @@ class ClueWeb22Docs(BaseDocs):
     def docs_iter(self) -> Iterator[AnyDoc]:
         return iter(_ClueWeb22Iterable(self.subset, self._files))
 
+    def docs_store(self) -> "ClueWeb22Docstore":
+        return ClueWeb22Docstore(self)
+
     def docs_cls(self) -> Type[AnyDoc]:
         return self.subset.value.doc_type
 
