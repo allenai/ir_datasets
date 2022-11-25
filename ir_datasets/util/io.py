@@ -78,11 +78,13 @@ class OffsetIOWrapper(IO[bytes]):
                    self._offset_range_position < len(self._offset_ranges)):
                 offset_range = self._offset_ranges[self._offset_range_position]
                 offset_start, offset_end = offset_range
-                offset_range_len: int
+                offset_n: int
                 if offset_end >= 0:
-                    offset_range_len = offset_end - offset_start
+                    offset_n = offset_end - offset_start
+                    if self._file_position > offset_start:
+                        offset_n -= self._file_position - offset_start
                 else:
-                    offset_range_len = -1
+                    offset_n = -1
 
                 # Advance to current offset range.
                 if self._file_position < offset_start:
@@ -91,10 +93,10 @@ class OffsetIOWrapper(IO[bytes]):
 
                 # Do not read more bytes than in the current offset range.
                 max_n: int
-                if n >= 0 and offset_range_len >= 0:
-                    max_n = max(n, offset_range_len)
-                elif offset_range_len >= 0:
-                    max_n = offset_range_len
+                if n >= 0 and offset_n >= 0:
+                    max_n = min(n, offset_n)
+                elif offset_n >= 0:
+                    max_n = offset_n
                 else:
                     max_n = n
 
@@ -188,9 +190,9 @@ class ConcatIOWrapper(IO[bytes]):
 
     @classmethod
     def from_iterable(
-            cls: Type[_OffsetIOWrapperSelf],
+            cls: Type[_ConcatIOWrapperSelf],
             files: Iterable[IO[bytes]],
-    ) -> _OffsetIOWrapperSelf:
+    ) -> _ConcatIOWrapperSelf:
         return cls(files)
 
     def close(self) -> None:
@@ -202,7 +204,8 @@ class ConcatIOWrapper(IO[bytes]):
         raise UnsupportedOperation()
 
     def flush(self) -> None:
-        self._current.flush()
+        if self._current is not None:
+            self._current.flush()
 
     def isatty(self) -> bool:
         raise UnsupportedOperation()
