@@ -605,175 +605,7 @@ class _ClueWeb22DocId:
         ])
 
 
-# Iterator classes for accessing multiple documents.
-
-
-class _ClueWeb22Iterable(Iterable[AnyDoc]):
-    subset: Final[ClueWeb22Subset]
-    files: Final[Callable[
-        [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
-    ]]
-
-    def __init__(
-            self,
-            subset: ClueWeb22Subset,
-            files: Callable[
-                [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
-            ],
-    ):
-        self.subset = subset
-        self.files = files
-
-    def __iter__(self) -> Iterator[AnyDoc]:
-        formats = self.subset.value.formats
-        with ExitStack() as stack:
-            format_files: Sequence[Iterator[IO[bytes]]] = [
-                stack.enter_context(self.files(format))
-                for format in formats
-            ]
-            format_records: Sequence[Iterator[_AnyRecord]] = [
-                format.value.reader(files)
-                for format, files in zip(formats, format_files)
-            ]
-            documents = self.subset.value.combiner(*format_records)
-            yield from documents
-
-
-class _ClueWeb22Iterator(Iterator[AnyDoc]):
-    docs: Final["ClueWeb22Docs"]
-    full_iterator: Final[Iterator[AnyDoc]]
-
-    def __init__(self, docs: "ClueWeb22Docs"):
-        self.docs = docs
-        self.full_iterator = docs.docs_iter()
-
-    def __next__(self) -> AnyDoc:
-        return next(self.full_iterator)
-
-    @staticmethod
-    def _in_slice(
-            index: int,
-            start: int,
-            stop: int,
-            step: int,
-    ) -> bool:
-        if not (start <= index < stop):
-            return False
-        return (index - start) % step == 0
-
-    @contextmanager
-    def _files(
-            self,
-            format: ClueWeb22Format,
-            start: int,
-            stop: int,
-            step: int,
-    ) -> Iterator[IO[bytes]]:
-        def generator() -> Iterator[IO[bytes]]:
-            file_paths = self.docs.file_paths(format)
-            file_index_offset = 0
-            for file_path in file_paths:
-                with file_path.open("rb") as file:
-                    compression = format.value.compression
-                    compression_extension = format.value.compression_extension
-                    if compression == ClueWeb22Compression.GZIP:
-                        assert compression_extension is None
-
-                        # Read offsets:
-                        offsets_name = (
-                                file_path.name.removesuffix(
-                                    format.value.extension
-                                ) + OFFSETS_FILE_EXTENSION
-                        )
-                        offsets_file_path = file_path.with_name(offsets_name)
-                        with offsets_file_path.open(
-                                "rt", encoding=ENCODING) as offsets_file:
-                            offsets = [
-                                int(offset)
-                                for offset in offsets_file
-                            ]
-
-                            # Map global indices to file indices.
-                            file_indices = range(len(offsets) - 1)
-                            index_file_indices = (
-                                (file_index_offset + file_index, file_index)
-                                for file_index in file_indices
-                            )
-
-                            # Determine local indices to read.
-                            file_indices = {
-                                file_index
-                                for index, file_index in index_file_indices
-                                if self._in_slice(index, start, stop, step)
-                            }
-
-                            # Wrap file to skip unneeded offsets.
-                            file = OffsetIOWrapper.from_offsets(
-                                file, offsets, file_indices
-                            )
-
-                            # Decompress the wrapped file.
-                            with GzipFile(
-                                    mode="rb",
-                                    fileobj=file,
-                            ) as gzip_file:
-                                yield gzip_file
-
-                    elif compression == ClueWeb22Compression.ZIP:
-                        assert compression_extension is not None
-                        with ZipFile(file, "r") as zip_file:
-                            # Map global indices to ZIP names.
-                            index_names = (
-                                (file_index_offset + index, name)
-                                for index, name in
-                                enumerate(zip_file.namelist())
-                            )
-
-                            # Determine ZIP names to read.
-                            names = (
-                                name
-                                for index, name in index_names
-                                if self._in_slice(index, start, stop, step)
-                            )
-
-                            for name in names:
-                                yield zip_file.open(name, "r")
-                    else:
-                        raise ValueError(
-                            f"Unknown compression format: {compression}"
-                        )
-
-        yield generator()
-
-    def __getitem__(self, key: Union[int, slice]) -> Union[
-        AnyDoc, Iterator[AnyDoc]
-    ]:
-        docs_count = self.docs.docs_count()
-        full_slice = slice(0, docs_count)
-        processed_slice: slice
-        if isinstance(key, slice):
-            processed_slice = apply_sub_slice(full_slice, key)
-        elif isinstance(key, int):
-            processed_slice = slice_idx(full_slice, key)
-        else:
-            raise TypeError("key must be int or slice")
-
-        start, stop, step = processed_slice.indices(docs_count)
-
-        @contextmanager
-        def filter_files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._files(format, start, stop, step) as files:
-                yield files
-
-        iterator = iter(_ClueWeb22Iterable(self.docs.subset, filter_files))
-        if isinstance(key, slice):
-            return iterator
-
-        try:
-            return next(iterator)
-        except StopIteration:
-            raise IndexError(
-                (full_slice, slice(key, key + 1), processed_slice))
+# Docs dataset class.
 
 
 class ClueWeb22Docs(BaseDocs):
@@ -835,52 +667,6 @@ class ClueWeb22Docs(BaseDocs):
                     result[path] = int(count)
         return result
 
-    def file_paths(self, format: ClueWeb22Format) -> Sequence[Path]:
-        languages: Iterable[ClueWeb22Language]
-        if self.language is not None:
-            languages = {self.language}
-        else:
-            languages = {language for language in ClueWeb22Language}
-        language_ids = {language.value.id for language in languages}
-        return sorted(
-            chain.from_iterable(
-                self.path.glob(join(
-                    format.value.id,
-                    language_id,
-                    f"{language_id}[0-9][0-9]",
-                    f"{language_id}[0-9][0-9][0-9][0-9]",
-                    f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
-                    f".{format.value.extension}",
-                ))
-                for language_id in language_ids
-            )
-        )
-
-    @contextmanager
-    def _files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-        def generator() -> Iterator[IO[bytes]]:
-            file_paths = self.file_paths(format)
-            for file_path in file_paths:
-                with file_path.open("rb") as file:
-                    compression = format.value.compression
-                    compression_extension = format.value.compression_extension
-                    if compression == ClueWeb22Compression.GZIP:
-                        assert compression_extension is None
-                        with GzipFile("rb", fileobj=file) as gzip_file:
-                            yield gzip_file
-                    elif compression == ClueWeb22Compression.ZIP:
-                        assert compression_extension is not None
-                        with ZipFile(file, "r") as zip_file:
-                            for name in zip_file.namelist():
-                                if name.endswith(compression_extension):
-                                    yield zip_file.open(name, "r")
-                    else:
-                        raise ValueError(
-                            f"Unknown compression format: {compression}"
-                        )
-
-        yield generator()
-
     def docs_iter(self) -> Iterator[AnyDoc]:
         return _ClueWeb22Iterator(self)
 
@@ -903,6 +689,233 @@ class ClueWeb22Docs(BaseDocs):
         if self.language is None:
             return None
         return self.language.value.tag
+
+
+# Iterators and doc store classes for accessing multiple documents efficiently.
+
+
+class _ClueWeb22Iterable(Iterable[AnyDoc]):
+    subset: Final[ClueWeb22Subset]
+    files: Final[Callable[
+        [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
+    ]]
+
+    def __init__(
+            self,
+            subset: ClueWeb22Subset,
+            files: Callable[
+                [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
+            ],
+    ):
+        self.subset = subset
+        self.files = files
+
+    def __iter__(self) -> Iterator[AnyDoc]:
+        formats = self.subset.value.formats
+        with ExitStack() as stack:
+            format_files: Sequence[Iterator[IO[bytes]]] = [
+                stack.enter_context(self.files(format))
+                for format in formats
+            ]
+            format_records: Sequence[Iterator[_AnyRecord]] = [
+                format.value.reader(files)
+                for format, files in zip(formats, format_files)
+            ]
+            documents = self.subset.value.combiner(*format_records)
+            yield from documents
+
+
+class _ClueWeb22Iterator(Iterator[AnyDoc]):
+    docs: Final[ClueWeb22Docs]
+    full_iterator: Final[Iterator[AnyDoc]]
+
+    def __init__(self, docs: ClueWeb22Docs):
+        self.docs = docs
+        self.full_iterator = iter(
+            _ClueWeb22Iterable(self.docs.subset, self._all_files)
+        )
+
+    def __next__(self) -> AnyDoc:
+        return next(self.full_iterator)
+
+    @staticmethod
+    def _in_slice(
+            index: int,
+            start: int,
+            stop: int,
+            step: int,
+    ) -> bool:
+        if not (start <= index < stop):
+            return False
+        return (index - start) % step == 0
+
+    def _file_paths(self, format: ClueWeb22Format) -> Sequence[Path]:
+        languages: Iterable[ClueWeb22Language]
+        if self.docs.language is not None:
+            languages = {self.docs.language}
+        else:
+            languages = {language for language in ClueWeb22Language}
+        language_ids = {language.value.id for language in languages}
+        return sorted(
+            chain.from_iterable(
+                self.docs.path.glob(join(
+                    format.value.id,
+                    language_id,
+                    f"{language_id}[0-9][0-9]",
+                    f"{language_id}[0-9][0-9][0-9][0-9]",
+                    f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
+                    f".{format.value.extension}",
+                ))
+                for language_id in language_ids
+            )
+        )
+
+    @contextmanager
+    def _all_files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
+        def generator() -> Iterator[IO[bytes]]:
+            file_paths = self._file_paths(format)
+            for file_path in file_paths:
+                with file_path.open("rb") as file:
+                    compression = format.value.compression
+                    compression_extension = format.value.compression_extension
+                    if compression == ClueWeb22Compression.GZIP:
+                        assert compression_extension is None
+                        with GzipFile("rb", fileobj=file) as gzip_file:
+                            yield gzip_file
+                    elif compression == ClueWeb22Compression.ZIP:
+                        assert compression_extension is not None
+                        with ZipFile(file, "r") as zip_file:
+                            for name in zip_file.namelist():
+                                if name.endswith(compression_extension):
+                                    yield zip_file.open(name, "r")
+                    else:
+                        raise ValueError(
+                            f"Unknown compression format: {compression}"
+                        )
+
+        yield generator()
+
+    @contextmanager
+    def _files(
+            self,
+            format: ClueWeb22Format,
+            start: int,
+            stop: int,
+            step: int,
+    ) -> Iterator[IO[bytes]]:
+        def generator() -> Iterator[IO[bytes]]:
+            file_paths = self._file_paths(format)
+            file_index_offset = 0
+            for file_path in file_paths:
+                with file_path.open("rb") as file:
+                    compression = format.value.compression
+                    compression_extension = format.value.compression_extension
+                    if compression == ClueWeb22Compression.GZIP:
+                        assert compression_extension is None
+
+                        # Read offsets:
+                        offsets_name = (
+                                file_path.name.removesuffix(
+                                    format.value.extension
+                                ) + OFFSETS_FILE_EXTENSION
+                        )
+                        offsets_file_path = file_path.with_name(offsets_name)
+                        with offsets_file_path.open(
+                                "rt", encoding=ENCODING) as offsets_file:
+                            offsets = [
+                                int(offset)
+                                for offset in offsets_file
+                            ]
+
+                            # Map global indices to file indices.
+                            num_indices = len(offsets) - 1
+                            file_indices = range(num_indices)
+                            index_file_indices = (
+                                (file_index_offset + file_index, file_index)
+                                for file_index in file_indices
+                            )
+
+                            # Determine local indices to read.
+                            file_indices = {
+                                file_index
+                                for index, file_index in index_file_indices
+                                if self._in_slice(index, start, stop, step)
+                            }
+
+                            # Wrap file to skip unneeded offsets.
+                            file = OffsetIOWrapper.from_offsets(
+                                file, offsets, file_indices
+                            )
+
+                            # Decompress the wrapped file.
+                            with GzipFile(
+                                    mode="rb",
+                                    fileobj=file,
+                            ) as gzip_file:
+                                yield gzip_file
+
+                            file_index_offset += num_indices
+
+                    elif compression == ClueWeb22Compression.ZIP:
+                        assert compression_extension is not None
+                        with ZipFile(file, "r") as zip_file:
+                            names = zip_file.namelist()
+                            num_names = len(names)
+
+                            # Map global indices to ZIP names.
+                            index_names = (
+                                (file_index_offset + index, name)
+                                for index, name in
+                                enumerate(zip_file.namelist())
+                            )
+
+                            # Determine ZIP names to read.
+                            names = (
+                                name
+                                for index, name in index_names
+                                if self._in_slice(index, start, stop, step)
+                            )
+
+                            for name in names:
+                                yield zip_file.open(name, "r")
+
+                            file_index_offset += num_names
+                    else:
+                        raise ValueError(
+                            f"Unknown compression format: {compression}"
+                        )
+
+        yield generator()
+
+    def __getitem__(self, key: Union[int, slice]) -> Union[
+        AnyDoc, Iterator[AnyDoc]
+    ]:
+        docs_count = self.docs.docs_count()
+        full_slice = slice(0, docs_count)
+        processed_slice: slice
+        if isinstance(key, slice):
+            processed_slice = apply_sub_slice(full_slice, key)
+        elif isinstance(key, int):
+            processed_slice = slice_idx(full_slice, key)
+        else:
+            raise TypeError("key must be int or slice")
+
+        start, stop, step = processed_slice.indices(docs_count)
+
+        @contextmanager
+        def filter_files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
+            with self._files(format, start, stop, step) as files:
+                yield files
+
+        iterator = iter(_ClueWeb22Iterable(self.docs.subset, filter_files))
+        if isinstance(key, slice):
+            return iterator
+
+        try:
+            return next(iterator)
+        except StopIteration:
+            raise IndexError(
+                (full_slice, slice(key, key + 1), processed_slice))
 
 
 class ClueWeb22Docstore(Docstore):
