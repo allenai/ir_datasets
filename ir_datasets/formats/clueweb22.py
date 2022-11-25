@@ -580,6 +580,8 @@ class _ClueWeb22DocId:
         if self.file > MAX_FILES_PER_SUBDIRECTORY:
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
+        self.doc = int(doc_index)
+
     @cached_property
     def path(self) -> str:
         language_path = self.language
