@@ -27,7 +27,7 @@ from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
 
 MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
 MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
-OFFSETS_FILE_EXTENSION: Final[str] = ".offsets"
+OFFSETS_FILE_EXTENSION: Final[str] = ".offset"
 ENCODING = "utf8"
 
 
