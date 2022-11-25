@@ -500,13 +500,14 @@ class _SubsetInfo(NamedTuple):
 
 class ClueWeb22Subset(Enum):
     value: _SubsetInfo
+
     L = _SubsetInfo(
         id="L",
         tag="l",
         formats=[ClueWeb22Format.TXT],
         doc_type=ClueWeb22LDoc,
         combiner=_combine_l_docs
-    ),
+    )
     A = _SubsetInfo(
         id="A",
         tag="a",
@@ -519,7 +520,7 @@ class ClueWeb22Subset(Enum):
         ],
         doc_type=ClueWeb22ADoc,
         combiner=_combine_a_docs
-    ),
+    )
     B = _SubsetInfo(
         id="B",
         tag="b",
@@ -533,7 +534,7 @@ class ClueWeb22Subset(Enum):
         ],
         doc_type=ClueWeb22BDoc,
         combiner=_combine_b_docs
-    ),
+    )
 
 
 # Utility classes
