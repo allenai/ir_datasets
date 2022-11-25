@@ -5,6 +5,7 @@ from enum import Enum
 from functools import cached_property
 from gzip import GzipFile
 from io import TextIOWrapper
+from itertools import chain
 from json import loads
 from os import PathLike
 from os.path import join
@@ -705,15 +706,17 @@ class ClueWeb22Docs(BaseDocs):
             languages = {language for language in ClueWeb22Language}
         language_ids = {language.value.id for language in languages}
         return sorted(
-            *self.path.glob(join(
-                format.value.id,
-                language_id,
-                f"{language_id}[0-9][0-9]",
-                f"{language_id}[0-9][0-9][0-9][0-9]",
-                f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
-                f".{format.value.extension}",
-            ))
-            for language_id in language_ids
+            chain.from_iterable(
+                self.path.glob(join(
+                    format.value.id,
+                    language_id,
+                    f"{language_id}[0-9][0-9]",
+                    f"{language_id}[0-9][0-9][0-9][0-9]",
+                    f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
+                    f".{format.value.extension}",
+                ))
+                for language_id in language_ids
+            )
         )
 
     @contextmanager
