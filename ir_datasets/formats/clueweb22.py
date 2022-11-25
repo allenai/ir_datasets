@@ -762,6 +762,11 @@ class ClueWeb22Docs(BaseDocs):
             names.append(self.language.value.tag)
         return "/".join(names)
 
+    def docs_lang(self) -> Optional[str]:
+        if self.language is None:
+            return None
+        return self.language.value.tag
+
 
 class ClueWeb22Docstore(Docstore):
     docs: Final[ClueWeb22Docs]
