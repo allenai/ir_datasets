@@ -849,7 +849,10 @@ class ClueWeb22Docstore(Docstore):
                             )
 
                             # Decompress the wrapped file.
-                            with GzipFile("rb", fileobj=file) as gzip_file:
+                            with GzipFile(
+                                    mode="rb",
+                                    fileobj=file,
+                            ) as gzip_file:
                                 yield gzip_file
 
                     elif compression == ClueWeb22Compression.ZIP:
