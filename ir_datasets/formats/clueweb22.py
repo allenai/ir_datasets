@@ -796,11 +796,12 @@ class ClueWeb22Docstore(Docstore):
         format_path = self.docs.path / format.value.id
 
         file_path_to_doc_ids: Mapping[
-            Path, MutableSet[_ClueWeb22DocId]] = defaultdict(
+            Path, MutableSet[_ClueWeb22DocId]
+        ] = defaultdict(
             lambda: set()
         )
         for doc_id in doc_ids:
-            file_path = format_path / f"{doc_id.path}.{format.value.extension}"
+            file_path = format_path / f"{doc_id.path}{format.value.extension}"
             file_path_to_doc_ids[file_path].add(doc_id)
 
         return (
