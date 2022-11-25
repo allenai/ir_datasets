@@ -886,7 +886,9 @@ class ClueWeb22Docstore(Docstore):
             for doc_id in doc_ids
         }
 
+        @contextmanager
         def files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            return self._files(format, doc_ids)
+            with self._files(format, doc_ids) as files:
+                yield files
 
-        return iter(_ClueWeb22Iterable(self.docs.subset, self._files))
+        return iter(_ClueWeb22Iterable(self.docs.subset, files))
