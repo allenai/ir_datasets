@@ -29,7 +29,6 @@ from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
 
 MAX_SUBDIRECTORIES_PER_STREAM: Final[int] = 80
 MAX_FILES_PER_SUBDIRECTORY: Final[int] = 100
-OFFSETS_FILE_EXTENSION: Final[str] = ".offset"
 ENCODING = "utf8"
 
 
@@ -364,6 +363,10 @@ class _FormatInfo(NamedTuple):
     """
     extension: str
     """
+    Offset file extension.
+    """
+    offset_extension: Optional[str]
+    """
     File extension of a single compressed file.
     """
     compression: ClueWeb22Compression
@@ -387,6 +390,7 @@ class ClueWeb22Format(Enum):
     HTML = _FormatInfo(
         id="html",
         extension=".warc.gz",
+        offset_extension=".warc.offset",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_html,
@@ -394,6 +398,7 @@ class ClueWeb22Format(Enum):
     INLINK = _FormatInfo(
         id="inlink",
         extension=".json.gz",
+        offset_extension=".offset",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_inlink,
@@ -401,6 +406,7 @@ class ClueWeb22Format(Enum):
     OUTLINK = _FormatInfo(
         id="outlink",
         extension=".json.gz",
+        offset_extension=".offset",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_outlink,
@@ -408,6 +414,7 @@ class ClueWeb22Format(Enum):
     TXT = _FormatInfo(
         id="txt",
         extension=".json.gz",
+        offset_extension=".offset",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
         reader=_read_txt,
@@ -415,6 +422,7 @@ class ClueWeb22Format(Enum):
     JPG = _FormatInfo(
         id="jpg",
         extension=NotImplemented,
+        offset_extension=NotImplemented,
         compression=NotImplemented,
         compression_extension=NotImplemented,
         reader=_read_jpg,
@@ -422,6 +430,7 @@ class ClueWeb22Format(Enum):
     VDOM = _FormatInfo(
         id="vdom",
         extension=".zip",
+        offset_extension=None,
         compression=ClueWeb22Compression.ZIP,
         compression_extension=".bin",
         reader=_read_vdom,
@@ -826,7 +835,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                         offsets_name = (
                                 file_path.name.removesuffix(
                                     format.value.extension
-                                ) + OFFSETS_FILE_EXTENSION
+                                ) + format.value.offset_extension
                         )
                         offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
@@ -993,7 +1002,7 @@ class ClueWeb22Docstore(Docstore):
                         offsets_name = (
                                 file_path.name.removesuffix(
                                     format.value.extension
-                                ) + OFFSETS_FILE_EXTENSION
+                                ) + format.value.offset_extension
                         )
                         offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
