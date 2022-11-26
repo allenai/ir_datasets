@@ -204,8 +204,8 @@ class ConcatIOWrapper(IO[bytes]):
         raise UnsupportedOperation()
 
     def flush(self) -> None:
-        if self._current is not None:
-            self._current.flush()
+        # No-op as stream is not writeable.
+        return
 
     def isatty(self) -> bool:
         raise UnsupportedOperation()
