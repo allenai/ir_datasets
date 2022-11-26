@@ -181,7 +181,7 @@ def _parse_anchor(json: Sequence[str]) -> Anchor:
     )
 
 
-def _read_link(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
+def _read_inlink(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
     with ConcatIOWrapper.from_iterable(files) as file:
         with TextIOWrapper(file, encoding=ENCODING) as text_file:
             for line in text_file:
@@ -192,6 +192,21 @@ def _read_link(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
                     url_hash=json["urlhash"],
                     anchors=[
                         _parse_anchor(anchor) for anchor in json["anchors"]
+                    ],
+                )
+
+
+def _read_outlink(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
+    with ConcatIOWrapper.from_iterable(files) as file:
+        with TextIOWrapper(file, encoding=ENCODING) as text_file:
+            for line in text_file:
+                json = loads(line)
+                yield _Link(
+                    doc_id=json["ClueWeb22-ID"],
+                    url=json["url"],
+                    url_hash=json["urlhash"],
+                    anchors=[
+                        _parse_anchor(anchor) for anchor in json["outlinks"]
                     ],
                 )
 
@@ -381,14 +396,14 @@ class ClueWeb22Format(Enum):
         extension=".json.gz",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
-        reader=_read_link,
+        reader=_read_inlink,
     )
     OUTLINK = _FormatInfo(
         id="outlink",
         extension=".json.gz",
         compression=ClueWeb22Compression.GZIP,
         compression_extension=None,
-        reader=_read_link,
+        reader=_read_outlink,
     )
     TXT = _FormatInfo(
         id="txt",
