@@ -300,22 +300,30 @@ def _combine_a_docs(
     )
     for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id
-        assert txt.url == html.url
+        if not txt.url == html.url:
+            # Bug in ClueWeb22:
+            # The URL in the txt record does not match the URL in the html
+            # record but is a prefix thereof.
+            # The txt URL seems to be split by comma.
+            # Example:
+            # - txt: https://www.anisearch.de/manga/43556
+            # - html: https://www.anisearch.de/manga/43556,verrueckt-nach-dir
+            assert "," in html.url and html.url.split(",")[0] == txt.url
         assert txt.url_hash == html.url_hash
         assert txt.language == html.language
         if inlink is not None:
-            assert txt.doc_id == inlink.doc_id
-            assert txt.url == inlink.url
-            assert txt.url_hash == inlink.url_hash
+            assert html.doc_id == inlink.doc_id
+            assert html.url == inlink.url
+            assert html.url_hash == inlink.url_hash
         if outlink is not None:
-            assert txt.doc_id == outlink.doc_id
-            assert txt.url == outlink.url
-            assert txt.url_hash == outlink.url_hash
+            assert html.doc_id == outlink.doc_id
+            assert html.url == outlink.url
+            assert html.url_hash == outlink.url_hash
         yield ClueWeb22ADoc(
-            doc_id=txt.doc_id,
-            url=txt.url,
-            url_hash=txt.url_hash,
-            language=txt.language,
+            doc_id=html.doc_id,
+            url=html.url,
+            url_hash=html.url_hash,
+            language=html.language,
             text=txt.text,
             date=html.date,
             html=html.html,
@@ -344,22 +352,30 @@ def _combine_b_docs(
     )
     for txt, html, inlink, outlink, vdom, jpg in zipped:
         assert txt.doc_id == html.doc_id
-        assert txt.url == html.url
+        if not txt.url == html.url:
+            # Bug in ClueWeb22:
+            # The URL in the txt record does not match the URL in the html
+            # record but is a prefix thereof.
+            # The txt URL seems to be split by comma.
+            # Example:
+            # - txt: https://www.anisearch.de/manga/43556
+            # - html: https://www.anisearch.de/manga/43556,verrueckt-nach-dir
+            assert "," in html.url and html.url.split(",")[0] == txt.url
         assert txt.url_hash == html.url_hash
         assert txt.language == html.language
         if inlink is not None:
-            assert txt.doc_id == inlink.doc_id
-            assert txt.url == inlink.url
-            assert txt.url_hash == inlink.url_hash
+            assert html.doc_id == inlink.doc_id
+            assert html.url == inlink.url
+            assert html.url_hash == inlink.url_hash
         if outlink is not None:
-            assert txt.doc_id == outlink.doc_id
-            assert txt.url == outlink.url
-            assert txt.url_hash == outlink.url_hash
+            assert html.doc_id == outlink.doc_id
+            assert html.url == outlink.url
+            assert html.url_hash == outlink.url_hash
         yield ClueWeb22BDoc(
-            doc_id=txt.doc_id,
-            url=txt.url,
-            url_hash=txt.url_hash,
-            language=txt.language,
+            doc_id=html.doc_id,
+            url=html.url,
+            url_hash=html.url_hash,
+            language=html.language,
             text=txt.text,
             date=html.date,
             html=html.html,
