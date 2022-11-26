@@ -198,10 +198,13 @@ def _read_inlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
                 )
 
 
-def _read_outlink(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
+def _read_outlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
     with ConcatIOWrapper.from_iterable(files) as file:
         with TextIOWrapper(file, encoding=ENCODING) as text_file:
             for line in text_file:
+                if len(line.strip()) == 0:
+                    yield None
+                    continue
                 json = loads(line)
                 yield _Link(
                     doc_id=json["ClueWeb22-ID"],
@@ -284,8 +287,8 @@ def _combine_l_docs(txt_iterator: Iterator[_Txt]) -> Iterator[ClueWeb22LDoc]:
 def _combine_a_docs(
         txt_iterator: Iterator[_Txt],
         html_iterator: Iterator[_Html],
-        inlink_iterator: Iterator[_Link],
-        outlink_iterator: Iterator[_Link],
+        inlink_iterator: Iterator[Optional[_Link]],
+        outlink_iterator: Iterator[Optional[_Link]],
         vdom_iterator: Iterator[_Vdom],
 ) -> Iterator[ClueWeb22ADoc]:
     zipped = zip(
@@ -296,7 +299,6 @@ def _combine_a_docs(
         vdom_iterator,
     )
     for txt, html, inlink, outlink, vdom in zipped:
-        print(txt.doc_id)
         assert txt.doc_id == html.doc_id
         assert txt.url == html.url
         assert txt.url_hash == html.url_hash
@@ -305,9 +307,10 @@ def _combine_a_docs(
             assert txt.doc_id == inlink.doc_id
             assert txt.url == inlink.url
             assert txt.url_hash == inlink.url_hash
-        assert txt.doc_id == outlink.doc_id
-        assert txt.url == outlink.url
-        assert txt.url_hash == outlink.url_hash
+        if outlink is not None:
+            assert txt.doc_id == outlink.doc_id
+            assert txt.url == outlink.url
+            assert txt.url_hash == outlink.url_hash
         yield ClueWeb22ADoc(
             doc_id=txt.doc_id,
             url=txt.url,
@@ -319,15 +322,15 @@ def _combine_a_docs(
             vdom_nodes=html.vdom_nodes,
             vdom_data=vdom.vdom_data,
             inlink_anchors=inlink.anchors if inlink is not None else [],
-            outlink_anchors=outlink.anchors,
+            outlink_anchors=outlink.anchors if outlink is not None else [],
         )
 
 
 def _combine_b_docs(
         txt_iterator: Iterator[_Txt],
         html_iterator: Iterator[_Html],
-        inlink_iterator: Iterator[_Link],
-        outlink_iterator: Iterator[_Link],
+        inlink_iterator: Iterator[Optional[_Link]],
+        outlink_iterator: Iterator[Optional[_Link]],
         vdom_iterator: Iterator[_Vdom],
         jpg_iterator: Iterator[_Jpg],
 ) -> Iterator[ClueWeb22BDoc]:
@@ -340,6 +343,18 @@ def _combine_b_docs(
         jpg_iterator,
     )
     for txt, html, inlink, outlink, vdom, jpg in zipped:
+        assert txt.doc_id == html.doc_id
+        assert txt.url == html.url
+        assert txt.url_hash == html.url_hash
+        assert txt.language == html.language
+        if inlink is not None:
+            assert txt.doc_id == inlink.doc_id
+            assert txt.url == inlink.url
+            assert txt.url_hash == inlink.url_hash
+        if outlink is not None:
+            assert txt.doc_id == outlink.doc_id
+            assert txt.url == outlink.url
+            assert txt.url_hash == outlink.url_hash
         yield ClueWeb22BDoc(
             doc_id=txt.doc_id,
             url=txt.url,
@@ -350,8 +365,8 @@ def _combine_b_docs(
             html=html.html,
             vdom_nodes=html.vdom_nodes,
             vdom_data=vdom.vdom_data,
-            inlink_anchors=inlink.anchors,
-            outlink_anchors=outlink.anchors,
+            inlink_anchors=inlink.anchors if inlink is not None else [],
+            outlink_anchors=outlink.anchors if outlink is not None else [],
         )
 
 
