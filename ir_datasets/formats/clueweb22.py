@@ -12,7 +12,7 @@ from os import PathLike
 from os.path import join
 from pathlib import Path
 from typing import (
-    NamedTuple, Sequence, TypeVar, Optional, Type, Any, Final, Iterator, IO,
+    NamedTuple, Sequence, TypeVar, Optional, Type, Final, Iterator, IO,
     TYPE_CHECKING, Iterable, Callable, ContextManager, Mapping, Union,
     AbstractSet, MutableSet, Tuple
 )
@@ -20,7 +20,7 @@ from zipfile import ZipFile
 
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices import Docstore
-from ir_datasets.lazy_libs import warc
+from ir_datasets.lazy_libs import warcio
 from ir_datasets.util import Download, apply_sub_slice, slice_idx
 from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
 
@@ -129,61 +129,47 @@ def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
                 )
 
 
-# Only import the heavy warc library for type checking.
-if TYPE_CHECKING:
-    # noinspection PyPackageRequirements (listed as warc3-wet)
-    from warc import WARCRecord
-else:
-    WARCRecord = Any
-
-
-def _parse_vdom_list(document: WARCRecord, key: str) -> Sequence[int]:
-    vdom_list = document.header.get(key, "").split()
-    return [int(vdom) for vdom in vdom_list]
-
-
 def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
-    # Only import the heavy warc library for type checking,
+    # Only import the heavy warcio library for type checking,
     # otherwise load the library lazily.
     if TYPE_CHECKING:
-        # noinspection PyPackageRequirements (listed as warc3-wet)
-        from warc import WARCFile
+        from warcio import ArchiveIterator
     else:
         # noinspection PyPep8Naming (due to export from lazy lib)
-        WARCFile = warc().WARCFile
+        ArchiveIterator = warcio().ArchiveIterator
 
     with ConcatIOWrapper.from_iterable(files) as file:
-        with WARCFile(fileobj=file) as warc_file:
-            documents: Iterable[WARCRecord] = warc_file
-            documents = (
-                document for document in documents
-                if document.type == "response"
+        for document in ArchiveIterator(file):
+            if document.rec_type != "response":
+                continue
+
+            doc_id = document.rec_headers.get_header("ClueWeb22-ID")
+            url = document.rec_headers.get_header('WARC-Target-URI')
+            url_hash = document.rec_headers.get_header("URL-Hash")
+            language = document.rec_headers.get_header("Language")
+            date = datetime.strptime(
+                document.rec_headers.get_header("WARC-Date"),
+                "%Y-%m-%dT%H:%M:%S.%fZ",
             )
-            for document in documents:
-                doc_id = document["ClueWeb22-ID"]
-                url = document.url
-                url_hash = document["URL-Hash"]
-                language = document["Language"]
-                date = datetime.fromisoformat(document.date)
-                vdom_nodes = {
-                    annotation_type: [
-                        int(vdom)
-                        for vdom in document.header.get(
-                            f"VDOM-{annotation_type.value}", ""
-                        ).split()
-                    ]
-                    for annotation_type in AnnotationType
-                }
-                html: bytes = document.payload.read()
-                yield _Html(
-                    doc_id=doc_id,
-                    url=url,
-                    url_hash=url_hash,
-                    language=language,
-                    date=date,
-                    html=html,
-                    vdom_nodes=vdom_nodes,
-                )
+            vdom_nodes = {
+                annotation_type: [
+                    int(vdom)
+                    for vdom in document.rec_headers.get_header(
+                        f"VDOM-{annotation_type.value}", ""
+                    ).split()
+                ]
+                for annotation_type in AnnotationType
+            }
+            html: bytes = document.content_stream().read()
+            yield _Html(
+                doc_id=doc_id,
+                url=url,
+                url_hash=url_hash,
+                language=language,
+                date=date,
+                html=html,
+                vdom_nodes=vdom_nodes,
+            )
 
 
 def _parse_anchor(json: Sequence[str]) -> Anchor:
