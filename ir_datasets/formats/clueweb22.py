@@ -48,6 +48,16 @@ class _Txt(NamedTuple):
     text: str
 
 
+class AnnotationType(Enum):
+    NONE = "None"
+    PRIMARY = "Primary"
+    HEADING = "Heading"
+    TITLE = "Title"
+    PARAGRAPH = "Paragraph"
+    TABLE = "Table"
+    LIST = "List"
+
+
 class _Html(NamedTuple):
     """
     Record from the ``html`` subdir.
@@ -58,13 +68,7 @@ class _Html(NamedTuple):
     language: str
     date: datetime
     html: bytes
-    vdom_heading: Sequence[int]
-    vdom_list: Sequence[int]
-    vdom_passage: Sequence[int]
-    vdom_primary: Sequence[int]
-    vdom_table: Sequence[int]
-    vdom_title: Sequence[int]
-    vdom_paragraph: Sequence[int]
+    vdom_nodes: Mapping[AnnotationType, Sequence[int]]
 
 
 class Anchor(NamedTuple):
@@ -91,10 +95,8 @@ class _Vdom(NamedTuple):
     """
     Record from the ``vdom`` subdirs.
     """
-    doc_id: str
-    url: str
-    url_hash: str
-    # TODO how to parse?
+    # Not parsed yet because parsing would require the protobuf library.
+    vdom_data: bytes
 
 
 class _Jpg(NamedTuple):
@@ -163,13 +165,15 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
                 url_hash = document["URL-Hash"]
                 language = document["Language"]
                 date = datetime.fromisoformat(document.date)
-                vdom_heading = _parse_vdom_list(document, "VDOM-Heading")
-                vdom_list = _parse_vdom_list(document, "VDOM-List")
-                vdom_passage = _parse_vdom_list(document, "VDOM-Passage")
-                vdom_primary = _parse_vdom_list(document, "VDOM-Primary")
-                vdom_table = _parse_vdom_list(document, "VDOM-Table")
-                vdom_title = _parse_vdom_list(document, "VDOM-Title")
-                vdom_paragraph = _parse_vdom_list(document, "VDOM-Paragraph")
+                vdom_nodes = {
+                    annotation_type: [
+                        int(vdom)
+                        for vdom in document.header.get(
+                            f"VDOM-{annotation_type.value}", ""
+                        ).split()
+                    ]
+                    for annotation_type in AnnotationType
+                }
                 html: bytes = document.payload.read()
                 yield _Html(
                     doc_id=doc_id,
@@ -178,13 +182,7 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
                     language=language,
                     date=date,
                     html=html,
-                    vdom_heading=vdom_heading,
-                    vdom_list=vdom_list,
-                    vdom_passage=vdom_passage,
-                    vdom_primary=vdom_primary,
-                    vdom_table=vdom_table,
-                    vdom_title=vdom_title,
-                    vdom_paragraph=vdom_paragraph,
+                    vdom_nodes=vdom_nodes,
                 )
 
 
@@ -213,7 +211,10 @@ def _read_link(files: Iterator[IO[bytes]]) -> Iterator[_Link]:
 
 
 def _read_vdom(files: Iterator[IO[bytes]]) -> Iterator[_Vdom]:
-    raise NotImplementedError()
+    for file in files:
+        yield _Vdom(
+            vdom_data=file.read()
+        )
 
 
 def _read_jpg(files: Iterator[IO[bytes]]) -> Iterator[_Jpg]:
@@ -240,13 +241,8 @@ class ClueWeb22ADoc(NamedTuple):
     text: str
     date: datetime
     html: bytes
-    vdom_heading: Sequence[int]
-    vdom_list: Sequence[int]
-    vdom_passage: Sequence[int]
-    vdom_primary: Sequence[int]
-    vdom_table: Sequence[int]
-    vdom_title: Sequence[int]
-    vdom_paragraph: Sequence[int]
+    vdom_nodes: Mapping[AnnotationType, Sequence[int]]
+    vdom_data: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
 
@@ -259,13 +255,8 @@ class ClueWeb22BDoc(NamedTuple):
     text: str
     date: datetime
     html: bytes
-    vdom_heading: Sequence[int]
-    vdom_list: Sequence[int]
-    vdom_passage: Sequence[int]
-    vdom_primary: Sequence[int]
-    vdom_table: Sequence[int]
-    vdom_title: Sequence[int]
-    vdom_paragraph: Sequence[int]
+    vdom_nodes: Mapping[AnnotationType, Sequence[int]]
+    vdom_data: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
 
@@ -303,10 +294,10 @@ def _combine_a_docs(
     )
     for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id == inlink.doc_id == \
-               outlink.doc_id == vdom.doc_id
-        assert txt.url == html.url == inlink.url == outlink.url == vdom.url
+               outlink.doc_id
+        assert txt.url == html.url == inlink.url == outlink.url
         assert txt.url_hash == html.url_hash == inlink.url_hash == \
-               outlink.url_hash == vdom.url_hash
+               outlink.url_hash
         assert txt.language == html.language
         yield ClueWeb22ADoc(
             doc_id=txt.doc_id,
@@ -316,13 +307,8 @@ def _combine_a_docs(
             text=txt.text,
             date=html.date,
             html=html.html,
-            vdom_heading=html.vdom_heading,
-            vdom_list=html.vdom_list,
-            vdom_passage=html.vdom_passage,
-            vdom_primary=html.vdom_primary,
-            vdom_table=html.vdom_table,
-            vdom_title=html.vdom_title,
-            vdom_paragraph=html.vdom_paragraph,
+            vdom_nodes=html.vdom_nodes,
+            vdom_data=vdom.vdom_data,
             inlink_anchors=inlink.anchors,
             outlink_anchors=outlink.anchors,
         )
@@ -353,13 +339,8 @@ def _combine_b_docs(
             text=txt.text,
             date=html.date,
             html=html.html,
-            vdom_heading=html.vdom_heading,
-            vdom_list=html.vdom_list,
-            vdom_passage=html.vdom_passage,
-            vdom_primary=html.vdom_primary,
-            vdom_table=html.vdom_table,
-            vdom_title=html.vdom_title,
-            vdom_paragraph=html.vdom_paragraph,
+            vdom_nodes=html.vdom_nodes,
+            vdom_data=vdom.vdom_data,
             inlink_anchors=inlink.anchors,
             outlink_anchors=outlink.anchors,
         )
