@@ -1,5 +1,6 @@
 from collections import defaultdict
 from contextlib import ExitStack, contextmanager
+from csv import reader
 from datetime import datetime
 from enum import Enum
 from functools import cached_property
@@ -654,18 +655,41 @@ class ClueWeb22Docs(BaseDocs):
         raise NotImplementedError()
 
     @cached_property
-    def _record_counts(self) -> Mapping[Path, int]:
-        record_counts_dir = self.path / "recordcounts"
-        result = {}
-        for counts_file in record_counts_dir.glob("*_counts.txt"):
-            dir_name = counts_file.name[:-len("_counts.txt")]
-            dir_path = self.path / dir_name
-            with open(counts_file, "rt", encoding=ENCODING) as file:
-                for line in file:
-                    file, count = line.strip().split()
-                    path = dir_path / file[2:]
-                    result[path] = int(count)
-        return result
+    def _record_counts(self) -> Mapping[
+        Tuple[str, str, int, int, int],
+        int
+    ]:
+        """
+        Mapping from the format ID, language ID, stream, subdirectory, and file
+        to the number of documents within the file.
+        """
+
+        counts_dir = self.path / "record_counts" / "record_counts"
+        counts = {}
+        for format in self.subset.value.formats:
+            format_counts_dir = counts_dir / format.value.id
+            format_counts_files = format_counts_dir.glob(
+                "*_counts.csv"
+            )
+            for format_counts_file in format_counts_files:
+                tag = format_counts_file.name \
+                    .removesuffix("_counts.csv")
+                language = tag[:-2]
+                stream = int(tag[-2:])
+                with open(format_counts_file, "rt", encoding=ENCODING) as file:
+                    csv_reader = reader(file)
+                    for file_name, count in csv_reader:
+                        subdirectory_tag, file_tag = file_name.split("-")
+                        file = int(file_tag)
+                        subdirectory = int(subdirectory_tag[-2:])
+                        counts[
+                            format.value.id,
+                            language,
+                            stream,
+                            subdirectory,
+                            file,
+                        ] = int(count)
+        return counts
 
     def docs_iter(self) -> Iterator[AnyDoc]:
         return _ClueWeb22Iterator(self)
