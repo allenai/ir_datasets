@@ -780,19 +780,22 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         else:
             languages = {language for language in ClueWeb22Language}
         language_ids = {language.value.id for language in languages}
-        return sorted(
-            chain.from_iterable(
-                self.docs.path.glob(join(
-                    format.value.id,
-                    language_id,
-                    f"{language_id}[0-9][0-9]",
-                    f"{language_id}[0-9][0-9][0-9][0-9]",
-                    f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
-                    f".{format.value.extension}",
-                ))
-                for language_id in language_ids
+        patterns = (
+            join(
+                format.value.id,
+                language_id,
+                f"{language_id}[0-9][0-9]",
+                f"{language_id}[0-9][0-9][0-9][0-9]",
+                f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
+                f"{format.value.extension}",
             )
+            for language_id in language_ids
         )
+        paths = chain.from_iterable(
+            self.docs.path.glob(pattern)
+            for pattern in patterns
+        )
+        return sorted(paths)
 
     @contextmanager
     def _all_files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
