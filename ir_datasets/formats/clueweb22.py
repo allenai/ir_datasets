@@ -21,8 +21,13 @@ from zipfile import ZipFile
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices import Docstore
 from ir_datasets.lazy_libs import warcio
+from ir_datasets.log import easy
 from ir_datasets.util import Download, apply_sub_slice, slice_idx
 from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
+
+# Logging.
+
+_logger = easy("clueweb22")
 
 # Constants and constraints.
 
