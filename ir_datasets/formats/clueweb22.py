@@ -126,6 +126,9 @@ def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
                 json = loads(line)
                 yield _Txt(
                     doc_id=json["ClueWeb22-ID"],
+                    # Bug:
+                    # URLs from txt records contain an additional new line (\n)
+                    # at the end of the URL but the other records don't.
                     url=json["URL"].removesuffix("\n"),
                     url_hash=json["URL-hash"],
                     language=json["Language"],
