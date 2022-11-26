@@ -655,7 +655,7 @@ class ClueWeb22Docs(BaseDocs):
         raise NotImplementedError()
 
     @cached_property
-    def _record_counts(self) -> Mapping[
+    def record_counts(self) -> Mapping[
         Tuple[str, str, int, int, int],
         int
     ]:
@@ -701,7 +701,7 @@ class ClueWeb22Docs(BaseDocs):
         return self.subset.value.doc_type
 
     def docs_count(self) -> int:
-        return sum(self._record_counts.values())
+        return sum(self.record_counts.values())
 
     def docs_namespace(self) -> str:
         names = [self.name, self.subset.value.tag]
@@ -823,7 +823,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         yield generator()
 
     @contextmanager
-    def _files(
+    def _slice_files(
             self,
             format: ClueWeb22Format,
             start: int,
@@ -931,7 +931,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
 
         @contextmanager
         def filter_files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._files(format, start, stop, step) as files:
+            with self._slice_files(format, start, stop, step) as files:
                 yield files
 
         iterator = iter(_ClueWeb22Iterable(self.docs.subset, filter_files))
