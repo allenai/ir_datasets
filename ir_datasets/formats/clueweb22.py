@@ -768,14 +768,14 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
     def __iter__(self) -> Iterator[AnyDoc]:
         formats = self.subset.value.formats
         with ExitStack() as stack:
-            format_files: Sequence[Iterator[IO[bytes]]] = [
+            format_files: Iterator[Iterator[IO[bytes]]] = (
                 stack.enter_context(self.files(format))
                 for format in formats
-            ]
-            format_records: Sequence[Iterator[_AnyRecord]] = [
+            )
+            format_records: Iterator[Iterator[_AnyRecord]] = (
                 format.value.reader(files)
                 for format, files in zip(formats, format_files)
-            ]
+            )
             documents = self.subset.value.combiner(*format_records)
             yield from documents
 
