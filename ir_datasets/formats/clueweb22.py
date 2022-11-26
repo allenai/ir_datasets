@@ -121,7 +121,7 @@ def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
                 json = loads(line)
                 yield _Txt(
                     doc_id=json["ClueWeb22-ID"],
-                    url=json["URL"],
+                    url=json["URL"].removesuffix("\n"),
                     url_hash=json["URL-hash"],
                     language=json["Language"],
                     text=json["Clean-Text"],
