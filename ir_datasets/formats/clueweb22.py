@@ -308,25 +308,61 @@ def _combine_a_docs(
     )
     for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id
-        if not txt.url == html.url:
-            # Bug in ClueWeb22:
-            # The URL in the txt record does not match the URL in the html
-            # record but is a prefix thereof.
-            # The txt URL seems to be split by comma.
-            # Example:
-            # - txt: https://www.anisearch.de/manga/43556
-            # - html: https://www.anisearch.de/manga/43556,verrueckt-nach-dir
+        if txt.url != html.url:
+            # Bug:
+            # URLs from txt records are truncated to everything
+            # before the first comma (,).
+            # Example: For clueweb22-de0000-00-00366, the html URL
+            # is https://www.anisearch.de/manga/43556,verrueckt-nach-dir but
+            # the txt URL hash is just https://www.anisearch.de/manga/43556.
+            _logger.debug(
+                f"URL mismatch for {txt.doc_id}: "
+                f"txt URL was {txt.url} but html URL was {html.url}"
+            )
             assert "," in html.url and html.url.split(",")[0] == txt.url
-        assert txt.url_hash == html.url_hash
+        if txt.url_hash != html.url_hash:
+            # Bug:
+            # Sometimes, URL hashes from txt records do not match the
+            # corresponding URL hashes from other records.
+            # Example: For clueweb22-de0000-00-13406, the html URL hash
+            # is B6956297B5EBBDFEAABF458F2FA5EADC but the txt URL hash
+            # is 9D5A53C6ACCB07B2C2319A4E5E44AB76.
+            _logger.warn(
+                f"URL hash mismatch for {txt.doc_id}: "
+                f"txt URL hash was {txt.url_hash} but "
+                f"html URL hash was {html.url_hash}"
+            )
         assert txt.language == html.language
         if inlink is not None:
             assert html.doc_id == inlink.doc_id
             assert html.url == inlink.url
             assert html.url_hash == inlink.url_hash
         if outlink is not None:
-            assert html.doc_id == outlink.doc_id
-            assert html.url == outlink.url
-            assert html.url_hash == outlink.url_hash
+            assert outlink.doc_id == html.doc_id
+            if outlink.url != html.url:
+                # Bug:
+                # Sometimes, URLs from outlink records do not match the
+                # corresponding URLs from other records.
+                # Example: For clueweb22-de0000-00-13406, the html URL
+                # is https://www.jovanna.de/ but the outlink URL
+                # is https://www.jovanovic.com/quotidien.htm.
+                _logger.warn(
+                    f"URL mismatch for {html.doc_id}: "
+                    f"outlink URL hash was {outlink.url} but "
+                    f"html URL hash was {html.url}"
+                )
+            if outlink.url_hash != html.url_hash:
+                # Bug:
+                # Sometimes, URL hashes from outlink records do not match the
+                # corresponding URL hashes from other records.
+                # Example: For clueweb22-de0000-00-13406, the html URL hash
+                # is B6956297B5EBBDFEAABF458F2FA5EADC but the outlink URL hash
+                # is 9D5A53C6ACCB07B2C2319A4E5E44AB76.
+                _logger.warn(
+                    f"URL hash mismatch for {txt.doc_id}: "
+                    f"outlink URL hash was {txt.url_hash} but "
+                    f"html URL hash was {html.url_hash}"
+                )
         yield ClueWeb22ADoc(
             doc_id=html.doc_id,
             url=html.url,
