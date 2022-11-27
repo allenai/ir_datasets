@@ -47,7 +47,8 @@ class TestClueWeb22(DatasetIntegrationTest):
         self.assertFalse(dataset.has_docpairs())
         self.assertFalse(dataset.has_qlogs())
 
-        for subset in ["l", "b", "a"]:
+        subsets = ["b", "a", "l"]
+        for subset in subsets:
             subset_dataset: Dataset = load(f"clueweb22/{subset}")
             self.assertTrue(subset_dataset.has_docs())
             self.assertFalse(subset_dataset.has_queries())
@@ -62,18 +63,46 @@ class TestClueWeb22(DatasetIntegrationTest):
                 "other-languages",
             ]:
                 lang_dataset: Dataset = load(f"clueweb22/{subset}/{lang}")
-                self.assertTrue(subset_dataset.has_docs())
-                self.assertFalse(subset_dataset.has_queries())
-                self.assertFalse(subset_dataset.has_qrels())
-                self.assertFalse(subset_dataset.has_scoreddocs())
-                self.assertFalse(subset_dataset.has_docpairs())
-                self.assertFalse(subset_dataset.has_qlogs())
+                self.assertTrue(lang_dataset.has_docs())
+                self.assertFalse(lang_dataset.has_queries())
+                self.assertFalse(lang_dataset.has_qrels())
+                self.assertFalse(lang_dataset.has_scoreddocs())
+                self.assertFalse(lang_dataset.has_docpairs())
+                self.assertFalse(lang_dataset.has_qlogs())
                 self.assertEqual(lang_dataset.docs_lang(), lang)
+
+            subset_views = subsets[subsets.index(subset) + 1:]
+            for subset_view in subset_views:
+                subset_view_dataset: Dataset = load(
+                    f"clueweb22/{subset}/as-{subset_view}"
+                )
+                self.assertTrue(subset_view_dataset.has_docs())
+                self.assertFalse(subset_view_dataset.has_queries())
+                self.assertFalse(subset_view_dataset.has_qrels())
+                self.assertFalse(subset_view_dataset.has_scoreddocs())
+                self.assertFalse(subset_view_dataset.has_docpairs())
+                self.assertFalse(subset_view_dataset.has_qlogs())
+                self.assertEqual(subset_view_dataset.docs_lang(), None)
+
+                for lang in [
+                    "de", "en", "es", "fr", "it", "ja", "nl", "po", "pt", "zh",
+                    "other-languages",
+                ]:
+                    lang_dataset: Dataset = load(
+                        f"clueweb22/{subset}/as-{subset_view}/{lang}"
+                    )
+                    self.assertTrue(lang_dataset.has_docs())
+                    self.assertFalse(lang_dataset.has_queries())
+                    self.assertFalse(lang_dataset.has_qrels())
+                    self.assertFalse(lang_dataset.has_scoreddocs())
+                    self.assertFalse(lang_dataset.has_docpairs())
+                    self.assertFalse(lang_dataset.has_qlogs())
+                    self.assertEqual(lang_dataset.docs_lang(), lang)
 
     def test_clueweb22_l(self):
         # noinspection PyTypeChecker
         self._test_docs(
-            "clueweb22/l",
+            "clueweb22/b/as-l",
             count=10_000_000_000,
             items={
                 0: ClueWeb22LDoc(
@@ -98,7 +127,7 @@ class TestClueWeb22(DatasetIntegrationTest):
         )
 
     def test_clueweb22_l_slice(self):
-        dataset: Dataset = load("clueweb22/l")
+        dataset: Dataset = load("clueweb22/b/as-l")
         self._test_docs_slice(
             dataset, slice(None, 100), 100, "start of file"
         )
@@ -129,7 +158,7 @@ class TestClueWeb22(DatasetIntegrationTest):
         self.maxDiff = None
         # noinspection PyTypeChecker
         self._test_docs(
-            "clueweb22/a",
+            "clueweb22/b/as-a",
             count=2_000_000_000,
             items={
                 0: ClueWeb22ADoc(
@@ -259,7 +288,7 @@ class TestClueWeb22(DatasetIntegrationTest):
         )
 
     def test_clueweb22_a_slice(self):
-        dataset: Dataset = load("clueweb22/a")
+        dataset: Dataset = load("clueweb22/b/as-a")
         self._test_docs_slice(
             dataset, slice(None, 100), 100, "start of file"
         )
@@ -286,8 +315,6 @@ class TestClueWeb22(DatasetIntegrationTest):
             skip_islice=True,
         )
 
-    # TODO add subset "b"
-
     def test_clueweb22_docstore(self):
         ids = [
             "clueweb22-de0000-01-00014",
@@ -303,9 +330,8 @@ class TestClueWeb22(DatasetIntegrationTest):
             "clueweb22-de0000-01-00001",
             "clueweb22-de0000-05-08131",
         ]
-        # TODO add subset "b"
         for subset in ["l", "a"]:
-            docstore = load(f"clueweb22/{subset}").docs_store()
+            docstore = load(f"clueweb22/b/as-{subset}").docs_store()
             docstore.clear_cache()
             with _logger.duration("cold fetch"):
                 docstore.get_many(ids)
