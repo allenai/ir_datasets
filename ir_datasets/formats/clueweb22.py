@@ -23,7 +23,7 @@ from ir_datasets.indices import Docstore
 from ir_datasets.lazy_libs import fastwarc
 from ir_datasets.log import easy
 from ir_datasets.util import Download, apply_sub_slice, slice_idx
-from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
+from ir_datasets.util.io import OffsetIOWrapper
 
 # Logging.
 
@@ -120,7 +120,7 @@ _AnyRecord = TypeVar("_AnyRecord", _Txt, _Html, _Link, _Vdom, _Jpg)
 
 
 def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
-    with ConcatIOWrapper.from_iterable(files) as file:
+    for file in files:
         with TextIOWrapper(file, encoding=ENCODING) as text_file:
             for line in text_file:
                 json = loads(line)
@@ -148,7 +148,7 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
         # noinspection PyPep8Naming
         WarcRecordType = fastwarc().WarcRecordType
 
-    with ConcatIOWrapper.from_iterable(files) as file:
+    for file in files:
         for document in ArchiveIterator(file):
             if document.record_type != WarcRecordType.response:
                 continue
@@ -192,7 +192,7 @@ def _parse_anchor(json: Sequence[str]) -> Anchor:
 
 
 def _read_inlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
-    with ConcatIOWrapper.from_iterable(files) as file:
+    for file in files:
         with TextIOWrapper(file, encoding=ENCODING) as text_file:
             for line in text_file:
                 if len(line.strip()) == 0:
@@ -210,7 +210,7 @@ def _read_inlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
 
 
 def _read_outlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
-    with ConcatIOWrapper.from_iterable(files) as file:
+    for file in files:
         with TextIOWrapper(file, encoding=ENCODING) as text_file:
             for line in text_file:
                 if len(line.strip()) == 0:
