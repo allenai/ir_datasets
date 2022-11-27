@@ -317,7 +317,8 @@ def _combine_a_docs(
             # the txt URL hash is just https://www.anisearch.de/manga/43556.
             _logger.debug(
                 f"URL mismatch for {txt.doc_id}: "
-                f"txt URL was {txt.url} but html URL was {html.url}"
+                f"txt URL was {txt.url} but "
+                f"html URL was {html.url}"
             )
             assert "," in html.url and html.url.split(",")[0] == txt.url
         if txt.url_hash != html.url_hash:
@@ -334,9 +335,31 @@ def _combine_a_docs(
             )
         assert txt.language == html.language
         if inlink is not None:
-            assert html.doc_id == inlink.doc_id
-            assert html.url == inlink.url
-            assert html.url_hash == inlink.url_hash
+            assert inlink.doc_id == html.doc_id
+            if inlink.url != html.url:
+                # Bug:
+                # Sometimes, URLs from inlink records do not match the
+                # corresponding URLs from other records.
+                # Example: For clueweb22-de0000-01-14834, the html URL
+                # is https://simon-transporte.com/ but the inlink URL
+                # is https://simon.ccbcmd.edu/pls/PROD/bwskalog.p_disploginnew?in_id=&cpbl=&newid=.
+                _logger.warn(
+                    f"URL mismatch for {html.doc_id}: "
+                    f"inlink URL was {inlink.url} but "
+                    f"html URL was {html.url}"
+                )
+            if inlink.url_hash != html.url_hash:
+                # Bug:
+                # Sometimes, URL hashes from inlink records do not match the
+                # corresponding URL hashes from other records.
+                # Example: For clueweb22-de0000-01-14834, the html URL hash
+                # is 825E120CE7F82C8B0268440A59107D04 but the inlink URL hash
+                # is 612691A107701D76AD36FD32F8608F3C.
+                _logger.warn(
+                    f"URL hash mismatch for {txt.doc_id}: "
+                    f"inlink URL hash was {txt.url_hash} but "
+                    f"html URL hash was {html.url_hash}"
+                )
         if outlink is not None:
             assert outlink.doc_id == html.doc_id
             if outlink.url != html.url:
@@ -348,8 +371,8 @@ def _combine_a_docs(
                 # is https://www.jovanovic.com/quotidien.htm.
                 _logger.warn(
                     f"URL mismatch for {html.doc_id}: "
-                    f"outlink URL hash was {outlink.url} but "
-                    f"html URL hash was {html.url}"
+                    f"outlink URL was {outlink.url} but "
+                    f"html URL was {html.url}"
                 )
             if outlink.url_hash != html.url_hash:
                 # Bug:
