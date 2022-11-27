@@ -897,14 +897,32 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
 
     @contextmanager
     def _all_files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
+        compression = format.value.compression
+        compression_extension = format.value.compression_extension
+
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format)
             for file_path in file_paths:
                 with file_path.open("rb") as file:
-                    compression = format.value.compression
-                    compression_extension = format.value.compression_extension
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
+
+                        # Read offsets:
+                        offsets_name = (
+                                file_path.name.removesuffix(
+                                    format.value.extension
+                                ) + format.value.offset_extension
+                        )
+                        offsets_file_path = file_path.with_name(offsets_name)
+                        with offsets_file_path.open(
+                                "rt", encoding=ENCODING) as offsets_file:
+                            first_offset = next(
+                                int(offset)
+                                for offset in offsets_file
+                            )
+
+                        file.seek(first_offset)
+
                         with GzipFile("rb", fileobj=file) as gzip_file:
                             yield gzip_file
                     elif compression == ClueWeb22Compression.ZIP:
@@ -928,13 +946,14 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             stop: int,
             step: int,
     ) -> Iterator[IO[bytes]]:
+        compression = format.value.compression
+        compression_extension = format.value.compression_extension
+
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format)
             file_index_offset = 0
             for file_path in file_paths:
                 with file_path.open("rb") as file:
-                    compression = format.value.compression
-                    compression_extension = format.value.compression_extension
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
 
@@ -966,6 +985,9 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                                 for index, file_index in index_file_indices
                                 if self._in_slice(index, start, stop, step)
                             }
+                            if len(file_indices) == 0:
+                                # No indices in this file.
+                                continue
 
                             # Wrap file to skip unneeded offsets.
                             file = OffsetIOWrapper.from_offsets(
@@ -1090,12 +1112,13 @@ class ClueWeb22Docstore(Docstore):
             format: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[IO[bytes]]:
+        compression = format.value.compression
+        compression_extension = format.value.compression_extension
+
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format, doc_ids)
             for file_path, file_path_doc_ids in file_paths:
                 with file_path.open("rb") as file:
-                    compression = format.value.compression
-                    compression_extension = format.value.compression_extension
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
 
