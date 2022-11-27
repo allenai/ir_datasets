@@ -749,6 +749,9 @@ class ClueWeb22Docs(BaseDocs):
         self.source = source
         self.subset = subset
         self.language = language
+        subset, major, minor = self.version
+        assert self.subset in subset.compatible_subsets
+        assert major >= 1
 
     def docs_path(self, force: bool = True) -> Union[str, PathLike[str]]:
         return self.source.path(force)
@@ -764,10 +767,16 @@ class ClueWeb22Docs(BaseDocs):
             return file.read()
 
     @cached_property
-    def version(self) -> int:
+    def version(self) -> Tuple[ClueWeb22Subset, int, int]:
         version_files = list(self.path.glob("version_*"))
         assert len(version_files) == 1
-        return int(version_files[0].name.split("_")[1])
+        version_file = version_files[0]
+        version_file_name = version_file.name
+        _, subset_id, version = version_file_name.split("_")
+        assert len(subset_id) == 1
+        subset = next(s for s in ClueWeb22Subset if s.value.id == subset_id)
+        major, minor = version.split(".")
+        return subset, int(major), int(minor)
 
     @cached_property
     def _checksums(self) -> NotImplemented:
