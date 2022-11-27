@@ -149,10 +149,11 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
         WarcRecordType = fastwarc().WarcRecordType
 
     for file in files:
-        for document in ArchiveIterator(file):
-            if document.record_type != WarcRecordType.response:
-                continue
-
+        for document in ArchiveIterator(
+                file,
+                record_types=WarcRecordType.response,
+                parse_http=False,
+        ):
             doc_id = document.headers["ClueWeb22-ID"]
             url = document.headers['WARC-Target-URI']
             url_hash = document.headers["URL-Hash"]
@@ -170,7 +171,7 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
                 ]
                 for annotation_type in AnnotationType
             }
-            html: bytes = document.reader.read()
+            html: bytes = document.reader.read().removesuffix(b"\r\n")
             yield _Html(
                 doc_id=doc_id,
                 url=url,
