@@ -23,18 +23,58 @@ def _init():
             f"{NAME}/{subset_tag}",
             Dataset(
                 documentation(subset_tag),
-                ClueWeb22Docs(NAME, download["docs"], subset)
+                ClueWeb22Docs(
+                    name=NAME,
+                    source=download["docs"],
+                    subset=subset,
+                    subset_view=subset,
+                )
             ),
         )
         for language in ClueWeb22Language:
-            language_tag = f"{subset.value.tag}/{language.value.tag}"
+            language_tag = f"{subset_tag}/{language.value.tag}"
             registry.register(
                 f"{NAME}/{language_tag}",
                 Dataset(
                     documentation(language_tag),
-                    ClueWeb22Docs(NAME, download["docs"], subset, language)
+                    ClueWeb22Docs(
+                        name=NAME,
+                        source=download["docs"],
+                        subset=subset,
+                        subset_view=subset,
+                        language=language,
+                    )
                 ),
             )
+        for subset_view in subset.subset_views - {subset}:
+            subset_view_tag = f"{subset_tag}/as-{subset_view.value.tag}"
+            registry.register(
+                f"{NAME}/{subset_view_tag}",
+                Dataset(
+                    documentation(subset_view_tag),
+                    ClueWeb22Docs(
+                        name=NAME,
+                        source=download["docs"],
+                        subset=subset,
+                        subset_view=subset_view,
+                    )
+                ),
+            )
+            for language in ClueWeb22Language:
+                language_tag = f"{subset_view_tag}/{language.value.tag}"
+                registry.register(
+                    f"{NAME}/{language_tag}",
+                    Dataset(
+                        documentation(language_tag),
+                        ClueWeb22Docs(
+                            name=NAME,
+                            source=download["docs"],
+                            subset=subset,
+                            subset_view=subset_view,
+                            language=language,
+                        )
+                    ),
+                )
 
 
 _init()
