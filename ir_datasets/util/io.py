@@ -240,8 +240,8 @@ class ConcatIOWrapper(IO[bytes]):
     def seekable(self) -> bool:
         return False
 
-    def tell(self) -> int:
-        raise UnsupportedOperation()
+    def tell(self) -> Optional[int]:
+        return None
 
     def truncate(self, size: Optional[int] = ...) -> int:
         raise UnsupportedOperation()
