@@ -795,8 +795,8 @@ class ClueWeb22Docs(BaseDocs):
 
         counts_dir = self.path / "record_counts" / "record_counts"
         counts = {}
-        for format in self.subset.value.formats:
-            format_counts_dir = counts_dir / format.value.id
+        for format_type in self.subset.value.formats:
+            format_counts_dir = counts_dir / format_type.value.id
             format_counts_files = format_counts_dir.glob(
                 "*_counts.csv"
             )
@@ -812,7 +812,7 @@ class ClueWeb22Docs(BaseDocs):
                         file = int(file_tag)
                         subdirectory = int(subdirectory_tag[-2:])
                         counts[
-                            format.value.id,
+                            format_type.value.id,
                             language,
                             stream,
                             subdirectory,
@@ -867,12 +867,12 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
         formats = self.subset.value.formats
         with ExitStack() as stack:
             format_files: Iterator[Iterator[IO[bytes]]] = (
-                stack.enter_context(self.files(format))
-                for format in formats
+                stack.enter_context(self.files(format_type))
+                for format_type in formats
             )
             format_records: Iterator[Iterator[_AnyRecord]] = (
-                format.value.reader(files)
-                for format, files in zip(formats, format_files)
+                format_type.value.reader(files)
+                for format_type, files in zip(formats, format_files)
             )
             documents = self.subset.value.combiner(*format_records)
             yield from documents
@@ -902,7 +902,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             return False
         return (index - start) % step == 0
 
-    def _file_paths(self, format: ClueWeb22Format) -> Sequence[Path]:
+    def _file_paths(self, format_type: ClueWeb22Format) -> Sequence[Path]:
         languages: Iterable[ClueWeb22Language]
         if self.docs.language is not None:
             languages = {self.docs.language}
@@ -911,12 +911,12 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         language_ids = {language.value.id for language in languages}
         patterns = (
             join(
-                format.value.id,
+                format_type.value.id,
                 language_id,
                 f"{language_id}[0-9][0-9]",
                 f"{language_id}[0-9][0-9][0-9][0-9]",
                 f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
-                f"{format.value.extension}",
+                f"{format_type.value.extension}",
             )
             for language_id in language_ids
         )
@@ -927,12 +927,12 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         return sorted(paths)
 
     @contextmanager
-    def _all_files(self, format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-        compression = format.value.compression
-        compression_extension = format.value.compression_extension
+    def _all_files(self, format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
+        compression = format_type.value.compression
+        compression_extension = format_type.value.compression_extension
 
         def generator() -> Iterator[IO[bytes]]:
-            file_paths = self._file_paths(format)
+            file_paths = self._file_paths(format_type)
             for file_path in file_paths:
                 with file_path.open("rb") as file:
                     if compression == ClueWeb22Compression.GZIP:
@@ -941,8 +941,8 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                         # Read offsets:
                         offsets_name = (
                                 file_path.name.removesuffix(
-                                    format.value.extension
-                                ) + format.value.offset_extension
+                                    format_type.value.extension
+                                ) + format_type.value.offset_extension
                         )
                         offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
@@ -972,16 +972,16 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
     @contextmanager
     def _slice_files(
             self,
-            format: ClueWeb22Format,
+            format_type: ClueWeb22Format,
             start: int,
             stop: int,
             step: int,
     ) -> Iterator[IO[bytes]]:
-        compression = format.value.compression
-        compression_extension = format.value.compression_extension
+        compression = format_type.value.compression
+        compression_extension = format_type.value.compression_extension
 
         def generator() -> Iterator[IO[bytes]]:
-            file_paths = self._file_paths(format)
+            file_paths = self._file_paths(format_type)
             file_index_offset = 0
             for file_path in file_paths:
                 with file_path.open("rb") as file:
@@ -991,8 +991,8 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                         # Read offsets:
                         offsets_name = (
                                 file_path.name.removesuffix(
-                                    format.value.extension
-                                ) + format.value.offset_extension
+                                    format_type.value.extension
+                                ) + format_type.value.offset_extension
                         )
                         offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
@@ -1081,8 +1081,8 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         start, stop, step = processed_slice.indices(docs_count)
 
         @contextmanager
-        def filter_files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._slice_files(format, start, stop, step) as files:
+        def filter_files(format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
+            with self._slice_files(format_type, start, stop, step) as files:
                 yield files
 
         iterator = iter(_ClueWeb22Iterable(self.docs.subset, filter_files))
@@ -1105,7 +1105,7 @@ class ClueWeb22Docstore(Docstore):
 
     def _file_paths(
             self,
-            format: ClueWeb22Format,
+            format_type: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[Tuple[Path, AbstractSet[_ClueWeb22DocId]]]:
         if self.docs.language is not None:
@@ -1121,7 +1121,7 @@ class ClueWeb22Docstore(Docstore):
                     f"{invalid_doc_ids}"
                 )
 
-        format_path = self.docs.path / format.value.id
+        format_path = self.docs.path / format_type.value.id
 
         file_path_to_doc_ids: Mapping[
             Path, MutableSet[_ClueWeb22DocId]
@@ -1129,7 +1129,7 @@ class ClueWeb22Docstore(Docstore):
             lambda: set()
         )
         for doc_id in doc_ids:
-            file_path = format_path / f"{doc_id.path}{format.value.extension}"
+            file_path = format_path / f"{doc_id.path}{format_type.value.extension}"
             file_path_to_doc_ids[file_path].add(doc_id)
 
         return (
@@ -1140,11 +1140,11 @@ class ClueWeb22Docstore(Docstore):
     @contextmanager
     def _files(
             self,
-            format: ClueWeb22Format,
+            format_type: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[IO[bytes]]:
-        compression = format.value.compression
-        compression_extension = format.value.compression_extension
+        compression = format_type.value.compression
+        compression_extension = format_type.value.compression_extension
 
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format, doc_ids)
@@ -1162,8 +1162,8 @@ class ClueWeb22Docstore(Docstore):
                         # Read offsets:
                         offsets_name = (
                                 file_path.name.removesuffix(
-                                    format.value.extension
-                                ) + format.value.offset_extension
+                                    format_type.value.extension
+                                ) + format_type.value.offset_extension
                         )
                         offsets_file_path = file_path.with_name(offsets_name)
                         with offsets_file_path.open(
@@ -1216,8 +1216,8 @@ class ClueWeb22Docstore(Docstore):
         }
 
         @contextmanager
-        def filter_files(format: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._files(format, doc_ids) as files:
+        def filter_files(format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
+            with self._files(format_type, doc_ids) as files:
                 yield files
 
         return iter(_ClueWeb22Iterable(self.docs.subset, filter_files))
