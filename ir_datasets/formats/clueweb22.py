@@ -673,7 +673,7 @@ class ClueWeb22Subset(Enum):
 # Utility classes
 
 
-class _ClueWeb22DocId:
+class _ClueWeb22DocId(NamedTuple):
     """
     ClueWeb22 document ID as described
     at https://lemurproject.org/clueweb22/docspecs.php#DocIds.
@@ -688,7 +688,8 @@ class _ClueWeb22DocId:
     file: int
     doc: int
 
-    def __init__(self, doc_id: str):
+    @classmethod
+    def from_string(cls, doc_id: str) -> "_ClueWeb22DocId":
         parts = doc_id.split("-")
         if len(parts) != 4:
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
@@ -696,29 +697,37 @@ class _ClueWeb22DocId:
         if dataset != "clueweb22":
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
-        self.language = subdirectory[:-4]
+        language = subdirectory[:-4]
         if not any(
-                self.language == language.value.id
-                for language in ClueWeb22Language
+                language == supported_language.value.id
+                for supported_language in ClueWeb22Language
         ):
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
-        self.stream_id = int(subdirectory[-4:-2])
+        stream_id = int(subdirectory[-4:-2])
 
-        self.subdirectory = int(subdirectory[-2:])
-        if self.subdirectory > MAX_SUBDIRECTORIES_PER_STREAM:
+        subdirectory_id = int(subdirectory[-2:])
+        if subdirectory_id > MAX_SUBDIRECTORIES_PER_STREAM:
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
-        self.file = int(file)
-        if self.file > MAX_FILES_PER_SUBDIRECTORY:
+        file_id = int(file)
+        if file_id > MAX_FILES_PER_SUBDIRECTORY:
             raise ValueError(f"Invalid ClueWeb22 ID: {doc_id}")
 
-        self.doc = int(doc_index)
+        doc = int(doc_index)
 
-    @cached_property
+        return _ClueWeb22DocId(
+            language=language,
+            stream=stream_id,
+            subdirectory=subdirectory_id,
+            file=file_id,
+            doc=doc,
+        )
+
+    @property
     def path(self) -> str:
         language_path = self.language
-        stream_path = f"{language_path}{self.stream_id:0>2}"
+        stream_path = f"{language_path}{self.stream:0>2}"
         subdirectory_path = f"{stream_path}{self.subdirectory:0>2}"
         file_path = f"{subdirectory_path}-{self.file:0>2}"
         return join(
@@ -731,7 +740,7 @@ class _ClueWeb22DocId:
     def __str__(self) -> str:
         return "-".join([
             "clueweb22",
-            f"{self.language}{self.stream_id:0>2}{self.subdirectory:0>2}",
+            f"{self.language}{self.stream:0>2}{self.subdirectory:0>2}",
             f"{self.file:0>2}",
             f"{self.doc:0>5}",
         ])
@@ -752,6 +761,18 @@ class _ClueWeb22FileId(NamedTuple):
     subdirectory: int
     file: int
 
+    @classmethod
+    def from_path(cls, path: Path) -> "_ClueWeb22FileId":
+        language = path.parts[-4]
+        stream = int(path.parts[-3][-2:])
+        subdirectory = int(path.parts[-2][-2:])
+        file = int(path.name.split(".")[0].split("-")[1])
+        return _ClueWeb22FileId(
+            language=language,
+            stream=stream,
+            subdirectory=subdirectory,
+            file=file,
+        )
 
 class _ClueWeb22Version(NamedTuple):
     """
@@ -1263,7 +1284,7 @@ class ClueWeb22Docstore(Docstore):
 
     def get_many_iter(self, doc_ids: Iterable[str]) -> Iterator[AnyDoc]:
         doc_ids: AbstractSet[_ClueWeb22DocId] = {
-            _ClueWeb22DocId(doc_id)
+            _ClueWeb22DocId.from_string(doc_id)
             for doc_id in doc_ids
         }
 
