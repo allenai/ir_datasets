@@ -737,6 +737,32 @@ class _ClueWeb22DocId:
         ])
 
 
+class _ClueWeb22FileId(NamedTuple):
+    """
+    ClueWeb22 file ID as described
+    at https://lemurproject.org/clueweb22/docspecs.php#DocIds
+    except for the "doc sequence".
+
+    This class can be used to iterate record counts and to align files
+    of different types.
+    """
+
+    language: str
+    stream: int
+    subdirectory: int
+    file: int
+
+
+class _ClueWeb22Version(NamedTuple):
+    """
+    ClueWeb22 disk version.
+    """
+
+    subset: ClueWeb22Subset
+    major: int
+    minor: int
+
+
 # Docs dataset class.
 
 
@@ -763,9 +789,9 @@ class ClueWeb22Docs(BaseDocs):
         self.subset = subset
         self.subset_view = subset_view
         self.language = language
-        subset, major, minor = self.version
+
         assert self.subset_view in subset.subset_views
-        assert major >= 1
+        assert self._version.major > 0
 
     def docs_path(self, force: bool = True) -> Union[str, PathLike[str]]:
         return self.source.path(force)
@@ -781,7 +807,7 @@ class ClueWeb22Docs(BaseDocs):
             return file.read()
 
     @cached_property
-    def version(self) -> Tuple[ClueWeb22Subset, int, int]:
+    def _version(self) -> _ClueWeb22Version:
         version_files = list(self.path.glob("version_*"))
         assert len(version_files) == 1
         version_file = version_files[0]
@@ -790,11 +816,11 @@ class ClueWeb22Docs(BaseDocs):
         assert len(subset_id) == 1
         subset = next(s for s in ClueWeb22Subset if s.value.id == subset_id)
         major, minor = version.split(".")
-        return subset, int(major), int(minor)
+        return _ClueWeb22Version(subset, int(major), int(minor))
 
     @cached_property
-    def record_counts(self) -> Mapping[
-        Tuple[str, str, int, int, int],
+    def _record_counts(self) -> Mapping[
+        Tuple[ClueWeb22Format, _ClueWeb22FileId],
         int
     ]:
         """
@@ -826,11 +852,13 @@ class ClueWeb22Docs(BaseDocs):
                         file = int(file_tag)
                         subdirectory = int(subdirectory_tag[-2:])
                         counts[
-                            format_type.value.id,
-                            language,
-                            stream,
-                            subdirectory,
-                            file,
+                            format_type,
+                            _ClueWeb22FileId(
+                                language,
+                                stream,
+                                subdirectory,
+                                file,
+                            )
                         ] = int(count)
         return counts
 
@@ -845,10 +873,10 @@ class ClueWeb22Docs(BaseDocs):
 
     def docs_count(self) -> int:
         diff_formats = self.subset_view.diff_formats
-        first_diff_format_type = next(iter(diff_formats)).value.id
+        first_diff_format_type = next(iter(diff_formats))
         return sum(
             count
-            for (format_type, _, _, _, _), count in self.record_counts.items()
+            for (format_type, _), count in self._record_counts.items()
             if format_type == first_diff_format_type
         )
 
@@ -877,7 +905,7 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
 
     def __init__(
             self,
-            subset_view : ClueWeb22Subset,
+            subset_view: ClueWeb22Subset,
             files: Callable[
                 [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
             ],
@@ -1107,7 +1135,9 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             with self._slice_files(format_type, start, stop, step) as files:
                 yield files
 
-        iterator = iter(_ClueWeb22Iterable(self.docs.subset_view, filter_files))
+        iterator = iter(
+            _ClueWeb22Iterable(self.docs.subset_view, filter_files)
+        )
         if isinstance(key, slice):
             return iterator
 
