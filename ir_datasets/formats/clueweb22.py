@@ -20,7 +20,7 @@ from zipfile import ZipFile
 
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices import Docstore
-from ir_datasets.lazy_libs import warcio
+from ir_datasets.lazy_libs import fastwarc
 from ir_datasets.log import easy
 from ir_datasets.util import Download, apply_sub_slice, slice_idx
 from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
@@ -140,34 +140,37 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
     # Only import the heavy warcio library for type checking,
     # otherwise load the library lazily.
     if TYPE_CHECKING:
-        from warcio import ArchiveIterator
+        from fastwarc import ArchiveIterator, WarcRecordType
     else:
-        # noinspection PyPep8Naming (due to export from lazy lib)
-        ArchiveIterator = warcio().ArchiveIterator
+        # Ignore PEP8 naming here, because of lazy libs import.
+        # noinspection PyPep8Naming
+        ArchiveIterator = fastwarc().ArchiveIterator
+        # noinspection PyPep8Naming
+        WarcRecordType = fastwarc().WarcRecordType
 
     with ConcatIOWrapper.from_iterable(files) as file:
         for document in ArchiveIterator(file):
-            if document.rec_type != "response":
+            if document.record_type != WarcRecordType.response:
                 continue
 
-            doc_id = document.rec_headers.get_header("ClueWeb22-ID")
-            url = document.rec_headers.get_header('WARC-Target-URI')
-            url_hash = document.rec_headers.get_header("URL-Hash")
-            language = document.rec_headers.get_header("Language")
+            doc_id = document.headers["ClueWeb22-ID"]
+            url = document.headers['WARC-Target-URI']
+            url_hash = document.headers["URL-Hash"]
+            language = document.headers["Language"]
             date = datetime.strptime(
-                document.rec_headers.get_header("WARC-Date"),
+                document.headers["WARC-Date"],
                 "%Y-%m-%dT%H:%M:%S.%fZ",
             )
             vdom_nodes = {
                 annotation_type: [
                     int(vdom)
-                    for vdom in document.rec_headers.get_header(
+                    for vdom in document.headers.get(
                         f"VDOM-{annotation_type.value}", ""
                     ).split()
                 ]
                 for annotation_type in AnnotationType
             }
-            html: bytes = document.content_stream().read()
+            html: bytes = document.reader.read()
             yield _Html(
                 doc_id=doc_id,
                 url=url,

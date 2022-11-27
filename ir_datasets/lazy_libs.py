@@ -73,11 +73,11 @@ def warc_clueweb09():
     return _cache['warc_clueweb09']
 
 
-def warcio():
-    if 'warcio' not in _cache:
-        import warcio
-        _cache['warcio'] = warcio
-    return _cache['warcio']
+def fastwarc():
+    if 'fastwarc' not in _cache:
+        import fastwarc
+        _cache['fastwarc'] = fastwarc
+    return _cache['fastwarc']
 
 
 def lz4_block():
