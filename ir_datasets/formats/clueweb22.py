@@ -806,8 +806,13 @@ class ClueWeb22Docs(BaseDocs):
         counts = {}
         for format_type in self.subset_view.value.formats:
             format_counts_dir = counts_dir / format_type.value.id
+            language_prefix: str
+            if self.language is not None:
+                language_prefix = self.language.value.id
+            else:
+                language_prefix = ""
             format_counts_files = format_counts_dir.glob(
-                "*_counts.csv"
+                f"{language_prefix}*_counts.csv"
             )
             for format_counts_file in format_counts_files:
                 tag = format_counts_file.name \
