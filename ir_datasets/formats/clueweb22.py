@@ -779,11 +779,6 @@ class ClueWeb22Docs(BaseDocs):
         return subset, int(major), int(minor)
 
     @cached_property
-    def _checksums(self) -> NotImplemented:
-        checksums_dir = self.path / "checksums"
-        raise NotImplementedError()
-
-    @cached_property
     def record_counts(self) -> Mapping[
         Tuple[str, str, int, int, int],
         int
