@@ -600,6 +600,11 @@ class _SubsetInfo(NamedTuple):
     to documents. The record iterators are passed to the function 
     in the same order as specified in the ``formats`` field.
     """
+    extends: Optional[str]
+    """
+    Subset ID that this subset extends, meaning that it supports 
+    all fields from the extended subset.
+    """
 
 
 class ClueWeb22Subset(Enum):
@@ -610,7 +615,8 @@ class ClueWeb22Subset(Enum):
         tag="l",
         formats=[ClueWeb22Format.TXT],
         doc_type=ClueWeb22LDoc,
-        combiner=_combine_l_docs
+        combiner=_combine_l_docs,
+        extends=None,
     )
     A = _SubsetInfo(
         id="A",
@@ -623,7 +629,8 @@ class ClueWeb22Subset(Enum):
             ClueWeb22Format.VDOM
         ],
         doc_type=ClueWeb22ADoc,
-        combiner=_combine_a_docs
+        combiner=_combine_a_docs,
+        extends="L",
     )
     B = _SubsetInfo(
         id="B",
@@ -637,8 +644,19 @@ class ClueWeb22Subset(Enum):
             ClueWeb22Format.JPG
         ],
         doc_type=ClueWeb22BDoc,
-        combiner=_combine_b_docs
+        combiner=_combine_b_docs,
+        extends="A",
     )
+
+    @property
+    def compatible_subsets(self) -> AbstractSet["ClueWeb22Subset"]:
+        if self.value.extends is not None:
+            extends = next(
+                s for s in ClueWeb22Subset
+                if s.value.id == self.value.extends
+            )
+            return {self} | extends.compatible_subsets
+        return {self}
 
 
 # Utility classes
