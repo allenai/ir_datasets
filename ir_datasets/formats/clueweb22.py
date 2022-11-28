@@ -5,7 +5,7 @@ from enum import Enum
 from functools import cached_property
 from gzip import GzipFile
 from io import TextIOWrapper
-from itertools import chain, groupby
+from itertools import groupby
 from json import loads
 from os import PathLike
 from os.path import join
@@ -768,6 +768,27 @@ class _ClueWeb22FileId(NamedTuple):
             file=file,
         )
 
+    @property
+    def path(self) -> str:
+        language_path = self.language
+        stream_path = f"{language_path}{self.stream:0>2}"
+        subdirectory_path = f"{stream_path}{self.subdirectory:0>2}"
+        file_path = f"{subdirectory_path}-{self.file:0>2}"
+        return join(
+            language_path,
+            stream_path,
+            subdirectory_path,
+            file_path
+        )
+
+    def __str__(self) -> str:
+        return "-".join([
+            "clueweb22",
+            f"{self.language}{self.stream:0>2}{self.subdirectory:0>2}",
+            f"{self.file:0>2}",
+        ])
+
+
 class _ClueWeb22Version(NamedTuple):
     """
     ClueWeb22 disk version.
@@ -833,49 +854,74 @@ class ClueWeb22Docs(BaseDocs):
         major, minor = version.split(".")
         return _ClueWeb22Version(subset, int(major), int(minor))
 
-    @cached_property
-    def _record_counts(self) -> Mapping[
-        Tuple[ClueWeb22Format, _ClueWeb22FileId],
-        int
-    ]:
+    def _record_counts(
+            self,
+            format_type: ClueWeb22Format,
+    ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
         """
-        Mapping from the format ID, language ID, stream, subdirectory, and file
-        to the number of documents within the file.
+        Iterator with the number of documents per file
+        for the specified format.
         """
 
         counts_dir = self.path / "record_counts" / "record_counts"
-        counts = {}
-        for format_type in self.subset_view.value.formats:
-            format_counts_dir = counts_dir / format_type.value.id
-            language_prefix: str
-            if self.language is not None:
-                language_prefix = self.language.value.id
-            else:
-                language_prefix = ""
-            format_counts_files = format_counts_dir.glob(
-                f"{language_prefix}*_counts.csv"
-            )
-            for format_counts_file in format_counts_files:
-                tag = format_counts_file.name \
-                    .removesuffix("_counts.csv")
-                language = tag[:-2]
-                stream = int(tag[-2:])
-                with open(format_counts_file, "rt", encoding=ENCODING) as file:
-                    csv_reader = reader(file)
-                    for file_name, count in csv_reader:
-                        subdirectory_tag, file_tag = file_name.split("-")
-                        file = int(file_tag)
-                        subdirectory = int(subdirectory_tag[-2:])
-                        counts[
-                            format_type,
-                            _ClueWeb22FileId(
-                                language,
-                                stream,
-                                subdirectory,
-                                file,
-                            )
-                        ] = int(count)
-        return counts
+        format_counts_dir = counts_dir / format_type.value.id
+        language_prefix: str
+        if self.language is not None:
+            language_prefix = self.language.value.id
+        else:
+            language_prefix = ""
+        format_counts_files = format_counts_dir.glob(
+            f"{language_prefix}*_counts.csv"
+        )
+        for format_counts_file in format_counts_files:
+            tag = format_counts_file.name \
+                .removesuffix("_counts.csv")
+            language = tag[:-2]
+            stream = int(tag[-2:])
+            with open(format_counts_file, "rt", encoding=ENCODING) as file:
+                csv_reader = reader(file)
+                for file_name, count in csv_reader:
+                    subdirectory_tag, file_tag = file_name.split("-")
+                    file = int(file_tag)
+                    subdirectory = int(subdirectory_tag[-2:])
+                    file_id = _ClueWeb22FileId(
+                        language,
+                        stream,
+                        subdirectory,
+                        file,
+                    )
+                    yield file_id, int(count)
+
+    def diff_format_record_counts(
+            self
+    ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
+        """
+        Iterator with the number of documents per file
+        for one of the diff formats (arbitrarily selected).
+
+        This is useful to find out the actual count of documents
+        for a specific subset, even if the base path
+        contains a "broader" subset (with possibly more files).
+        """
+        diff_formats = self.subset_view.diff_formats
+        diff_format_type = next(iter(diff_formats))
+        return self._record_counts(diff_format_type)
+
+    def record_counts(
+            self,
+            format_type: ClueWeb22Format,
+    ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
+        """
+        Iterator with the number of documents per file,
+        constrained to the selected subset, even if the base path
+        contains a "broader" subset (with possibly more files).
+        """
+        counts = self._record_counts(format_type)
+        for diff_file_id, diff_count in self.diff_format_record_counts():
+            for file_id, count in counts:
+                if file_id == diff_file_id:
+                    yield file_id, diff_count
+                    break
 
     def docs_iter(self) -> Iterator[AnyDoc]:
         return _ClueWeb22Iterator(self)
@@ -887,13 +933,7 @@ class ClueWeb22Docs(BaseDocs):
         return self.subset_view.value.doc_type
 
     def docs_count(self) -> int:
-        diff_formats = self.subset_view.diff_formats
-        first_diff_format_type = next(iter(diff_formats))
-        return sum(
-            count
-            for (format_type, _), count in self._record_counts.items()
-            if format_type == first_diff_format_type
-        )
+        return sum(count for _, count in self.diff_format_record_counts())
 
     def docs_namespace(self) -> str:
         names = [self.name, self.subset.value.tag]
@@ -978,29 +1018,15 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
     def _file_paths(
             self,
             format_type: ClueWeb22Format,
-    ) -> Iterator[Path]:
-        languages: Iterable[ClueWeb22Language]
-        if self.docs.language is not None:
-            languages = {self.docs.language}
-        else:
-            languages = {language for language in ClueWeb22Language}
-        language_ids = {language.value.id for language in languages}
-        patterns = (
-            join(
-                format_type.value.id,
-                language_id,
-                f"{language_id}[0-9][0-9]",
-                f"{language_id}[0-9][0-9][0-9][0-9]",
-                f"{language_id}[0-9][0-9][0-9][0-9]-[0-9][0-9]"
-                f"{format_type.value.extension}",
-            )
-            for language_id in language_ids
-        )
-        paths = chain.from_iterable(
-            self.docs.path.glob(pattern)
-            for pattern in patterns
-        )
-        return sorted(paths)
+    ) -> Iterator[Tuple[Path, int]]:
+        """
+        Iterate all available file paths with the number of records within.
+        """
+
+        format_path = self.docs.path / format_type.value.id
+        for file_id, count in self.docs.record_counts(format_type):
+            path = format_path / f"{file_id.path}{format_type.value.extension}"
+            yield path, count
 
     @contextmanager
     def _file_iterator_all(
@@ -1012,7 +1038,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             compression = format_type.value.compression
             compression_extension = format_type.value.compression_extension
             file_paths = self._file_paths(format_type)
-            for file_path in file_paths:
+            for file_path, _ in file_paths:
                 with file_path.open("rb") as file:
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
@@ -1059,10 +1085,20 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         compression = format_type.value.compression
         compression_extension = format_type.value.compression_extension
 
+        def in_slice(index: int) -> bool:
+            return self._in_slice(index, start, stop, step)
+
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format_type)
             file_index_offset = 0
-            for file_path in file_paths:
+            for file_path, count in file_paths:
+
+                if (
+                        not in_slice(file_index_offset) and
+                        not in_slice(file_index_offset + count)
+                ):
+                    file_index_offset += count
+                    continue
                 with file_path.open("rb") as file:
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
@@ -1093,7 +1129,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                             file_indices = {
                                 file_index
                                 for index, file_index in index_file_indices
-                                if self._in_slice(index, start, stop, step)
+                                if in_slice(index)
                             }
                             if len(file_indices) == 0:
                                 # No indices in this file.
@@ -1130,7 +1166,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                             names = (
                                 name
                                 for index, name in index_names
-                                if self._in_slice(index, start, stop, step)
+                                if in_slice(index)
                             )
 
                             for name in names:
