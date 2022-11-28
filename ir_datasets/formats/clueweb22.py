@@ -1,20 +1,19 @@
-from collections import defaultdict
-from contextlib import ExitStack, contextmanager
+from contextlib import contextmanager, ExitStack
 from csv import reader
 from datetime import datetime
 from enum import Enum
 from functools import cached_property
 from gzip import GzipFile
 from io import TextIOWrapper
-from itertools import chain
+from itertools import chain, groupby
 from json import loads
 from os import PathLike
 from os.path import join
 from pathlib import Path
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable, Callable, ContextManager, Mapping, Union,
-    AbstractSet, MutableSet, Tuple
+    TYPE_CHECKING, Iterable, Callable, Mapping, Union, AbstractSet, Tuple,
+    ContextManager
 )
 from zipfile import ZipFile
 
@@ -119,24 +118,23 @@ _AnyRecord = TypeVar("_AnyRecord", _Txt, _Html, _Link, _Vdom, _Jpg)
 # Readers for parsing the base record types from iterators of IO streams.
 
 
-def _read_txt(files: Iterator[IO[bytes]]) -> Iterator[_Txt]:
-    for file in files:
-        with TextIOWrapper(file, encoding=ENCODING) as text_file:
-            for line in text_file:
-                json = loads(line)
-                yield _Txt(
-                    doc_id=json["ClueWeb22-ID"],
-                    # Bug:
-                    # URLs from txt records contain an additional new line (\n)
-                    # at the end of the URL but the other records don't.
-                    url=json["URL"].removesuffix("\n"),
-                    url_hash=json["URL-hash"],
-                    language=json["Language"],
-                    text=json["Clean-Text"],
-                )
+def _read_txt(file: IO[bytes]) -> Iterator[_Txt]:
+    with TextIOWrapper(file, encoding=ENCODING) as text_file:
+        for line in text_file:
+            json = loads(line)
+            yield _Txt(
+                doc_id=json["ClueWeb22-ID"],
+                # Bug:
+                # URLs from txt records contain an additional new line (\n)
+                # at the end of the URL but the other records don't.
+                url=json["URL"].removesuffix("\n"),
+                url_hash=json["URL-hash"],
+                language=json["Language"],
+                text=json["Clean-Text"],
+            )
 
 
-def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
+def _read_html(file: IO[bytes]) -> Iterator[_Html]:
     # Only import the heavy warcio library for type checking,
     # otherwise load the library lazily.
     if TYPE_CHECKING:
@@ -148,39 +146,38 @@ def _read_html(files: Iterator[IO[bytes]]) -> Iterator[_Html]:
         # noinspection PyPep8Naming
         WarcRecordType = fastwarc().WarcRecordType
 
-    for file in files:
-        for document in ArchiveIterator(
-                file,
-                record_types=WarcRecordType.response,
-                parse_http=False,
-        ):
-            doc_id = document.headers["ClueWeb22-ID"]
-            url = document.headers['WARC-Target-URI']
-            url_hash = document.headers["URL-Hash"]
-            language = document.headers["Language"]
-            date = datetime.strptime(
-                document.headers["WARC-Date"],
-                "%Y-%m-%dT%H:%M:%S.%fZ",
-            )
-            vdom_nodes = {
-                annotation_type: [
-                    int(vdom)
-                    for vdom in document.headers.get(
-                        f"VDOM-{annotation_type.value}", ""
-                    ).split()
-                ]
-                for annotation_type in AnnotationType
-            }
-            html: bytes = document.reader.read().removesuffix(b"\r\n")
-            yield _Html(
-                doc_id=doc_id,
-                url=url,
-                url_hash=url_hash,
-                language=language,
-                date=date,
-                html=html,
-                vdom_nodes=vdom_nodes,
-            )
+    for document in ArchiveIterator(
+            file,
+            record_types=WarcRecordType.response,
+            parse_http=False,
+    ):
+        doc_id = document.headers["ClueWeb22-ID"]
+        url = document.headers['WARC-Target-URI']
+        url_hash = document.headers["URL-Hash"]
+        language = document.headers["Language"]
+        date = datetime.strptime(
+            document.headers["WARC-Date"],
+            "%Y-%m-%dT%H:%M:%S.%fZ",
+        )
+        vdom_nodes = {
+            annotation_type: [
+                int(vdom)
+                for vdom in document.headers.get(
+                    f"VDOM-{annotation_type.value}", ""
+                ).split()
+            ]
+            for annotation_type in AnnotationType
+        }
+        html: bytes = document.reader.read().removesuffix(b"\r\n")
+        yield _Html(
+            doc_id=doc_id,
+            url=url,
+            url_hash=url_hash,
+            language=language,
+            date=date,
+            html=html,
+            vdom_nodes=vdom_nodes,
+        )
 
 
 def _parse_anchor(json: Sequence[str]) -> Anchor:
@@ -192,50 +189,47 @@ def _parse_anchor(json: Sequence[str]) -> Anchor:
     )
 
 
-def _read_inlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
-    for file in files:
-        with TextIOWrapper(file, encoding=ENCODING) as text_file:
-            for line in text_file:
-                if len(line.strip()) == 0:
-                    yield None
-                    continue
-                json = loads(line)
-                yield _Link(
-                    doc_id=json["ClueWeb22-ID"],
-                    url=json["url"],
-                    url_hash=json["urlhash"],
-                    anchors=[
-                        _parse_anchor(anchor) for anchor in json["anchors"]
-                    ],
-                )
+def _read_inlink(file: IO[bytes]) -> Iterator[Optional[_Link]]:
+    with TextIOWrapper(file, encoding=ENCODING) as text_file:
+        for line in text_file:
+            if len(line.strip()) == 0:
+                yield None
+                continue
+            json = loads(line)
+            yield _Link(
+                doc_id=json["ClueWeb22-ID"],
+                url=json["url"],
+                url_hash=json["urlhash"],
+                anchors=[
+                    _parse_anchor(anchor) for anchor in json["anchors"]
+                ],
+            )
 
 
-def _read_outlink(files: Iterator[IO[bytes]]) -> Iterator[Optional[_Link]]:
-    for file in files:
-        with TextIOWrapper(file, encoding=ENCODING) as text_file:
-            for line in text_file:
-                if len(line.strip()) == 0:
-                    yield None
-                    continue
-                json = loads(line)
-                yield _Link(
-                    doc_id=json["ClueWeb22-ID"],
-                    url=json["url"],
-                    url_hash=json["urlhash"],
-                    anchors=[
-                        _parse_anchor(anchor) for anchor in json["outlinks"]
-                    ],
-                )
+def _read_outlink(file: IO[bytes]) -> Iterator[Optional[_Link]]:
+    with TextIOWrapper(file, encoding=ENCODING) as text_file:
+        for line in text_file:
+            if len(line.strip()) == 0:
+                yield None
+                continue
+            json = loads(line)
+            yield _Link(
+                doc_id=json["ClueWeb22-ID"],
+                url=json["url"],
+                url_hash=json["urlhash"],
+                anchors=[
+                    _parse_anchor(anchor) for anchor in json["outlinks"]
+                ],
+            )
 
 
-def _read_vdom(files: Iterator[IO[bytes]]) -> Iterator[_Vdom]:
-    for file in files:
-        yield _Vdom(
-            vdom_data=file.read()
-        )
+def _read_vdom(file: IO[bytes]) -> Iterator[_Vdom]:
+    yield _Vdom(
+        vdom_data=file.read()
+    )
 
 
-def _read_jpg(files: Iterator[IO[bytes]]) -> Iterator[_Jpg]:
+def _read_jpg(files: IO[bytes]) -> Iterator[_Jpg]:
     raise NotImplementedError()
 
 
@@ -489,7 +483,7 @@ class _FormatInfo(NamedTuple):
     """
     File extension of files within the compressed archive.
     """
-    reader: Callable[[Iterator[IO[bytes]]], Iterator[_AnyRecord]]
+    reader: Callable[[IO[bytes]], Iterator[_AnyRecord]]
     """
     Function for reading records from the decompressed files.
     """
@@ -920,29 +914,37 @@ class ClueWeb22Docs(BaseDocs):
 
 class _ClueWeb22Iterable(Iterable[AnyDoc]):
     subset_view: Final[ClueWeb22Subset]
-    files: Final[Callable[
+    file_iterator: Final[Callable[
         [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
     ]]
 
     def __init__(
             self,
             subset_view: ClueWeb22Subset,
-            files: Callable[
+            file_iterator: Callable[
                 [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
             ],
     ):
         self.subset_view = subset_view
-        self.files = files
+        self.file_iterator = file_iterator
 
     def __iter__(self) -> Iterator[AnyDoc]:
         formats = self.subset_view.value.formats
+
+        def read_records(
+                format_type: ClueWeb22Format,
+                files: Iterator[IO[bytes]],
+        ) -> Iterator[AnyDoc]:
+            for file in files:
+                yield from format_type.value.reader(file)
+
         with ExitStack() as stack:
             format_files: Iterator[Iterator[IO[bytes]]] = (
-                stack.enter_context(self.files(format_type))
+                stack.enter_context(self.file_iterator(format_type))
                 for format_type in formats
             )
-            format_records: Iterator[Iterator[_AnyRecord]] = (
-                format_type.value.reader(files)
+            format_records: Sequence[Iterator[_AnyRecord]] = tuple(
+                read_records(format_type, files)
                 for format_type, files in zip(formats, format_files)
             )
             documents = self.subset_view.value.combiner(*format_records)
@@ -956,7 +958,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
     def __init__(self, docs: ClueWeb22Docs):
         self.docs = docs
         self.full_iterator = iter(
-            _ClueWeb22Iterable(self.docs.subset_view, self._all_files)
+            _ClueWeb22Iterable(self.docs.subset_view, self._file_iterator_all)
         )
 
     def __next__(self) -> AnyDoc:
@@ -973,7 +975,10 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             return False
         return (index - start) % step == 0
 
-    def _file_paths(self, format_type: ClueWeb22Format) -> Sequence[Path]:
+    def _file_paths(
+            self,
+            format_type: ClueWeb22Format,
+    ) -> Iterator[Path]:
         languages: Iterable[ClueWeb22Language]
         if self.docs.language is not None:
             languages = {self.docs.language}
@@ -998,11 +1003,14 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         return sorted(paths)
 
     @contextmanager
-    def _all_files(self, format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
-        compression = format_type.value.compression
-        compression_extension = format_type.value.compression_extension
+    def _file_iterator_all(
+            self,
+            format_type: ClueWeb22Format,
+    ) -> ContextManager[Iterator[IO[bytes]]]:
 
         def generator() -> Iterator[IO[bytes]]:
+            compression = format_type.value.compression
+            compression_extension = format_type.value.compression_extension
             file_paths = self._file_paths(format_type)
             for file_path in file_paths:
                 with file_path.open("rb") as file:
@@ -1041,13 +1049,13 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         yield generator()
 
     @contextmanager
-    def _slice_files(
+    def _file_iterator_slice(
             self,
             format_type: ClueWeb22Format,
             start: int,
             stop: int,
             step: int,
-    ) -> Iterator[IO[bytes]]:
+    ) -> ContextManager[Iterator[IO[bytes]]]:
         compression = format_type.value.compression
         compression_extension = format_type.value.compression_extension
 
@@ -1151,10 +1159,12 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
 
         start, stop, step = processed_slice.indices(docs_count)
 
-        @contextmanager
-        def filter_files(format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._slice_files(format_type, start, stop, step) as files:
-                yield files
+        def filter_files(
+                format_type: ClueWeb22Format,
+        ) -> ContextManager[Iterator[IO[bytes]]]:
+            return self._file_iterator_slice(
+                format_type, start, stop, step
+            )
 
         iterator = iter(
             _ClueWeb22Iterable(self.docs.subset_view, filter_files)
@@ -1180,7 +1190,7 @@ class ClueWeb22Docstore(Docstore):
             self,
             format_type: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
-    ) -> Iterator[Tuple[Path, AbstractSet[_ClueWeb22DocId]]]:
+    ) -> Iterator[Tuple[Path, Iterator[_ClueWeb22DocId]]]:
         if self.docs.language is not None:
             invalid_doc_ids = {
                 doc_id
@@ -1196,26 +1206,20 @@ class ClueWeb22Docstore(Docstore):
 
         format_path = self.docs.path / format_type.value.id
 
-        file_path_to_doc_ids: Mapping[
-            Path, MutableSet[_ClueWeb22DocId]
-        ] = defaultdict(
-            lambda: set()
-        )
-        for doc_id in doc_ids:
-            file_path = format_path / f"{doc_id.path}{format_type.value.extension}"
-            file_path_to_doc_ids[file_path].add(doc_id)
+        def doc_id_format_path(doc_id: _ClueWeb22DocId) -> Path:
+            return format_path / f"{doc_id.path}{format_type.value.extension}"
 
         return (
-            (file_path, file_path_doc_ids)
-            for file_path, file_path_doc_ids in file_path_to_doc_ids.items()
+            (path, path_doc_ids)
+            for path, path_doc_ids in groupby(doc_ids, doc_id_format_path)
         )
 
     @contextmanager
-    def _files(
+    def _file_iterator(
             self,
             format_type: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
-    ) -> Iterator[IO[bytes]]:
+    ) -> ContextManager[Iterator[IO[bytes]]]:
         compression = format_type.value.compression
         compression_extension = format_type.value.compression_extension
 
@@ -1288,9 +1292,9 @@ class ClueWeb22Docstore(Docstore):
             for doc_id in doc_ids
         }
 
-        @contextmanager
-        def filter_files(format_type: ClueWeb22Format) -> Iterator[IO[bytes]]:
-            with self._files(format_type, doc_ids) as files:
-                yield files
+        def filter_files(
+                format_type: ClueWeb22Format,
+        ) -> ContextManager[Iterator[IO[bytes]]]:
+            return self._file_iterator(format_type, doc_ids)
 
         return iter(_ClueWeb22Iterable(self.docs.subset_view, filter_files))
