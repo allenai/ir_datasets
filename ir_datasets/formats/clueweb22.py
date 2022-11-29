@@ -122,12 +122,15 @@ def _read_txt(file: IO[bytes]) -> Iterator[_Txt]:
     with TextIOWrapper(file, encoding=ENCODING) as text_file:
         for line in text_file:
             json = loads(line)
+            url = json["URL"]
+            if url.endswith("\n"):
+                url = url[:-1]  # Strip trailing newline.
             yield _Txt(
                 doc_id=json["ClueWeb22-ID"],
                 # Bug:
                 # URLs from txt records contain an additional new line (\n)
                 # at the end of the URL but the other records don't.
-                url=json["URL"].removesuffix("\n"),
+                url=url,
                 url_hash=json["URL-hash"],
                 language=json["Language"],
                 text=json["Clean-Text"],
@@ -168,7 +171,9 @@ def _read_html(file: IO[bytes]) -> Iterator[_Html]:
             ]
             for annotation_type in AnnotationType
         }
-        html: bytes = document.reader.read().removesuffix(b"\r\n")
+        html: bytes = document.reader.read()
+        assert html.endswith(b"\r\n")
+        html = html[:-2]  # Strip trailing \r\n.
         yield _Html(
             doc_id=doc_id,
             url=url,
@@ -952,8 +957,8 @@ class ClueWeb22Docs(BaseDocs):
             f"{language_prefix}*_counts.csv"
         ))
         for format_counts_file in format_counts_files:
-            tag = format_counts_file.name \
-                .removesuffix("_counts.csv")
+            assert format_counts_file.name.endswith("_counts.csv")
+            tag = format_counts_file.name[:-11]  # Remove "_counts.csv"
             language = tag[:-2]
             stream = int(tag[-2:])
             with open(format_counts_file, "rt", encoding=ENCODING) as file:
@@ -1081,6 +1086,21 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
             yield from documents
 
 
+def _read_offsets(
+        file_path: Path,
+        format_type: ClueWeb22Format,
+) -> Iterator[int]:
+    assert file_path.name.endswith(format_type.value.extension)
+    offsets_name = (
+            file_path.name[:-len(format_type.value.extension)] +
+            format_type.value.offset_extension
+    )
+    offsets_file_path = file_path.with_name(offsets_name)
+    with offsets_file_path.open("rt", encoding=ENCODING) as offsets_file:
+        for offset in offsets_file:
+            yield int(offset)
+
+
 class _ClueWeb22Iterator(Iterator[AnyDoc]):
     docs: Final[ClueWeb22Docs]
     full_iterator: Final[Iterator[AnyDoc]]
@@ -1135,19 +1155,9 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                         assert compression_extension is None
 
                         # Read offsets:
-                        offsets_name = (
-                                file_path.name.removesuffix(
-                                    format_type.value.extension
-                                ) + format_type.value.offset_extension
-                        )
-                        offsets_file_path = file_path.with_name(offsets_name)
-                        with offsets_file_path.open(
-                                "rt", encoding=ENCODING) as offsets_file:
-                            first_offset = next(
-                                int(offset)
-                                for offset in offsets_file
-                            )
-
+                        first_offset = next(_read_offsets(
+                            file_path, format_type
+                        ))
                         file.seek(first_offset)
 
                         with GzipFile("rb", fileobj=file) as gzip_file:
@@ -1199,56 +1209,41 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                     if compression == ClueWeb22Compression.GZIP:
                         assert compression_extension is None
 
-                        # Read offsets:
-                        offsets_name = (
-                                file_path.name.removesuffix(
-                                    format_type.value.extension
-                                ) + format_type.value.offset_extension
+                        # Map global indices to file indices.
+                        file_indices = range(count)
+                        index_file_indices = (
+                            (index_offset + file_index, file_index)
+                            for file_index in file_indices
                         )
-                        offsets_file_path = file_path.with_name(offsets_name)
-                        with offsets_file_path.open(
-                                "rt", encoding=ENCODING) as offsets_file:
-                            offsets = [
-                                int(offset)
-                                for offset in offsets_file
-                            ]
 
-                            # Map global indices to file indices.
-                            file_indices = range(count)
-                            index_file_indices = (
-                                (index_offset + file_index, file_index)
-                                for file_index in file_indices
-                            )
+                        # Determine local indices to read.
+                        file_indices = {
+                            file_index
+                            for index, file_index in index_file_indices
+                            if in_slice(index)
+                        }
+                        if len(file_indices) == 0:
+                            # No indices in this file.
+                            continue
 
-                            # Determine local indices to read.
-                            file_indices = {
-                                file_index
-                                for index, file_index in index_file_indices
-                                if in_slice(index)
-                            }
-                            if len(file_indices) == 0:
-                                # No indices in this file.
-                                continue
+                        # Wrap file to skip unneeded offsets.
+                        offsets = _read_offsets(file_path, format_type)
+                        file = OffsetIOWrapper.from_offsets(
+                            file, offsets, file_indices
+                        )
 
-                            # Wrap file to skip unneeded offsets.
-                            file = OffsetIOWrapper.from_offsets(
-                                file, offsets, file_indices
-                            )
+                        # Decompress the wrapped file.
+                        with GzipFile(
+                                mode="rb",
+                                fileobj=file,
+                        ) as gzip_file:
+                            yield gzip_file
 
-                            # Decompress the wrapped file.
-                            with GzipFile(
-                                    mode="rb",
-                                    fileobj=file,
-                            ) as gzip_file:
-                                yield gzip_file
-
-                            index_offset += count
+                        index_offset += count
 
                     elif compression == ClueWeb22Compression.ZIP:
                         assert compression_extension is not None
                         with ZipFile(file, "r") as zip_file:
-                            names = zip_file.namelist()
-
                             # Map global indices to ZIP names.
                             index_names = (
                                 (index_offset + index, name)
@@ -1366,30 +1361,18 @@ class ClueWeb22Docstore(Docstore):
                             for doc_id in file_path_doc_ids
                         }
 
-                        # Read offsets:
-                        offsets_name = (
-                                file_path.name.removesuffix(
-                                    format_type.value.extension
-                                ) + format_type.value.offset_extension
+                        # Wrap file to skip unneeded offsets.
+                        offsets = _read_offsets(file_path, format_type)
+                        file = OffsetIOWrapper.from_offsets(
+                            file, offsets, indices
                         )
-                        offsets_file_path = file_path.with_name(offsets_name)
-                        with offsets_file_path.open(
-                                "rt", encoding=ENCODING) as offsets_file:
-                            offsets = (
-                                int(line)
-                                for line in offsets_file
-                            )
-                            # Wrap file to skip unneeded offsets.
-                            file = OffsetIOWrapper.from_offsets(
-                                file, offsets, indices
-                            )
 
-                            # Decompress the wrapped file.
-                            with GzipFile(
-                                    mode="rb",
-                                    fileobj=file,
-                            ) as gzip_file:
-                                yield gzip_file
+                        # Decompress the wrapped file.
+                        with GzipFile(
+                                mode="rb",
+                                fileobj=file,
+                        ) as gzip_file:
+                            yield gzip_file
 
                     elif compression == ClueWeb22Compression.ZIP:
                         assert compression_extension is not None
