@@ -690,6 +690,13 @@
   }
 },
 
+"clueweb22": {
+  "docs": {
+    "instructions": "ClueWeb22 is available by hard drives from the Carnegie Mellon University here: <https://lemurproject.org/clueweb22/obtain.php>\nMore details about the procedure can be found here: <https://ir-datasets.com/clueweb22.html#DataAccess>.\nLink the ClueWeb22 source files here: {path}\nShould contain directories like 'html', 'inlink', 'outlink', 'txt', 'jpg', and/or 'vdom'.",
+    "cache_path": "corpus"
+  }
+},
+
 "codec": {
   "documents": {
     "instructions": "The CODEC document collection is available on request (see here: <https://github.com/grill-lab/CODEC>). Once downloaded, move/link the comets_documents.jsonl file to {path}.",

@@ -2,6 +2,7 @@
 # utilities. This file loads them lazily if they are needed.
 _cache = {}
 
+
 def numpy():
     if 'numpy' not in _cache:
         import numpy
@@ -57,11 +58,13 @@ def trec_car():
         _cache['trec_car'] = trec_car
     return _cache['trec_car']
 
+
 def warc():
     if 'warc' not in _cache:
         import warc
         _cache['warc'] = warc
     return _cache['warc']
+
 
 def warc_clueweb09():
     if 'warc_clueweb09' not in _cache:
@@ -69,11 +72,20 @@ def warc_clueweb09():
         _cache['warc_clueweb09'] = warc3_wet_clueweb09
     return _cache['warc_clueweb09']
 
+
+def fastwarc():
+    if 'fastwarc' not in _cache:
+        import fastwarc
+        _cache['fastwarc'] = fastwarc
+    return _cache['fastwarc']
+
+
 def lz4_block():
     if 'lz4_block' not in _cache:
         import lz4.block
         _cache['lz4_block'] = lz4
     return _cache['lz4_block']
+
 
 def lz4_frame():
     if 'lz4_frame' not in _cache:
@@ -81,11 +93,13 @@ def lz4_frame():
         _cache['lz4_frame'] = lz4
     return _cache['lz4_frame']
 
+
 def zlib_state():
     if 'zlib_state' not in _cache:
         import zlib_state
         _cache['zlib_state'] = zlib_state
     return _cache['zlib_state']
+
 
 def xml_etree():
     if 'xml_etree' not in _cache:
@@ -93,11 +107,13 @@ def xml_etree():
         _cache['xml_etree'] = ET
     return _cache['xml_etree']
 
+
 def lxml_html():
     if 'lxml_html' not in _cache:
         import lxml.html
         _cache['lxml_html'] = lxml.html
     return _cache['lxml_html']
+
 
 def ijson():
     if 'ijson' not in _cache:
@@ -105,11 +121,13 @@ def ijson():
         _cache['ijson'] = ijson
     return _cache['ijson']
 
+
 def pyautocorpus():
     if 'pyautocorpus' not in _cache:
         import pyautocorpus
         _cache['pyautocorpus'] = pyautocorpus
     return _cache['pyautocorpus']
+
 
 def unlzw3():
     if 'unlzw3' not in _cache:
