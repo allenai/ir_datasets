@@ -12,8 +12,8 @@ from os.path import join
 from pathlib import Path
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Final, Iterator, IO,
-    TYPE_CHECKING, Iterable, Callable, Mapping, Union, AbstractSet, Tuple,
-    ContextManager
+    TYPE_CHECKING, Iterable, Mapping, Union, AbstractSet, Tuple,
+    ContextManager, Protocol
 )
 from zipfile import ZipFile
 
@@ -520,6 +520,11 @@ class ClueWeb22Compression(Enum):
     ZIP = 2
 
 
+class _FormatReader(Protocol):
+    def __call__(self, file: IO[bytes]) -> Iterator[_AnyRecord]:
+        ...
+
+
 class _FormatInfo(NamedTuple):
     id: str
     """
@@ -543,7 +548,7 @@ class _FormatInfo(NamedTuple):
     """
     File extension of files within the compressed archive.
     """
-    reader: Callable[[IO[bytes]], Iterator[_AnyRecord]]
+    reader: _FormatReader
     """
     Function for reading records from the decompressed files.
     """
@@ -630,6 +635,11 @@ class ClueWeb22Language(Enum):
     OTHER = _LanguageInfo(id="other", tag="other-languages")
 
 
+class _Combiner(Protocol):
+    def __call__(self, *args, ) -> Iterator[AnyDoc]:
+        ...
+
+
 class _SubsetInfo(NamedTuple):
     id: str
     """
@@ -648,7 +658,7 @@ class _SubsetInfo(NamedTuple):
     """
     Type of one single document.
     """
-    combiner: Callable[[...], Iterator[AnyDoc]]
+    combiner: _Combiner
     """
     Function for combining iterables of the different format records 
     to documents. The record iterators are passed to the function 
@@ -1020,18 +1030,22 @@ class ClueWeb22Docs(BaseDocs):
 # Iterators and doc store classes for accessing multiple documents efficiently.
 
 
+class _FileIterator(Protocol):
+    def __call__(
+            self,
+            format_type: ClueWeb22Format
+    ) -> ContextManager[Iterator[IO[bytes]]]:
+        ...
+
+
 class _ClueWeb22Iterable(Iterable[AnyDoc]):
     subset_view: Final[ClueWeb22Subset]
-    file_iterator: Final[Callable[
-        [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
-    ]]
+    file_iterator: Final[_FileIterator]
 
     def __init__(
             self,
             subset_view: ClueWeb22Subset,
-            file_iterator: Callable[
-                [ClueWeb22Format], ContextManager[Iterator[IO[bytes]]]
-            ],
+            file_iterator: _FileIterator,
     ):
         self.subset_view = subset_view
         self.file_iterator = file_iterator
