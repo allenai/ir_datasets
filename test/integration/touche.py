@@ -2,9 +2,10 @@ from unittest import main
 from re import compile
 
 from ir_datasets.formats import ToucheQuery, TrecQrel, ToucheTitleQuery, \
-    ToucheComparativeQuery, ToucheQualityQrel, ToucheQualityCoherenceQrel, \
-    ToucheQualityComparativeStanceQrel, ToucheComparativeStance, \
-    ToucheControversialStanceQrel, ToucheControversialStance
+    ToucheComparativeQuery, ToucheCausalQuery, ToucheQualityQrel, \
+    ToucheQualityCoherenceQrel, ToucheQualityComparativeStanceQrel, \
+    ToucheComparativeStance, ToucheControversialStanceQrel, \
+    ToucheControversialStance
 from test.integration.base import DatasetIntegrationTest
 
 
@@ -228,6 +229,87 @@ class TestTouche(DatasetIntegrationTest):
                     ),
                     narrative=compile(
                         "Highly relevant arguments take a clear stance toward the universal basic income, giving clear premises. Relevant arguments offer only emotional arguments, or talk about minimum wages, mentioning universal basic income only in passing."
+                    ),
+                ),
+            }
+        )
+        self._test_queries(
+            "clueweb22/b/touche-2023-task-1",
+            count=50,
+            items={
+                0: ToucheQuery(
+                    query_id="1",
+                    title="Should teachers get tenure?",
+                    description=compile(
+                        "A user has heard .{215} professors is of interest."
+                    ),
+                    narrative=compile(
+                        "Highly relevant arguments make a clear statement about tenure for teachers in schools or universities. Relevant arguments consider tenure more generally, not specifically for teachers, or, instead of talking about tenure, consider the situation of teachers' financial independence."
+                    ),
+                ),
+                49: ToucheQuery(
+                    query_id="50",
+                    title="Should everyone get a universal basic income?",
+                    description=compile(
+                        "Redistribution of wealth is a fundamental concept of many economies and social systems. A key component might be a universal basic income, however, a user wonders whether this truly would help."
+                    ),
+                    narrative=compile(
+                        "Highly relevant arguments take a clear stance toward the universal basic income, giving clear premises. Relevant arguments offer only emotional arguments, or talk about minimum wages, mentioning universal basic income only in passing."
+                    ),
+                ),
+            }
+        )
+        self._test_queries(
+            "clueweb22/b/touche-2023-task-2",
+            count=50,
+            items={
+                0: ToucheCausalQuery(
+                    query_id="1",
+                    title="Can eating broccoli lead to constipation?",
+                    cause="eating broccoli",
+                    effect="constipation",
+                    description=(
+                        "A user is experiencing constipation and is searching for potential causes of their condition. They want to find out if having eaten broccoli regularly could be the reason."
+                    ),
+                    narrative=(
+                        "Highly relevant documents will provide information on a potential causal connection between eating broccoli and constipation. This includes documents stating or giving evidence that the first is (or is not) a cause of the other. Documents stating that there is not enough evidence to decide either way are also highly relevant. Relevant documents will provide information about other fibrous foods causing or not causing constipation or documents listing other possible conditions caused by eating broccoli. Documents are not relevant if they either mention one or both concepts, but do not provide any information about their causal relation. Documents not mentioning either concept are also not relevant."
+                    ),
+                ),
+                49: ToucheCausalQuery(
+                    query_id="50",
+                    title="Can a financial crisis cause a recession?",
+                    cause="financial crisis",
+                    effect="recession",
+                    description=(
+                        "A user is worried about a potential financial crisis and is wondering if this may lead to a world-wide recession."
+                    ),
+                    narrative=(
+                        "Highly relevant documents will provide information on a potential causal connection between financial crisis and recession. This includes documents stating or giving evidence that the first is (or is not) a cause of the other. Documents stating that there is not enough evidence to decide either way are also highly relevant. Relevant documents may contain implicit information on whether the causal relationship exists or does not exist, e.g., by listing all other causes or effects. Documents are not relevant if they either mention one or both concepts, but do not provide any information about their causal relation. Documents not mentioning either concept are also not relevant. Documents containing information about recessions possibly leading to financial crises are not relevant."
+                    ),
+                ),
+            }
+        )
+        self._test_queries(
+            "touche-image/2022-06-13/touche-2023-task-3",
+            count=50,
+            items={
+                0: ToucheQuery(
+                    query_id="51",
+                    title="Do we need sex education in schools?",
+                    description=(
+                        "An adult user now has a partner for the first time and searched the Internet for information on contraception. They found that some schools provide sex education, and wonder why this is not mandatory everywhere."),
+                    narrative=(
+                        "On-topic images address, for example, the treatment of sex and related topics in a school setting. Pro images might be shared on social media with this text (no irony, no link): We need sex education in schools."
+                    ),
+                ),
+                49: ToucheQuery(
+                    query_id="100",
+                    title="Do we need cash?",
+                    description=(
+                        "A user pays with a card for the first time in their life. Impressed by the simplicity, they wonder whether they need cash at all."
+                    ),
+                    narrative=(
+                        "On-topic images address, for example, the advantages, problems or inconveniences of using cash, or with alternatives for small or large purchases. Pro images might be shared on social media with this text (no irony, no link): We need cash."
                     ),
                 ),
             }
