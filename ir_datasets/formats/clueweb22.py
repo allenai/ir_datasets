@@ -669,6 +669,11 @@ class _SubsetInfo(NamedTuple):
     Subset ID that this subset extends, meaning that it supports 
     all fields from the extended subset.
     """
+    hide: bool
+    """
+    Temporary flag to hide subsets that are not yet 
+    fully implemented and tested.
+    """
 
 
 class ClueWeb22Subset(Enum):
@@ -681,6 +686,7 @@ class ClueWeb22Subset(Enum):
         doc_type=ClueWeb22LDoc,
         combiner=_combine_l_docs,
         extends=None,
+        hide=True,
     )
     A = _SubsetInfo(
         id="A",
@@ -695,6 +701,7 @@ class ClueWeb22Subset(Enum):
         doc_type=ClueWeb22ADoc,
         combiner=_combine_a_docs,
         extends="L",
+        hide=True,
     )
     B = _SubsetInfo(
         id="B",
@@ -710,6 +717,7 @@ class ClueWeb22Subset(Enum):
         doc_type=ClueWeb22BDoc,
         combiner=_combine_b_docs,
         extends="A",
+        hide=False,
     )
 
     @property

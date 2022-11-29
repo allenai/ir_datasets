@@ -18,6 +18,8 @@ def _init():
     )
 
     for subset in ClueWeb22Subset:
+        if subset.value.hide:
+            continue
         subset_tag = subset.value.tag
         registry.register(
             f"{NAME}/{subset_tag}",

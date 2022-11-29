@@ -49,7 +49,7 @@ class TestClueWeb22(DatasetIntegrationTest):
         self.assertFalse(dataset.has_docpairs())
         self.assertFalse(dataset.has_qlogs())
 
-        subsets = ["b", "a", "l"]
+        subsets = ["b"]
         for subset in subsets:
             subset_dataset: Dataset = load(f"clueweb22/{subset}")
             self.assertTrue(subset_dataset.has_docs())
@@ -73,7 +73,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                 self.assertFalse(lang_dataset.has_qlogs())
                 self.assertEqual(lang_dataset.docs_lang(), lang)
 
-            subset_views = subsets[subsets.index(subset) + 1:]
+            all_subsets = ["b", "a", "l"]
+            subset_views = all_subsets[all_subsets.index(subset) + 1:]
             for subset_view in subset_views:
                 subset_view_dataset: Dataset = load(
                     f"clueweb22/{subset}/as-{subset_view}"
