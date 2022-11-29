@@ -62,21 +62,21 @@ def _init():
                     )
                 ),
             )
-            for language in ClueWeb22Language:
-                language_tag = f"{subset_view_tag}/{language.value.tag}"
-                registry.register(
-                    f"{NAME}/{language_tag}",
-                    Dataset(
-                        documentation(language_tag),
-                        ClueWeb22Docs(
-                            name=NAME,
-                            source=download["docs"],
-                            subset=subset,
-                            subset_view=subset_view,
-                            language=language,
-                        )
-                    ),
-                )
+            # for language in ClueWeb22Language:
+            #     language_tag = f"{subset_view_tag}/{language.value.tag}"
+            #     registry.register(
+            #         f"{NAME}/{language_tag}",
+            #         Dataset(
+            #             documentation(language_tag),
+            #             ClueWeb22Docs(
+            #                 name=NAME,
+            #                 source=download["docs"],
+            #                 subset=subset,
+            #                 subset_view=subset_view,
+            #                 language=language,
+            #             )
+            #         ),
+            #     )
 
 
 _init()
