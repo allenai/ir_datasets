@@ -899,7 +899,7 @@ class ClueWeb22Docs(BaseDocs):
         assert self.subset_view in subset.subset_views
         assert self._version.major > 0
 
-    def docs_path(self, force: bool = True) -> Union[str, PathLike[str]]:
+    def docs_path(self, force: bool = True) -> Union[str, PathLike]:
         return self.source.path(force)
 
     @cached_property
