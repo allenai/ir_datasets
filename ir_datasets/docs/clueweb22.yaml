@@ -247,6 +247,16 @@ a/other-languages:
     </p>
   docs_instructions: *inst
 
+a/as-l:
+  desc: |
+    <p>
+    Category A subset of the ClueWeb22 dataset with 2B mostly head web pages 
+    (1B in English, 1B in other languages; 20% of the whole dataset),
+    only providing record types from category L (for faster iteration).
+    This subset provides only clean text.
+    </p>
+  docs_instructions: *inst
+
 b:
   desc: |
     <p>
@@ -340,5 +350,25 @@ b/other-languages:
     <span class="lang-code">po</span>, 
     <span class="lang-code">pt</span>, 
     <span class="lang-code">zh</span>
+    </p>
+  docs_instructions: *inst
+
+b/as-l:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with 200M most popular web pages 
+    (100M in English, 100M in other languages; 2% of the whole dataset),
+    only providing record types from category L (for faster iteration).
+    This subset provides only clean text.
+    </p>
+  docs_instructions: *inst
+
+b/as-a:
+  desc: |
+    <p>
+    Category B subset of the ClueWeb22 dataset with 200M most popular web pages 
+    (100M in English, 100M in other languages; 2% of the whole dataset),
+    only providing record types from category A (for faster iteration).
+    This subset provides HTML, clean text, and, semantic analysis.
     </p>
   docs_instructions: *inst
