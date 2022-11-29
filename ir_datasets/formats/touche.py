@@ -29,6 +29,15 @@ class ToucheComparativeQuery(NamedTuple):
     narrative: str
 
 
+class ToucheCausalQuery(NamedTuple):
+    query_id: str
+    title: str
+    cause: str
+    effect: str
+    description: str
+    narrative: str
+
+
 class ToucheQualityQrel(NamedTuple):
     query_id: str
     doc_id: str
@@ -221,6 +230,60 @@ class ToucheComparativeQueries(BaseQueries):
 
     def queries_cls(self):
         return ToucheComparativeQuery
+
+    def queries_namespace(self):
+        return self._namespace
+
+    def queries_lang(self):
+        return self._language
+
+
+class ToucheCausalQueries(BaseQueries):
+    _source: Any
+    _namespace: Optional[str]
+    _language: Optional[str]
+
+    def __init__(
+            self,
+            source: Any,
+            namespace: Optional[str] = None,
+            language: Optional[str] = None,
+    ):
+        self._source = source
+        self._namespace = namespace
+        self._language = language
+
+    def queries_path(self):
+        return self._source.path()
+
+    def queries_iter(self):
+        with self._source.stream() as file:
+            tree: ElementTree = parse(file)
+            root: Element = tree.getroot()
+            assert root.tag == "topics"
+
+            for element in root:
+                element: Element
+                assert element.tag == "topic"
+                number = int(element.findtext("number").strip())
+                title = element.findtext("title").strip()
+                cause = element.findtext("cause")
+                effect = element.findtext("effect")
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
+                yield ToucheCausalQuery(
+                    str(number),
+                    title,
+                    cause,
+                    effect,
+                    description,
+                    narrative,
+                )
+
+    def queries_cls(self):
+        return ToucheCausalQuery
 
     def queries_namespace(self):
         return self._namespace
