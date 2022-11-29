@@ -243,12 +243,14 @@
     Touché 2022 is the third lab on argument retrieval at CLEF 2022 featuring three tasks.
     </p>
     <p>
+    Given a controversial topic, the task is to retrieve images 
+    (from <a class="ds-ref">touche-image/2022-06-13</a>) 
+    for each stance (pro/con) that show support for that stance.
+    </p>
+    <p>
     Systems are evaluated on 50 topics by the ratio of images among the 20 retrieved images 
     for each topic (10 images for each stance) that are all three: 
     relevant to the topic, argumentative, and have the associated stance.
-    </p>
-    <p>
-    Systems are evaluated on Touché topics 1-50 by the ratio of images among the 20 retrieved images for each topic (10 images for each stance) that are all three: relevant to the topic, argumentative, and have the associated stance.
     </p>
     <ul>
     <li><a href="https://touche.webis.de/clef22/touche22-web/image-retrieval-for-arguments">Task 3 website</a></li>
@@ -340,7 +342,7 @@
     </p>
     <p>
     Given a controversial topic, the task is to retrieve images 
-    (from <a class="ds-ref">touche-image-search/2022-06-13</a>) 
+    (from <a class="ds-ref">touche-image/2022-06-13</a>) 
     for each stance (pro/con) that show support for that stance.
     </p>
     <p>
