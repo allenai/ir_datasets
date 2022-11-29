@@ -863,7 +863,7 @@ class ClueWeb22Docs(BaseDocs):
         for the specified format.
         """
 
-        counts_dir = self.path / "record_counts" / "record_counts"
+        counts_dir = self.path / "record_counts"
         format_counts_dir = counts_dir / format_type.value.id
         language_prefix: str
         if self.language is not None:
@@ -903,7 +903,7 @@ class ClueWeb22Docs(BaseDocs):
         for a specific subset, even if the base path
         contains a "broader" subset (with possibly more files).
         """
-        diff_formats = self.subset_view.diff_formats
+        diff_formats = self.subset.diff_formats
         diff_format_type = next(iter(diff_formats))
         return self._record_counts(diff_format_type)
 
