@@ -110,8 +110,10 @@ class ToucheQueries(BaseQueries):
                 assert element.tag == "topic"
                 number = int(element.findtext("number").strip())
                 title = element.findtext("title").strip()
-                description = element.findtext("description").strip()
-                narrative = element.findtext("narrative").strip()
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
                 yield ToucheQuery(
                     str(number),
                     title,
@@ -205,8 +207,10 @@ class ToucheComparativeQueries(BaseQueries):
                 objects = element.findtext("objects").split(",")
                 objects = (obj.strip() for obj in objects)
                 object1, object2 = objects
-                description = element.findtext("description").strip()
-                narrative = element.findtext("narrative").strip()
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
                 yield ToucheComparativeQuery(
                     str(number),
                     title,
