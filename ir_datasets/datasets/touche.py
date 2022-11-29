@@ -275,18 +275,6 @@ def _init():
         documentation("2023/task-1"),
     )
     register_ongoing_dataset(
-        f"clueweb22/{NAME}-2023-task-1/bm25-top1000",
-        JsonlDocs(
-            cached_download("2023/task-1/documents/bm25-top1000", "jsonl"),
-            mapping={"doc_id": "docno", "text": "text"},
-            namespace=f"clueweb22/{NAME}-2023-task-1/bm25-top1000",
-            lang="en",
-            count_hint=50000
-        ),
-        registry[f"clueweb22/{NAME}-2023-task-1"].queries_handler(),
-        documentation("2023/task-1/bm25-top1000"),
-    )
-    register_ongoing_dataset(
         f"clueweb22/{NAME}-2023-task-2",
         registry["clueweb22"].docs_handler(),
         ToucheComparativeQueries(
@@ -295,18 +283,6 @@ def _init():
             language="en",
         ),
         documentation("2023/task-2"),
-    )
-    register_ongoing_dataset(
-        f"clueweb22/{NAME}-2023-task-2/bm25-top1000",
-        JsonlDocs(
-            cached_download("2023/task-2/documents/bm25-top1000", "jsonl"),
-            mapping={"doc_id": "docno", "text": "text"},
-            namespace=f"clueweb22/{NAME}-2023-task-2/bm25-top1000",
-            lang="en",
-            count_hint=50000
-        ),
-        registry[f"clueweb22/{NAME}-2023-task-2"].queries_handler(),
-        documentation("2023/task-2/bm25-top1000"),
     )
     register_ongoing_dataset(
         f"touche-image/2022-06-13/{NAME}-2023-task-3",
