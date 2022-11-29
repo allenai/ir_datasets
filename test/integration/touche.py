@@ -21,20 +21,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="Should teachers get tenure?",
                     description=compile(
-                        "A user has heard that some countries do give teach.{159}teachers vs. university professors is of interest\."
+                        r"A user has heard that some countries do give"
+                        r".{165}"
+                        r"teachers vs. university professors is of interest\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments make a clear statement a.{181}the situation of teachers' financial independence\."
+                        r"Highly relevant arguments make a clear statement a"
+                        r".{181}"
+                        r"the situation of teachers' financial independence\."
                     ),
                 ),
                 48: ToucheQuery(
                     query_id="50",
                     title="Should everyone get a universal basic income?",
                     description=compile(
-                        "Redistribution of wealth is a fundamental concept .{93}ver, a user wonders whether this truly would help\."
+                        r"Redistribution of wealth is a fundamental concept"
+                        r".{99}"
+                        r"a user wonders whether this truly would help\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments take a clear stance towa.{134}mentioning universal basic income only in passing\."
+                        r"Highly relevant arguments take a clear stance"
+                        r".{139}"
+                        r"mentioning universal basic income only in passing\."
                     ),
                 ),
             }
@@ -47,17 +55,29 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="Should teachers get tenure?",
                     description=compile(
-                        "A user has heard that some countries do give teach.{159}teachers vs. university professors is of interest\."
+                        r"A user has heard that some countries do give"
+                        r".{165}"
+                        r"teachers vs. university professors is of interest\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments make a clear statement a.{181}the situation of teachers' financial independence\."
+                        r"Highly relevant arguments make a clear statement a"
+                        r".{181}"
+                        r"the situation of teachers' financial independence\."
                     ),
                 ),
                 48: ToucheQuery(
                     query_id="50",
                     title="Should everyone get a universal basic income?",
-                    description=compile("Redistribution of wealth is a fundamental concept .{93}ver, a user wonders whether this truly would help\."),
-                    narrative=compile("Highly relevant arguments take a clear stance towa.{134}mentioning universal basic income only in passing\."),
+                    description=compile(
+                        r"Redistribution of wealth is a fundamental concept"
+                        r".{99}"
+                        r"a user wonders whether this truly would help\."
+                    ),
+                    narrative=compile(
+                        r"Highly relevant arguments take a clear stance"
+                        r".{139}"
+                        r"mentioning universal basic income only in passing\."
+                    ),
                 ),
             }
         )
@@ -69,20 +89,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="Should teachers get tenure?",
                     description=compile(
-                        "A user has heard that some countries do give teach.{159}teachers vs. university professors is of interest\."
+                        r"A user has heard that some countries do give"
+                        r".{165}"
+                        r"teachers vs. university professors is of interest\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments make a clear statement a.{181}the situation of teachers' financial independence\."
+                        r"Highly relevant arguments make a clear statement a"
+                        r".{181}"
+                        r"the situation of teachers' financial independence\."
                     ),
                 ),
                 48: ToucheQuery(
                     query_id="50",
                     title="Should everyone get a universal basic income?",
                     description=compile(
-                        "Redistribution of wealth is a fundamental concept .{93}ver, a user wonders whether this truly would help\."
+                        r"Redistribution of wealth is a fundamental concept"
+                        r".{99}"
+                        r"a user wonders whether this truly would help\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments take a clear stance towa.{134}mentioning universal basic income only in passing\."
+                        r"Highly relevant arguments take a clear stance"
+                        r".{139}"
+                        r"mentioning universal basic income only in passing\."
                     ),
                 ),
             }
@@ -95,20 +123,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="What is the difference between sex and love?",
                     description=compile(
-                        "A potentially younger user has heard people talk a.{147}ontrast, what characterizes a loving relationship\."
+                        r"A potentially younger user has heard people talk"
+                        r".{158}"
+                        r"what characterizes a loving relationship\."
                     ),
                     narrative=compile(
-                        "Relevant documents will contain some description o.{155}f what people are looking for in either direction\."
+                        r"Relevant documents will contain some description"
+                        r".{159}"
+                        r"what people are looking for in either direction\."
                     ),
                 ),
                 49: ToucheQuery(
                     query_id="50",
                     title="Whose salary is higher: basketball or soccer players?",
                     description=compile(
-                        "A young married couple raises a 14-year old boy wh.{313}income to players in different parts of the world\."
+                        r"A young married couple raises a 14-year old boy"
+                        r".{316}"
+                        r"income to players in different parts of the world\."
                     ),
                     narrative=compile(
-                        "Highly relevant documents provide information on a.{496}iptions of basketball and soccer are not relevant\."
+                        r"Highly relevant documents provide information on"
+                        r".{506}"
+                        r"of basketball and soccer are not relevant\."
                     ),
                 ),
             }
@@ -135,20 +171,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="51",
                     title="What is better at reducing fever in children, Ibuprofen or Aspirin?",
                     description=compile(
-                        "Younger parents have their 8-year old child sick\. .{400}en and aspirin for reducing the fever in children\."
+                        r"Younger parents have their 8-year old child sick"
+                        r".{405}"
+                        r"and aspirin for reducing the fever in children\."
                     ),
                     narrative=compile(
-                        "Relevant documents will describe ibuprofen, aspiri.{258} or ingredients of the medicines are not relevant\."
+                        r"Relevant documents will describe ibuprofen"
+                        r".{267}"
+                        r"or ingredients of the medicines are not relevant\."
                     ),
                 ),
                 49: ToucheQuery(
                     query_id="100",
                     title="Should I learn Python or R for data analysis?",
                     description=compile(
-                        "Wondering whether you should use Python or R for d.{318}ore useful, flexible, easy to learn and efficient\."
+                        r"Wondering whether you should use Python or R for"
+                        r".{324}"
+                        r"useful, flexible, easy to learn and efficient\."
                     ),
                     narrative=compile(
-                        "Relevant documents should compare two programming .{430}re not related to data analysis, are not relevant\."
+                        r"Relevant documents should compare two programming"
+                        r".{434}"
+                        r"not related to data analysis, are not relevant\."
                     ),
                 ),
             }
@@ -161,20 +205,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="Should teachers get tenure?",
                     description=compile(
-                        "A user has heard .{215} professors is of interest."
+                        r"A user has heard that some countries do give"
+                        r".{165}"
+                        r"teachers vs. university professors is of interest\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments make a clear statement about tenure for teachers in schools or universities. Relevant arguments consider tenure more generally, not specifically for teachers, or, instead of talking about tenure, consider the situation of teachers' financial independence."
+                        r"Highly relevant arguments make a clear statement a"
+                        r".{181}"
+                        r"the situation of teachers' financial independence\."
                     ),
                 ),
                 49: ToucheQuery(
                     query_id="50",
                     title="Should everyone get a universal basic income?",
                     description=compile(
-                        "Redistribution of wealth is a fundamental concept of many economies and social systems. A key component might be a universal basic income, however, a user wonders whether this truly would help."
+                        r"Redistribution of wealth is a fundamental concept"
+                        r".{99}"
+                        r"a user wonders whether this truly would help\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments take a clear stance toward the universal basic income, giving clear premises. Relevant arguments offer only emotional arguments, or talk about minimum wages, mentioning universal basic income only in passing."
+                        r"Highly relevant arguments take a clear stance"
+                        r".{139}"
+                        r"mentioning universal basic income only in passing\."
                     ),
                 ),
             }
@@ -188,10 +240,14 @@ class TestTouche(DatasetIntegrationTest):
                     title="Which is better, a laptop or a desktop?",
                     objects=("laptop", "desktop"),
                     description=compile(
-                        "A user wants to buy .{272} gaming desktop PC."
+                        r"A user wants to buy a new PC but has no prior"
+                        r".{223}"
+                        r"of a rather \"stationary\" gaming desktop PC\."
                     ),
                     narrative=compile(
-                        "Highly relevant documents will describe the major similarities and dissimilarities of laptops and desktops along with the respective advantages and disadvantages of specific usage scenarios. A comparison of the technical and architectural characteristics without personal opinion, recommendation, or pros/cons is not relevant."
+                        r"Highly relevant documents will describe the major"
+                        r".{232}"
+                        r"recommendation, or pros/cons is not relevant\."
                     ),
                 ),
                 49: ToucheComparativeQuery(
@@ -199,10 +255,14 @@ class TestTouche(DatasetIntegrationTest):
                     title="Should I learn Python or R for data analysis?",
                     objects=("Python", "R"),
                     description=compile(
-                        "Wondering whether you should use Python or R for data analysis\? It's hard to know whether to use Python or R for data analysis. And that's especially true if you're a newbie data analyst looking for the right language to start with. Users are looking for documents that help them decide which programming language, Python or R, is better suited for data analysis, is more useful, flexible, easy to learn and efficient."
+                        r"Wondering whether you should use Python or R for"
+                        r".{319}"
+                        r"more useful, flexible, easy to learn and efficient\."
                     ),
                     narrative=compile(
-                        "Relevant documents should compare two programming languages for data analysis: Python and R. Highly relevant documents should compare the two objects in terms of efficiency, usefulness, easiness to learn and so on. Highly relevant documents would ideally compare most of the features. The documents that only describe one language, but provide insights on how it is good for data analysis are relevant. Arguments and opinions of using one of the two or both for other tasks that are not related to data analysis, are not relevant."
+                        r"Relevant documents should compare two programming"
+                        r".{430}"
+                        r"are not related to data analysis, are not relevant\."
                     ),
                 ),
             }
@@ -215,20 +275,28 @@ class TestTouche(DatasetIntegrationTest):
                     query_id="1",
                     title="Should teachers get tenure?",
                     description=compile(
-                        "A user has heard .{215} professors is of interest."
+                        r"A user has heard that some countries do give"
+                        r".{165}"
+                        r"teachers vs. university professors is of interest\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments make a clear statement about tenure for teachers in schools or universities. Relevant arguments consider tenure more generally, not specifically for teachers, or, instead of talking about tenure, consider the situation of teachers' financial independence."
+                        r"Highly relevant arguments make a clear statement a"
+                        r".{181}"
+                        r"the situation of teachers' financial independence\."
                     ),
                 ),
                 49: ToucheQuery(
                     query_id="50",
                     title="Should everyone get a universal basic income?",
                     description=compile(
-                        "Redistribution of wealth is a fundamental concept of many economies and social systems. A key component might be a universal basic income, however, a user wonders whether this truly would help."
+                        r"Redistribution of wealth is a fundamental concept"
+                        r".{99}"
+                        r"a user wonders whether this truly would help\."
                     ),
                     narrative=compile(
-                        "Highly relevant arguments take a clear stance toward the universal basic income, giving clear premises. Relevant arguments offer only emotional arguments, or talk about minimum wages, mentioning universal basic income only in passing."
+                        r"Highly relevant arguments take a clear stance"
+                        r".{139}"
+                        r"mentioning universal basic income only in passing\."
                     ),
                 ),
             }
@@ -268,11 +336,15 @@ class TestTouche(DatasetIntegrationTest):
                     title="Can eating broccoli lead to constipation?",
                     cause="eating broccoli",
                     effect="constipation",
-                    description=(
-                        "A user is experiencing constipation and is searching for potential causes of their condition. They want to find out if having eaten broccoli regularly could be the reason."
+                    description=compile(
+                        r"A user is experiencing constipation and is searching"
+                        r".{74}"
+                        r"eaten broccoli regularly could be the reason\."
                     ),
-                    narrative=(
-                        "Highly relevant documents will provide information on a potential causal connection between eating broccoli and constipation. This includes documents stating or giving evidence that the first is (or is not) a cause of the other. Documents stating that there is not enough evidence to decide either way are also highly relevant. Relevant documents will provide information about other fibrous foods causing or not causing constipation or documents listing other possible conditions caused by eating broccoli. Documents are not relevant if they either mention one or both concepts, but do not provide any information about their causal relation. Documents not mentioning either concept are also not relevant."
+                    narrative=compile(
+                        r"Highly relevant documents will provide information"
+                        r".{608}"
+                        r"mentioning either concept are also not relevant\."
                     ),
                 ),
                 49: ToucheCausalQuery(
@@ -280,11 +352,15 @@ class TestTouche(DatasetIntegrationTest):
                     title="Can a financial crisis cause a recession?",
                     cause="financial crisis",
                     effect="recession",
-                    description=(
-                        "A user is worried about a potential financial crisis and is wondering if this may lead to a world-wide recession."
+                    description=compile(
+                        r"A user is worried about a potential financial crisis"
+                        r".{18}"
+                        r"if this may lead to a world-wide recession\."
                     ),
-                    narrative=(
-                        "Highly relevant documents will provide information on a potential causal connection between financial crisis and recession. This includes documents stating or giving evidence that the first is (or is not) a cause of the other. Documents stating that there is not enough evidence to decide either way are also highly relevant. Relevant documents may contain implicit information on whether the causal relationship exists or does not exist, e.g., by listing all other causes or effects. Documents are not relevant if they either mention one or both concepts, but do not provide any information about their causal relation. Documents not mentioning either concept are also not relevant. Documents containing information about recessions possibly leading to financial crises are not relevant."
+                    narrative=compile(
+                        r"Highly relevant documents will provide information"
+                        r".{693}"
+                        r"leading to financial crises are not relevant\."
                     ),
                 ),
             }
@@ -296,20 +372,29 @@ class TestTouche(DatasetIntegrationTest):
                 0: ToucheQuery(
                     query_id="51",
                     title="Do we need sex education in schools?",
-                    description=(
-                        "An adult user now has a partner for the first time and searched the Internet for information on contraception. They found that some schools provide sex education, and wonder why this is not mandatory everywhere."),
-                    narrative=(
-                        "On-topic images address, for example, the treatment of sex and related topics in a school setting. Pro images might be shared on social media with this text (no irony, no link): We need sex education in schools."
+                    description=compile(
+                        r"An adult user now has a partner for the first time"
+                        r".{113}"
+                        r"and wonder why this is not mandatory everywhere\."
+                    ),
+                    narrative=compile(
+                        r"On-topic images address, for example, the treatment"
+                        r".{110}"
+                        r"irony, no link\): We need sex education in schools\."
                     ),
                 ),
                 49: ToucheQuery(
                     query_id="100",
                     title="Do we need cash?",
-                    description=(
-                        "A user pays with a card for the first time in their life. Impressed by the simplicity, they wonder whether they need cash at all."
+                    description=compile(
+                        r"A user pays with a card for the first time in their"
+                        r".{36}"
+                        r"they wonder whether they need cash at all\."
                     ),
-                    narrative=(
-                        "On-topic images address, for example, the advantages, problems or inconveniences of using cash, or with alternatives for small or large purchases. Pro images might be shared on social media with this text (no irony, no link): We need cash."
+                    narrative=compile(
+                        r"On-topic images address, for example, the"
+                        r".{149}"
+                        r"with this text \(no irony, no link\): We need cash\."
                     ),
                 ),
             }
