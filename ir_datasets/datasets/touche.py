@@ -3,10 +3,10 @@ from typing import Dict
 from ir_datasets import registry
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import ToucheQueries, ToucheTitleQueries, \
-    ToucheComparativeQueries, ToucheQrels, ToucheQualityQrels, \
-    ToucheQualityComparativeStanceQrels, ToucheControversialStanceQrels, \
-    ToucheQualityCoherenceQrels, TouchePassageDocs, BaseQueries, BaseQrels, \
-    BaseDocs, JsonlDocs
+    ToucheComparativeQueries, ToucheCausalQueries, ToucheQrels, \
+    ToucheQualityQrels, ToucheQualityComparativeStanceQrels, \
+    ToucheControversialStanceQrels, ToucheQualityCoherenceQrels, \
+    TouchePassageDocs, BaseQueries, BaseQrels, BaseDocs
 from ir_datasets.util import DownloadConfig, home_path, Cache, ZipExtract, \
     GzipExtract
 
@@ -269,17 +269,19 @@ def _init():
 
     # Touché 2023 (qrels to be released later)
     register_ongoing_dataset(
-        f"clueweb22/{NAME}-2023-task-1",
-        registry["clueweb22"].docs_handler(),
-        registry[f"argsme/2020-04-01/{NAME}-2022-task-1"].queries_handler(),
+        f"clueweb22/b/{NAME}-2023-task-1",
+        registry["clueweb22/b"].docs_handler(),
+        registry[
+            f"argsme/2020-04-01/processed/{NAME}-2022-task-1"
+        ].queries_handler(),
         documentation("2023/task-1"),
     )
     register_ongoing_dataset(
-        f"clueweb22/{NAME}-2023-task-2",
-        registry["clueweb22"].docs_handler(),
-        ToucheComparativeQueries(
-            TODO,
-            namespace=f"clueweb22/{NAME}-2023-task-2",
+        f"clueweb22/b/{NAME}-2023-task-2",
+        registry["clueweb22/b"].docs_handler(),
+        ToucheCausalQueries(
+            cached_download("2023/task-2/queries", "xml"),
+            namespace=f"clueweb22/b/{NAME}-2023-task-2",
             language="en",
         ),
         documentation("2023/task-2"),
@@ -288,7 +290,7 @@ def _init():
         f"touche-image/2022-06-13/{NAME}-2023-task-3",
         registry[f"touche-image/2022-06-13/{NAME}-2022-task-3"].docs_handler(),
         ToucheQueries(
-            TODO,
+            cached_download("2023/task-3/queries", "xml"),
             namespace=f"touche-image/2022-06-13/{NAME}-2023-task-3",
             language="en",
         ),
