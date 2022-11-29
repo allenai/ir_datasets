@@ -1086,18 +1086,23 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         compression_extension = format_type.value.compression_extension
 
         def in_slice(index: int) -> bool:
-            return self._in_slice(index, start, stop, step)
+            if not (start <= index < stop):
+                return False
+            return (index - start) % step == 0
+
+        def overlaps_slice(
+                index_start: int,
+                index_end: int
+        ) -> bool:
+            return max(index_start, start) < min(index_end, stop)
 
         def generator() -> Iterator[IO[bytes]]:
             file_paths = self._file_paths(format_type)
-            file_index_offset = 0
+            index_offset = 0
             for file_path, count in file_paths:
 
-                if (
-                        not in_slice(file_index_offset) and
-                        not in_slice(file_index_offset + count)
-                ):
-                    file_index_offset += count
+                if not overlaps_slice(index_offset, index_offset + count):
+                    index_offset += count
                     continue
                 with file_path.open("rb") as file:
                     if compression == ClueWeb22Compression.GZIP:
@@ -1118,10 +1123,9 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                             ]
 
                             # Map global indices to file indices.
-                            num_indices = len(offsets) - 1
-                            file_indices = range(num_indices)
+                            file_indices = range(count)
                             index_file_indices = (
-                                (file_index_offset + file_index, file_index)
+                                (index_offset + file_index, file_index)
                                 for file_index in file_indices
                             )
 
@@ -1147,17 +1151,16 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                             ) as gzip_file:
                                 yield gzip_file
 
-                            file_index_offset += num_indices
+                            index_offset += count
 
                     elif compression == ClueWeb22Compression.ZIP:
                         assert compression_extension is not None
                         with ZipFile(file, "r") as zip_file:
                             names = zip_file.namelist()
-                            num_names = len(names)
 
                             # Map global indices to ZIP names.
                             index_names = (
-                                (file_index_offset + index, name)
+                                (index_offset + index, name)
                                 for index, name in
                                 enumerate(zip_file.namelist())
                             )
@@ -1172,7 +1175,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
                             for name in names:
                                 yield zip_file.open(name, "r")
 
-                            file_index_offset += num_names
+                            index_offset += count
                     else:
                         raise ValueError(
                             f"Unknown compression format: {compression}"
