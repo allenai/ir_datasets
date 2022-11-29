@@ -87,20 +87,20 @@ class TestClueWeb22(DatasetIntegrationTest):
                 self.assertFalse(subset_view_dataset.has_qlogs())
                 self.assertEqual(subset_view_dataset.docs_lang(), None)
 
-                for lang in [
-                    "de", "en", "es", "fr", "it", "ja", "nl", "po", "pt", "zh",
-                    "other-languages",
-                ]:
-                    lang_dataset: Dataset = load(
-                        f"clueweb22/{subset}/as-{subset_view}/{lang}"
-                    )
-                    self.assertTrue(lang_dataset.has_docs())
-                    self.assertFalse(lang_dataset.has_queries())
-                    self.assertFalse(lang_dataset.has_qrels())
-                    self.assertFalse(lang_dataset.has_scoreddocs())
-                    self.assertFalse(lang_dataset.has_docpairs())
-                    self.assertFalse(lang_dataset.has_qlogs())
-                    self.assertEqual(lang_dataset.docs_lang(), lang)
+                # for lang in [
+                #     "de", "en", "es", "fr", "it", "ja", "nl", "po", "pt", "zh",
+                #     "other-languages",
+                # ]:
+                #     lang_dataset: Dataset = load(
+                #         f"clueweb22/{subset}/as-{subset_view}/{lang}"
+                #     )
+                #     self.assertTrue(lang_dataset.has_docs())
+                #     self.assertFalse(lang_dataset.has_queries())
+                #     self.assertFalse(lang_dataset.has_qrels())
+                #     self.assertFalse(lang_dataset.has_scoreddocs())
+                #     self.assertFalse(lang_dataset.has_docpairs())
+                #     self.assertFalse(lang_dataset.has_qlogs())
+                #     self.assertEqual(lang_dataset.docs_lang(), lang)
 
     def test_clueweb22_l_docs(self):
         # noinspection PyTypeChecker
