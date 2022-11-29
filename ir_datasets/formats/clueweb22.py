@@ -860,7 +860,7 @@ class ClueWeb22Docs(BaseDocs):
     ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
         """
         Iterator with the number of documents per file
-        for the specified format.
+        for the specified format, in ascending order by file ID.
         """
 
         counts_dir = self.path / "record_counts"
@@ -870,9 +870,9 @@ class ClueWeb22Docs(BaseDocs):
             language_prefix = self.language.value.id
         else:
             language_prefix = ""
-        format_counts_files = format_counts_dir.glob(
+        format_counts_files = sorted(format_counts_dir.glob(
             f"{language_prefix}*_counts.csv"
-        )
+        ))
         for format_counts_file in format_counts_files:
             tag = format_counts_file.name \
                 .removesuffix("_counts.csv")
@@ -897,7 +897,8 @@ class ClueWeb22Docs(BaseDocs):
     ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
         """
         Iterator with the number of documents per file
-        for one of the diff formats (arbitrarily selected).
+        for one of the diff formats (arbitrarily selected),
+        in ascending order by file ID.
 
         This is useful to find out the actual count of documents
         for a specific subset, even if the base path
@@ -914,7 +915,8 @@ class ClueWeb22Docs(BaseDocs):
         """
         Iterator with the number of documents per file,
         constrained to the selected subset, even if the base path
-        contains a "broader" subset (with possibly more files).
+        contains a "broader" subset (with possibly more files),
+        in ascending order by file ID.
         """
         counts = self._record_counts(format_type)
         for diff_file_id, diff_count in self.diff_format_record_counts():
@@ -1020,13 +1022,14 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             format_type: ClueWeb22Format,
     ) -> Iterator[Tuple[Path, int]]:
         """
-        Iterate all available file paths with the number of records within.
+        List all available file paths with the number of records within,
+        in ascending order by file path.
         """
 
         format_path = self.docs.path / format_type.value.id
+        suffix = format_type.value.extension
         for file_id, count in self.docs.record_counts(format_type):
-            path = format_path / f"{file_id.path}{format_type.value.extension}"
-            yield path, count
+            yield format_path / f"{file_id.path}{suffix}", count
 
     @contextmanager
     def _file_iterator_all(
