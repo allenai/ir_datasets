@@ -405,7 +405,7 @@ def _combine_b_docs(
         inlink_iterator: Iterator[Optional[_Link]],
         outlink_iterator: Iterator[Optional[_Link]],
         vdom_iterator: Iterator[_Vdom],
-        jpg_iterator: Iterator[_Jpg],
+        # jpg_iterator: Iterator[_Jpg],
 ) -> Iterator[ClueWeb22BDoc]:
     zipped = zip(
         txt_iterator,
@@ -413,9 +413,10 @@ def _combine_b_docs(
         inlink_iterator,
         outlink_iterator,
         vdom_iterator,
-        jpg_iterator,
+        # jpg_iterator,
     )
-    for txt, html, inlink, outlink, vdom, jpg in zipped:
+    # for txt, html, inlink, outlink, vdom, jpg in zipped:
+    for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id
         if not txt.url == html.url:
             # Bug in ClueWeb22:
@@ -635,7 +636,7 @@ class ClueWeb22Subset(Enum):
             ClueWeb22Format.INLINK,
             ClueWeb22Format.OUTLINK,
             ClueWeb22Format.VDOM,
-            ClueWeb22Format.JPG
+            # ClueWeb22Format.JPG,
         ],
         doc_type=ClueWeb22BDoc,
         combiner=_combine_b_docs,
@@ -896,16 +897,22 @@ class ClueWeb22Docs(BaseDocs):
             self
     ) -> Iterator[Tuple[_ClueWeb22FileId, int]]:
         """
-        Iterator with the number of documents per file
-        for one of the diff formats (arbitrarily selected),
-        in ascending order by file ID.
+        Iterator with the number of documents per file,
+        in ascending order by file ID,
+        for one of the diff formats (arbitrarily selected).
 
         This is useful to find out the actual count of documents
         for a specific subset, even if the base path
         contains a "broader" subset (with possibly more files).
         """
         diff_formats = self.subset.diff_formats
-        diff_format_type = next(iter(diff_formats))
+        try:
+            diff_format_type = next(iter(diff_formats))
+        except StopIteration:
+            # FIXME Temporary fix until parsers for ClueWeb22Format.JPG
+            #  are implemented for the B subset. Then the JPG format files
+            #  can be used to get the record counts.
+            return self._record_counts(ClueWeb22Format.HTML)
         return self._record_counts(diff_format_type)
 
     def record_counts(
