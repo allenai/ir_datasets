@@ -3654,25 +3654,15 @@
     "size_hint": 558028,
     "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
   },
-  "2023/task-1/documents/bm25-top1000": {
-    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "size_hint": 99999999,
-    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
-  },
   "2023/task-2/queries": {
-    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "size_hint": 99999999,
-    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
-  },
-  "2023/task-2/documents/bm25-top1000": {
-    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "size_hint": 99999999,
-    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
+    "url": "https://touche.webis.de/clef23/touche23-data/topics-task2.xml",
+    "size_hint": 55337,
+    "expected_md5": "bfeebfaaf12e29781ea7283cc80c79c5"
   },
   "2023/task-3/queries": {
-    "url": "XXXXXXXXXXXXXXXXXXXXXXXXX",
-    "size_hint": 99999999,
-    "expected_md5": "XXXXXXXXXXXXXXXXXXXX"
+    "url": "https://touche.webis.de/clef23/touche23-data/topics-task3.xml",
+    "size_hint": 32179,
+    "expected_md5": "187fba305b4816933abd9dc35ef298f8"
   }
 },
 
