@@ -2,7 +2,6 @@ from contextlib import contextmanager, ExitStack
 from csv import reader
 from datetime import datetime
 from enum import Enum
-from functools import cached_property
 from gzip import GzipFile
 from io import TextIOWrapper
 from itertools import groupby
@@ -872,7 +871,7 @@ class _ClueWeb22FileId(NamedTuple):
         ])
 
 
-class _ClueWeb22Version(NamedTuple):
+class ClueWeb22Version(NamedTuple):
     """
     ClueWeb22 disk version.
     """
@@ -892,7 +891,8 @@ class ClueWeb22Docs(BaseDocs):
     subset_view: Final[ClueWeb22Subset]
     language: Final[Optional[ClueWeb22Language]]
 
-    # TODO Filter files by subset
+    _path: Path = None
+    _version: ClueWeb22Version = None
 
     def __init__(
             self,
@@ -908,34 +908,38 @@ class ClueWeb22Docs(BaseDocs):
         self.subset = subset
         self.subset_view = subset_view
         self.language = language
-
         assert self.subset_view in subset.subset_views
-        assert self._version.major > 0
 
     def docs_path(self, force: bool = True) -> Union[str, PathLike]:
         return self.source.path(force)
 
-    @cached_property
+    @property
     def path(self) -> Path:
-        return Path(self.source.path())
+        if self._path is None:
+            self._path = Path(self.docs_path())
+            assert self.version.major > 0
+        return self._path
 
-    @cached_property
+    @property
     def readme(self) -> str:
         readme_path = self.path / "README.txt"
         with readme_path.open("rt", encoding=ENCODING) as file:
             return file.read()
 
-    @cached_property
-    def _version(self) -> _ClueWeb22Version:
-        version_files = list(self.path.glob("version_*"))
-        assert len(version_files) == 1
-        version_file = version_files[0]
-        version_file_name = version_file.name
-        _, subset_id, version = version_file_name.split("_")
-        assert len(subset_id) == 1
-        subset = next(s for s in ClueWeb22Subset if s.value.id == subset_id)
-        major, minor = version.split(".")
-        return _ClueWeb22Version(subset, int(major), int(minor))
+    @property
+    def version(self) -> ClueWeb22Version:
+        if self._version is None:
+            version_files = list(self.path.glob("version_*"))
+            assert len(version_files) == 1
+            version_file = version_files[0]
+            version_file_name = version_file.name
+            _, subset_id, version = version_file_name.split("_")
+            assert len(subset_id) == 1
+            subset = next(
+                s for s in ClueWeb22Subset if s.value.id == subset_id)
+            major, minor = version.split(".")
+            self._version = ClueWeb22Version(subset, int(major), int(minor))
+        return self._version
 
     def _record_counts(
             self,
