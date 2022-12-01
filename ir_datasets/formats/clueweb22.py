@@ -12,7 +12,7 @@ from pathlib import Path
 from typing import (
     NamedTuple, Sequence, TypeVar, Optional, Type, Iterator, IO,
     TYPE_CHECKING, Iterable, Mapping, Union, AbstractSet, Tuple,
-    ContextManager, Protocol
+    ContextManager, Callable
 )
 from zipfile import ZipFile
 
@@ -280,7 +280,10 @@ AnyDoc = TypeVar("AnyDoc", ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc)
 # Combining iterators to construct documents from base records.from
 
 
-def _combine_l_docs(txt_iterator: Iterator[_Txt]) -> Iterator[ClueWeb22LDoc]:
+def _combine_l_docs(
+        record_iterators: Sequence[Iterator[_AnyRecord]],
+) -> Iterator[ClueWeb22LDoc]:
+    txt_iterator, = record_iterators
     for txt in txt_iterator:
         yield ClueWeb22LDoc(
             doc_id=txt.doc_id,
@@ -292,19 +295,9 @@ def _combine_l_docs(txt_iterator: Iterator[_Txt]) -> Iterator[ClueWeb22LDoc]:
 
 
 def _combine_a_docs(
-        txt_iterator: Iterator[_Txt],
-        html_iterator: Iterator[_Html],
-        inlink_iterator: Iterator[Optional[_Link]],
-        outlink_iterator: Iterator[Optional[_Link]],
-        vdom_iterator: Iterator[_Vdom],
+        record_iterators: Sequence[Iterator[_AnyRecord]],
 ) -> Iterator[ClueWeb22ADoc]:
-    zipped = zip(
-        txt_iterator,
-        html_iterator,
-        inlink_iterator,
-        outlink_iterator,
-        vdom_iterator,
-    )
+    zipped = zip(*record_iterators)
     for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id
         if txt.url != html.url:
@@ -401,21 +394,10 @@ def _combine_a_docs(
 
 
 def _combine_b_docs(
-        txt_iterator: Iterator[_Txt],
-        html_iterator: Iterator[_Html],
-        inlink_iterator: Iterator[Optional[_Link]],
-        outlink_iterator: Iterator[Optional[_Link]],
-        vdom_iterator: Iterator[_Vdom],
-        # jpg_iterator: Iterator[_Jpg],
+        record_iterators: Sequence[Iterator[_AnyRecord]],
 ) -> Iterator[ClueWeb22BDoc]:
-    zipped = zip(
-        txt_iterator,
-        html_iterator,
-        inlink_iterator,
-        outlink_iterator,
-        vdom_iterator,
-        # jpg_iterator,
-    )
+    zipped = zip(*record_iterators)
+    # TODO Enable screenshot once JPGs are released.
     # for txt, html, inlink, outlink, vdom, jpg in zipped:
     for txt, html, inlink, outlink, vdom in zipped:
         assert txt.doc_id == html.doc_id
@@ -523,13 +505,10 @@ class ClueWeb22Compression(Enum):
     ZIP = 2
 
 
-class _FormatReader(Protocol):
-    """
-    Function for reading records from the decompressed files.
-    """
-
-    def __call__(self, file: IO[bytes]) -> Iterator[_AnyRecord]:
-        ...
+_FormatReader = Callable[[IO[bytes]], Iterator[_AnyRecord]]
+"""
+Function for reading records from the decompressed files.
+"""
 
 
 class _FormatInfo(NamedTuple):
@@ -674,15 +653,12 @@ class ClueWeb22Language(Enum):
         return self.value.tag
 
 
-class _Combiner(Protocol):
-    """
-    Function for combining iterables of the different format records
-    to documents. The record iterators are passed to the function
-    in the same order as specified in the ``ClueWeb22Subset.formats`` field.
-    """
-
-    def __call__(self, *args, ) -> Iterator[AnyDoc]:
-        ...
+_Combiner = Callable[[Sequence[Iterator[_AnyRecord]]], Iterator[AnyDoc]]
+"""
+Function for combining iterables of the different format records
+to documents. The record iterators are passed to the function
+in the same order as specified in the ``ClueWeb22Subset.formats`` field.
+"""
 
 
 class _SubsetInfo(NamedTuple):
@@ -1134,12 +1110,17 @@ class ClueWeb22Docs(BaseDocs):
 # Iterators and doc store classes for accessing multiple documents efficiently.
 
 
-class _FileIterator(Protocol):
-    def __call__(
-            self,
-            format_type: ClueWeb22Format
-    ) -> ContextManager[Iterator[IO[bytes]]]:
-        ...
+_FileIterator = Callable[
+    [ClueWeb22Format],
+    ContextManager[Iterator[IO[bytes]]]
+]
+"""
+Function for iterating over all files for the specified format type.
+The iterator should only open the files that actually 
+need to be parsed in order to yield the documents 
+specified in ``ClueWeb22Docstore.get_many`` or 
+by "fancy" iterator slicing in ``ClueWeb22Iterator``.
+"""
 
 
 class _ClueWeb22Iterable(Iterable[AnyDoc]):
@@ -1173,7 +1154,7 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
                 read_records(format_type, files)
                 for format_type, files in zip(formats, format_files)
             )
-            documents = self._subset_view.combiner(*format_records)
+            documents = self._subset_view.combiner(format_records)
             yield from documents
 
 
