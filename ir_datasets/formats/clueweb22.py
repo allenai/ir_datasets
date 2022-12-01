@@ -62,7 +62,7 @@ class AnnotationType(Enum):
 
 class _Html(NamedTuple):
     """
-    Record from the ``html`` subdir.
+    Record from the ``html`` subdirectory.
     """
     doc_id: str
     url: str
@@ -75,7 +75,7 @@ class _Html(NamedTuple):
 
 class Anchor(NamedTuple):
     """
-    Anchor sub-record from the ``inlink`` and ``outlink`` subdirs.
+    Anchor sub-record from the ``inlink`` and ``outlink`` subdirectories.
     """
     url: str
     url_hash: str
@@ -85,7 +85,7 @@ class Anchor(NamedTuple):
 
 class _Link(NamedTuple):
     """
-    Record from the ``inlink`` and ``outlink`` subdirs.
+    Record from the ``inlink`` and ``outlink`` subdirectories.
     """
     doc_id: str
     url: str
@@ -95,20 +95,17 @@ class _Link(NamedTuple):
 
 class _Vdom(NamedTuple):
     """
-    Record from the ``vdom`` subdirs.
+    Record from the ``vdom`` subdirectory.
     """
     # Not parsed yet because parsing would require the protobuf library.
-    vdom_data: bytes
+    vdom: bytes
 
 
 class _Jpg(NamedTuple):
     """
-    Record from the ``jpg`` subdirs.
+    Record from the ``jpg`` subdirectory.
     """
-    doc_id: str
-    url: str
-    url_hash: str
-    # TODO how to parse?
+    screenshot: bytes
 
 
 _AnyRecord = TypeVar("_AnyRecord", _Txt, _Html, _Link, _Vdom, _Jpg)
@@ -228,13 +225,11 @@ def _read_outlink(file: IO[bytes]) -> Iterator[Optional[_Link]]:
 
 
 def _read_vdom(file: IO[bytes]) -> Iterator[_Vdom]:
-    yield _Vdom(
-        vdom_data=file.read()
-    )
+    yield _Vdom(file.read())
 
 
-def _read_jpg(files: IO[bytes]) -> Iterator[_Jpg]:
-    raise NotImplementedError()
+def _read_jpg(file: IO[bytes]) -> Iterator[_Jpg]:
+    return _Jpg(file.read())
 
 
 # Doc records corresponding to the fields available for each subset listed
@@ -258,10 +253,9 @@ class ClueWeb22ADoc(NamedTuple):
     date: datetime
     html: bytes
     vdom_nodes: Mapping[AnnotationType, Sequence[int]]
-    vdom_data: bytes
+    vdom: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
-    # TODO Add JPG data once that is released.
 
 
 class ClueWeb22BDoc(NamedTuple):
@@ -273,9 +267,11 @@ class ClueWeb22BDoc(NamedTuple):
     date: datetime
     html: bytes
     vdom_nodes: Mapping[AnnotationType, Sequence[int]]
-    vdom_data: bytes
+    vdom: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
+    # TODO Enable screenshot once JPGs are released.
+    # screenshot: bytes
 
 
 AnyDoc = TypeVar("AnyDoc", ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc)
@@ -398,7 +394,7 @@ def _combine_a_docs(
             date=html.date,
             html=html.html,
             vdom_nodes=html.vdom_nodes,
-            vdom_data=vdom.vdom_data,
+            vdom=vdom.vdom,
             inlink_anchors=inlink.anchors if inlink is not None else [],
             outlink_anchors=outlink.anchors if outlink is not None else [],
         )
@@ -510,9 +506,11 @@ def _combine_b_docs(
             date=html.date,
             html=html.html,
             vdom_nodes=html.vdom_nodes,
-            vdom_data=vdom.vdom_data,
+            vdom=vdom.vdom,
             inlink_anchors=inlink.anchors if inlink is not None else [],
             outlink_anchors=outlink.anchors if outlink is not None else [],
+            # TODO Enable screenshot once JPGs are released.
+            # screenshot=jpg.jpg,
         )
 
 
@@ -733,6 +731,7 @@ class ClueWeb22Subset(Enum):
             ClueWeb22Format.INLINK,
             ClueWeb22Format.OUTLINK,
             ClueWeb22Format.VDOM,
+            # TODO Enable screenshot once JPGs are released.
             # ClueWeb22Format.JPG,
         ],
         doc_type=ClueWeb22BDoc,
