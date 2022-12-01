@@ -10,7 +10,7 @@ from os import PathLike
 from os.path import join
 from pathlib import Path
 from typing import (
-    NamedTuple, Sequence, TypeVar, Optional, Type, Final, Iterator, IO,
+    NamedTuple, Sequence, TypeVar, Optional, Type, Iterator, IO,
     TYPE_CHECKING, Iterable, Mapping, Union, AbstractSet, Tuple,
     ContextManager, Protocol
 )
@@ -885,14 +885,14 @@ class ClueWeb22Version(NamedTuple):
 
 
 class ClueWeb22Docs(BaseDocs):
-    name: Final[str]
-    source: Final[Download]
-    subset: Final[ClueWeb22Subset]
-    subset_view: Final[ClueWeb22Subset]
-    language: Final[Optional[ClueWeb22Language]]
+    _name: str
+    _source: Download
+    _subset: ClueWeb22Subset
+    _subset_view: ClueWeb22Subset
+    _language: Optional[ClueWeb22Language]
 
-    _path: Path = None
-    _version: ClueWeb22Version = None
+    _path_cached: Path = None
+    _version_cached: ClueWeb22Version = None
 
     def __init__(
             self,
@@ -903,22 +903,22 @@ class ClueWeb22Docs(BaseDocs):
             language: Optional[ClueWeb22Language] = None,
     ):
         super().__init__()
-        self.name = name
-        self.source = source
-        self.subset = subset
-        self.subset_view = subset_view
-        self.language = language
-        assert self.subset_view in subset.subset_views
+        self._name = name
+        self._source = source
+        self._subset = subset
+        self._subset_view = subset_view
+        self._language = language
+        assert self._subset_view in subset.subset_views
 
     def docs_path(self, force: bool = True) -> Union[str, PathLike]:
-        return self.source.path(force)
+        return self._source.path(force)
 
     @property
     def path(self) -> Path:
-        if self._path is None:
-            self._path = Path(self.docs_path())
+        if self._path_cached is None:
+            self._path_cached = Path(self.docs_path())
             assert self.version.major > 0
-        return self._path
+        return self._path_cached
 
     @property
     def readme(self) -> str:
@@ -928,7 +928,7 @@ class ClueWeb22Docs(BaseDocs):
 
     @property
     def version(self) -> ClueWeb22Version:
-        if self._version is None:
+        if self._version_cached is None:
             version_files = list(self.path.glob("version_*"))
             assert len(version_files) == 1
             version_file = version_files[0]
@@ -938,8 +938,9 @@ class ClueWeb22Docs(BaseDocs):
             subset = next(
                 s for s in ClueWeb22Subset if s.value.id == subset_id)
             major, minor = version.split(".")
-            self._version = ClueWeb22Version(subset, int(major), int(minor))
-        return self._version
+            self._version_cached = ClueWeb22Version(subset, int(major),
+                                                    int(minor))
+        return self._version_cached
 
     def _record_counts(
             self,
@@ -953,8 +954,8 @@ class ClueWeb22Docs(BaseDocs):
         counts_dir = self.path / "record_counts"
         format_counts_dir = counts_dir / format_type.value.id
         language_prefix: str
-        if self.language is not None:
-            language_prefix = self.language.value.id
+        if self._language is not None:
+            language_prefix = self._language.value.id
         else:
             language_prefix = ""
         format_counts_files = sorted(format_counts_dir.glob(
@@ -991,7 +992,7 @@ class ClueWeb22Docs(BaseDocs):
         for a specific subset, even if the base path
         contains a "broader" subset (with possibly more files).
         """
-        diff_formats = self.subset.diff_formats
+        diff_formats = self._subset.diff_formats
         try:
             diff_format_type = next(iter(diff_formats))
         except StopIteration:
@@ -1025,23 +1026,23 @@ class ClueWeb22Docs(BaseDocs):
         return ClueWeb22Docstore(self)
 
     def docs_cls(self) -> Type[AnyDoc]:
-        return self.subset_view.value.doc_type
+        return self._subset_view.value.doc_type
 
     def docs_count(self) -> int:
         return sum(count for _, count in self.diff_format_record_counts())
 
     def docs_namespace(self) -> str:
-        names = [self.name, self.subset.value.tag]
-        if self.subset_view != self.subset:
-            names.append(f"as-{self.subset_view.value.tag}")
-        if self.language is not None:
-            names.append(self.language.value.tag)
+        names = [self._name, self._subset.value.tag]
+        if self._subset_view != self._subset:
+            names.append(f"as-{self._subset_view.value.tag}")
+        if self._language is not None:
+            names.append(self._language.value.tag)
         return "/".join(names)
 
     def docs_lang(self) -> Optional[str]:
-        if self.language is None:
+        if self._language is None:
             return None
-        return self.language.value.tag
+        return self._language.value.tag
 
 
 # Iterators and doc store classes for accessing multiple documents efficiently.
@@ -1056,19 +1057,19 @@ class _FileIterator(Protocol):
 
 
 class _ClueWeb22Iterable(Iterable[AnyDoc]):
-    subset_view: Final[ClueWeb22Subset]
-    file_iterator: Final[_FileIterator]
+    _subset_view: ClueWeb22Subset
+    _file_iterator: _FileIterator
 
     def __init__(
             self,
             subset_view: ClueWeb22Subset,
             file_iterator: _FileIterator,
     ):
-        self.subset_view = subset_view
-        self.file_iterator = file_iterator
+        self._subset_view = subset_view
+        self._file_iterator = file_iterator
 
     def __iter__(self) -> Iterator[AnyDoc]:
-        formats = self.subset_view.value.formats
+        formats = self._subset_view.value.formats
 
         def read_records(
                 format_type: ClueWeb22Format,
@@ -1079,14 +1080,14 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
 
         with ExitStack() as stack:
             format_files: Iterator[Iterator[IO[bytes]]] = (
-                stack.enter_context(self.file_iterator(format_type))
+                stack.enter_context(self._file_iterator(format_type))
                 for format_type in formats
             )
             format_records: Sequence[Iterator[_AnyRecord]] = tuple(
                 read_records(format_type, files)
                 for format_type, files in zip(formats, format_files)
             )
-            documents = self.subset_view.value.combiner(*format_records)
+            documents = self._subset_view.value.combiner(*format_records)
             yield from documents
 
 
@@ -1106,17 +1107,18 @@ def _read_offsets(
 
 
 class _ClueWeb22Iterator(Iterator[AnyDoc]):
-    docs: Final[ClueWeb22Docs]
-    full_iterator: Final[Iterator[AnyDoc]]
+    _docs: ClueWeb22Docs
+    _full_iterator: Iterator[AnyDoc]
 
     def __init__(self, docs: ClueWeb22Docs):
-        self.docs = docs
-        self.full_iterator = iter(
-            _ClueWeb22Iterable(self.docs.subset_view, self._file_iterator_all)
+        self._docs = docs
+        self._full_iterator = iter(
+            _ClueWeb22Iterable(self._docs._subset_view,
+                               self._file_iterator_all)
         )
 
     def __next__(self) -> AnyDoc:
-        return next(self.full_iterator)
+        return next(self._full_iterator)
 
     @staticmethod
     def _in_slice(
@@ -1138,9 +1140,9 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         in ascending order by file path.
         """
 
-        format_path = self.docs.path / format_type.value.id
+        format_path = self._docs.path / format_type.value.id
         suffix = format_type.value.extension
-        for file_id, count in self.docs.record_counts(format_type):
+        for file_id, count in self._docs.record_counts(format_type):
             yield format_path / f"{file_id.path}{suffix}", count
 
     @contextmanager
@@ -1276,7 +1278,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
     def __getitem__(self, key: Union[int, slice]) -> Union[
         AnyDoc, Iterator[AnyDoc]
     ]:
-        docs_count = self.docs.docs_count()
+        docs_count = self._docs.docs_count()
         full_slice = slice(0, docs_count)
         processed_slice: slice
         if isinstance(key, slice):
@@ -1296,7 +1298,7 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
             )
 
         iterator = iter(
-            _ClueWeb22Iterable(self.docs.subset_view, filter_files)
+            _ClueWeb22Iterable(self._docs._subset_view, filter_files)
         )
         if isinstance(key, slice):
             return iterator
@@ -1309,31 +1311,31 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
 
 
 class ClueWeb22Docstore(Docstore):
-    docs: Final[ClueWeb22Docs]
+    _docs: ClueWeb22Docs
 
     def __init__(self, docs: ClueWeb22Docs):
         super().__init__(docs.docs_cls(), "doc_id")
-        self.docs = docs
+        self._docs = docs
 
     def _file_paths(
             self,
             format_type: ClueWeb22Format,
             doc_ids: Iterable[_ClueWeb22DocId],
     ) -> Iterator[Tuple[Path, Iterator[_ClueWeb22DocId]]]:
-        if self.docs.language is not None:
+        if self._docs._language is not None:
             invalid_doc_ids = {
                 doc_id
                 for doc_id in doc_ids
-                if doc_id.language != self.docs.language.value.id
+                if doc_id.language != self._docs._language.value.id
             }
             if len(invalid_doc_ids) > 0:
                 raise ValueError(
                     f"The following document IDs don't match "
-                    f"the dataset's language ({self.docs.language.value.id}): "
+                    f"the dataset's language ({self._docs._language.value.id}): "
                     f"{invalid_doc_ids}"
                 )
 
-        format_path = self.docs.path / format_type.value.id
+        format_path = self._docs.path / format_type.value.id
 
         def doc_id_format_path(doc_id: _ClueWeb22DocId) -> Path:
             return format_path / f"{doc_id.path}{format_type.value.extension}"
@@ -1414,4 +1416,4 @@ class ClueWeb22Docstore(Docstore):
         ) -> ContextManager[Iterator[IO[bytes]]]:
             return self._file_iterator(format_type, doc_ids)
 
-        return iter(_ClueWeb22Iterable(self.docs.subset_view, filter_files))
+        return iter(_ClueWeb22Iterable(self._docs._subset_view, filter_files))
