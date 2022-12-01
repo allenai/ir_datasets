@@ -184,7 +184,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1467, 1473, 1479, 1665
                         ],
                     },
-                    vdom_data=compile(b".*clueweb22-de0000-00-00000$"),
+                    vdom=compile(b".*clueweb22-de0000-00-00000$"),
                     inlink_anchors=[
                         Anchor(
                             url='https://www.alba.info/karriere/studierende-absolventen/werkstudenten/',
@@ -249,7 +249,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1657, 1666, 1671, 1675, 1680, 1686, 2167
                         ],
                     },
-                    vdom_data=compile(b".*clueweb22-de0000-00-01000$"),
+                    vdom=compile(b".*clueweb22-de0000-00-01000$"),
                     inlink_anchors=[
                         Anchor(
                             url='https://totallygamergirl.com/2021/10/22/forza-horizon-5-hopsital-records-und-radio-eternal-playlists/',
@@ -336,7 +336,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1114, 1162, 1209, 1256, 1339
                         ]
                     },
-                    vdom_data=compile(b".*clueweb22-es0000-56-11365"),
+                    vdom=compile(b".*clueweb22-es0000-56-11365"),
                     inlink_anchors=[],
                     outlink_anchors=[
                         Anchor(
@@ -396,7 +396,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1467, 1473, 1479, 1665
                         ],
                     },
-                    vdom_data=compile(b".*clueweb22-de0000-00-00000$"),
+                    vdom=compile(b".*clueweb22-de0000-00-00000$"),
                     inlink_anchors=[
                         Anchor(
                             url='https://www.alba.info/karriere/studierende-absolventen/werkstudenten/',
@@ -461,7 +461,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1657, 1666, 1671, 1675, 1680, 1686, 2167
                         ],
                     },
-                    vdom_data=compile(b".*clueweb22-de0000-00-01000$"),
+                    vdom=compile(b".*clueweb22-de0000-00-01000$"),
                     inlink_anchors=[
                         Anchor(
                             url='https://totallygamergirl.com/2021/10/22/forza-horizon-5-hopsital-records-und-radio-eternal-playlists/',
@@ -548,7 +548,7 @@ class TestClueWeb22(DatasetIntegrationTest):
                             1114, 1162, 1209, 1256, 1339
                         ]
                     },
-                    vdom_data=compile(b".*clueweb22-es0000-56-11365"),
+                    vdom=compile(b".*clueweb22-es0000-56-11365"),
                     inlink_anchors=[],
                     outlink_anchors=[
                         Anchor(
