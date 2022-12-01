@@ -261,6 +261,7 @@ class ClueWeb22ADoc(NamedTuple):
     vdom_data: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
+    # TODO Add JPG data once that is released.
 
 
 class ClueWeb22BDoc(NamedTuple):
@@ -525,37 +526,21 @@ class ClueWeb22Compression(Enum):
 
 
 class _FormatReader(Protocol):
+    """
+    Function for reading records from the decompressed files.
+    """
+
     def __call__(self, file: IO[bytes]) -> Iterator[_AnyRecord]:
         ...
 
 
 class _FormatInfo(NamedTuple):
     id: str
-    """
-    ClueWeb22 format as described 
-    at https://lemurproject.org/clueweb22/docspecs.php#Organization
-    """
     extension: str
-    """
-    Offset file extension.
-    """
     offset_extension: Optional[str]
-    """
-    File extension of a single compressed file.
-    """
     compression: ClueWeb22Compression
-    """
-    Compression form as described 
-    at https://lemurproject.org/clueweb22/docspecs.php#Compression
-    """
     compression_extension: Optional[str]
-    """
-    File extension of files within the compressed archive.
-    """
     reader: _FormatReader
-    """
-    Function for reading records from the decompressed files.
-    """
 
 
 class ClueWeb22Format(Enum):
@@ -612,39 +597,52 @@ class ClueWeb22Format(Enum):
 
     @property
     def id(self) -> str:
+        """
+        ClueWeb22 format as described
+        at https://lemurproject.org/clueweb22/docspecs.php#Organization
+        """
         return self.value.id
 
     @property
     def extension(self) -> str:
+        """
+        File extension of a single compressed file.
+        """
         return self.value.extension
 
     @property
     def offset_extension(self) -> Optional[str]:
+        """
+        Offset file extension.
+        """
         return self.value.offset_extension
 
     @property
     def compression(self) -> ClueWeb22Compression:
+        """
+        Compression form as described
+        at https://lemurproject.org/clueweb22/docspecs.php#Compression
+        """
         return self.value.compression
 
     @property
     def compression_extension(self) -> Optional[str]:
+        """
+        File extension of files within the compressed archive.
+        """
         return self.value.compression_extension
 
     @property
     def reader(self) -> _FormatReader:
+        """
+        Function for reading records from the decompressed files.
+        """
         return self.value.reader
 
 
 class _LanguageInfo(NamedTuple):
     id: str
-    """
-    ClueWeb22 language ID as described 
-    at https://lemurproject.org/clueweb22/docspecs.php#Organization
-    """
     tag: str
-    """
-    Shorthand tag to be used as suffix in the dataset ID.
-    """
 
 
 class ClueWeb22Language(Enum):
@@ -664,52 +662,39 @@ class ClueWeb22Language(Enum):
 
     @property
     def id(self) -> str:
+        """
+        ClueWeb22 language ID as described
+        at https://lemurproject.org/clueweb22/docspecs.php#Organization
+        """
         return self.value.id
 
     @property
     def tag(self) -> str:
+        """
+        Shorthand tag to be used as suffix in the dataset ID.
+        """
         return self.value.tag
 
 
 class _Combiner(Protocol):
+    """
+    Function for combining iterables of the different format records
+    to documents. The record iterators are passed to the function
+    in the same order as specified in the ``ClueWeb22Subset.formats`` field.
+    """
+
     def __call__(self, *args, ) -> Iterator[AnyDoc]:
         ...
 
 
 class _SubsetInfo(NamedTuple):
     id: str
-    """
-    ClueWeb22 subset name as described 
-    at https://lemurproject.org/clueweb22/index.php#Specs
-    """
     tag: str
-    """
-    Shorthand to be used as suffix in the dataset ID.
-    """
     formats: Sequence[ClueWeb22Format]
-    """
-    Required formats for constructing a document for this subset.
-    """
     doc_type: Type[AnyDoc]
-    """
-    Type of one single document.
-    """
     combiner: _Combiner
-    """
-    Function for combining iterables of the different format records 
-    to documents. The record iterators are passed to the function 
-    in the same order as specified in the ``formats`` field.
-    """
     extends: Optional[str]
-    """
-    Subset ID that this subset extends, meaning that it supports 
-    all fields from the extended subset.
-    """
     hide: bool
-    """
-    Temporary flag to hide subsets that are not yet 
-    fully implemented and tested.
-    """
 
 
 class ClueWeb22Subset(Enum):
@@ -758,34 +743,65 @@ class ClueWeb22Subset(Enum):
 
     @property
     def id(self) -> str:
+        """
+        ClueWeb22 subset name as described
+        at https://lemurproject.org/clueweb22/index.php#Specs
+        """
         return self.value.id
 
     @property
     def tag(self) -> str:
+        """
+        Shorthand to be used as suffix in the dataset ID.
+        """
         return self.value.tag
 
     @property
     def formats(self) -> Sequence[ClueWeb22Format]:
+        """
+        Required formats for constructing a document for this subset.
+        """
         return self.value.formats
 
     @property
     def doc_type(self) -> Type[AnyDoc]:
+        """
+        Type of one single document.
+        """
         return self.value.doc_type
 
     @property
     def combiner(self) -> _Combiner:
+        """
+        Function for combining iterables of the different format records
+        to documents. The record iterators are passed to the function
+        in the same order as specified in the ``formats`` field.
+        """
         return self.value.combiner
 
     @property
     def extends(self) -> Optional[str]:
+        """
+        Subset ID that this subset extends, meaning that it supports
+        all fields from the extended subset.
+        """
         return self.value.extends
 
     @property
     def hide(self) -> bool:
+        """
+        Temporary flag to hide subsets that are not yet
+        fully implemented or tested.
+        """
         return self.value.hide
 
     @property
     def subset_views(self) -> AbstractSet["ClueWeb22Subset"]:
+        """
+        All subsets that are supported by this subset.
+        This subset can be viewed as any of the subsets it extends
+        because it contains all record types from the extended subsets.
+        """
         if self.extends is not None:
             extends = next(
                 s for s in ClueWeb22Subset
@@ -797,8 +813,8 @@ class ClueWeb22Subset(Enum):
     @property
     def diff_formats(self) -> AbstractSet[ClueWeb22Format]:
         """
-        Find the formats that are included in this subset but not in its subset views.
-        :return:
+        Find the formats that are included in this subset
+        but not in its subset views.
         """
         formats = set(self.formats)
         for subset_view in self.subset_views - {self}:
