@@ -2,6 +2,7 @@ from datetime import datetime
 from itertools import islice
 from unittest import main
 from re import compile
+from uuid import UUID
 
 from tqdm.auto import tqdm
 
@@ -154,6 +155,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 24, 1, 39, 58, 761009),
                     html=compile(b"^<html"),
+                    record_id=UUID("45af2957-73e2-4e27-a732-d1a3eb22d1cb"),
+                    payload_digest="sha1:a327d7b36b2da46bd4f3fd18d530f53a70070280",
                     vdom_nodes={
                         AnnotationType.LIST: [877],
                         AnnotationType.TABLE: [55, 269, 459],
@@ -212,6 +215,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 24, 4, 1, 57, 988007),
                     html=compile(b"^<html"),
+                    record_id=UUID("5bf118fc-c66f-429c-82f5-dfc9c0bfef17"),
+                    payload_digest="sha1:7ececcd7d4910c2e6dcbe800bbb87bc0f891af0d",
                     vdom_nodes={
                         AnnotationType.LIST: [
                             1311, 1332, 1353, 1379, 1410, 1436, 1467, 1498,
@@ -277,6 +282,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 25, 6, 58, 5, 282445),
                     html=compile(b"^<html"),
+                    record_id=UUID("8df8e58f-85d7-4804-ad44-8136856d00a0"),
+                    payload_digest="sha1:4285cbda8ce39d8273c9fad8350f2c260d59d58e",
                     vdom_nodes={
                         AnnotationType.NONE: [],
                         AnnotationType.PRIMARY: [
@@ -366,6 +373,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 24, 1, 39, 58, 761009),
                     html=compile(b"^<html"),
+                    record_id=UUID("45af2957-73e2-4e27-a732-d1a3eb22d1cb"),
+                    payload_digest="sha1:a327d7b36b2da46bd4f3fd18d530f53a70070280",
                     vdom_nodes={
                         AnnotationType.LIST: [877],
                         AnnotationType.TABLE: [55, 269, 459],
@@ -424,6 +433,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 24, 4, 1, 57, 988007),
                     html=compile(b"^<html"),
+                    record_id=UUID("5bf118fc-c66f-429c-82f5-dfc9c0bfef17"),
+                    payload_digest="sha1:7ececcd7d4910c2e6dcbe800bbb87bc0f891af0d",
                     vdom_nodes={
                         AnnotationType.LIST: [
                             1311, 1332, 1353, 1379, 1410, 1436, 1467, 1498,
@@ -489,6 +500,8 @@ class TestClueWeb22(DatasetIntegrationTest):
                     ),
                     date=datetime(2022, 8, 25, 6, 58, 5, 282445),
                     html=compile(b"^<html"),
+                    record_id=UUID("8df8e58f-85d7-4804-ad44-8136856d00a0"),
+                    payload_digest="sha1:4285cbda8ce39d8273c9fad8350f2c260d59d58e",
                     vdom_nodes={
                         AnnotationType.NONE: [],
                         AnnotationType.PRIMARY: [

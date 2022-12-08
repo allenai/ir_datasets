@@ -14,6 +14,7 @@ from typing import (
     TYPE_CHECKING, Iterable, Mapping, Union, AbstractSet, Tuple,
     ContextManager, Callable
 )
+from uuid import UUID
 from zipfile import ZipFile
 
 from ir_datasets.formats import BaseDocs
@@ -69,6 +70,8 @@ class _Html(NamedTuple):
     url_hash: str
     language: str
     date: datetime
+    record_id: UUID
+    payload_digest: str
     html: bytes
     vdom_nodes: Mapping[AnnotationType, Sequence[int]]
 
@@ -158,6 +161,11 @@ def _read_html(file: IO[bytes]) -> Iterator[_Html]:
             document.headers["WARC-Date"],
             "%Y-%m-%dT%H:%M:%S.%fZ",
         )
+        record_id = UUID(document.headers["WARC-Record-ID"][1:-1])
+        payload_digest = document.headers["WARC-Payload-Digest"]
+        content_length = int(document.headers["Content-Length"])
+        html: bytes = document.reader.read()
+        assert len(html) == content_length
         vdom_nodes = {
             annotation_type: [
                 int(vdom)
@@ -167,15 +175,14 @@ def _read_html(file: IO[bytes]) -> Iterator[_Html]:
             ]
             for annotation_type in AnnotationType
         }
-        html: bytes = document.reader.read()
-        assert html.endswith(b"\r\n")
-        html = html[:-2]  # Strip trailing \r\n.
         yield _Html(
             doc_id=doc_id,
             url=url,
             url_hash=url_hash,
             language=language,
             date=date,
+            record_id=record_id,
+            payload_digest=payload_digest,
             html=html,
             vdom_nodes=vdom_nodes,
         )
@@ -252,6 +259,8 @@ class ClueWeb22ADoc(NamedTuple):
     text: str
     date: datetime
     html: bytes
+    record_id: UUID
+    payload_digest: str
     vdom_nodes: Mapping[AnnotationType, Sequence[int]]
     vdom: bytes
     inlink_anchors: Sequence[Anchor]
@@ -266,6 +275,8 @@ class ClueWeb22BDoc(NamedTuple):
     text: str
     date: datetime
     html: bytes
+    record_id: UUID
+    payload_digest: str
     vdom_nodes: Mapping[AnnotationType, Sequence[int]]
     vdom: bytes
     inlink_anchors: Sequence[Anchor]
@@ -386,6 +397,8 @@ def _combine_a_docs(
             text=txt.text,
             date=html.date,
             html=html.html,
+            record_id=html.record_id,
+            payload_digest=html.payload_digest,
             vdom_nodes=html.vdom_nodes,
             vdom=vdom.vdom,
             inlink_anchors=inlink.anchors if inlink is not None else [],
@@ -487,6 +500,8 @@ def _combine_b_docs(
             text=txt.text,
             date=html.date,
             html=html.html,
+            record_id=html.record_id,
+            payload_digest=html.payload_digest,
             vdom_nodes=html.vdom_nodes,
             vdom=vdom.vdom,
             inlink_anchors=inlink.anchors if inlink is not None else [],
