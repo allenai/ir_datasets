@@ -157,10 +157,13 @@ def _read_html(file: IO[bytes]) -> Iterator[_Html]:
         url = document.headers['WARC-Target-URI']
         url_hash = document.headers["URL-Hash"]
         language = document.headers["Language"]
-        date = datetime.strptime(
-            document.headers["WARC-Date"],
-            "%Y-%m-%dT%H:%M:%S.%fZ",
-        )
+        date_header = document.headers["WARC-Date"]
+        date_format: str
+        if "." in date_header:
+            date_format = "%Y-%m-%dT%H:%M:%S.%fZ"
+        else:
+            date_format = "%Y-%m-%dT%H:%M:%SZ"
+        date = datetime.strptime(date_header, date_format)
         record_id = UUID(document.headers["WARC-Record-ID"][1:-1])
         payload_digest = document.headers["WARC-Payload-Digest"]
         content_length = int(document.headers["Content-Length"])
