@@ -18,9 +18,9 @@ def _init():
     )
 
     for subset in ClueWeb22Subset:
-        if subset.value.hide:
+        if subset.hide:
             continue
-        subset_tag = subset.value.tag
+        subset_tag = subset.tag
         registry.register(
             f"{NAME}/{subset_tag}",
             Dataset(
@@ -34,7 +34,7 @@ def _init():
             ),
         )
         for language in ClueWeb22Language:
-            language_tag = f"{subset_tag}/{language.value.tag}"
+            language_tag = f"{subset_tag}/{language.tag}"
             registry.register(
                 f"{NAME}/{language_tag}",
                 Dataset(
@@ -49,7 +49,7 @@ def _init():
                 ),
             )
         for subset_view in subset.subset_views - {subset}:
-            subset_view_tag = f"{subset_tag}/as-{subset_view.value.tag}"
+            subset_view_tag = f"{subset_tag}/as-{subset_view.tag}"
             registry.register(
                 f"{NAME}/{subset_view_tag}",
                 Dataset(
