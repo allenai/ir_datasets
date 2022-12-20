@@ -339,7 +339,7 @@ def _combine_a_docs(
                 f"txt URL hash was {txt.url_hash} but "
                 f"html URL hash was {html.url_hash}"
             )
-        assert txt.language == html.language
+        assert txt.language == "other" or txt.language == html.language
         if inlink is not None:
             assert inlink.doc_id == html.doc_id
             if inlink.url != html.url:
@@ -442,7 +442,7 @@ def _combine_b_docs(
                 f"txt URL hash was {txt.url_hash} but "
                 f"html URL hash was {html.url_hash}"
             )
-        assert txt.language == html.language
+        assert txt.language == "other" or txt.language == html.language
         if inlink is not None:
             assert inlink.doc_id == html.doc_id
             if inlink.url != html.url:
