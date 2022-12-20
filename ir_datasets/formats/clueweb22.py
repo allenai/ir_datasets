@@ -1191,6 +1191,19 @@ def _read_offsets(
             yield int(offset)
 
 
+def _fix_path(path: str, format_type: ClueWeb22Format) -> str:
+    """
+    Fix faulty file paths for Chinese outlink files.
+    For example, the document "clueweb22-zh_chs0000-00-00000" has
+    the following paths for outlink and HTML files:
+    /outlink/zh_chs/zh00/zh_chs0000/zh_chs0000-00.json.gz
+    /html/zh_chs/zh_chs00/zh_chs0000/zh_chs0000-00.warc.gz
+    """
+    if format_type == ClueWeb22Format.OUTLINK and "_" in path:
+        path = path.replace("zh_chs/zh_chs", "zh_chs/zh")
+    return path
+
+
 class _ClueWeb22Iterator(Iterator[AnyDoc]):
     _docs: ClueWeb22Docs
     _full_iterator: Iterator[AnyDoc]
@@ -1228,7 +1241,8 @@ class _ClueWeb22Iterator(Iterator[AnyDoc]):
         format_path = self._docs.path / format_type.id
         suffix = format_type.extension
         for file_id, count in self._docs.record_counts(format_type):
-            yield format_path / f"{file_id.path}{suffix}", count
+            path = _fix_path(file_id.path, format_type)
+            yield format_path / f"{path}{suffix}", count
 
     @contextmanager
     def _file_iterator_all(
@@ -1423,7 +1437,8 @@ class ClueWeb22Docstore(Docstore):
         format_path = self._docs.path / format_type.id
 
         def doc_id_format_path(doc_id: ClueWeb22DocId) -> Path:
-            return format_path / f"{doc_id.path}{format_type.extension}"
+            path = _fix_path(doc_id.path, format_type)
+            return format_path / f"{path}{format_type.extension}"
 
         return (
             (path, path_doc_ids)
