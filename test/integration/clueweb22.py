@@ -608,6 +608,10 @@ class TestClueWeb22(DatasetIntegrationTest):
                 dataset, slice(100_000_000, 100_000_100), 100, "middle of dataset",
                 skip_islice=True,
             )
+            self._test_docs_slice(
+                dataset, slice(180_000_000, 180_000_100), 100, "near end of dataset",
+                skip_islice=True,
+            )
 
     def test_clueweb22_docstore(self):
         ids = [
