@@ -446,6 +446,7 @@
   "msmarco-passage-v2/trec-dl-2021/judged": {"docs": {"_ref": "msmarco-passage-v2"}, "queries": {"count": 53}, "qrels": {"_ref": "msmarco-passage-v2/trec-dl-2021"}, "scoreddocs": {"count": 5300}},
   "msmarco-passage-v2/trec-dl-2022": {"docs": {"_ref": "msmarco-passage-v2"}, "queries": {"count": 500}, "scoreddocs": {"count": 50000}},
   "msmarco-passage/dev": {"docs": {"_ref": "msmarco-passage"}, "queries": {"count": 101093}, "qrels": {"count": 59273, "fields": {"relevance": {"counts_by_value": {"1": 59273}}}}},
+  "msmarco-passage/dev/2": {"docs": {"_ref": "msmarco-passage"}, "queries": {"count": 4281}, "qrels": {"count": 4655, "fields": {"relevance": {"counts_by_value": {"1": 4655}}}}},
   "msmarco-passage/dev/judged": {"docs": {"_ref": "msmarco-passage"}, "queries": {"count": 55578}, "qrels": {"_ref": "msmarco-passage/dev"}},
   "msmarco-passage/dev/small": {"docs": {"_ref": "msmarco-passage"}, "queries": {"count": 6980}, "qrels": {"count": 7437, "fields": {"relevance": {"counts_by_value": {"1": 7437}}}}, "scoreddocs": {"count": 6668967}},
   "msmarco-passage/eval": {"docs": {"_ref": "msmarco-passage"}, "queries": {"count": 101092}},
