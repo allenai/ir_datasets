@@ -50,6 +50,11 @@ class GovWeb02Query(NamedTuple):
     query_id: str
     title: str
     description: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class GovDoc(NamedTuple):

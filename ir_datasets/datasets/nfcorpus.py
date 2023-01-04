@@ -22,6 +22,11 @@ class NfCorpusDoc(NamedTuple):
     url: str
     title: str
     abstract: str
+    def default_text(self):
+        """
+        title and abstract
+        """
+        return f'{self.title} {self.abstract}'
 
 class NfCorpusQuery(NamedTuple):
     query_id: str

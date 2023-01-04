@@ -20,12 +20,22 @@ class WikiClirQuery(NamedTuple):
     query_id: str
     title: str
     first_sent: str
+    def default_text(self):
+        """
+        title
+        """
+        return f"{self.title}"
 
 
 class WikiClirDoc(NamedTuple):
     doc_id: str
     title: str
     text: str
+    def default_text(self):
+        """
+        title and text
+        """
+        return f"{self.title} {self.text}"
 
 
 def _init():
