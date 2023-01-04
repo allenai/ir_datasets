@@ -21,6 +21,12 @@ class NqPassageDoc(NamedTuple):
     document_title: str # from document itself
     document_url: str # from document itself
     parent_doc_id: str # doc_id of the largest passage it's under (e.g., a sentence under a paragraph), or None if it's a top-level passage
+    def default_text(self):
+        """
+        document_title and text
+        """
+        return f'{self.document_title} {self.text}'
+
 
 
 class NqQrel(NamedTuple):
