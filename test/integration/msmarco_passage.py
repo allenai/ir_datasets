@@ -57,6 +57,11 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             9: GenericQuery('524699', 'tricare service number'),
             6979: GenericQuery('1048565', 'who plays sebastian michaelis'),
         })
+        self._test_queries('msmarco-passage/dev/2', count=4281, items={
+            0: GenericQuery('1048579', 'what is pcnt'),
+            9: GenericQuery('1048779', 'what is ott media'),
+            4280: GenericQuery('1092262', ';liter chemistry definition'),
+        })
         self._test_queries('msmarco-passage/dev/judged', count=55578, items={
             0: GenericQuery(query_id='1048578', text='cost of endless pools/swim spa'),
             9: GenericQuery(query_id='1048601', text='what is pastoral medicine'),
@@ -148,6 +153,11 @@ class TestMsMarcoPassage(DatasetIntegrationTest):
             0: TrecQrel('300674', '7067032', 1, '0'),
             9: TrecQrel('54544', '7068203', 1, '0'),
             7436: TrecQrel('195199', '8009377', 1, '0'),
+        })
+        self._test_qrels('msmarco-passage/dev/2', count=4655, items={
+            0: TrecQrel('1090266', '7068220', 1, '0'),
+            9: TrecQrel('30178', '7071029', 1, '0'),
+            4654: TrecQrel('1090285', '8009191', 1, '0'),
         })
         self._test_qrels('msmarco-passage/dev/judged', count=59273, items={
             0: TrecQrel(query_id='1102432', doc_id='2026790', relevance=1, iteration='0'),
