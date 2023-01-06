@@ -1176,6 +1176,21 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
             yield from documents
 
 
+def _fix_missing_line_break(lines: Iterator[str]) -> Iterator[str]:
+    """
+    Bug fix for offset file `html/ja/ja00/ja0009/ja0009-57.warc.offset`:
+    The offset file's last line is missing a line break,
+    so we have to split the last line manually like this:
+    04723330100472349245\n -> 0472333010\n0472349245\n
+    """
+    for line in lines:
+        if len(line) > 10 + 1:  # 10 digits and newline
+            yield line[:10]
+            yield line[10:]
+        else:
+            yield line
+
+
 def _read_offsets(
         file_path: Path,
         format_type: ClueWeb22Format,
@@ -1187,6 +1202,10 @@ def _read_offsets(
     )
     offsets_file_path = file_path.with_name(offsets_name)
     with offsets_file_path.open("rt", encoding=_ENCODING) as offsets_file:
+        # Bug fix for offset file `html/ja/ja00/ja0009/ja0009-57.warc.offset`.
+        if offsets_name == "ja0009-57.warc.offset":
+            offsets_file = _fix_missing_line_break(offsets_file)
+
         for offset in offsets_file:
             yield int(offset)
 

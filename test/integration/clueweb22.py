@@ -652,6 +652,20 @@ class TestClueWeb22(DatasetIntegrationTest):
             with _logger.duration("cold fetch (earlier, cleared)"):
                 docstore.get_many(ids_earlier)
 
+    def test_clueweb22_offset_file_workaround(self):
+        """
+        Test workaround for offset file with missing line break at last line
+        (document index 147621050, document ID clueweb22-ja0009-57-17759)
+        """
+        for subset_view in [None, "a"]:
+            dataset_id = "clueweb22/b"
+            if subset_view:
+                dataset_id += f"/as-{subset_view}"
+            dataset = load(dataset_id)
+
+            assert dataset.docs_store().get("clueweb22-ja0009-57-17759") is not None
+            assert dataset.docs_iter()[147621050] is not None
+
 
 if __name__ == "__main__":
     main()
