@@ -63,6 +63,8 @@ class GovDoc(NamedTuple):
     http_headers: str
     body: bytes
     body_content_type: str
+    def default_text(self):
+        return ir_datasets.util.sax_html_parser(self.body, headers=self.http_headers, fields=[{'title', 'body'}])[0]
 
 
 class GovDocs(BaseDocs):
