@@ -32,11 +32,21 @@ class NfCorpusQuery(NamedTuple):
     query_id: str
     title: str
     all: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 class NfCorpusVideoQuery(NamedTuple):
     query_id: str
     title: str
     desc: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 class ZipQueries(BaseQueries):
     def __init__(self, queries, idxs, qtype):
