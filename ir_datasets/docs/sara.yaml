@@ -2,16 +2,9 @@ _: # matches documentation key above
   pretty_name: 'SARA' # a more human-readable way to present this dataset than the dataset-id
   desc: '
 <p>
-HTML-encoded and human-readable information about this dataset.
-Include a brief description of the dataset.
-Be sure to include important decisions made when processing it.
-Also, link to more information, e.g. websites, papers, etc.
-</p>
+A set of sensitivity-aware relevance assessments. More information is avaliable here:
+<p> 
+
 <ul>
-  <li><a href="https://github.com/seanmacavaney/dummy-irds-ext">Link to the source</a></li>
-</ul>' 
-  bibtex: |
-    @misc{dummy,
-      title={Dummy: a made-up dataset},
-      year={2021}
-    }
+<li><a href="https://github.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments">SARA</a></li>
+</ul>
