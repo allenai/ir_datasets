@@ -8,10 +8,130 @@ from ir_datasets.indices import PickleLz4FullStore
 from typing import NamedTuple, Tuple
 import itertools
 import io
-from ir_datasets.util import GzipExtract, Cache, Lazy, TarExtractAll
-
+from ir_datasets.util import GzipExtract, Cache, Lazy, TarExtractAll, RelativePath
+import os 
+import re
 import logging
+import glob
+import tarfile
 
+# Utility functions
+
+def filenames_from_cat(top,second, directory):
+    cats_globs = glob.glob(directory + '/*/*/*.cats')
+    matches = []
+    for g in cats_globs:
+        with open(g) as file:
+            for line in file:
+                line = line.split()[0]
+                line = line.split(",")
+                if int(line[0]) == top and int(line[1]) == second:
+                    dir = os.path.basename(g)
+                    filename = os.path.splitext(dir)[0]
+                    matches.append(filename)
+    return matches
+
+def print_email_from_filename(directory,filename):
+    full_filename = glob.glob(directory +'/*/*/*' + str(filename) + '.txt')
+    with open(full_filename[0]) as file:
+        for line in file:
+            print(line)
+
+def save_email_from_filename(filename, directory):
+    full_filename = glob.glob(directory +'/*/*/' + str(filename) + '.txt')
+    email_contents = ""
+    with open(full_filename[0]) as file:
+        for line in file:
+            email_contents = email_contents + line
+    return email_contents
+
+def save_all_from_cat(primary, secondary):
+    filenames = filenames_from_cat(primary, secondary)
+    contents = ""
+    for file in filenames:
+        contents = contents + save_email_from_filename(file)
+        contents = contents + "\n" + ("*" * 100) + "\n\n"
+    return contents
+
+def list_all_filenames(directory):
+    globs = glob.glob(directory +'/*/*/*.cats')
+    filenames = []
+    for file in globs:
+        filenames.append(os.path.splitext(os.path.basename(file))[0])
+    return filenames
+
+def length_of_email_from_filename(filename, directory):
+    email_text = save_email_from_filename(filename)
+    tokenised = word_tokenize(email_text)
+    return len(tokenised)
+
+def number_of_recipients(filename):
+    addresses = []
+    contents = save_email_from_filename(filename)
+    contents = contents.split("\n")
+    for line in contents:
+        if line.startswith("To:"):
+            addresses.append(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", line))
+    
+    return len([j for sub in addresses for j in sub])
+
+def get_sender_from_filename(filename):
+    addresses = []
+    contents = save_email_from_filename(filename)
+    contents = contents.split("\n")
+    for line in contents:
+        if line.startswith("From:"):
+            addresses.append(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", line))
+    
+    return [j for sub in addresses for j in sub][0]
+
+def search_by_id(id):
+    all_emails = list_all_filenames()
+    for email in all_emails:
+        text = save_email_from_filename(email)
+        if id in text:
+            print(text)
+
+def sensitivity_stats(filenames):
+  non_sensitive_count = 0
+  sensitive_count = 0
+  
+  for f in filenames:
+    if f in non_sensitive_filenames:
+      non_sensitive_count += 1
+    if f in sensitive_filenames:
+      sensitive_count += 1
+
+  print(f"Non-Sensitive: {non_sensitive_count} | Sensitive: {sensitive_count} ")
+
+def get_docs_frame(directory):
+    # Generate dataframe for collection to be indexed
+    data = []
+    # Partition emails into sensitive and non-sensitive
+    sensitive_filenames = []
+    # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
+    sensitive_filenames.append(filenames_from_cat(1,2, directory))
+    sensitive_filenames.append(filenames_from_cat(1,3, directory))
+
+    # Flatten the list
+    sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
+    # Remove duplicates - 3 emails are counted in both categories
+    sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
+
+    non_sensitive_filenames = []
+    for name in list_all_filenames(directory):
+        if name not in sensitive_filenames:
+            non_sensitive_filenames.append(name)
+
+    for filename in sensitive_filenames:
+        email = save_email_from_filename(filename, directory)
+        data.append([filename,email,1])
+
+    for filename in non_sensitive_filenames:
+        email = save_email_from_filename(filename, directory)
+        data.append([filename,email,0])
+
+    return data
 
 # A unique identifier for this dataset. This should match the file name (with "-" instead of "_")
 NAME = "sara"
@@ -26,51 +146,47 @@ QREL_DEFS = {
 # This message is shown to the user before downloads are started
 DUA = 'Please confirm that you agree to the data usage agreement at <https://some-url/>'
 
-def sentinel_splitter(it, sentinel):
-    for is_sentinel, group in itertools.groupby(it, lambda l: l == sentinel):
-        if not is_sentinel:
-            yield list(group)
-
 class SaraDoc(NamedTuple):
     doc_id: str
     text: str
+    sensitivity: int 
 
 class SaraDocs(BaseDocs):
     def __init__(self,dlc):
         super().__init__()
         self._dlc = dlc
-        print("init")
 
-    @ir_datasets.util.use_docstore
     def docs_iter(self):
-        print("docs_iter")
-        print(self._dlc)
-        with self._dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
-            for lines in sentinel_splitter(stream, sentinel='   /\n'):
-                print(lines)
-                print("123")
-                doc_id = lines[0].rstrip('\n')
-                doc_text = ''.join(lines[1:])
-                yield SaraDoc(doc_id, doc_text)
-
-    # # def docs_count(self):
-    #     raise NotImplementedError()
+        return iter(self.docs_store())
     
-    # def docs_path(self, force=True):
-    #     return self.docs_dlc.path(force)
+    def _docs_iter(self):
+        directory = self._dlc
+        documents = get_docs_frame(str(directory))
+        for doc in documents:
+            yield SaraDoc(doc[0],doc[1],doc[2])
     
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
-            init_iter_fn=self.docs_iter,
+            path=f'{ir_datasets.util.home_path()/NAME}/enron_with_categories/enron_with_categories/docs.pklz4',
+            init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=ir_datasets.util.count_hint(NAME),
         )
 
+    def docs_count(self):
+        if self.docs_store().built():
+            return self.docs_store().count()
 
+    def docs_namespace(self):
+        return NAME
+
+    def docs_lang(self):
+        return 'en'
+    
+    def docs_cls(self):
+        return SaraDoc
 
 # An initialization function is used to keep the namespace clean
 def _init():
@@ -81,38 +197,29 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     # A reference to the downloads file, under the key "dummy". (DLC stands for DownLoadable Content)
-    dlc = DownloadConfig.context(NAME, base_path)    
+    dlc = DownloadConfig.context(NAME, base_path)
 
     # collection = SaraDocs(dlc.) 
     # How to process the documents. Since they are in a typical TSV format, we'll use TsvDocs.
-    # Note that other dataset formats may require you to write a custom docs handler (BaseDocs).
+    # Note that oth9er dataset formats may require you to write a custom docs handler (BaseDocs).
     # Note that this doesn't process the documents now; it just defines how they are processed.
-    colle = SaraDocs(Cache(TarExtractAll(dlc, base_path/"docs.txt"), base_path/'docs.txt'))
-
-    print(dlc["docs"].stream())
-    stream = io.TextIOWrapper(dlc["docs"].stream())
+    #path = TarExtractAll(dlc["docs"], base_path/"enron_with_categories")
     
-
-    # @ir_datasets.util.use_docstore
-    # def test(dlc):
-    #     with dlc["docs"].stream() as stream:
-    #         stream = io.TextIOWrapper(stream)
-    # test(dlc)
-    #print(TarExtractAll(dlc, base_path/"docs.txt").path())
+    docs = SaraDocs(TarExtractAll(dlc["docs"], base_path/"enron_with_categories/").path())
     # How to process the queries. Similar to the documents, you may need to write a custom
     # queries handler (BaseQueries).
-    #queries = TsvQueries(dlc['queries'], namespace=NAME, lang='en')
+    queries = TsvQueries(dlc['queries'], namespace=NAME, lang='en')
 
     # Qrels: The qrels file is in the TREC format, so we'll use TrecQrels to process them
-    #qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
+    qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
 
     # Package the docs, queries, qrels, and documentation into a Dataset object
-    #dataset = Dataset(docs, queries, qrels, documentation('_'))
+    dataset = Dataset(docs, queries, qrels, documentation('_'))
 
     # Register the dataset in ir_datasets
-    #ir_datasets.registry.register(NAME, dataset)
+    ir_datasets.registry.register(NAME, dataset)
 
-    #return dataset # used for exposing dataset to the namespace
-    return -1
+    return dataset # used for exposing dataset to the namespace
+
 
 _init()

@@ -4049,17 +4049,16 @@
   "sara": {
     "docs": {
       "url": "https://bailando.berkeley.edu/enron/enron_with_categories.tar.gz",
-      "expected_md5": "f880a35b54bf9fa4d18d1eee8da6f179",
-      "cache_path": "docs.txt"
+      "expected_md5": "f880a35b54bf9fa4d18d1eee8da6f179"
     },
     "queries": {
-      "url": "https://github.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments/blob/main/information_needs.tsv",
-      "expected_md5": "dba742f52b2cdd271b5e29aa9850241d",
+      "url": "https://raw.githubusercontent.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments/main/repeated_queries.tsv",
+      "expected_md5": "fc0247928a0b93bb344068fa238a5e3f",
       "cache_path": "queries.csv"
     },
     "qrels": {
-      "url": "https://github.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments/blob/main/qrels.txt",
-      "expected_md5": "0a5cf8417e43913d46bdd17299251ed0",
+      "url": "https://raw.githubusercontent.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments/main/repeated_qrels.txt",
+      "expected_md5": "49589ab65d1eaf78dbbadfc5ae56ef72",
       "cache_paths": "qrels.txt"
     }
   }
