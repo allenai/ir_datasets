@@ -9,7 +9,7 @@ from typing import NamedTuple, Tuple
 import itertools
 import io
 from ir_datasets.util import GzipExtract, Cache, Lazy, TarExtractAll, RelativePath
-import os 
+import os
 import re
 import logging
 import glob
@@ -18,7 +18,7 @@ import tarfile
 # Utility functions
 
 def filenames_from_cat(top,second, directory):
-    cats_globs = glob.glob(directory + '/*/*/*.cats')
+    cats_globs = sorted(glob.glob(directory + '/*/*/*.cats'))
     matches = []
     for g in cats_globs:
         with open(g) as file:
@@ -33,7 +33,7 @@ def filenames_from_cat(top,second, directory):
 
 
 def save_email_from_filename(filename, directory):
-    full_filename = glob.glob(directory +'/*/*/' + str(filename) + '.txt')
+    full_filename = sorted(glob.glob(directory +'/*/*/' + str(filename) + '.txt'))
     email_contents = ""
     with open(full_filename[0]) as file:
         for line in file:
@@ -42,41 +42,12 @@ def save_email_from_filename(filename, directory):
 
 
 def list_all_filenames(directory):
-    globs = glob.glob(directory +'/*/*/*.cats')
+    globs = sorted(glob.glob(directory +'/*/*/*.cats'))
     filenames = []
     for file in globs:
         filenames.append(os.path.splitext(os.path.basename(file))[0])
     return filenames
 
-
-# def get_docs_frame(directory):
-#     # Generate dataframe for collection to be indexed
-#     data = []
-#     # Partition emails into sensitive and non-sensitive
-#     sensitive_filenames = []
-#     # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
-#     sensitive_filenames.append(filenames_from_cat(1,2, directory))
-#     sensitive_filenames.append(filenames_from_cat(1,3, directory))
-
-#     # Flatten the list
-#     sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
-#     # Remove duplicates - 3 emails are counted in both categories
-#     sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
-
-#     non_sensitive_filenames = []
-#     for name in list_all_filenames(directory):
-#         if name not in sensitive_filenames:
-#             non_sensitive_filenames.append(name)
-
-#     for filename in sensitive_filenames:
-#         email = save_email_from_filename(filename, directory)
-#         data.append([filename,email,1])
-
-#     for filename in non_sensitive_filenames:
-#         email = save_email_from_filename(filename, directory)
-#         data.append([filename,email,0])
-
-#     return data
 
 # A unique identifier for this dataset. This should match the file name (with "-" instead of "_")
 NAME = "sara"
@@ -88,13 +59,10 @@ QREL_DEFS = {
     0: 'not relevant',
 }
 
-# This message is shown to the user before downloads are started
-DUA = 'Please confirm that you agree to the data usage agreement at <https://some-url/>'
-
 class SaraDoc(NamedTuple):
     doc_id: str
     text: str
-    sensitivity: int 
+    sensitivity: int
 
 class SaraDocs(BaseDocs):
     def __init__(self,dlc):
@@ -104,7 +72,8 @@ class SaraDocs(BaseDocs):
     def docs_iter(self):
         return iter(self.docs_store())
 
-    def _docs_iter(directory):
+    def _docs_iter(self):
+        directory = str(self._dlc.path())
         # Partition emails into sensitive and non-sensitive
         sensitive_filenames = []
         # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
@@ -127,8 +96,8 @@ class SaraDocs(BaseDocs):
 
         for filename in non_sensitive_filenames:
             email = save_email_from_filename(filename, directory)
-            yield SaraDoc(filename,email,0)   
-    
+            yield SaraDoc(filename,email,0)
+
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()/NAME}/enron_with_categories/enron_with_categories/docs.pklz4',
@@ -148,20 +117,20 @@ class SaraDocs(BaseDocs):
 
     def docs_lang(self):
         return 'en'
-    
+
     def docs_cls(self):
         return SaraDoc
 
 # An initialization function is used to keep the namespace clean
 def _init():
     base_path = ir_datasets.util.home_path()/NAME
-    
+
     # # Load an object that is used for providing the documentation
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
     dlc = DownloadConfig.context(NAME, base_path)
 
-    docs = SaraDocs(TarExtractAll(dlc["docs"], base_path/"enron_with_categories/").path())
+    docs = SaraDocs(TarExtractAll(dlc["docs"], base_path/"enron_with_categories/"))
 
     queries = TsvQueries(dlc['queries'], namespace=NAME, lang='en')
 
