@@ -64,7 +64,7 @@ class RequestsDownload(BaseDownload):
         http_args = {
             'url': self.url,
             'stream': True, # return the response as a stream, rather than loading it all into memory
-            'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__path__}'}, # identify itself
+            'headers': {'User-Agent': f'ir_datasets/{ir_datasets.__version__}'}, # identify itself
             'timeout': float(os.environ.get('IR_DATASETS_DL_TIMEOUT', '15')), # raise error if 15 seconds pass without any data from the socket
             'verify': os.environ.get('IR_DATASETS_DL_SKIP_SSL', '').lower() != 'true', # skip SSL verification if user specifies
             'cookies': self.cookies,

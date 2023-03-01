@@ -31,11 +31,6 @@ def filenames_from_cat(top,second, directory):
                     matches.append(filename)
     return matches
 
-def print_email_from_filename(directory,filename):
-    full_filename = glob.glob(directory +'/*/*/*' + str(filename) + '.txt')
-    with open(full_filename[0]) as file:
-        for line in file:
-            print(line)
 
 def save_email_from_filename(filename, directory):
     full_filename = glob.glob(directory +'/*/*/' + str(filename) + '.txt')
@@ -45,13 +40,6 @@ def save_email_from_filename(filename, directory):
             email_contents = email_contents + line
     return email_contents
 
-def save_all_from_cat(primary, secondary):
-    filenames = filenames_from_cat(primary, secondary)
-    contents = ""
-    for file in filenames:
-        contents = contents + save_email_from_filename(file)
-        contents = contents + "\n" + ("*" * 100) + "\n\n"
-    return contents
 
 def list_all_filenames(directory):
     globs = glob.glob(directory +'/*/*/*.cats')
@@ -60,78 +48,35 @@ def list_all_filenames(directory):
         filenames.append(os.path.splitext(os.path.basename(file))[0])
     return filenames
 
-def length_of_email_from_filename(filename, directory):
-    email_text = save_email_from_filename(filename)
-    tokenised = word_tokenize(email_text)
-    return len(tokenised)
 
-def number_of_recipients(filename):
-    addresses = []
-    contents = save_email_from_filename(filename)
-    contents = contents.split("\n")
-    for line in contents:
-        if line.startswith("To:"):
-            addresses.append(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", line))
-    
-    return len([j for sub in addresses for j in sub])
+# def get_docs_frame(directory):
+#     # Generate dataframe for collection to be indexed
+#     data = []
+#     # Partition emails into sensitive and non-sensitive
+#     sensitive_filenames = []
+#     # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
+#     sensitive_filenames.append(filenames_from_cat(1,2, directory))
+#     sensitive_filenames.append(filenames_from_cat(1,3, directory))
 
-def get_sender_from_filename(filename):
-    addresses = []
-    contents = save_email_from_filename(filename)
-    contents = contents.split("\n")
-    for line in contents:
-        if line.startswith("From:"):
-            addresses.append(re.findall(r"[a-z0-9\.\-+_]+@[a-z0-9\.\-+_]+\.[a-z]+", line))
-    
-    return [j for sub in addresses for j in sub][0]
+#     # Flatten the list
+#     sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
+#     # Remove duplicates - 3 emails are counted in both categories
+#     sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
 
-def search_by_id(id):
-    all_emails = list_all_filenames()
-    for email in all_emails:
-        text = save_email_from_filename(email)
-        if id in text:
-            print(text)
+#     non_sensitive_filenames = []
+#     for name in list_all_filenames(directory):
+#         if name not in sensitive_filenames:
+#             non_sensitive_filenames.append(name)
 
-def sensitivity_stats(filenames):
-  non_sensitive_count = 0
-  sensitive_count = 0
-  
-  for f in filenames:
-    if f in non_sensitive_filenames:
-      non_sensitive_count += 1
-    if f in sensitive_filenames:
-      sensitive_count += 1
+#     for filename in sensitive_filenames:
+#         email = save_email_from_filename(filename, directory)
+#         data.append([filename,email,1])
 
-  print(f"Non-Sensitive: {non_sensitive_count} | Sensitive: {sensitive_count} ")
+#     for filename in non_sensitive_filenames:
+#         email = save_email_from_filename(filename, directory)
+#         data.append([filename,email,0])
 
-def get_docs_frame(directory):
-    # Generate dataframe for collection to be indexed
-    data = []
-    # Partition emails into sensitive and non-sensitive
-    sensitive_filenames = []
-    # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
-    sensitive_filenames.append(filenames_from_cat(1,2, directory))
-    sensitive_filenames.append(filenames_from_cat(1,3, directory))
-
-    # Flatten the list
-    sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
-    # Remove duplicates - 3 emails are counted in both categories
-    sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
-
-    non_sensitive_filenames = []
-    for name in list_all_filenames(directory):
-        if name not in sensitive_filenames:
-            non_sensitive_filenames.append(name)
-
-    for filename in sensitive_filenames:
-        email = save_email_from_filename(filename, directory)
-        data.append([filename,email,1])
-
-    for filename in non_sensitive_filenames:
-        email = save_email_from_filename(filename, directory)
-        data.append([filename,email,0])
-
-    return data
+#     return data
 
 # A unique identifier for this dataset. This should match the file name (with "-" instead of "_")
 NAME = "sara"
@@ -158,12 +103,31 @@ class SaraDocs(BaseDocs):
 
     def docs_iter(self):
         return iter(self.docs_store())
-    
-    def _docs_iter(self):
-        directory = self._dlc
-        documents = get_docs_frame(str(directory))
-        for doc in documents:
-            yield SaraDoc(doc[0],doc[1],doc[2])
+
+    def _docs_iter(directory):
+        # Partition emails into sensitive and non-sensitive
+        sensitive_filenames = []
+        # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
+        sensitive_filenames.append(filenames_from_cat(1,2, directory))
+        sensitive_filenames.append(filenames_from_cat(1,3, directory))
+
+        # Flatten the list
+        sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
+        # Remove duplicates - 3 emails are counted in both categories
+        sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
+
+        non_sensitive_filenames = []
+        for name in list_all_filenames(directory):
+            if name not in sensitive_filenames:
+                non_sensitive_filenames.append(name)
+
+        for filename in sensitive_filenames:
+            email = save_email_from_filename(filename, directory)
+            yield SaraDoc(filename,email,1)
+
+        for filename in non_sensitive_filenames:
+            email = save_email_from_filename(filename, directory)
+            yield SaraDoc(filename,email,0)   
     
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
@@ -190,27 +154,17 @@ class SaraDocs(BaseDocs):
 
 # An initialization function is used to keep the namespace clean
 def _init():
-    # The directory where this dataset's data files will be stored
     base_path = ir_datasets.util.home_path()/NAME
     
     # # Load an object that is used for providing the documentation
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    # A reference to the downloads file, under the key "dummy". (DLC stands for DownLoadable Content)
     dlc = DownloadConfig.context(NAME, base_path)
 
-    # collection = SaraDocs(dlc.) 
-    # How to process the documents. Since they are in a typical TSV format, we'll use TsvDocs.
-    # Note that oth9er dataset formats may require you to write a custom docs handler (BaseDocs).
-    # Note that this doesn't process the documents now; it just defines how they are processed.
-    #path = TarExtractAll(dlc["docs"], base_path/"enron_with_categories")
-    
     docs = SaraDocs(TarExtractAll(dlc["docs"], base_path/"enron_with_categories/").path())
-    # How to process the queries. Similar to the documents, you may need to write a custom
-    # queries handler (BaseQueries).
+
     queries = TsvQueries(dlc['queries'], namespace=NAME, lang='en')
 
-    # Qrels: The qrels file is in the TREC format, so we'll use TrecQrels to process them
     qrels = TrecQrels(dlc['qrels'], QREL_DEFS)
 
     # Package the docs, queries, qrels, and documentation into a Dataset object
