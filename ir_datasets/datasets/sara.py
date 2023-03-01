@@ -73,34 +73,29 @@ class SaraDocs(BaseDocs):
         return iter(self.docs_store())
 
     def _docs_iter(self):
-        directory = str(self._dlc.path())
-        # Partition emails into sensitive and non-sensitive
-        sensitive_filenames = []
-        # Assume 'Purely personal' and 'Personal but in a professional context' are the sensitive categories
-        sensitive_filenames.append(filenames_from_cat(1,2, directory))
-        sensitive_filenames.append(filenames_from_cat(1,3, directory))
-
-        # Flatten the list
-        sensitive_filenames = [j for sub in sensitive_filenames for j in sub]
-        # Remove duplicates - 3 emails are counted in both categories
-        sensitive_filenames = list(dict.fromkeys(sensitive_filenames))
-
-        non_sensitive_filenames = []
-        for name in list_all_filenames(directory):
-            if name not in sensitive_filenames:
-                non_sensitive_filenames.append(name)
-
-        for filename in sensitive_filenames:
-            email = save_email_from_filename(filename, directory)
-            yield SaraDoc(filename,email,1)
-
-        for filename in non_sensitive_filenames:
-            email = save_email_from_filename(filename, directory)
-            yield SaraDoc(filename,email,0)
+        with self._dlc.stream() as stream, \
+             tarfile.open(fileobj=stream, mode='r|gz') as tarf:
+            it = iter(tarf)
+            for record in it:
+                if record.name.endswith('.txt') and not record.name.endswith('categories.txt'):
+                    dir = os.path.basename(record.name)
+                    doc_id = os.path.splitext(dir)[0]
+                    with tarf.extractfile(record) as inp:
+                         contents = inp.read().decode()
+                    record = next(it)
+                    assert record.name.endswith(f'{doc_id}.cats')
+                    sensitive = 0
+                    with tarf.extractfile(record) as file:
+                        for line in file:
+                            line = line.split()[0]
+                            line = line.split(b",")
+                            if int(line[0]) == 1 and int(line[1]) in (2, 3):
+                                sensitive = 1
+                    yield SaraDoc(doc_id, contents, sensitive)
 
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()/NAME}/enron_with_categories/enron_with_categories/docs.pklz4',
+            path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
@@ -130,7 +125,7 @@ def _init():
 
     dlc = DownloadConfig.context(NAME, base_path)
 
-    docs = SaraDocs(TarExtractAll(dlc["docs"], base_path/"enron_with_categories/"))
+    docs = SaraDocs(dlc["docs"])
 
     queries = TsvQueries(dlc['queries'], namespace=NAME, lang='en')
 

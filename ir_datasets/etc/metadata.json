@@ -523,6 +523,7 @@
   "pmc/v1/trec-cds-2015": {"docs": {"_ref": "pmc/v1"}, "queries": {"count": 30}, "qrels": {"count": 37807, "fields": {"relevance": {"counts_by_value": {"1": 2979, "0": 32817, "2": 2011}}}}},
   "pmc/v2": {"docs": {"count": 1255260, "fields": {"doc_id": {"max_len": 7, "common_prefix": ""}}}},
   "pmc/v2/trec-cds-2016": {"docs": {"_ref": "pmc/v2"}, "queries": {"count": 30}, "qrels": {"count": 37707, "fields": {"relevance": {"counts_by_value": {"0": 32246, "1": 3411, "2": 2050}}}}},
+  "sara": {"docs": {"count": 1702, "fields": {"doc_id": {"max_len": 6, "common_prefix": ""}}}, "queries": {"count": 150}, "qrels": {"count": 34413, "fields": {"relevance": {"counts_by_value": {"0": 32706, "2": 708, "1": 999}}}}},
   "touche-image": {},
   "touche-image/2022-06-13": {"docs": {"count": 23841, "fields": {"doc_id": {"max_len": 17, "common_prefix": "I"}}}},
   "touche-image/2022-06-13/touche-2022-task-3": {"docs": {"_ref": "touche-image/2022-06-13"}, "queries": {"count": 50}, "qrels": {"count": 19821, "fields": {"relevance": {"counts_by_value": {"1": 8736, "0": 11085}}}}},

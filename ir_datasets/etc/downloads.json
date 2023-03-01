@@ -4073,7 +4073,7 @@
     "qrels": {
       "url": "https://raw.githubusercontent.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments/main/repeated_qrels.txt",
       "expected_md5": "49589ab65d1eaf78dbbadfc5ae56ef72",
-      "cache_paths": "qrels.txt"
+      "cache_path": "qrels.txt"
     }
   }
   }
