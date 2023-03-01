@@ -15,39 +15,6 @@ import logging
 import glob
 import tarfile
 
-# Utility functions
-
-def filenames_from_cat(top,second, directory):
-    cats_globs = sorted(glob.glob(directory + '/*/*/*.cats'))
-    matches = []
-    for g in cats_globs:
-        with open(g) as file:
-            for line in file:
-                line = line.split()[0]
-                line = line.split(",")
-                if int(line[0]) == top and int(line[1]) == second:
-                    dir = os.path.basename(g)
-                    filename = os.path.splitext(dir)[0]
-                    matches.append(filename)
-    return matches
-
-
-def save_email_from_filename(filename, directory):
-    full_filename = sorted(glob.glob(directory +'/*/*/' + str(filename) + '.txt'))
-    email_contents = ""
-    with open(full_filename[0]) as file:
-        for line in file:
-            email_contents = email_contents + line
-    return email_contents
-
-
-def list_all_filenames(directory):
-    globs = sorted(glob.glob(directory +'/*/*/*.cats'))
-    filenames = []
-    for file in globs:
-        filenames.append(os.path.splitext(os.path.basename(file))[0])
-    return filenames
-
 
 # A unique identifier for this dataset. This should match the file name (with "-" instead of "_")
 NAME = "sara"
