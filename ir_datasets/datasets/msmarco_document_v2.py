@@ -28,6 +28,11 @@ class MsMarcoV2Document(NamedTuple):
     title: str
     headings: str
     body: str
+    def default_text(self):
+        """
+        title + headings + body
+        """
+        return f'{self.title} {self.headings} {self.body}'
 
 
 class MsMarcoV2Docs(BaseDocs):
@@ -101,6 +106,11 @@ class MsMarcoV2AnchorTextDocument(NamedTuple):
     doc_id: str
     text: str
     anchors: List[str]
+    def default_text(self):
+        """
+        text + anchors
+        """
+        return f'{self.text} ' + ' '.join(self.anchors)
 
 
 class MsMarcoV2AnchorTextDocs(BaseDocs):

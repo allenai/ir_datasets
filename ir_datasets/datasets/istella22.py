@@ -18,6 +18,11 @@ class Istella22Doc(NamedTuple):
     extra_text: str
     lang: str
     lang_pct: int
+    def default_text(self):
+        """
+        title + text + extra_text
+        """
+        return f'{self.title} {self.text} {self.extra_text}'
 
 
 NAME = 'istella22'

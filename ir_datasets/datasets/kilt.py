@@ -43,6 +43,11 @@ class KiltDoc(NamedTuple):
     history_parentid: str
     history_pageid: str
     history_url: str
+    def default_text(self):
+        """
+        title + text
+        """
+        return f'{self.title} {self.text}'
 
 
 def strip_markup(text):

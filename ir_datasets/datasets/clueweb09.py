@@ -40,6 +40,11 @@ class TrecWebTrackQuery(NamedTuple):
     description: str
     type: str
     subtopics: Tuple[TrecSubtopic, ...]
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 class ClueWeb09Docs(WarcDocs):

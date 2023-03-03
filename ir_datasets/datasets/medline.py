@@ -36,6 +36,11 @@ class MedlineDoc(NamedTuple):
     doc_id: str
     title: str
     abstract: str
+    def default_text(self):
+        """
+        title + abstract
+        """
+        return f'{self.title} {self.abstract}'
 
 
 class TrecGenomicsQuery(NamedTuple):
@@ -43,6 +48,11 @@ class TrecGenomicsQuery(NamedTuple):
     title: str
     need: str
     context: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class TrecPm2017Query(NamedTuple):
@@ -51,6 +61,11 @@ class TrecPm2017Query(NamedTuple):
     gene: str
     demographic: str
     other: str
+    def default_text(self):
+        """
+        disease, gene, demographic, and other
+        """
+        return f'{self.disease} {self.gene} {self.demographic} {self.other}'
 
 
 class TrecPmQuery(NamedTuple):
@@ -58,6 +73,11 @@ class TrecPmQuery(NamedTuple):
     disease: str
     gene: str
     demographic: str
+    def default_text(self):
+        """
+        disease, gene, and demographic
+        """
+        return f'{self.disease} {self.gene} {self.demographic}'
 
 
 class ConcatFile:
