@@ -111,9 +111,9 @@ class BeirCovidQuery(NamedTuple):
     narrative: str
     def default_text(self):
         """
-        title text
+        text
         """
-        return self,text
+        return self.text
 
 class BeirCqaQuery(NamedTuple):
     query_id: str
@@ -121,9 +121,9 @@ class BeirCqaQuery(NamedTuple):
     tags: List[str]
     def default_text(self):
         """
-        title text
+        text
         """
-        return self,text
+        return self.text
 
 def _map_field(field, data):
     if field in ('doc_id', 'query_id'):
