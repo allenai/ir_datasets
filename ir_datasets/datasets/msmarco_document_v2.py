@@ -110,7 +110,7 @@ class MsMarcoV2AnchorTextDocument(NamedTuple):
         """
         text + anchors
         """
-        return f'{self.title} ' + ' '.join(self.anchors)
+        return f'{self.text} ' + ' '.join(self.anchors)
 
 
 class MsMarcoV2AnchorTextDocs(BaseDocs):
