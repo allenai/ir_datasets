@@ -21,7 +21,7 @@ class TestNeuMarco(DatasetIntegrationTest):
             9: GenericDoc('9', ' 汉福德被选定为曼哈顿项目B反应堆的一个主要原因是它靠近哥伦比亚河，这是北美海岸流入太平洋的最大河流。'),
             8841822: GenericDoc('8841822', ' 查看全尺寸图像。 在耀眼的灯光的背后，7月4日的观众们都是精心制作的烟花。 不管是红色、白色和蓝色的喷泉还是紫色的火花，每个烟花都充满了正确的化学物质组合，以创造这些五颜六色的灯光。 在每一个手工烟花中，都有少量的特殊化学物质，主要是金属盐和金属氧化物，它们会反应产生一系列的颜色。'),
         })
-"""
+
     def test_queries(self):
         for lang in ['fa', 'ru', 'zh']:
             self._test_queries(f'neumarco/{lang}/train', count=808731, items={
@@ -85,7 +85,7 @@ class TestNeuMarco(DatasetIntegrationTest):
                 9: GenericDocPair('411362', '31018', '4238671'),
                 269919003: GenericDocPair('88228', '5117891', '7075853')
             })
-"""
+
 
 
 if __name__ == '__main__':
