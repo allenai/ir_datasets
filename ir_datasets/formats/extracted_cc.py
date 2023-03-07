@@ -22,11 +22,12 @@ class ExctractedCCDoc(NamedTuple):
 
 class ExctractedCCDocs(BaseDocs):
     
-    def __init__(self, docs_dlc, subset_lang, namespace=None, count=None):
+    def __init__(self, docs_dlc, subset_lang, namespace=None, count=None, doc_store_path=None):
         self._docs_dlc = docs_dlc
         self._subset_lang = subset_lang
         self._namespace = namespace
         self._count = count
+        self._doc_store_path_val = doc_store_path
         # self._count = DOC_COUNTS[subset_lang]
 
     def docs_path(self, force=True):
@@ -37,6 +38,8 @@ class ExctractedCCDocs(BaseDocs):
         yield from self._internal_docs_iter()
 
     def _doc_store_path(self):
+        if self._doc_store_path_val:
+            return self._doc_store_path_val
         return self.docs_path(force=False)
 
     def docs_store(self):

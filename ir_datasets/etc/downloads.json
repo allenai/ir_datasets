@@ -1238,8 +1238,10 @@
       "cache_path": "test.topics.v1-0.jsonl"
     },
     "fa/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "fas/hc4_docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/hc4/resolve/main/data/fas-00000-of-00001.jsonl.gz",
+      "size_hint": 518142839,
+      "expected_md5": "dc4867f3dd1619323ee97db87b8bbb4f",
+      "cache_path": "fas/hc4_docs.jsonl.gz"
     },
     "fa/docs/ids": {
       "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/fas/ids.jsonl.gz",
@@ -1266,8 +1268,10 @@
       "cache_path": "fas/test.qrels.v1-0.txt"
     },
     "zh/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "zho/hc4_docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/hc4/resolve/main/data/zho-00000-of-00001.jsonl.gz",
+      "size_hint": 576134453,
+      "expected_md5": "a2f202455023e0189952d829808756f6",
+      "cache_path": "zho/hc4_docs.jsonl.gz"
     },
     "zh/docs/ids": {
       "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/zho/ids.jsonl.gz",
@@ -1294,8 +1298,10 @@
       "cache_path": "zho/test.qrels.v1-0.txt"
     },
     "ru/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/hltcoe/HC4>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "rus/hc4_docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/hc4/resolve/main/data/rus-00000-of-00001.jsonl.gz",
+      "size_hint": 4138605072,
+      "expected_md5": "a3deb9d6183a34345c72193de87eebe5",
+      "cache_path": "rus/hc4_docs.jsonl.gz"
     },
     "ru/docs/ids/0": {
       "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/rus/ids.0.jsonl.gz",
@@ -2986,7 +2992,7 @@
   
   "neumarco": {
     "main": {
-      "url": "https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/dlawrie1_jh_edu/EQcICtPaSqFNoCZHtoeZszoB7FC362BvaPvieUSk2j30tA?download=1",
+      "url": "https://huggingface.co/datasets/neuclir/neumarco/resolve/main/data/neumarco.tar.gz",
       "size_hint": 3723728998,
       "expected_md5": "733181c211959a7c09c695bfcddaea54",
       "cache_path": "neuMSMARCO.tar.gz"
@@ -3393,16 +3399,22 @@
   
   "neuclir": {
     "1/fa/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "1/fas/docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/fas-00000-of-00001.jsonl.gz",
+      "size_hint": 2359094118,
+      "expected_md5": "c88f79f6b6da974db22cef3dd73fcee1",
+      "cache_path": "1/fas/docs.jsonl.gz"
     },
     "1/zh/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "1/zho/docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/zho-00000-of-00001.jsonl.gz",
+      "size_hint": 4504119267,
+      "expected_md5": "99eb400f3a474603d1db5d41f606889b",
+      "cache_path": "1/zho/docs.jsonl.gz"
     },
     "1/ru/docs": {
-      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
-      "cache_path": "1/rus/docs.jsonl"
+      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/rus-00000-of-00001.jsonl.gz",
+      "size_hint": 3188072408,
+      "expected_md5": "3aabc798a3b5dd92d7c47db9521870b1",
+      "cache_path": "1/rus/docs.jsonl.gz"
     }
   },
   

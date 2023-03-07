@@ -30,13 +30,13 @@ def get_ids(dlcs):
     return set(ids)
 
 class FilteredExctractedCCDocs(ExctractedCCDocs):
-    def __init__(self, docs_dlc, subset_lang, include_doc_id_dlc, filter_name=None, namespace=None, count=None):
-        super().__init__(docs_dlc, subset_lang, namespace, count)
+    def __init__(self, docs_dlc, subset_lang, include_doc_id_dlc, filter_name=None, namespace=None, count=None, doc_store_path=None):
+        super().__init__(docs_dlc, subset_lang, namespace, count, doc_store_path)
         self._filter_name = filter_name or "filtered"
         self._include_doc_id_dlc = include_doc_id_dlc
     
     def _doc_store_path(self):
-        return self.docs_path(force=False) + f".{self._filter_name}"
+        return str(super()._doc_store_path()) + f".{self._filter_name}"
 
     def _internal_docs_iter(self):
         include_doc_id = get_ids(self._include_doc_id_dlc)
@@ -75,14 +75,15 @@ def _init():
 
     # For NeuCLIR Collection 1
     for lang in ['zh', 'fa', 'ru']:
-        lang_docs = ExctractedCCDocs(dlc[f'1/{lang}/docs'], subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang])
+        lang3 = {'zh': 'zho', 'fa': 'fas', 'ru': 'rus'}[lang]
+        lang_docs = ExctractedCCDocs(GzipExtract(dlc[f'1/{lang}/docs']), subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang], doc_store_path=base_path/'1'/lang3/'docs.jsonl')
         subsets[f"1/{lang}"] = Dataset(
             lang_docs,
             documentation(f"1/{lang}")
         )
         include_doc_id_dlc = hc4_dlc[f'{lang}/docs/ids'] if lang != 'ru' else tuple([ hc4_dlc[f'{lang}/docs/ids/{i}'] for i in range(8) ])
         subsets[f"1/{lang}/hc4-filtered"] = Dataset(
-            FilteredExctractedCCDocs(dlc[f'1/{lang}/docs'], subset_lang=lang, namespace=NAME, include_doc_id_dlc=include_doc_id_dlc),
+            FilteredExctractedCCDocs(GzipExtract(dlc[f'1/{lang}/docs']), subset_lang=lang, namespace=NAME, include_doc_id_dlc=include_doc_id_dlc, doc_store_path=base_path/lang3/'docs.jsonl'),
             ExctractedCCQueries([hc4_dlc[f'dev/topics'], hc4_dlc[f'test/topics']], subset_lang=lang, namespace=NAME),
             FilteredTrecQrels([ hc4_dlc[f'{lang}/dev/qrels'], hc4_dlc[f'{lang}/test/qrels'] ], QREL_DEFS, include_doc_id_dlc=include_doc_id_dlc),
             documentation(f"1/{lang}/hc4-filtered")

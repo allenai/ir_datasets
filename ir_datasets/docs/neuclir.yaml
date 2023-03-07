@@ -21,37 +21,6 @@ Users can conduct experiemnts on this collection with queries and qrels in HC4 f
   <li><a href="https://neuclir.github.io/">NeuCLIR Track Website</a></li>
   <li><a href="https://github.com/NeuCLIR/download-collection">Collection Repository</a></li>
 </ul>'
-  data_access: '
-<p>
-To access the docuemnts of this dataset, you will need to download the documents from Common Crawl. 
-The script for downloading and validating the documents are in <a href="https://github.com/NeuCLIR/download-collection">NeuCLIR/download-collection </a>. 
-Please use the following command to download the documents:
-</p>
-<code>
-git clone https://github.com/NeuCLIR/download-collection<br/>
-cd download-collection<br/>
-pip install -r requirements.txt<br/>
-python download_documents.py --storage ~/.ir_datasets/neuclir/1 \ <br/>
-                             --zho ./resource/zho/ids.jsonl.gz \ <br/>
-                             --fas ./resource/fas/ids.jsonl.gz \ <br/>
-                             --rus ./resource/rus/ids.*.jsonl.gz \ <br/>
-                             --jobs {number of process}<br/>
-</code>
-<p>
-After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
-modify the ordering of the collection to match the original specified ordering in the id files. 
-</p>
-<code>
-for lang in zho fas rus; do <br/>
-&nbsp;&nbsp;python fix_document_order.py --raw_download_file ~/.ir_datasets/neuclir/1/$lang/docs.jsonl \ <br/>
-&nbsp;&nbsp;                             --id_file ./resource/$lang/ids*.jsonl.gz \ <br/>
-&nbsp;&nbsp;                             --check_hash <br/>
-done
-</code>
-<p>
-You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/neuclir/22/</kbd>.
-</p>
-'
 
 1:
   desc: '

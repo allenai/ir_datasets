@@ -2,7 +2,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import TrecQrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-
+from ir_datasets.util.fileio import GzipExtract
 from ir_datasets.formats import ExctractedCCDocs, ExctractedCCQueries
 
 NAME = 'hc4'
@@ -28,7 +28,8 @@ def _init():
     base = Dataset(documentation('_')) # dummy top level ds
 
     for lang in ['zh', 'fa', 'ru']:
-        lang_docs = ExctractedCCDocs(dlc[f'{lang}/docs'], subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang])
+        lang3 = {'zh': 'zho', 'fa': 'fas', 'ru': 'rus'}[lang]
+        lang_docs = ExctractedCCDocs(GzipExtract(dlc[f'{lang}/docs']), subset_lang=lang, namespace=NAME, count=DOC_COUNTS[lang], doc_store_path=base_path/lang3/'hc4_docs.jsonl')
         subsets[lang] = Dataset(
             lang_docs,
             documentation(lang)
