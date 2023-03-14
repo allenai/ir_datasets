@@ -30,12 +30,22 @@ class MsMarcoQnAQuery(NamedTuple):
     text: str
     type: str
     answers: Tuple[str, ...]
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class MsMarcoQnAEvalQuery(NamedTuple):
     query_id: str
     text: str
     type: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class MsMarcoQnADoc(NamedTuple):
@@ -44,6 +54,11 @@ class MsMarcoQnADoc(NamedTuple):
     url: str
     msmarco_passage_id: str
     msmarco_document_id: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 # The MS MARCO QnA data files are in a super inconvenient format. They have a script to convert it

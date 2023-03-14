@@ -24,12 +24,22 @@ class DprW100Doc(NamedTuple):
     doc_id: str
     text: str
     title: str
+    def default_text(self):
+        """
+        title + text
+        """
+        return f'{self.title} {self.text}'
 
 
 class DprW100Query(NamedTuple):
     query_id: str
     text: str
     answers: Tuple[str, ]
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class DprW100Manager:

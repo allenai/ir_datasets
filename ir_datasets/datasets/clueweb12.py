@@ -60,12 +60,22 @@ class TrecWebTrackQuery(NamedTuple):
     description: str
     type: str
     subtopics: Tuple[TrecSubtopic, ...]
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 class NtcirQuery(NamedTuple):
     query_id: str
     title: str
     description: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class MisinfoQuery(NamedTuple):
@@ -74,6 +84,11 @@ class MisinfoQuery(NamedTuple):
     cochranedoi: str
     description: str
     narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class MisinfoQrel(NamedTuple):

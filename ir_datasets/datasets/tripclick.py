@@ -109,6 +109,11 @@ class TripClickPartialDoc(NamedTuple):
     doc_id: str
     title: str
     url: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class TripClickQlogs(BaseQlogs):

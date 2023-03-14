@@ -30,6 +30,12 @@ class NytDoc(NamedTuple):
     headline: str
     body: str
     source_xml: str
+    def default_text(self):
+        """
+        headline and body
+        """
+        return f'{self.headline} {self.body}'
+
 
 
 class NytDocs(BaseDocs):

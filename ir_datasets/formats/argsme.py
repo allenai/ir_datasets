@@ -166,6 +166,12 @@ class ArgsMeDoc(NamedTuple):
     author_role: Optional[str]
     mode: Optional[ArgsMeMode]
 
+    def default_text(self):
+        """
+        premises + conclusion
+        """
+        return f"{self.premises_texts} {self.conclusion}"
+
     @staticmethod
     def from_json(json: dict) -> "ArgsMeDoc":
         context_json = json["context"]
