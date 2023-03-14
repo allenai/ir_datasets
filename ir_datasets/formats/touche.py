@@ -14,6 +14,7 @@ class ToucheQuery(NamedTuple):
     title: str
     description: str
     narrative: str
+
     def default_text(self):
         """
         title
@@ -24,6 +25,7 @@ class ToucheQuery(NamedTuple):
 class ToucheTitleQuery(NamedTuple):
     query_id: str
     title: str
+
     def default_text(self):
         """
         title
@@ -37,6 +39,7 @@ class ToucheComparativeQuery(NamedTuple):
     objects: Tuple[str, str]
     description: str
     narrative: str
+
     def default_text(self):
         """
         title
@@ -51,6 +54,12 @@ class ToucheCausalQuery(NamedTuple):
     effect: str
     description: str
     narrative: str
+
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class ToucheQualityQrel(NamedTuple):
@@ -103,6 +112,7 @@ class TouchePassageDoc(NamedTuple):
     doc_id: str
     text: str
     chatnoir_url: str
+
     def default_text(self):
         """
         text
@@ -542,7 +552,7 @@ class ToucheQualityCoherenceQrels(BaseQrels):
                             f"but got {len(cols_coherence)}."
                         )
                     qid_coherence, it_coherence, did_coherence, \
-                    score_coherence = cols_coherence
+                        score_coherence = cols_coherence
                     if qid_coherence != qid:
                         raise ValueError(
                             f"Coherence query {qid_coherence} does not match "
