@@ -43,6 +43,11 @@ class AolIaDoc(NamedTuple):
     text: str
     url: str
     ia_url: str
+    def default_text(self):
+        """
+        title and text
+        """
+        return f'{self.title} {self.text}'
 
 
 class AolQlogs(BaseQlogs):

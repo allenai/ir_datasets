@@ -36,6 +36,11 @@ class PmcDoc(NamedTuple):
     title: str
     abstract: str
     body: str
+    def default_text(self):
+        """
+        title, abstract, and body
+        """
+        return f'{self.title} {self.abstract} {self.body}'
 
 
 class TrecCdsQuery(NamedTuple):
@@ -43,6 +48,11 @@ class TrecCdsQuery(NamedTuple):
     type: str
     description: str
     summary: str
+    def default_text(self):
+        """
+        description
+        """
+        return self.description
 
 
 class TrecCds2016Query(NamedTuple):
@@ -51,6 +61,11 @@ class TrecCds2016Query(NamedTuple):
     note: str
     description: str
     summary: str
+    def default_text(self):
+        """
+        description
+        """
+        return self.description
 
 
 class PmcDocs(BaseDocs):

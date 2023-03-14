@@ -28,6 +28,11 @@ class CranfieldDoc(NamedTuple):
     text: str
     author: str
     bib: str
+    def default_text(self):
+        """
+        title + text
+        """
+        return f'{self.title} {self.text}'
 
 
 def prefix_sentinel_splitter(it, sentinel):

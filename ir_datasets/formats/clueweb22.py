@@ -253,6 +253,9 @@ class ClueWeb22LDoc(NamedTuple):
     language: str
     text: str
 
+    def default_text(self):
+        return self.text
+
 
 class ClueWeb22ADoc(NamedTuple):
     doc_id: str
@@ -268,6 +271,9 @@ class ClueWeb22ADoc(NamedTuple):
     vdom: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
+
+    def default_text(self):
+        return self.text
 
 
 class ClueWeb22BDoc(NamedTuple):
@@ -286,6 +292,9 @@ class ClueWeb22BDoc(NamedTuple):
     outlink_anchors: Sequence[Anchor]
     # TODO Enable screenshot once JPGs are released.
     # screenshot: bytes
+
+    def default_text(self):
+        return self.text
 
 
 AnyDoc = TypeVar("AnyDoc", ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc)
@@ -339,7 +348,7 @@ def _combine_a_docs(
                 f"txt URL hash was {txt.url_hash} but "
                 f"html URL hash was {html.url_hash}"
             )
-        assert txt.language == html.language
+        assert txt.language == "other" or txt.language == html.language
         if inlink is not None:
             assert inlink.doc_id == html.doc_id
             if inlink.url != html.url:
@@ -442,7 +451,7 @@ def _combine_b_docs(
                 f"txt URL hash was {txt.url_hash} but "
                 f"html URL hash was {html.url_hash}"
             )
-        assert txt.language == html.language
+        assert txt.language == "other" or txt.language == html.language
         if inlink is not None:
             assert inlink.doc_id == html.doc_id
             if inlink.url != html.url:
@@ -1176,6 +1185,21 @@ class _ClueWeb22Iterable(Iterable[AnyDoc]):
             yield from documents
 
 
+def _fix_missing_line_break(lines: Iterator[str]) -> Iterator[str]:
+    """
+    Bug fix for offset file `html/ja/ja00/ja0009/ja0009-57.warc.offset`:
+    The offset file's last line is missing a line break,
+    so we have to split the last line manually like this:
+    04723330100472349245\n -> 0472333010\n0472349245\n
+    """
+    for line in lines:
+        if len(line) > 10 + 1:  # 10 digits and newline
+            yield line[:10]
+            yield line[10:]
+        else:
+            yield line
+
+
 def _read_offsets(
         file_path: Path,
         format_type: ClueWeb22Format,
@@ -1187,6 +1211,10 @@ def _read_offsets(
     )
     offsets_file_path = file_path.with_name(offsets_name)
     with offsets_file_path.open("rt", encoding=_ENCODING) as offsets_file:
+        # Bug fix for offset file `html/ja/ja00/ja0009/ja0009-57.warc.offset`.
+        if offsets_name == "ja0009-57.warc.offset":
+            offsets_file = _fix_missing_line_break(offsets_file)
+
         for offset in offsets_file:
             yield int(offset)
 

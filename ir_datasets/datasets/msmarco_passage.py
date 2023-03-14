@@ -274,6 +274,13 @@ def _init():
         subsets['train'],
     )
 
+    dev2_qids = Lazy(lambda: {q.query_id for q in ir_datasets.load('msmarco-passage-v2/dev2').queries})
+    subsets['dev/2'] = Dataset(
+        FilteredQueries(subsets['dev'].queries_handler(), dev2_qids),
+        FilteredQrels(subsets['dev'].qrels_handler(), dev2_qids),
+        subsets['dev'],
+    )
+
     # Medical subset
     def train_med():
         with dlc['medmarco_ids'].stream() as stream:

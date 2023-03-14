@@ -28,6 +28,11 @@ class FairTrecDoc(NamedTuple):
     quality_score: Optional[float]
     geographic_locations: Optional[List[str]]
     quality_score_disk: Optional[str]
+    def default_text(self):
+        """
+        title and text
+        """
+        return f"{self.title} {self.text}"
 
 
 class FairTrec2022Doc(NamedTuple):
@@ -67,11 +72,21 @@ class FairTrecQuery(NamedTuple):
     keywords: List[str]
     scope: str
     homepage: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class FairTrec2022TrainQuery(NamedTuple):
     query_id: str
     text: str
     url: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class FairTrecEvalQuery(NamedTuple):
@@ -79,6 +94,11 @@ class FairTrecEvalQuery(NamedTuple):
     text: str
     keywords: List[str]
     scope: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class FairTrecDocs(BaseDocs):

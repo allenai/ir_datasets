@@ -10,10 +10,14 @@ _logger = ir_datasets.log.easy()
 class GenericDoc(NamedTuple):
     doc_id: str
     text: str
+    def default_text(self):
+        return self.text
 
 class GenericQuery(NamedTuple):
     query_id: str
     text: str
+    def default_text(self):
+        return self.text
 
 class GenericQrel(NamedTuple):
     query_id: str

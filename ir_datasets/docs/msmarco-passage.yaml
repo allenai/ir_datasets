@@ -55,6 +55,14 @@ one qrel.
   bibtex_ids: ['Bajaj2016Msmarco']
   official_measures: ['RR@10']
 
+dev/2:
+  desc: '
+<p>
+"Dev2" split of the <a class="ds-ref">msmarco-passage/dev</a> set. Originally released as part of the v2 corpus.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
 
 eval:
   desc: '
