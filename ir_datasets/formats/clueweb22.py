@@ -253,6 +253,9 @@ class ClueWeb22LDoc(NamedTuple):
     language: str
     text: str
 
+    def default_text(self):
+        return self.text
+
 
 class ClueWeb22ADoc(NamedTuple):
     doc_id: str
@@ -268,6 +271,9 @@ class ClueWeb22ADoc(NamedTuple):
     vdom: bytes
     inlink_anchors: Sequence[Anchor]
     outlink_anchors: Sequence[Anchor]
+
+    def default_text(self):
+        return self.text
 
 
 class ClueWeb22BDoc(NamedTuple):
@@ -286,6 +292,9 @@ class ClueWeb22BDoc(NamedTuple):
     outlink_anchors: Sequence[Anchor]
     # TODO Enable screenshot once JPGs are released.
     # screenshot: bytes
+
+    def default_text(self):
+        return self.text
 
 
 AnyDoc = TypeVar("AnyDoc", ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc)
