@@ -28,6 +28,11 @@ class MsMarcoV2Passage(NamedTuple):
     text: str
     spans: Tuple[Tuple[int, int], ...]
     msmarco_document_id: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 def parse_msmarco_passage(line):

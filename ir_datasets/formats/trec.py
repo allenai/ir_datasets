@@ -17,24 +17,44 @@ class TrecDoc(NamedTuple):
     doc_id: str
     text: str
     marked_up_doc: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class TitleUrlTextDoc(NamedTuple):
     doc_id: str
     title: str
     url: str
     text: str
+    def default_text(self):
+        """
+        title and text
+        """
+        return f'{self.title} {self.text}'
 
 class TrecParsedDoc(NamedTuple):
     doc_id: str
     title: str
     body: str
     marked_up_doc: bytes
+    def default_text(self):
+        """
+        title and body
+        """
+        return f'{self.title} {self.body}'
 
 class TrecQuery(NamedTuple):
     query_id: str
     title: str
     description: str
     narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 class TrecSubtopic(NamedTuple):
     number: str

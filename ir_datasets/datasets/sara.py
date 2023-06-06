@@ -30,6 +30,8 @@ class SaraDoc(NamedTuple):
     doc_id: str
     text: str
     sensitivity: int
+    def default_text(self):
+        return self.text
 
 class SaraDocs(BaseDocs):
     def __init__(self,dlc):

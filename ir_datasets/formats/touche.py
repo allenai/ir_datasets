@@ -14,11 +14,21 @@ class ToucheQuery(NamedTuple):
     title: str
     description: str
     narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class ToucheTitleQuery(NamedTuple):
     query_id: str
     title: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class ToucheComparativeQuery(NamedTuple):
@@ -27,6 +37,11 @@ class ToucheComparativeQuery(NamedTuple):
     objects: Tuple[str, str]
     description: str
     narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class ToucheQualityQrel(NamedTuple):
@@ -79,6 +94,11 @@ class TouchePassageDoc(NamedTuple):
     doc_id: str
     text: str
     chatnoir_url: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class ToucheQueries(BaseQueries):

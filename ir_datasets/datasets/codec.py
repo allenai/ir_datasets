@@ -35,6 +35,11 @@ class CodecQuery(NamedTuple):
     query: str
     domain: str
     guidelines: str
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 class CodecQueries(BaseQueries):

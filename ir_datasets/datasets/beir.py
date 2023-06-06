@@ -18,18 +18,33 @@ class BeirDoc(NamedTuple):
     text: str
     title: str
     metadata: Dict[str, str]
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 
 class BeirTitleDoc(NamedTuple):
     doc_id: str
     text: str
     title: str
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirTitleUrlDoc(NamedTuple):
     doc_id: str
     text: str
     title: str
     url: str
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirSciDoc(NamedTuple):
     doc_id: str
@@ -46,6 +61,11 @@ class BeirCordDoc(NamedTuple):
     title: str
     url: str
     pubmed_id: str
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirToucheDoc(NamedTuple):
     doc_id: str
@@ -59,6 +79,11 @@ class BeirCqaDoc(NamedTuple):
     text: str
     title: str
     tags: List[str]
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirUrlQuery(NamedTuple):
     query_id: str
@@ -84,11 +109,21 @@ class BeirCovidQuery(NamedTuple):
     text: str
     query: str
     narrative: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class BeirCqaQuery(NamedTuple):
     query_id: str
     text: str
     tags: List[str]
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 def _map_field(field, data):
     if field in ('doc_id', 'query_id'):

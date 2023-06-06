@@ -18,6 +18,11 @@ class ExctractedCCDoc(NamedTuple):
     url: str
     time: str
     cc_file: str
+    def default_text(self):
+        """
+        title and text
+        """
+        return f'{self.title} {self.text}'
 
 
 class ExctractedCCDocs(BaseDocs):
@@ -86,6 +91,11 @@ class ExctractedCCQuery(NamedTuple):
     report_url: str
     report_date: str
     translation_lang: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 class ExctractedCCQueries(BaseQueries):
     def __init__(self, queries_dlc, subset_lang, namespace=None):
