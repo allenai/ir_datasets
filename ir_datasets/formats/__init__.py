@@ -11,3 +11,4 @@ from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
 from .argsme import ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain, ArgsMePremiseAnnotation, ArgsMePremise, ArgsMeAspect, ArgsMeDoc, ArgsMeProcessedDoc, ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
 from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries
 from .jsonl import JsonlDocs, JsonlQueries
+from .clueweb22 import ClueWeb22Docs, ClueWeb22Docstore, ClueWeb22LDoc, ClueWeb22ADoc, ClueWeb22BDoc, ClueWeb22Subset, ClueWeb22Language, ClueWeb22Format, ClueWeb22Compression

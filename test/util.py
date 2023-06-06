@@ -1,5 +1,8 @@
 import unittest
+from io import BytesIO
+
 import ir_datasets
+from ir_datasets.util.io import ConcatIOWrapper, OffsetIOWrapper
 
 
 class TestUtil(unittest.TestCase):
@@ -53,6 +56,49 @@ class TestUtil(unittest.TestCase):
         self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="utf-8"/>\xc2\xa3'), ('', '£'))
         self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<meta charset="iso8859-1"/>\xa3'), ('', '£'))
         self.assertEqual(ir_datasets.util.html_parsing.sax_html_parser(b'<title>Some <span>text</span></title>\n<body><script>this is all discarded <div></script><style a="b">so is this</style><div><span>other </span>  \xc2\xa3<span>stuff</span>!</div>   \n\n\r\ntext&gt;&#62;&#x3E;</body>'), ('Some text', 'other £stuff!\ntext>>>'))
+
+    def test_offset_io_wrapper(self):
+        alphabet = b"abcdefghijklmnopqrstuvwxyz"
+        alphabet_offset = alphabet[0:1] + alphabet[4:6] + alphabet[10:]
+
+        alphabet_io = BytesIO(alphabet)
+        alphabet_offset_io = OffsetIOWrapper(
+            alphabet_io,
+            [
+                (0, 1),
+                (4, 6),
+                (10, -1),
+            ]
+        )
+
+        self.assertEqual(
+            alphabet_offset_io.read(),
+            alphabet_offset
+        )
+
+    def test_concat_io_wrapper(self):
+        alphabet1 = b"abcdefghijklm"
+        alphabet2 = b"nopqrstuvwxyz"
+        alphabet = alphabet1 + alphabet2
+
+        concat_alphabet_io = ConcatIOWrapper(
+            BytesIO(alphabet1),
+            BytesIO(alphabet2)
+        )
+
+        self.assertEqual(concat_alphabet_io.read(), alphabet)
+
+    def test_concat_io_wrapper_iterable(self):
+        alphabet1 = b"abcdefghijklm"
+        alphabet2 = b"nopqrstuvwxyz"
+        alphabet = alphabet1 + alphabet2
+
+        concat_alphabet_io = ConcatIOWrapper.from_iterable([
+            BytesIO(alphabet1),
+            BytesIO(alphabet2)
+        ])
+
+        self.assertEqual(concat_alphabet_io.read(), alphabet)
 
 
 if __name__ == '__main__':
