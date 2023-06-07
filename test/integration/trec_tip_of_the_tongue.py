@@ -18,6 +18,7 @@ class TestTipOfTheTongue(DatasetIntegrationTest):
         self._test_queries('trec-tip-of-the-tongue/train', count=150)
         query = list(ir_datasets.load('trec-tip-of-the-tongue/train').queries_iter())[0]
         self.assertEqual('763', query.id)
+        self.assertEqual('763', query.query_id)
         
         self.assertTrue(query.text.startswith("Very rare movie that is scifi/dystopian/experimental/surreal. It’s like Stalker meets el Topo meets"))
 
@@ -26,6 +27,7 @@ class TestTipOfTheTongue(DatasetIntegrationTest):
         self._test_queries('trec-tip-of-the-tongue/dev', count=150)
         query = list(ir_datasets.load('trec-tip-of-the-tongue/dev').queries_iter())[0]
         self.assertEqual('152', query.id)
+        self.assertEqual('152', query.query_id)
         self.assertTrue(query.text.startswith("Movie from  the early 2000s I believe about three people living in an apartment"))
 
 
@@ -47,3 +49,4 @@ class TestTipOfTheTongue(DatasetIntegrationTest):
 
 if __name__ == '__main__':
     unittest.main()
+

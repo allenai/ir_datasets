@@ -30,6 +30,12 @@ class TipOfTheTongueQuery(NamedTuple):
 
     def default_text(self):
         return self.title + ' ' + self.text
+    
+    def __getattr__(self, attr):
+        if attr == 'query_id':
+            return self.id
+
+        return self.__getattribute__(attr)
 
 
 def _init():
