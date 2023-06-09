@@ -7,7 +7,7 @@ from typing import NamedTuple, List
 NAME = 'trec-tip-of-the-tongue'
 
 
-class TipOfTheTongueDocument(NamedTuple):
+class TipOfTheTongueDoc(NamedTuple):
     doc_id: str
     page_title: str
     wikidata_id: str
@@ -21,7 +21,7 @@ class TipOfTheTongueDocument(NamedTuple):
 
 
 class TipOfTheTongueQuery(NamedTuple):
-    id: str
+    query_id: str
     url: str
     domain: str
     title: list
@@ -30,12 +30,9 @@ class TipOfTheTongueQuery(NamedTuple):
 
     def default_text(self):
         return self.title + ' ' + self.text
-    
-    def __getattr__(self, attr):
-        if attr == 'query_id':
-            return self.id
 
-        return self.__getattribute__(attr)
+
+QUERY_MAP = {'query_id': 'id', 'url': 'url', 'domain': 'domain', 'title': 'title', 'text': 'text', 'sentence_annotations': 'sentence_annotations'}
 
 
 def _init():
@@ -45,18 +42,19 @@ def _init():
     subsets = {'train': None, 'dev': None}
 
     main_dlc = dlc['main']
+    docs_handler = JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT/corpus.jsonl'), base_path/'corpus.jsonl'), doc_cls=TipOfTheTongueDoc)
     base = Dataset(
-        JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT/corpus.jsonl'), base_path/'corpus.jsonl'), doc_cls=TipOfTheTongueDocument),
+        docs_handler,
         documentation('_'),
     )
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
         subsets[s] = Dataset(
-            JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT/corpus.jsonl'), base_path/'corpus.jsonl'), doc_cls=TipOfTheTongueDocument),
-            JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery),
+            docs_handler,
+            JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP),
             TrecQrels(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/qrel.txt'), base_path/f'{s}/qrel.txt'), {0: 'Not Relevant', 1: 'Relevant'}),
-            documentation('_'),
+            documentation(s),
         )
         ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
 
@@ -64,4 +62,3 @@ def _init():
 
 
 base, subsets = _init()
-
