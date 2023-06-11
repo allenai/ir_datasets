@@ -37,7 +37,7 @@
       "cache_path": "test-disallow-list.txt"
     }
   },
-  
+
   "aol-ia": {
     "logs": {
       "url": "http://www.cim.mcgill.ca/~dudek/206/Logs/AOL-user-ct-collection/aol-data.tar.gz",
@@ -52,7 +52,7 @@
       "cache_path": "aol.id2wb.tsv.gz"
     }
   },
-  
+
   "aquaint": {
     "docs": {
       "instructions": "The AQUAINT corpus is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2002T31>.\nMore details about the procedure can be found here: <https://ir-datasets.com/aquaint.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -74,7 +74,7 @@
       "cache_path": "trec-robust-2005/qrels"
     }
   },
-  
+
   "argsme": {
     "1.0": {
       "url": "https://zenodo.org/record/3274636/files/argsme.zip",
@@ -117,7 +117,7 @@
       "expected_md5": "43bfce957df69bf59b3d59744eb73ded"
     }
   },
-  
+
   "beir": {
     "msmarco": {
       "url": "https://public.ukp.informatik.tu-darmstadt.de/thakur/BEIR/datasets/msmarco.zip",
@@ -216,7 +216,7 @@
       "cache_path": "scifact/source.zip"
     }
   },
-  
+
   "c4": {
     "en-noclean/sources": {
       "url": "https://ai2-s2-research-public.s3-us-west-2.amazonaws.com/ir-datasets/c4/en.noclean.sources.json.gz",
@@ -236,7 +236,7 @@
       "cache_path": "misinfo-2021-topics.xml"
     }
   },
-  
+
   "car": {
     "docs": {
       "url": "http://trec-car.cs.unh.edu/datareleases/v1.5/paragraphcorpus-v1.5.tar.xz",
@@ -275,7 +275,7 @@
       "cache_path": "train.tar.xz"
     }
   },
-  
+
   "clinicaltrials": {
     "docs/2017": {
       "url": "https://bionlp.nlm.nih.gov/trec2017precisionmedicine/clinicaltrials_xml.tar.gz",
@@ -384,7 +384,7 @@
       "cache_path": "trec-ct-2022/queries.xml"
     }
   },
-    
+
   "clirmatrix": {
     "downloads": {
       "url": "http://www.cs.jhu.edu/~shuosun/clirmatrix/data/downloads.json.gz",
@@ -399,7 +399,7 @@
       "cache_path": "clirmatrix-metadata.json.lz4"
     }
   },
-  
+
   "clueweb09": {
     "docs": {
       "instructions": "ClueWeb09 is available by hard drives from CMU here: <https://lemurproject.org/clueweb09/>\nMore details about the procedure can be found here: <https://ir-datasets.com/ClueWeb09.html#DataAccess>.\nLink the ClueWeb09 source files here: {path}\nShould contain directories like ClueWeb09_English_1",
@@ -509,7 +509,7 @@
       "cache_path": "trec-mq-2009/prels.gz"
     }
   },
-  
+
   "clueweb12": {
     "docs": {
       "instructions": "ClueWeb12 is available by hard drives from CMU here: <https://lemurproject.org/clueweb12/>\nMore details about the procedure can be found here: <https://ir-datasets.com/ClueWeb12.html#DataAccess>.\nLink the ClueWeb12 source files here: {path}\nShould contain ClueWeb12_00--19 directories",
@@ -689,7 +689,14 @@
       "cache_path": "clef-ehealth/2017.qureads"
     }
   },
-  
+
+  "clueweb22": {
+    "docs": {
+      "instructions": "ClueWeb22 is available by hard drives from the Carnegie Mellon University here: <https://lemurproject.org/clueweb22/obtain.php>\nMore details about the procedure can be found here: <https://ir-datasets.com/clueweb22.html#DataAccess>.\nLink the ClueWeb22 source files here: {path}\nShould contain directories like 'html', 'inlink', 'outlink', 'txt', 'jpg', and/or 'vdom'.",
+      "cache_path": "corpus"
+    }
+  },
+
   "codec": {
     "documents": {
       "instructions": "The CODEC document collection is available on request (see here: <https://github.com/grill-lab/CODEC>). Once downloaded, move/link the comets_documents.jsonl file to {path}.",
@@ -708,7 +715,7 @@
       "cache_path": "v1/document.qrels"
     }
   },
-  
+
   "codesearchnet": {
     "python": {
       "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip",
@@ -753,7 +760,7 @@
       "cache_path": "qrels.csv"
     }
   },
-  
+
   "cord19": {
     "docs/2020-07-16": {
       "url": "https://ai2-semanticscholar-cord-19.s3-us-west-2.amazonaws.com/historical_releases/cord-19_2020-07-16.tar.gz",
@@ -869,7 +876,7 @@
       "cache_path": "trec-covid/round5/qrels"
     }
   },
-  
+
   "cranfield": {
     "main": {
       "url": "http://ir.dcs.gla.ac.uk/resources/test_collections/cran/cran.tar.gz",
@@ -878,7 +885,7 @@
       "cache_path": "cran.tar.gz"
     }
   },
-  
+
   "disks45": {
     "docs": {
       "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
@@ -927,7 +934,7 @@
       "cache_path": "topics.351-400.gz"
     }
   },
-  
+
   "dpr-w100": {
     "docs": {
       "url": "https://dl.fbaipublicfiles.com/dpr/wikipedia_split/psgs_w100.tsv.gz",
@@ -960,9 +967,7 @@
       "cache_path": "tqa-dev.json.gz"
     }
   },
-  
-  
-  
+
   "trec-fair": {
     "2021/docs": {
       "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_corpus.json.gz",
@@ -1013,7 +1018,7 @@
       "cache_path": "2022/trec_2022_train_reldocs.jsonl"
     }
   },
-  
+
   "gov": {
     "docs": {
       "instructions": "GOV is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>\nMore details about the procedure can be found here: <https://ir-datasets.com/gov.html#DataAccess>.\nLink the GOV source files here: {path}\nShould contain G00, G01, G02, ...",
@@ -1097,7 +1102,7 @@
       "cache_path": "trec-web-2004/types.txt"
     }
   },
-  
+
   "gov2": {
     "docs": {
       "instructions": "GOV2 is available by hard drive from UoG here: <http://ir.dcs.gla.ac.uk/test_collections/access_to_data.html>\nMore details about the procedure can be found here: <https://ir-datasets.com/gov2.html#DataAccess>.\nLink the GOV2 source files here: {path}\nShould contain GOV2_data",
@@ -1216,8 +1221,7 @@
       "cache_path": "trec-mq-2008/prels.tar.gz"
     }
   },
-  
-  
+
   "hc4": {
     "train/topics": {
       "url": "https://raw.githubusercontent.com/hltcoe/HC4/main/resources/hc4/train.topics.v1-0.jsonl",
@@ -1364,7 +1368,7 @@
       "cache_path": "rus/test.qrels.v1-0.txt"
     }
   },
-  
+
   "highwire": {
     "ajepidem": {
       "url": "https://dmice.ohsu.edu/trec-gen/data/2006/documents/ajepidem.zip",
@@ -1751,7 +1755,7 @@
       "cache_path": "trec-genomics-2007/qrels"
     }
   },
-  
+
   "istella22": {
     "source": {
       "url": "https://www.istella.ai/dataset/istella22.tar.gz",
@@ -1760,7 +1764,7 @@
       "cache_path": "istella22.tar.gz"
     }
   },
-  
+
   "kilt": {
     "knowledgesource": {
       "url": "http://dl.fbaipublicfiles.com/KILT/kilt_knowledgesource.json",
@@ -1775,7 +1779,7 @@
       "cache_path": "codec/v1/raw_entity_judgments.txt"
     }
   },
-  
+
   "lotte": {
     "source": {
       "url": "https://downloads.cs.stanford.edu/nlp/data/colbert/colbertv2/lotte.tar.gz",
@@ -1784,7 +1788,7 @@
       "cache_path": "lotte.tar.gz"
     }
   },
-  
+
   "medline": {
     "2004/a": {
       "url": "https://dmice.ohsu.edu/trec-gen/data/2004/XML/2004_TREC_XML_MEDLINE_A.gz",
@@ -1898,8 +1902,7 @@
       "cache_path": "trec-pm-2018/qrels"
     }
   },
-  
-  
+
   "mmarco": {
     "zh/docs": {
       "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/helsinki/collections/chinese_collection.tsv",
@@ -2129,7 +2132,7 @@
       "size_hint": 143300,
       "cache_path": "qrels.dev.small.tsv"
     },
-  
+
     "v2/ar/docs": {
       "url": "https://huggingface.co/datasets/unicamp-dl/mmarco/resolve/main/data/google/collections/arabic_collection.tsv",
       "expected_md5": "b73406ce3a3d31edea240603d031be7a",
@@ -2443,8 +2446,7 @@
       "cache_path": "v2/vietnamese.queries.train.tsv"
     }
   },
-  
-  
+
   "mr-tydi": {
     "ar": {
       "url": "https://git.uwaterloo.ca/jimmylin/mr.tydi/-/raw/master/data/mrtydi-v1.0-arabic.tar.gz",
@@ -2502,7 +2504,7 @@
       "size_hint": 112677400
     }
   },
-  
+
   "msmarco-document": {
     "docs": {
       "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco-docs.trec.gz",
@@ -2629,7 +2631,7 @@
       "cache_path": "anchor-text-separate-v1.jsonl.gz"
     }
   },
-  
+
   "msmarco-document-v2": {
     "docs": {
       "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco_v2_doc.tar",
@@ -2754,7 +2756,7 @@
       "cache_path": "trec-dl-2022/top100.txt.gz"
     }
   },
-  
+
   "msmarco-passage": {
     "collectionandqueries": {
       "url": "https://msmarco.blob.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
@@ -2867,7 +2869,7 @@
       "cache_path": "trec-dl-hard/qrels"
     }
   },
-  
+
   "msmarco-passage-v2": {
     "passages": {
       "url": "https://msmarco.blob.core.windows.net/msmarcoranking/msmarco_v2_passage.tar",
@@ -2962,7 +2964,7 @@
       "cache_path": "trec-dl-2022/top100.txt.gz"
     }
   },
-  
+
   "msmarco-qna": {
     "train": {
       "url": "https://msmarco.blob.core.windows.net/msmarco/train_v2.1.json.gz",
@@ -2983,7 +2985,7 @@
       "cache_path": "eval_v2.1_public.json.gz"
     }
   },
-  
+
   "neumarco": {
     "main": {
       "url": "https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/dlawrie1_jh_edu/EQcICtPaSqFNoCZHtoeZszoB7FC362BvaPvieUSk2j30tA?download=1",
@@ -2992,7 +2994,7 @@
       "cache_path": "neuMSMARCO.tar.gz"
     }
   },
-  
+
   "nfcorpus": {
     "main": {
       "url": "https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/nfcorpus.tar.gz",
@@ -3001,7 +3003,7 @@
       "cache_path": "nfcorpus.tar.gz"
     }
   },
-  
+
   "natural-questions": {
     "nq-dev-00": {
       "url": "https://storage.googleapis.com/natural_questions/v1.0/dev/nq-dev-00.jsonl.gz",
@@ -3389,8 +3391,7 @@
       "skip_local": true
     }
   },
-  
-  
+
   "neuclir": {
     "1/fa/docs": {
       "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
@@ -3405,7 +3406,7 @@
       "cache_path": "1/rus/docs.jsonl"
     }
   },
-  
+
   "nyt": {
     "source": {
       "instructions": "The New York Times Annotated Corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2008T19>.\nMore details about the procedure can be found here: <https://ir-datasets.com/nyt.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -3427,7 +3428,7 @@
       "cache_path": "trec-core-2017/qrels"
     }
   },
-  
+
   "pmc": {
     "v1/source0": {
       "url": "https://ceb.nlm.nih.gov/~simpsonmatt/pmc-text-00.tar.gz",
@@ -3531,7 +3532,7 @@
       "cache_path": "trec-cds-2016/qrels"
     }
   },
-  
+
   "touche": {
     "2020/task-1/queries": {
       "url": "https://zenodo.org/record/6862281/files/topics-task-1.zip",
@@ -3652,9 +3653,19 @@
       "url": "https://zenodo.org/record/6873575/files/touche-task3-001-050-relevance.qrels",
       "size_hint": 558028,
       "expected_md5": "83ec2d715d0205b68b9b63f9c30da784"
+    },
+    "2023/task-2/queries": {
+      "url": "https://touche.webis.de/clef23/touche23-data/topics-task2.xml",
+      "size_hint": 55337,
+      "expected_md5": "bfeebfaaf12e29781ea7283cc80c79c5"
+    },
+    "2023/task-3/queries": {
+      "url": "https://touche.webis.de/clef23/touche23-data/topics-task3.xml",
+      "size_hint": 32179,
+      "expected_md5": "187fba305b4816933abd9dc35ef298f8"
     }
   },
-  
+
   "touche-image": {
     "2022-06-13/images-main": {
       "url": "https://zenodo.org/record/6873575/files/touche22-image-search-main.zip",
@@ -3672,7 +3683,7 @@
       "expected_md5": "e2965b221248ba23a288135f757efae1"
     }
   },
-  
+
   "trec-arabic": {
     "docs": {
       "instructions": "The dataset is based on the Arabic Newswire corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2001T55>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-arabic.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -3708,7 +3719,7 @@
       "cache_path": "ar2002/qrels"
     }
   },
-  
+
   "trec-cast": {
     "marco_dupes": {
       "url": "http://boston.lti.cs.cmu.edu/Services/treccast19/duplicate_list_v1.0.txt",
@@ -3773,7 +3784,7 @@
       "cache_path": "2020/2020qrels.txt"
     }
   },
-  
+
   "trec-mandarin": {
     "docs": {
       "instructions": "The dataset is based on the TREC Mandarin corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T52>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -3809,7 +3820,7 @@
       "cache_path": "trec6/qrels.gz"
     }
   },
-  
+
   "trec-spanish": {
     "docs": {
       "instructions": "The dataset is based on the TREC Spanish corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T51>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-spanish.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -3845,7 +3856,7 @@
       "cache_path": "trec4/qrels.gz"
     }
   },
-  
+
   "tripclick": {
     "benchmark": {
       "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -3874,7 +3885,7 @@
       "cache_path": "improved_tripclick_train_triple-ids.tsv"
     }
   },
-  
+
   "trec-robust04": {
     "docs": {
       "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
@@ -3896,7 +3907,7 @@
       "cache_path": "qrels"
     }
   },
-  
+
   "tweets2013-ia": {
     "docs/feb": {
       "url": "https://archive.org/download/archiveteam-twitter-stream-2013-02/archiveteam-twitter-stream-2013-02.tar",
@@ -3941,7 +3952,7 @@
       "cache_path": "trec-mb-2014/qrels"
     }
   },
-  
+
   "vaswani": {
     "main": {
       "url": "http://ir.dcs.gla.ac.uk/resources/test_collections/npl/npl.tar.gz",
@@ -3950,7 +3961,7 @@
       "cache_path": "npl.tar.gz"
     }
   },
-  
+
   "wapo": {
     "v2": {
       "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
@@ -4014,7 +4025,7 @@
       "cache_path": "trec-news-2020/qrels"
     }
   },
-  
+
   "wikiclir": {
     "source": {
       "url": "https://www.cs.jhu.edu/~kevinduh/a/wikiclir2018/wiki-clir.tar.gz",
@@ -4022,7 +4033,7 @@
       "expected_md5": "705abb611eb8cbab9ced2b8767a3bdb6"
     }
   },
-  
+
   "wikir": {
     "en1k": {
       "url": "https://zenodo.org/record/3565761/files/wikIR1k.zip",

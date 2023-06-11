@@ -14,6 +14,7 @@ class ToucheQuery(NamedTuple):
     title: str
     description: str
     narrative: str
+
     def default_text(self):
         """
         title
@@ -24,6 +25,7 @@ class ToucheQuery(NamedTuple):
 class ToucheTitleQuery(NamedTuple):
     query_id: str
     title: str
+
     def default_text(self):
         """
         title
@@ -37,6 +39,22 @@ class ToucheComparativeQuery(NamedTuple):
     objects: Tuple[str, str]
     description: str
     narrative: str
+
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
+
+
+class ToucheCausalQuery(NamedTuple):
+    query_id: str
+    title: str
+    cause: str
+    effect: str
+    description: str
+    narrative: str
+
     def default_text(self):
         """
         title
@@ -94,6 +112,7 @@ class TouchePassageDoc(NamedTuple):
     doc_id: str
     text: str
     chatnoir_url: str
+
     def default_text(self):
         """
         text
@@ -130,8 +149,10 @@ class ToucheQueries(BaseQueries):
                 assert element.tag == "topic"
                 number = int(element.findtext("number").strip())
                 title = element.findtext("title").strip()
-                description = element.findtext("description").strip()
-                narrative = element.findtext("narrative").strip()
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
                 yield ToucheQuery(
                     str(number),
                     title,
@@ -225,8 +246,10 @@ class ToucheComparativeQueries(BaseQueries):
                 objects = element.findtext("objects").split(",")
                 objects = (obj.strip() for obj in objects)
                 object1, object2 = objects
-                description = element.findtext("description").strip()
-                narrative = element.findtext("narrative").strip()
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
                 yield ToucheComparativeQuery(
                     str(number),
                     title,
@@ -237,6 +260,60 @@ class ToucheComparativeQueries(BaseQueries):
 
     def queries_cls(self):
         return ToucheComparativeQuery
+
+    def queries_namespace(self):
+        return self._namespace
+
+    def queries_lang(self):
+        return self._language
+
+
+class ToucheCausalQueries(BaseQueries):
+    _source: Any
+    _namespace: Optional[str]
+    _language: Optional[str]
+
+    def __init__(
+            self,
+            source: Any,
+            namespace: Optional[str] = None,
+            language: Optional[str] = None,
+    ):
+        self._source = source
+        self._namespace = namespace
+        self._language = language
+
+    def queries_path(self):
+        return self._source.path()
+
+    def queries_iter(self):
+        with self._source.stream() as file:
+            tree: ElementTree = parse(file)
+            root: Element = tree.getroot()
+            assert root.tag == "topics"
+
+            for element in root:
+                element: Element
+                assert element.tag == "topic"
+                number = int(element.findtext("number").strip())
+                title = element.findtext("title").strip()
+                cause = element.findtext("cause")
+                effect = element.findtext("effect")
+                description = element.findtext("description") \
+                    .strip().replace("\n", " ")
+                narrative = element.findtext("narrative") \
+                    .strip().replace("\n", " ")
+                yield ToucheCausalQuery(
+                    str(number),
+                    title,
+                    cause,
+                    effect,
+                    description,
+                    narrative,
+                )
+
+    def queries_cls(self):
+        return ToucheCausalQuery
 
     def queries_namespace(self):
         return self._namespace
@@ -475,7 +552,7 @@ class ToucheQualityCoherenceQrels(BaseQrels):
                             f"but got {len(cols_coherence)}."
                         )
                     qid_coherence, it_coherence, did_coherence, \
-                    score_coherence = cols_coherence
+                        score_coherence = cols_coherence
                     if qid_coherence != qid:
                         raise ValueError(
                             f"Coherence query {qid_coherence} does not match "
