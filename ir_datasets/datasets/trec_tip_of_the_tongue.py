@@ -27,7 +27,7 @@ class TipOfTheTongueQuery(NamedTuple):
     query_id: str
     url: str
     domain: str
-    title: list
+    title: str
     text: str
     sentence_annotations: List[dict]
 
