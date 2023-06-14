@@ -2,7 +2,7 @@ import ir_datasets
 from ir_datasets.util import ZipExtract, Cache, Lazy, DownloadConfig
 from ir_datasets.formats import TrecQrels, JsonlQueries, JsonlDocs, TrecQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation, Deprecated
-from typing import NamedTuple, List
+from typing import NamedTuple, List, Dict
 
 NAME = 'trec-tip-of-the-tongue'
 
@@ -13,8 +13,8 @@ class TipOfTheTongueDoc(NamedTuple):
     wikidata_id: str
     wikidata_classes: List[str]
     text: str
-    sections: dict
-    infoboxes: List[dict]
+    sections: Dict[str, str]
+    infoboxes: List[Dict[str, str]]
 
     def default_text(self):
         """
@@ -29,7 +29,7 @@ class TipOfTheTongueQuery(NamedTuple):
     domain: str
     title: str
     text: str
-    sentence_annotations: List[dict]
+    sentence_annotations: List[Dict[str, str]]
 
     def default_text(self):
         return self.title + ' ' + self.text
