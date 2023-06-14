@@ -17,6 +17,9 @@ class TipOfTheTongueDoc(NamedTuple):
     infoboxes: List[dict]
 
     def default_text(self):
+        """
+        We use the title and text of the TipOfTheTongueQuery as default_text because that is everything available for users who want to respond to such an information need.
+        """
         return self.page_title + ' ' + self.text
 
 
