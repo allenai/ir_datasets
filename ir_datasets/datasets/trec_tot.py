@@ -4,7 +4,7 @@ from ir_datasets.formats import TrecQrels, JsonlQueries, JsonlDocs, TrecQrels
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation, Deprecated
 from typing import NamedTuple, List, Dict
 
-NAME = 'trec-tip-of-the-tongue'
+NAME = 'trec-tot'
 
 
 class TipOfTheTongueDoc(NamedTuple):
@@ -42,24 +42,28 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     base_path = ir_datasets.util.home_path()/NAME
     dlc = DownloadConfig.context(NAME, base_path)
-    subsets = {'train': None, 'dev': None}
+    subsets = {}
 
     main_dlc = dlc['main']
-    docs_handler = JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT/corpus.jsonl'), base_path/'corpus.jsonl'), doc_cls=TipOfTheTongueDoc)
     base = Dataset(
-        docs_handler,
         documentation('_'),
     )
-
     ir_datasets.registry.register(NAME, base)
-    for s in sorted(subsets):
-        subsets[s] = Dataset(
-            docs_handler,
-            JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP),
-            TrecQrels(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/qrel.txt'), base_path/f'{s}/qrel.txt'), {0: 'Not Relevant', 1: 'Relevant'}),
+
+    docs_2023_handler = JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT/corpus.jsonl'), base_path/'2023/corpus.jsonl'), doc_cls=TipOfTheTongueDoc, lang='en')
+    subsets['2023'] = Dataset(
+        docs_2023_handler,
+        documentation('2023'),
+    )
+    ir_datasets.registry.register(f'{NAME}/2023', subsets['2023'])
+    for s in ['train', 'dev']:
+        subsets[f'2023/{s}'] = Dataset(
+            docs_2023_handler,
+            JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'2023/{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP, lang='en'),
+            TrecQrels(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/qrel.txt'), base_path/f'2023/{s}/qrel.txt'), {0: 'Not Relevant', 1: 'Relevant'}),
             documentation(s),
         )
-        ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
+        ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
 
     return base, subsets
 
