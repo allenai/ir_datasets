@@ -61,7 +61,7 @@ def _init():
             docs_2023_handler,
             JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'2023/{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP, lang='en'),
             TrecQrels(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/qrel.txt'), base_path/f'2023/{s}/qrel.txt'), {0: 'Not Relevant', 1: 'Relevant'}),
-            documentation(s),
+            documentation(f'2023/{s}'),
         )
         ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
 
