@@ -2752,6 +2752,13 @@
       "size_hint": 642721,
       "expected_md5": "93f70329ce1b9ce913a5f87008736ff2",
       "cache_path": "trec-dl-2022/top100.txt.gz"
+    },
+    "trec-dl-2022/qrels": {
+      "url": "https://trec.nist.gov/data/deep/2022.qrels.docs.inferred.txt",
+      "irds_mirror": true,
+      "size_hint": 13808681,
+      "expected_md5": "cca2e4db9d842e6262500532809bd571",
+      "cache_path": "trec-dl-2022/qrels.inferred.txt"
     }
   },
   
@@ -2960,6 +2967,13 @@
       "size_hint": 630095,
       "expected_md5": "36004dfad64826167aeecddff1d490a6",
       "cache_path": "trec-dl-2022/top100.txt.gz"
+    },
+    "trec-dl-2022/qrels": {
+      "url": "https://trec.nist.gov/data/deep/2022.qrels.pass.withDupes.txt",
+      "irds_mirror": true,
+      "size_hint": 15800539,
+      "expected_md5": "b36484d6cfd039664a570a4bf04f0eeb",
+      "cache_path": "trec-dl-2022/qrels.withDupes.txt"
     }
   },
   

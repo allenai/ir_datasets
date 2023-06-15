@@ -44,6 +44,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: GenericQuery('77640', "can you get a master's degree in tefl"),
             499: GenericQuery('2056473', 'is a dairy farm considered as an agriculture'),
         })
+        self._test_queries('msmarco-passage-v2/trec-dl-2022/judged', count=76, items={
+            0: GenericQuery('2000511', 'average bahamas temperature at the end of october'),
+            9: GenericQuery('2003157', 'how to cook frozen ham steak on nuwave oven'),
+            75: GenericQuery('2056323', 'how does magic leap optics work'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-passage-v2/train', count=284212, items={
@@ -71,6 +76,16 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: TrecQrel('2082', 'msmarco_passage_02_437070914', 3, '0'),
             10827: TrecQrel('1129560', 'msmarco_passage_68_639912287', 0, '0'),
         })
+        self._test_qrels('msmarco-passage-v2/trec-dl-2022', count=386416, items={
+            0: TrecQrel('2000511', 'msmarco_passage_00_491550793', 0, '0'),
+            9: TrecQrel('2000511', 'msmarco_passage_00_491585086', 0, '0'),
+            386415: TrecQrel('2056323', 'msmarco_passage_68_715747739', 1, '0'),
+        })
+        self._test_qrels('msmarco-passage-v2/trec-dl-2022/judged', count=386416, items={
+            0: TrecQrel('2000511', 'msmarco_passage_00_491550793', 0, '0'),
+            9: TrecQrel('2000511', 'msmarco_passage_00_491585086', 0, '0'),
+            386415: TrecQrel('2056323', 'msmarco_passage_68_715747739', 1, '0'),
+        })
 
     def test_scoreddocs(self):
         self._test_scoreddocs('msmarco-passage-v2/train', count=27713673, items={
@@ -97,6 +112,11 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             0: GenericScoredDoc('588', 'msmarco_passage_30_337959223', 18.762699),
             9: GenericScoredDoc('588', 'msmarco_passage_10_355039123', 17.7628),
             49999: GenericScoredDoc('2056473', 'msmarco_passage_17_225374709', 12.147499),
+        })
+        self._test_scoreddocs('msmarco-passage-v2/trec-dl-2022/judged', count=7600, items={
+            0: GenericScoredDoc('2000511', 'msmarco_passage_05_149863652', 17.3363),
+            9: GenericScoredDoc('2000511', 'msmarco_passage_10_615816159', 13.9977),
+            7599: GenericScoredDoc('2056323', 'msmarco_passage_42_417977141', 9.592),
         })
 
 
