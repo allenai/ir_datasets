@@ -111,6 +111,18 @@ trec-dl-2022:
 <p>
 Official topics for the TREC Deep Learning (DL) 2022 shared task.
 </p>
+<p>
+Note that these qrels are <i>inferred</i> from the passage ranking task; a document''s relevance
+label is the maximum of the labels of its passages.
+</p>
+'
+
+trec-dl-2022/judged:
+  desc: '
+<p>
+<a class="ds-ref">msmarco-document-v2/trec-dl-2022</a>, but filtered down to only the queries
+with qrels.
+</p>
 '
 
 anchor-text:
