@@ -69,6 +69,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('2003157', 'how to cook frozen ham steak on nuwave oven'),
             75: GenericQuery('2056323', 'how does magic leap optics work'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2023', count=700, items={
+            0: GenericQuery('2000138', 'How does the process of digestion and metabolism of carbohydrates start'),
+            9: GenericQuery('2001686', 'good food and bad food for high cholesterol'),
+            699: GenericQuery('3100949', 'How do birth control and hormone levels affect menstrual cycle variations?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -157,6 +162,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('2000511', 'msmarco_doc_24_542172327', 12.5308),
             9: GenericScoredDoc('2000511', 'msmarco_doc_55_1712593294', 11.8392),
             7599: GenericScoredDoc('2056323', 'msmarco_doc_18_978967402', 8.5719),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2023', count=70000, items={
+            0: GenericScoredDoc('2000138', 'msmarco_doc_15_421173917', 14.1515),
+            9: GenericScoredDoc('2000138', 'msmarco_doc_50_2209372409', 13.6826),
+            69999: GenericScoredDoc('3100949', 'msmarco_doc_42_771008717', 18.752998),
         })
 
     def test_anchor_text(self):

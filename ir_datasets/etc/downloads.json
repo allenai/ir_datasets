@@ -2759,6 +2759,18 @@
       "size_hint": 13808681,
       "expected_md5": "cca2e4db9d842e6262500532809bd571",
       "cache_path": "trec-dl-2022/qrels.inferred.txt"
+    },
+    "trec-dl-2023/queries": {
+      "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2023_queries.tsv",
+      "size_hint": 38128,
+      "expected_md5": "7df9e17b47cc9aa5d1c9fd5b313e273c",
+      "cache_path": "trec-dl-2023/queries.tsv"
+    },
+    "trec-dl-2023/scoreddocs": {
+      "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2023_document_top100.txt.gz",
+      "size_hint": 902168,
+      "expected_md5": "0f5d548e53afb9e319c837ad67f9046a",
+      "cache_path": "trec-dl-2023/top100.txt.gz"
     }
   },
   
@@ -2974,6 +2986,18 @@
       "size_hint": 15800539,
       "expected_md5": "b36484d6cfd039664a570a4bf04f0eeb",
       "cache_path": "trec-dl-2022/qrels.withDupes.txt"
+    },
+    "trec-dl-2023/queries": {
+      "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2023_queries.tsv",
+      "size_hint": 38128,
+      "expected_md5": "7df9e17b47cc9aa5d1c9fd5b313e273c",
+      "cache_path": "trec-dl-2023/queries.tsv"
+    },
+    "trec-dl-2023/scoreddocs": {
+      "url": "https://msmarco.blob.core.windows.net/msmarcoranking/2023_passage_top100.txt.gz",
+      "size_hint": 888898,
+      "expected_md5": "c339ed75e1556cacb387899f34cadad1",
+      "cache_path": "trec-dl-2023/top100.txt.gz"
     }
   },
   
