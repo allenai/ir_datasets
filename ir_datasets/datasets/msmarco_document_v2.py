@@ -219,6 +219,11 @@ def _init():
         FilteredScoredDocs(subsets['trec-dl-2022'].scoreddocs_handler(), dl22_judged),
         subsets['trec-dl-2022'],
     )
+    subsets['trec-dl-2023'] = Dataset(
+        collection,
+        TsvQueries(dlc['trec-dl-2023/queries'], namespace='msmarco', lang='en'),
+        TrecScoredDocs(GzipExtract(dlc['trec-dl-2023/scoreddocs'])),
+    )
 
     subsets['anchor-text'] = Dataset(
         MsMarcoV2AnchorTextDocs(
