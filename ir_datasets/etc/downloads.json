@@ -2998,6 +2998,12 @@
       "size_hint": 888898,
       "expected_md5": "c339ed75e1556cacb387899f34cadad1",
       "cache_path": "trec-dl-2023/top100.txt.gz"
+    },
+    "dedup_positions": {
+      "url": "https://huggingface.co/datasets/macavaney/msmarco-passage-v2-duplicate-ids/resolve/main/dedup_positions.tar.gz",
+      "size_hint": 388936118,
+      "expected_md5": "08bfed7742450ccaae64f8bf12033886",
+      "cache_path": "dedup_positions.tar.gz"
     }
   },
   

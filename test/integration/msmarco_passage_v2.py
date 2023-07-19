@@ -1,5 +1,6 @@
 import re
 import unittest
+import ir_datasets
 from ir_datasets.datasets.msmarco_passage_v2 import MsMarcoV2Passage
 from ir_datasets.formats import GenericQuery, TrecQrel, GenericScoredDoc
 from .base import DatasetIntegrationTest
@@ -12,6 +13,16 @@ class TestMsMarcoPassageV2(DatasetIntegrationTest):
             9: MsMarcoV2Passage('msmarco_passage_00_3346', re.compile('^Engineers and designers work tirelessly to provide better and better numbers with each progressive m.{69} or muscle car enthusiast can determine the 0\\-60 times of their cars and make moves to improve them\\.$', flags=48), ((1653, 1789), (1790, 1922)), 'msmarco_doc_00_0'),
             138364197: MsMarcoV2Passage('msmarco_passage_69_159748475', re.compile('^When it asks "What item would you like to create a shortcut for\\?", paste in the URL you want to use .{100} like to name the shortcut\\?", type the name of the meeting \\(i\\.e\\. "Standup Meeting"\\)\\. Click "Finish"\\.$', flags=48), ((1794, 1951), (1952, 1965), (1966, 2078), (2079, 2094)), 'msmarco_doc_59_1043776256'),
         })
+        self._test_docs('msmarco-passage-v2/dedup', count=119582876, items={
+            0: MsMarcoV2Passage('msmarco_passage_00_0', '0-60 Times - 0-60 | 0 to 60 Times & 1/4 Mile Times | Zero to 60 Car Reviews.', ((0, 75),), 'msmarco_doc_00_0'),
+            9: MsMarcoV2Passage('msmarco_passage_00_3346', re.compile('^Engineers and designers work tirelessly to provide better and better numbers with each progressive m.{69} or muscle car enthusiast can determine the 0\\-60 times of their cars and make moves to improve them\\.$', flags=48), ((1653, 1789), (1790, 1922)), 'msmarco_doc_00_0'),
+            119582875: MsMarcoV2Passage('msmarco_passage_69_159748475', re.compile('^When it asks "What item would you like to create a shortcut for\\?", paste in the URL you want to use .{100} like to name the shortcut\\?", type the name of the meeting \\(i\\.e\\. "Standup Meeting"\\)\\. Click "Finish"\\.$', flags=48), ((1794, 1951), (1952, 1965), (1966, 2078), (2079, 2094)), 'msmarco_doc_59_1043776256'),
+        })
+        # the following doc_id is a duplicate and shouldn't be returned in the dedup version
+        self.assertRaises(KeyError, lambda: ir_datasets.load('msmarco-passage-v2/dedup').docs.lookup('msmarco_passage_00_9218'))
+        self.assertEqual({}, ir_datasets.load('msmarco-passage-v2/dedup').docs.lookup(['msmarco_passage_00_9218']))
+        self.assertNotEqual(None, ir_datasets.load('msmarco-passage-v2').docs.lookup('msmarco_passage_00_9218'))
+        self.assertEqual(1, len(ir_datasets.load('msmarco-passage-v2').docs.lookup(['msmarco_passage_00_9218'])))
 
     def test_queries(self):
         self._test_queries('msmarco-passage-v2/train', count=277144, items={
