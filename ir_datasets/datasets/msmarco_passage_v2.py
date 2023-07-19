@@ -47,21 +47,27 @@ def parse_msmarco_passage(line):
 
 
 class MsMarcoV2Passages(BaseDocs):
-    def __init__(self, dlc):
+    def __init__(self, dlc, pos_dlc=None):
         super().__init__()
         self._dlc = dlc
+        self._pos_dlc = pos_dlc
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
-        with self._dlc.stream() as stream, \
-             tarfile.open(fileobj=stream, mode='r|') as tarf:
-            for record in tarf:
-                if not record.name.endswith('.gz'):
-                    continue
-                file = tarf.extractfile(record)
-                with gzip.open(file) as file:
-                    for line in file:
-                        yield parse_msmarco_passage(line)
+        if self._pos_dlc is not None:
+            # the shortcut only applies if the default pos
+            # files are used (i.e., no filtering is applied)
+            yield from self.docs_store()
+        else:
+            with self._dlc.stream() as stream, \
+                 tarfile.open(fileobj=stream, mode='r|') as tarf:
+                for record in tarf:
+                    if not record.name.endswith('.gz'):
+                        continue
+                    file = tarf.extractfile(record)
+                    with gzip.open(file) as file:
+                        for line in file:
+                            yield parse_msmarco_passage(line)
 
     def docs_cls(self):
         return MsMarcoV2Passage
@@ -88,8 +94,10 @@ class MsMarcoV2Passages(BaseDocs):
 class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
     def __init__(self, docs_handler):
         super().__init__(docs_handler.docs_cls(), 'doc_id')
+        self.np = ir_datasets.lazy_libs.numpy()
         self.docs_handler = docs_handler
         self.dlc = docs_handler._dlc
+        self.pos_dlc = docs_handler._pos_dlc
         self.base_path = docs_handler.docs_path(force=False) + '.extracted'
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
@@ -113,12 +121,18 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
             if not os.path.exists(file):
                 # invalid doc_id -- doesn't point to a real bundle
                 continue
+            if self.docs_handler._pos_dlc is not None:
+                # check the positions are valid for these doc_ids -- only return valid ones
+                mmp = self.np.memmap(os.path.join(self.pos_dlc.path(), f'msmarco_passage_{bundlenum}.pos'), dtype='<u4')
+                positions = self.np.array(positions, dtype='<u4')
+                positions = positions[self.np.isin(positions, mmp)].tolist()
+                del mmp
             with open(file, 'rt', encoding='utf8') as in_fh:
                 for position in positions:
                     in_fh.seek(position)
                     try:
                         yield parse_msmarco_passage(in_fh.readline())
-                    except JSONDecodeError:
+                    except json.JSONDecodeError:
                         # invalid doc_id -- pointed to a wrong position
                         pass
 
@@ -143,7 +157,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
                         fout.write(line)
                 # keep track of the positions for efficient slicing
                 with open(os.path.join(self.base_path, f'{fname}.pos'), 'wb') as posout:
-                    posout.write(np.array(positions, dtype=np.uint32).tobytes())
+                    posout.write(np.array(positions, dtype='<u4').tobytes())
                 pbar.update(1)
         (Path(self.base_path) / '_built').touch()
 
@@ -159,6 +173,9 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
             yield os.path.join(self.base_path, f'msmarco_passage_{i:02d}')
 
     def count(self):
+        if self.docs_handler._pos_dlc is not None:
+            base_path = self.pos_dlc.path()
+            return sum(os.path.getsize(os.path.join(base_path, f)) for f in os.listdir(base_path)) // 4
         return 138_364_198
 
 
@@ -177,7 +194,7 @@ class MsMarcoV2PassageIter:
     def __next__(self):
         if self.slice.start >= self.slice.stop:
             raise StopIteration
-        while self.next_index != self.slice.start or self.current_file is None or self.current_file_end_idx <= self.slice.start:
+        while self.next_index != self.slice.start or self.current_file is None or self.current_file_end_idx <= self.slice.start or self.current_pos_mmap[self.slice.start - self.current_file_start_idx] != self.current_file.tell():
             if self.current_file is None or self.current_file_end_idx <= self.slice.start:
                 # First iteration or no docs remaining in this file
                 if self.current_file is not None:
@@ -189,10 +206,13 @@ class MsMarcoV2PassageIter:
                     source_file = next(self.file_iter)
                     self.next_index = self.current_file_end_idx
                     self.current_file_start_idx = self.current_file_end_idx
-                    self.current_file_end_idx = self.current_file_start_idx + (os.path.getsize(source_file + '.pos') // 4)
+                    pos_file = source_file + '.pos'
+                    if self.docstore.pos_dlc is not None:
+                        pos_file = os.path.join(self.docstore.pos_dlc.path(), source_file.split('/')[-1] + '.pos')
+                    self.current_file_end_idx = self.current_file_start_idx + (os.path.getsize(pos_file) // 4)
                     first = False
                 self.current_file = open(source_file, 'rb')
-                self.current_pos_mmap = self.np.memmap(source_file + '.pos', dtype=self.np.uint32)
+                self.current_pos_mmap = self.np.memmap(pos_file, dtype='<u4')
             else:
                 # jump to the position of the next document
                 pos = self.current_pos_mmap[self.slice.start - self.current_file_start_idx]
@@ -246,6 +266,10 @@ def _init():
     qrels_migrator = Migrator(base_path/'qrels_version.txt', 'v2',
         affected_files=[base_path/'train'/'qrels.tsv', base_path/'dev1'/'qrels.tsv', base_path/'dev2'/'qrels.tsv'],
         message='Updating qrels (task organizers removed duplicates)')
+
+    subsets['dedup'] = Dataset(
+        MsMarcoV2Passages(dlc['passages'], TarExtractAll(dlc['dedup_positions'], base_path/'dedup_positions'))
+    )
 
     subsets['train'] = Dataset(
         collection,
