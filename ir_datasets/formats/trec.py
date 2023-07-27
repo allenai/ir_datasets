@@ -159,7 +159,7 @@ class TrecDocs(BaseDocs):
             elif path_suffix in ['.z', '.0z', '.1z', '.2z']:
                 # unix "compress" command encoding
                 unlzw3 = ir_datasets.lazy_libs.unlzw3()
-                with io.BytesIO(unlzw3.unlzw(path)) as f:
+                with io.BytesIO(unlzw3.unlzw(Path(path))) as f:
                     yield from self._parser(f)
             else:
                 with open(path, 'rb') as f:
