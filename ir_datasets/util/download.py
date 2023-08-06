@@ -154,8 +154,6 @@ class RequestsDownload(BaseDownload):
         return f'RequestsDownload({repr(self.url)}, tries={self.tries})'
 
     def _handle_auth(self, http_args):
-        if self.auth == 'huggingface':
-            return self._handle_huggingface_auth(http_args)
         auth_dir = util.home_path() / 'auth'
         if not auth_dir.exists():
             auth_dir.mkdir(parents=True, exist_ok=True)
@@ -174,23 +172,6 @@ class RequestsDownload(BaseDownload):
             uname = input('enter username for {url}: '.format(**http_args))
             pwd = input('enter password for {url}: '.format(**http_args))
             http_args['auth'] = (uname, pwd)
-
-    def _handle_huggingface_auth(self, http_args):
-        auth_dir = util.home_path() / 'auth'
-        if not auth_dir.exists():
-            auth_dir.mkdir(parents=True, exist_ok=True)
-        auth_path = auth_dir / self.auth
-        if auth_path.exists():
-            with auth_path.open('rt') as fin:
-                pwd = fin.read().strip()
-            http_args['auth'] = ('', pwd)
-        else:
-            _logger.info('To download {url}, you need to enter a username and password. To avoid this message in the future, you may '
-                         'also set them in a file''named {auth_path}, with the first line as the username and the second line as the '
-                         'password.'.format(auth_path=str(auth_path), **http_args))
-            uname = input('enter username for {url}: '.format(**http_args))
-            pwd = input('enter password for {url}: '.format(**http_args))
-            http_args['auth'] = ('', pwd)
 
 
 class LocalDownload(BaseDownload):
