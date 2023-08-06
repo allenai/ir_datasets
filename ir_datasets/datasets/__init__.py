@@ -23,6 +23,7 @@ from . import istella22
 from . import kilt
 from . import lotte
 from . import medline
+from . import miracl
 from . import mmarco
 from . import mr_tydi
 from . import msmarco_document
