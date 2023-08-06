@@ -1,0 +1,662 @@
+_:
+  pretty_name: 'MIRACL'
+  desc: '
+<p>
+MIRACL is a multilingual adhoc retrieval dataset covering 18 languages.
+The document corpora are based on Wikipedia dumps, which are split into
+passages.
+</p>
+<ul>
+  <li><a href="https://arxiv.org/pdf/2210.09984.pdf">Dataset paper</a></li>
+  <li><a href="https://project-miracl.github.io/">Website</a></li>
+</ul>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ar:
+  desc: '
+<p>
+The Arabic corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ar/train:
+  desc: '
+<p>
+The train set for Arabic.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ar/dev:
+  desc: '
+<p>
+The dev set for Arabic.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ar/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Arabic.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ar/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Arabic.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+bn:
+  desc: '
+<p>
+The Bengali corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+bn/train:
+  desc: '
+<p>
+The train set for Bengali.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+bn/dev:
+  desc: '
+<p>
+The dev set for Bengali.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+bn/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Bengali.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+bn/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Bengali.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+de:
+  desc: '
+<p>
+The German corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+de/dev:
+  desc: '
+<p>
+The dev set for German.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+de/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for German.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+en:
+  desc: '
+<p>
+The English corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+en/train:
+  desc: '
+<p>
+The train set for English.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+en/dev:
+  desc: '
+<p>
+The dev set for English.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+en/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for English.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+en/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for English.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+es:
+  desc: '
+<p>
+The Spanish corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+es/train:
+  desc: '
+<p>
+The train set for Spanish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+es/dev:
+  desc: '
+<p>
+The dev set for Spanish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+es/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Spanish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fa:
+  desc: '
+<p>
+The Persian corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fa/train:
+  desc: '
+<p>
+The train set for Persian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fa/dev:
+  desc: '
+<p>
+The dev set for Persian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fa/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Persian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fi:
+  desc: '
+<p>
+The Finnish corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fi/train:
+  desc: '
+<p>
+The train set for Finnish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fi/dev:
+  desc: '
+<p>
+The dev set for Finnish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fi/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Finnish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fi/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Finnish.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fr:
+  desc: '
+<p>
+The French corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fr/train:
+  desc: '
+<p>
+The train set for French.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fr/dev:
+  desc: '
+<p>
+The dev set for French.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+fr/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for French.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+hi:
+  desc: '
+<p>
+The Hindi corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+hi/train:
+  desc: '
+<p>
+The train set for Hindi.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+hi/dev:
+  desc: '
+<p>
+The dev set for Hindi.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+hi/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Hindi.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+id:
+  desc: '
+<p>
+The Indonesian corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+id/train:
+  desc: '
+<p>
+The train set for Indonesian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+id/dev:
+  desc: '
+<p>
+The dev set for Indonesian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+id/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Indonesian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+id/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Indonesian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ja:
+  desc: '
+<p>
+The Japanese corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ja/train:
+  desc: '
+<p>
+The train set for Japanese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ja/dev:
+  desc: '
+<p>
+The dev set for Japanese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ja/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Japanese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ja/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Japanese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ko:
+  desc: '
+<p>
+The Korean corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ko/train:
+  desc: '
+<p>
+The train set for Korean.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ko/dev:
+  desc: '
+<p>
+The dev set for Korean.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ko/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Korean.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ko/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Korean.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ru:
+  desc: '
+<p>
+The Russian corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ru/train:
+  desc: '
+<p>
+The train set for Russian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ru/dev:
+  desc: '
+<p>
+The dev set for Russian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ru/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Russian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+ru/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Russian.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+sw:
+  desc: '
+<p>
+The Swahili corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+sw/train:
+  desc: '
+<p>
+The train set for Swahili.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+sw/dev:
+  desc: '
+<p>
+The dev set for Swahili.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+sw/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Swahili.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+sw/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Swahili.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+te:
+  desc: '
+<p>
+The Telugu corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+te/train:
+  desc: '
+<p>
+The train set for Telugu.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+te/dev:
+  desc: '
+<p>
+The dev set for Telugu.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+te/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Telugu.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+te/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Telugu.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+th:
+  desc: '
+<p>
+The Thai corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+th/train:
+  desc: '
+<p>
+The train set for Thai.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+th/dev:
+  desc: '
+<p>
+The dev set for Thai.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+th/test-a:
+  desc: '
+<p>
+The held-out test set (version a) for Thai.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+th/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Thai.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+yo:
+  desc: '
+<p>
+The Yoruba corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+yo/dev:
+  desc: '
+<p>
+The dev set for Yoruba.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+yo/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Yoruba.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+zh:
+  desc: '
+<p>
+The Chinese corpus.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+zh/train:
+  desc: '
+<p>
+The train set for Chinese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+zh/dev:
+  desc: '
+<p>
+The dev set for Chinese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
+
+zh/test-b:
+  desc: '
+<p>
+The held-out test set (version b) for Chinese.
+</p>
+'
+  bibtex_ids: ['Zhang2022Miracl']
