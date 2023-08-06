@@ -16,6 +16,11 @@ class TrecMandarinQuery(NamedTuple):
     description_zh: str
     narrative_en: str
     narrative_zh: str
+    def default_text(self):
+        """
+        title_zh
+        """
+        return self.title_zh
 
 
 QREL_DEFS = {

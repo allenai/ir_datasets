@@ -64,6 +64,16 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('77640', "can you get a master's degree in tefl"),
             499: GenericQuery('2056473', 'is a dairy farm considered as an agriculture'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2022/judged', count=76, items={
+            0: GenericQuery('2000511', 'average bahamas temperature at the end of october'),
+            9: GenericQuery('2003157', 'how to cook frozen ham steak on nuwave oven'),
+            75: GenericQuery('2056323', 'how does magic leap optics work'),
+        })
+        self._test_queries('msmarco-document-v2/trec-dl-2023', count=700, items={
+            0: GenericQuery('2000138', 'How does the process of digestion and metabolism of carbohydrates start'),
+            9: GenericQuery('2001686', 'good food and bad food for high cholesterol'),
+            699: GenericQuery('3100949', 'How do birth control and hormone levels affect menstrual cycle variations?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -111,6 +121,16 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: TrecQrel('2082', 'msmarco_doc_02_613155504', 1, '0'),
             13057: TrecQrel('1129560', 'msmarco_doc_59_863449044', 1, '0'),
         })
+        self._test_qrels('msmarco-document-v2/trec-dl-2022', count=369638, items={
+            0: TrecQrel('2000511', 'msmarco_doc_00_928629354', 0, '0'),
+            9: TrecQrel('2000511', 'msmarco_doc_00_928870217', 0, '0'),
+            369637: TrecQrel('2056323', 'msmarco_doc_59_419476385', 1, '0'),
+        })
+        self._test_qrels('msmarco-document-v2/trec-dl-2022/judged', count=369638, items={
+            0: TrecQrel('2000511', 'msmarco_doc_00_928629354', 0, '0'),
+            9: TrecQrel('2000511', 'msmarco_doc_00_928870217', 0, '0'),
+            369637: TrecQrel('2056323', 'msmarco_doc_59_419476385', 1, '0'),
+        })
 
     def test_scoreddocs(self):
         self._test_scoreddocs('msmarco-document-v2/train', count=32218809, items={
@@ -137,6 +157,16 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('588', 'msmarco_doc_01_1675156368', 16.856501),
             9: GenericScoredDoc('588', 'msmarco_doc_44_970138133', 16.118099),
             49999: GenericScoredDoc('2056473', 'msmarco_doc_58_500974264', 10.868498),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2022/judged', count=7600, items={
+            0: GenericScoredDoc('2000511', 'msmarco_doc_24_542172327', 12.5308),
+            9: GenericScoredDoc('2000511', 'msmarco_doc_55_1712593294', 11.8392),
+            7599: GenericScoredDoc('2056323', 'msmarco_doc_18_978967402', 8.5719),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2023', count=70000, items={
+            0: GenericScoredDoc('2000138', 'msmarco_doc_15_421173917', 14.1515),
+            9: GenericScoredDoc('2000138', 'msmarco_doc_50_2209372409', 13.6826),
+            69999: GenericScoredDoc('3100949', 'msmarco_doc_42_771008717', 18.752998),
         })
 
     def test_anchor_text(self):

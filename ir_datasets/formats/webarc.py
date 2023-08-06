@@ -5,6 +5,7 @@ from typing import NamedTuple
 import ir_datasets
 from ir_datasets.formats import BaseDocs
 
+_logger = ir_datasets.log.easy()
 
 class WarcDoc(NamedTuple):
     doc_id: str
@@ -13,6 +14,12 @@ class WarcDoc(NamedTuple):
     http_headers: bytes
     body: bytes
     body_content_type: str
+    def default_text(self):
+        try:
+            return ir_datasets.util.sax_html_parser(self.body, headers=self.http_headers, fields=[{'title', 'body'}])[0]
+        except UnicodeDecodeError:
+            _logger.info(f'UnicodeDecodeError when parsing doc_id={self.doc_id}')
+            return ''
 
 
 class WarcDocs(BaseDocs):

@@ -28,6 +28,11 @@ class MsMarcoV2Document(NamedTuple):
     title: str
     headings: str
     body: str
+    def default_text(self):
+        """
+        title + headings + body
+        """
+        return f'{self.title} {self.headings} {self.body}'
 
 
 class MsMarcoV2Docs(BaseDocs):
@@ -101,6 +106,11 @@ class MsMarcoV2AnchorTextDocument(NamedTuple):
     doc_id: str
     text: str
     anchors: List[str]
+    def default_text(self):
+        """
+        text + anchors
+        """
+        return f'{self.text} ' + ' '.join(self.anchors)
 
 
 class MsMarcoV2AnchorTextDocs(BaseDocs):
@@ -200,7 +210,19 @@ def _init():
     subsets['trec-dl-2022'] = Dataset(
         collection,
         TsvQueries(dlc['trec-dl-2022/queries'], namespace='msmarco', lang='en'),
+        TrecQrels(dlc['trec-dl-2022/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2022/scoreddocs'])),
+    )
+    dl22_judged = Lazy(lambda: {q.query_id for q in subsets['trec-dl-2022'].qrels_iter()})
+    subsets['trec-dl-2022/judged'] = Dataset(
+        FilteredQueries(subsets['trec-dl-2022'].queries_handler(), dl22_judged),
+        FilteredScoredDocs(subsets['trec-dl-2022'].scoreddocs_handler(), dl22_judged),
+        subsets['trec-dl-2022'],
+    )
+    subsets['trec-dl-2023'] = Dataset(
+        collection,
+        TsvQueries(dlc['trec-dl-2023/queries'], namespace='msmarco', lang='en'),
+        TrecScoredDocs(GzipExtract(dlc['trec-dl-2023/scoreddocs'])),
     )
 
     subsets['anchor-text'] = Dataset(

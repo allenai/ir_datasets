@@ -10,6 +10,11 @@ NAME = 'trec-spanish'
 class TrecDescOnlyQuery(NamedTuple):
     query_id: str
     description: str
+    def default_text(self):
+        """
+        description
+        """
+        return self.description
 
 class TrecSpanish3Query(NamedTuple):
     query_id: str
@@ -19,6 +24,11 @@ class TrecSpanish3Query(NamedTuple):
     description_en: str
     narrative_es: str
     narrative_en: str
+    def default_text(self):
+        """
+        title_es
+        """
+        return self.title_es
 
 class TrecSpanish4Query(NamedTuple):
     query_id: str
@@ -26,6 +36,11 @@ class TrecSpanish4Query(NamedTuple):
     description_en1: str
     description_es2: str
     description_en2: str
+    def default_text(self):
+        """
+        description_es1
+        """
+        return self.description_es1
 
 QREL_DEFS = {
     1: 'relevant',

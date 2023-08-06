@@ -41,6 +41,7 @@ from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish
 from . import trec_robust04
+from . import trec_tot
 from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
@@ -51,3 +52,4 @@ from . import trec_fair
 from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
 from . import neuclir # must be after hc4
+from . import sara

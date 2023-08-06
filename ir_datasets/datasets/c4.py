@@ -22,6 +22,11 @@ class C4Doc(NamedTuple):
     text: str
     url: str
     timestamp: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class MisinfoQuery(NamedTuple):
@@ -32,6 +37,11 @@ class MisinfoQuery(NamedTuple):
     disclaimer: str
     stance: str
     evidence: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class C4Source(DocSource):
