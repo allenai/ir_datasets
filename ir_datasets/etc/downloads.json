@@ -711,32 +711,32 @@
   
   "codesearchnet": {
     "python": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/python.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/go.zip",
       "size_hint": 940909997,
       "expected_md5": "07b49dd01fbac894fbdae22da6462e4f"
     },
     "java": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/java.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/java.zip",
       "size_hint": 1060569153,
       "expected_md5": "fea180077275d8f98f42a3386f492837"
     },
     "go": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/go.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/go.zip",
       "size_hint": 487525935,
       "expected_md5": "c0288db91f067c95bb952577949e7b13"
     },
     "php": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/php.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/php.zip",
       "size_hint": 851894048,
       "expected_md5": "62373f85cfae2f5d7422dc1e55fbbb50"
     },
     "ruby": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/ruby.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/ruby.zip",
       "size_hint": 111758028,
       "expected_md5": "6847c0149666334cc937909b0e2297ae"
     },
     "javascript": {
-      "url": "https://s3.amazonaws.com/code-search-net/CodeSearchNet/v2/javascript.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/javascript.zip",
       "size_hint": 1664713350,
       "expected_md5": "7649178a02f7b5c8fbccb64abe7946b6"
     },
