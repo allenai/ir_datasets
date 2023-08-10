@@ -711,7 +711,7 @@
   
   "codesearchnet": {
     "python": {
-      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/go.zip",
+      "url": "https://huggingface.co/datasets/macavaney/codesearchnet-mirror/resolve/main/v2/python.zip",
       "size_hint": 940909997,
       "expected_md5": "07b49dd01fbac894fbdae22da6462e4f"
     },
