@@ -986,7 +986,8 @@
       "url": "https://trec.nist.gov/data/fair/2021-eval-topics-with-qrels.json.gz",
       "size_hint": 120050,
       "expected_md5": "50068634036c00adb54e8be9314bf37c",
-      "cache_path": "2021/eval/topics-with-qrels.json.gz"
+      "cache_path": "2021/eval/topics-with-qrels.json.gz",
+      "irds_mirror": true
     },
     "2021/metadata": {
       "url": "https://data.boisestate.edu/library/Ekstrand-2021/TRECFairRanking2021/trec_metadata.json.gz",
