@@ -35,8 +35,20 @@ class TipOfTheTongueQuery(NamedTuple):
         return self.title + ' ' + self.text
 
 
+class TipOfTheTongueTestQuery(NamedTuple):
+    query_id: str
+    domain: str
+    title: str
+    text: str
+    sentence_annotations: List[Dict[str, str]]
+
+    def default_text(self):
+        return self.title + ' ' + self.text
+
+
 QUERY_MAP = {'query_id': 'id', 'url': 'url', 'domain': 'domain', 'title': 'title', 'text': 'text', 'sentence_annotations': 'sentence_annotations'}
 
+QUERY_MAP_TEST = {'query_id': 'id', 'domain': 'domain', 'title': 'title', 'text': 'text', 'sentence_annotations': 'sentence_annotations'}
 
 def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
@@ -56,7 +68,7 @@ def _init():
         documentation('2023'),
     )
     ir_datasets.registry.register(f'{NAME}/2023', subsets['2023'])
-    for s in ['train', 'dev', 'test']:
+    for s in ['train', 'dev']:
         subsets[f'2023/{s}'] = Dataset(
             docs_2023_handler,
             JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'2023/{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP, lang='en'),
@@ -64,6 +76,16 @@ def _init():
             documentation(f'2023/{s}'),
         )
         ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
+    
+    # Test dataset outside of the loop above as no qrels available at the moment and queries come from different file
+    s = 'test'
+    test_dlc = dlc['test-queries']
+    subsets[f'2023/{s}'] = Dataset(
+        docs_2023_handler,
+        JsonlQueries(Cache(ZipExtract(test_dlc, f'test/queries.jsonl'), base_path/f'2023/{s}/queries.jsonl'), query_cls=TipOfTheTongueTestQuery, mapping=QUERY_MAP_TEST, lang='en'),
+        documentation(f'2023/{s}'),
+    )
+    ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
 
     return base, subsets
 
