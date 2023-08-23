@@ -56,7 +56,7 @@ def _init():
         documentation('2023'),
     )
     ir_datasets.registry.register(f'{NAME}/2023', subsets['2023'])
-    for s in ['train', 'dev']:
+    for s in ['train', 'dev', 'test']:
         subsets[f'2023/{s}'] = Dataset(
             docs_2023_handler,
             JsonlQueries(Cache(ZipExtract(main_dlc, f'TREC-TOT/{s}/queries.jsonl'), base_path/f'2023/{s}/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP, lang='en'),
