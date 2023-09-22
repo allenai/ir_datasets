@@ -597,3 +597,15 @@ StackExchange subforum.
 </ul>
 '
   bibtex_ids: ['Hoogeveen2015CqaDupStack', 'Thakur2021Beir']
+
+bioasq:
+  desc: '
+<p>
+A version of the BioASQ dataset for Question Answering in the biomedical domain.
+</p>
+<ul>
+<li><a href="https://bmcbioinformatics.biomedcentral.com/articles/10.1186/s12859-015-0564-6">Dataset paper</a></li>
+<li><a href="http://www.bioasq.org/">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Tsatsaronis2015BioASQ', 'Thakur2021Beir']

@@ -252,6 +252,7 @@ def _init():
         'fever': (['train', 'dev', 'test'], BeirTitleDoc, GenericQuery),
         'climate-fever': (['test'], BeirTitleDoc, GenericQuery),
         'scifact': (['train', 'test'], BeirTitleDoc, GenericQuery),
+        'bioasq': (['train', 'test'], BeirTitleDoc, GenericQuery),
     }
 
     for ds, (qrels, doc_type, query_type) in benchmarks.items():
