@@ -19,7 +19,7 @@ class Docstore:
             if field is not None:
                 result[getattr(doc, self._id_field)] = doc[field_idx]
             else:
-                result[getattr(doc.doc_id, self._id_field)] = doc
+                result[getattr(doc, self._id_field)] = doc
         return result
 
     def get_many_iter(self, doc_ids):
