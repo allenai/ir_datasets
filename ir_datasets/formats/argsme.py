@@ -1,7 +1,11 @@
+from ast import literal_eval
+from csv import DictReader, field_size_limit
 from datetime import datetime
 from enum import Enum
+from io import TextIOWrapper
 from pathlib import Path
 from re import sub
+from sys import maxsize
 from typing import NamedTuple, List, Optional
 
 from ir_datasets import lazy_libs
@@ -118,6 +122,18 @@ class ArgsMeAspect(NamedTuple):
         return ArgsMeAspect(name, weight, normalized_weight, rank)
 
 
+class ArgsMeSentence(NamedTuple):
+    id: str
+    text: str
+
+    @staticmethod
+    def from_json(json: dict) -> "ArgsMeSentence":
+        return ArgsMeSentence(
+            str(json["sent_id"]),
+            str(json["sent_text"]),
+        )
+
+
 class ArgsMeDoc(NamedTuple):
     """
     See the corresponding Java source files from the args.me project:
@@ -149,6 +165,12 @@ class ArgsMeDoc(NamedTuple):
     author_organization: Optional[str]
     author_role: Optional[str]
     mode: Optional[ArgsMeMode]
+
+    def default_text(self):
+        """
+        premises + conclusion
+        """
+        return f"{self.premises_texts} {self.conclusion}"
 
     @staticmethod
     def from_json(json: dict) -> "ArgsMeDoc":
@@ -290,6 +312,54 @@ class ArgsMeDoc(NamedTuple):
         )
 
 
+class ArgsMeProcessedDoc(NamedTuple):
+    """
+    See the corresponding Java source files from the args.me project:
+    https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/Argument.java
+    https://git.webis.de/code-research/arguana/args/args-framework/-/blob/master/src/main/java/me/args/argument/Premise.java
+    """
+    doc_id: str
+    conclusion: str
+    premises: List[ArgsMePremise]
+    premises_texts: str  # Premises texts concatenated with spaces.
+    aspects: List[ArgsMeAspect]
+    aspects_names: str  # Aspects namews concatenated with spaces.
+    source_id: str
+    source_title: str
+    source_url: Optional[str]
+    source_previous_argument_id: Optional[str]
+    source_next_argument_id: Optional[str]
+    source_domain: Optional[ArgsMeSourceDomain]
+    source_text: Optional[str]
+    source_text_conclusion_start: Optional[int]
+    source_text_conclusion_end: Optional[int]
+    source_text_premise_start: Optional[int]
+    source_text_premise_end: Optional[int]
+    topic: str  # Topic or discussion title.
+    acquisition: datetime
+    date: Optional[datetime]
+    author: Optional[str]
+    author_image_url: Optional[str]
+    author_organization: Optional[str]
+    author_role: Optional[str]
+    mode: Optional[ArgsMeMode]
+    sentences: List[ArgsMeSentence]
+
+    @staticmethod
+    def from_csv(csv: dict) -> "ArgsMeProcessedDoc":
+        csv["premises"] = literal_eval(csv["premises"])
+        csv["context"] = literal_eval(csv["context"])
+        doc = ArgsMeDoc.from_json(csv)
+        sentences = [
+            ArgsMeSentence.from_json(json)
+            for json in literal_eval(csv["sentences"])
+        ]
+        return ArgsMeProcessedDoc(
+            *doc,
+            sentences=sentences,
+        )
+
+
 class ArgsMeDocs(BaseDocs):
     _source: Cache
     _namespace: Optional[str]
@@ -343,7 +413,61 @@ class ArgsMeDocs(BaseDocs):
         return self._language
 
 
-class ArgsMeCombinedArguments(BaseDocs):
+class ArgsMeProcessedDocs(BaseDocs):
+    _source: Cache
+    _namespace: Optional[str]
+    _language: Optional[str]
+    _count_hint: Optional[int]
+
+    def __init__(
+            self,
+            cache: Cache,
+            namespace: Optional[str] = None,
+            language: Optional[str] = None,
+            count_hint: Optional[int] = None,
+    ):
+        self._source = cache
+        self._namespace = namespace
+        self._language = language
+        self._count_hint = count_hint
+
+    def docs_path(self):
+        return self._source.path()
+
+    @use_docstore
+    def docs_iter(self):
+        with self._source.stream() as csv_stream:
+            lines = TextIOWrapper(csv_stream)
+            field_size_limit(maxsize)
+            reader = DictReader(lines)
+            for argument_csv in reader:
+                argument = ArgsMeProcessedDoc.from_csv(argument_csv)
+                yield argument
+
+    def docs_store(self, field="doc_id"):
+        return PickleLz4FullStore(
+            path=f"{self.docs_path()}.pklz4",
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=["doc_id"],
+            count_hint=self._count_hint,
+        )
+
+    def docs_count(self):
+        return self._count_hint
+
+    def docs_cls(self):
+        return ArgsMeProcessedDoc
+
+    def docs_namespace(self):
+        return self._namespace
+
+    def docs_lang(self):
+        return self._language
+
+
+class ArgsMeCombinedDocs(BaseDocs):
     _path: Path
     _sources: List[ArgsMeDocs]
     _namespace: Optional[str]

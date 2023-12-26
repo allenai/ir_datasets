@@ -70,6 +70,11 @@ class Cast2019Query(NamedTuple):
     turn_number: int
     topic_title: str
     topic_description: str
+    def default_text(self):
+        """
+        raw_utterance
+        """
+        return self.raw_utterance
 
 
 class Cast2020Query(NamedTuple):
@@ -80,6 +85,11 @@ class Cast2020Query(NamedTuple):
     manual_canonical_result_id: str
     topic_number: int
     turn_number: int
+    def default_text(self):
+        """
+        raw_utterance
+        """
+        return self.raw_utterance
 
 
 class CastDocs(BaseDocs):

@@ -56,6 +56,11 @@ class TweetDoc(NamedTuple):
     retweet_doc_id: str
     source: bytes
     source_content_type: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 
 class TrecMb13Query(NamedTuple):
@@ -63,6 +68,11 @@ class TrecMb13Query(NamedTuple):
     query: str
     time: str
     tweet_time: str
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 class TrecMb14Query(NamedTuple):
@@ -71,6 +81,11 @@ class TrecMb14Query(NamedTuple):
     time: str
     tweet_time: str
     description: str
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 """

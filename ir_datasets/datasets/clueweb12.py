@@ -8,7 +8,7 @@ from glob import glob
 from pathlib import Path
 import ir_datasets
 from ir_datasets.util import DownloadConfig, TarExtract, TarExtractAll, Cache, Bz2Extract, ZipExtract, IterStream
-from ir_datasets.formats import TrecQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, NtcirQrels, TrecSubtopic
+from ir_datasets.formats import TrecQrels, TrecSubQrels, TrecDocs, TrecXmlQueries, WarcDocs, GenericDoc, GenericQuery, TrecQrel, TrecSubQrel, NtcirQrels, TrecSubtopic
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.indices import Docstore, CacheDocstore
 
@@ -60,12 +60,22 @@ class TrecWebTrackQuery(NamedTuple):
     description: str
     type: str
     subtopics: Tuple[TrecSubtopic, ...]
+    def default_text(self):
+        """
+        query
+        """
+        return self.query
 
 
 class NtcirQuery(NamedTuple):
     query_id: str
     title: str
     description: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class MisinfoQuery(NamedTuple):
@@ -74,6 +84,11 @@ class MisinfoQuery(NamedTuple):
     cochranedoi: str
     description: str
     narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
 
 
 class MisinfoQrel(NamedTuple):
@@ -273,12 +288,24 @@ def _init():
         TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
         TrecQrels(dlc['trec-web-2013/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2013'))
+    
+    subsets['trec-web-2013/diversity'] = Dataset(
+        collection,
+        TrecXmlQueries(dlc['trec-web-2013/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
+        TrecSubQrels(dlc['trec-web-2013/qrels.all'], QREL_DEFS),
+        documentation('trec-web-2013/diversity'))
 
     subsets['trec-web-2014'] = Dataset(
         collection,
         TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
         TrecQrels(dlc['trec-web-2014/qrels.adhoc'], QREL_DEFS),
         documentation('trec-web-2014'))
+
+    subsets['trec-web-2014/diversity'] = Dataset(
+        collection,
+        TrecXmlQueries(dlc['trec-web-2014/queries'], qtype=TrecWebTrackQuery, namespace='trec-web', lang='en'),
+        TrecSubQrels(dlc['trec-web-2014/qrels.all'], QREL_DEFS),
+        documentation('trec-web-2014/diversity'))
 
     subsets['b13/ntcir-www-1'] = Dataset(
         collection_b13,
@@ -376,6 +403,7 @@ def _init():
     # NOTE: the following datasets are defined in touche.py:
     # - clueweb12/touche-2020-task-2
     # - clueweb12/touche-2021-task-2
+    # - clueweb12/touche-2022-task-2
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

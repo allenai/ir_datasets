@@ -77,3 +77,31 @@ with qrels.
 </p>
 '
   official_measures: ['AP@100', 'nDCG@10', 'P(rel=2)@10', 'RR(rel=2)']
+
+trec-dl-2022:
+  desc: '
+<p>
+Official topics for the TREC Deep Learning (DL) 2022 shared task.
+</p>
+<p>
+Note that the officially-released qrels <i>include</i> relevance labels propagated to
+duplicate passages, while results presented in the notebook papers remove duplicate documents.
+This means that the results are not directly comparable, and extra care should be taken when
+making comparisions among systems to ensure that they were evaluated in the same settings.
+</p>
+'
+
+trec-dl-2022/judged:
+  desc: '
+<p>
+<a class="ds-ref">msmarco-passage-v2/trec-dl-2022</a>, but filtered down to only the queries
+with qrels.
+</p>
+'
+
+trec-dl-2023:
+  desc: '
+<p>
+Official topics for the TREC Deep Learning (DL) 2023 shared task.
+</p>
+'

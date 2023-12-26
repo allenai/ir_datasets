@@ -19,9 +19,11 @@ from . import codesearchnet
 from . import gov
 from . import gov2
 from . import highwire
+from . import istella22
 from . import kilt
 from . import lotte
 from . import medline
+from . import miracl
 from . import mmarco
 from . import mr_tydi
 from . import msmarco_document
@@ -34,11 +36,13 @@ from . import nfcorpus
 from . import natural_questions
 from . import nyt
 from . import pmc
-from . import touche
+from . import touche_image
+from . import touche  # must be after argsme,clueweb12,touche_image
 from . import trec_arabic
 from . import trec_mandarin
 from . import trec_spanish
 from . import trec_robust04
+from . import trec_tot
 from . import tripclick
 from . import tweets2013_ia
 from . import vaswani
@@ -49,3 +53,4 @@ from . import trec_fair
 from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
 from . import neuclir # must be after hc4
+from . import sara

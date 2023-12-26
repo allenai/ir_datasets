@@ -32,6 +32,11 @@ class MsMarcoDocument(NamedTuple):
     url: str
     title: str
     body: str
+    def default_text(self):
+        """
+        title + body
+        """
+        return f'{self.title} {self.body}'
 
 
 # Use the TREC-formatted docs so we get all the available formatting (namely, line breaks)
@@ -63,6 +68,11 @@ class MsMarcoAnchorTextDocument(NamedTuple):
     doc_id: str
     text: str
     anchors: List[str]
+    def default_text(self):
+        """
+        text + anchors
+        """
+        return f'{self.text} ' + ' '.join(self.anchors)
 
 
 class MsMarcoAnchorTextDocs(BaseDocs):

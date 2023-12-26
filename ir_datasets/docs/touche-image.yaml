@@ -1,0 +1,46 @@
+_:
+  pretty_name: "Touché Image Search"
+  desc: |
+    <p>
+    Focused crawl of about 23 841 images (and associated web pages) as document collection.
+    </p>
+    <p>
+    This collection is licensed with the
+    <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+    Individual rights to the content still apply.
+    </p>
+    <ul>
+    <li><a href="https://zenodo.org/record/6873575">Zenodo</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/image-retrieval-for-arguments.html">Touché 2022 task 3 website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/">Touché 2022 lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-99739-7_43">Overview paper</a></li>
+    </ul>
+  bibtex_ids:
+    - Bondarenko2022Touche
+    - Kiesel2021Image
+    - Dimitrov2021SemEval
+    - Yanai2007Image
+
+2022-06-13:
+  pretty_name: "Touché Image Search"
+  desc: |
+    <p>
+    Corpus version 2022-06-13 with 23 841 images.
+    It was released on June 13, 2022 on <a href="https://zenodo.org/record/3734893">Zenodo</a>.
+    </p>
+    <p>
+    This collection is licensed with the
+    <a href="https://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International</a>.
+    Individual rights to the content still apply.
+    </p>
+    <ul>
+    <li><a href="https://zenodo.org/record/6873575">Zenodo</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/image-retrieval-for-arguments.html">Touché 2022 task 3 website</a></li>
+    <li><a href="https://touche.webis.de/clef22/touche22-web/">Touché 2022 lab website</a></li>
+    <li><a href="https://doi.org/10.1007/978-3-030-99739-7_43">Overview paper</a></li>
+    </ul>
+  bibtex_ids:
+    - Bondarenko2022Touche
+    - Kiesel2021Image
+    - Dimitrov2021SemEval
+    - Yanai2007Image

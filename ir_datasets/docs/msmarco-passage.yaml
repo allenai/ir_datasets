@@ -28,7 +28,7 @@ Official dev set.
 </p>
 <p>
 scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note
-that these are sub-sampled to about 1/8 of the total avaialable dev queries by the MSMARCO authors
+that these are sub-sampled to about 1/8 of the total available dev queries by the MSMARCO authors
 for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0).
 </p>
 '
@@ -55,6 +55,14 @@ one qrel.
   bibtex_ids: ['Bajaj2016Msmarco']
   official_measures: ['RR@10']
 
+dev/2:
+  desc: '
+<p>
+"Dev2" split of the <a class="ds-ref">msmarco-passage/dev</a> set. Originally released as part of the v2 corpus.
+</p>
+'
+  bibtex_ids: ['Bajaj2016Msmarco']
+  official_measures: ['RR@10']
 
 eval:
   desc: '
@@ -63,7 +71,7 @@ Official eval set for submission to MS MARCO leaderboard. Relevance judgments ar
 </p>
 <p>
 scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note
-that these are sub-sampled to about 1/8 of the total avaialable eval queries by the MSMARCO authors
+that these are sub-sampled to about 1/8 of the total available eval queries by the MSMARCO authors
 for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0).
 </p>
 '
@@ -91,7 +99,7 @@ a filtered list that only includes documents that have at least one qrel.
 </p>
 <p>
 scoreddocs are the top 1000 results from BM25. These are used for the "re-ranking" setting. Note
-that these are sub-sampled to about 1/8 of the total avaialable train queries by the MSMARCO authors
+that these are sub-sampled to about 1/8 of the total available train queries by the MSMARCO authors
 for faster evaluation. The BM25 scores from scoreddocs are not available (all have a score of 0).
 </p>
 <p>

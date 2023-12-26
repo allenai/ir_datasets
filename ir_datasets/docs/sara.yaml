@@ -1,0 +1,11 @@
+_: # matches documentation key above
+  pretty_name: 'SARA' # a more human-readable way to present this dataset than the dataset-id
+  desc: '
+<p>
+A set of sensitivity-aware relevance assessments. More information is avaliable here:
+<p> 
+
+<ul>
+<li><a href="https://github.com/JackMcKechnie/SARA-A-Collection-of-Sensitivity-Aware-Relevance-Assessments">SARA</a></li>
+</ul>
+'

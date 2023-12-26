@@ -1,0 +1,60 @@
+_:
+  pretty_name: 'Istella22'
+  desc: '
+<p>
+The Istella22 dataset facilitates comparisions between traditional and neural learning-to-rank
+by including query and document text along with LTR features (not included in ir_datasets).
+</p>
+<p>
+Note that to use the dataset, you must <b>read and accept</b> the <a href="https://www.istella.ai/dataset/Istella22-LicenseAgreement.txt">Istella22 License Agreement</a>.
+By using the dataset, you agree to be bound by the terms of the license: the <b>Istella dataset
+is solely for non-commercial use</b>.
+</p>
+<ul>
+<li><a href="https://dl.acm.org/doi/abs/10.1145/3477495.3531740">Paper</a></li>
+<li><a href="https://istella.ai/data/istella22-dataset/">Website</a></li>
+</ul>
+'
+  bibtex_ids: ['Dato2022Istella']
+
+test:
+  desc: '
+<p>
+Official test query set.
+</p>
+'
+
+test/fold1:
+  desc: '
+<p>
+Fold 1 of the official test query set.
+</p>
+'
+
+test/fold2:
+  desc: '
+<p>
+Fold 2 of the official test query set.
+</p>
+'
+
+test/fold3:
+  desc: '
+<p>
+Fold 3 of the official test query set.
+</p>
+'
+
+test/fold4:
+  desc: '
+<p>
+Fold 4 of the official test query set.
+</p>
+'
+
+test/fold5:
+  desc: '
+<p>
+Fold 5 of the official test query set.
+</p>
+'

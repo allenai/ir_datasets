@@ -6,7 +6,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ir_datasets",
-    version="0.5.1", # NOTE: keep this in sync with ir_datasets/__init__.py
+    version="0.5.5", # NOTE: keep this in sync with ir_datasets/__init__.py
     author="Sean MacAvaney",
     author_email="sean.macavaney@glasgow.ac.uk",
     description="provides a common interface to many IR ad-hoc ranking benchmarks, training datasets, etc.",
@@ -17,7 +17,7 @@ setuptools.setup(
     packages=setuptools.find_packages(include=['ir_datasets', 'ir_datasets.*']),
     install_requires=list(open('requirements.txt')),
     classifiers=[],
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     entry_points={
         'console_scripts': ['ir_datasets=ir_datasets:main_cli'],
     },

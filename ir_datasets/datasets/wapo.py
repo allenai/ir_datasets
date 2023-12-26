@@ -51,6 +51,11 @@ class WapoDoc(NamedTuple):
     body: str
     body_paras_html: Tuple[str, ...]
     body_media: Tuple[WapoDocMedia, ...]
+    def default_text(self):
+        """
+        title and body
+        """
+        return f'{self.title} {self.body}'
 
 
 class TrecBackgroundLinkingQuery(NamedTuple):
