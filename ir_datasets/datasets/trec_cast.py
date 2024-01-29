@@ -173,6 +173,47 @@ class DocsSubsetList(DocsList):
         return super().__len__()
 
 
+class Dupes:
+    def __init__(self, base: BaseDownload, prefix: Optional[str]=None):
+        self._base = base
+        self._prefix = prefix
+        self._prefix_len = len(prefix) if prefix else 0
+        self._remove_prefix = self.remove_prefix if prefix else lambda x: x
+
+    def remove_prefix(self, doc_id: str):
+        if doc_id.startswith(self._prefix):
+            return doc_id[self._prefix_len:]
+
+    @cached_property
+    def doc_ids(self):
+        doc_ids = set()
+        with self._base.stream() as fp:
+            for line in fp:
+                if doc_id := self._remove_prefix(line.strip().decode("utf-8")):
+                    doc_ids.append(doc_id)
+        return doc_ids
+
+    def has(self, doc_id: str):
+        return doc_id in self.doc_ids
+
+class ColonCommaDupes(Dupes):
+    """Dupes with the format
+    
+    doc_id:dupe_1_id,dupe_2_id,...
+    """
+    @cached_property
+    def doc_ids(self):
+        doc_ids = set()
+        with self._base.stream() as fp:
+            for line in fp:
+                _, dupes = line.strip().decode("utf-8").split(":")
+                for doc_id in dupes.split(","):
+                    if doc_id := self._remove_prefix(doc_id):
+                        doc_ids.add(doc_id)
+
+        return doc_ids
+
+
 class DocsSubset(BaseDocs, DirectAccessDocs):
     """Document collection minus a set of duplicated"""
     
@@ -743,29 +784,6 @@ class KiltCastDocs(TransformedDocs):
         return CastDoc(doc["wikipedia_id"], title, url, [body])
 
 
-class Dupes:
-    def __init__(self, base: BaseDownload, prefix: Optional[str]=None):
-        self._base = base
-        self._prefix = prefix
-        self._prefix_len = len(prefix) if prefix else 0
-        self._remove_prefix = self.remove_prefix if prefix else lambda x: x
-
-    def remove_prefix(self, doc_id: str):
-        if doc_id.startswith(self._prefix):
-            return doc_id[self._prefix_len:]
-
-    @cached_property
-    def doc_ids(self):
-        doc_ids = set()
-        with self._base.stream() as fp:
-            for line in fp:
-                if doc_id := self._remove_prefix(line.strip().decode("utf-8")):
-                    doc_ids.append(doc_id)
-        return doc_ids
-
-    def has(self, doc_id: str):
-        return doc_id in self.doc_ids
-
 
 class WapoDupes(Dupes):
     @cached_property
@@ -777,24 +795,6 @@ class WapoDupes(Dupes):
                 if base_id != wapo_id:
                     if doc_id := self._remove_prefix(wapo_id.decode("utf-8")):
                         doc_ids.add(doc_id)
-        return doc_ids
-
-
-class ColonCommaDupes(Dupes):
-    """Dupes with the format
-    
-    doc_id:dupe_1_id,dupe_2_id,...
-    """
-    @cached_property
-    def doc_ids(self):
-        doc_ids = set()
-        with self._base.stream() as fp:
-            for line in fp:
-                _, dupes = line.strip().decode("utf-8").split(":")
-                for doc_id in dupes.split(","):
-                    if doc_id := self._remove_prefix(doc_id):
-                        doc_ids.add(doc_id)
-
         return doc_ids
 
 
