@@ -1,18 +1,372 @@
-import sys
+from abc import ABC, abstractmethod
+import array
+import contextlib
+import gzip
+from hashlib import md5
 import os
-from functools import lru_cache
+from functools import cached_property, lru_cache
 from collections import defaultdict
 import re
 import json
 import itertools
-from typing import NamedTuple, Tuple
+from typing import Iterator, List, NamedTuple, Optional, Sequence, Set, Tuple, Union
 import ir_datasets
-from ir_datasets.util import DownloadConfig, Lazy
+from ir_datasets.indices.base import Docstore
+from ir_datasets.util import BaseDownload, DownloadConfig, Lazy
 from ir_datasets.formats import TrecQrels, TrecScoredDocs, BaseDocs, BaseQueries, GenericDoc
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
 from ir_datasets.indices import PickleLz4FullStore
 import numpy as np
 
+# --- Generic classes TODO: move elsewhere
+
+
+
+class PrefixedDocstore(Docstore):
+    def __init__(self, docs_mapping: List[Tuple[str, BaseDocs]], id_field='doc_id'):
+        self._id_field = id_field
+        self._stores = [
+            (mapping[0], len(mapping[0]), mapping[1].docs_store(id_field=id_field)) for mapping in docs_mapping
+        ]
+    
+    def get_many(self, doc_ids: Sequence[str], field=None):
+        assert field is None
+
+        result = {}
+        if field is None or field == self._id_field:
+            # If field is ID field, remove the prefix
+            for prefix, ix, store in self._stores:
+                doc_ids = [doc_id[ix:] for doc_id in doc_ids if doc_id.startswith(prefix)]
+                if doc_ids:
+                    for key, doc in store.get_many(doc_ids):
+                        key = f"{prefix}{key}"
+                        result[key] = doc._replace(doc_id=key)              
+        else:
+            # Just use the field
+            for prefix, store in self._stores:
+                for key, doc in store.get_many(doc_ids):
+                    key = f"{prefix}{key}"
+                    result[key] = doc._replace(doc_id=key)                   
+
+        return result
+
+
+class PrefixedDocs(BaseDocs):
+    """Mixes documents and use a prefix to distinguish them"""
+    def __init__(self, *docs_mapping: Tuple[str, BaseDocs]):
+        assert all(len(mapping) == 2 for mapping in docs_mapping)
+        self._docs_mapping = docs_mapping
+
+    @cached_property
+    def _docs_cls(self):
+        _docs_cls = self._docs_mapping[0][1].docs_cls()
+        assert all(mapping[1].docs_cls() == _docs_cls for mapping in self._docs_mapping[1:])
+        return _docs_cls
+
+    @cached_property
+    def _docs_lang(self):
+        _docs_lang = self._docs_mapping[0][1].docs_lang()
+        if any(mapping[1].docs_lang() == self._docs_lang for mapping in self._docs_mapping[1:]):
+            return None
+        return _docs_lang
+
+    @cached_property
+    def _docs_namespace(self):
+        _docs_namespace = self._docs_mapping[0][1].docs_namespace()
+        if any(mapping[1].docs_namespace() == self._docs_namespace for mapping in self._docs_mapping[1:]):
+            return None
+        return _docs_namespace
+
+    @lru_cache()
+    def docs_count(self):
+        return sum(mapping[1].docs_count() for mapping in self._docs_mapping)
+    
+    def __iter__(self):
+        return self.docs_iter()
+
+    def docs_iter(self):
+        for prefix, mapping in self._docs_mapping:
+            for doc in mapping.docs_iter():
+                doc = doc._replace(doc_id=f"{prefix}{doc.doc_id}")
+                yield doc
+
+    def docs_cls(self):
+        return self._docs_cls
+
+    def docs_lang(self):
+        return self._docs_lang
+
+    def docs_namespace(self):
+        return self._docs_namespace
+
+    @lru_cache
+    def docs_store(self, field='doc_id'):
+        return PrefixedDocstore(self._docs_mapping, field=field)
+
+
+class DocsListView:
+    def __init__(self, docs: "DocsList", slice: slice):
+        self._docs = docs
+        self._indices = [c for c in slice]
+
+    def __getitem__(self, slice: Union[int, slice]):
+        if isinstance(slice, int):
+            return self._docs.get(slice)
+
+        return DocsListView(self, self._docs, slice[slice])
+
+
+class DocsList(ABC):
+    """A document list"""
+    @abstractmethod
+    def get(self, ix: int):
+        ...
+
+    @abstractmethod
+    def __len__(self):
+        ...
+
+    def __getitem__(self, slice: Union[int, slice]):
+        if isinstance(slice, int):
+            return self.get(slice)
+
+        return DocsListView(self, slice)
+
+
+class DirectAccessDocs:
+    def docs_list(self) -> DocsList:
+        return DocsList
+
+
+class LazyDocsIter:
+    """Iterate over documents unless a specific range is queried"""
+    def __init__(self, docs: DirectAccessDocs, iter):
+        self.docs = docs
+        self._iter = iter
+
+    def __getitem__(self, slice: Union[int, slice]):
+        return self.docs_list()[slice]
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        return next(self._iter)
+
+
+class DocsSubsetList(DocsList):
+    """List view of a document subset"""
+    def __init__(self, main: "DocsSubset", indices: array.array):
+        self._main = main
+        self._indices = indices
+        
+    def get(self, ix: int):
+        count = 0
+        for removed_ix in self._indices:
+            if ix <= removed_ix:
+                count += 1
+            else:
+                break
+        return self._main[ix]
+
+    def __len__(self):
+        return super().__len__()
+
+
+class DocsSubset(BaseDocs, DirectAccessDocs):
+    """Document collection minus a set of duplicated"""
+    
+    def __init__(self, store_name: str, docs: BaseDocs, removed_ids: "Dupes"):
+        self._docs = docs
+        self._store_name = store_name
+        self._removed_ids = removed_ids
+        self._store = None
+        
+    def docs_list(self):
+        @lru_cache()
+        def indices():
+            """Stores the indices of removed documents"""
+            indices_path = f'{ir_datasets.util.home_path()}/{self._store_name}.intarray'
+            indices = array.array('L')
+            if not os.path.exists(indices_path):
+                for ix, doc in enumerate(_logger.pbar(iter(self.docs_iter()), total=self.docs_count(), desc='identifying removed documents')):
+                    if self._removed_ids.has(doc.doc_id):
+                        indices.append(indices)
+                with ir_datasets.util.finialized_file(indices_path, 'wb') as fout:
+                    fout.write(indices.tobytes())
+                return indices
+            else:
+                with indices_path.open('rb') as fin:
+                    indices.frombytes(fin)
+                return indices
+
+        return DocsSubsetList(self._docs.docs_iter(), indices)
+
+    def docs_cls(self):
+        return self._docs.docs_cls()
+
+    def docs_lang(self):
+        return self._docs.docs_lang()
+
+    def docs_count(self):
+        return self._docs.docs_count() - len(self._removed_ids)
+
+    def docs_iter(self):
+        return LazyDocsIter(self, (doc for doc in self._docs.docs_iter() if not self._removed_ids.has(doc.doc_id)))
+
+    def docs_namespace(self):
+        return self._docs.docs_namespace()
+
+    def docs_store(self, field='doc_id'):
+        return self._docs.docs_store(field=field)
+
+
+class BaseLazyDocs(BaseDocs):
+    def __init__(self, ds_id: str):
+        self._ds_id = ds_id
+
+    @cached_property
+    def docs(self):
+        return ir_datasets.load(self._ds_id)
+
+    def docs_cls(self):
+        return self.docs.docs_cls()
+
+    def docs_lang(self):
+        return self.docs.docs_lang()
+
+    def docs_count(self):
+        return self.docs.docs_count()
+
+    def docs_iter(self):
+        return self.docs.docs_iter()
+
+
+class LazyDocs(BaseLazyDocs):
+    def docs_store(self, id_field='doc_id'):
+        return self.docs.docs_store(id_field=id_field)
+                
+
+class BaseTransformedDocs(BaseDocs):
+    def __init__(self, docs: BaseDocs, cls, store_name, count=None):
+        """Document collection tranformed using a transform function
+
+        :param docs: The base documents
+        :param store_name: The name of the LZ4 document store
+        """
+        self._docs = docs
+        self._cls = cls
+        self._store_name = store_name
+        self._count_hint = count
+   
+    def docs_cls(self):
+        return self._cls
+    
+    def docs_lang(self):
+        return self._docs.docs_lang()
+
+    def docs_count(self):
+        return self._count_hint or self._docs.docs_count()
+    
+    @lru_cache
+    def docs_store(self, id_field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()/NAME}/{self._store_name}.pklz4',
+            init_iter_fn=self.docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=id_field,
+            index_fields=[id_field],
+            count_hint=self._count_hint,
+        )
+
+
+class TransformedDocs(BaseTransformedDocs):
+    def __init__(self, docs: BaseDocs, cls, transform=None, store_name=None, count=None):
+        """Document collection tranformed using a transform function
+
+        :param docs: The base documents
+        :param transform: The transformation function
+        :param store_name: if set, creates a LZ4 document store, otherwise
+            transform on the fly, defaults to None
+        """
+        super().__init__(docs, cls, store_name, count=count)
+        self._transform = transform or self
+
+    @lru_cache
+    def docs_store(self, id_field='doc_id'):
+        if self._store_name is None:
+            return TransformedDocstore(self._docs.docs_store(id_field), self._transform)
+        return super().docs_store()
+    
+    def docs_iter(self):
+        for doc in map(self._transform, self._docs.docs_iter()):
+            if doc is not None:
+                yield doc
+
+
+class TransformedDocstore(Docstore):
+    """On the fly transform of documents"""
+    def __init__(self, store, transform):
+        self._store = store
+        self._transform = transform
+        
+    def get_many(self, doc_ids, field=None):
+        return {key: self._transform(doc) for key, doc in self._store.get_many(doc_ids, field)}
+
+
+class IterDocs(BaseDocs):
+    """Documents based on an iterator"""
+    def __init__(self,
+        corpus_name, 
+        docs_iter_fn: Iterator,
+        docs_lang='en',
+        docs_cls=GenericDoc, 
+        count_hint=None,
+    ):
+        super().__init__()
+        self._corpus_name = corpus_name
+        self._docs_iter_fn = docs_iter_fn
+        self._docs_cls = docs_cls
+        self._count_hint = count_hint
+        self._docs_lang = docs_lang
+
+    def docs_count(self):
+        if self.docs_store().built():
+            return self.docs_store().count()
+        return self._count_hint
+
+    def docs_iter(self):
+        def iter():
+            with _logger.duration(f'processing {self._corpus_name}'):
+                yield from (d for d in self._docs_iter_fn())
+
+        return LazyDocsIter(self, iter)
+    
+    def docs_list(self):
+        return self.docs_store()
+
+    def docs_cls(self):
+        return self._docs_cls
+
+    def docs_store(self, field='doc_id'):
+        return PickleLz4FullStore(
+            path=f'{ir_datasets.util.home_path()}/{self._corpus_name}.pklz4',
+            init_iter_fn=self._docs_iter,
+            data_cls=self.docs_cls(),
+            lookup_field=field,
+            index_fields=[field],
+            count_hint=self._count_hint,
+        )
+
+    def docs_namespace(self):
+        return NAME
+
+    def docs_lang(self):
+        return self._docs_lang
+
+
+
+# --- (end of generic classes)
 
 _logger = ir_datasets.log.easy()
 
@@ -92,62 +446,37 @@ class Cast2020Query(NamedTuple):
         return self.raw_utterance
 
 
-class CastDocs(BaseDocs):
-    def __init__(self, corpus_name, docs_mapping, global_dupes=None, docs_cls=GenericDoc, count_hint=None):
-        super().__init__()
-        self._corpus_name = corpus_name
-        self._docs_mapping = docs_mapping
-        self._global_dupes = global_dupes
-        self._docs_cls = docs_cls
-        self._count_hint = count_hint
-
-    def docs_iter(self):
-        return iter(self.docs_store())
-
-    def _docs_iter(self):
-        global_dupes = []
-        if self._global_dupes is not None:
-            with _logger.duration(f'loading dupes'):
-                with self._global_dupes.stream() as fin:
-                    global_dupes = {dupe_id.decode().strip() for dupe_id in fin}
-        for docs_name, docs_iter_fn, dupef in self._docs_mapping:
-            if dupef is not None:
-                with _logger.duration(f'loading {docs_name} dupes'):
-                    with dupef.stream() as fin:
-                        dupes = set()
-                        for line in fin:
-                            _, line_dupes = line.decode().split(':')
-                            if line_dupes:
-                                dupes.update(line_dupes.split(','))
-            else:
-                dupes = []
-            with _logger.duration(f'processing {docs_name}'):
-                yield from (d for d in docs_iter_fn() if d.doc_id not in dupes and d.doc_id not in global_dupes)
-
-    def docs_cls(self):
-        return self._docs_cls
-
-    def docs_store(self, field='doc_id'):
-        return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()/NAME}/{self._corpus_name}.pklz4',
-            init_iter_fn=self._docs_iter,
-            data_cls=self.docs_cls(),
-            lookup_field=field,
-            index_fields=['doc_id'],
-            count_hint=self._count_hint,
-        )
-
-    def docs_count(self):
-        if self.docs_store().built():
-            return self.docs_store().count()
-
-    def docs_namespace(self):
-        return NAME
-
-    def docs_lang(self):
-        return 'en'
+class Cast2021Query(NamedTuple):
+    query_id: str
+    raw_utterance: str
+    automatic_rewritten_utterance: str
+    manual_rewritten_utterance: str
+    canonical_result_id: str
+    topic_number: int
+    turn_number: int
+    def default_text(self):
+        """
+        raw_utterance
+        """
+        return self.raw_utterance
 
 
+class Cast2022Query(NamedTuple):
+    query_id: str
+    parent_id: Optional[str]
+    participant: str
+    raw_utterance: str
+    manual_rewritten_utterance: str
+    response: str
+    provenance: List[str]
+    topic_number: int
+    turn_number: int
+    
+    def default_text(self):
+        """
+        raw_utterance
+        """
+        return self.raw_utterance
 
 class CastPassageIter:
     def __init__(self, docstore, doc_psg_offsets, slice):
@@ -217,16 +546,34 @@ class CastPassageDocstore(ir_datasets.indices.Docstore):
                     yield CastPassageDoc(passage.passage_id, doc.title, doc.url, passage.text)
 
 
-class CastPasageDocs(BaseDocs):
-    def __init__(self, docs, count):
-        super().__init__()
+class LazyCastPassageIter:
+    def __init__(self, docs: "CastPassageDocs"):
         self._docs = docs
-        self._count = count
+        self._doc_iter = docs._docs.docs_iter()
+        self._doc = None
+        self._passage_ix = None
+    
+    def __iter__(self):
+        return self
+    
+    def __next__(self):
+        while (self._doc is None) or (len(self._doc.passages) <= self._passage_ix):
+            self._doc = next(self._doc_iter)
+            self._passage_ix = 0
 
-    def docs_iter(self):
-        docstore = self._docs.docs_store()
+        self._passage_ix += 1
+        
+        return CastPassageDoc(f"{self._doc.doc_id}-{self._passage_ix+1}", self._doc.title, self._doc.url,
+            self._doc.passages[self._passage_ix-1]    
+        )
+
+    def __getitem__(self, key):
+        docstore = self._docs._docs.docs_store()
+        
         @lru_cache()
         def offsets_fn():
+            """Stores the number of passages for each document of the initial
+            collection"""
             offsets_path = f'{str(docstore.path)}.psg_offsets.np'
             if not os.path.exists(offsets_path):
                 offsets = np.empty(docstore.count()+1, dtype=np.uint32)
@@ -240,7 +587,17 @@ class CastPasageDocs(BaseDocs):
                 return offsets
             else:
                 return np.memmap(offsets_path, dtype=np.uint32, mode='r')
-        return CastPassageIter(docstore, offsets_fn, slice(0, self._count, 1))
+        return CastPassageIter(docstore, offsets_fn, slice(0, self._docs._count, 1))
+
+
+class CastPassageDocs(BaseDocs):
+    def __init__(self, docs, count):
+        super().__init__()
+        self._docs = docs
+        self._count = count
+
+    def docs_iter(self):
+        return LazyCastPassageIter(self)
 
     def docs_cls(self):
         return CastPassageDoc
@@ -258,6 +615,44 @@ class CastPasageDocs(BaseDocs):
         return 'en'
 
 
+class SegmentedDocs(BaseTransformedDocs):
+    """Segmented document collection based on pre-computed offsets
+
+    segments_dl points to a compressed JSONL file where the ranges refer to the
+    original document text, e.g.:
+    
+    {"id":"MARCO_00_1454834","ranges":[[[0,917]],[[918,2082]],[[2083,3220]],[[3221,3763]]],"md5":"f0577db28de265852932224525710486"}
+    """
+
+    def __init__(self, docs, segments_dl: BaseDownload, store_name: str):
+        super().__init__(docs, CastDoc, store_name)
+        self._segments_dl = segments_dl
+        
+    def docs_iter(self):
+        # Process files
+        with self._segments_dl.stream() as fin, gzip.open(fin) as offsets_stream:
+            for doc, data_json in zip(self._docs, offsets_stream):
+                data = json.loads(data_json)
+                assert doc.doc_id == data["id"], f"Error in processing offsets, docids differ: expected {data['id']}, got {doc.doc_id}"
+                body: str = doc.passages[0]
+
+                computer = md5()
+                passages = []
+                for ranges in data["ranges"]:
+                    texts = []
+                    computer.update(b"\x00")
+                    for start, end in ranges:
+                        computer.update(b"\x01")
+                        text = body[start:end]
+                        texts.append(text)
+                        computer.update(text.encode("utf-8"))
+                    passages.append(" ".join(texts))
+                
+                assert computer.digest().hex() == data["md5"]
+
+                yield doc._replace(passages=passages)
+
+
 class CastQueries(BaseQueries):
     def __init__(self, dlc, query_type):
         super().__init__()
@@ -267,6 +662,7 @@ class CastQueries(BaseQueries):
     def queries_iter(self):
         with self._dlc.stream() as stream:
             topics = json.load(stream)
+            
             for topic in topics:
                 topic_number = topic['number']
                 for turn in topic['turn']:
@@ -275,6 +671,12 @@ class CastQueries(BaseQueries):
                         yield Cast2019Query(f'{topic_number}_{turn_number}', turn['raw_utterance'], topic_number, turn_number, topic['title'], topic.get('description', ''))
                     elif self._query_type is Cast2020Query:
                         yield Cast2020Query(f'{topic_number}_{turn_number}', turn['raw_utterance'], turn['automatic_rewritten_utterance'], turn['manual_rewritten_utterance'], turn['manual_canonical_result_id'], topic_number, turn_number)
+                    elif self._query_type is Cast2021Query:
+                        yield Cast2021Query(f'{topic_number}_{turn_number}', turn['raw_utterance'], turn['automatic_rewritten_utterance'], turn['manual_rewritten_utterance'], turn['canonical_result_id'], topic_number, turn_number)
+                    elif self._query_type is Cast2022Query:
+                        if parent_id := turn.get("parent"):
+                            parent_id = f"{parent_id}_{turn_number}"
+                        yield Cast2022Query(f'{topic_number}_{turn_number}', parent_id, turn["participant"], turn.get('utterance', None), turn.get('manual_rewritten_utterance', None), turn.get('response', None), turn.get('provenance', []), topic_number, turn_number)
 
     def queries_cls(self):
         return self._query_type
@@ -286,36 +688,123 @@ class CastQueries(BaseQueries):
         return 'en'
 
 
-def _spacy_make_passages(doc):
-    import spacy
-    passage_size = 250
-    passages = []
+class WapoV4Docs(BaseLazyDocs):
+    def __init__(self, dsid: str):
+        super().__init__(dsid)
 
-    current_passage = ''
-    current_passage_word_count = 0
+    def docs_cls(self):
+        return CastDoc
 
-    for sentence in doc.sents:
-        word_count = len(sentence)
-        if word_count >= passage_size:
-            if current_passage:
-                passages.extend([current_passage, sentence.text])
+    def docs_iter(self):
+        CLEANR = re.compile('<.*?>')
+        dup_dids = set()
+        for data in self.docs.docs_handler().docs_wapo_raw_iter():
+            if data["id"] in dup_dids:
+                continue
+            dup_dids.add(data["id"])
+
+            doc_id = str(data['id'])
+
+            title = data.get('title', 'No Title')
+
+            if data["article_url"]:
+                if "www.washingtonpost.com" not in data["article_url"]:
+                    url = "https://www.washingtonpost.com" + data['article_url']
+                else:
+                    url = data['article_url']
             else:
-                passages.append(sentence.text)
+                url = ''
 
-        elif word_count + current_passage_word_count > passage_size:
-            passages.append(current_passage)
-            current_passage = sentence.text
-            current_passage_word_count = word_count
-        else:
-            current_passage += sentence.text + ' '
-            current_passage_word_count += word_count
+            body = ''
+            if data.get('contents') and len(data['contents']) > 0:
+                for item in data['contents']:
+                    # if item is not None and item.get('subtype') == 'paragraph':
+                    if item is not None and item.get('subtype') == 'paragraph':
+                        body += ' ' + item['content']
+            body = re.sub(CLEANR, '', body)
+            body = body.replace('\n', ' ').strip()
+            if body:
+                yield CastDoc(doc_id, title, url, [body])
 
-    if current_passage:
-        passages.append(current_passage)
 
-    doc = spacy.tokens.Doc(doc.vocab) # Drop all data from the doc; we only need the passages. This saves a lot of time serialising
-    doc._.passages = passages
-    return doc
+class KiltCastDocs(TransformedDocs):
+    def __init__(self, dsid: str):
+        super().__init__(LazyDocs(dsid), CastDoc)
+        
+    def docs_iter(self):
+        for doc in map(self.transform, self._docs.docs.docs_handler().docs_kilt_raw_iter()):
+            if doc is not None:
+                yield doc
+
+    def transform(self, doc):
+        title = doc['wikipedia_title']
+        body = ' '.join(doc['text']).replace('\n', ' ').strip()
+        url = doc['history']['url']
+        return CastDoc(doc["wikipedia_id"], title, url, [body])
+
+
+class Dupes:
+    def __init__(self, base: BaseDownload, prefix: Optional[str]=None):
+        self._base = base
+        self._prefix = prefix
+        self._prefix_len = len(prefix) if prefix else 0
+        self._remove_prefix = self.remove_prefix if prefix else lambda x: x
+
+    def remove_prefix(self, doc_id: str):
+        if doc_id.startswith(self._prefix):
+            return doc_id[self._prefix_len:]
+
+    @cached_property
+    def doc_ids(self):
+        doc_ids = set()
+        with self._base.stream() as fp:
+            for line in fp:
+                if doc_id := self._remove_prefix(line.strip().decode("utf-8")):
+                    doc_ids.append(doc_id)
+        return doc_ids
+
+    def has(self, doc_id: str):
+        return doc_id in self.doc_ids
+
+
+class WapoDupes(Dupes):
+    @cached_property
+    def doc_ids(self):
+        doc_ids = set()
+        with self._base.stream() as fp:
+            for line in fp:
+                base_id, wapo_id, *__  = line.strip().split(b" ", 3)
+                if base_id != wapo_id:
+                    if doc_id := self._remove_prefix(wapo_id.decode("utf-8")):
+                        doc_ids.add(doc_id)
+        return doc_ids
+
+
+class ColonCommaDupes(Dupes):
+    """Dupes with the format
+    
+    doc_id:dupe_1_id,dupe_2_id,...
+    """
+    @cached_property
+    def doc_ids(self):
+        doc_ids = set()
+        with self._base.stream() as fp:
+            for line in fp:
+                _, dupes = line.strip().decode("utf-8").split(":")
+                for doc_id in dupes.split(","):
+                    if doc_id := self._remove_prefix(doc_id):
+                        doc_ids.add(doc_id)
+
+        return doc_ids
+
+
+def transform_msmarco_v1(doc):
+    return CastDoc(doc.doc_id, doc.title, doc.url, [doc.body.replace('\n', ' ').strip()])
+
+
+def transform_msmarco_v2(doc):
+    doc_id = doc.doc_id[len('msmarco_doc_'):]
+    return CastDoc(doc_id, doc.title, doc.url, [doc.body.replace('\n', ' ').strip()])
 
 
 def _init():
@@ -324,31 +813,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    def spacy_passager_batch(text_extractor=None, passage_size=250):
-        try:
-            import spacy
-        except ImportError as err:
-            raise AssertionError('you must install spacy==3.3.0 to prepare trec-cast', err)
-        assert spacy.__version__ == '3.3.0', 'you must install spacy==3.3.0 to prepare trec-cast'
-        try:
-            nlp = spacy.load("en_core_web_sm", exclude=["parser", "tagger", "ner", "attribute_ruler", "lemmatizer", "tok2vec"])
-        except OSError as err:
-            raise AssertionError('you must install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.3.0/en_core_web_sm-3.3.0-py3-none-any.whl to prepare trec-cast')
-        assert nlp.meta['name'] == 'core_web_sm' and nlp.meta['version'] == '3.3.0', 'you must install https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.3.0/en_core_web_sm-3.3.0-py3-none-any.whl to prepare trec-cast'
-        nlp.enable_pipe("senter")
-        nlp.max_length = 10000000
-        spacy.Language.component('make_passages')(_spacy_make_passages)
-        spacy.tokens.Doc.set_extension("passages", default=None)
-        nlp.add_pipe("make_passages", last=True)
-        if text_extractor is None:
-            text_extractor = lambda x: x
-        def wrapped(docs):
-            docs1, docs2 = itertools.tee(docs)
-            for nlp_doc, doc in zip(nlp.pipe((d.passages for d in docs1), n_process=15), docs2):
-                yield doc._replace(passages=tuple(CastPassage(f'{doc.doc_id}-{i+1}', p, text_extractor(p)) for i, p in enumerate(nlp_doc._.passages)))
-        return wrapped
-
-    def wapo_converter(dsid):
+    def wapo_converter(dsid, dupes: Dupes):
         def wrapped():
             BeautifulSoup = ir_datasets.lazy_libs.bs4().BeautifulSoup
             # NOTE: These rules are very specific in order to replicate the behaviour present in the official script
@@ -360,6 +825,11 @@ def _init():
             # without the need for further pre-processing. (Though a bit of information is lost.)
             for wapo_doc in ir_datasets.load(dsid).docs_handler().docs_wapo_raw_iter():
                 doc_id = wapo_doc['id']
+                
+                # Ignore this one
+                if dupes.has(doc_id):
+                    continue
+                
                 pid = itertools.count(1) # paragrah index starts at 1
                 for paragraph in wapo_doc['contents']:
                     if paragraph is not None and paragraph.get('subtype') == 'paragraph' and paragraph['content'] != '':
@@ -369,79 +839,22 @@ def _init():
                         yield GenericDoc(f'WAPO_{doc_id}-{next(pid)}', text)
         return wrapped
 
-    def wapo_v4_converter(dsid):
-        def core_iter():
-            CLEANR = re.compile('<.*?>')
-            dup_dids = set()
-            for data in ir_datasets.load(dsid).docs_handler().docs_wapo_raw_iter():
-                if data["id"] in dup_dids:
-                    continue
-                dup_dids.add(data["id"])
 
-                doc_id = 'WAPO_' + str(data['id'])
+    # --- Version 0 and 1 (2019 and 2020)
+    # https://github.com/daltonj/treccastweb#year-2-trec-2020
+    # documents = MARCO Ranking passages (v1) and Wikipedia (TREC CAR)
+    # Version 0 contains WAPO (but this is not used)
+    
+    docs_v0 = PrefixedDocs(
+        ('WAPO_', IterDocs(f"{NAME}/v1/wapo-v2", wapo_converter('wapo/v2', ColonCommaDupes(dlc['wapo_dupes'], prefix='WAPO_')))),
+        ('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
+        ('CAR_', LazyDocs("car/v2.0")),
+    )
 
-                title = data.get('title', 'No Title')
-
-                if data["article_url"]:
-                    if "www.washingtonpost.com" not in data["article_url"]:
-                        url = "https://www.washingtonpost.com" + data['article_url']
-                    else:
-                        url = data['article_url']
-                else:
-                    url = ''
-
-                body = ''
-                if data.get('contents') and len(data['contents']) > 0:
-                    for item in data['contents']:
-                        # if item is not None and item.get('subtype') == 'paragraph':
-                        if item is not None and item.get('subtype') == 'paragraph':
-                            body += ' ' + item['content']
-                body = re.sub(CLEANR, '', body)
-                body = body.replace('\n', ' ').strip()
-                if body:
-                    yield CastDoc(doc_id, title, url, body)
-        return lambda: spacy_passager_batch()(core_iter())
-
-    def kilt_converter(dsid):
-        def core_iter():
-            for doc in ir_datasets.load(dsid).docs_handler().docs_kilt_raw_iter():
-                doc_id = 'KILT_' + doc['wikipedia_id']
-                title = doc['wikipedia_title']
-                body = ' '.join(doc['text']).replace('\n', ' ').strip()
-                url = doc['history']['url']
-                yield CastDoc(doc_id, title, url, body)
-        yield lambda: spacy_passager_batch()(core_iter())
-
-    def marco_v2_converter(dsid):
-        def core_iter():
-            for doc in ir_datasets.load(dsid).docs:
-                doc_id = 'MARCO_' + doc.doc_id[len('msmarco_doc_'):]
-                yield CastDoc(doc_id, doc.title, doc.url, doc.body.replace('\n', ' ').strip())
-        return lambda: spacy_passager_batch()(core_iter())
-
-    def prefixer(dsid, prefix):
-        def wrapped():
-            for doc in ir_datasets.load(dsid).docs_iter():
-                yield GenericDoc(f'{prefix}_{doc.doc_id}', doc.text)
-        return wrapped
-
-    WAPO_v2 = wapo_converter('wapo/v2')
-    WAPO_v4 = wapo_v4_converter('wapo/v4')
-    KILT = kilt_converter('kilt')
-    MARCO = prefixer('msmarco-passage', 'MARCO')
-    MARCO_V2 = marco_v2_converter('msmarco-document-v2')
-    CAR = prefixer('car/v2.0', 'CAR')
-
-    docs_v0 = CastDocs('docs_v0', [
-        ('WAPO', WAPO_v2, dlc['wapo_dupes']),
-        ('MARCO', MARCO, dlc['marco_dupes']),
-        ('CAR', CAR, None),
-    ])
-
-    docs_v1 = CastDocs('docs_v1', [
-        ('MARCO', MARCO, dlc['marco_dupes']),
-        ('CAR', CAR, None),
-    ])
+    docs_v1 = PrefixedDocs(
+        ('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
+        ('CAR_', LazyDocs("car/v2.0")),
+    )
 
     base = Dataset(documentation('_'))
 
@@ -489,27 +902,111 @@ def _init():
         subsets['v1/2020'].qrels_handler(),
     )
 
-    docs_v3_wapo = CastDocs('deleteme_docs_v3_wapo', [
-        ('WAPO', WAPO_v4, None),
-    ], global_dupes=dlc['v3/dupes'], docs_cls=CastDoc, count_hint=713638)
+    # --- Version 2 (2021)
+    # https://github.com/daltonj/treccastweb#year-3-trec-2021
+    # Documents = WAPO 2020, KILT and MS Marco v1 (documents)
+    # We provide passage offsets for the three document collections
 
-    subsets['v3/wapo'] = Dataset(docs_v3_wapo)
-    subsets['v3/wapo/psgs'] = Dataset(CastPasageDocs(docs_v3_wapo, 3728553))
+    # Duplicates are in two files:
+    # wapo-near-duplicates for WAPO
+    # marco_duplicates.txt for MS-MARCO
 
-    docs_v3_kilt = CastDocs('deleteme_docs_v3_kilt', [
-        ('KILT', KILT, None),
-    ], global_dupes=dlc['v3/dupes'], docs_cls=CastDoc, count_hint=5903530)
+    def register_docs(namespace: str, *tuples):
+        all_docs_spec = []
+        for dsid, prefix, raw, count in tuples:
+            all_docs_spec.append((prefix, raw))
+            prefixed = PrefixedDocs((prefix, raw))
+            subsets[f"{namespace}/{dsid}"] = Dataset(prefixed)
+            segmented = SegmentedDocs(prefixed, dlc[f"{namespace}/offsets/{dsid}"], f"docs_{namespace}_{dsid}")
+            subsets[f"{namespace}/{dsid}/segmented"] = Dataset(segmented)
+            subsets[f'{namespace}/{dsid}/passages'] = Dataset(CastPassageDocs(segmented, count))
+            
+        all_docs = PrefixedDocs(*all_docs_spec)
+        subsets[f"{namespace}"] = all_docs
+        return all_docs
 
-    subsets['v3/kilt'] = Dataset(docs_v3_kilt)
-    subsets['v3/kilt/psgs'] = Dataset(CastPasageDocs(docs_v3_kilt, 999999999999))
+    docs_v2 = register_docs(
+        "v2",
+        (
+            "msmarco",
+            "MARCO_",
+            TransformedDocs(
+                DocsSubset(f"{NAME}/v2/msmarco-documents", LazyDocs("msmarco-document"), ColonCommaDupes(dlc['v2/dupes/marco_v1'])),
+                CastDoc,
+                transform_msmarco_v1
+            ),
+            999999,
+        ),
+        (
+            "wapo",
+            "WAPO_",
+            DocsSubset(
+                f"{NAME}/v2/wapo-v4",
+                WapoV4Docs("wapo/v4"),
+                WapoDupes(dlc['v2/dupes/wapo'])
+            ),
+            3728553
+        ),
+        (
+            "kilt",
+            "KILT_",
+            KiltCastDocs("kilt"),
+            99999999
+        )
+    )
 
-    docs_v3_marco = CastDocs('deleteme_docs_v3_marco', [
-        ('MARCO', MARCO_V2, None),
-    ], global_dupes=dlc['v3/dupes'], docs_cls=CastDoc)
+    subsets['v2/2021'] = Dataset(
+        docs_v2,
+        CastQueries(dlc['2021/queries'], Cast2021Query),
+        TrecQrels(dlc['2021/qrels'], QRELS_DEFS),
+    )
 
-    subsets['v3/marco'] = Dataset(docs_v3_marco)
-    subsets['v3/marco/psgs'] = Dataset(CastPasageDocs(docs_v3_marco, 999999999999))
+    # --- Version 3 (2022)
+    # https://github.com/daltonj/treccastweb#year-4-trec-2022
+    # Official documents = processed (split) WAPO 2020, KILT, MS Marco V2
 
+    v3_dupes = dlc['v3/dupes']
+    docs_v3 = register_docs(
+        "v3",
+        (
+            "msmarco",
+            "MARCO_",
+            DocsSubset(
+                f"{NAME}/v3/msmarco-documents-v2",
+                TransformedDocs(LazyDocs("msmarco-document-v2"), CastDoc, transform_msmarco_v2),
+                Dupes(v3_dupes, prefix="MARCO_")
+            ),
+            999999,
+        ),
+        (
+            "wapo",
+            "WAPO_",
+            DocsSubset(
+                f"{NAME}/v3/wapo-v4",
+                WapoV4Docs("wapo/v4"),
+                Dupes(v3_dupes, prefix="WAPO_")
+            ),
+            3728553
+        ),
+        (
+            "kilt",
+            "KILT_",
+            DocsSubset(
+                f"{NAME}/v3/kilt-v4",
+                KiltCastDocs("kilt"),
+                Dupes(v3_dupes, prefix="KILT_")
+            ),
+            99999999
+        )
+    )
+    
+    subsets['v3/2022'] = Dataset(
+        docs_v3,
+        CastQueries(dlc['2022/queries'], Cast2022Query),
+        TrecQrels(dlc['2022/qrels'], QRELS_DEFS),
+    )
+    
+    # --- Register all datasets
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
         ir_datasets.registry.register(f'{NAME}/{s}', Dataset(subsets[s], documentation(s)))
