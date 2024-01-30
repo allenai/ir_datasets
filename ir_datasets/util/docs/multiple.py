@@ -9,7 +9,7 @@ class PrefixedDocstore(Docstore):
     def __init__(self, docs_mapping: List[Tuple[str, BaseDocs]], id_field="doc_id"):
         self._id_field = id_field
         self._stores = [
-            (mapping[0], len(mapping[0]), mapping[1].docs_store(id_field=id_field))
+            (mapping[0], len(mapping[0]), mapping[1].docs_store(field=id_field))
             for mapping in docs_mapping
         ]
 
@@ -20,11 +20,10 @@ class PrefixedDocstore(Docstore):
         if field is None or field == self._id_field:
             # If field is ID field, remove the prefix
             for prefix, ix, store in self._stores:
-                doc_ids = [
+                if _doc_ids := [
                     doc_id[ix:] for doc_id in doc_ids if doc_id.startswith(prefix)
-                ]
-                if doc_ids:
-                    for key, doc in store.get_many(doc_ids):
+                ]:
+                    for key, doc in store.get_many(_doc_ids).items():
                         key = f"{prefix}{key}"
                         result[key] = doc._replace(doc_id=key)
         else:
@@ -95,4 +94,4 @@ class PrefixedDocs(BaseDocs):
 
     @lru_cache
     def docs_store(self, field="doc_id"):
-        return PrefixedDocstore(self._docs_mapping, field=field)
+        return PrefixedDocstore(self._docs_mapping, id_field=field)
