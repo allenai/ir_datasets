@@ -5702,7 +5702,7 @@
       "cache_path": "v2/offsets/marco_v1.jsonl.gz"
     },
     "v2/offsets/wapo": {
-      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/WaPo-v2.chunks.jsonl.gz`",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/WaPo-v2.chunks.jsonl.gz",
       "size_hint": 43654392,
       "expected_md5": "900c56039b4a3edd642983c4a1e13796",
       "cache_path": "v2/offsets/wapo.jsonl.gz"

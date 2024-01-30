@@ -1,6 +1,3 @@
-from abc import ABC, abstractmethod
-import array
-import contextlib
 import gzip
 from hashlib import md5
 import os
@@ -9,406 +6,18 @@ from collections import defaultdict
 import re
 import json
 import itertools
-from typing import Iterator, List, NamedTuple, Optional, Sequence, Set, Tuple, Union
+from typing import List, NamedTuple, Optional, Tuple
 import ir_datasets
-from ir_datasets.indices.base import Docstore
 from ir_datasets.util import BaseDownload, DownloadConfig, Lazy
 from ir_datasets.formats import TrecQrels, TrecScoredDocs, BaseDocs, BaseQueries, GenericDoc
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.util.docs.lazy import IRDSDocuments, BaseTransformedDocs, IterDocs, LazyDocs, TransformedDocs
+from ir_datasets.util.docs.multiple import PrefixedDocs
+
 import numpy as np
 
-# --- Generic classes TODO: move elsewhere
+from ir_datasets.util.docs.subset import ColonCommaDupes, DocsSubset, Dupes
 
-
-
-class PrefixedDocstore(Docstore):
-    def __init__(self, docs_mapping: List[Tuple[str, BaseDocs]], id_field='doc_id'):
-        self._id_field = id_field
-        self._stores = [
-            (mapping[0], len(mapping[0]), mapping[1].docs_store(id_field=id_field)) for mapping in docs_mapping
-        ]
-    
-    def get_many(self, doc_ids: Sequence[str], field=None):
-        assert field is None
-
-        result = {}
-        if field is None or field == self._id_field:
-            # If field is ID field, remove the prefix
-            for prefix, ix, store in self._stores:
-                doc_ids = [doc_id[ix:] for doc_id in doc_ids if doc_id.startswith(prefix)]
-                if doc_ids:
-                    for key, doc in store.get_many(doc_ids):
-                        key = f"{prefix}{key}"
-                        result[key] = doc._replace(doc_id=key)              
-        else:
-            # Just use the field
-            for prefix, store in self._stores:
-                for key, doc in store.get_many(doc_ids):
-                    key = f"{prefix}{key}"
-                    result[key] = doc._replace(doc_id=key)                   
-
-        return result
-
-
-class PrefixedDocs(BaseDocs):
-    """Mixes documents and use a prefix to distinguish them"""
-    def __init__(self, *docs_mapping: Tuple[str, BaseDocs]):
-        assert all(len(mapping) == 2 for mapping in docs_mapping)
-        self._docs_mapping = docs_mapping
-
-    @cached_property
-    def _docs_cls(self):
-        _docs_cls = self._docs_mapping[0][1].docs_cls()
-        assert all(mapping[1].docs_cls() == _docs_cls for mapping in self._docs_mapping[1:])
-        return _docs_cls
-
-    @cached_property
-    def _docs_lang(self):
-        _docs_lang = self._docs_mapping[0][1].docs_lang()
-        if any(mapping[1].docs_lang() == self._docs_lang for mapping in self._docs_mapping[1:]):
-            return None
-        return _docs_lang
-
-    @cached_property
-    def _docs_namespace(self):
-        _docs_namespace = self._docs_mapping[0][1].docs_namespace()
-        if any(mapping[1].docs_namespace() == self._docs_namespace for mapping in self._docs_mapping[1:]):
-            return None
-        return _docs_namespace
-
-    @lru_cache()
-    def docs_count(self):
-        return sum(mapping[1].docs_count() for mapping in self._docs_mapping)
-    
-    def __iter__(self):
-        return self.docs_iter()
-
-    def docs_iter(self):
-        for prefix, mapping in self._docs_mapping:
-            for doc in mapping.docs_iter():
-                doc = doc._replace(doc_id=f"{prefix}{doc.doc_id}")
-                yield doc
-
-    def docs_cls(self):
-        return self._docs_cls
-
-    def docs_lang(self):
-        return self._docs_lang
-
-    def docs_namespace(self):
-        return self._docs_namespace
-
-    @lru_cache
-    def docs_store(self, field='doc_id'):
-        return PrefixedDocstore(self._docs_mapping, field=field)
-
-
-class DocsListView:
-    def __init__(self, docs: "DocsList", slice: slice):
-        self._docs = docs
-        self._indices = [c for c in slice]
-
-    def __getitem__(self, slice: Union[int, slice]):
-        if isinstance(slice, int):
-            return self._docs.get(slice)
-
-        return DocsListView(self, self._docs, slice[slice])
-
-
-class DocsList(ABC):
-    """A document list"""
-    @abstractmethod
-    def get(self, ix: int):
-        ...
-
-    @abstractmethod
-    def __len__(self):
-        ...
-
-    def __getitem__(self, slice: Union[int, slice]):
-        if isinstance(slice, int):
-            return self.get(slice)
-
-        return DocsListView(self, slice)
-
-
-class DirectAccessDocs:
-    def docs_list(self) -> DocsList:
-        return DocsList
-
-
-class LazyDocsIter:
-    """Iterate over documents unless a specific range is queried"""
-    def __init__(self, docs: DirectAccessDocs, iter):
-        self.docs = docs
-        self._iter = iter
-
-    def __getitem__(self, slice: Union[int, slice]):
-        return self.docs_list()[slice]
-
-    def __iter__(self):
-        return self
-
-    def __next__(self):
-        return next(self._iter)
-
-
-class DocsSubsetList(DocsList):
-    """List view of a document subset"""
-    def __init__(self, main: "DocsSubset", indices: array.array):
-        self._main = main
-        self._indices = indices
-        
-    def get(self, ix: int):
-        count = 0
-        for removed_ix in self._indices:
-            if ix <= removed_ix:
-                count += 1
-            else:
-                break
-        return self._main[ix]
-
-    def __len__(self):
-        return super().__len__()
-
-
-class Dupes:
-    def __init__(self, base: BaseDownload, prefix: Optional[str]=None):
-        self._base = base
-        self._prefix = prefix
-        self._prefix_len = len(prefix) if prefix else 0
-        self._remove_prefix = self.remove_prefix if prefix else lambda x: x
-
-    def remove_prefix(self, doc_id: str):
-        if doc_id.startswith(self._prefix):
-            return doc_id[self._prefix_len:]
-
-    @cached_property
-    def doc_ids(self):
-        doc_ids = set()
-        with self._base.stream() as fp:
-            for line in fp:
-                if doc_id := self._remove_prefix(line.strip().decode("utf-8")):
-                    doc_ids.add(doc_id)
-        return doc_ids
-
-    def has(self, doc_id: str):
-        return doc_id in self.doc_ids
-
-
-class ColonCommaDupes(Dupes):
-    """Dupes with the format
-    
-    doc_id:dupe_1_id,dupe_2_id,...
-    """
-    @cached_property
-    def doc_ids(self):
-        doc_ids = set()
-        with self._base.stream() as fp:
-            for line in fp:
-                _, dupes = line.strip().decode("utf-8").split(":")
-                for doc_id in dupes.split(","):
-                    if doc_id := self._remove_prefix(doc_id):
-                        doc_ids.add(doc_id)
-
-        return doc_ids
-
-
-class DocsSubset(BaseDocs, DirectAccessDocs):
-    """Document collection minus a set of duplicated"""
-    
-    def __init__(self, store_name: str, docs: BaseDocs, removed_ids: "Dupes"):
-        self._docs = docs
-        self._store_name = store_name
-        self._removed_ids = removed_ids
-        self._store = None
-        
-    def docs_list(self):
-        @lru_cache()
-        def indices():
-            """Stores the indices of removed documents"""
-            indices_path = f'{ir_datasets.util.home_path()}/{self._store_name}.intarray'
-            indices = array.array('L')
-            if not os.path.exists(indices_path):
-                for ix, doc in enumerate(_logger.pbar(iter(self.docs_iter()), total=self.docs_count(), desc='identifying removed documents')):
-                    if self._removed_ids.has(doc.doc_id):
-                        indices.append(indices)
-                with ir_datasets.util.finialized_file(indices_path, 'wb') as fout:
-                    fout.write(indices.tobytes())
-                return indices
-            else:
-                with indices_path.open('rb') as fin:
-                    indices.frombytes(fin)
-                return indices
-
-        return DocsSubsetList(self._docs.docs_iter(), indices)
-
-    def docs_cls(self):
-        return self._docs.docs_cls()
-
-    def docs_lang(self):
-        return self._docs.docs_lang()
-
-    def docs_count(self):
-        return self._docs.docs_count() - len(self._removed_ids)
-
-    def docs_iter(self):
-        return LazyDocsIter(self, (doc for doc in self._docs.docs_iter() if not self._removed_ids.has(doc.doc_id)))
-
-    def docs_namespace(self):
-        return self._docs.docs_namespace()
-
-    def docs_store(self, field='doc_id'):
-        return self._docs.docs_store(field=field)
-
-
-class BaseLazyDocs(BaseDocs):
-    def __init__(self, ds_id: str):
-        self._ds_id = ds_id
-
-    @cached_property
-    def docs(self):
-        return ir_datasets.load(self._ds_id)
-
-    def docs_cls(self):
-        return self.docs.docs_cls()
-
-    def docs_lang(self):
-        return self.docs.docs_lang()
-
-    def docs_count(self):
-        return self.docs.docs_count()
-
-    def docs_iter(self):
-        return self.docs.docs_iter()
-
-
-class LazyDocs(BaseLazyDocs):
-    def docs_store(self, id_field='doc_id'):
-        return self.docs.docs_store(id_field=id_field)
-                
-
-class BaseTransformedDocs(BaseDocs):
-    def __init__(self, docs: BaseDocs, cls, store_name, count=None):
-        """Document collection tranformed using a transform function
-
-        :param docs: The base documents
-        :param store_name: The name of the LZ4 document store
-        """
-        self._docs = docs
-        self._cls = cls
-        self._store_name = store_name
-        self._count_hint = count
-   
-    def docs_cls(self):
-        return self._cls
-    
-    def docs_lang(self):
-        return self._docs.docs_lang()
-
-    def docs_count(self):
-        return self._count_hint or self._docs.docs_count()
-    
-    @lru_cache
-    def docs_store(self, id_field='doc_id'):
-        return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()/NAME}/{self._store_name}.pklz4',
-            init_iter_fn=self.docs_iter,
-            data_cls=self.docs_cls(),
-            lookup_field=id_field,
-            index_fields=[id_field],
-            count_hint=self._count_hint,
-        )
-
-
-class TransformedDocs(BaseTransformedDocs):
-    def __init__(self, docs: BaseDocs, cls, transform=None, store_name=None, count=None):
-        """Document collection tranformed using a transform function
-
-        :param docs: The base documents
-        :param transform: The transformation function
-        :param store_name: if set, creates a LZ4 document store, otherwise
-            transform on the fly, defaults to None
-        """
-        super().__init__(docs, cls, store_name, count=count)
-        self._transform = transform or self
-
-    @lru_cache
-    def docs_store(self, id_field='doc_id'):
-        if self._store_name is None:
-            return TransformedDocstore(self._docs.docs_store(id_field), self._transform)
-        return super().docs_store()
-    
-    def docs_iter(self):
-        for doc in map(self._transform, self._docs.docs_iter()):
-            if doc is not None:
-                yield doc
-
-
-class TransformedDocstore(Docstore):
-    """On the fly transform of documents"""
-    def __init__(self, store, transform):
-        self._store = store
-        self._transform = transform
-        
-    def get_many(self, doc_ids, field=None):
-        return {key: self._transform(doc) for key, doc in self._store.get_many(doc_ids, field)}
-
-
-class IterDocs(BaseDocs):
-    """Documents based on an iterator"""
-    def __init__(self,
-        corpus_name, 
-        docs_iter_fn: Iterator,
-        docs_lang='en',
-        docs_cls=GenericDoc, 
-        count_hint=None,
-    ):
-        super().__init__()
-        self._corpus_name = corpus_name
-        self._docs_iter_fn = docs_iter_fn
-        self._docs_cls = docs_cls
-        self._count_hint = count_hint
-        self._docs_lang = docs_lang
-
-    def docs_count(self):
-        if self.docs_store().built():
-            return self.docs_store().count()
-        return self._count_hint
-
-    def docs_iter(self):
-        def iter():
-            with _logger.duration(f'processing {self._corpus_name}'):
-                yield from (d for d in self._docs_iter_fn())
-
-        return LazyDocsIter(self, iter)
-    
-    def docs_list(self):
-        return self.docs_store()
-
-    def docs_cls(self):
-        return self._docs_cls
-
-    def docs_store(self, field='doc_id'):
-        return PickleLz4FullStore(
-            path=f'{ir_datasets.util.home_path()}/{self._corpus_name}.pklz4',
-            init_iter_fn=self._docs_iter,
-            data_cls=self.docs_cls(),
-            lookup_field=field,
-            index_fields=[field],
-            count_hint=self._count_hint,
-        )
-
-    def docs_namespace(self):
-        return NAME
-
-    def docs_lang(self):
-        return self._docs_lang
-
-
-
-# --- (end of generic classes)
 
 _logger = ir_datasets.log.easy()
 
@@ -680,7 +289,7 @@ class SegmentedDocs(BaseTransformedDocs):
         with self._segments_dl.stream() as fin, gzip.open(fin) as offsets_stream:
             for doc, data_json in zip(self._docs, offsets_stream):
                 data = json.loads(data_json)
-                assert doc.doc_id == data["id"], f"Error in processing offsets, docids differ: expected {data['id']}, got {doc.doc_id}"
+                assert doc.doc_id == data["id"], f"Error in processing offsets, docids differ: expected {data['id']} (offset), got {doc.doc_id} (document)"
                 body: str = doc.passages[0]
 
                 computer = md5()
@@ -735,7 +344,7 @@ class CastQueries(BaseQueries):
         return 'en'
 
 
-class WapoV4Docs(BaseLazyDocs):
+class WapoV4Docs(IRDSDocuments):
     def __init__(self, dsid: str):
         super().__init__(dsid)
 
@@ -788,7 +397,6 @@ class KiltCastDocs(TransformedDocs):
         body = ' '.join(doc['text']).replace('\n', ' ').strip()
         url = doc['history']['url']
         return CastDoc(doc["wikipedia_id"], title, url, [body])
-
 
 
 class WapoDupes(Dupes):
@@ -918,15 +526,20 @@ def _init():
     # marco_duplicates.txt for MS-MARCO
 
     def register_docs(namespace: str, *tuples):
+        """Register all documents (sub)collections
+        
+        Tuples: (name prefix, document ID prefix, raw documents, passage count)
+        """
         all_docs_spec = []
         for dsid, prefix, raw, count in tuples:
             all_docs_spec.append((prefix, raw))
             prefixed = PrefixedDocs((prefix, raw))
             subsets[f"{namespace}/{dsid}"] = Dataset(prefixed)
-            segmented = SegmentedDocs(prefixed, dlc[f"{namespace}/offsets/{dsid}"], f"docs_{namespace}_{dsid}")
+            segmented = SegmentedDocs(prefixed, dlc[f"{namespace}/offsets/{dsid}"], f"{NAME}/docs_{namespace}_{dsid}")
             subsets[f"{namespace}/{dsid}/segmented"] = Dataset(segmented)
             subsets[f'{namespace}/{dsid}/passages'] = Dataset(CastPassageDocs(segmented, count))
             
+        # All documents together
         all_docs = PrefixedDocs(*all_docs_spec)
         subsets[f"{namespace}"] = all_docs
         return all_docs
@@ -941,7 +554,7 @@ def _init():
                 CastDoc,
                 transform_msmarco_v1
             ),
-            999999,
+            19_092_817,
         ),
         (
             "wapo",
@@ -951,13 +564,13 @@ def _init():
                 WapoV4Docs("wapo/v4"),
                 WapoDupes(dlc['v2/dupes/wapo'])
             ),
-            3728553
+            3_728_553
         ),
         (
             "kilt",
             "KILT_",
             KiltCastDocs("kilt"),
-            99999999
+            17_124_025
         )
     )
 
@@ -982,17 +595,17 @@ def _init():
                 TransformedDocs(LazyDocs("msmarco-document-v2"), CastDoc, transform_msmarco_v2),
                 Dupes(v3_dupes, prefix="MARCO_")
             ),
-            999999,
+            86_326_322,
         ),
         (
-            "wapo",
+            "wapo", 
             "WAPO_",
             DocsSubset(
                 f"{NAME}/v3/wapo-v4",
                 WapoV4Docs("wapo/v4"),
                 Dupes(v3_dupes, prefix="WAPO_")
             ),
-            3728553
+            2_963_130
         ),
         (
             "kilt",
@@ -1002,10 +615,10 @@ def _init():
                 KiltCastDocs("kilt"),
                 Dupes(v3_dupes, prefix="KILT_")
             ),
-            99999999
+            17_111_488
         )
     )
-    
+
     subsets['v3/2022'] = Dataset(
         docs_v3,
         CastQueries(dlc['2022/queries'], Cast2022Query),
