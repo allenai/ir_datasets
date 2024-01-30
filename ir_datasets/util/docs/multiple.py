@@ -45,36 +45,40 @@ class PrefixedDocs(BaseDocs):
         self._docs_mapping = docs_mapping
 
     @cached_property
-    def _docs_cls(self):
-        _docs_cls = self._docs_mapping[0][1].docs_cls()
-        assert all(
-            mapping[1].docs_cls() == _docs_cls for mapping in self._docs_mapping[1:]
-        )
-        return _docs_cls
-
-    @cached_property
-    def _docs_lang(self):
-        _docs_lang = self._docs_mapping[0][1].docs_lang()
-        if any(
-            mapping[1].docs_lang() == self._docs_lang
+    def lazy_self(self):
+        self._docs_cls = self._docs_mapping[0][1].docs_cls()
+        if not all(
+            mapping[1].docs_cls() == self._docs_cls
             for mapping in self._docs_mapping[1:]
         ):
-            return None
-        return _docs_lang
+            raise AssertionError(
+                f"Differing classes for documents, got {[mapping[1].docs_cls() for mapping in self._docs_mapping[1:]]}"
+            )
 
-    @cached_property
-    def _docs_namespace(self):
-        _docs_namespace = self._docs_mapping[0][1].docs_namespace()
+        self._docs_lang = self._docs_mapping[0][1].docs_lang()
         if any(
-            mapping[1].docs_namespace() == self._docs_namespace
+            mapping[1].docs_lang() != self._docs_lang
             for mapping in self._docs_mapping[1:]
         ):
-            return None
-        return _docs_namespace
+            self._docs_lang = None
 
-    @lru_cache()
-    def docs_count(self):
-        return sum(mapping[1].docs_count() for mapping in self._docs_mapping)
+        self._docs_namespace = self._docs_mapping[0][1].docs_namespace()
+        if any(
+            mapping[1].docs_namespace() != self._docs_namespace
+            for mapping in self._docs_mapping[1:]
+        ):
+            self._docs_namespace = None
+
+        return self
+
+    def docs_cls(self):
+        return self.lazy_self._docs_cls
+
+    def docs_namespace(self):
+        return self.lazy_self._docs_namespace
+
+    def docs_lang(self):
+        return self.lazy_self._docs_lang
 
     def __iter__(self):
         return self.docs_iter()
@@ -85,14 +89,9 @@ class PrefixedDocs(BaseDocs):
                 doc = doc._replace(doc_id=f"{prefix}{doc.doc_id}")
                 yield doc
 
-    def docs_cls(self):
-        return self._docs_cls
-
-    def docs_lang(self):
-        return self._docs_lang
-
-    def docs_namespace(self):
-        return self._docs_namespace
+    @lru_cache()
+    def docs_count(self):
+        return sum(mapping[1].docs_count() for mapping in self._docs_mapping)
 
     @lru_cache
     def docs_store(self, field="doc_id"):
