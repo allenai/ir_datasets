@@ -5696,21 +5696,21 @@
       "cache_path": "v2/dupes/wapo_near_duplicates.txt"
     },
     "v2/offsets/msmarco": {
-      "instructions": "FIXME: move to some repository",
-      "size_hint": 131116975,
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/MARCO_v1.chunks.jsonl.gz",
+      "size_hint": 190998420,
       "expected_md5": "b76c8d1e3b260764d573ce618a15525f",
       "cache_path": "v2/offsets/marco_v1.jsonl.gz"
     },
     "v2/offsets/wapo": {
-      "instructions": "FIXME: move to some repository",
-      "size_hint": 42785199,
-      "expected_md5": "1dbed58d09aeaa6046c234d056ea703e",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/WaPo-v2.chunks.jsonl.gz`",
+      "size_hint": 43654392,
+      "expected_md5": "900c56039b4a3edd642983c4a1e13796",
       "cache_path": "v2/offsets/wapo.jsonl.gz"
     },
     "v2/offsets/kilt": {
-      "instructions": "FIXME: move to some repository",
-      "size_hint": 0,
-      "expected_md5": "1dbed58d09aeaa6046c234d056ea703e",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/KILT-nodupes.chunks.jsonl.gz",
+      "size_hint": 237224538,
+      "expected_md5": "7bd9c844ea7d8ecc7a1236ef5c7d7722",
       "cache_path": "v2/offsets/kilt.jsonl.gz"
     },
     "v3/dupes": {
@@ -5720,18 +5720,21 @@
       "cache_path": "v3/all_duplicates.txt"
     },
     "v3/offsets/wapo": {
-      "instructions": "FIXME: move to some repository",
-      "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/WaPo.chunks.jsonl.gz",
+      "expected_md5": "1dbed58d09aeaa6046c234d056ea703e",
+      "size_hint": 42785199,
       "cache_path": "v3/offsets/wapo.jsonl.gz"
     },
     "v3/offsets/msmarco": {
-      "instructions": "FIXME: move to some repository",
-      "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/MARCO_v2.chunks.jsonl.gz",
+      "expected_md5": "2f0bbe152b4645bff744892c5b53471f",
+      "size_hint": 780228823,
       "cache_path": "v3/offsets/msmarco.jsonl.gz"
     },
     "v3/offsets/kilt": {
-      "instructions": "FIXME: move to some repository",
+      "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/KILT.chunks.jsonl.gz",
       "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+      "size_hint": 237135443,
       "cache_path": "v3/offsets/kilt.jsonl.gz"
     },        
     "2019/train/queries": {

@@ -190,11 +190,12 @@ class Dupes:
         with self._base.stream() as fp:
             for line in fp:
                 if doc_id := self._remove_prefix(line.strip().decode("utf-8")):
-                    doc_ids.append(doc_id)
+                    doc_ids.add(doc_id)
         return doc_ids
 
     def has(self, doc_id: str):
         return doc_id in self.doc_ids
+
 
 class ColonCommaDupes(Dupes):
     """Dupes with the format
@@ -543,7 +544,9 @@ class CastPassageIter:
             if self.doc is StopIteration:
                 raise StopIteration
         result = self.doc.passages[self.next_psg_index]
-        result = CastPassageDoc(result.passage_id, self.doc.title, self.doc.url, result.text)
+        result = CastPassageDoc(f"{self.doc.doc_id}-{self.next_psg_index+1}", self.doc.title, self.doc.url,
+            self.doc.passages[self.next_psg_index]    
+        )
         self.next_psg_index += (self.slice.step or 1)
         self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
         return result
@@ -604,7 +607,7 @@ class LazyCastPassageIter:
 
         self._passage_ix += 1
         
-        return CastPassageDoc(f"{self._doc.doc_id}-{self._passage_ix+1}", self._doc.title, self._doc.url,
+        return CastPassageDoc(f"{self._doc.doc_id}-{self._passage_ix}", self._doc.title, self._doc.url,
             self._doc.passages[self._passage_ix-1]    
         )
 
@@ -628,7 +631,10 @@ class LazyCastPassageIter:
                 return offsets
             else:
                 return np.memmap(offsets_path, dtype=np.uint32, mode='r')
-        return CastPassageIter(docstore, offsets_fn, slice(0, self._docs._count, 1))
+            
+        passage_iter = CastPassageIter(docstore, offsets_fn, slice(0, self._docs._count, 1))
+        return passage_iter[key]
+
 
 
 class CastPassageDocs(BaseDocs):
