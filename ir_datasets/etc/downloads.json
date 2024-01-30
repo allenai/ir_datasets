@@ -5733,7 +5733,7 @@
     },
     "v3/offsets/kilt": {
       "url": "https://huggingface.co/datasets/bpiwowar/trec_cast_offsets/resolve/main/KILT.chunks.jsonl.gz",
-      "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+      "expected_md5": "290cc1a172b7fc29b5ce211a87ced098",
       "size_hint": 237135443,
       "cache_path": "v3/offsets/kilt.jsonl.gz"
     },        
