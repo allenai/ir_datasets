@@ -7,6 +7,8 @@ from ir_datasets.formats import BaseDocs, GenericDoc
 from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.indices.base import Docstore
 
+_logger = ir_datasets.log.easy()
+
 
 class IRDSDocuments(BaseDocs):
     """Document collection based on another ir_datasets one"""
@@ -37,8 +39,8 @@ class IRDSDocuments(BaseDocs):
 
 class LazyDocs(IRDSDocuments):
     """Proxy for a IR dataset collection"""
-    def docs_store(self, id_field="doc_id"):
-        return self.docs.docs_store(id_field=id_field)
+    def docs_store(self, field="doc_id"):
+        return self.docs.docs_store(field=field)
 
 
 class DocsListView:
@@ -117,13 +119,13 @@ class BaseTransformedDocs(BaseDocs):
         return self._count_hint or self._docs.docs_count()
 
     @lru_cache
-    def docs_store(self, id_field="doc_id"):
+    def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(
             path=f"{ir_datasets.util.home_path()}/{self._store_name}.pklz4",
             init_iter_fn=self.docs_iter,
             data_cls=self.docs_cls(),
-            lookup_field=id_field,
-            index_fields=[id_field],
+            lookup_field=field,
+            index_fields=[field],
             count_hint=self._count_hint,
         )
 
@@ -143,9 +145,9 @@ class TransformedDocs(BaseTransformedDocs):
         self._transform = transform or self
 
     @lru_cache
-    def docs_store(self, id_field="doc_id"):
+    def docs_store(self, field="doc_id"):
         if self._store_name is None:
-            return TransformedDocstore(self._docs.docs_store(id_field), self._transform)
+            return TransformedDocstore(self._docs.docs_store(field), self._transform)
         return super().docs_store()
 
     def docs_iter(self):
@@ -176,6 +178,7 @@ class IterDocs(BaseDocs):
         corpus_name,
         docs_iter_fn: Iterator,
         docs_lang="en",
+        docs_namespace=None,
         docs_cls=GenericDoc,
         count_hint=None,
     ):
@@ -184,6 +187,7 @@ class IterDocs(BaseDocs):
         self._docs_iter_fn = docs_iter_fn
         self._docs_cls = docs_cls
         self._count_hint = count_hint
+        self._docs_namespace = docs_namespace
         self._docs_lang = docs_lang
 
     def docs_count(self):
@@ -215,7 +219,7 @@ class IterDocs(BaseDocs):
         )
 
     def docs_namespace(self):
-        return NAME
+        return self._docs_namespace
 
     def docs_lang(self):
         return self._docs_lang

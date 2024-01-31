@@ -12,7 +12,7 @@ from ir_datasets.util import BaseDownload, DownloadConfig, Lazy
 from ir_datasets.formats import TrecQrels, TrecScoredDocs, BaseDocs, BaseQueries, GenericDoc
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs
 from ir_datasets.util.docs.lazy import IRDSDocuments, BaseTransformedDocs, IterDocs, LazyDocs, TransformedDocs
-from ir_datasets.util.docs.multiple import PrefixedDocs
+from ir_datasets.util.docs.multiple import PrefixedDocs, PrefixedDocsSpec
 
 import numpy as np
 
@@ -196,7 +196,7 @@ class CastPassageDocstore(ir_datasets.indices.Docstore):
             for idx in did2pids[doc.doc_id]:
                 if len(doc.passages) > idx:
                     passage = doc.passages[idx]
-                    yield CastPassageDoc(passage.passage_id, doc.title, doc.url, passage.text)
+                    yield CastPassageDoc(f"{doc.doc_id}-{idx+1}", doc.title, doc.url, passage)
 
 
 class LazyCastPassageIter:
@@ -460,14 +460,14 @@ def _init():
     # Version 0 contains WAPO (but this is not used)
     
     docs_v0 = PrefixedDocs(
-        ('WAPO_', IterDocs(f"{NAME}/v1/wapo-v2", wapo_converter('wapo/v2', ColonCommaDupes(dlc['wapo_dupes'], prefix='WAPO_')))),
-        ('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
-        ('CAR_', LazyDocs("car/v2.0")),
+        PrefixedDocsSpec('WAPO_', IterDocs(f"{NAME}/v1/wapo-v2", wapo_converter('wapo/v2', ColonCommaDupes(dlc['wapo_dupes'], prefix='WAPO_')))),
+        PrefixedDocsSpec('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
+        PrefixedDocsSpec('CAR_', LazyDocs("car/v2.0")),
     )
 
     docs_v1 = PrefixedDocs(
-        ('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
-        ('CAR_', LazyDocs("car/v2.0")),
+        PrefixedDocsSpec('MARCO_', DocsSubset(f"{NAME}/v1/msmarco-passages", LazyDocs("msmarco-passage"), ColonCommaDupes(dlc['marco_dupes'], prefix='MARCO_'))),
+        PrefixedDocsSpec('CAR_', LazyDocs("car/v2.0")),
     )
 
     base = Dataset(documentation('_'))
@@ -525,27 +525,35 @@ def _init():
     # wapo-near-duplicates for WAPO
     # marco_duplicates.txt for MS-MARCO
 
-    def register_docs(namespace: str, *tuples):
+    def register_docs(namespace: str,  use_docs: bool, *tuples):
         """Register all documents (sub)collections
         
         Tuples: (name prefix, document ID prefix, raw documents, passage count)
         """
         all_docs_spec = []
+        passages = []
         for dsid, prefix, raw, count in tuples:
-            all_docs_spec.append((prefix, raw))
-            prefixed = PrefixedDocs((prefix, raw))
+            prefixed = PrefixedDocs(PrefixedDocsSpec(prefix, raw))
             subsets[f"{namespace}/{dsid}"] = Dataset(prefixed)
+            
             segmented = SegmentedDocs(prefixed, dlc[f"{namespace}/offsets/{dsid}"], f"{NAME}/docs_{namespace}_{dsid}")
             subsets[f"{namespace}/{dsid}/segmented"] = Dataset(segmented)
-            subsets[f'{namespace}/{dsid}/passages'] = Dataset(CastPassageDocs(segmented, count))
+            
+            passage = CastPassageDocs(segmented, count)
+            passages.append(passage)
+            subsets[f'{namespace}/{dsid}/passages'] = Dataset(passage)
+            
+            # Add this
+            all_docs_spec.append(PrefixedDocsSpec(prefix, (raw if use_docs else passage), not use_docs))
             
         # All documents together
         all_docs = PrefixedDocs(*all_docs_spec)
-        subsets[f"{namespace}"] = all_docs
-        return all_docs
+        subsets[f"{namespace}"] = Dataset(all_docs)
+        return all_docs, passages
 
     docs_v2 = register_docs(
         "v2",
+        True,
         (
             "msmarco",
             "MARCO_",
@@ -587,6 +595,7 @@ def _init():
     v3_dupes = dlc['v3/dupes']
     docs_v3 = register_docs(
         "v3",
+        False,
         (
             "msmarco",
             "MARCO_",
