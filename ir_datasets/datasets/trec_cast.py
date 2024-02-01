@@ -68,6 +68,7 @@ class CastPassageDoc(NamedTuple):
         """
         return f"{self.title}\n{self.text}"
 
+
 class Cast2019Query(NamedTuple):
     query_id: str
     raw_utterance: str
@@ -118,7 +119,7 @@ class Cast2022Query(NamedTuple):
     participant: str
     raw_utterance: str
     manual_rewritten_utterance: str
-    response: str
+    response: Optional[str]
     provenance: List[str]
     topic_number: int
     turn_number: int

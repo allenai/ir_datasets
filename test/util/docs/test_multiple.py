@@ -6,7 +6,7 @@ from typing import NamedTuple
 import pytest
 from ir_datasets.formats.base import BaseDocs, GenericDoc
 from ir_datasets.indices.base import Docstore
-from ir_datasets.util.docs.multiple import PrefixedDocs
+from ir_datasets.util.docs.multiple import PrefixedDocs, PrefixedDocsSpec
 
 
 class OtherDoc(NamedTuple):
@@ -60,8 +60,8 @@ def test_multiple_prefixes():
     docs_2 = FakeDocs(3)
 
     spec = [
-        ("D1-", docs_1),
-        ("D2-", docs_2)
+        PrefixedDocsSpec("D1-", docs_1),
+        PrefixedDocsSpec("D2-", docs_2)
     ]
 
     all_docs = PrefixedDocs(
@@ -81,20 +81,20 @@ def test_multiple_prefixes():
     
     # Check that the doc IDs are the same    
     set_1 = set()
-    for prefix, docs in spec:
-        set_1.update(f"{prefix}{doc.doc_id}" for doc in docs.docs_iter())
+    for spec in spec:
+        set_1.update(f"{spec.prefix}{doc.doc_id}" for doc in spec.docs.docs_iter())
 
     assert set_1 == set(doc.doc_id for doc in all_docs.docs_iter())
     
-    with pytest.raises(AssertionError):
+    with pytest.raises(AttributeError):
         PrefixedDocs(
-            ("D1-", FakeDocs(5)),
-            ("D2-", FakeDocs(3, docs_cls=OtherDoc)) 
+            PrefixedDocsSpec("D1-", FakeDocs(5)),
+            PrefixedDocsSpec("D2-", FakeDocs(3, docs_cls=OtherDoc)) 
         ).docs_cls()
         
     blank = PrefixedDocs(
-        ("D1-", FakeDocs(5)),
-        ("D2-", FakeDocs(3, lang='fr', namespace='other')) 
+        PrefixedDocsSpec("D1-", FakeDocs(5)),
+        PrefixedDocsSpec("D2-", FakeDocs(3, lang='fr', namespace='other')) 
     )
     
     assert blank.docs_lang() is None
