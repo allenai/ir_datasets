@@ -65,7 +65,7 @@ def main(args):
                 })
             except Exception as ex:
                 print(file, ex)
-        with gzip.open(args.sources_file + '.gz', 'wt') as f:
+        with gzip.open(args.sources_file + '.gz', 'wt', encoding='utf8') as f:
             json.dump(sources, f)
     all_source_files = [f.relative_to(source_dir) for f in all_source_files]
     if args.skip_last:

@@ -36,7 +36,7 @@ def dataset2metadata(args):
 
 
 def write_metadata_file(data, file):
-    with file.open('wt') as f:
+    with file.open('wt', encoding='utf8') as f:
         # partially-formatted data; one dataset per line
         f.write('{\n')
         for i, key in enumerate(sorted(data.keys())):

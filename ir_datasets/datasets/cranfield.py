@@ -56,7 +56,7 @@ class CranfieldDocs(BaseDocs):
     @ir_datasets.util.use_docstore
     def docs_iter(self):
         with self.docs_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for lines in prefix_sentinel_splitter(stream, sentinel='.I '):
                 record = {'doc_id': '', 'title': '', 'author': '', 'bib': '', 'text': ''}
                 field = 'doc_id'
@@ -108,7 +108,7 @@ class CranfieldQueries(BaseQueries):
 
     def queries_iter(self):
         with self.queries_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for lines in prefix_sentinel_splitter(stream, sentinel='.I '):
                 record = {'query_id': '', 'text': ''}
                 field = 'query_id'

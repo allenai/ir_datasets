@@ -38,7 +38,7 @@ class NumpySortedIndex:
         self.mmap_keys[:] = keys[:]
         self.mmap_poss = self.np.memmap(f'{self.path}.pos', dtype=poss.dtype, mode='w+', shape=poss.shape)
         self.mmap_poss[:] = poss[:]
-        with ir_datasets.util.finialized_file(f'{self.path}.meta', 'wt') as f:
+        with ir_datasets.util.finalized_file(f'{self.path}.meta', 'wt') as f:
             f.write(f'{self.keylen} {self.doccount}')
         self.transaction = None
 
@@ -49,7 +49,7 @@ class NumpySortedIndex:
         if self.np is None:
             self.np = ir_datasets.lazy_libs.numpy()
         if self.mmap_keys is None and self._exists():
-            with open(f'{self.path}.meta', 'rt') as f:
+            with open(f'{self.path}.meta', 'rt', encoding='utf8') as f:
                 self.keylen, self.doccount = f.read().split()
                 self.keylen, self.doccount = int(self.keylen), int(self.doccount)
             self.mmap_keys = self.np.memmap(f'{self.path}.key', dtype=f'S{self.keylen}', mode='r', shape=(self.doccount,))

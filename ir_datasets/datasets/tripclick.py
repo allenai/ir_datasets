@@ -122,7 +122,7 @@ class TripClickQlogs(BaseQlogs):
 
     def qlogs_iter(self):
         for file in sorted(Path(self.dlc.path()).glob('logs/*.json')):
-            with file.open('rt') as fin:
+            with file.open('rt', encoding='utf8') as fin:
                 for line in fin:
                     record = json.loads(line)
                     time = re.match(r'^/Date\(([0-9]+)\)/$', record['DateCreated']).group(1)
@@ -168,7 +168,7 @@ class DocPairGenerator:
             for query in _logger.pbar(self._queries.queries_iter(), desc='build query lookup', unit='query'):
                 queryhash = hashlib.md5(SPACES.sub(' ', query.text).strip().encode()).digest()[:6]
                 query_map[queryhash] = query.query_id
-            with ir_datasets.util.finialized_file(self._cache_path, 'wt') as fout, \
+            with ir_datasets.util.finalized_file(self._cache_path, 'wt') as fout, \
                  self._docpair_dlc.stream() as stream, \
                  _logger.pbar_raw(desc='building docpairs', total=23_222_038, unit='docpair') as pbar:
                 skipped = 0

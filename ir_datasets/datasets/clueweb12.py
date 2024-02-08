@@ -208,7 +208,7 @@ class ClueWeb12Docs(WarcDocs):
             result = {}
             for counts_file in glob(os.path.join(self.docs_dlc.path(), 'recordcounts', '*.txt')):
                 d = os.path.basename(counts_file)[:-len('_counts.txt')]
-                with open(counts_file, 'rt') as f:
+                with open(counts_file, 'rt', encoding='utf8') as f:
                     for line in f:
                         file, count = line.strip().split()
                         file = os.path.join(self.docs_dlc.path(), d, file[2:])
@@ -254,7 +254,7 @@ java -jar {extract_path} {source_path}/ {path}/
         with contextlib.ExitStack() as stack, _logger.pbar_raw(desc='building b13 document count cache', unit='file') as pbar:
             for d in glob(os.path.join(path, 'ClueWeb12_??')):
                 d = os.path.basename(d)
-                out = stack.enter_context(ir_datasets.util.finialized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))
+                out = stack.enter_context(ir_datasets.util.finalized_file(f'{rc_dir}/{d}_counts.txt', 'wt'))
                 for file in sorted(glob(os.path.join(path, d, '*', '*.warc.gz'))):
                     shortf = file[-24:]
                     with gzip.open(file, 'rb') as f, warc.WARCFile(fileobj=f) as warcf:

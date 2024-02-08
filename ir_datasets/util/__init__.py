@@ -35,13 +35,14 @@ def home_path():
 
 
 @contextmanager
-def finialized_file(path, mode):
+def finalized_file(path, mode):
+    encoding = 'utf8' if 't' in mode else None
     if path == os.devnull:
-        with open(path, mode) as f:
+        with open(path, mode, encoding=encoding) as f:
             yield f
     else:
         try:
-            with open(f'{path}.tmp', mode) as f:
+            with open(f'{path}.tmp', mode, encoding=encoding) as f:
                 yield f
             os.replace(f'{path}.tmp', path)
         except:
@@ -50,6 +51,8 @@ def finialized_file(path, mode):
             except:
                 pass # ignore
             raise
+
+finialized_file = finalized_file # support old name of function w/ typo
 
 
 class Lazy:
@@ -199,7 +202,7 @@ class Migrator:
                                     os.unlink(file)
                                 else:
                                     shutil.rmtree(file)
-                        with self._version_file.open('wt') as f:
+                        with self._version_file.open('wt', encoding='utf8') as f:
                             f.write(self._version)
                     self._state = 'OK'
                 return fn(*args, **kwargs)
@@ -207,7 +210,7 @@ class Migrator:
         return fn
 
     def _read_version(self):
-        with self._version_file.open('rt') as f:
+        with self._version_file.open('rt', encoding='utf8') as f:
             return f.read()
 
 

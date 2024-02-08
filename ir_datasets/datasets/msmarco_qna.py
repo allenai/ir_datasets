@@ -145,16 +145,16 @@ class MsMarcoQnAManager:
                 with contextlib.ExitStack() as inner_stack:
                     stream = inner_stack.enter_context(dlc.stream())
                     parser = ijson.parse(stream)
-                    out_text = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_text', 'wt'))
-                    out_type = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_type', 'wt'))
-                    out_id = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_id', 'wt'))
+                    out_text = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_text', 'wt', encoding='utf8'))
+                    out_type = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_type', 'wt', encoding='utf8'))
+                    out_id = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_id', 'wt', encoding='utf8'))
                     if file_str != 'eval':
-                        out_qrels = inner_stack.enter_context(open(self._base_path/f'{file_str}.selections', 'wt'))
-                        out_answer = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_answer', 'wt+'))
+                        out_qrels = inner_stack.enter_context(open(self._base_path/f'{file_str}.selections', 'wt', encoding='utf8'))
+                        out_answer = inner_stack.enter_context(open(self._base_path/f'{file_str}.query_answer', 'wt+', encoding='utf8'))
                         out_seq = None
                     else:
                         out_qrels, out_answer = None, None
-                        out_seq = inner_stack.enter_context(open(self._base_path/f'{file_str}.seq', 'wt'))
+                        out_seq = inner_stack.enter_context(open(self._base_path/f'{file_str}.seq', 'wt', encoding='utf8'))
                     for prefix, event, data in parser:
                         pbar_postfix['key'] = prefix
                         pbar.set_postfix(pbar_postfix, refresh=False)
@@ -236,19 +236,19 @@ class MsMarcoQnAManager:
             # Merge files
             for file_str in ['train', 'dev', 'eval']:
                 with contextlib.ExitStack() as stack:
-                    f_qid = stack.enter_context(open(self._base_path/f'{file_str}.query_id', 'rt'))
-                    f_type = stack.enter_context(open(self._base_path/f'{file_str}.query_type', 'rt'))
-                    f_text = stack.enter_context(open(self._base_path/f'{file_str}.query_text', 'rt'))
-                    f_queries = stack.enter_context(open(self._base_path/f'{file_str}.queries.tsv', 'wt'))
-                    f_run = stack.enter_context(open(self._base_path/f'{file_str}.run', 'wt'))
+                    f_qid = stack.enter_context(open(self._base_path/f'{file_str}.query_id', 'rt', encoding='utf8'))
+                    f_type = stack.enter_context(open(self._base_path/f'{file_str}.query_type', 'rt', encoding='utf8'))
+                    f_text = stack.enter_context(open(self._base_path/f'{file_str}.query_text', 'rt', encoding='utf8'))
+                    f_queries = stack.enter_context(open(self._base_path/f'{file_str}.queries.tsv', 'wt', encoding='utf8'))
+                    f_run = stack.enter_context(open(self._base_path/f'{file_str}.run', 'wt', encoding='utf8'))
                     in_files = [f_qid, f_type, f_text]
                     if file_str != 'eval':
-                        f_selections = stack.enter_context(open(self._base_path/f'{file_str}.selections', 'rt'))
-                        f_answers = stack.enter_context(open(self._base_path/f'{file_str}.query_answer', 'rt'))
-                        f_qrels = stack.enter_context(open(self._base_path/f'{file_str}.qrels', 'wt'))
+                        f_selections = stack.enter_context(open(self._base_path/f'{file_str}.selections', 'rt', encoding='utf8'))
+                        f_answers = stack.enter_context(open(self._base_path/f'{file_str}.query_answer', 'rt', encoding='utf8'))
+                        f_qrels = stack.enter_context(open(self._base_path/f'{file_str}.qrels', 'wt', encoding='utf8'))
                         in_files += [f_selections, f_answers]
                     else:
-                        f_seq = stack.enter_context(open(self._base_path/f'{file_str}.seq', 'rt'))
+                        f_seq = stack.enter_context(open(self._base_path/f'{file_str}.seq', 'rt', encoding='utf8'))
                         in_files += [f_seq]
                     for columns in _logger.pbar(zip(*in_files), desc=f'merging {file_str} files', unit='doc'):
                         columns = [x.strip() for x in columns]

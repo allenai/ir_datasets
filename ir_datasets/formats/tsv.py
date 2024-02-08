@@ -23,9 +23,9 @@ class FileLineIter:
             raise StopIteration
         if self.stream is None:
             if isinstance(self.dlc, list):
-                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()))
+                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()), encoding='utf8')
             else:
-                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc.stream()))
+                self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc.stream()), encoding='utf8')
         while self.pos < self.start:
             line = self.stream.readline()
             if line != '\n':
@@ -34,7 +34,7 @@ class FileLineIter:
             if isinstance(self.dlc, list):
                 self.stream_idx += 1
                 if self.stream_idx < len(self.dlc):
-                    self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()))
+                    self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()), encoding='utf8')
                     line = self.stream.readline()
                 else:
                     raise StopIteration()

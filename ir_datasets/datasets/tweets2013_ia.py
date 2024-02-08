@@ -347,7 +347,7 @@ class Tweets2013IaDocs(BaseDocs):
 
             # Write out a file that gives the counts for each source file. This is used for fancy slicing
             # and also avoids globbing to get a list of all source files.
-            with (Path(self._docs_base_path) / 'file_counts.tsv').open('wt') as f:
+            with (Path(self._docs_base_path) / 'file_counts.tsv').open('wt', encoding='utf8') as f:
                 for file, count in sorted(file_counts.items()):
                     f.write(f'{file}\t{count}\n')
 
@@ -384,7 +384,7 @@ class Tweets2013IaDocs(BaseDocs):
         if self._docs_file_counts_cache is None:
             self._docs_build()
             result = {}
-            with (Path(self.docs_path()) / 'file_counts.tsv').open('rt') as f:
+            with (Path(self.docs_path()) / 'file_counts.tsv').open('rt', encoding='utf8') as f:
                 for line in f:
                     file, count = line.strip().split('\t')
                     result[file] = int(count)

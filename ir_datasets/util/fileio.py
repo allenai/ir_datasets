@@ -161,7 +161,7 @@ class ReTar:
         if not self._output_file.exists():
             with contextlib.ExitStack() as ctxt, self._streamer.stream() as stream:
                 ctxt.enter_context(_logger.duration('re-taring file'))
-                outf = ctxt.enter_context(util.finialized_file(self._output_file, 'wb'))
+                outf = ctxt.enter_context(util.finalized_file(self._output_file, 'wb'))
                 o_tarf = ctxt.enter_context(tarfile.open(fileobj=outf, mode=f'w|{self._compression or ""}'))
                 # IMPORTANT: open this file in streaming mode (| in mode). This means that the
                 # content need not be written to disk or be fully read.

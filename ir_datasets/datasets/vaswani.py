@@ -33,7 +33,7 @@ class VaswaniDocs(BaseDocs):
     @ir_datasets.util.use_docstore
     def docs_iter(self):
         with self.docs_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for lines in sentinel_splitter(stream, sentinel='   /\n'):
                 doc_id = lines[0].rstrip('\n')
                 doc_text = ''.join(lines[1:])
@@ -73,7 +73,7 @@ class VaswaniQueries(BaseQueries):
 
     def queries_iter(self):
         with self.queries_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for lines in sentinel_splitter(stream, sentinel='/\n'):
                 query_id = lines[0].rstrip('\n')
                 query_text = ''.join(lines[1:])
@@ -98,7 +98,7 @@ class VaswaniQrels(BaseQrels):
 
     def qrels_iter(self):
         with self.qrels_dlc.stream() as stream:
-            stream = io.TextIOWrapper(stream)
+            stream = io.TextIOWrapper(stream, encoding='utf8')
             for lines in sentinel_splitter(stream, sentinel='   /\n'):
                 query_id = lines[0].rstrip('\n')
                 for line in lines[1:]:

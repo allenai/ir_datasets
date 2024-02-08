@@ -1,7 +1,7 @@
 from glob import glob
 import setuptools
 
-with open("README.md", "r") as fh:
+with open("README.md", "rt", encoding='utf8') as fh:
     long_description = fh.read()
 
 setuptools.setup(
@@ -15,7 +15,7 @@ setuptools.setup(
     url="https://github.com/allenai/ir_datasets",
     include_package_data = True,
     packages=setuptools.find_packages(include=['ir_datasets', 'ir_datasets.*']),
-    install_requires=list(open('requirements.txt')),
+    install_requires=list(open('requirements.txt', 'rt', encoding='utf8')),
     classifiers=[],
     python_requires='>=3.7',
     entry_points={

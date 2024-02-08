@@ -35,7 +35,7 @@ def _build_cache(data, dir, prefix=''):
             _logger.info(f'skipping {prefix}; already exists')
             return
         try:
-            with ir_datasets.util.finialized_file(cache_path, 'wb') as fout, _logger.duration(prefix):
+            with ir_datasets.util.finalized_file(cache_path, 'wb') as fout, _logger.duration(prefix):
                 download = ir_datasets.util.Download([ir_datasets.util.RequestsDownload(data['url'])], expected_md5=data['expected_md5'], stream=True)
                 with download.stream() as stream:
                     inp = stream.read(io.DEFAULT_BUFFER_SIZE)
@@ -63,7 +63,7 @@ def main(args):
     parser.add_argument('--retries', default='10')
     args = parser.parse_args(args)
 
-    with open('ir_datasets/etc/downloads.json') as f:
+    with open('ir_datasets/etc/downloads.json', 'rt', encoding='utf8') as f:
         data = json.load(f)
     with tmp_environ(IR_DATASETS_DL_TRIES=args.retries):
         _build_cache(data, args.dir)
