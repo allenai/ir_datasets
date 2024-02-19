@@ -94,11 +94,48 @@ class ExctractedCCQuery(NamedTuple):
         """
         return self.title
 
+class ExctractedCCNoReportQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+    narrative: str
+    ht_title: str
+    ht_description: str
+    ht_narrative: str
+    mt_title: str
+    mt_description: str
+    mt_narrative: str
+    translation_lang: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
+
+class ExctractedCCNoReportNoHtNarQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+    narrative: str
+    ht_title: str
+    ht_description: str
+    mt_title: str
+    mt_description: str
+    mt_narrative: str
+    translation_lang: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
+
 class ExctractedCCQueries(BaseQueries):
-    def __init__(self, queries_dlc, subset_lang, namespace=None):
+    def __init__(self, queries_dlc, subset_lang, filter_lwq=True, cls=ExctractedCCQuery, namespace=None):
         self._queries_dlc = queries_dlc if isinstance(queries_dlc, list) else [queries_dlc]
         self._subset_lang = subset_lang
+        self._filter_lwq = filter_lwq
         self._namespace = namespace
+        self._cls = cls
 
         self._subset_lang_three = LANG_CODE_CONVERT[self._subset_lang]
     
@@ -106,7 +143,7 @@ class ExctractedCCQueries(BaseQueries):
         return [ dlc.path() for dlc in self._queries_dlc ]
     
     def queries_cls(self):
-        return ExctractedCCQuery
+        return self._cls
 
     def queries_namespace(self):
         return self._namespace
@@ -119,7 +156,7 @@ class ExctractedCCQueries(BaseQueries):
         with dlc.stream() as f:
             for line in f:
                 line = json.loads(line)
-                if self._subset_lang_three in line['languages_with_qrels']:
+                if not self._filter_lwq or self._subset_lang_three in line['languages_with_qrels']:
                     yield self._produce_query(line)
     
     def _produce_query(self, line):
@@ -132,17 +169,45 @@ class ExctractedCCQueries(BaseQueries):
                     resources['ht'] = tp
                 else: # machine translation
                     resources['mt'] = tp
-        return ExctractedCCQuery(
-            query_id=line['topic_id'],
-            title=resources['org']['topic_title'],
-            description=resources['org']['topic_description'],
-            ht_title=resources['ht']['topic_title'],
-            ht_description=resources['ht']['topic_description'],
-            mt_title=resources['mt']['topic_title'],
-            mt_description=resources['mt']['topic_description'],
-            narrative_by_relevance=line['narratives'][self._subset_lang_three],
-            report=line['report']['text'],
-            report_url=line['report']['url'],
-            report_date=line['report']['date'],
-            translation_lang=self._subset_lang
-        )
+        if self._cls is ExctractedCCQuery:
+            return ExctractedCCQuery(
+                query_id=line['topic_id'],
+                title=resources['org']['topic_title'],
+                description=resources['org']['topic_description'],
+                ht_title=resources['ht']['topic_title'],
+                ht_description=resources['ht']['topic_description'],
+                mt_title=resources['mt']['topic_title'],
+                mt_description=resources['mt']['topic_description'],
+                narrative_by_relevance=line['narratives'][self._subset_lang_three],
+                report=line['report']['text'],
+                report_url=line['report']['url'],
+                report_date=line['report']['date'],
+                translation_lang=self._subset_lang
+            )
+        elif self._cls is ExctractedCCNoReportQuery:
+            return ExctractedCCNoReportQuery(
+                query_id=line['topic_id'],
+                title=resources['org']['topic_title'],
+                description=resources['org']['topic_description'],
+                narrative=resources['org']['topic_narrative'],
+                ht_title=resources['ht']['topic_title'],
+                ht_description=resources['ht']['topic_description'],
+                ht_narrative=resources['ht']['topic_narrative'],
+                mt_title=resources['mt']['topic_title'],
+                mt_description=resources['mt']['topic_description'],
+                mt_narrative=resources['mt']['topic_narrative'],
+                translation_lang=self._subset_lang
+            )
+        elif self._cls is ExctractedCCNoReportNoHtNarQuery:
+            return ExctractedCCNoReportNoHtNarQuery(
+                query_id=line['topic_id'],
+                title=resources['org']['topic_title'],
+                description=resources['org']['topic_description'],
+                narrative=resources['org']['topic_narrative'],
+                ht_title=resources['ht']['topic_title'],
+                ht_description=resources['ht']['topic_description'],
+                mt_title=resources['mt']['topic_title'],
+                mt_description=resources['mt']['topic_description'],
+                mt_narrative=resources['mt']['topic_narrative'],
+                translation_lang=self._subset_lang
+            )
