@@ -5395,7 +5395,7 @@
       "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-qrels.final.tar.gz",
       "size_hint": 6023886,
       "expected_md5": "cea4ff3d9eba612c7119e6490217d4e1",
-      "cache_path": "trec-2022/qrels.tar.gz",
+      "cache_path": "trec-2023/qrels.tar.gz",
       "irds_mirror": true
     }
   },
