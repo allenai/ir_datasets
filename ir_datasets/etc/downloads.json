@@ -879,6 +879,29 @@
     }
   },
   
+  "csl": {
+    "docs": {
+      "url": "https://huggingface.co/datasets/neuclir/csl/resolve/main/data/csl.jsonl.gz?download=true",
+      "size_hint": 115749077,
+      "expected_md5": "4198f7b442187320e2351b3b473c1883",
+      "cache_path": "docs.jsonl.gz"
+    },
+    "trec-2023/queries": {
+      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-technical_topics.0719.jsonl",
+      "size_hint": 86519,
+      "expected_md5": "0dd5ba173c695362a8705056edca481b",
+      "cache_path": "trec-2023/topics.jsonl",
+      "irds_mirror": true
+    },
+    "trec-2023/qrels": {
+      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-qrels.final.tar.gz",
+      "size_hint": 6023886,
+      "expected_md5": "cea4ff3d9eba612c7119e6490217d4e1",
+      "cache_path": "trec-2023/qrels.tar.gz",
+      "irds_mirror": true
+    }
+  },
+
   "disks45": {
     "docs": {
       "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",

@@ -166,6 +166,8 @@
   "cord19/trec-covid/round4": {"docs": {"count": 158274, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}, "queries": {"count": 45}, "qrels": {"count": 13262, "fields": {"relevance": {"counts_by_value": {"1": 2279, "0": 7438, "2": 3545}}}}},
   "cord19/trec-covid/round5": {"docs": {"_ref": "cord19"}, "queries": {"_ref": "cord19/trec-covid"}, "qrels": {"count": 23151, "fields": {"relevance": {"counts_by_value": {"2": 6677, "1": 4233, "0": 12239, "-1": 2}}}}},
   "cranfield": {"docs": {"count": 1400, "fields": {"doc_id": {"max_len": 4, "common_prefix": ""}}}, "queries": {"count": 225}, "qrels": {"count": 1837, "fields": {"relevance": {"counts_by_value": {"2": 387, "3": 734, "4": 363, "-1": 225, "1": 128}}}}},
+  "csl": {"docs": {"count": 395927, "fields": {"doc_id": {"max_len": 10, "common_prefix": "csl-"}}}},
+  "csl/trec-2023": {"docs": {"_ref": "csl"}, "queries": {"count": 41}, "qrels": {"count": 11291, "fields": {"relevance": {"counts_by_value": {"0": 10644, "1": 419, "3": 228}}}}},
   "disks45": {},
   "disks45/nocr": {"docs": {"count": 528155, "fields": {"doc_id": {"max_len": 16, "common_prefix": ""}}}},
   "disks45/nocr/trec-robust-2004": {"docs": {"_ref": "disks45/nocr"}, "queries": {"count": 250}, "qrels": {"count": 311410, "fields": {"relevance": {"counts_by_value": {"1": 16381, "0": 293998, "2": 1031}}}}},
