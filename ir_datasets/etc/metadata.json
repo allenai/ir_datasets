@@ -570,6 +570,8 @@
   "neuclir/1/fa/hc4-filtered": {"docs": {"count": 391703, "fields": {"doc_id": {"max_len": 36, "common_prefix": ""}}}, "queries": {"count": 60}, "qrels": {"count": 3087, "fields": {"relevance": {"counts_by_value": {"0": 2557, "3": 269, "1": 261}}}}},
   "neuclir/1/fa/trec-2022": {"docs": {"_ref": "neuclir/1/fa"}, "queries": {"count": 46}, "qrels": {"count": 34174, "fields": {"relevance": {"counts_by_value": {"3": 870, "0": 32702, "1": 602}}}}},
   "neuclir/1/fa/trec-2023": {"docs": {"_ref": "neuclir/1/fa"}, "queries": {"count": 76}, "qrels": {"count": 26662, "fields": {"relevance": {"counts_by_value": {"1": 2491, "2": 2068, "0": 21624, "3": 479}}}}},
+  "neuclir/1/multi": {"docs": {"count": 10038768, "fields": {"doc_id": {"max_len": 36, "common_prefix": ""}}}},
+  "neuclir/1/multi/trec-2023": {"docs": {"_ref": "neuclir/1/multi"}, "queries": {"count": 76}, "qrels": {"count": 79934, "fields": {"relevance": {"counts_by_value": {"1": 6041, "2": 7171, "0": 66087, "3": 635}}}}},
   "neuclir/1/ru": {"docs": {"count": 4627543, "fields": {"doc_id": {"max_len": 36, "common_prefix": ""}}}},
   "neuclir/1/ru/hc4-filtered": {"docs": {"count": 964719, "fields": {"doc_id": {"max_len": 36, "common_prefix": ""}}}, "queries": {"count": 54}, "qrels": {"count": 3235, "fields": {"relevance": {"counts_by_value": {"0": 2483, "1": 478, "3": 274}}}}},
   "neuclir/1/ru/trec-2022": {"docs": {"_ref": "neuclir/1/ru"}, "queries": {"count": 45}, "qrels": {"count": 33006, "fields": {"relevance": {"counts_by_value": {"3": 810, "0": 31117, "1": 1079}}}}},

@@ -27,14 +27,16 @@ class ExctractedCCDoc(NamedTuple):
 
 class ExctractedCCDocs(BaseDocs):
     
-    def __init__(self, docs_dlc, subset_lang, namespace=None, count=None):
+    def __init__(self, docs_dlc, subset_lang=None, namespace=None, count=None, docstore_path=None):
         self._docs_dlc = docs_dlc
         self._subset_lang = subset_lang
         self._namespace = namespace
         self._count = count
-        # self._count = DOC_COUNTS[subset_lang]
+        self._docstore_path = docstore_path
 
     def docs_path(self, force=True):
+        if self._docstore_path:
+            return self._docstore_path
         return self._docs_dlc.path(force)
 
     @ir_datasets.util.use_docstore
@@ -55,12 +57,17 @@ class ExctractedCCDocs(BaseDocs):
         )
     
     def _internal_docs_iter(self):
-        with self._docs_dlc.stream() as f:
-            for line in f:
-                line = json.loads(line)
-                line['doc_id'] = line['id']
-                del line['id']
-                yield ExctractedCCDoc(**line)
+        if not isinstance(self._docs_dlc, list):
+            docs_dlc = [self._docs_dlc]
+        else:
+            docs_dlc = self._docs_dlc
+        for dlc in docs_dlc:
+            with dlc.stream() as f:
+                for line in f:
+                    line = json.loads(line)
+                    line['doc_id'] = line['id']
+                    del line['id']
+                    yield ExctractedCCDoc(**line)
 
     def docs_cls(self):
         return ExctractedCCDoc
@@ -129,15 +136,37 @@ class ExctractedCCNoReportNoHtNarQuery(NamedTuple):
         """
         return self.title
 
+
+class ExctractedCCMultiMtQuery(NamedTuple):
+    query_id: str
+    title: str
+    description: str
+    narrative: str
+    fa_mt_title: str
+    fa_mt_description: str
+    fa_mt_narrative: str
+    ru_mt_title: str
+    ru_mt_description: str
+    ru_mt_narrative: str
+    zh_mt_title: str
+    zh_mt_description: str
+    zh_mt_narrative: str
+    def default_text(self):
+        """
+        title
+        """
+        return self.title
+
+
 class ExctractedCCQueries(BaseQueries):
-    def __init__(self, queries_dlc, subset_lang, filter_lwq=True, cls=ExctractedCCQuery, namespace=None):
+    def __init__(self, queries_dlc, subset_lang=None, filter_lwq=True, cls=ExctractedCCQuery, namespace=None):
         self._queries_dlc = queries_dlc if isinstance(queries_dlc, list) else [queries_dlc]
         self._subset_lang = subset_lang
         self._filter_lwq = filter_lwq
         self._namespace = namespace
         self._cls = cls
 
-        self._subset_lang_three = LANG_CODE_CONVERT[self._subset_lang]
+        self._subset_lang_three = LANG_CODE_CONVERT.get(self._subset_lang)
     
     def queries_path(self):
         return [ dlc.path() for dlc in self._queries_dlc ]
@@ -164,11 +193,16 @@ class ExctractedCCQueries(BaseQueries):
         for tp in line['topics']:
             if tp['lang'] == 'eng':
                 resources['org'] = tp
-            elif tp['lang'] == self._subset_lang_three:
+            else:
                 if tp['source'] == 'human translation':
-                    resources['ht'] = tp
+                    resources['ht_{lang}'.format(**tp)] = tp
                 else: # machine translation
-                    resources['mt'] = tp
+                    resources['mt_{lang}'.format(**tp)] = tp
+                if tp['lang'] == self._subset_lang_three:
+                    if tp['source'] == 'human translation':
+                        resources['ht'] = tp
+                    else: # machine translation
+                        resources['mt'] = tp
         if self._cls is ExctractedCCQuery:
             return ExctractedCCQuery(
                 query_id=line['topic_id'],
@@ -210,4 +244,20 @@ class ExctractedCCQueries(BaseQueries):
                 mt_description=resources['mt']['topic_description'],
                 mt_narrative=resources['mt']['topic_narrative'],
                 translation_lang=self._subset_lang
+            )
+        elif self._cls is ExctractedCCMultiMtQuery:
+            return ExctractedCCMultiMtQuery(
+                query_id=line['topic_id'],
+                title=resources['org']['topic_title'],
+                description=resources['org']['topic_description'],
+                narrative=resources['org']['topic_narrative'],
+                fa_mt_title=resources['mt_fas']['topic_title'],
+                fa_mt_description=resources['mt_fas']['topic_description'],
+                fa_mt_narrative=resources['mt_fas']['topic_narrative'],
+                ru_mt_title=resources['mt_rus']['topic_title'],
+                ru_mt_description=resources['mt_rus']['topic_description'],
+                ru_mt_narrative=resources['mt_rus']['topic_narrative'],
+                zh_mt_title=resources['mt_zho']['topic_title'],
+                zh_mt_description=resources['mt_zho']['topic_description'],
+                zh_mt_narrative=resources['mt_zho']['topic_narrative'],
             )

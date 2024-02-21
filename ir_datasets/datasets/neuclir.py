@@ -7,7 +7,7 @@ from ir_datasets.util import DownloadConfig, Lazy
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
 from ir_datasets.formats.trec import TrecQrels
 
-from ir_datasets.formats import ExctractedCCDocs, ExctractedCCQueries, ExctractedCCNoReportQuery, ExctractedCCNoReportNoHtNarQuery
+from ir_datasets.formats import ExctractedCCDocs, ExctractedCCQueries, ExctractedCCNoReportQuery, ExctractedCCNoReportNoHtNarQuery, ExctractedCCMultiMtQuery
 
 from ir_datasets.datasets.hc4 import NAME as HC4_NAME
 from ir_datasets.util.fileio import GzipExtract, TarExtract
@@ -116,6 +116,19 @@ def _init():
             FilteredTrecQrels([ hc4_dlc[f'{lang}/dev/qrels'], hc4_dlc[f'{lang}/test/qrels'] ], QREL_DEFS, include_doc_id_dlc=include_doc_id_dlc),
             documentation(f"1/{lang}/hc4-filtered")
         )
+
+    multi_docs = ExctractedCCDocs([GzipExtract(dlc[f'1/{lang}/docs']) for lang in ['zh', 'fa', 'ru']], namespace=NAME, count=sum(DOC_COUNTS.values()), docstore_path=base_path/'1'/'multi')
+    subsets['1/multi'] = Dataset(
+        multi_docs,
+        documentation("1/multi")
+    )
+
+    subsets['1/multi/trec-2023'] = Dataset(
+        multi_docs,
+        ExctractedCCQueries(dlc['trec-2023/queries'], filter_lwq=False, cls=ExctractedCCMultiMtQuery, namespace=NAME),
+        TrecQrels(qrels2023, QREL_DEFS),
+        documentation("1/multi/trec-2023")
+    )
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):

@@ -9,5 +9,5 @@ from .webarc import WarcDocs, WarcDoc
 from .ntcir import NtcirQrels
 from .clirmatrix import CLIRMatrixQueries, CLIRMatrixQrels
 from .argsme import ArgsMeStance, ArgsMeMode, ArgsMeSourceDomain, ArgsMePremiseAnnotation, ArgsMePremise, ArgsMeAspect, ArgsMeDoc, ArgsMeProcessedDoc, ArgsMeDocs, ArgsMeProcessedDocs, ArgsMeCombinedDocs
-from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries, ExctractedCCNoReportQuery, ExctractedCCNoReportNoHtNarQuery
+from .extracted_cc import ExctractedCCDoc, ExctractedCCDocs, ExctractedCCQuery, ExctractedCCQueries, ExctractedCCNoReportQuery, ExctractedCCNoReportNoHtNarQuery, ExctractedCCMultiMtQuery
 from .jsonl import JsonlDocs, JsonlQueries
