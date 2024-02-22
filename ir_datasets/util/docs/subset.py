@@ -6,7 +6,7 @@ from typing import Optional
 import ir_datasets
 from ir_datasets.formats import BaseDocs
 from ir_datasets.util import BaseDownload
-from ir_datasets.util.docs.lazy import DirectAccessDocs, DocsList, LazyDocsIter
+from ir_datasets.util.docs.lazy import DocsList, LazyDocsIter
 
 _logger = ir_datasets.log.easy()
 
@@ -53,7 +53,10 @@ class Dupes:
         return doc_ids
 
     def has(self, doc_id: str):
-        return doc_id in self.doc_ids
+        return doc_id in self.doc_ids   
+
+    def __len__(self):
+        return len(self.doc_ids)
 
 
 class ColonCommaDupes(Dupes):
@@ -73,9 +76,10 @@ class ColonCommaDupes(Dupes):
                         doc_ids.add(doc_id)
 
         return doc_ids
+    
 
 
-class DocsSubset(BaseDocs, DirectAccessDocs):
+class DocsSubset(BaseDocs):
     """Document collection minus a set of duplicated"""
 
     def __init__(self, store_name: str, docs: BaseDocs, removed_ids: "Dupes"):
@@ -121,7 +125,7 @@ class DocsSubset(BaseDocs, DirectAccessDocs):
 
     def docs_iter(self):
         return LazyDocsIter(
-            self,
+            self.docs_list,
             (
                 doc
                 for doc in self._docs.docs_iter()

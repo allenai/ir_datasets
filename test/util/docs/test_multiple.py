@@ -14,6 +14,7 @@ def test_multiple_prefixes():
     ]
 
     all_docs = PrefixedDocs(
+        None,
         *spec
     )
     

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from functools import cached_property, lru_cache
-from typing import Iterator, Union
+from typing import Iterator, Protocol, Sequence, Union
 
 import ir_datasets
 from ir_datasets.formats import BaseDocs, GenericDoc
@@ -43,6 +43,12 @@ class LazyDocs(IRDSDocuments):
         return self.docs.docs_store(field=field)
 
 
+class DirectAccessDocs(Protocol):
+    def __call__(self) -> Sequence:
+        """Returns a sequence of documents"""
+        ...
+
+
 class DocsListView:
     """View over document lists"""
 
@@ -75,20 +81,20 @@ class DocsList(ABC):
         return DocsListView(self, slice)
 
 
-class DirectAccessDocs:
-    def docs_list(self) -> DocsList:
-        return DocsList
-
-
 class LazyDocsIter:
-    """Iterate over documents unless a specific range is queried"""
+    """Lazy document iterator: materializes the list only if a specific index is
+    requested"""
 
-    def __init__(self, docs: DirectAccessDocs, iter):
-        self.docs = docs
+    def __init__(self, _get_list_fn: DirectAccessDocs, iter):
+        self._get_list_fn = _get_list_fn
         self._iter = iter
 
+    @cached_property
+    def _list(self):
+        return self._get_list_fn()
+
     def __getitem__(self, slice: Union[int, slice]):
-        return self.docs_list()[slice]
+        return self._list[slice]
 
     def __iter__(self):
         return self
@@ -200,14 +206,12 @@ class IterDocs(BaseDocs):
             with _logger.duration(f"processing {self._corpus_name}"):
                 yield from (d for d in self._docs_iter_fn())
 
-        return LazyDocsIter(self, iter)
-
-    def docs_list(self):
-        return self.docs_store()
+        return LazyDocsIter(lambda: iter(self.docs_store()), iter)
 
     def docs_cls(self):
         return self._docs_cls
 
+    @lru_cache
     def docs_store(self, field="doc_id"):
         return PickleLz4FullStore(
             path=f"{ir_datasets.util.home_path()}/{self._corpus_name}.pklz4",

@@ -1,10 +1,12 @@
+from typing import List, Sequence, Tuple, Optional
 from functools import cached_property, lru_cache
 from dataclasses import dataclass
-from typing import List, NamedTuple, Sequence, Tuple
 
 import ir_datasets
 from ir_datasets.formats import BaseDocs
 from ir_datasets.indices.base import Docstore
+from ir_datasets.indices.lz4_pickle import PickleLz4FullStore
+from ir_datasets.util.docs.lazy import LazyDocsIter
 
 _logger = ir_datasets.log.easy()
 
@@ -66,9 +68,14 @@ class PrefixedDocstore(Docstore):
 class PrefixedDocs(BaseDocs):
     """Mixes documents and use a prefix to distinguish them"""
 
-    def __init__(self, *docs_mapping: PrefixedDocsSpec):
+    def __init__(self, store_name: Optional[str], *docs_mapping: PrefixedDocsSpec):
         """Each mapping = (prefix, documents, boolean indicating whether
-        documents have already a prefix)"""
+        documents have already a prefix)
+
+        :param store_name: if set, creates a LZ4 document store, otherwise
+            transform on the fly.
+        """
+        self._store_name = store_name
         self._docs_mapping = docs_mapping
 
     @cached_property
@@ -112,17 +119,32 @@ class PrefixedDocs(BaseDocs):
     def __iter__(self):
         return self.docs_iter()
 
-    def docs_iter(self):
+    def _iter(self):
         for mapping in self._docs_mapping:
             for doc in mapping.docs.docs_iter():
                 if not mapping.has_prefix:
                     doc = doc._replace(doc_id=f"{mapping.prefix}{doc.doc_id}")
                 yield doc
 
+    def docs_iter(self):
+        return LazyDocsIter(lambda: iter(self.docs_store()), self._iter())
+
     @lru_cache()
     def docs_count(self):
         return sum(mapping.docs.docs_count() for mapping in self._docs_mapping)
 
     @lru_cache
-    def docs_store(self, field="doc_id"):
-        return PrefixedDocstore(self._docs_mapping, id_field=field)
+    def docs_store(self, id_field="doc_id"):
+        # If no store name, we use dynamic access
+        if self._store_name is None:
+            return PrefixedDocstore(self._docs_mapping, id_field=field)
+
+        # otherwise, builds a store
+        return PickleLz4FullStore(
+            path=f"{ir_datasets.util.home_path()}/{self._store_name}.pklz4",
+            init_iter_fn=self._iter,
+            data_cls=self.docs_cls(),
+            lookup_field=id_field,
+            index_fields=[id_field],
+            count_hint=self.docs_count(),
+        )
