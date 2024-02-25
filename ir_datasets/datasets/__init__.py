@@ -13,6 +13,7 @@ from . import clueweb12
 from . import codec
 from . import cord19
 from . import cranfield
+from . import csl
 from . import disks45
 from . import dpr_w100
 from . import codesearchnet

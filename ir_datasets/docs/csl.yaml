@@ -1,0 +1,14 @@
+_:
+  pretty_name: 'CSL'
+  desc: '
+<p>
+The CSL dataset, used for the TREC NueCLIR technical document task.
+</p>
+'
+
+trec-2023:
+  desc: '
+<p>
+The TREC NeuCLIR 2023 technical documen task.
+</p>
+'
