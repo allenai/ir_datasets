@@ -131,6 +131,7 @@ class PrefixedDocs(BaseDocs):
 
     @lru_cache()
     def docs_count(self):
+        print("UYYOOO")
         return sum(mapping.docs.docs_count() for mapping in self._docs_mapping)
 
     @lru_cache

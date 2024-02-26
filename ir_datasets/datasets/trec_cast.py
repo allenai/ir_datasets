@@ -644,6 +644,7 @@ def _init():
         Tuples: (name prefix, document ID prefix, raw documents, passage count)
         """
         all_docs_spec = []
+        all_passages_spec = []
         passages = []
         for dsid, prefix, raw, count in tuples:
             prefixed = PrefixedDocs(None, PrefixedDocsSpec(prefix, raw))
@@ -664,10 +665,16 @@ def _init():
             all_docs_spec.append(
                 PrefixedDocsSpec(prefix, (raw if use_docs else passage), not use_docs)
             )
+            all_passages_spec.append(
+                PrefixedDocsSpec(prefix, passage, not use_docs)                
+            )
 
         # All documents together
         all_docs = PrefixedDocs(f"{NAME}/docs_{namespace}", *all_docs_spec)
         subsets[f"{namespace}"] = Dataset(all_docs)
+        if use_docs:
+            # Add a passage dataset
+            subsets[f"{namespace}/passages"] = PrefixedDocs(f"{NAME}/passages_{namespace}", *all_passages_spec)
         return all_docs, passages
 
     docs_v2 = register_docs(
