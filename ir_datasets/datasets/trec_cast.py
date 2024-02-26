@@ -666,7 +666,7 @@ def _init():
                 PrefixedDocsSpec(prefix, (raw if use_docs else passage), not use_docs)
             )
             all_passages_spec.append(
-                PrefixedDocsSpec(prefix, passage, not use_docs)                
+                PrefixedDocsSpec(prefix, passage, True)                
             )
 
         # All documents together
