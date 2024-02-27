@@ -63,7 +63,7 @@ class CrisisFactsApiDownload:
             r = requests.get(url = API_ENDPOINT, params = PARAMS, timeout=60) # longer timeout than default
             r.raise_for_status()
             if r.content:
-                yield r.content
+                yield r.content.replace(b'\n', b' ') # ensure it's in "lines" format by removing any newcline characters within the chunk
                 yield b'\n'
             else:
                 endOfStream = True
