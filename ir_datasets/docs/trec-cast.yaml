@@ -110,3 +110,23 @@ v1/2020/judged:
 <a class="ds-ref">trec-cast/v1/2020</a>, but with queries that do not appear in the qrels removed.
 </p>'
   bibtex_ids: ['Dalton2020Cast']
+
+v2:
+  desc: '
+<p>
+Version 2 of the TREC CAsT corpus. This version uses documents from 
+the Washington Post (2017-20), KILT and MS Marco V1 (documents).
+This version of the corpus was used for TREC CAsT 2021. Segmented passages
+version are also provided (using the 2021 script).
+</p>
+<ul>
+<li><a href="https://trec.nist.gov/pubs/trec30/papers/Overview-CAsT.pdf">Task Overview Paper</a></li>
+</ul>'
+
+
+v3:
+  desc: '
+<p> Version 3 of the TREC CAsT corpus. This version uses segmented documents
+from the Washington Post (2017-20), KILT and MS Marco V2 (documents). This
+version of the corpus was used for TREC CAsT 2022. </p> <ul> <li><a
+href="https://trec.nist.gov/pubs/trec31/papers/Overview_cast.pdf">Task Overview Paper</a></li> </ul>'

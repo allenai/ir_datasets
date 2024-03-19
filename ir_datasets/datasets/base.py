@@ -303,6 +303,9 @@ class FilteredQueries(BaseQueries):
             if operator(query):
                 yield query
 
+    def queries_cls(self):
+        return self._queries_handler.queries_cls()
+
     def queries_handler(self):
         return self
 

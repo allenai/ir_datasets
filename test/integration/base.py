@@ -276,6 +276,10 @@ self._test_qlogs({repr(dataset_name)}, count={count}, items={self._repr_namedtup
                 count = len(value) - maxlen
                 pattern = b'^' + re.escape(value[:maxlen//2]) + (b'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + b'$'
                 result.append(re.compile(pattern, re.DOTALL))
+            elif isinstance(value, tuple) and isinstance(value[0], tuple):
+                result.append(tuple(self._replace_regex_namedtuple(t) for t in value))
+            elif isinstance(value, list) and isinstance(value[0], tuple):
+                result.append(list(self._replace_regex_namedtuple(t) for t in value))
             else:
                 result.append(value)
         return type(tup)(*result)
@@ -283,16 +287,24 @@ self._test_qlogs({repr(dataset_name)}, count={count}, items={self._repr_namedtup
     def _repr_namedtuples(self, items):
         result = '{\n'
         for key, value in items.items():
-            result += f'    {repr(key)}: {type(value).__name__}('
-            for item in value:
-                if isinstance(item, re.Pattern):
-                    if isinstance(item.pattern, str):
-                        pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
-                    else:
-                        pattern = item.pattern.replace(b'\\ ', b' ').replace(b'\\\n', b'\n') # don't want these escaped
-                    result += f're.compile({repr(pattern)}, flags={item.flags}), '
-                else:
-                    result += f'{repr(item)}, '
-            result = result[:-2] + '),\n'
+            result += f'    {repr(key)}: {self._repr_namedtuple(value)},\n'
         result += '}'
+        return result
+
+    def _repr_namedtuple(self, value):
+        result = f'{type(value).__name__}('
+        for item in value:
+            if isinstance(item, re.Pattern):
+                if isinstance(item.pattern, str):
+                    pattern = item.pattern.replace('\\ ', ' ').replace('\\\n', '\n') # don't want these escaped
+                else:
+                    pattern = item.pattern.replace(b'\\ ', b' ').replace(b'\\\n', b'\n') # don't want these escaped
+                result += f're.compile({repr(pattern)}, flags={item.flags}), '
+            elif isinstance(item, list) and len(item) > 0 and isinstance(item[0], tuple) and hasattr(item[0], '_fields'):
+                result += '[' + ', '.join(self._repr_namedtuple(i) for i in item) + '], '
+            elif isinstance(item, tuple) and len(item) > 0 and isinstance(item[0], tuple) and hasattr(item[0], '_fields'):
+                result += '(' + ', '.join(self._repr_namedtuple(i) for i in item) + ',), '
+            else:
+                result += f'{repr(item)}, '
+        result = result[:-2] + ')'
         return result

@@ -14,10 +14,10 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/allenai/ir_datasets",
     include_package_data = True,
-    packages=setuptools.find_packages(include=['ir_datasets', 'ir_datasets.*']),
+    packages=setuptools.find_packages(include=['ir_datasets', 'ir_datasets.**']),
     install_requires=list(open('requirements.txt')),
     classifiers=[],
-    python_requires='>=3.7',
+    python_requires='>=3.8',
     entry_points={
         'console_scripts': ['ir_datasets=ir_datasets:main_cli'],
     },

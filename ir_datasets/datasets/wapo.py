@@ -65,8 +65,9 @@ class TrecBackgroundLinkingQuery(NamedTuple):
 
 
 class WapoDocs(BaseDocs):
-    def __init__(self, dlc):
+    def __init__(self, dlc, file_name):
         self._dlc = dlc
+        self._file_name = file_name
 
     def docs_path(self, force=True):
         return self._dlc.path(force)
@@ -129,7 +130,7 @@ class WapoDocs(BaseDocs):
         with self._dlc.stream() as stream:
             with tarfile.open(fileobj=stream, mode='r|gz') as tarf:
                 for member in tarf:
-                    if member.name != 'WashingtonPost.v2/data/TREC_Washington_Post_collection.v2.jl':
+                    if member.name != self._file_name:
                         continue
                     file = tarf.extractfile(member)
                     for line in file:
@@ -162,7 +163,8 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
 
-    collection_v2 = WapoDocs(dlc['v2'])
+    collection_v2 = WapoDocs(dlc['v2'], 'WashingtonPost.v2/data/TREC_Washington_Post_collection.v2.jl')
+    collection_v4 = WapoDocs(dlc['v4'], 'WashingtonPost.v4/data/TREC_Washington_Post_collection.v4.jl')
 
     base = Dataset(documentation('_'))
 
@@ -192,6 +194,10 @@ def _init():
         TrecQueries(dlc['trec-news-2020/queries'], namespace='trec-news-2020', lang='en', qtype=TrecBackgroundLinkingQuery, qtype_map=BL_MAP, remove_tags=RM_TAGS),
         TrecQrels(dlc['trec-news-2020/qrels'], BL_QREL_DEFS),
         documentation('v3/trec-news-2020'))
+
+    subsets['v4'] = Dataset(
+        collection_v4,
+        documentation('v4'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
