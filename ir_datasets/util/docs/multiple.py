@@ -127,6 +127,11 @@ class PrefixedDocs(BaseDocs):
                 yield doc
 
     def docs_iter(self):
+        # Use docstore if build
+        if self.docs_store().built():
+            return self.docs_store().__iter__()
+
+        # Otherwise, only build it if needed
         return LazyDocsIter(lambda: iter(self.docs_store()), self._iter())
 
     @lru_cache()
