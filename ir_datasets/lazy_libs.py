@@ -107,7 +107,10 @@ def ijson():
 
 def pyautocorpus():
     if 'pyautocorpus' not in _cache:
-        import pyautocorpus
+        try:
+            import pyautocorpus
+        except ImportError as ie:
+            raise ImportError("This dataset requires pyautocorpus. Run 'pip install pyautocorpus'") from ie
         _cache['pyautocorpus'] = pyautocorpus
     return _cache['pyautocorpus']
 
