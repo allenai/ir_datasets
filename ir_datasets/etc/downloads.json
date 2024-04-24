@@ -5382,13 +5382,13 @@
       "cache_path": "1/fas/docs.jsonl.gz"
     },
     "1/zh/docs": {
-      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/rus-00000-of-00001.jsonl.gz?download=true",
+      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/zho-00000-of-00001.jsonl.gz?download=true",
       "size_hint": 3188072408,
       "expected_md5": "99eb400f3a474603d1db5d41f606889b",
       "cache_path": "1/zho/docs.jsonl.gz"
     },
     "1/ru/docs": {
-      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/zho-00000-of-00001.jsonl.gz?download=true",
+      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/rus-00000-of-00001.jsonl.gz?download=true",
       "size_hint": 4504119267,
       "expected_md5": "3aabc798a3b5dd92d7c47db9521870b1",
       "cache_path": "1/rus/docs.jsonl.gz"
