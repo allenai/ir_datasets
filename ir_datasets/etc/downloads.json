@@ -879,29 +879,6 @@
     }
   },
   
-  "csl": {
-    "docs": {
-      "url": "https://huggingface.co/datasets/neuclir/csl/resolve/main/data/csl.jsonl.gz?download=true",
-      "size_hint": 115749077,
-      "expected_md5": "4198f7b442187320e2351b3b473c1883",
-      "cache_path": "docs.jsonl.gz"
-    },
-    "trec-2023/queries": {
-      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-technical_topics.0719.jsonl",
-      "size_hint": 86519,
-      "expected_md5": "0dd5ba173c695362a8705056edca481b",
-      "cache_path": "trec-2023/topics.jsonl",
-      "irds_mirror": true
-    },
-    "trec-2023/qrels": {
-      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-qrels.final.tar.gz",
-      "size_hint": 6023886,
-      "expected_md5": "cea4ff3d9eba612c7119e6490217d4e1",
-      "cache_path": "trec-2023/qrels.tar.gz",
-      "irds_mirror": true
-    }
-  },
-
   "disks45": {
     "docs": {
       "instructions": "The TREC Robust document collection is from TREC disks 4 and 5. Due to the copyrighted nature of the  documents, this collection is for research use only, which requires agreements to be filed with NIST. See details here: <https://trec.nist.gov/data/cd45/index.html>.\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-robust04.html#DataAccess>.\nOnce completed, place the uncompressed source here: {path}\nThis should contain directories like NEWS_data/FBIS, NEWS_data/FR94, etc.",
@@ -5374,55 +5351,22 @@
     }
   },
   
+  
   "neuclir": {
     "1/fa/docs": {
-      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/fas-00000-of-00001.jsonl.gz?download=true",
-      "size_hint": 2359094118,
-      "expected_md5": "c88f79f6b6da974db22cef3dd73fcee1",
-      "cache_path": "1/fas/docs.jsonl.gz"
+      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+      "cache_path": "1/fas/docs.jsonl"
     },
     "1/zh/docs": {
-      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/zho-00000-of-00001.jsonl.gz?download=true",
-      "size_hint": 3188072408,
-      "expected_md5": "99eb400f3a474603d1db5d41f606889b",
-      "cache_path": "1/zho/docs.jsonl.gz"
+      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+      "cache_path": "1/zho/docs.jsonl"
     },
     "1/ru/docs": {
-      "url": "https://huggingface.co/datasets/neuclir/neuclir1/resolve/main/data/rus-00000-of-00001.jsonl.gz?download=true",
-      "size_hint": 4504119267,
-      "expected_md5": "3aabc798a3b5dd92d7c47db9521870b1",
-      "cache_path": "1/rus/docs.jsonl.gz"
-    },
-    "trec-2022/queries": {
-      "url": "https://trec.nist.gov/data/neuclir/2022/topics.0720.utf8.jsonl",
-      "size_hint": 662272,
-      "expected_md5": "264bf244f798670f063f32ff57ba6135",
-      "cache_path": "trec-2022/topics.jsonl",
-      "irds_mirror": true
-    },
-    "trec-2022/qrels": {
-      "url": "https://trec.nist.gov/data/neuclir/2022/2022-qrels.all",
-      "size_hint": 4785668,
-      "expected_md5": "8dc1aecf13fbe358eea74ade7496b085",
-      "cache_path": "trec-2022/qrels",
-      "irds_mirror": true
-    },
-    "trec-2023/queries": {
-      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-topics.0605.jsonl",
-      "size_hint": 683779,
-      "expected_md5": "3dbb41b02bfbd719d8b55632d9b15b83",
-      "cache_path": "trec-2023/topics.jsonl",
-      "irds_mirror": true
-    },
-    "trec-2023/qrels": {
-      "url": "https://trec.nist.gov/data/neuclir/2023/neuclir-2023-qrels.final.tar.gz",
-      "size_hint": 6023886,
-      "expected_md5": "cea4ff3d9eba612c7119e6490217d4e1",
-      "cache_path": "trec-2023/qrels.tar.gz",
-      "irds_mirror": true
+      "instructions": "To use this dataset, you need to download the document files using the HC4 document download the post-processing script here: <https://github.com/NeuCLIR/download-collection>.\nTo proceed, symlink the source file here: {path}",
+      "cache_path": "1/rus/docs.jsonl"
     }
   },
-
+  
   "nyt": {
     "source": {
       "instructions": "The New York Times Annotated Corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2008T19>.\nMore details about the procedure can be found here: <https://ir-datasets.com/nyt.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
@@ -5790,7 +5734,32 @@
       "cache_path": "2020/2020qrels.txt"
     }
   },
-  
+
+  "trec-ikat": {
+    "docs": {
+      "instructions": "Please download the dataset. Instructions: <https://www.trecikat.com/>.\nTo proceed, symlink the processed passages source files here: {path}",
+      "cache_path": "/ivi/ilps/projects/TREC-Ikat-CW22/passage_jsonl/"
+    },
+    "test_queries": {
+      "url": "https://docs.google.com/uc?export=download&id=1zPSiAqLmbx9QFGm6walnuMUl7xoJmRB7",
+      "expected_md5": "684fa0197cdec8c3cfb6a2e586ab83f6",
+      "cache_path": "2023_test_topics.json"
+    },
+    "qrels": {
+      "url": "https://trec.nist.gov/data/ikat/2023-qrels.all-turns.txt",
+      "expected_md5": "79dc121bab25b2245e52a53263e5ad1f",
+      "cache_path": "2023-qrels.all-turns.txt"
+    },
+    "train_queries": {
+      "url": "https://docs.google.com/uc?export=download&id=1sNHmVYO9PVG2kFxLscPGhN-uCCUuDAu9",
+      "cache_path": "2023_train_topics.json"
+    },
+    "ptkb": {
+      "url": "https://trec.nist.gov/data/ikat/2023-ptkb-qrels.txt",
+      "cache_path": "2023-ptkb-qrels.txt"
+    }
+  },
+
   "trec-mandarin": {
     "docs": {
       "instructions": "The dataset is based on the TREC Mandarin corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T52>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
