@@ -878,7 +878,7 @@
       "cache_path": "cran.tar.gz"
     }
   },
- 
+  
   "csl": {
     "docs": {
       "url": "https://huggingface.co/datasets/neuclir/csl/resolve/main/data/csl.jsonl.gz?download=true",
@@ -5373,7 +5373,6 @@
       "skip_local": true
     }
   },
-
   
   "neuclir": {
     "1/fa/docs": {
