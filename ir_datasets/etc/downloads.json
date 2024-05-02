@@ -5794,7 +5794,7 @@
   "trec-ikat": {
     "docs": {
       "instructions": "Please download the dataset. Instructions: <https://www.trecikat.com/>.\nTo proceed, symlink the processed passages source files here: {path}",
-      "cache_path": "/ivi/ilps/projects/TREC-Ikat-CW22/passage_jsonl/"
+      "cache_path": "TREC-Ikat-CW22-passage/"
     },
     "test_queries": {
       "url": "https://docs.google.com/uc?export=download&id=1zPSiAqLmbx9QFGm6walnuMUl7xoJmRB7",
