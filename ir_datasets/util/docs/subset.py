@@ -121,7 +121,9 @@ class DocsSubset(BaseDocs):
         return self._docs.docs_lang()
 
     def docs_count(self):
-        return self._docs.docs_count() - len(self._removed_ids)
+        if count := self._docs.docs_count():
+            return count - len(self._removed_ids)
+        return None
 
     def docs_iter(self):
         return LazyDocsIter(

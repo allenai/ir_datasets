@@ -675,7 +675,7 @@ def _init():
         if use_docs:
             # Add a passage dataset
             subsets[f"{namespace}/passages"] = PrefixedDocs(f"{NAME}/passages_{namespace}", *all_passages_spec)
-        return all_docs, passages
+        return all_docs
 
     docs_v2 = register_docs(
         "v2",
