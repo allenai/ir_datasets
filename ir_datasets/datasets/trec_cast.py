@@ -137,11 +137,11 @@ class Cast2021Query(NamedTuple):
 
 class Cast2022Query(NamedTuple):
     query_id: str
-    parent_id: Optional[str]
+    parent_id: str
     participant: str
     raw_utterance: str
     manual_rewritten_utterance: str
-    response: Optional[str]
+    response: str
     provenance: List[str]
     topic_number: int
     turn_number: int
@@ -400,14 +400,14 @@ class CastQueries(BaseQueries):
                         )
                     elif self._query_type is Cast2022Query:
                         if parent_id := turn.get("parent"):
-                            parent_id = f"{parent_id}_{turn_number}"
+                            parent_id = f"{topic_number}_{parent_id}"
                         yield Cast2022Query(
                             f"{topic_number}_{turn_number}",
                             parent_id,
                             turn["participant"],
-                            turn.get("utterance", None),
-                            turn.get("manual_rewritten_utterance", None),
-                            turn.get("response", None),
+                            turn.get("utterance", ""),
+                            turn.get("manual_rewritten_utterance", ""),
+                            turn.get("response", ""),
                             turn.get("provenance", []),
                             topic_number,
                             turn_number,
