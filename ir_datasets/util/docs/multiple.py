@@ -127,10 +127,6 @@ class PrefixedDocs(BaseDocs):
                 yield doc
 
     def docs_iter(self):
-        # Use docstore if build
-        if self.docs_store().built():
-            return self.docs_store().__iter__()
-
         # Otherwise, only build it if needed
         return LazyDocsIter(lambda: iter(self.docs_store()), self._iter())
 
@@ -145,7 +141,7 @@ class PrefixedDocs(BaseDocs):
     def docs_store(self, id_field="doc_id"):
         # If no store name, we use dynamic access
         if self._store_name is None:
-            return PrefixedDocstore(self._docs_mapping, id_field=field)
+            return PrefixedDocstore(self._docs_mapping, id_field=id_field)
 
         # otherwise, builds a store
         return PickleLz4FullStore(
