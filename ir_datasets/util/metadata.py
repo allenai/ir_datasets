@@ -30,9 +30,9 @@ class MetadataComponent:
 
     def _count(self, etype):
         result = None
-        if hasattr(self._dataset, f'{etype}_count'):
+        if hasattr(self._dataset, f'{etype.value}_count'):
             try:
-                result = getattr(self._dataset, f'{etype}_count')() # may also return None
+                result = getattr(self._dataset, f'{etype.value}_count')() # may also return None
             except RuntimeError:
                 pass # swallow error and fall back onto metadata
             except FileNotFoundError:
