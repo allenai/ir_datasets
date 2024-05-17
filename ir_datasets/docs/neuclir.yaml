@@ -21,37 +21,6 @@ Users can conduct experiemnts on this collection with queries and qrels in HC4 f
   <li><a href="https://neuclir.github.io/">NeuCLIR Track Website</a></li>
   <li><a href="https://github.com/NeuCLIR/download-collection">Collection Repository</a></li>
 </ul>'
-  data_access: '
-<p>
-To access the docuemnts of this dataset, you will need to download the documents from Common Crawl. 
-The script for downloading and validating the documents are in <a href="https://github.com/NeuCLIR/download-collection">NeuCLIR/download-collection </a>. 
-Please use the following command to download the documents:
-</p>
-<code>
-git clone https://github.com/NeuCLIR/download-collection<br/>
-cd download-collection<br/>
-pip install -r requirements.txt<br/>
-python download_documents.py --storage ~/.ir_datasets/neuclir/1 \ <br/>
-                             --zho ./resource/zho/ids.jsonl.gz \ <br/>
-                             --fas ./resource/fas/ids.jsonl.gz \ <br/>
-                             --rus ./resource/rus/ids.*.jsonl.gz \ <br/>
-                             --jobs {number of process}<br/>
-</code>
-<p>
-After download, please also post-process the downloaded file to verify all and only specified documents are downloaded, and 
-modify the ordering of the collection to match the original specified ordering in the id files. 
-</p>
-<code>
-for lang in zho fas rus; do <br/>
-&nbsp;&nbsp;python fix_document_order.py --raw_download_file ~/.ir_datasets/neuclir/1/$lang/docs.jsonl \ <br/>
-&nbsp;&nbsp;                             --id_file ./resource/$lang/ids*.jsonl.gz \ <br/>
-&nbsp;&nbsp;                             --check_hash <br/>
-done
-</code>
-<p>
-You can also store the documents in other directory and create a soft link for <kbd>~/.ir_datasets/neuclir/22/</kbd>.
-</p>
-'
 
 1:
   desc: '
@@ -68,7 +37,6 @@ Human and machine translated queries will be provided in the query object for ru
 assuming the machine query tranlstion into Chinese is available. 
 </p>
 '
-  docs_instructions: &inst "docs available using https://github.com/NeuCLIR/download-collection package"
 
 1/zh/hc4-filtered:
   desc: '
@@ -77,7 +45,6 @@ Subset of the Chinse collection that intersect with HC4.
 The 60 queries are the <a class="ds-ref">hc4/zh/dev</a> and <a class="ds-ref">hc4/zh/test</a> sets combined. 
 </p>
 '
-  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 1/fa:
@@ -88,7 +55,6 @@ Human and machine translated queries will be provided in the query object for ru
 assuming the machine query tranlstion into Persian is available. 
 </p>
 '
-  docs_instructions: *inst
 
 1/fa/hc4-filtered:
   desc: '
@@ -97,7 +63,6 @@ Subset of the Persian collection that intersect with HC4.
 The 60 queries are the <a class="ds-ref">hc4/fa/dev</a> and <a class="ds-ref">hc4/fa/test</a> sets combined. 
 </p>
 '
-  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
 
@@ -109,7 +74,6 @@ Human and machine translated queries will be provided in the query object for ru
 assuming the machine query tranlstion into Russian is available. 
 </p>
 '
-  docs_instructions: *inst
 
 1/ru/hc4-filtered:
   desc: '
@@ -118,6 +82,60 @@ Subset of the Russian collection that intersect with HC4.
 The 54 queries are the <a class="ds-ref">hc4/ru/dev</a> and <a class="ds-ref">hc4/ru/test</a> sets combined. 
 </p>
 '
-  docs_instructions: *inst
   bibtex_ids: ['Lawrie2022HC4']
 
+1/fa/trec-2022:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2022 (Persian language CLIR).
+</p>
+'
+
+1/fa/trec-2023:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2023 (Persian language CLIR).
+</p>
+'
+
+1/ru/trec-2022:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2022 (Russian language CLIR).
+</p>
+'
+
+1/ru/trec-2023:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2023 (Russian language CLIR).
+</p>
+'
+
+1/zh/trec-2022:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2022 (Chinese language CLIR).
+</p>
+'
+
+1/zh/trec-2023:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2023 (Chinese language CLIR).
+</p>
+'
+
+1/multi:
+  desc: '
+<p>
+A combined corpus of NeuCLIR v1 including all Persian, Russian, and Chinese documents.
+</p>
+'
+
+1/multi/trec-2023:
+  desc: '
+<p>
+Topics and assessments for the TREC NeuCLIR 2023 multi-language retrieval task.
+</p>
+'

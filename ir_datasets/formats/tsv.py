@@ -26,6 +26,7 @@ class FileLineIter:
                 self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc[self.stream_idx].stream()))
             else:
                 self.stream = io.TextIOWrapper(self.ctxt.enter_context(self.dlc.stream()))
+        line = ''
         while self.pos < self.start:
             line = self.stream.readline()
             if line != '\n':
