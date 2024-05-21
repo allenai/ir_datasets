@@ -1,7 +1,8 @@
 import pytest
 from ir_datasets.formats.base import GenericDoc
 from ir_datasets.util.docs.multiple import PrefixedDocs, PrefixedDocsSpec
-from .data import FakeDocs
+from .data import FakeDocs, OtherDoc
+
 
 
 def test_multiple_prefixes():
@@ -43,11 +44,13 @@ def test_multiple_prefixes():
     
     with pytest.raises(AttributeError):
         PrefixedDocs(
+            None,
             PrefixedDocsSpec("D1-", FakeDocs(5)),
             PrefixedDocsSpec("D2-", FakeDocs(3, docs_cls=OtherDoc)) 
         ).docs_cls()
         
     blank = PrefixedDocs(
+        None,
         PrefixedDocsSpec("D1-", FakeDocs(5)),
         PrefixedDocsSpec("D2-", FakeDocs(3, lang='fr', namespace='other')) 
     )
@@ -58,16 +61,17 @@ def test_multiple_prefixes():
     
 def test_multiple_prefixes_inlined():
     """Test support for already prefixed collections"""
-    
+
     docs_1 = FakeDocs(5)
     docs_2 = FakeDocs(3)
 
     spec = [
-        PrefixedDocsSpec("D1-", PrefixedDocs(PrefixedDocsSpec("D1-", docs_1)), True),
-        PrefixedDocsSpec("D2-", PrefixedDocs(PrefixedDocsSpec("D2-", docs_2)), True)
+        PrefixedDocsSpec("D1-", PrefixedDocs(None, PrefixedDocsSpec("D1-", docs_1)), True),
+        PrefixedDocsSpec("D2-", PrefixedDocs(None, PrefixedDocsSpec("D2-", docs_2)), True)
     ]
 
     all_docs = PrefixedDocs(
+        None,
         *spec
     )
     

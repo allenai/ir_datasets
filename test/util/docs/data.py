@@ -4,6 +4,13 @@ import string
 from ir_datasets.formats.base import BaseDocs, GenericDoc
 from ir_datasets.indices.base import Docstore
 
+
+class OtherDoc:
+    def __init__(self, id: str, text: str):
+        self.id = id
+        self.text = text
+
+
 class FakeDocs(BaseDocs):
     def __init__(self, n_docs: int, namespace = 'test', lang='en', docs_cls=GenericDoc):
         self._docs = [

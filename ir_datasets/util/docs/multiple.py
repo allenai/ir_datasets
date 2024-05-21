@@ -28,10 +28,10 @@ class PrefixedDocsSpec:
 
 
 class PrefixedDocstore(Docstore):
-    def __init__(self, docs_mapping: List[PrefixedDocsSpec], id_field="doc_id"):
-        self._id_field = id_field
+    def __init__(self, docs_mapping: List[PrefixedDocsSpec], field="doc_id"):
+        self._id_field = field
         self._stores = [
-            (mapping, mapping.docs.docs_store(field=id_field))
+            (mapping, mapping.docs.docs_store(field=field))
             for mapping in docs_mapping
         ]
 
@@ -77,6 +77,7 @@ class PrefixedDocs(BaseDocs):
         """
         self._store_name = store_name
         self._docs_mapping = docs_mapping
+        assert len(self._docs_mapping) > 0, "No document mapping provided"
 
     @cached_property
     def lazy_self(self):
@@ -87,7 +88,7 @@ class PrefixedDocs(BaseDocs):
                 for mapping in self._docs_mapping[1:]
             ):
                 _logger.error( f"Differing classes for documents, got {[mapping.docs.docs_cls() for mapping in self._docs_mapping[1:]]}")
-                raise AssertionError()
+                raise AttributeError("Differing classes for documents")
 
             self._docs_lang = self._docs_mapping[0].docs.docs_lang()
             if any(
@@ -138,10 +139,10 @@ class PrefixedDocs(BaseDocs):
         return sum(counts)
 
     @lru_cache
-    def docs_store(self, id_field="doc_id"):
+    def docs_store(self, field="doc_id"):
         # If no store name, we use dynamic access
         if self._store_name is None:
-            return PrefixedDocstore(self._docs_mapping, id_field=id_field)
+            return PrefixedDocstore(self._docs_mapping, field=field)
 
         # otherwise, builds a store
         return PickleLz4FullStore(
