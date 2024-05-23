@@ -204,9 +204,8 @@ class IterDocs(BaseDocs):
     def docs_iter(self):
         def iter():
             with _logger.duration(f"processing {self._corpus_name}"):
-                yield from (d for d in self._docs_iter_fn())
-
-        return LazyDocsIter(lambda: iter(self.docs_store()), iter)
+                yield from self._docs_iter_fn()
+        return LazyDocsIter(lambda: iter(self.docs_store()), iter())
 
     def docs_cls(self):
         return self._docs_cls

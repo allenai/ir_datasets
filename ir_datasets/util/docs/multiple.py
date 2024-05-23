@@ -149,7 +149,7 @@ class PrefixedDocs(BaseDocs):
             path=f"{ir_datasets.util.home_path()}/{self._store_name}.pklz4",
             init_iter_fn=self._iter,
             data_cls=self.docs_cls(),
-            lookup_field=id_field,
-            index_fields=[id_field],
+            lookup_field=field,
+            index_fields=[field],
             count_hint=self.docs_count(),
         )

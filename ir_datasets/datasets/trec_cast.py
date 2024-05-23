@@ -1,7 +1,7 @@
 import gzip
 from hashlib import md5
 import os
-from functools import cached_property, lru_cache
+from functools import cached_property, lru_cache, partial
 from collections import defaultdict
 import re
 import json
@@ -405,9 +405,9 @@ class CastQueries(BaseQueries):
                             f"{topic_number}_{turn_number}",
                             parent_id,
                             turn["participant"],
-                            turn.get("utterance", ""),
-                            turn.get("manual_rewritten_utterance", ""),
-                            turn.get("response", ""),
+                            turn.get("utterance"),
+                            turn.get("manual_rewritten_utterance"),
+                            turn.get("response"),
                             turn.get("provenance", []),
                             topic_number,
                             turn_number,
@@ -511,37 +511,34 @@ def _init():
     documentation = YamlDocumentation(f"docs/{NAME}.yaml")
 
     def wapo_converter(dsid, dupes: Dupes):
-        def wrapped():
-            BeautifulSoup = ir_datasets.lazy_libs.bs4().BeautifulSoup
-            # NOTE: These rules are very specific in order to replicate the behaviour present in the official script
-            # here: <https://github.com/grill-lab/trec-cast-tools/blob/8fa243a7e058ce4b1b378c99768c53546460c0fe/src/main/python/wapo_trecweb.py>
-            # Specifically, things like skipping empty documents, filtering by "paragraph" subtype, and starting the
-            # paragraph index at 1 are all needed to perfectly match the above script.
-            # Note that the script does NOT strip HTML markup, which is meant to be removed out in a later stage (e.g., indexing).
-            # We do that here for user simplicity, as it will allow the text to be consumed directly by various models
-            # without the need for further pre-processing. (Though a bit of information is lost.)
-            for wapo_doc in ir_datasets.load(dsid).docs_handler().docs_wapo_raw_iter():
-                doc_id = wapo_doc["id"]
+        BeautifulSoup = ir_datasets.lazy_libs.bs4().BeautifulSoup
+        # NOTE: These rules are very specific in order to replicate the behaviour present in the official script
+        # here: <https://github.com/grill-lab/trec-cast-tools/blob/8fa243a7e058ce4b1b378c99768c53546460c0fe/src/main/python/wapo_trecweb.py>
+        # Specifically, things like skipping empty documents, filtering by "paragraph" subtype, and starting the
+        # paragraph index at 1 are all needed to perfectly match the above script.
+        # Note that the script does NOT strip HTML markup, which is meant to be removed out in a later stage (e.g., indexing).
+        # We do that here for user simplicity, as it will allow the text to be consumed directly by various models
+        # without the need for further pre-processing. (Though a bit of information is lost.)
+        for wapo_doc in ir_datasets.load(dsid).docs_handler().docs_wapo_raw_iter():
+            doc_id = wapo_doc["id"]
 
-                # Ignore this one
-                if dupes.has(doc_id):
-                    continue
+            # Ignore this one
+            if dupes.has(doc_id):
+                continue
 
-                pid = itertools.count(1)  # paragrah index starts at 1
-                for paragraph in wapo_doc["contents"]:
-                    if (
-                        paragraph is not None
-                        and paragraph.get("subtype") == "paragraph"
-                        and paragraph["content"] != ""
-                    ):
-                        text = paragraph["content"]
-                        if paragraph.get("mime") == "text/html":
-                            text = BeautifulSoup(
-                                f"<OUTER>{text}</OUTER>", "lxml-xml"
-                            ).get_text()
-                        yield GenericDoc(f"WAPO_{doc_id}-{next(pid)}", text)
-
-        return wrapped
+            pid = itertools.count(1)  # paragrah index starts at 1
+            for paragraph in wapo_doc["contents"]:
+                if (
+                    paragraph is not None
+                    and paragraph.get("subtype") == "paragraph"
+                    and paragraph["content"] != ""
+                ):
+                    text = paragraph["content"]
+                    if paragraph.get("mime") == "text/html":
+                        text = BeautifulSoup(
+                            f"<OUTER>{text}</OUTER>", "lxml-xml"
+                        ).get_text()
+                    yield GenericDoc(f"WAPO_{doc_id}-{next(pid)}", text)
 
     # --- Version 0 and 1 (2019 and 2020)
     # https://github.com/daltonj/treccastweb#year-2-trec-2020
@@ -554,7 +551,7 @@ def _init():
             "WAPO_",
             IterDocs(
                 f"{NAME}/v1/wapo-v2",
-                wapo_converter(
+                partial(wapo_converter,
                     "wapo/v2", ColonCommaDupes(dlc["wapo_dupes"], prefix="WAPO_")
                 ),
             ),
