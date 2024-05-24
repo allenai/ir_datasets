@@ -5739,6 +5739,60 @@
       "expected_md5": "3f221bdd3a44d1850d698041a8cdd2bc",
       "cache_path": "wapo_duplicate_list_v1.0.txt"
     },
+    "v2/dupes/marco_v1": {
+      "url": "https://github.com/daltonj/treccastweb/raw/master/2021/duplicate_files/marco_duplicates.txt",
+      "size_hint": 131116975,
+      "expected_md5": "549f721aec777b18f6538ddeabf6a8f3",
+      "cache_path": "v2/dupes/marco_v1.txt"
+    },
+    "v2/dupes/wapo": {
+      "url": "https://github.com/daltonj/treccastweb/raw/master/2021/duplicate_files/wapo-near-duplicates",
+      "size_hint": 98717888,
+      "expected_md5": "23bacc7e03af656dc590fd6a5476bc83",
+      "cache_path": "v2/dupes/wapo_near_duplicates.txt"
+    },
+    "v2/offsets/msmarco": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/MARCO_v1.chunks.jsonl.gz",
+      "size_hint": 190998420,
+      "expected_md5": "b76c8d1e3b260764d573ce618a15525f",
+      "cache_path": "v2/offsets/marco_v1.jsonl.gz"
+    },
+    "v2/offsets/wapo": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/WaPo-v2.chunks.jsonl.gz",
+      "size_hint": 43654392,
+      "expected_md5": "900c56039b4a3edd642983c4a1e13796",
+      "cache_path": "v2/offsets/wapo.jsonl.gz"
+    },
+    "v2/offsets/kilt": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/KILT-nodupes.chunks.jsonl.gz",
+      "size_hint": 237224538,
+      "expected_md5": "7bd9c844ea7d8ecc7a1236ef5c7d7722",
+      "cache_path": "v2/offsets/kilt.jsonl.gz"
+    },
+    "v3/dupes": {
+      "url": "https://github.com/daltonj/treccastweb/raw/master/2022/duplicate_files/all_duplicates.txt",
+      "size_hint": 21506576,
+      "expected_md5": "2d6cbb4a2e8733423434cfe561635c21",
+      "cache_path": "v3/all_duplicates.txt"
+    },
+    "v3/offsets/wapo": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/WaPo.chunks.jsonl.gz",
+      "expected_md5": "1dbed58d09aeaa6046c234d056ea703e",
+      "size_hint": 42785199,
+      "cache_path": "v3/offsets/wapo.jsonl.gz"
+    },
+    "v3/offsets/msmarco": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/MARCO_v2.chunks.jsonl.gz",
+      "expected_md5": "2f0bbe152b4645bff744892c5b53471f",
+      "size_hint": 780228823,
+      "cache_path": "v3/offsets/msmarco.jsonl.gz"
+    },
+    "v3/offsets/kilt": {
+      "url": "https://huggingface.co/datasets/irds/trec_cast_offsets/resolve/main/KILT.chunks.jsonl.gz",
+      "expected_md5": "290cc1a172b7fc29b5ce211a87ced098",
+      "size_hint": 237135443,
+      "cache_path": "v3/offsets/kilt.jsonl.gz"
+    },        
     "2019/train/queries": {
       "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2019/data/training/train_topics_v1.0.json",
       "size_hint": 32800,
@@ -5788,6 +5842,31 @@
       "size_hint": 1563427,
       "expected_md5": "de6a8406217945bdbf1da304214ef60c",
       "cache_path": "2020/2020qrels.txt"
+    },
+    "2021/queries": {
+      "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2021/2021_manual_evaluation_topics_v1.0.json",
+      "expected_md5": "eafb4d4c5b914baab02a71c474e4ecc4",
+      "size_hint": 363259,
+      "cache_path": "2021/2021_manual_evaluation_topics_v1.0.json"
+    },
+    "2021/qrels": {
+      "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2021/trec-cast-qrels-docs.2021.qrel",
+      "irds_mirror": true,
+      "expected_md5": "3393d7d2fbf8771511e3cf2448ad3dad",
+      "size_hint": 507214,
+      "cache_path": "2021/trec-cast-qrels-docs.2021.qrel"
+    },
+    "2022/queries": {
+      "url": "https://raw.githubusercontent.com/daltonj/treccastweb/master/2022/2022_evaluation_topics_tree_v1.0.json",
+      "expected_md5": "a2996adf88b3933816f65ad5536c7860",
+      "size_hint": 252600,
+      "cache_path": "2022/2022_evaluation_topics_tree_v1.0.json"
+    },
+    "2022/qrels": {
+      "url": "https://raw.githubusercontent.com/paulowoicho/treccastweb/master/2022/cast2022.qrel",
+      "expected_md5": "b8a53b590d1db78ebb687ddf7b173345",
+      "size_hint": 1435510,
+      "cache_path": "2022/cast2022.qrel" 
     }
   },
   
@@ -5981,6 +6060,11 @@
       "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
       "expected_md5": "ce6e93f6ce9959b72c2de4f8d12089ab",
       "cache_path": "WashingtonPost.v2.tar.gz"
+    },
+    "v4": {
+      "instructions": "The Washington Post collection can be requested here: <https://trec.nist.gov/data/wapost/>\nMore details about the procedure can be found here: <https://ir-datasets.com/wapo.html#DataAccess>.\nOnce completed, place/link the source file: {path}",
+      "expected_md5": "b45b8d34393b4df72737c11aa7fb2b3d",
+      "cache_path": "WashingtonPost.v4.tar.gz"
     },
     "trec-core-2018/queries": {
       "url": "https://trec.nist.gov/data/core/topics2018.txt",
