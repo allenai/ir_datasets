@@ -1,0 +1,11 @@
+<DOC>
+<DOCNO>  D102   </DOCNO>
+<HT> more text  </HT>
+
+<TEXT>
+some very <F P=102> fun text
+<!-- commented out --> markup &AMP;
+
+</TEXT>
+
+</DOC>
