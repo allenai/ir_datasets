@@ -4714,6 +4714,23 @@
     }
   },
   
+  "msmarco-document-v2.1": {
+    "docs": {
+      "url": "https://msmarco.z22.web.core.windows.net/msmarcoranking/msmarco_v2.1_doc.tar",
+      "size_hint": 30844989440,
+      "expected_md5_foo": "a5950665d6448d3dbaf7135645f1e074",
+      "cache_path": "msmarco_v2.1_doc.tar",
+      "download_args": {"headers": {"X-Ms-Version": "2024-07-10"}}
+    },
+    "docs-segmented": {
+      "url": "https://msmarco.z22.web.core.windows.net/msmarcoranking/msmarco_v2.1_doc_segmented.tar",
+      "size_hint": 26918768640,
+      "expected_md5_foo": "3799e7611efffd8daeb257e9ccca4d60",
+      "cache_path": "msmarco_v2.1_doc_segmented.tar",
+      "download_args": {"headers": {"X-Ms-Version": "2024-07-10"}}
+    }
+  },
+
   "msmarco-passage": {
     "collectionandqueries": {
       "url": "https://msmarco.z22.web.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
