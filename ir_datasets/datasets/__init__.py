@@ -30,6 +30,7 @@ from . import mr_tydi
 from . import msmarco_document
 from . import msmarco_document_v2
 from . import msmarco_document_v2_1
+from . import msmarco_document_v2_1_segmented
 from . import msmarco_passage
 from . import msmarco_passage_v2
 from . import msmarco_qna

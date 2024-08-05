@@ -1,7 +1,7 @@
 import re
 import unittest
 import ir_datasets
-from ir_datasets.datasets.msmarco_document_v2_1 import MsMarcoV2Document
+from ir_datasets.datasets.msmarco_document_v2_1 import MsMarcoV21Document
 from ir_datasets.formats import TrecQrel, GenericQuery
 from .base import DatasetIntegrationTest
 
@@ -12,21 +12,21 @@ _logger = ir_datasets.log.easy()
 class TestMSMarcoV21Docs(DatasetIntegrationTest):
     def test_ms_marco_docs_iter_full(self):
         self._test_docs('msmarco-document-v2.1', count=5371, items={
-            0: MsMarcoV2Document(
+            0: MsMarcoV21Document(
                 doc_id='msmarco_v2.1_doc_12_0',
                 title='Who Is Ringo Starr\'s Wife Barbara Bach and How Many Children Do They Have?',
                 url='https://answersafrica.com/ringo-starrs-wife-children.html',
                 headings=re.compile('.*Wife Barbara Bach.*'),
                 body=re.compile('^Who Is Ringo Starr\'s Wife Barbara Bach.*')
             ),
-            9: MsMarcoV2Document(
+            9: MsMarcoV21Document(
                 doc_id='msmarco_v2.1_doc_12_70974',
                 title='List of Robin Williams Movies and TV Shows From Best To Worst',
                 url='https://answersafrica.com/robin-williams-movies-tv-shows.html',
                 headings=re.compile('List of Robin Williams Movies and TV Shows.*'),
                 body=re.compile('List of Robin Williams Movies and TV Shows From Best To Worst\nList of Robin Williams Movies and TV Shows From Best To Worst*')
             ),
-            5370: MsMarcoV2Document(
+            5370: MsMarcoV21Document(
                 doc_id='msmarco_v2.1_doc_12_48692010',
                 title='Warriors of Waterdeep 2.11.13 (Mod) latest',
                 url='https://apkdry.com/warriors-of-waterdeep-2-3-24-mod/',

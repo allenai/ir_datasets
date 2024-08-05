@@ -19,6 +19,10 @@ _logger = ir_datasets.log.easy()
 NAME = 'msmarco-document-v2.1'
 
 
+class MsMarcoV21Document(MsMarcoV2Document):
+    # Identical to V2 Document
+    pass
+
 class MsMarcoV21DocStore(ir_datasets.indices.Docstore):    
     def __init__(self, doc_cls, dlc, base_path):
         super().__init__(doc_cls)
@@ -46,7 +50,7 @@ class MsMarcoV21DocStore(ir_datasets.indices.Docstore):
             document = json.loads(json_string)
 
             assert document["docid"] == doc_id
-            return MsMarcoV2Document(
+            return MsMarcoV21Document(
                 document['docid'],
                 document['url'],
                 document['title'],
@@ -69,7 +73,6 @@ class MsMarcoV21Docs(MsMarcoV2Docs):
         ir_datasets.util.home_path() / NAME / "docs")
         ds.build()
         return ds
-
 
 def _init():
     base_path = ir_datasets.util.home_path()/NAME
