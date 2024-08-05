@@ -75,16 +75,11 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
-    subsets = {}
-    
     collection = MsMarcoV21Docs(dlc['docs'])
-    for docs in collection.docs_iter():
-        print(docs)
-        break
+    subsets = {}
 
-    ds = collection.docs_store()
-    document = ds.get("msmarco_v2.1_doc_12_0")
-    print(document)
+    ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
+    
+    return collection, subsets
 
-if __name__ == "__main__":
-    _init()
+collection, subsets = _init()
