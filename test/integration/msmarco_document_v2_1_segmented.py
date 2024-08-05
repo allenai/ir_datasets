@@ -67,6 +67,12 @@ class TestMSMarcoV21DocsSegmented(DatasetIntegrationTest):
         self.assertEqual('msmarco_v2.1_doc_42_0#0_0', first_doc.doc_id)
         self.assertEqual('msmarco_v2.1_doc_42_0#1_1311', second_doc.doc_id)
 
+    def test_fast_docs_count(self):
+        expected = 113520750
+        actual = ir_datasets.load('msmarco-document-v2.1/segmented').docs_count()
+
+        self.assertEqual(expected, actual)
+
 
 if __name__ == '__main__':
     unittest.main()

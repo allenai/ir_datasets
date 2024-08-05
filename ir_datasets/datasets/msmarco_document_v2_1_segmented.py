@@ -130,8 +130,7 @@ class MsMarcoV21Docs(BaseDocs):
         return ds
 
     def docs_count(self):
-        if self.docs_store().built():
-            return self.docs_store().count()
+        return 113520750
 
     def docs_namespace(self):
         return NAME
@@ -148,8 +147,6 @@ def _init():
     subsets = {}
 
     ir_datasets.registry.register(NAME + '/segmented', Dataset(collection, documentation('_')))
-    collection
-    print(collection.docs_iter().__next__())
     
     return collection, subsets
 

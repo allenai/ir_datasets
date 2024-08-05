@@ -74,6 +74,9 @@ class MsMarcoV21Docs(MsMarcoV2Docs):
         ds.build()
         return ds
 
+    def docs_count(self):
+        return 10960555
+
 def _init():
     base_path = ir_datasets.util.home_path()/NAME
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')

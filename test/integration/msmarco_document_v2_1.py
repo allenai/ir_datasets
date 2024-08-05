@@ -61,6 +61,11 @@ class TestMSMarcoV21Docs(DatasetIntegrationTest):
         self.assertEqual('msmarco_v2.1_doc_12_0', first_doc.doc_id)
         self.assertEqual('msmarco_v2.1_doc_12_5689', second_doc.doc_id)
 
+    def test_fast_docs_count(self):
+        expected = 10960555
+        actual = ir_datasets.load('msmarco-document-v2.1').docs_count()
+
+        self.assertEqual(expected, actual)
 
 if __name__ == '__main__':
     unittest.main()
