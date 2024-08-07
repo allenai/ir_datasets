@@ -1,6 +1,8 @@
 import contextlib
 import gzip
 import io
+import os
+import shutil
 from pathlib import Path
 import json
 from typing import NamedTuple, Tuple, List
@@ -23,6 +25,17 @@ class MsMarcoV21Document(MsMarcoV2Document):
     # Identical to V2 Document
     pass
 
+def ensure_file_is_extracted(file_name):
+    if os.path.isfile(file_name):
+        return
+    import tempfile
+    tmp_file = Path(tempfile.mkdtemp()) / file_name.split('/')[-1]
+
+    with gzip.open(file_name + '.gz', 'rb') as f_in:
+        with open(tmp_file, 'wb') as f_out:
+            shutil.copyfileobj(f_in, f_out)
+    shutil.move(tmp_file, file_name)
+
 class MsMarcoV21DocStore(ir_datasets.indices.Docstore):    
     def __init__(self, doc_cls, dlc, base_path):
         super().__init__(doc_cls)
@@ -37,6 +50,9 @@ class MsMarcoV21DocStore(ir_datasets.indices.Docstore):
         if self.cache:
             return
         self.cache = Cache(TarExtractAll(self.dlc, "msmarco_v2.1_doc"), self.base_path)
+        for i in range(0, 59):
+            ensure_file_is_extracted(f"{self.cache.path()}/msmarco_v2.1_doc_{i:02d}.json")
+
 
     def get(self, doc_id, field=None):
         (string1, string2, string3, bundlenum, position) = doc_id.split("_")
