@@ -100,7 +100,14 @@ def _init():
     collection = MsMarcoV21Docs(dlc['docs'])
     subsets = {}
 
+    subsets['trec-rag-2024'] = Dataset(
+        collection,
+        TsvQueries(dlc['rag-2024-test-topics'], namespace=NAME, lang='en'),
+    )
+
     ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
+    for s in sorted(subsets):
+        ir_datasets.registry.register(f'{NAME}/{s}', Dataset(subsets[s], documentation(s)))
     
     return collection, subsets
 

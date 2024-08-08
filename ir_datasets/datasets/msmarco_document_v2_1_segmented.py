@@ -145,8 +145,14 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     collection = MsMarcoV21Docs(dlc['docs-segmented'])
     subsets = {}
+    subsets['trec-rag-2024'] = Dataset(
+        collection,
+        TsvQueries(dlc['rag-2024-test-topics'], namespace=NAME, lang='en'),
+    )
 
     ir_datasets.registry.register(NAME + '/segmented', Dataset(collection, documentation('_')))
+    for s in sorted(subsets):
+        ir_datasets.registry.register(f'{NAME}/segmented/{s}', Dataset(subsets[s], documentation(s)))
     
     return collection, subsets
 

@@ -73,6 +73,13 @@ class TestMSMarcoV21DocsSegmented(DatasetIntegrationTest):
 
         self.assertEqual(expected, actual)
 
+    def test_fast_queries(self):
+        self._test_queries('msmarco-document-v2.1/trec-rag-2024', count=301, items={
+            0: GenericQuery('2024-145979', 'what is vicarious trauma and how can it be coped with?'),
+            9: GenericQuery('2024-158743', 'what was happening in germany and netherlands in the 1840s'),
+            300: GenericQuery('2024-21669', 'do abortions kill more black people than other weapons'),
+        })
+
 
 if __name__ == '__main__':
     unittest.main()
