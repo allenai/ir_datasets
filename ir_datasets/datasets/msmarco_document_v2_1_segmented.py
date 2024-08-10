@@ -61,7 +61,7 @@ class MsMarcoV21SegmentedDocStore(ir_datasets.indices.Docstore):
     def build(self):
         if self.cache:
             return
-        self.cache = Cache(TarExtractAll(self.dlc, "msmarco_v2.1_doc_segmented"), self.base_path)
+        self.cache = TarExtractAll(self.dlc, self.base_path/"msmarco_v2.1_doc_segmented")
 
         for i in range(0, 59):
             ensure_file_is_extracted(f"{self.cache.path()}/msmarco_v2.1_doc_segmented_{i:02d}.json")
