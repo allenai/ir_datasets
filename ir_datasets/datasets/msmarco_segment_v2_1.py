@@ -20,6 +20,8 @@ class MsMarcoV21SegmentedDoc(NamedTuple):
     segment: str
     start_char: int
     end_char: int
+    msmarco_document_id: str
+    msmarco_document_segment_idx: int
     def default_text(self):
         """
         title + headings + segment
@@ -32,6 +34,8 @@ class MsMarcoV21SegmentedDoc(NamedTuple):
 
 def parse_msmarco_segment(line):
     data = json.loads(line)
+    msmarco_document_id, segment_info = data['docid'].split('#')
+    segment_idx, segment_file_offset = segment_info.split('_')
     return MsMarcoV21SegmentedDoc(
         data['docid'],
         data['url'],
@@ -39,15 +43,17 @@ def parse_msmarco_segment(line):
         data['headings'],
         data['segment'],
         data['start_char'],
-        data['end_char']
+        data['end_char'],
+        msmarco_document_id,
+        int(segment_idx),
     )
 
 
-def passage_bundle_pos_from_key(key):
+def segment_bundle_pos_from_key(key):
     # key like: msmarco_v2.1_doc_00_0#4_5974
     first, second = key.split('#')
     (string1, string2, string3, bundle, doc_pos) = first.split('_')
-    (segment_num, segment_pos) = first.split('_')
+    (segment_num, segment_pos) = second.split('_')
     assert string1 == 'msmarco' and string2 == 'v2.1' and string3 == 'doc'
     return f'msmarco_v2.1_doc_segmented_{bundle}.json', segment_pos
 
@@ -56,7 +62,7 @@ def _init():
     base_path = ir_datasets.util.home_path()/NAME
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
-    collection = MsMarcoV2Passages(dlc['docs'], cls=MsMarcoV21SegmentedDoc, parse_passage=parse_msmarco_segment, name=NAME, bundle_pos_from_key=passage_bundle_pos_from_key, count=113_520_750)
+    collection = MsMarcoV2Passages(dlc['docs'], cls=MsMarcoV21SegmentedDoc, parse_passage=parse_msmarco_segment, name=NAME, bundle_pos_from_key=segment_bundle_pos_from_key, count=113_520_750, docstore_size_hint=205178702472)
     subsets = {}
     subsets['trec-rag-2024'] = Dataset(
         collection,

@@ -14,7 +14,7 @@ def _init():
     documentation = YamlDocumentation(f'docs/{NAME}.yaml')
     dlc = DownloadConfig.context(NAME, base_path, dua=DUA)
     # we can re-use MsMarcoV2Docs, just with a few modifications directly
-    collection = MsMarcoV2Docs(dlc['docs'], docid_prefix='msmarco_v2.1_doc_', docstore_size_hint=0, name=NAME)
+    collection = MsMarcoV2Docs(dlc['docs'], docid_prefix='msmarco_v2.1_doc_', docstore_size_hint=59680176084, name=NAME)
     subsets = {}
 
     subsets['trec-rag-2024'] = Dataset(

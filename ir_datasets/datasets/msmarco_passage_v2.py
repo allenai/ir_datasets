@@ -121,9 +121,10 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         # adapted from <https://microsoft.github.io/msmarco/TREC-Deep-Learning.html>
         bundles = {}
         for key in keys:
-            if not key.count('_') == 3:
+            try:
+                bundlenum, position = self.docs_handler._bundle_pos_from_key(key)
+            except:
                 continue
-            bundlenum, position = self.docs_handler._bundle_pos_from_key(key)
             if bundlenum not in bundles:
                 bundles[bundlenum] = []
             bundles[bundlenum].append(int(position))
@@ -227,7 +228,7 @@ class MsMarcoV2PassageIter:
                 pos = self.current_pos_mmap[self.slice.start - self.current_file_start_idx]
                 self.current_file.seek(pos)
                 self.next_index = self.slice.start
-        result = parse_msmarco_passage(self.current_file.readline())
+        result = self.docstore.docs_handler._parse_passage(self.current_file.readline())
         self.next_index += 1
         self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
         return result
