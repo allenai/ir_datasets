@@ -36,17 +36,21 @@ class MsMarcoV2Document(NamedTuple):
 
 
 class MsMarcoV2Docs(BaseDocs):
-    def __init__(self, dlc):
+    def __init__(self, dlc, docid_prefix='msmarco_doc_', docstore_size_hint=66500029281, name=NAME):
         super().__init__()
         self._dlc = dlc
+        self._docid_prefix = docid_prefix
+        self._docstore_size_hint = docstore_size_hint
+        self._name = name
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
-        with self._dlc.stream() as stream, \
-             tarfile.open(fileobj=stream, mode='r|') as tarf:
-            for record in tarf:
-                if not record.name.endswith('.gz'):
-                    continue
+        with tarfile.open(self._dlc.path(), mode='r:') as tarf:
+            # since there's no compression, it's fast to scan all records and sort them.
+            # The sorting has no effect on v2, but in v2.1, the files are out-of-sequence, so this
+            # addressed that problem.
+            records = sorted([r for r in tarf if r.name.endswith('.gz')], key=lambda x: x.name)
+            for record in records:
                 file = tarf.extractfile(record)
                 with gzip.open(file) as file:
                     for line in file:
@@ -84,18 +88,17 @@ class MsMarcoV2Docs(BaseDocs):
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
-            key_field_prefix='msmarco_doc_', # cut down on storage by removing prefix in lookup structure
-            size_hint=66500029281,
-            count_hint=ir_datasets.util.count_hint(NAME),
+            key_field_prefix=self._docid_prefix, # cut down on storage by removing prefix in lookup structure
+            size_hint=self._docstore_size_hint,
+            count_hint=ir_datasets.util.count_hint(self._name),
         )
-        # return MsMArcoV2DocStore(self)
 
     def docs_count(self):
         if self.docs_store().built():
             return self.docs_store().count()
 
     def docs_namespace(self):
-        return NAME
+        return self._name
 
     def docs_lang(self):
         return 'en'
