@@ -5943,10 +5943,15 @@
   },
 
   "trec-tot": {
-    "main": {
+    "2023": {
       "url": "https://surfdrive.surf.nl/files/index.php/s/FaEK4xc6Xp2JcAJ/download",
       "expected_md5": "f84fe82cb80e3ee1072576c8d6c4a417",
       "cache_path": "trec-tot.zip"
+    },
+    "2024": {
+       "url": "https://zenodo.org/api/records/11185090/files-archive",
+      "expected_md5": "ea48b27fd3a1b90b1b9b8bf98351f7f9",
+      "cache_path": "trec-tot-2024.zip"
     }
   },
   

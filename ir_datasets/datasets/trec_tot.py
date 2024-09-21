@@ -44,7 +44,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 
-    main_dlc = dlc['main']
+    main_dlc = dlc['2023']
     base = Dataset(
         documentation('_'),
     )
@@ -55,6 +55,7 @@ def _init():
         docs_2023_handler,
         documentation('2023'),
     )
+
     ir_datasets.registry.register(f'{NAME}/2023', subsets['2023'])
     for s in ['train', 'dev']:
         subsets[f'2023/{s}'] = Dataset(
@@ -64,6 +65,15 @@ def _init():
             documentation(f'2023/{s}'),
         )
         ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
+
+    main_dlc = dlc['2024']
+
+    docs_2024_handler = JsonlDocs(Cache(ZipExtract(main_dlc, 'TREC-TOT-2024/corpus.jsonl'), base_path/'2024/corpus.jsonl'), doc_cls=TipOfTheTongueDoc, lang='en')
+    subsets['2024'] = Dataset(
+        docs_2024_handler,
+        documentation('2024'),
+    )
+    ir_datasets.registry.register(f'{NAME}/2024', subsets['2024'])
 
     return base, subsets
 
