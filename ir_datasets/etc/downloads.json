@@ -5949,9 +5949,14 @@
       "cache_path": "trec-tot.zip"
     },
     "2024": {
-       "url": "https://zenodo.org/api/records/11185090/files-archive",
-      "expected_md5": "ea48b27fd3a1b90b1b9b8bf98351f7f9",
-      "cache_path": "trec-tot-2024.zip"
+      "url": "https://zenodo.org/records/13370657/files/corpus.jsonl.zip?download=1",
+      "expected_md5": "4ea86770817e46a06fea5c94f596409c",
+      "cache_path": "trec-tot-2024-corpus.zip"
+    },
+    "2024-test": {
+      "url": "https://zenodo.org/records/13370657/files/test-2024.zip?download=1",
+      "expected_md5": "3d0a4d83957ee6a1398afefbc96162fa",
+      "cache_path": "trec-tot-2024-queries.zip"
     }
   },
   
