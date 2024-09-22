@@ -22,6 +22,26 @@ class TipOfTheTongueDoc(NamedTuple):
         """
         return self.page_title + ' ' + self.text
 
+class TipOfTheTongueDoc2024(NamedTuple):
+    doc_id: str
+    title: str
+    wikidata_id: str
+    text: str
+    sections: Dict[str, str]
+
+    def default_text(self):
+        """
+        We use the title and text of the TipOfTheTongueQuery as default_text because that is everything available for users who want to respond to such an information need.
+        """
+        return self.title + ' ' + self.text
+
+class TipOfTheTongueQuery2024(NamedTuple):
+    query_id: str
+    query: str
+
+    def default_text(self):
+        return self.query
+
 
 class TipOfTheTongueQuery(NamedTuple):
     query_id: str
@@ -44,7 +64,7 @@ def _init():
     dlc = DownloadConfig.context(NAME, base_path)
     subsets = {}
 
-    main_dlc = dlc['main']
+    main_dlc = dlc['2023']
     base = Dataset(
         documentation('_'),
     )
@@ -55,6 +75,7 @@ def _init():
         docs_2023_handler,
         documentation('2023'),
     )
+
     ir_datasets.registry.register(f'{NAME}/2023', subsets['2023'])
     for s in ['train', 'dev']:
         subsets[f'2023/{s}'] = Dataset(
@@ -64,6 +85,23 @@ def _init():
             documentation(f'2023/{s}'),
         )
         ir_datasets.registry.register(f'{NAME}/2023/{s}', subsets[f'2023/{s}'])
+
+    main_dlc = dlc['2024']
+
+    docs_2024_handler = JsonlDocs(Cache(ZipExtract(main_dlc, 'corpus.jsonl'), base_path/'2024/corpus.jsonl'), doc_cls=TipOfTheTongueDoc2024, lang='en')
+    subsets['2024'] = Dataset(
+        docs_2024_handler,
+        documentation('2024'),
+    )
+    ir_datasets.registry.register(f'{NAME}/2024', subsets['2024'])
+    for s in ['test']:
+        subsets[f'2024/{s}'] = Dataset(
+            docs_2024_handler,
+            JsonlQueries(Cache(ZipExtract(dlc[f'2024-{s}'], f'{s}-2024/queries.jsonl'), base_path/f'2024/{s}-2024/queries.jsonl'), query_cls=TipOfTheTongueQuery2024, lang='en'),
+            documentation(f'2024/{s}'),
+        )
+        ir_datasets.registry.register(f'{NAME}/2024/{s}', subsets[f'2024/{s}'])
+
 
     return base, subsets
 
