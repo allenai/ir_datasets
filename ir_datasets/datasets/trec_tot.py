@@ -35,6 +35,12 @@ class TipOfTheTongueDoc2024(NamedTuple):
         """
         return self.title + ' ' + self.text
 
+class TipOfTheTongueQuery2024(NamedTuple):
+    query_id: str
+    query: str
+
+    def default_text(self):
+        return self.query
 
 
 class TipOfTheTongueQuery(NamedTuple):
@@ -91,7 +97,7 @@ def _init():
     for s in ['test']:
         subsets[f'2024/{s}'] = Dataset(
             docs_2024_handler,
-            JsonlQueries(Cache(ZipExtract(dlc[f'2024-{s}'], f'TREC-TOT/{s}-2024/queries.jsonl'), base_path/f'2024/{s}-2024/queries.jsonl'), query_cls=TipOfTheTongueQuery, mapping=QUERY_MAP, lang='en'),
+            JsonlQueries(Cache(ZipExtract(dlc[f'2024-{s}'], f'{s}-2024/queries.jsonl'), base_path/f'2024/{s}-2024/queries.jsonl'), query_cls=TipOfTheTongueQuery2024, lang='en'),
             documentation(f'2024/{s}'),
         )
         ir_datasets.registry.register(f'{NAME}/2024/{s}', subsets[f'2024/{s}'])
