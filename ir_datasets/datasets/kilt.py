@@ -66,28 +66,26 @@ class KiltDocs(BaseDocs):
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
-        with self._streamer.stream() as stream:
-            for doc in stream:
-                doc = json.loads(doc)
-                yield KiltDoc(
-                    doc['wikipedia_id'],
-                    doc['wikipedia_title'],
-                    ''.join(strip_markup(t) for t in doc['text']),
-                    tuple(doc['text']),
-                    tuple(KiltDocAnchor(
-                        a['text'],
-                        a['href'],
-                        a['paragraph_id'],
-                        a['start'],
-                        a['end']) for a in doc['anchors']),
-                    tuple(doc['categories'].split(',')),
-                    doc.get('wikidata_info', {}).get('wikidata_id', ''),
-                    str(doc['history']['revid']),
-                    doc['history']['timestamp'],
-                    str(doc['history']['parentid']),
-                    str(doc['history']['pageid']),
-                    doc['history']['url'],
-                )
+        for doc in self.docs_kilt_raw_iter():
+            yield KiltDoc(
+                doc['wikipedia_id'],
+                doc['wikipedia_title'],
+                ''.join(strip_markup(t) for t in doc['text']),
+                tuple(doc['text']),
+                tuple(KiltDocAnchor(
+                    a['text'],
+                    a['href'],
+                    a['paragraph_id'],
+                    a['start'],
+                    a['end']) for a in doc['anchors']),
+                tuple(doc['categories'].split(',')),
+                doc.get('wikidata_info', {}).get('wikidata_id', ''),
+                str(doc['history']['revid']),
+                doc['history']['timestamp'],
+                str(doc['history']['parentid']),
+                str(doc['history']['pageid']),
+                doc['history']['url'],
+            )
 
     def docs_cls(self):
         return KiltDoc
@@ -111,6 +109,11 @@ class KiltDocs(BaseDocs):
 
     def docs_lang(self):
         return 'en'
+
+    def docs_kilt_raw_iter(self):
+        with self._streamer.stream() as stream:
+            for doc in stream:
+                yield json.loads(doc)
 
 
 def _init():
