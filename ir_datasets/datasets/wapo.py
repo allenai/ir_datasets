@@ -195,9 +195,9 @@ def _init():
         TrecQrels(dlc['trec-news-2020/qrels'], BL_QREL_DEFS),
         documentation('v3/trec-news-2020'))
 
-    subsets['v4'] = Dataset(
-        collection_v4,
-        documentation('v4'))
+    #subsets['v4'] = Dataset(
+    #    collection_v4,
+    #    documentation('v4'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
