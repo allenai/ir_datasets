@@ -16,8 +16,8 @@ class TestCranfield(DatasetIntegrationTest):
     def test_queries(self):
         self._test_queries('cranfield', count=225, items={
             0: GenericQuery('1', 'what similarity laws must be obeyed when constructing aeroelastic models\nof heated high speed aircraft .'),
-            9: GenericQuery('18', 'are real-gas transport properties for air available over a wide range of\nenthalpies and densities .'),
-            224: GenericQuery('365', 'what design factors can be used to control lift-drag ratios at mach\nnumbers above 5 .'),
+            9: GenericQuery('10', 'are real-gas transport properties for air available over a wide range of\nenthalpies and densities .'),
+            224: GenericQuery('225', 'what design factors can be used to control lift-drag ratios at mach\nnumbers above 5 .'),
         })
 
     def test_qrels(self):
