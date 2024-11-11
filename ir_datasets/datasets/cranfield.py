@@ -109,6 +109,7 @@ class CranfieldQueries(BaseQueries):
     def queries_iter(self):
         with self.queries_dlc.stream() as stream:
             stream = io.TextIOWrapper(stream)
+            query_id = 1
             for lines in prefix_sentinel_splitter(stream, sentinel='.I '):
                 record = {'query_id': '', 'text': ''}
                 field = 'query_id'
@@ -118,7 +119,8 @@ class CranfieldQueries(BaseQueries):
                     else:
                         record[field] += line
                 record = {k: v.strip() for k, v in record.items()}
-                record['query_id'] = record['query_id'].lstrip('0') # remove leading 0s to match qrels
+                record['query_id'] = str(query_id) # overwrite query_id to match qrels
+                query_id += 1
                 yield GenericQuery(**record)
 
     def queries_cls(self):
