@@ -26,3 +26,17 @@ Train query set for TREC 2023 tip-of-the-tongue search track.
 Dev query set for TREC 2023 tip-of-the-tongue search track.
 </p>
 '
+
+2024:
+  desc: '
+<p>
+Corpus for the TREC 2024 tip-of-the-tongue search track.
+</p>
+'
+
+2024/test:
+  desc: '
+<p>
+Test query set for TREC 2024 tip-of-the-tongue search track.
+</p>
+'
