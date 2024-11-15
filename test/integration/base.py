@@ -276,9 +276,9 @@ self._test_qlogs({repr(dataset_name)}, count={count}, items={self._repr_namedtup
                 count = len(value) - maxlen
                 pattern = b'^' + re.escape(value[:maxlen//2]) + (b'.{%i}' % count) + re.escape(value[-(maxlen//2):]) + b'$'
                 result.append(re.compile(pattern, re.DOTALL))
-            elif isinstance(value, tuple) and isinstance(value[0], tuple):
+            elif isinstance(value, tuple) and len(value) > 0 and isinstance(value[0], tuple):
                 result.append(tuple(self._replace_regex_namedtuple(t) for t in value))
-            elif isinstance(value, list) and isinstance(value[0], tuple):
+            elif isinstance(value, list) and len(value) > 0 and isinstance(value[0], tuple):
                 result.append(list(self._replace_regex_namedtuple(t) for t in value))
             else:
                 result.append(value)
