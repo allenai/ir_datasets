@@ -715,6 +715,7 @@
   "wapo/v2/trec-news-2018": {"docs": {"_ref": "wapo/v2"}, "queries": {"count": 50}, "qrels": {"count": 8508, "fields": {"relevance": {"counts_by_value": {"16": 106, "2": 1189, "0": 6465, "4": 584, "8": 164}}}}},
   "wapo/v2/trec-news-2019": {"docs": {"_ref": "wapo/v2"}, "queries": {"count": 60}, "qrels": {"count": 15655, "fields": {"relevance": {"counts_by_value": {"2": 1677, "0": 12614, "8": 431, "16": 273, "4": 660}}}}},
   "wapo/v3/trec-news-2020": {"queries": {"count": 50}, "qrels": {"count": 17764, "fields": {"relevance": {"counts_by_value": {"0": 15348, "2": 1603, "4": 631, "8": 132, "16": 50}}}}},
+  "wapo/v4": {"docs": {"count": 728626, "fields": {"doc_id": {"max_len": 36, "common_prefix": ""}}}},
   "wikiclir": {},
   "wikiclir/ar": {"docs": {"count": 535118, "fields": {"doc_id": {"max_len": 7, "common_prefix": ""}}}, "queries": {"count": 324489}, "qrels": {"count": 519269, "fields": {"relevance": {"counts_by_value": {"2": 324475, "1": 194794}}}}},
   "wikiclir/ca": {"docs": {"count": 548722, "fields": {"doc_id": {"max_len": 7, "common_prefix": ""}}}, "queries": {"count": 339586}, "qrels": {"count": 965233, "fields": {"relevance": {"counts_by_value": {"2": 339562, "1": 625671}}}}},
