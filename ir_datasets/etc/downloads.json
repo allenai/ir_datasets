@@ -5806,7 +5806,7 @@
       "cache_path": "2019/train_topics_mod.qrel"
     },
     "2019/train/scoreddocs": {
-      "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/train_topics.teIn",
+      "url": "https://huggingface.co/datasets/macavaney/trec-cast-files/resolve/main/train_topics.teIn",
       "size_hint": 14766212,
       "expected_md5": "83bdb720e0c469390004598091021901",
       "cache_path": "2019/train_topics.teIn"
@@ -5825,7 +5825,7 @@
       "cache_path": "2019/2019qrels.txt"
     },
     "2019/eval/scoreddocs": {
-      "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/test_topics.teIn",
+      "url": "https://huggingface.co/datasets/macavaney/trec-cast-files/resolve/main/test_topics.teIn",
       "size_hint": 27691171,
       "expected_md5": "4c3958c09edab1b46474a337590c1ecd",
       "cache_path": "2019/test_topics.teIn"
