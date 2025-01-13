@@ -85,7 +85,6 @@ def _init():
     subsets["1"] = Dataset(documentation('1')) # dummy year level ds
 
     qrels2022 = dlc['trec-2022/qrels']
-    qrels2023 = TarExtract(dlc['trec-2023/qrels'], 'qrels.final')
 
     # For NeuCLIR Collection 1
     for lang in ['zh', 'fa', 'ru']:
@@ -102,11 +101,10 @@ def _init():
             qrels,
             documentation(f"1/{lang}/trec-2022"),
         )
-        qrels = LangFilteredTrecQrels(qrels2023, QREL_DEFS, lang3)
         subsets[f"1/{lang}/trec-2023"] = Dataset(
             lang_docs,
             FilteredQueries(ExctractedCCQueries(dlc['trec-2023/queries'], subset_lang=lang, filter_lwq=False, cls=ExctractedCCNoReportNoHtNarQuery, namespace=NAME), _lazy_qids_set(qrels), mode='include'),
-            qrels,
+            TrecQrels(TarExtract(dlc['trec-2023/qrels'], f'qrels.final.gains.{lang3}'), QREL_DEFS),
             documentation(f"1/{lang}/trec-2023"),
         )
         include_doc_id_dlc = hc4_dlc[f'{lang}/docs/ids'] if lang != 'ru' else tuple([ hc4_dlc[f'{lang}/docs/ids/{i}'] for i in range(8) ])
@@ -126,7 +124,7 @@ def _init():
     subsets['1/multi/trec-2023'] = Dataset(
         multi_docs,
         ExctractedCCQueries(dlc['trec-2023/queries'], filter_lwq=False, cls=ExctractedCCMultiMtQuery, namespace=NAME),
-        TrecQrels(qrels2023, QREL_DEFS),
+        TrecQrels(TarExtract(dlc['trec-2023/qrels'], 'qrels.final.gains'), QREL_DEFS),
         documentation("1/multi/trec-2023")
     )
 
