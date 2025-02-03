@@ -1,0 +1,14 @@
+_:
+  pretty_name: 'MSMARCO (document, version 2.1)'
+  desc: '
+  <p>
+Version 2.1 of the MS MARCO document ranking dataset used in TREC RAG 2024.
+</p>
+<ul>
+  <li>Version 1 of dataset: <a class="ds-ref">msmarco-document</a></li>
+  <li>Documents: Text extracted from web pages</li>
+  <li>Queries: Natural language questions (from query log)</li>
+  <li> TODO: add paper describing the dataset.</li>
+</ul>'
+  bibtex_ids: []
+
