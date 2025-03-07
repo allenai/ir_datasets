@@ -1,6 +1,3 @@
-import codecs
-import json
-
 import pyarrow.parquet as pq
 
 import ir_datasets
