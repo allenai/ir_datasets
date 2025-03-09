@@ -29,10 +29,10 @@ def parquet_iter(path):
     pq = ir_datasets.lazy_libs.pyarrow_parquet()
     # https://stackoverflow.com/a/77150113
     batch_size = 64
-    parquet_file = pq.ParquetFile(path)
-    for record_batch in parquet_file.iter_batches(batch_size=batch_size):
-        for d in record_batch.to_pylist():
-            yield d
+    with pq.ParquetFile(path) as parquet_file:
+        for record_batch in parquet_file.iter_batches(batch_size=batch_size):
+            for d in record_batch.to_pylist():
+                yield d
 
 
 class NanoBeirDocs(BaseDocs):
