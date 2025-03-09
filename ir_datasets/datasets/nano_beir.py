@@ -1,5 +1,3 @@
-import pyarrow.parquet as pq
-
 import ir_datasets
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import (
@@ -28,6 +26,7 @@ def _map_field(field, data):
 
 
 def parquet_iter(path):
+    pq = ir_datasets.lazy_libs.pyarrow_parquet()
     # https://stackoverflow.com/a/77150113
     batch_size = 64
     parquet_file = pq.ParquetFile(path)
