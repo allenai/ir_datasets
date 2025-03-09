@@ -140,7 +140,7 @@ def _init():
     for ds in benchmarks:
         docs = NanoBeirDocs(ds, dlc[f"{ds}/docs"], GenericDoc)
         queries = NanoBeirQueries(ds, dlc[f"{ds}/queries"], GenericQuery)
-        qrels = NanoBeirQrels(dlc[f"{ds}/qrels"], qrels_defs={})
+        qrels = NanoBeirQrels(dlc[f"{ds}/qrels"], qrels_defs={1: 'relevant'})
         subsets[ds] = Dataset(
             docs,
             queries,
