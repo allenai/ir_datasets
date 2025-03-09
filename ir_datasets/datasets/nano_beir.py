@@ -9,7 +9,6 @@ from ir_datasets.formats import (
     TrecQrel,
 )
 from ir_datasets.indices import PickleLz4FullStore
-from ir_datasets.util import Migrator
 
 _logger = ir_datasets.log.easy()
 
@@ -139,13 +138,7 @@ def _init():
     ]
 
     for ds in benchmarks:
-        docs_migrator = Migrator(
-            base_path / ds / "irds_version.txt",
-            "v2",
-            affected_files=[f"{base_path/ds}/docs.pklz4"],
-            message=f"Migrating {NAME}/{ds} (structuring fields)",
-        )
-        docs = docs_migrator(NanoBeirDocs(ds, dlc[f"{ds}/docs"], GenericDoc))
+        docs = NanoBeirDocs(ds, dlc[f"{ds}/docs"], GenericDoc)
         queries = NanoBeirQueries(ds, dlc[f"{ds}/queries"], GenericQuery)
         qrels = NanoBeirQrels(dlc[f"{ds}/qrels"], qrels_defs={})
         subsets[ds] = Dataset(
