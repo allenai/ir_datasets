@@ -41,7 +41,3 @@ dependencies = {file = ["requirements.txt"]}
 
 [project.scripts]
 ir_datasets = "ir_datasets:main_cli"
-
-[tool.setuptools.package-data]
-"ir_datasets" = ["docs/*.yaml", "etc/*.json"]
-"" = ["requirements.txt", "LICENSE"]
