@@ -32,6 +32,7 @@ from . import msmarco_document_v2
 from . import msmarco_passage
 from . import msmarco_passage_v2
 from . import msmarco_qna
+from . import nano_beir
 from . import neumarco
 from . import nfcorpus
 from . import natural_questions
