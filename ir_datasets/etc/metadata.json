@@ -700,6 +700,7 @@
   "trec-spanish/trec4": {"docs": {"_ref": "trec-spanish"}, "queries": {"count": 25}, "qrels": {"count": 13109, "fields": {"relevance": {"counts_by_value": {"1": 2202, "0": 10907}}}}},
   "trec-tot": {},
   "trec-tot/2023": {"docs": {"count": 231852, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}},
+  "trec-tot/2024": {"docs": {"count": 3185450, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}},
   "trec-tot/2023/dev": {"docs": {"count": 231852, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}, "queries": {"count": 150}, "qrels": {"count": 150, "fields": {"relevance": {"counts_by_value": {"1": 150}}}}},
   "trec-tot/2023/train": {"docs": {"count": 231852, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}, "queries": {"count": 150}, "qrels": {"count": 150, "fields": {"relevance": {"counts_by_value": {"1": 150}}}}},
   "tripclick": {"docs": {"count": 1523878, "fields": {"doc_id": {"max_len": 8, "common_prefix": ""}}}},
