@@ -6184,6 +6184,11 @@
       "url": "https://surfdrive.surf.nl/files/index.php/s/FaEK4xc6Xp2JcAJ/download",
       "expected_md5": "f84fe82cb80e3ee1072576c8d6c4a417",
       "cache_path": "trec-tot.zip"
+    },
+    "test-queries": {
+      "url": "https://surfdrive.surf.nl/files/index.php/s/qQCQ1iRZvj712kv/download",
+      "expected_md5": "756b77a2725f0960defb3a9b12d95334",
+      "cache_path": "trec-tot-test-queries.zip"
     }
   },
   
