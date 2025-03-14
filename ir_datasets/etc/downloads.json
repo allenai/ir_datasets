@@ -6106,7 +6106,32 @@
       "cache_path": "2022/cast2022.qrel" 
     }
   },
-  
+
+  "trec-ikat": {
+    "docs": {
+      "instructions": "Please download the dataset. Instructions: <https://www.trecikat.com/>.\nTo proceed, symlink the processed passages source files here: {path}",
+      "cache_path": "TREC-Ikat-CW22-passage/"
+    },
+    "test_queries": {
+      "url": "https://docs.google.com/uc?export=download&id=1zPSiAqLmbx9QFGm6walnuMUl7xoJmRB7",
+      "expected_md5": "684fa0197cdec8c3cfb6a2e586ab83f6",
+      "cache_path": "2023_test_topics.json"
+    },
+    "qrels": {
+      "url": "https://trec.nist.gov/data/ikat/2023-qrels.all-turns.txt",
+      "expected_md5": "79dc121bab25b2245e52a53263e5ad1f",
+      "cache_path": "2023-qrels.all-turns.txt"
+    },
+    "train_queries": {
+      "url": "https://docs.google.com/uc?export=download&id=1sNHmVYO9PVG2kFxLscPGhN-uCCUuDAu9",
+      "cache_path": "2023_train_topics.json"
+    },
+    "ptkb": {
+      "url": "https://trec.nist.gov/data/ikat/2023-ptkb-qrels.txt",
+      "cache_path": "2023-ptkb-qrels.txt"
+    }
+  },
+
   "trec-mandarin": {
     "docs": {
       "instructions": "The dataset is based on the TREC Mandarin corpus. It is available from the LDC via: <https://catalog.ldc.upenn.edu/LDC2000T52>\nMore details about the procedure can be found here: <https://ir-datasets.com/trec-mandarin.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
