@@ -35,13 +35,12 @@ If you want the main branch, you install as such:
 pip install git+https://github.com/allenai/ir_datasets.git
 ```
 
-If you want to build from source, use:
+If you want to run an editable version locally:
 
 ```
 $ git clone https://github.com/allenai/ir_datasets
 $ cd ir_datasets
-$ python setup.py bdist_wheel
-$ pip install dist/ir_datasets-*.whl
+$ pip install -e .    
 ```
 
 Tested with python versions 3.7, 3.8, 3.9, and 3.10. (Mininum python version is 3.7.)
