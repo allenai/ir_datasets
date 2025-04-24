@@ -94,7 +94,7 @@ class JsonlDocumentsWithOffsets(BaseDocs):
         raise ValueError("ToDo: Implement this")
 
     def docs_count(self):
-        return len(self.docs_dict())
+        return 6407814
 
     def docs_lang(self):
         return "en"
