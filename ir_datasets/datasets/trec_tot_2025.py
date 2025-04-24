@@ -97,7 +97,7 @@ class JsonlDocumentsWithOffsets(BaseDocs):
         return len(self.docs_dict())
 
     def docs_lang(self):
-        raise ValueError("ToDo: Implement this")
+        raise "en"
 
 
 class TrecToT2025Dataset(Dataset):
