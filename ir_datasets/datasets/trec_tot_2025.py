@@ -35,6 +35,9 @@ class TrecToT2025Doc():
     def default_text(self):
         return self.title + " " + self.text
 
+    def _asdict(self):
+        return {"docno": self.doc_id, "text": self.default_text()}
+
 class JsonlWithOffsetsDocsStore(Docstore):
     def __init__(self, docs, offsets):
        self.__docs = docs
