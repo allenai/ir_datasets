@@ -1,0 +1,53 @@
+_:
+  pretty_name: 'TREC iKAT'
+  desc: '
+<p>
+A conversational passage ranking resource from the TREC iKAT task. Relevance judgments come
+from NIST assessors based on from the TREC iKAT runs.
+</p>
+'
+
+2023:
+  desc: '
+<p>
+Official TREC iKAT Collection from 2023.
+</p>
+<p>
+Passage collection contains 116,838,987 passages, extracted from ClueWeb22-B, 
+follows here to get the licence and access to the dataset 
+(iKAT guidelines <a href="https://www.trecikat.com/">link</a>).
+</p>
+<p>
+Queries and qrels are free access. Queries are the flatten converation, where <kbd>query_id</kbd> is both
+a topic number and a turn id.
+</p>
+'
+  data_access: '
+<p>
+To use this dataset, you need a local copy of the processed passage corpus, provided by 
+the iKAT organizers. To get this copy, first apply for the ClueWeb licence on 
+https://lemurproject.org/clueweb22/obtain.php and send the form to CMU for approval (jlm4@andrew.cmu.edu).
+Once you have the license, send a mail to Andrew Ramsay <andrew.ramsay@glasgow.ac.uk> to have access to a 
+download link with the preprocessed iKAT collection.
+<p>
+Download the 16 subfiles [Passages (JSONL)], in a folder 
+as <kbd>~/.ir_datasets/trec-ikat/2023/passage_jsonl/*</kbd>.
+</p>
+'
+
+2023/judged:
+  desc: '
+<p>
+Subset of queries with assed relevance.
+</p>
+'
+
+2023/judged/ptkb:
+  desc: '
+<p>
+PTKB: Relevance for the PTKB (Personal Textual Knowledge Base). 
+</p>
+<p>
+Each topic contains a list of PTKBs, within the conversation each turn has one or several relevant PTKB.
+</p>
+'
