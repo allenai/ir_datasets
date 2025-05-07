@@ -119,12 +119,12 @@ def register_dataset():
     if f"{NAME}/2025" in registry:
         return
 
-    doc_offsets = cached_tot_resource("https://files.webis.de/data-in-progress/trec-tot-2025-offsets.jsonl.gz", "00678e3155d962bb244e034e6401b79b")
-    doc_corpus = cached_tot_resource("https://files.webis.de/data-in-progress/trec-tot-2025-corpus.jsonl.gz", "a2c82398aa86df6a68c8706b9b462bf2")
+    doc_offsets = cached_tot_resource("https://zenodo.org/records/15356599/files/trec-tot-2025-offsets.jsonl.gz", "00678e3155d962bb244e034e6401b79b")
+    doc_corpus = cached_tot_resource("https://zenodo.org/records/15356599/files/trec-tot-2025-corpus.jsonl.gz", "a2c82398aa86df6a68c8706b9b462bf2")
     registry.register(f"{NAME}/2025", TrecToT2025Dataset(doc_corpus, doc_offsets))
     for i in ["train", "dev1", "dev2", "dev3"]:
-        qrels = cached_tot_resource("https://files.webis.de/data-in-progress/trec-tot-2025-queries/" + i + "-2025-qrel.txt", "TBD")
-        queries = cached_tot_resource("https://files.webis.de/data-in-progress/trec-tot-2025-queries/" + i + "-2025-queries.jsonl", "TBD")
+        qrels = cached_tot_resource("https://zenodo.org/records/15356599/files/" + i + "-2025-qrel.txt", "TBD")
+        queries = cached_tot_resource("https://zenodo.org/records/15356599/files/" + i + "-2025-queries.jsonl", "TBD")
         registry.register(f"{NAME}/2025/{i}", TrecToT2025Dataset(doc_corpus, doc_offsets, queries, qrels))
 
 
