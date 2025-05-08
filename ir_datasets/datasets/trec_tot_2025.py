@@ -1,9 +1,9 @@
 from ir_datasets import registry
-from ir_datasets.datasets.base import Dataset
+from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.util.download import RequestsDownload
 from ir_datasets.formats.base import BaseDocs
 from ir_datasets.indices import Docstore
-from ir_datasets.util import ZipExtractCache, home_path, Cache
+from ir_datasets.util import ZipExtractCache, home_path, Cache, DownloadConfig
 from ir_datasets.formats import BaseDocs, TrecQrels, JsonlQueries
 from ir_datasets.indices import PickleLz4FullStore
 import os
@@ -14,9 +14,6 @@ from typing import NamedTuple
 
 NAME = "trec-tot"
 
-def cached_tot_resource(url, md5):
-    streamer = RequestsDownload(url)
-    return Cache(streamer, home_path() / "trec-tot-2025" / url.split("/")[-1])
 
 class JsonlDocumentOffset(NamedTuple):
     doc_id: str
@@ -104,7 +101,7 @@ class JsonlDocumentsWithOffsets(BaseDocs):
 
 
 class TrecToT2025Dataset(Dataset):
-    def __init__(self, docs_jsonl_file, offset_jsonl_file, queries=None, qrels=None):
+    def __init__(self, docs_jsonl_file, offset_jsonl_file, queries=None, qrels=None, documentation=None):
         docs = JsonlDocumentsWithOffsets(docs_jsonl_file, offset_jsonl_file)
 
         if queries:
@@ -112,34 +109,24 @@ class TrecToT2025Dataset(Dataset):
         if qrels:
             qrels = TrecQrels(qrels, {0: 'Not Relevant', 1: 'Relevant'})
 
-        super().__init__(docs, queries, qrels)
+        super().__init__(docs, queries, qrels, documentation)
 
 
 def register_dataset():
     if f"{NAME}/2025" in registry:
         return
 
-    doc_offsets = cached_tot_resource("https://zenodo.org/records/15356599/files/trec-tot-2025-offsets.jsonl.gz", "00678e3155d962bb244e034e6401b79b")
-    doc_corpus = cached_tot_resource("https://zenodo.org/records/15356599/files/trec-tot-2025-corpus.jsonl.gz", "a2c82398aa86df6a68c8706b9b462bf2")
-    registry.register(f"{NAME}/2025", TrecToT2025Dataset(doc_corpus, doc_offsets))
+    dlc = DownloadConfig.context("trec-tot-2025", home_path() / NAME / "2025")
+
+    documentation = YamlDocumentation(f'docs/{NAME}.yaml')
+    doc_offsets = dlc['trec-tot-2025-offsets.jsonl.gz']
+    doc_corpus = dlc['trec-tot-2025-corpus.jsonl.gz']
+    registry.register(f"{NAME}/2025", TrecToT2025Dataset(doc_corpus, doc_offsets, documentation=documentation("2025")))
     for i in ["train", "dev1", "dev2", "dev3"]:
-        qrels = cached_tot_resource("https://zenodo.org/records/15356599/files/" + i + "-2025-qrel.txt", "TBD")
-        queries = cached_tot_resource("https://zenodo.org/records/15356599/files/" + i + "-2025-queries.jsonl", "TBD")
-        registry.register(f"{NAME}/2025/{i}", TrecToT2025Dataset(doc_corpus, doc_offsets, queries, qrels))
+        qrels = dlc[i + "-2025-qrel.txt"]
+        queries = dlc[i + "-2025-queries.jsonl"]
+        registry.register(f"{NAME}/2025/{i}", TrecToT2025Dataset(doc_corpus, doc_offsets, queries, qrels, documentation(f"2025/{i}")))
 
 
-if __name__ == '__main__':
-    register_dataset()
-    import ir_datasets
-    dataset = ir_datasets.load("trec-tot/2025")
-
-    cnt = 0
-    for doc in dataset.docs_iter():
-        print(doc.doc_id)
-        cnt += 1
-        if cnt > 10:
-            break
-
-    for doc in ["12", "39", "290", "303", "305", "307", "308", "309"]:
-        print(doc, "=>", dataset.docs_store().get(doc).doc_id)
+register_dataset()
 
