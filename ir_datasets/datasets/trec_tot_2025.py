@@ -50,7 +50,7 @@ class JsonlWithOffsetsDocsStore(Docstore):
 
     def docs_dict(self):
         return PickleLz4FullStore(
-            path=str(self.__offsets.path().absolute().resolve()) + '.pklz4',
+            path=str(self.__offsets.path()) + '.pklz4',
             init_iter_fn=self.offsets_iter,
             data_cls=JsonlDocumentOffset,
             lookup_field="doc_id",
