@@ -58,4 +58,3 @@ from . import neuclir # must be after hc4
 from . import sara
 from . import trec_tot_2025
 
-trec_tot_2025.register_dataset()
