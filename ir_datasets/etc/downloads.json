@@ -6197,6 +6197,59 @@
       "cache_path": "trec-tot-2024-queries.zip"
     }
   },
+
+  "trec-tot-2025": {
+    "trec-tot-2025-offsets.jsonl.gz": {
+      "url": "https://zenodo.org/records/15356599/files/trec-tot-2025-offsets.jsonl.gz",
+      "expected_md5": "00678e3155d962bb244e034e6401b79b",
+      "cache_path": "trec-tot-2025-offsets.jsonl.gz"
+    },
+    "trec-tot-2025-corpus.jsonl.gz": {
+      "url": "https://zenodo.org/records/15356599/files/trec-tot-2025-corpus.jsonl.gz",
+      "expected_md5": "a2c82398aa86df6a68c8706b9b462bf2",
+      "cache_path": "trec-tot-2025-corpus.jsonl.gz"
+    },
+    "train-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/train-2025-qrel.txt",
+      "expected_md5": "10a3c727fc5806ec4510f7a071b57cd7",
+      "cache_path": "train-2025-qrel.txt"
+    },
+    "train-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/train-2025-queries.jsonl",
+      "expected_md5": "288b7707b4e897f7447aac2cc2f613be",
+      "cache_path": "train-2025-queries.jsonl"
+    },
+    "dev1-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev1-2025-qrel.txt",
+      "expected_md5": "0c913ce8b5b287c73a6dfac662971e82",
+      "cache_path": "dev1-2025-qrel.txt"
+    },
+    "dev1-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev1-2025-queries.jsonl",
+      "expected_md5": "b87c2f51d058de844e258a69b02e70fc",
+      "cache_path": "dev1-2025-queries.jsonl"
+    },
+    "dev2-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev2-2025-qrel.txt",
+      "expected_md5": "4548eb41e639905384aa017c69129bfc",
+      "cache_path": "dev2-2025-qrel.txt"
+    },
+    "dev2-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev2-2025-queries.jsonl",
+      "expected_md5": "b174a128a255e92d0d54b76465d596b5",
+      "cache_path": "dev2-2025-queries.jsonl"
+    },
+    "dev3-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev3-2025-qrel.txt",
+      "expected_md5": "48ab0d24a5946861546e54064238477f",
+      "cache_path": "dev3-2025-qrel.txt"
+    },
+    "dev3-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev3-2025-queries.jsonl",
+      "expected_md5": "259c11645694a3c5230b66c7852d4d80",
+      "cache_path": "dev3-2025-queries.jsonl"
+    }
+  },
   
   "tripclick": {
     "benchmark": {

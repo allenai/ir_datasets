@@ -1,0 +1,42 @@
+_:
+  pretty_name: 'TREC Tip-of-the-Tongue'
+  desc: '
+<p>
+Tip of the tongue: The phenomenon of failing to retrieve something from memory, combined with partial recall and the feeling that retrieval is imminent. More details <a href="https://trec-tot.github.io/guidelines">are available on the official page for the TREC Tip-of-the-Tongue (ToT) Track</a>.
+</p>
+'
+
+2025:
+  desc: '
+<p>
+Corpus for the TREC 2025 tip-of-the-tongue search track.
+</p>
+'
+
+2025/train:
+  desc: '
+<p>
+Train query set for TREC 2025 tip-of-the-tongue search track.
+</p>
+'
+
+2025/dev1:
+  desc: '
+<p>
+Dev-1 query set for TREC 2025 tip-of-the-tongue search track (the original 2023 dev set).
+</p>
+'
+
+2025/dev2:
+  desc: '
+<p>
+Dev-2 query set for TREC 2025 tip-of-the-tongue search track (the original 2023 test set).
+</p>
+'
+
+2025/dev3:
+  desc: '
+<p>
+Dev-3 query set for TREC 2025 tip-of-the-tongue search track (the original 2024 test set).
+</p>
+'
