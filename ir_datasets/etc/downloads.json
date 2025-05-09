@@ -6181,10 +6181,20 @@
   },
 
   "trec-tot": {
-    "main": {
+    "2023": {
       "url": "https://surfdrive.surf.nl/files/index.php/s/FaEK4xc6Xp2JcAJ/download",
       "expected_md5": "f84fe82cb80e3ee1072576c8d6c4a417",
       "cache_path": "trec-tot.zip"
+    },
+    "2024": {
+      "url": "https://zenodo.org/records/13370657/files/corpus.jsonl.zip?download=1",
+      "expected_md5": "4ea86770817e46a06fea5c94f596409c",
+      "cache_path": "trec-tot-2024-corpus.zip"
+    },
+    "2024-test": {
+      "url": "https://zenodo.org/records/13370657/files/test-2024.zip?download=1",
+      "expected_md5": "3d0a4d83957ee6a1398afefbc96162fa",
+      "cache_path": "trec-tot-2024-queries.zip"
     }
   },
   
