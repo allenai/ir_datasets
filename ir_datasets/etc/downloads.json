@@ -6100,10 +6100,11 @@
       "cache_path": "2022/2022_evaluation_topics_tree_v1.0.json"
     },
     "2022/qrels": {
-      "url": "https://raw.githubusercontent.com/paulowoicho/treccastweb/master/2022/cast2022.qrel",
-      "expected_md5": "b8a53b590d1db78ebb687ddf7b173345",
+      "url": "https://trec.nist.gov/data/cast/2022-qrels.txt",
+      "expected_md5": "1d1ffe3d3a3a7fc64278ac7cc72b8bde",
+      "irds_mirror": true,
       "size_hint": 1435510,
-      "cache_path": "2022/cast2022.qrel" 
+      "cache_path": "2022/2022qrels.txt"
     }
   },
   
