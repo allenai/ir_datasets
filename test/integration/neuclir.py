@@ -125,25 +125,25 @@ class TestNeuCLIR22(DatasetIntegrationTest):
             9: TrecQrel('5', '3dd3d61d-b1e8-4daf-a62f-e54cf6a985bf', 3, 'rus'),
             33005: TrecQrel('114', '7254202b-6a7f-477a-b4b9-dae50cf3629e', 0, 'rus'),
         })
-        self._test_qrels('neuclir/1/zh/trec-2023', count=27638, items={
+        self._test_qrels('neuclir/1/zh/trec-2023', count=22061, items={
             0: TrecQrel('200', '033a72f3-b44e-4159-bf28-71273d635d80', 0, 'zho'),
-            9: TrecQrel('200', '08d7940c-ce11-449f-83d3-4fff72087ec3', 1, 'zho'),
-            27637: TrecQrel('275', 'ff76fb03-2547-4f79-a727-5fd41cfe6345', 0, 'zho'),
+            9: TrecQrel('200', '08d7940c-ce11-449f-83d3-4fff72087ec3', 0, 'zho'),
+            22060: TrecQrel('275', 'ff76fb03-2547-4f79-a727-5fd41cfe6345', 0, 'zho'),
         })
-        self._test_qrels('neuclir/1/fa/trec-2023', count=26662, items={
-            0: TrecQrel('200', '00258365-6d48-49cc-901f-578b883c8226', 1, 'fas'),
+        self._test_qrels('neuclir/1/fa/trec-2023', count=20450, items={
+            0: TrecQrel('200', '00258365-6d48-49cc-901f-578b883c8226', 0, 'fas'),
             9: TrecQrel('200', '041eb44c-5e2d-41dd-83d6-1458df12e543', 0, 'fas'),
-            26661: TrecQrel('275', 'ff90b1c5-aee1-4519-a45b-1e9afffc0fb8', 1, 'fas'),
+            20449: TrecQrel('274', 'ff33f614-0e2a-4060-b3d5-a006b1866db8', 0, 'fas'),
         })
-        self._test_qrels('neuclir/1/ru/trec-2023', count=25634, items={
+        self._test_qrels('neuclir/1/ru/trec-2023', count=20062, items={
             0: TrecQrel('200', '0123b71d-7dc9-4797-ace1-484d7ac23e5c', 0, 'rus'),
-            9: TrecQrel('200', '0640f622-4ac0-4f48-890e-5d66d3495136', 2, 'rus'),
-            25633: TrecQrel('275', 'ffea67f2-2e85-46d0-9c73-2074de381063', 0, 'rus'),
+            9: TrecQrel('200', '0640f622-4ac0-4f48-890e-5d66d3495136', 1, 'rus'),
+            20061: TrecQrel('275', 'ffea67f2-2e85-46d0-9c73-2074de381063', 0, 'rus'),
         })
-        self._test_qrels('neuclir/1/multi/trec-2023', count=79934, items={
-            0: TrecQrel('200', '00258365-6d48-49cc-901f-578b883c8226', 1, 'fas'),
+        self._test_qrels('neuclir/1/multi/trec-2023', count=62573, items={
+            0: TrecQrel('200', '00258365-6d48-49cc-901f-578b883c8226', 0, 'fas'),
             9: TrecQrel('200', '041eb44c-5e2d-41dd-83d6-1458df12e543', 0, 'fas'),
-            79933: TrecQrel('275', 'ff76fb03-2547-4f79-a727-5fd41cfe6345', 0, 'zho'),
+            62572: TrecQrel('275', 'ff76fb03-2547-4f79-a727-5fd41cfe6345', 0, 'zho'),
         })
 
 if __name__ == '__main__':

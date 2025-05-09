@@ -1,0 +1,200 @@
+_:
+  pretty_name: 'Nano Beir (benchmark suite)'
+  desc: '
+<p>
+Nano Beir is a smaller version (max 50 queries per benchmark) of the Beir suite of benchmarks to 
+test zero-shot transfer.
+</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2104.08663">Paper</a></li>
+<li><a href="https://github.com/UKPLab/beir/blob/main/README.md">GitHub</a></li>
+</ul>
+'
+  bibtex_ids: ['Thakur2021Beir']
+
+arguana:
+  desc: '
+<p>
+A version of the ArguAna Counterargs dataset, for argument retrieval.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/P18-1023.pdf">Dataset paper</a></li>
+<li><a href="http://argumentation.bplaced.net/arguana/data">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Wachsmuth2018Arguana', 'Thakur2021Beir']
+
+climate-fever:
+  desc: '
+<p>
+A version of the CLIMATE-FEVER dataset, for fact verification on claims about climate.
+</p>
+<ul>
+<li><a href="https://arxiv.org/pdf/2012.00614.pdf">Dataset paper</a></li>
+<li><a href="https://www.sustainablefinance.uzh.ch/en/research/climate-fever.html">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Diggelmann2020CLIMATEFEVERAD', 'Thakur2021Beir']
+
+dbpedia-entity:
+  desc: '
+<p>
+A version of the DBPedia-Entity-v2 dataset for entity retrieval.
+</p>
+<ul>
+<li><a href="http://hasibi.com/files/sigir2017-dbpedia_entity.pdf">Dataset paper</a></li>
+<li><a href="https://github.com/iai-group/DBpedia-Entity">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Hasibi2017DBpediaEntityVA', 'Thakur2021Beir']
+
+fever:
+  desc: '
+<p>
+A version of the FEVER dataset for fact verification.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/N18-1074.pdf">Dataset paper</a></li>
+<li><a href="https://fever.ai/resources.html">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Thorne2018Fever', 'Thakur2021Beir']
+
+fiqa:
+  desc: '
+<p>
+A version of the FIQA-2018 dataset (financial opinion question answering).
+</p>
+<ul>
+<li><a href="https://dl.acm.org/doi/10.1145/3184558.3192301">Dataset paper</a></li>
+<li><a href="https://sites.google.com/view/fiqa/home">Dataset site</a></li>
+</ul>
+'
+  bibtex_ids: ['Maia2018Fiqa', 'Thakur2021Beir']
+
+hotpotqa:
+  desc: '
+<p>
+A version of the Hotpot QA dataset for multi-hop question answering.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/D18-1259">Dataset paper</a></li>
+<li><a href="https://github.com/hotpotqa/hotpot">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Yang2018Hotpotqa', 'Thakur2021Beir']
+
+msmarco:
+  desc: '
+<p>
+A version of the MS MARCO passage ranking dataset.
+</p>
+<p>
+Note that this version differs from <a class="ds-ref">msmarco-passage</a>, in that it does not correct
+the encoding problems in the source documents.
+</p>
+<ul>
+<li><a href="https://microsoft.github.io/msmarco/#ranking">Leaderboard</a></li>
+<li><a href="https://arxiv.org/abs/1611.09268">Dataset Paper</a></li>
+<li>See also: <a class="ds-ref">msmarco-passage</a></li>
+</ul>
+'
+  bibtex_ids: ['Bajaj2016Msmarco', 'Thakur2021Beir']
+
+nfcorpus:
+  desc: '
+<p>
+A version of the NF Corpus (Nutrition Facts).
+</p>
+<p>
+Data pre-processing may be different than what is done in <a class="ds-ref">nfcorpus</a>.
+</p>
+<ul>
+<li><a href="https://www.cl.uni-heidelberg.de/statnlpgroup/nfcorpus/">Dataset website</p></li>
+<li><a href="https://link.springer.com/chapter/10.1007/978-3-319-30671-1_58">Dataset paper</p></li>
+<li>See also: <a class="ds-ref">nfcorpus</a></li>
+</ul>
+'
+  bibtex_ids: ['Boteva2016Nfcorpus', 'Thakur2021Beir']
+
+nq:
+  desc: '
+<p>
+A version of the Natural Questions dev dataset.
+</p>
+<p>
+Data pre-processing differs both from what is done in <a class="ds-ref">natural-questions</a> and
+<a class="ds-ref">dpr-w100/natural-questions</a>, especially with respect to the document collection
+and filtering conducted on the queries. See the Beir paper for details.
+</p>
+<ul>
+<li><a href="https://ai.google.com/research/NaturalQuestions">Dataset website</a></li>
+<li><a href="https://storage.googleapis.com/pub-tools-public-publication-data/pdf/1f7b46b5378d757553d3e92ead36bda2e4254244.pdf">Dataset paper</a></li>
+<li>See also: <a class="ds-ref">natural-questions</a>, <a class="ds-ref">dpr-w100/natural-questions</a></li>
+</ul>
+'
+  bibtex_ids: ['Kwiatkowski2019Nq', 'Thakur2021Beir']
+
+quora:
+  desc: '
+<p>
+A version of the Quora duplicate question detection dataset (QQP).
+</p>
+<ul>
+<li><a href="https://www.kaggle.com/c/quora-question-pairs">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Thakur2021Beir']
+
+scidocs:
+  desc: '
+<p>
+A version of the SciDocs dataset, used for citation retrieval.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.acl-main.207.pdf">Dataset paper</a></li>
+<li><a href="https://allenai.org/data/scidocs">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Cohan2020Scidocs', 'Thakur2021Beir']
+
+scifact:
+  desc: '
+<p>
+A version of the SciFact dataset, for fact verification.
+</p>
+<ul>
+<li><a href="https://www.aclweb.org/anthology/2020.emnlp-main.609.pdf">Dataset paper</a></li>
+<li><a href="https://www.aclweb.org/anthology/2020.emnlp-main.609.pdf">Dataset website</a></li>
+</ul>
+'
+  bibtex_ids: ['Wadden2020Scifact', 'Thakur2021Beir']
+
+webis-touche2020:
+  desc: '
+<p>
+Original version of the Touchè-2020 dataset, for argument retrieval.
+</p>
+<div class="warn">
+Consider using <a class="ds-ref">beir/webis-touche2020/v2</a> instead; it uses an updated,
+more complete version of the qrels.
+</div>
+<ul>
+<li><a href="https://link.springer.com/chapter/10.1007%2F978-3-030-58219-7_26">Dataset paper</a></li>
+<li><a href="https://webis.de/events/touche-20/">Dataset webiste</a></li>
+</ul>
+'
+  bibtex_ids: ['Bondarenko2020Tuche', 'Thakur2021Beir']
+
+webis-touche2020/v2:
+  desc: '
+<p>
+Version 2 of the Touchè-2020 dataset, for argument retrieval. This version uses the "corrected" version
+of the qrels, mapped to version 1 of the corpus.
+</p>
+<ul>
+<li><a href="https://link.springer.com/chapter/10.1007%2F978-3-030-58219-7_26">Dataset paper</a></li>
+<li><a href="https://webis.de/events/touche-20/">Dataset webiste</a></li>
+</ul>
+'
+  bibtex_ids: ['Bondarenko2020Tuche', 'Thakur2021Beir']

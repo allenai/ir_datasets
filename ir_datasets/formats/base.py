@@ -185,7 +185,7 @@ class BaseQlogs:
         return self
 
 
-BaseQueries.EXTENSIONS['queries_dict'] = lambda x: {q.query_id: q for q in x.iter_queries()}
+BaseQueries.EXTENSIONS['queries_dict'] = lambda x: {q.query_id: q for q in x.queries_iter()}
 
 
 def qrels_dict(qrels_handler):

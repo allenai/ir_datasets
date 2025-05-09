@@ -1,0 +1,43 @@
+[build-system]
+requires = ["setuptools>=42", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ir_datasets"
+description = "provides a common interface to many IR ad-hoc ranking benchmarks, training datasets, etc."
+readme = "README.md"
+authors = [
+    {name = "Sean MacAvaney", email = "sean.macavaney@glasgow.ac.uk"},
+]
+maintainers = [
+  {name = "Sean MacAvaney", email = "sean.macavaney@glasgow.ac.uk"},
+]
+requires-python = ">=3.8"
+classifiers = [
+  "Programming Language :: Python",
+  "Operating System :: OS Independent",
+  "Topic :: Text Processing",
+  "Topic :: Text Processing :: Indexing",
+  "License :: OSI Approved :: MIT License",
+]
+dynamic = ["version", "dependencies"]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+exclude = ["test"]
+
+[tool.setuptools.dynamic]
+version = {attr = "ir_datasets.__version__"}
+dependencies = {file = ["requirements.txt"]}
+
+[project.urls]
+"Homepage" = "https://ir-datasets.com/"
+"Documentation" = "https://project.readthedocs.io/"
+"Source" = "https://github.com/allenai/ir_datasets"
+"Issues" = "https://github.com/allenai/ir_datasets/issues"
+"Bug Tracker" = "https://github.com/allenai/ir_datasets/issues"
+
+[project.scripts]
+ir_datasets = "ir_datasets:main_cli"

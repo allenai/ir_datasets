@@ -119,3 +119,12 @@ def unlzw3():
         import unlzw3
         _cache['unlzw3'] = unlzw3
     return _cache['unlzw3']
+
+def pyarrow_parquet():
+    if 'pyarrow_parquet' not in _cache:
+        try:
+            import pyarrow.parquet
+        except ImportError as ex:
+            raise ImportError("This dataset requires pyarrow. Run 'pip install pyarrow>=16.1.0'") from ex
+        _cache['pyarrow_parquet'] = pyarrow.parquet
+    return _cache['pyarrow_parquet']
