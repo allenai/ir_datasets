@@ -21,19 +21,19 @@ class JsonlDocumentOffset(NamedTuple):
     offset_end: int
 
 
-class TrecToT2025Doc():
-    def __init__(self, json_doc):
-        parsed_doc = json.loads(json_doc)
-        self.doc_id = parsed_doc["id"]
-        self.title = parsed_doc["title"]
-        self.url = parsed_doc["url"]
-        self.text = parsed_doc["text"]
+class TrecToT2025Doc(NamedTuple):
+    doc_id: str
+    title: str
+    url: str
+    text: str
+
+    @staticmethod
+    def _from_json(self, json_doc):
+        return TrecToT2025Doc(json_doc["id"], json_doc["title"], json_doc["url"], json_doc["text"])
 
     def default_text(self):
         return self.title + " " + self.text
 
-    def _asdict(self):
-        return {"doc_id": self.doc_id, "text": self.default_text()}
 
 class JsonlWithOffsetsDocsStore(Docstore):
     def __init__(self, docs, offsets):
@@ -71,7 +71,7 @@ class JsonlWithOffsetsDocsStore(Docstore):
 class TrecToT2025DocsStore(JsonlWithOffsetsDocsStore):
     def get_many_iter(self, doc_ids):
         for i in super().get_many_iter(doc_ids):
-            yield TrecToT2025Doc(i)
+            yield TrecToT2025Doc._from_json(i)
 
 
 class JsonlDocumentsWithOffsets(BaseDocs):
@@ -82,10 +82,10 @@ class JsonlDocumentsWithOffsets(BaseDocs):
     def docs_iter(self):
         with gzip.open(self.__docs.path()) as f:
             for l in f:
-                yield TrecToT2025Doc(l)
+                yield TrecToT2025Doc._from_json(json.loads(l))
 
     def docs_cls(self):
-        return self._cls
+        return TrecToT2025Doc
 
     def docs_store(self, field='doc_id'):
         return TrecToT2025DocsStore(self.__docs, self.__offsets)
