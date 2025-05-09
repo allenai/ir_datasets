@@ -28,7 +28,7 @@ class TrecToT2025Doc(NamedTuple):
     text: str
 
     @staticmethod
-    def _from_json(self, json_doc):
+    def _from_json(json_doc):
         return TrecToT2025Doc(json_doc["id"], json_doc["title"], json_doc["url"], json_doc["text"])
 
     def default_text(self):
