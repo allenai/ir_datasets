@@ -100,10 +100,10 @@ class TestTrecCast(DatasetIntegrationTest):
             9: TrecQrel('81_1', 'MARCO_1381086', 1, '0'),
             40450: TrecQrel('105_9', 'MARCO_8757526', 0, '0'),
         })
-        self._test_qrels('trec-cast/v3/2022', count=42196, items={
+        self._test_qrels('trec-cast/v3/2022', count=41749, items={
             0: TrecQrel('132_1-1', 'KILT_1168284-2', 0, '0'),
             9: TrecQrel('132_1-1', 'KILT_39457508-1', 0, '0'),
-            42195: TrecQrel('149_3-9', 'MARCO_56_987506629-2', 2, '0'),
+            41748: TrecQrel('149_3-9', 'MARCO_56_987506629-2', 2, '0'),
         })
         self._test_qrels('trec-cast/v2/2021', count=19334, items={
             0: TrecQrel('106_1', 'KILT_105219', 0, '0'),
