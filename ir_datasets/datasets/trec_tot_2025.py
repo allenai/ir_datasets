@@ -71,7 +71,7 @@ class JsonlWithOffsetsDocsStore(Docstore):
 class TrecToT2025DocsStore(JsonlWithOffsetsDocsStore):
     def get_many_iter(self, doc_ids):
         for i in super().get_many_iter(doc_ids):
-            yield TrecToT2025Doc._from_json(i)
+            yield TrecToT2025Doc._from_json(json.loads(i))
 
 
 class JsonlDocumentsWithOffsets(BaseDocs):
