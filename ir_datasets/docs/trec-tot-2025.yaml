@@ -6,37 +6,37 @@ Tip of the tongue: The phenomenon of failing to retrieve something from memory, 
 </p>
 '
 
-2023:
+2025:
   desc: '
 <p>
-Corpus for the TREC 2023 tip-of-the-tongue search track.
+Corpus for the TREC 2025 tip-of-the-tongue search track.
 </p>
 '
 
-2023/train:
+2025/train:
   desc: '
 <p>
-Train query set for TREC 2023 tip-of-the-tongue search track.
+Train query set for TREC 2025 tip-of-the-tongue search track.
 </p>
 '
 
-2023/dev:
+2025/dev1:
   desc: '
 <p>
-Dev query set for TREC 2023 tip-of-the-tongue search track.
+Dev-1 query set for TREC 2025 tip-of-the-tongue search track (the original 2023 dev set).
 </p>
 '
 
-2024:
+2025/dev2:
   desc: '
 <p>
-Corpus for the TREC 2024 tip-of-the-tongue search track.
+Dev-2 query set for TREC 2025 tip-of-the-tongue search track (the original 2023 test set).
 </p>
 '
 
-2024/test:
+2025/dev3:
   desc: '
 <p>
-Test query set for TREC 2024 tip-of-the-tongue search track.
+Dev-3 query set for TREC 2025 tip-of-the-tongue search track (the original 2024 test set).
 </p>
 '
