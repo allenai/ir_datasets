@@ -54,6 +54,11 @@ class BeirSciDoc(NamedTuple):
     year: int
     cited_by: List[str]
     references: List[str]
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirCordDoc(NamedTuple):
     doc_id: str
@@ -73,6 +78,11 @@ class BeirToucheDoc(NamedTuple):
     title: str
     stance: str
     url: str
+    def default_text(self):
+        """
+        title text
+        """
+        return f'{self.title} {self.text}'
 
 class BeirCqaDoc(NamedTuple):
     doc_id: str
@@ -89,6 +99,11 @@ class BeirUrlQuery(NamedTuple):
     query_id: str
     text: str
     url: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class BeirSciQuery(NamedTuple):
     query_id: str
@@ -97,12 +112,22 @@ class BeirSciQuery(NamedTuple):
     year: int
     cited_by: List[str]
     references: List[str]
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class BeirToucheQuery(NamedTuple):
     query_id: str
     text: str
     description: str
     narrative: str
+    def default_text(self):
+        """
+        text
+        """
+        return self.text
 
 class BeirCovidQuery(NamedTuple):
     query_id: str

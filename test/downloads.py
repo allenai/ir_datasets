@@ -117,9 +117,11 @@ class TestDownloads(unittest.TestCase):
                 self.skipTest('Test skipped by user')
             except Exception as ex:
                 record['duration'] = time.time() - start
-                record['result'] = 'FAIL' if not data.get('irds_mirror') else 'FAIL_BUT_HAS_MIRROR'
+                has_mirror = 'irds_mirror' in data
+                record['result'] = 'FAIL' if not has_mirror else 'FAIL_BUT_HAS_MIRROR'
                 record['fail_messagae'] = str(ex)
-                raise
+                if not has_mirror:
+                    raise # only raise error if it doesn't have a mirror to avoid spurious errors from the github action
         return record
 
 

@@ -32,6 +32,7 @@ from . import msmarco_document_v2
 from . import msmarco_passage
 from . import msmarco_passage_v2
 from . import msmarco_qna
+from . import nano_beir
 from . import neumarco
 from . import nfcorpus
 from . import natural_questions
@@ -55,3 +56,5 @@ from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
 from . import neuclir # must be after hc4
 from . import sara
+from . import trec_tot_2025
+

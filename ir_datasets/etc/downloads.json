@@ -4972,6 +4972,243 @@
     }
   },
   
+  "nano-beir": {
+    "arguana/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoArguAna/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 3635,
+      "expected_md5": "ee563dc09a91032b494f469b6c807a9c",
+      "cache_path": "arguana/corpus.parquet"
+    },
+    "arguana/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoArguAna/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "5fab96653b0455879606e82071ef4b21",
+      "cache_path": "arguana/qrels.parquet"
+    },
+    "arguana/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoArguAna/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "5ad0a26fad750dc74eae00ab753731b8",
+      "cache_path": "arguana/queries.parquet"
+    },
+    "climate-fever/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoClimateFEVER/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 3408,
+      "expected_md5": "97a57296bbb7e48ffc8b763c4b2a188b",
+      "cache_path": "climate-fever/corpus.parquet"
+    },
+    "climate-fever/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoClimateFEVER/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 148,
+      "expected_md5": "3042ccd6054266951ac1338c57a2bb85",
+      "cache_path": "climate-fever/qrels.parquet"
+    },
+    "climate-fever/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoClimateFEVER/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "0f4d43544ae8755e0557f89be3ae7e74",
+      "cache_path": "climate-fever/queries.parquet"
+    },
+    "dbpedia-entity/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoDBPedia/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 6045,
+      "expected_md5": "cee2bc11f2b84fe636b5f219246221e0",
+      "cache_path": "dbpedia-entity/corpus.parquet"
+    },
+    "dbpedia-entity/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoDBPedia/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 1158,
+      "expected_md5": "8a9fa7e95c276d810ddbb53b8054801d",
+      "cache_path": "dbpedia-entity/qrels.parquet"
+    },
+    "dbpedia-entity/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoDBPedia/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "ec7d771ba38310699a5b323aa693febe",
+      "cache_path": "dbpedia-entity/queries.parquet"
+    },
+    "fever/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFEVER/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 4996,
+      "expected_md5": "0b052fca4b4c975088bc2f01d7f2b749",
+      "cache_path": "fever/corpus.parquet"
+    },
+    "fever/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFEVER/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 57,
+      "expected_md5": "a25763bbae313d39668c37dbadb70cd3",
+      "cache_path": "fever/qrels.parquet"
+    },
+    "fever/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFEVER/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "43122d82b3df866afad1f37a28e6ba60",
+      "cache_path": "fever/queries.parquet"
+    },
+    "fiqa/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFiQA2018/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 4598,
+      "expected_md5": "873e5dcf7920fc8c0ff210cf06907607",
+      "cache_path": "fiqa/corpus.parquet"
+    },
+    "fiqa/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFiQA2018/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 123,
+      "expected_md5": "f22d89ef6658379498bc92e92cf92d26",
+      "cache_path": "fiqa/qrels.parquet"
+    },
+    "fiqa/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoFiQA2018/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "8b25da8b2d2e40a483d7a782a048a950",
+      "cache_path": "fiqa/queries.parquet"
+    },
+    "hotpotqa/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoHotpotQA/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 5090,
+      "expected_md5": "da3d14375223d0e5dad172acdbb1c332",
+      "cache_path": "hotpotqa/corpus.parquet"
+    },
+    "hotpotqa/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoHotpotQA/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 100,
+      "expected_md5": "3ed8424185156af1fe4c55aac84bce92",
+      "cache_path": "hotpotqa/qrels.parquet"
+    },
+    "hotpotqa/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoHotpotQA/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "c1f13d4ed9f88a89285e39d9e13f5c38",
+      "cache_path": "hotpotqa/queries.parquet"
+    },
+    "msmarco/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoMSMARCO/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 5043,
+      "expected_md5": "15ab2a1d3674e562d088e64dc5781373",
+      "cache_path": "msmarco/corpus.parquet"
+    },
+    "msmarco/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoMSMARCO/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "c72caacf4bc04efa8af6b2ac2944ea92",
+      "cache_path": "msmarco/qrels.parquet"
+    },
+    "msmarco/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoMSMARCO/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "9ab46c94f88bfed1e338dc0887568f03",
+      "cache_path": "msmarco/queries.parquet"
+    },
+    "nfcorpus/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNFCorpus/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 2953,
+      "expected_md5": "deb02538a3b030843a8ccca212dc6a3c",
+      "cache_path": "nfcorpus/corpus.parquet"
+    },
+    "nfcorpus/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNFCorpus/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 2518,
+      "expected_md5": "402762544651e0fc6df10cd76e2cbfae",
+      "cache_path": "nfcorpus/qrels.parquet"
+    },
+    "nfcorpus/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNFCorpus/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "6578fc992124bb997e32bd1192c1b475",
+      "cache_path": "nfcorpus/queries.parquet"
+    },
+    "nq/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNQ/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 5035,
+      "expected_md5": "aaf73189d2b8d0de039dc2619d7a29ef",
+      "cache_path": "nq/corpus.parquet"
+    },
+    "nq/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNQ/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 57,
+      "expected_md5": "fc2b183187c4f99e0939b55dc11b1908",
+      "cache_path": "nq/qrels.parquet"
+    },
+    "nq/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoNQ/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "87de29b17a669fc61d1f192bd5099887",
+      "cache_path": "nq/queries.parquet"
+    },
+    "quora/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoQuoraRetrieval/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 5046,
+      "expected_md5": "a8cd6d41cbeb6bda2a3ed90526de4521",
+      "cache_path": "quora/corpus.parquet"
+    },
+    "quora/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoQuoraRetrieval/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 70,
+      "expected_md5": "650ca21cef9a73b83e3845c93e3a230a",
+      "cache_path": "quora/qrels.parquet"
+    },
+    "quora/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoQuoraRetrieval/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "590ed67697e12f21fafe436c07e6f772",
+      "cache_path": "quora/queries.parquet"
+    },
+    "scidocs/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSCIDOCS/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 2210,
+      "expected_md5": "60f9f2a7206f0e8a0fc185df2b7ab00b",
+      "cache_path": "scidocs/corpus.parquet"
+    },
+    "scidocs/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSCIDOCS/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 244,
+      "expected_md5": "e21c1514761b06ac6bba5a8f958d8803",
+      "cache_path": "scidocs/qrels.parquet"
+    },
+    "scidocs/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSCIDOCS/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "940e2220bc9667138774a36f6c771c97",
+      "cache_path": "scidocs/queries.parquet"
+    },
+    "scifact/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSciFact/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 2919,
+      "expected_md5": "9f82bfc70f9b7d7f0275fb6b8ee38876",
+      "cache_path": "scifact/corpus.parquet"
+    },
+    "scifact/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSciFact/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 56,
+      "expected_md5": "1155d79cf3854fa43c72c8458f34f744",
+      "cache_path": "scifact/qrels.parquet"
+    },
+    "scifact/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoSciFact/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 50,
+      "expected_md5": "0218d8ad9c0bd8671002f16edb497ff3",
+      "cache_path": "scifact/queries.parquet"
+    },
+    "webis-touche2020/docs" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoTouche2020/resolve/main/corpus/train-00000-of-00001.parquet",
+      "size_hint": 5745,
+      "expected_md5": "fdea27196d1234ab4aa2c49c9a849840",
+      "cache_path": "webis-touche2020/corpus.parquet"
+    },
+    "webis-touche2020/qrels" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoTouche2020/resolve/main/qrels/train-00000-of-00001.parquet",
+      "size_hint": 932,
+      "expected_md5": "4b3de9c60d59be85ae4483e1210caff9",
+      "cache_path": "webis-touche2020/qrels.parquet"
+    },
+    "webis-touche2020/queries" : {
+      "url": "https://huggingface.co/datasets/zeta-alpha-ai/NanoTouche2020/resolve/main/queries/train-00000-of-00001.parquet",
+      "size_hint": 49,
+      "expected_md5": "0ba668cdae413f411644871f544a9d1b",
+      "cache_path": "webis-touche2020/queries.parquet"
+    }
+  },
+
   "neumarco": {
     "main": {
       "url": "https://livejohnshopkins-my.sharepoint.com/:u:/g/personal/dlawrie1_jh_edu/EQcICtPaSqFNoCZHtoeZszoB7FC362BvaPvieUSk2j30tA?download=1",
@@ -5810,7 +6047,7 @@
       "cache_path": "2019/train_topics_mod.qrel"
     },
     "2019/train/scoreddocs": {
-      "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/train_topics.teIn",
+      "url": "https://huggingface.co/datasets/macavaney/trec-cast-files/resolve/main/train_topics.teIn",
       "size_hint": 14766212,
       "expected_md5": "83bdb720e0c469390004598091021901",
       "cache_path": "2019/train_topics.teIn"
@@ -5829,7 +6066,7 @@
       "cache_path": "2019/2019qrels.txt"
     },
     "2019/eval/scoreddocs": {
-      "url": "http://boston.lti.cs.cmu.edu/vaibhav2/cast/test_topics.teIn",
+      "url": "https://huggingface.co/datasets/macavaney/trec-cast-files/resolve/main/test_topics.teIn",
       "size_hint": 27691171,
       "expected_md5": "4c3958c09edab1b46474a337590c1ecd",
       "cache_path": "2019/test_topics.teIn"
@@ -5867,10 +6104,11 @@
       "cache_path": "2022/2022_evaluation_topics_tree_v1.0.json"
     },
     "2022/qrels": {
-      "url": "https://raw.githubusercontent.com/paulowoicho/treccastweb/master/2022/cast2022.qrel",
-      "expected_md5": "b8a53b590d1db78ebb687ddf7b173345",
+      "url": "https://trec.nist.gov/data/cast/2022-qrels.txt",
+      "expected_md5": "1d1ffe3d3a3a7fc64278ac7cc72b8bde",
+      "irds_mirror": true,
       "size_hint": 1435510,
-      "cache_path": "2022/cast2022.qrel" 
+      "cache_path": "2022/2022qrels.txt"
     }
   },
   
@@ -5947,10 +6185,73 @@
   },
 
   "trec-tot": {
-    "main": {
+    "2023": {
       "url": "https://surfdrive.surf.nl/files/index.php/s/FaEK4xc6Xp2JcAJ/download",
       "expected_md5": "f84fe82cb80e3ee1072576c8d6c4a417",
       "cache_path": "trec-tot.zip"
+    },
+    "2024": {
+      "url": "https://zenodo.org/records/13370657/files/corpus.jsonl.zip?download=1",
+      "expected_md5": "4ea86770817e46a06fea5c94f596409c",
+      "cache_path": "trec-tot-2024-corpus.zip"
+    },
+    "2024-test": {
+      "url": "https://zenodo.org/records/13370657/files/test-2024.zip?download=1",
+      "expected_md5": "3d0a4d83957ee6a1398afefbc96162fa",
+      "cache_path": "trec-tot-2024-queries.zip"
+    }
+  },
+
+  "trec-tot-2025": {
+    "trec-tot-2025-offsets.jsonl.gz": {
+      "url": "https://zenodo.org/records/15356599/files/trec-tot-2025-offsets.jsonl.gz",
+      "expected_md5": "00678e3155d962bb244e034e6401b79b",
+      "cache_path": "trec-tot-2025-offsets.jsonl.gz"
+    },
+    "trec-tot-2025-corpus.jsonl.gz": {
+      "url": "https://zenodo.org/records/15356599/files/trec-tot-2025-corpus.jsonl.gz",
+      "expected_md5": "a2c82398aa86df6a68c8706b9b462bf2",
+      "cache_path": "trec-tot-2025-corpus.jsonl.gz"
+    },
+    "train-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/train-2025-qrel.txt",
+      "expected_md5": "10a3c727fc5806ec4510f7a071b57cd7",
+      "cache_path": "train-2025-qrel.txt"
+    },
+    "train-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/train-2025-queries.jsonl",
+      "expected_md5": "288b7707b4e897f7447aac2cc2f613be",
+      "cache_path": "train-2025-queries.jsonl"
+    },
+    "dev1-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev1-2025-qrel.txt",
+      "expected_md5": "0c913ce8b5b287c73a6dfac662971e82",
+      "cache_path": "dev1-2025-qrel.txt"
+    },
+    "dev1-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev1-2025-queries.jsonl",
+      "expected_md5": "b87c2f51d058de844e258a69b02e70fc",
+      "cache_path": "dev1-2025-queries.jsonl"
+    },
+    "dev2-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev2-2025-qrel.txt",
+      "expected_md5": "4548eb41e639905384aa017c69129bfc",
+      "cache_path": "dev2-2025-qrel.txt"
+    },
+    "dev2-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev2-2025-queries.jsonl",
+      "expected_md5": "b174a128a255e92d0d54b76465d596b5",
+      "cache_path": "dev2-2025-queries.jsonl"
+    },
+    "dev3-2025-qrel.txt": {
+      "url": "https://zenodo.org/records/15356599/files/dev3-2025-qrel.txt",
+      "expected_md5": "48ab0d24a5946861546e54064238477f",
+      "cache_path": "dev3-2025-qrel.txt"
+    },
+    "dev3-2025-queries.jsonl": {
+      "url": "https://zenodo.org/records/15356599/files/dev3-2025-queries.jsonl",
+      "expected_md5": "259c11645694a3c5230b66c7852d4d80",
+      "cache_path": "dev3-2025-queries.jsonl"
     }
   },
   

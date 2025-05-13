@@ -1,7 +1,7 @@
 import io
 import json
 import tarfile
-from typing import NamedTuple, Tuple
+from typing import NamedTuple, Tuple, Optional
 import ir_datasets
 from ir_datasets.indices import PickleLz4FullStore
 from ir_datasets.util import Lazy, DownloadConfig, Migrator
@@ -46,7 +46,7 @@ class WapoDoc(NamedTuple):
     url: str
     title: str
     author: str
-    published_date: int
+    published_date: Optional[int]
     kicker: str
     body: str
     body_paras_html: Tuple[str, ...]
@@ -120,7 +120,7 @@ class WapoDocs(BaseDocs):
                 doc_json['article_url'],
                 doc_json['title'],
                 doc_json['author'],
-                doc_json['published_date'],
+                doc_json.get('published_date'),
                 kicker.rstrip('\n'),
                 body.rstrip('\n'),
                 tuple(body_paras_html),
@@ -196,8 +196,8 @@ def _init():
         documentation('v3/trec-news-2020'))
 
     subsets['v4'] = Dataset(
-        collection_v4,
-        documentation('v4'))
+       collection_v4,
+       documentation('v4'))
 
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
