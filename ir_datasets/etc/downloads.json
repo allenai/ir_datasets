@@ -4743,6 +4743,12 @@
       "size_hint": 19517,
       "expected_md5": "5bd6c8fa0e1300233fe139bae8288d09",
       "cache_path": "trec-rag-2024-topics-test.txt"
+    },
+    "rag-2024-test-qrels": {
+      "url": "https://trec.nist.gov/data/rag/2024-retrieval-conditions-qrels.txt",
+      "size_hint": 1201033,
+      "expected_md5": "a813a1b92b3bee1f9e4ce84b6f8887ab",
+      "cache_path": "trec-rag-2024-test-qrels.txt"
     }
   },
 
