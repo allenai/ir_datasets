@@ -130,7 +130,7 @@ def register_dataset():
     # datasets that currently do not have qrels
     for i in ["test"]:
         queries = dlc[i + "-2025-queries.jsonl"]
-        registry.register(f"{NAME}/2025/{i}", TrecToT2025Dataset(doc_corpus, doc_offsets, queries, qrels, documentation(f"2025/{i}")))
+        registry.register(f"{NAME}/2025/{i}", TrecToT2025Dataset(doc_corpus, doc_offsets, queries, None, documentation(f"2025/{i}")))
 
 register_dataset()
 
