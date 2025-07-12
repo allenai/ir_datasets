@@ -6250,7 +6250,7 @@
       "cache_path": "dev3-2025-queries.jsonl"
     },
     "test-2025-queries.jsonl": {
-      "url": "https://files.webis.de/data-in-progress/trec-tot-2025-queries/test-2025-queries.jsonl",
+      "url": "https://zenodo.org/records/15869078/files/test-2025-queries.jsonl",
       "expected_md5": "374cdc9142240f8bc9e4b071c35713f8",
       "cache_path": "test-2025-queries.jsonl"
     }
