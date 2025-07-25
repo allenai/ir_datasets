@@ -32,6 +32,20 @@ exclude = ["test"]
 version = {attr = "ir_datasets.__version__"}
 dependencies = {file = ["requirements.txt"]}
 
+[project.optional-dependencies]
+car = [
+  "trec-car-tools>=2.5.4",
+]
+warc = [
+  "warc3-wet>=0.2.3",
+  "warc3-wet-clueweb09>=0.2.5"
+]
+all = [
+  "trec-car-tools>=2.5.4",
+  "warc3-wet>=0.2.3",
+  "warc3-wet-clueweb09>=0.2.5"
+]
+
 [project.urls]
 "Homepage" = "https://ir-datasets.com/"
 "Documentation" = "https://project.readthedocs.io/"
