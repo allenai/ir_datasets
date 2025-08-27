@@ -153,17 +153,17 @@ class Lz4PickleLookup:
                 finally:
                     f.close()  # mapping stays valid after this
             else:
-                assert False, f"File access {self._file_access} not supported"
+                assert False, f"File access {self._file_access} not supported / {FileAccess.FILE}"
         return self._bin
 
     def pos(self):
         if self._pos is None:
-            self._pos = NumpyPosIndex(self._pos_path)
+            self._pos = NumpyPosIndex(self._pos_path, file_access=self._file_access)
         return self._pos
 
     def idx(self):
         if self._idx is None:
-            self._idx = NumpySortedIndex(self._idx_path)
+            self._idx = NumpySortedIndex(self._idx_path, file_access=self._file_access)
         return self._idx
 
     def close(self):
