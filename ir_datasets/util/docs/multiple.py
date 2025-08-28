@@ -28,10 +28,10 @@ class PrefixedDocsSpec:
 
 
 class PrefixedDocstore(Docstore):
-    def __init__(self, docs_mapping: List[PrefixedDocsSpec], field="doc_id"):
+    def __init__(self, docs_mapping: List[PrefixedDocsSpec], field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         self._id_field = field
         self._stores = [
-            (mapping, mapping.docs.docs_store(field=field))
+            (mapping, mapping.docs.docs_store(field=field, options=options))
             for mapping in docs_mapping
         ]
 

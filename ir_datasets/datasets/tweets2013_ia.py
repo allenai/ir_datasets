@@ -234,8 +234,8 @@ class Tweets2013IaDocIter:
 
 
 class TweetsDocstore(Docstore):
-    def __init__(self, tweets_docs):
-        super().__init__(tweets_docs.docs_cls(), 'doc_id')
+    def __init__(self, tweets_docs, options=DEFAULT_DOCSTORE_OPTIONS):
+        super().__init__(tweets_docs.docs_cls(), 'doc_id', options=options)
         self.tweets_docs = tweets_docs
 
     def get_many_iter(self, doc_ids):

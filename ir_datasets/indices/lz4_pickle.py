@@ -310,7 +310,7 @@ class PickleLz4FullStore(Docstore):
         count_hint=None,
         options=DEFAULT_DOCSTORE_OPTIONS,
     ):
-        super().__init__(data_cls, lookup_field)
+        super().__init__(data_cls, lookup_field, options=options)
         self.path = path
         self.init_iter_fn = init_iter_fn
         self.lookup = Lz4PickleLookup(
