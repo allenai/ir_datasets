@@ -13,7 +13,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import TrecQrels, TrecQueries, BaseDocs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.indices import Docstore, CacheDocstore
+from ir_datasets.indices import Docstore, CacheDocstore, DEFAULT_DOCSTORE_OPTIONS
 
 
 NAME = 'tweets2013-ia'
@@ -363,8 +363,8 @@ class Tweets2013IaDocs(BaseDocs):
     def docs_cls(self):
         return TweetDoc
 
-    def docs_store(self):
-        return ir_datasets.indices.CacheDocstore(TweetsDocstore(self), f'{self.docs_path(force=False)}.cache')
+    def docs_store(self, options=DEFAULT_DOCSTORE_OPTIONS):
+        return CacheDocstore(TweetsDocstore(self), f'{self.docs_path(force=False)}.cache', options=options)
 
     def docs_path(self, force=False):
         return self._docs_base_path

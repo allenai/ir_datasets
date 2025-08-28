@@ -205,9 +205,9 @@ class Gov2Docs(BaseDocs):
             self._docs_file_counts_cache = result
         return self._docs_file_counts_cache
 
-    def docs_store(self):
+    def docs_store(self, options=ir_datasets.indices.DEFAULT_DOCSTORE_OPTIONS):
         docstore = Gov2Docstore(self)
-        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache')
+        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache', options=options)
 
     def docs_count(self):
         return sum(self._docs_file_counts().values())

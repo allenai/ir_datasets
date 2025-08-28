@@ -7,6 +7,7 @@ import ir_datasets
 from ir_datasets.formats import BaseDocs
 from ir_datasets.util import BaseDownload
 from ir_datasets.util.docs.lazy import DocsList, LazyDocsIter
+from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -138,5 +139,5 @@ class DocsSubset(BaseDocs):
     def docs_namespace(self):
         return self._docs.docs_namespace()
 
-    def docs_store(self, field="doc_id"):
-        return self._docs.docs_store(field=field)
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
+        return self._docs.docs_store(field=field, options=options)

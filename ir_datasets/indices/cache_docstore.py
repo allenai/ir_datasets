@@ -1,15 +1,15 @@
 import os
 from contextlib import contextmanager
 import ir_datasets
-from . import Docstore, Lz4PickleLookup
+from . import Docstore, Lz4PickleLookup, DEFAULT_DOCSTORE_OPTIONS
 
 
 class CacheDocstore(Docstore):
-    def __init__(self, full_store, path, cache_cls=Lz4PickleLookup):
-        super().__init__(full_store._doc_cls, full_store._id_field)
+    def __init__(self, full_store, path, cache_cls=Lz4PickleLookup, options=DEFAULT_DOCSTORE_OPTIONS):
+        super().__init__(full_store._doc_cls, full_store._id_field, options=options)
         self.full_store = full_store
         self._path = path
-        self.cache = cache_cls(path, self._doc_cls, self._id_field, [self._id_field])
+        self.cache = cache_cls(path, self._doc_cls, self._id_field, [self._id_field], file_access=options.file_access)
 
     def get_many_iter(self, doc_ids):
         doc_ids_remaining = set(doc_ids)

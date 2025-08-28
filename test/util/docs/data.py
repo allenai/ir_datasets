@@ -2,7 +2,7 @@ import random
 import string
 
 from ir_datasets.formats.base import BaseDocs, GenericDoc
-from ir_datasets.indices.base import Docstore
+from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS, Docstore
 
 
 class OtherDoc:
@@ -39,7 +39,7 @@ class FakeDocs(BaseDocs):
     def docs_namepace(self):
         return self._namespace
     
-    def docs_store(self, field="doc_id") -> Docstore:
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS) -> Docstore:
         return FakeDocstore(self)
 
 

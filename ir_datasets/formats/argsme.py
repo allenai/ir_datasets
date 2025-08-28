@@ -10,7 +10,7 @@ from typing import NamedTuple, List, Optional
 
 from ir_datasets import lazy_libs
 from ir_datasets.formats import BaseDocs
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Cache, use_docstore
 
 
@@ -390,7 +390,7 @@ class ArgsMeDocs(BaseDocs):
                 argument = ArgsMeDoc.from_json(argument_json)
                 yield argument
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -398,6 +398,7 @@ class ArgsMeDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
@@ -444,7 +445,7 @@ class ArgsMeProcessedDocs(BaseDocs):
                 argument = ArgsMeProcessedDoc.from_csv(argument_csv)
                 yield argument
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -452,6 +453,7 @@ class ArgsMeProcessedDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
@@ -497,7 +499,7 @@ class ArgsMeCombinedDocs(BaseDocs):
             for argument in source.docs_iter():
                 yield argument
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -505,6 +507,7 @@ class ArgsMeCombinedDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):

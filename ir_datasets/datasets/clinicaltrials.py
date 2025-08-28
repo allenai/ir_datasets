@@ -12,7 +12,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig, GzipExtract, ZipExtract
 from ir_datasets.formats import BaseDocs, BaseQueries, GenericQuery, TrecQrels, TrecXmlQueries
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from . import medline
 
 _logger = ir_datasets.log.easy()
@@ -93,7 +93,7 @@ class ClinicalTrialsDocs(BaseDocs):
     def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/self._name/'corpus'
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
@@ -101,6 +101,7 @@ class ClinicalTrialsDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_cls(self):

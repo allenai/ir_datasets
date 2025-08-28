@@ -81,9 +81,9 @@ class WarcDocs(BaseDocs):
         # For Warc Docstore lookups
         return None
 
-    def docs_store(self):
+    def docs_store(self, options=ir_datasets.indices.DEFAULT_DOCSTORE_OPTIONS):
         docstore = ir_datasets.indices.ClueWebWarcDocstore(self)
-        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache')
+        return ir_datasets.indices.CacheDocstore(docstore, f'{self.docs_path(force=False)}.cache', options=options)
 
     def docs_cls(self):
         return WarcDoc
