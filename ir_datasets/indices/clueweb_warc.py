@@ -130,7 +130,9 @@ class ClueWebWarcIndex:
 
 
 class ClueWebWarcDocstore(Docstore):
-    def __init__(self, warc_docs, options=ir_datasets.indices.DEFAULT_DOCSTORE_OPTIONS):
+    def __init__(self, warc_docs, options=None):
+        from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS
+        options = options or DEFAULT_DOCSTORE_OPTIONS
         super().__init__(warc_docs.docs_cls(), 'doc_id', options=options)
         self.warc_docs = warc_docs
 
