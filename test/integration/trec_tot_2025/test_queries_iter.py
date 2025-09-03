@@ -76,3 +76,15 @@ class TestQueriesIter(unittest.TestCase):
         self.assertEqual("2028", actual.query_id)
         self.assertIn("The place had this weird energy source", actual.default_text())
 
+    def test_query_from_test_dataset_can_be_loaded_01(self):
+        actual = load_query_number("trec-tot/2025/test", 2)
+        self.assertIsNotNone(actual)
+        self.assertEqual(3002, actual.query_id)
+        self.assertIn("learn judo or kung fu techniques and become a skilled master himself", actual.default_text())
+
+    def test_query_from_test_dataset_can_be_loaded_02(self):
+        actual = load_query_number("trec-tot/2025/test", 25)
+        self.assertIsNotNone(actual)
+        self.assertEqual(3025, actual.query_id)
+        self.assertIn("discussing complex tax structures and their impacts on businesses globally", actual.default_text())
+
