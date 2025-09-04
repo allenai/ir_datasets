@@ -53,19 +53,28 @@ def json():
 
 def trec_car():
     if 'trec_car' not in _cache:
-        import trec_car.read_data
+        try:
+            import trec_car.read_data
+        except ImportError as ie:
+            raise ImportError("This dataset requires trec-car-tools. Run 'pip install ir_datasets[car]' to install dependencies for this dataset") from ie
         _cache['trec_car'] = trec_car
     return _cache['trec_car']
 
 def warc():
     if 'warc' not in _cache:
-        import warc
+        try:
+            import warc
+        except ImportError as ie:
+            raise ImportError("This dataset requires warc. Run 'pip install ir_datasets[warc]' to install dependencies for this dataset") from ie
         _cache['warc'] = warc
     return _cache['warc']
 
 def warc_clueweb09():
     if 'warc_clueweb09' not in _cache:
-        import warc3_wet_clueweb09
+        try:
+            import warc3_wet_clueweb09
+        except ImportError as ie:
+            raise ImportError("This dataset requires warc. Run 'pip install ir_datasets[warc]' to install dependencies for this dataset") from ie
         _cache['warc_clueweb09'] = warc3_wet_clueweb09
     return _cache['warc_clueweb09']
 
