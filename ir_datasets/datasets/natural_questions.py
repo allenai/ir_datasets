@@ -4,7 +4,7 @@ import contextlib
 import ir_datasets
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.formats import DocstoreBackedDocs, TsvQueries, BaseQrels, BaseScoredDocs, GenericScoredDoc
-
+from ir_datasets.indices import DocstoreOptions, DEFAULT_DOCSTORE_OPTIONS
 _logger = ir_datasets.log.easy()
 
 
@@ -43,11 +43,11 @@ class NqManager:
         self._docs_store = None
         self._base_path = base_path
 
-    def docs_store(self):
+    def docs_store(self, options: DocstoreOptions = DEFAULT_DOCSTORE_OPTIONS):
         self.build()
-        return self._internal_docs_store()
+        return self._internal_docs_store(options)
 
-    def _internal_docs_store(self):
+    def _internal_docs_store(self, options: DocstoreOptions = DEFAULT_DOCSTORE_OPTIONS):
         if self._docs_store is None:
             self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, NqPassageDoc, 'doc_id', ['doc_id'], count_hint=ir_datasets.util.count_hint(NAME))
         return self._docs_store

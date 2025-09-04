@@ -1,10 +1,27 @@
 
+from dataclasses import dataclass, field
+from enum import Enum
+
+class FileAccess(Enum):
+    FILE = 0
+    MMAP = 1
+    MEMORY = 2
+
+
+@dataclass(kw_only=True)
+class DocstoreOptions:
+    #: How to access the document content
+    file_access: FileAccess = field(default=FileAccess.FILE)
+
+
+DEFAULT_DOCSTORE_OPTIONS = DocstoreOptions()
 
 class Docstore:
-    def __init__(self, doc_cls, id_field='doc_id'):
+    def __init__(self, doc_cls, id_field='doc_id', options: DocstoreOptions=DEFAULT_DOCSTORE_OPTIONS):
         self._doc_cls = doc_cls
         self._id_field = id_field
         self._id_field_idx = doc_cls._fields.index(id_field)
+        self._options = options
 
     def get(self, doc_id, field=None):
         result = self.get_many([doc_id], field)

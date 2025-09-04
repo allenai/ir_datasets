@@ -9,7 +9,7 @@ from fnmatch import fnmatch
 from pathlib import Path
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from .base import GenericDoc, GenericQuery, GenericScoredDoc, BaseDocs, BaseQueries, BaseScoredDocs, BaseQrels
 
 
@@ -257,7 +257,7 @@ class TrecDocs(BaseDocs):
     def docs_cls(self):
         return self._doc
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         if self._docstore_path is not None:
             ds_path = self._docstore_path
         else:
@@ -270,6 +270,7 @@ class TrecDocs(BaseDocs):
             index_fields=['doc_id'],
             size_hint=self._docstore_size_hint,
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):

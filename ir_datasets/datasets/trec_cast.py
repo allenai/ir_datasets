@@ -34,7 +34,7 @@ from ir_datasets.util.docs.multiple import PrefixedDocs, PrefixedDocsSpec
 import numpy as np
 
 from ir_datasets.util.docs.subset import ColonCommaDupes, DocsSubset, Dupes
-
+from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -212,8 +212,8 @@ class CastPassageIter:
 
 
 class CastPassageDocstore(ir_datasets.indices.Docstore):
-    def __init__(self, docs_docstore):
-        super().__init__(GenericDoc, "doc_id")
+    def __init__(self, docs_docstore, options=DEFAULT_DOCSTORE_OPTIONS):
+        super().__init__(GenericDoc, "doc_id", options=options)
         self._docs_docstore = docs_docstore
 
     def get_many_iter(self, doc_ids):
@@ -302,8 +302,8 @@ class CastPassageDocs(BaseDocs):
     def docs_cls(self):
         return CastPassageDoc
 
-    def docs_store(self, field="doc_id"):
-        return CastPassageDocstore(self._docs.docs_store(field))
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
+        return CastPassageDocstore(self._docs.docs_store(field, options=options), options=options)
 
     def docs_count(self):
         return self._count

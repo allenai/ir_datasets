@@ -8,7 +8,7 @@ import json
 from typing import NamedTuple, Tuple
 import tarfile
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS, FileAccess
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
@@ -72,10 +72,10 @@ class MsMarcoV2Passages(BaseDocs):
     def docs_cls(self):
         return MsMarcoV2Passage
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         assert field == 'doc_id'
         # Unlike for msmarco-document-v2, using the docstore actually hurts performance.
-        return MsMarcoV2DocStore(self)
+        return MsMarcoV2DocStore(self, options=options)
 
     def docs_count(self):
         if self.docs_store().built():
@@ -92,8 +92,8 @@ class MsMarcoV2Passages(BaseDocs):
 
 
 class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
-    def __init__(self, docs_handler):
-        super().__init__(docs_handler.docs_cls(), 'doc_id')
+    def __init__(self, docs_handler, options=DEFAULT_DOCSTORE_OPTIONS):
+        super().__init__(docs_handler.docs_cls(), 'doc_id', options=options)
         self.np = ir_datasets.lazy_libs.numpy()
         self.docs_handler = docs_handler
         self.dlc = docs_handler._dlc
@@ -102,6 +102,9 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
         self.size_hint = 60880127751
+        
+        if options.file_access != FileAccess.FILE:
+            _logger.warning(f"MsMarcoV2 passage only allows FILE access (requested {options.file_access})")
 
     def get_many_iter(self, keys):
         self.build()
