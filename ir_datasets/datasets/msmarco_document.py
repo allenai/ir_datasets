@@ -1,7 +1,7 @@
 from typing import NamedTuple, List
 import json
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TrecDocs, TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
@@ -91,7 +91,7 @@ class MsMarcoAnchorTextDocs(BaseDocs):
     def docs_cls(self):
         return MsMarcoAnchorTextDocument
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()}/{NAME}/anchor-text.pklz4',
             init_iter_fn=self.docs_iter,
@@ -99,6 +99,7 @@ class MsMarcoAnchorTextDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):

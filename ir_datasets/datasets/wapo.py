@@ -3,7 +3,7 @@ import json
 import tarfile
 from typing import NamedTuple, Tuple, Optional
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels, GenericQuery, GenericQrel, TrecQueries, TrecQrels
@@ -137,13 +137,14 @@ class WapoDocs(BaseDocs):
                         doc_json = json.loads(line)
                         yield doc_json
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self.docs_path()}.pklz4',
             init_iter_fn=self._docs_iter,
             data_cls=self.docs_cls(),
             lookup_field=field,
             index_fields=['doc_id'],
+            options=options
         )
 
     def docs_count(self):

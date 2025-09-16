@@ -10,6 +10,7 @@ from typing import NamedTuple, Tuple
 from ir_datasets.util import DownloadConfig, GzipExtract, TarExtract, finialized_file
 from ir_datasets.formats import TrecQrels, TsvQueries, DocstoreBackedDocs, BaseQlogs
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
+from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS, DocstoreOptions, PickleLz4FullStore
 
 _logger = ir_datasets.log.easy()
 
@@ -98,13 +99,13 @@ class AolManager:
         if not self._base_path.exists():
             self._base_path.mkdir(exist_ok=True, parents=True)
 
-    def docs_store(self):
+    def docs_store(self, options=DEFAULT_DOCSTORE_OPTIONS):
         self._build_docs()
-        return self._internal_docs_store()
+        return self._internal_docs_store(options)
 
-    def _internal_docs_store(self):
+    def _internal_docs_store(self, options: DocstoreOptions=DEFAULT_DOCSTORE_OPTIONS):
         if self._docs_store is None:
-            self._docs_store = ir_datasets.indices.PickleLz4FullStore(self._base_path/'docs.pklz4', None, AolIaDoc, 'doc_id', ['doc_id'], count_hint=ir_datasets.util.count_hint(NAME))
+            self._docs_store = PickleLz4FullStore(self._base_path/'docs.pklz4', None, AolIaDoc, 'doc_id', ['doc_id'], count_hint=ir_datasets.util.count_hint(NAME), options=options)
         return self._docs_store
 
     def _build_docs(self):

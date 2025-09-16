@@ -8,7 +8,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig, Download, RequestsDownload, TarExtractAll, GzipExtract
 from ir_datasets.formats import BaseDocs, TrecXmlQueries, DocSourceSeekableIter, DocSource, SourceDocIter
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.indices import Docstore
+from ir_datasets.indices import Docstore, DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -112,8 +112,8 @@ class C4SourceIter(DocSourceSeekableIter):
 
 
 class C4Docstore(Docstore):
-    def __init__(self, docs):
-        super().__init__(docs.docs_cls(), 'doc_id')
+    def __init__(self, docs, options=DEFAULT_DOCSTORE_OPTIONS):
+        super().__init__(docs.docs_cls(), 'doc_id', options=options)
         self.docs = docs
 
     def get_many_iter(self, doc_ids):
@@ -157,9 +157,9 @@ class C4Docs(BaseDocs):
     def docs_cls(self):
         return C4Doc
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         assert field == 'doc_id'
-        return C4Docstore(self)
+        return C4Docstore(self, options=options)
 
     def docs_count(self, force=False):
         if force or self._sources is not None:

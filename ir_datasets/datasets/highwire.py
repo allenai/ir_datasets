@@ -5,7 +5,7 @@ import ir_datasets
 from ir_datasets.util import DownloadConfig
 from ir_datasets.formats import BaseDocs, BaseQueries, GenericQuery, BaseQrels
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -101,7 +101,7 @@ class HighwireDocs(BaseDocs):
     def docs_path(self, force=True):
         return ir_datasets.util.home_path()/NAME/'corpus'
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
@@ -109,6 +109,7 @@ class HighwireDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=ir_datasets.util.count_hint(NAME),
+            options=options
         )
 
     def docs_cls(self):

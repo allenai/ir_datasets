@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import ir_datasets
 from ir_datasets.formats import BaseDocs
-from ir_datasets.indices.base import Docstore
+from ir_datasets.indices.base import Docstore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.indices.lz4_pickle import PickleLz4FullStore
 from ir_datasets.util.docs.lazy import LazyDocsIter
 
@@ -28,10 +28,10 @@ class PrefixedDocsSpec:
 
 
 class PrefixedDocstore(Docstore):
-    def __init__(self, docs_mapping: List[PrefixedDocsSpec], field="doc_id"):
+    def __init__(self, docs_mapping: List[PrefixedDocsSpec], field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         self._id_field = field
         self._stores = [
-            (mapping, mapping.docs.docs_store(field=field))
+            (mapping, mapping.docs.docs_store(field=field, options=options))
             for mapping in docs_mapping
         ]
 
@@ -139,10 +139,10 @@ class PrefixedDocs(BaseDocs):
         return sum(counts)
 
     @lru_cache
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         # If no store name, we use dynamic access
         if self._store_name is None:
-            return PrefixedDocstore(self._docs_mapping, field=field)
+            return PrefixedDocstore(self._docs_mapping, field=field, options=options)
 
         # otherwise, builds a store
         return PickleLz4FullStore(
@@ -152,4 +152,5 @@ class PrefixedDocs(BaseDocs):
             lookup_field=field,
             index_fields=[field],
             count_hint=self.docs_count(),
+            options=options
         )

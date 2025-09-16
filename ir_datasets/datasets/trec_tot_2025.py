@@ -5,7 +5,7 @@ from ir_datasets.formats.base import BaseDocs
 from ir_datasets.indices import Docstore
 from ir_datasets.util import ZipExtractCache, home_path, Cache, DownloadConfig
 from ir_datasets.formats import BaseDocs, TrecQrels, JsonlQueries
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 import os
 import gzip
 import json
@@ -36,11 +36,12 @@ class TrecToT2025Doc(NamedTuple):
 
 
 class JsonlWithOffsetsDocsStore(Docstore):
-    def __init__(self, docs, offsets):
+    def __init__(self, docs, offsets, options=DEFAULT_DOCSTORE_OPTIONS):
        self.__docs = docs
        self.__offsets = offsets
        self._docs_dict = None
        self._id_field = "doc_id"
+       self._options = options
 
     def offsets_iter(self):
         with gzip.open(self.__offsets.path(), "rt") as f:
@@ -54,7 +55,8 @@ class JsonlWithOffsetsDocsStore(Docstore):
             init_iter_fn=self.offsets_iter,
             data_cls=JsonlDocumentOffset,
             lookup_field="doc_id",
-            index_fields=("doc_id",)
+            index_fields=("doc_id",),
+            options=self._options
         )
 
     def get_many_iter(self, doc_ids):
@@ -87,8 +89,8 @@ class JsonlDocumentsWithOffsets(BaseDocs):
     def docs_cls(self):
         return TrecToT2025Doc
 
-    def docs_store(self, field='doc_id'):
-        return TrecToT2025DocsStore(self.__docs, self.__offsets)
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
+        return TrecToT2025DocsStore(self.__docs, self.__offsets, options=options)
 
     def docs_namespace(self):
         raise ValueError("ToDo: Implement this")

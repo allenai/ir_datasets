@@ -3,7 +3,7 @@ from typing import Tuple
 import io
 import ir_datasets
 from .base import GenericDoc, GenericQuery, GenericDocPair, BaseDocs, BaseQueries, BaseDocPairs
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 
 
 class FileLineIter:
@@ -149,7 +149,7 @@ class TsvDocs(_TsvBase, BaseDocs):
     def docs_cls(self):
         return self._cls
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         fields = (self._doc_store_index_fields or ['doc_id'])
         return PickleLz4FullStore(
             path=f'{self.docs_path(force=False)}.pklz4',
@@ -159,6 +159,7 @@ class TsvDocs(_TsvBase, BaseDocs):
             index_fields=fields,
             size_hint=self._docstore_size_hint,
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_namespace(self):

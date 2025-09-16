@@ -1,10 +1,14 @@
 import io
+import mmap
 import os
 import pickle
+
+from ir_datasets.indices import DEFAULT_DOCSTORE_OPTIONS, FileAccess
+
 try:
     import fcntl
 except:
-    fcntl = None # not available on Windows :shrug:
+    fcntl = None  # not available on Windows :shrug:
 from contextlib import contextmanager
 import ir_datasets
 from . import Docstore, NumpySortedIndex, NumpyPosIndex
@@ -15,7 +19,7 @@ _logger = ir_datasets.log.easy()
 
 def _read_next(f, data_cls):
     lz4 = ir_datasets.lazy_libs.lz4_block()
-    content_length = int.from_bytes(f.read(4), 'little')
+    content_length = int.from_bytes(f.read(4), "little")
     content = f.read(content_length)
     content = lz4.block.decompress(content)
     content = pickle.loads(content)
@@ -23,7 +27,7 @@ def _read_next(f, data_cls):
 
 
 def _skip_next(f):
-    content_length = int.from_bytes(f.read(4), 'little')
+    content_length = int.from_bytes(f.read(4), "little")
     f.seek(content_length, io.SEEK_CUR)
 
 
@@ -33,12 +37,12 @@ def _write_next(f, record):
     content = pickle.dumps(content)
     content = lz4.block.compress(content, store_size=True)
     content_length = len(content)
-    f.write(content_length.to_bytes(4, 'little'))
+    f.write(content_length.to_bytes(4, "little"))
     f.write(content)
 
 
 def safe_str(s):
-    return "".join(c for c in s if c.isalnum() or c == '_')
+    return "".join(c for c in s if c.isalnum() or c == "_")
 
 
 class Lz4PickleIter:
@@ -53,17 +57,21 @@ class Lz4PickleIter:
         if self.slice.start >= self.slice.stop:
             raise StopIteration
         if self.bin is None:
-            self.bin = open(self.lookup._bin_path, 'rb')
+            self.bin = open(self.lookup._bin_path, "rb")
         if self.next_index != self.slice.start:
             # Fast -- lookup keeps track of position of each index
             if self.pos_idx is None:
                 self.pos_idx = NumpyPosIndex(self.lookup._pos_path)
             new_pos = self.pos_idx[self.slice.start][0]
-            self.bin.seek(new_pos) # this seek is smart -- if alrady in buffer, skips to that point
+            self.bin.seek(
+                new_pos
+            )  # this seek is smart -- if alrady in buffer, skips to that point
             self.next_index = self.slice.start
         result = _read_next(self.bin, self.lookup._doc_cls)
         self.next_index += 1
-        self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
+        self.slice = slice(
+            self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step
+        )
         return result
 
     def __iter__(self):
@@ -90,45 +98,72 @@ class Lz4PickleIter:
                 return next(new_it)
             except StopIteration as e:
                 raise IndexError(e)
-        raise TypeError('key must be int or slice')
+        raise TypeError("key must be int or slice")
 
 
 class Lz4PickleLookup:
-    def __init__(self, path, doc_cls, key_field, index_fields, key_field_prefix=None):
+    def __init__(
+        self,
+        path,
+        doc_cls,
+        key_field,
+        index_fields,
+        key_field_prefix=None,
+        file_access=FileAccess.FILE,
+    ):
         self._path = path
         self._key_field = key_field
         self._key_idx = doc_cls._fields.index(key_field)
         self._index_fields = list(index_fields)
         self._doc_cls = doc_cls
         self._bin = None
-        self._bin_path = os.path.join(self._path, 'bin')
+        self._bin_path = os.path.join(self._path, "bin")
         self._pos = None
-        self._pos_path = os.path.join(self._path, 'bin.pos')
+        self._pos_path = os.path.join(self._path, "bin.pos")
         self._idx = None
-        self._idx_path = os.path.join(self._path, f'idx.{safe_str(self._key_field)}')
+        self._idx_path = os.path.join(self._path, f"idx.{safe_str(self._key_field)}")
         self._key_field_prefix = key_field_prefix
-        self._meta_path = os.path.join(self._path, 'bin.meta')
+        self._meta_path = os.path.join(self._path, "bin.meta")
+        self._file_access = file_access
 
         # check that the fields match
-        meta_info = ' '.join(doc_cls._fields)
+        meta_info = " ".join(doc_cls._fields)
         if os.path.exists(self._meta_path):
-            with open(self._meta_path, 'rt') as f:
+            with open(self._meta_path, "rt") as f:
                 existing_meta = f.read()
-            assert existing_meta == meta_info, f"fields do not match; you may need to re-build this store {path}"
+            assert (
+                existing_meta == meta_info
+            ), f"fields do not match; you may need to re-build this store {path}"
 
     def bin(self):
         if self._bin is None:
-            self._bin = open(self._bin_path, 'rb')
+            if self._file_access == FileAccess.FILE:
+                _logger.info(f"Opening {self._bin_path} with direct file access")
+                self._bin = open(self._bin_path, "rb")
+            elif self._file_access == FileAccess.MEMORY:
+                _logger.info(f"Opening {self._bin_path} in memory")
+                with open(self._bin_path, "rb") as f:
+                    data = bytearray(f.read())  # mutable buffer
+                self._bin = io.BytesIO(data)  # Use the same buffer
+            elif self._file_access == FileAccess.MMAP:
+                _logger.info(f"Opening {self._bin_path} with MMAP")
+                f = open(self._bin_path, "rb")
+                try:
+                    self._bin = mmap.mmap(f.fileno(), 0, access=mmap.ACCESS_READ)
+                finally:
+                    f.close()  # mapping stays valid after this
+            else:
+                assert False, f"File access {self._file_access} not supported / {FileAccess.FILE}"
         return self._bin
 
     def pos(self):
         if self._pos is None:
-            self._pos = NumpyPosIndex(self._pos_path)
+            self._pos = NumpyPosIndex(self._pos_path, file_access=self._file_access)
         return self._pos
 
     def idx(self):
         if self._idx is None:
-            self._idx = NumpySortedIndex(self._idx_path)
+            self._idx = NumpySortedIndex(self._idx_path, file_access=self._file_access)
         return self._idx
 
     def close(self):
@@ -158,8 +193,8 @@ class Lz4PickleLookup:
         if not os.path.exists(self._path):
             os.makedirs(self._path, exist_ok=True)
         if not os.path.exists(self._meta_path):
-            meta_info = ' '.join(self._doc_cls._fields)
-            with open(self._meta_path, 'wt') as f:
+            meta_info = " ".join(self._doc_cls._fields)
+            with open(self._meta_path, "wt") as f:
                 f.write(meta_info)
 
         with Lz4PickleTransaction(self) as trans:
@@ -170,13 +205,17 @@ class Lz4PickleLookup:
             values = (values,)
         # for removing long doc_id prefixes
         if self._key_field_prefix:
-            values = [v[len(self._key_field_prefix):] for v in values if v.startswith(self._key_field_prefix)]
+            values = [
+                v[len(self._key_field_prefix) :]
+                for v in values
+                if v.startswith(self._key_field_prefix)
+            ]
         poss = self.idx()[values]
-        poss = sorted(poss) # go though the file in increasing order-- better for HDDs
+        poss = sorted(poss)  # go though the file in increasing order-- better for HDDs
         binf = None
         for pos in poss:
             if pos == -1:
-                continue # not found
+                continue  # not found
             if binf is None:
                 binf = self.bin()
             binf.seek(pos)
@@ -203,14 +242,14 @@ class Lz4PickleTransaction:
         self.start_pos = None
 
     def __enter__(self):
-        self.bin = open(self.lookup._bin_path, 'ab')
+        self.bin = open(self.lookup._bin_path, "ab")
         if fcntl:
             fcntl.lockf(self.bin, fcntl.LOCK_EX)
-        self.start_pos = self.bin.tell() # for rolling back
+        self.start_pos = self.bin.tell()  # for rolling back
         self.pos = NumpyPosIndex(self.lookup._pos_path)
         self.idxs = []
         for index_field in self.lookup._index_fields:
-            idx_path = os.path.join(self.lookup._path, f'idx.{safe_str(index_field)}')
+            idx_path = os.path.join(self.lookup._path, f"idx.{safe_str(index_field)}")
             self.idxs.append(NumpySortedIndex(idx_path))
         return self
 
@@ -234,7 +273,7 @@ class Lz4PickleTransaction:
         self.bin = None
 
     def rollback(self):
-        self.bin.truncate(self.start_pos) # remove appended content
+        self.bin.truncate(self.start_pos)  # remove appended content
         if fcntl:
             fcntl.lockf(self.bin, fcntl.LOCK_UN)
         self.bin.close()
@@ -253,17 +292,35 @@ class Lz4PickleTransaction:
             # remove long doc_id prefixes to cut down on storage
             if field == self.lookup._key_field and self.lookup._key_field_prefix:
                 assert value.startswith(self.lookup._key_field_prefix)
-                value = value[len(self.lookup._key_field_prefix):]
+                value = value[len(self.lookup._key_field_prefix) :]
             idx.add(value, bin_pos)
         _write_next(self.bin, record)
 
 
 class PickleLz4FullStore(Docstore):
-    def __init__(self, path, init_iter_fn, data_cls, lookup_field, index_fields, key_field_prefix=None, size_hint=None, count_hint=None):
-        super().__init__(data_cls, lookup_field)
+    def __init__(
+        self,
+        path,
+        init_iter_fn,
+        data_cls,
+        lookup_field,
+        index_fields,
+        key_field_prefix=None,
+        size_hint=None,
+        count_hint=None,
+        options=DEFAULT_DOCSTORE_OPTIONS,
+    ):
+        super().__init__(data_cls, lookup_field, options=options)
         self.path = path
         self.init_iter_fn = init_iter_fn
-        self.lookup = Lz4PickleLookup(path, data_cls, lookup_field, index_fields, key_field_prefix)
+        self.lookup = Lz4PickleLookup(
+            path,
+            data_cls,
+            lookup_field,
+            index_fields,
+            key_field_prefix,
+            file_access=options.file_access,
+        )
         self.size_hint = size_hint
         self.count_hint = count_hint
 
@@ -275,11 +332,17 @@ class PickleLz4FullStore(Docstore):
         if not self.built():
             if self.size_hint:
                 ir_datasets.util.check_disk_free(self.path, self.size_hint)
-            with self.lookup.transaction() as trans, _logger.duration('building docstore'):
-                count_hint = self.count_hint # either a callable or int or None
+            with self.lookup.transaction() as trans, _logger.duration(
+                "building docstore"
+            ):
+                count_hint = self.count_hint  # either a callable or int or None
                 if callable(count_hint):
-                    count_hint = count_hint() # allows for deferred loading of metadata; should return an int or None
-                for doc in _logger.pbar(self.init_iter_fn(), 'docs_iter', unit='doc', total=count_hint):
+                    count_hint = (
+                        count_hint()
+                    )  # allows for deferred loading of metadata; should return an int or None
+                for doc in _logger.pbar(
+                    self.init_iter_fn(), "docs_iter", unit="doc", total=count_hint
+                ):
                     trans.add(doc)
 
     def built(self):

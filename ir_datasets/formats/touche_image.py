@@ -6,7 +6,7 @@ from typing import NamedTuple, Optional, Dict, List, Tuple
 from zipfile import ZipFile
 
 from ir_datasets.formats import BaseDocs
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Cache, use_docstore
 
 
@@ -219,7 +219,7 @@ class ToucheImageDocs(BaseDocs):
                         pages=pages,
                     )
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -227,6 +227,7 @@ class ToucheImageDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
