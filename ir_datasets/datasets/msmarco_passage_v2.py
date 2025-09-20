@@ -46,11 +46,22 @@ def parse_msmarco_passage(line):
         data['docid'])
 
 
+def passage_bundle_pos_from_key(key):
+    (string1, string2, bundlenum, position) = key.split('_')
+    assert string1 == 'msmarco' and string2 == 'passage'
+    return f'msmarco_passage_{bundlenum}', position
+
 class MsMarcoV2Passages(BaseDocs):
-    def __init__(self, dlc, pos_dlc=None):
+    def __init__(self, dlc, pos_dlc=None, cls=MsMarcoV2Passage, parse_passage=parse_msmarco_passage, name=NAME, docstore_size_hint=60880127751, bundle_pos_from_key=passage_bundle_pos_from_key, count=138_364_198):
         super().__init__()
         self._dlc = dlc
         self._pos_dlc = pos_dlc
+        self._cls = cls
+        self._parse_passage = parse_passage
+        self._name = name
+        self._docstore_size_hint = docstore_size_hint
+        self._bundle_pos_from_key = bundle_pos_from_key
+        self._count = count
 
     @ir_datasets.util.use_docstore
     def docs_iter(self):
@@ -59,30 +70,31 @@ class MsMarcoV2Passages(BaseDocs):
             # files are used (i.e., no filtering is applied)
             yield from self.docs_store()
         else:
-            with self._dlc.stream() as stream, \
-                 tarfile.open(fileobj=stream, mode='r|') as tarf:
-                for record in tarf:
-                    if not record.name.endswith('.gz'):
-                        continue
+            with tarfile.open(self._dlc.path(), mode='r:') as tarf:
+                # since there's no compression, it's fast to scan all records and sort them.
+                # The sorting has no effect on v2, but in v2.1, the files are out-of-sequence, so this
+                # addressed that problem.
+                records = sorted([r for r in tarf if r.name.endswith('.gz')], key=lambda x: x.name)
+                for record in records:
                     file = tarf.extractfile(record)
                     with gzip.open(file) as file:
                         for line in file:
-                            yield parse_msmarco_passage(line)
+                            yield self._parse_passage(line)
 
     def docs_cls(self):
-        return MsMarcoV2Passage
+        return self._cls
 
     def docs_store(self, field='doc_id'):
         assert field == 'doc_id'
         # Unlike for msmarco-document-v2, using the docstore actually hurts performance.
-        return MsMarcoV2DocStore(self)
+        return MsMarcoV2DocStore(self, size_hint=self._docstore_size_hint, count=self._count)
 
     def docs_count(self):
         if self.docs_store().built():
             return self.docs_store().count()
 
     def docs_namespace(self):
-        return NAME
+        return self._name
 
     def docs_lang(self):
         return 'en'
@@ -92,7 +104,7 @@ class MsMarcoV2Passages(BaseDocs):
 
 
 class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
-    def __init__(self, docs_handler):
+    def __init__(self, docs_handler, size_hint=60880127751, count=138_364_198):
         super().__init__(docs_handler.docs_cls(), 'doc_id')
         self.np = ir_datasets.lazy_libs.numpy()
         self.docs_handler = docs_handler
@@ -101,29 +113,30 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         self.base_path = docs_handler.docs_path(force=False) + '.extracted'
         if not os.path.exists(self.base_path):
             os.makedirs(self.base_path)
-        self.size_hint = 60880127751
+        self.size_hint = size_hint
+        self._count = count
 
     def get_many_iter(self, keys):
         self.build()
         # adapted from <https://microsoft.github.io/msmarco/TREC-Deep-Learning.html>
         bundles = {}
         for key in keys:
-            if not key.count('_') == 3:
+            try:
+                bundlenum, position = self.docs_handler._bundle_pos_from_key(key)
+            except:
                 continue
-            (string1, string2, bundlenum, position) = key.split('_')
-            assert string1 == 'msmarco' and string2 == 'passage'
             if bundlenum not in bundles:
                 bundles[bundlenum] = []
             bundles[bundlenum].append(int(position))
         for bundlenum, positions in bundles.items():
             positions = sorted(positions)
-            file = f'{self.base_path}/msmarco_passage_{bundlenum}'
+            file = f'{self.base_path}/{bundlenum}'
             if not os.path.exists(file):
                 # invalid doc_id -- doesn't point to a real bundle
                 continue
             if self.docs_handler._pos_dlc is not None:
                 # check the positions are valid for these doc_ids -- only return valid ones
-                mmp = self.np.memmap(os.path.join(self.pos_dlc.path(), f'msmarco_passage_{bundlenum}.pos'), dtype='<u4')
+                mmp = self.np.memmap(os.path.join(self.pos_dlc.path(), f'{bundlenum}.pos'), dtype='<u4')
                 positions = self.np.array(positions, dtype='<u4')
                 positions = positions[self.np.isin(positions, mmp)].tolist()
                 del mmp
@@ -131,7 +144,7 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
                 for position in positions:
                     in_fh.seek(position)
                     try:
-                        yield parse_msmarco_passage(in_fh.readline())
+                        yield self.docs_handler._parse_passage(in_fh.readline())
                     except json.JSONDecodeError:
                         # invalid doc_id -- pointed to a wrong position
                         pass
@@ -141,12 +154,9 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
             return
         np = ir_datasets.lazy_libs.numpy()
         ir_datasets.util.check_disk_free(self.base_path, self.size_hint)
-        with _logger.pbar_raw('extracting source documents', total=70, unit='file') as pbar, \
-             self.dlc.stream() as stream, \
-             tarfile.open(fileobj=stream, mode='r|') as tarf:
-            for record in tarf:
-                if not record.name.endswith('.gz'):
-                    continue
+        with tarfile.open(self.dlc.path(), mode='r:') as tarf:
+            records = sorted([r for r in tarf if r.name.endswith('.gz')], key=lambda x: x.name)
+            for record in _logger.pbar(records, desc='extracting source documents'):
                 file = tarf.extractfile(record)
                 fname = record.name.split('/')[-1][:-len('.gz')]
                 positions = []
@@ -158,7 +168,6 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
                 # keep track of the positions for efficient slicing
                 with open(os.path.join(self.base_path, f'{fname}.pos'), 'wb') as posout:
                     posout.write(np.array(positions, dtype='<u4').tobytes())
-                pbar.update(1)
         (Path(self.base_path) / '_built').touch()
 
     def built(self):
@@ -169,14 +178,15 @@ class MsMarcoV2DocStore(ir_datasets.indices.Docstore):
         return MsMarcoV2PassageIter(self, slice(0, self.count()))
 
     def _iter_source_files(self):
-        for i in range(70):
-            yield os.path.join(self.base_path, f'msmarco_passage_{i:02d}')
+        for path in sorted(os.listdir(self.base_path)):
+            if path.startswith('msmarco_') and not path.endswith('.pos'):
+                yield os.path.join(self.base_path, path)
 
     def count(self):
         if self.docs_handler._pos_dlc is not None:
             base_path = self.pos_dlc.path()
             return sum(os.path.getsize(os.path.join(base_path, f)) for f in os.listdir(base_path)) // 4
-        return 138_364_198
+        return self._count
 
 
 class MsMarcoV2PassageIter:
@@ -218,7 +228,7 @@ class MsMarcoV2PassageIter:
                 pos = self.current_pos_mmap[self.slice.start - self.current_file_start_idx]
                 self.current_file.seek(pos)
                 self.next_index = self.slice.start
-        result = parse_msmarco_passage(self.current_file.readline())
+        result = self.docstore.docs_handler._parse_passage(self.current_file.readline())
         self.next_index += 1
         self.slice = slice(self.slice.start + (self.slice.step or 1), self.slice.stop, self.slice.step)
         return result
