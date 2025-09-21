@@ -21,15 +21,3 @@ The dataset was annotated manually by three annotators following specific annota
 <li><a href="https://github.com/LIAAD/pt-image-ir-dataset">Dataset Repository</a></li>
 </ul>
 '
-
-
-images:
-  pretty_name: 'PT Image IR Dataset (Images only)'
-  desc: '
-<p>
-Image collection from the PT Image IR dataset. Contains 42,333 images from the Portuguese Presidency website.
-</p>
-<p>
-This variant provides access to only the image documents from the full PT Image IR dataset, useful for image-focused retrieval tasks.
-</p>
-'
