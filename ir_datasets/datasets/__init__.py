@@ -53,8 +53,9 @@ from . import wapo
 from . import wikiclir
 from . import wikir
 from . import trec_fair
-from . import trec_cast  # must be after wapo,car,msmarco_passage
+from . import trec_cast # must be after wapo,car,msmarco_passage
 from . import hc4
-from . import neuclir  # must be after hc4
+from . import neuclir # must be after hc4
 from . import sara
 from . import trec_tot_2025
+
