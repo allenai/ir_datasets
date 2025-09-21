@@ -38,6 +38,7 @@ from . import nfcorpus
 from . import natural_questions
 from . import nyt
 from . import pmc
+from . import pt_image_ir_dataset
 from . import touche_image
 from . import touche  # must be after argsme,clueweb12,touche_image
 from . import trec_arabic
@@ -52,9 +53,8 @@ from . import wapo
 from . import wikiclir
 from . import wikir
 from . import trec_fair
-from . import trec_cast # must be after wapo,car,msmarco_passage
+from . import trec_cast  # must be after wapo,car,msmarco_passage
 from . import hc4
-from . import neuclir # must be after hc4
+from . import neuclir  # must be after hc4
 from . import sara
 from . import trec_tot_2025
-

@@ -1,0 +1,35 @@
+_: # matches documentation key above
+  pretty_name: 'PT Image IR Dataset' # a more human-readable way to present this dataset than the dataset-id
+  desc: '
+<p>
+A Dataset for Image Information Retrieval in European Portuguese. The data is sourced from the
+<a href="https://www.presidencia.pt/">Portuguese Presidency</a> website. It contains 4,678 articles, 42,333 images, and 80 queries related to the Portuguese Presidency. Over 5,000 images were annotated by three annotators.
+</p>
+<p>
+The dataset includes:
+</p>
+<ul>
+<li><strong>Articles:</strong> 4,678 articles with URL, title, content, date, and associated images</li>
+<li><strong>Images:</strong> 42,333 images with URLs</li>
+<li><strong>Queries:</strong> 80 queries in Portuguese created by the dataset authors</li>
+<li><strong>Relevance judgments:</strong> Over 5,000 image-query relevance annotations (binary: relevant/not relevant)</li>
+</ul>
+<p>
+The dataset was annotated manually by three annotators following specific annotation rules. The relevance judgments are in TREC format, where each line contains a query ID, a zero, an image ID, and a relevance score (0 or 1).
+</p>
+<ul>
+<li><a href="https://github.com/LIAAD/pt-image-ir-dataset">Dataset Repository</a></li>
+</ul>
+'
+
+
+images:
+  pretty_name: 'PT Image IR Dataset (Images only)'
+  desc: '
+<p>
+Image collection from the PT Image IR dataset. Contains 42,333 images from the Portuguese Presidency website.
+</p>
+<p>
+This variant provides access to only the image documents from the full PT Image IR dataset, useful for image-focused retrieval tasks.
+</p>
+'

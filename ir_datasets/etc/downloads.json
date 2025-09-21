@@ -6490,5 +6490,27 @@
       "expected_md5": "49589ab65d1eaf78dbbadfc5ae56ef72",
       "cache_path": "qrels.txt"
     }
+  },
+  "pt-image-ir-dataset": {
+    "articles": {
+      "url": "https://raw.githubusercontent.com/LIAAD/pt-image-ir-dataset/main/data/articles.tsv",
+      "expected_md5": "ebbce9e470f683918d526b44849ad97c",
+      "cache_path": "articles.tsv"
+    },
+    "images": {
+      "url": "https://raw.githubusercontent.com/LIAAD/pt-image-ir-dataset/main/data/images.tsv",
+      "expected_md5": "eaefd26a5b2ba1e18c48715d3363d8a1",
+      "cache_path": "images.tsv"
+    },
+    "queries": {
+      "url": "https://raw.githubusercontent.com/LIAAD/pt-image-ir-dataset/main/data/queries.tsv",
+      "expected_md5": "2e094149f0ba84e2eb8d5dedc574c3e2",
+      "cache_path": "queries.tsv"
+    },
+    "qrels": {
+      "url": "https://raw.githubusercontent.com/LIAAD/pt-image-ir-dataset/main/data/qrels.txt",
+      "expected_md5": "53187432192e9989b913e5c3259322ca",
+      "cache_path": "qrels.txt"
+    }
   }
   }
