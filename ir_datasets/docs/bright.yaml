@@ -1,0 +1,12 @@
+_:
+  pretty_name: 'BRIGHT (benchmark suite)'
+  desc: '
+<p>
+BRIGHT is a retrieval benchmark for reasoning.
+</p>
+<ul>
+<li><a href="https://arxiv.org/abs/2104.08663">Paper</a></li>
+<li><a href="https://github.com/UKPLab/beir/blob/main/README.md">GitHub</a></li>
+</ul>
+'
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']

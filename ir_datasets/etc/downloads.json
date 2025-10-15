@@ -216,6 +216,201 @@
       "cache_path": "scifact/source.zip"
     }
   },
+
+  "bright": {
+    "aops/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/aops-00000-of-00001.parquet",
+      "size_hint": 65301334,
+      "expected_md5": "43d86de9400e68911a7d419de8105c61",
+      "cache_path": "aops.docs.parquet"
+    },
+    "biology/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/biology-00000-of-00001.parquet",
+      "size_hint": 11046045,
+      "expected_md5": "f5634c69200296066adf9816f5e4f729",
+      "cache_path": "biology.docs.parquet"
+    },
+    "earth-science/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/earth_science-00000-of-00001.parquet",
+      "size_hint": 23084671,
+      "expected_md5": "210a3b5cdc06cfd9ca6728fa97fb8067",
+      "cache_path": "earth'science.docs.parquet"
+    },
+    "economics/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/economics-00000-of-00001.parquet",
+      "size_hint": 10969621,
+      "expected_md5": "51f017a94fc4bccb68e44c85640a2feb",
+      "cache_path": "economics.docs.parquet"
+    },
+    "leetcode/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/leetcode-00000-of-00001.parquet",
+      "size_hint": 210510658,
+      "expected_md5": "eda94d3cb40aa9b1f55030d1631acf72",
+      "cache_path": "leetcode.docs.parquet"
+    },
+    "pony/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/pony-00000-of-00001.parquet",
+      "size_hint": 1125040,
+      "expected_md5": "f0805cab692e3a4f4b69819b743c0a82",
+      "cache_path": "pony.docs.parquet"
+    },
+    "psychology/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/psychology-00000-of-00001.parquet",
+      "size_hint": 11430533,
+      "expected_md5": "cb0a14e59845efe80fdc1fa92c379605",
+      "cache_path": "psychology.docs.parquet"
+    },
+    "robotics/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/robotics-00000-of-00001.parquet",
+      "size_hint": 7874186,
+      "expected_md5": "595fb0d3075eaca19298a51bb706a513",
+      "cache_path": "robotics.docs.parquet"
+    },
+    "stackoverflow/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/stackoverflow-00000-of-00001.parquet",
+      "size_hint": 39493317,
+      "expected_md5": "e1e3b210340e7fb5ec3782b57525a6ee",
+      "cache_path": "stackoverflow.docs.parquet"
+    },
+    "sustainable-living/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/sustainable_living-00000-of-00001.parquet",
+      "size_hint": 11720059,
+      "expected_md5": "e7f3e97d3314f2afb662c8779b904ce9",
+      "cache_path": "sustainable-living.docs.parquet"
+    },
+    "theoremqa-questions/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/theoremqa_questions-00000-of-00001.parquet",
+      "size_hint": 65301334,
+      "expected_md5": "43d86de9400e68911a7d419de8105c61",
+      "cache_path": "theoremqa-questions.docs.parquet"
+    },
+    "theoremqa-theorems/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/documents/theoremqa_theorems-00000-of-00001.parquet",
+      "size_hint": 7632381,
+      "expected_md5": "93fb1207b33e0dffb79a7923326c060d",
+      "cache_path": "theoremqa-theorems.docs.parquet"
+    },
+    "biology-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/biology-00000-of-00001.parquet",
+      "size_hint": 9063521,
+      "md5sum": "adf570ca7c9ded642b9dc5dbca80d3ad",
+      "cache_path": "biology.long-docs.parquet"
+    },
+    "earth-science-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/earth_science-00000-of-00001.parquet",
+      "size_hint": 16229287,
+      "md5sum": "fdcfd781a0277a07edff9e86dd7b5391",
+      "cache_path": "earth_science.long-docs.parquet"
+    },
+    "economics-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/economics-00000-of-00001.parquet",
+      "size_hint": 9422303,
+      "md5sum": "fb84391a7514cb110a82d88614f5b846",
+      "cache_path": "economics.long-docs.parquet"
+    },
+    "pony-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/pony-00000-of-00001.parquet",
+      "size_hint": 813435,
+      "md5sum": "67ee14f338db467071b4afc1a4417dc1",
+      "cache_path": "pony.long-docs.parquet"
+    },
+    "psychology-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/psychology-00000-of-00001.parquet",
+      "size_hint": 9855475,
+      "md5sum": "b8c68cb60fcbed3404c13fbb5d006186",
+      "cache_path": "psychology.long-docs.parquet"
+    },
+    "robotics-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/robotics-00000-of-00001.parquet",
+      "size_hint": 6390001,
+      "md5sum": "94408fb87b6f7ec43622acdd2ce259e0",
+      "cache_path": "robotics.long-docs.parquet"
+    },
+    "stackoverflow-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/stackoverflow-00000-of-00001.parquet",
+      "size_hint": 43080248,
+      "md5sum": "f328785df5459f92934f3580e4252bb0",
+      "cache_path": "stackoverflow.long-docs.parquet"
+    },
+    "sustainable-living-long/docs": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/long_documents/sustainable_living-00000-of-00001.parquet",
+      "size_hint": 9724495,
+      "md5sum": "571c7966369496f852a571996574537f",
+      "cache_path": "sustainable_living.long-docs.parquet"
+    },
+    "aops/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/aops-00000-of-00001.parquet",
+      "size_hint": 1338908,
+      "md5sum": "26f1458f835aeba9c915c1eda4321ec0",
+      "cache_path": "aops.queries.parquet"
+    },
+    "biology/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/biology-00000-of-00001.parquet",
+      "size_hint": 200655,
+      "md5sum": "53d20abac1f80d0ebd223da63a5a7d45",
+      "cache_path": "biology.queries.parquet"
+    },
+    "earth-science/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/earth_science-00000-of-00001.parquet",
+      "size_hint": 184093,
+      "md5sum": "d8a46cd50ff605094bf7460ce387ff4c",
+      "cache_path": "earth-science.queries.parquet"
+    },
+    "economics/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/economics-00000-of-00001.parquet",
+      "size_hint": 219518,
+      "md5sum": "618302357566c1d1aa45dfdc13d471ef",
+      "cache_path": "economics.queries.parquet"
+    },
+    "leetcode/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/leetcode-00000-of-00001.parquet",
+      "size_hint": 168560,
+      "md5sum": "33e413c4f4c5b80b074b979807eaa5e6",
+      "cache_path": "leetcode.queries.parquet"
+    },
+    "pony/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/pony-00000-of-00001.parquet",
+      "size_hint": 27722,
+      "md5sum": "0decd583ecef3e17b861d0697585033f",
+      "cache_path": "pony.queries.parquet"
+    },
+    "psychology/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/psychology-00000-of-00001.parquet",
+      "size_hint": 183889,
+      "md5sum": "16c99781402179d309696a68d0a1ab86",
+      "cache_path": "psychology.queries.parquet"
+    },
+    "robotics/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/robotics-00000-of-00001.parquet",
+      "size_hint": 178820,
+      "md5sum": "1ac3ec10dda663f083f28b33d901fad1",
+      "cache_path": "robotics.queries.parquet"
+    },
+    "stackoverflow/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/stackoverflow-00000-of-00001.parquet",
+      "size_hint": 250458,
+      "md5sum": "e676fb3e8f822237d67287d75a769155",
+      "cache_path": "stackoverflow.queries.parquet"
+    },
+    "sustainable-living/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/sustainable_living-00000-of-00001.parquet",
+      "size_hint": 218151,
+      "md5sum": "e8e73cf45e751e447a470cdb27974f42",
+      "cache_path": "sustainable-living.queries.parquet"
+    },
+    "theoremqa-questions/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/theoremqa_questions-00000-of-00001.parquet",
+      "size_hint": 1494939,
+      "md5sum": "eac182e1594f199acda6d18fdbb8a4ef",
+      "cache_path": "theoremqa-questions.queries.parquet"
+    },
+    "theoremqa-theorems/queries": {
+      "url": "https://huggingface.co/datasets/xlangai/BRIGHT/resolve/main/examples/theoremqa_theorems-00000-of-00001.parquet",
+      "size_hint": 124476,
+      "md5sum": "e45115bb80e939fc9a063514f2331e54",
+      "cache_path": "theoremqa-theorems.queries.parquet"
+    }
+  },
   
   "c4": {
     "en-noclean/sources": {

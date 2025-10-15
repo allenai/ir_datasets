@@ -4,6 +4,7 @@ from . import aol_ia
 from . import aquaint
 from . import argsme
 from . import beir
+from . import bright
 from . import c4
 from . import car
 from . import clinicaltrials
