@@ -10,3 +10,83 @@ BRIGHT is a retrieval benchmark for reasoning.
 </ul>
 '
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+aops:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+biology:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+earth-science:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+economics:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+leetcode:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+pony:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+psychology:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+robotics:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+stackoverflow:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+sustainable-living:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+theoremqa-questions:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+theoremqa-theorems:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+biology-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+earth-science-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+economics-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+pony-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+psychology-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+robotics-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+stackoverflow-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
+
+sustainable-living-long:
+  official_measures: ['nDCG@10']
+  bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
