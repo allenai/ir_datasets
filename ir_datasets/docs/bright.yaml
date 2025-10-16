@@ -60,33 +60,33 @@ theoremqa-theorems:
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 biology-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 earth-science-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 economics-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 pony-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 psychology-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 robotics-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 stackoverflow-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
 
 sustainable-living-long:
-  official_measures: ['nDCG@10']
+  official_measures: ['Success@1']
   bibtex_ids: ['DBLP:conf/iclr/SuYXSMWLSST0YA025']
