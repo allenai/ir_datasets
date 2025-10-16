@@ -25,14 +25,20 @@ def requests():
 
 def bs4():
     if 'bs4' not in _cache:
-        import bs4
+        try:
+            import bs4
+        except ImportError as ie:
+            raise ImportError("This dataset requires beautifulsoup4. Run 'pip install ir_datasets[beautifulsoup4]' to install dependencies for this dataset") from ie
         _cache['bs4'] = bs4
     return _cache['bs4']
 
 
 def inscriptis():
     if 'inscriptis' not in _cache:
-        import inscriptis
+        try:
+            import inscriptis
+        except ImportError as ie:
+            raise ImportError("This dataset requires inscriptis. Run 'pip install ir_datasets[inscriptis]' to install dependencies for this dataset") from ie
         _cache['inscriptis'] = inscriptis
     return _cache['inscriptis']
 
@@ -92,7 +98,10 @@ def lz4_frame():
 
 def zlib_state():
     if 'zlib_state' not in _cache:
-        import zlib_state
+        try:
+            import zlib_state
+        except ImportError as ie:
+            raise ImportError("This dataset requires zlib-state. Run 'pip install ir_datasets[zlib-state]' to install dependencies for this dataset") from ie
         _cache['zlib_state'] = zlib_state
     return _cache['zlib_state']
 
@@ -110,7 +119,10 @@ def lxml_html():
 
 def ijson():
     if 'ijson' not in _cache:
-        import ijson
+        try:
+            import ijson
+        except ImportError as ie:
+            raise ImportError("This dataset requires ijson. Run 'pip install ir_datasets[ijson]' to install dependencies for this dataset") from ie
         _cache['ijson'] = ijson
     return _cache['ijson']
 
@@ -119,13 +131,16 @@ def pyautocorpus():
         try:
             import pyautocorpus
         except ImportError as ie:
-            raise ImportError("This dataset requires pyautocorpus. Run 'pip install pyautocorpus'") from ie
+            raise ImportError("This dataset requires pyautocorpus. Run 'pip install ir_datasets[pyautocorpus]' to install dependencies for this dataset") from ie
         _cache['pyautocorpus'] = pyautocorpus
     return _cache['pyautocorpus']
 
 def unlzw3():
     if 'unlzw3' not in _cache:
-        import unlzw3
+        try:
+            import unlzw3
+        except ImportError as ex:
+            raise ImportError("This dataset requires unlzw3. Run 'pip install ir_datasets[unlzw3]' to install dependencies for this dataset") from ex
         _cache['unlzw3'] = unlzw3
     return _cache['unlzw3']
 
@@ -133,7 +148,7 @@ def pyarrow_parquet():
     if 'pyarrow_parquet' not in _cache:
         try:
             import pyarrow.parquet
-        except ImportError as ex:
-            raise ImportError("This dataset requires pyarrow. Run 'pip install pyarrow>=16.1.0'") from ex
+        except ImportError as ie:
+            raise ImportError("This dataset requires pyarrow. Run 'pip install ir_datasets[pyarrow]' to install dependencies for this dataset") from ie
         _cache['pyarrow_parquet'] = pyarrow.parquet
     return _cache['pyarrow_parquet']
