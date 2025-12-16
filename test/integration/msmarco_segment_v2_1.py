@@ -17,13 +17,19 @@ class TestMSMarcoV21DocsSegmented(DatasetIntegrationTest):
             113520749: MsMarcoV21SegmentedDoc('msmarco_v2.1_doc_59_964287870#4_2159633396', 'https://zzzzbov.com/blag/shortcut-to-zoom', 'Shortcut to Zoom › zzzzBov.com', 'Shortcut to Zoom\nShortcut to Zoom\nBatch File\nShortcut\nTrying it out\n', re.compile('^When it asks "What would you like to name the shortcut\\?", type the name of the meeting \\(i\\.e\\. "Standu.{333}hat adding even a few of these to my start menu will help reduce just a bit more friction in my day\\.$', flags=48), 1963, 2497, 'msmarco_v2.1_doc_59_964287870', 4),
         })
 
-    def test_queries(self):
+    def test_2024_rag_queries(self):
         self._test_queries('msmarco-segment-v2.1/trec-rag-2024', count=301, items={
             0: GenericQuery('2024-145979', 'what is vicarious trauma and how can it be coped with?'),
             9: GenericQuery('2024-158743', 'what was happening in germany and netherlands in the 1840s'),
             300: GenericQuery('2024-21669', 'do abortions kill more black people than other weapons'),
         })
 
+    def test_2025_rag_queries(self):
+        self._test_queries('msmarco-segment-v2.1/trec-rag-2025', count=105, items={
+            0: GenericQuery('464', "I want a thorough understanding of what makes up a community, including its definitions in various contexts like science and what it means to be a 'civilized community.' I'm also interested in related terms like 'grassroots organizations,' how communities set boundaries and priorities, and their roles in important areas such as preparedness and nation-building."),
+            9: GenericQuery('66', "I want to understand how ethical theories like utilitarianism and Kantianism, along with professional codes, influence decision-making and leadership in organizations and professions such as social work and teaching. How do these ethical standards impact hiring, leadership styles, and personal behavior? I'm also puzzled why ethical people might still make unethical choices."),
+            104: GenericQuery('838', "I'm looking to learn more about relationship dynamics, including how social media affects them and common challenges like long-distance relationships. I'm also interested in ways to improve communication and stability, the role of leisure activities, and how competency and image enhancement can help address social devaluation in relationships."),
+        })
 
 if __name__ == '__main__':
     unittest.main()

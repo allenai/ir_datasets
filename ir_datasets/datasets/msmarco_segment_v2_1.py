@@ -3,7 +3,7 @@ from typing import NamedTuple
 import ir_datasets
 from ir_datasets.util import DownloadConfig
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
-from ir_datasets.formats import TsvQueries
+from ir_datasets.formats import TsvQueries, JsonlQueries
 from ir_datasets.formats.trec import TrecQrels
 from ir_datasets.datasets.msmarco_passage import DUA
 from ir_datasets.datasets.msmarco_passage_v2 import MsMarcoV2Passages
@@ -69,6 +69,10 @@ def _init():
         collection,
         TsvQueries(dlc['rag-2024-test-topics'], namespace=NAME, lang='en'),
         TrecQrels(dlc['rag-2024-test-qrels'], qrels_defs={})
+    )
+    subsets['trec-rag-2025'] = Dataset(
+        collection,
+        JsonlQueries(dlc['rag-2025-test-topics'], lang='en', mapping={"query_id": "id" , "text": "title"})
     )
 
     ir_datasets.registry.register(NAME, Dataset(collection, documentation('_')))
