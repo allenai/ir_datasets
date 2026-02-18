@@ -134,10 +134,6 @@ Official topics for the TREC Deep Learning (DL) 2023 shared task.
 Note that these qrels are <i>inferred</i> from the passage ranking task; a document''s relevance
 label is the maximum of the labels of its passages.
 </p>
-<p>
-These qrels use the official <code>withDupes</code> variant from NIST and include graded
-relevance labels from 0 to 3.
-</p>
 '
 
 trec-dl-2023/judged:

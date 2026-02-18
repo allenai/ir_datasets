@@ -110,10 +110,6 @@ duplicate passages, while results presented in the notebook papers remove duplic
 This means that the results are not directly comparable, and extra care should be taken when
 making comparisons among systems to ensure that they were evaluated in the same settings.
 </p>
-<p>
-These qrels use the official <code>withDupes</code> variant from NIST and include graded
-relevance labels from 0 to 3.
-</p>
 '
 
 trec-dl-2023/judged:
