@@ -111,8 +111,8 @@ This means that the results are not directly comparable, and extra care should b
 making comparisons among systems to ensure that they were evaluated in the same settings.
 </p>
 <p>
-Note also that passage label 1 ("Related") is considered <i>not relevant</i> for binary
-measures; NIST provides a separate qrels variant (withDupes.no1) for those workflows.
+These qrels use the official <code>withDupes</code> variant from NIST and include graded
+relevance labels from 0 to 3.
 </p>
 '
 
