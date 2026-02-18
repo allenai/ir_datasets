@@ -222,7 +222,14 @@ def _init():
     subsets['trec-dl-2023'] = Dataset(
         collection,
         TsvQueries(dlc['trec-dl-2023/queries'], namespace='msmarco', lang='en'),
+        TrecQrels(dlc['trec-dl-2023/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2023/scoreddocs'])),
+    )
+    dl23_judged = Lazy(lambda: {q.query_id for q in subsets['trec-dl-2023'].qrels_iter()})
+    subsets['trec-dl-2023/judged'] = Dataset(
+        FilteredQueries(subsets['trec-dl-2023'].queries_handler(), dl23_judged),
+        FilteredScoredDocs(subsets['trec-dl-2023'].scoreddocs_handler(), dl23_judged),
+        subsets['trec-dl-2023'],
     )
 
     subsets['anchor-text'] = Dataset(
