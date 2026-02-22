@@ -6500,8 +6500,8 @@
       "cache_path": "queries.csv"
     },
     "qrels": {
-      "url": "https://raw.githubusercontent.com/JackMcKechnie/SARA/refs/heads/main/sara_large_qrels.tsv",
-      "expected_md5": "f12b25b7165d9f0ab678f46dec01ab81",
+      "url": "https://raw.githubusercontent.com/JackMcKechnie/SARA/refs/heads/main/combined_qrels.txt",
+      "expected_md5": "39a24d38b4d0e352e7818abd09d6815a",
       "cache_path": "qrels.txt"
     }
   }

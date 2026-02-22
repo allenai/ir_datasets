@@ -6,6 +6,7 @@ from ir_datasets.util import DownloadConfig
 from typing import NamedTuple
 import csv
 import io
+import zipfile
 
 # A unique identifier for this dataset. This should match the file name (with "-" instead of "_")
 NAME = "sara"
@@ -33,16 +34,26 @@ class SaraDocs(BaseDocs):
         return iter(self.docs_store())
 
     def _docs_iter(self):
-            # Stream the CSV directly from DLC
-            with self._dlc.stream() as stream:
-                text_stream = io.TextIOWrapper(stream, encoding="utf-8")
-                reader = csv.DictReader(text_stream)
-                for row in reader:
-                    yield SaraDoc(
-                        doc_id=row["docno"],
-                        text=row["text"],
-                        sensitivity=int(row["sensitivity"])
+        max_int = 229739
+        csv.field_size_limit(max_int)
+        with self._dlc.stream() as stream:
+            with zipfile.ZipFile(stream) as zf:
+                # Adjust this if the filename inside differs
+                with zf.open(zf.namelist()[0]) as f:
+                    text_stream = io.TextIOWrapper(
+                        f,
+                        encoding="utf-8-sig",
+                        errors="replace",
+                        newline=""
                     )
+                    reader = csv.DictReader(text_stream)
+                    for row in reader:
+                        yield SaraDoc(
+                            doc_id=row["docno"],
+                            text=row["text"],
+                            sensitivity=int(row["sensitivity"])
+                        )
+
     def docs_store(self, field='doc_id'):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
