@@ -38,6 +38,7 @@ from . import nfcorpus
 from . import natural_questions
 from . import nyt
 from . import pmc
+from . import pt_image_ir_dataset
 from . import touche_image
 from . import touche  # must be after argsme,clueweb12,touche_image
 from . import trec_arabic
