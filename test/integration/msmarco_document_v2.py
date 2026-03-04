@@ -74,6 +74,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: GenericQuery('2001686', 'good food and bad food for high cholesterol'),
             699: GenericQuery('3100949', 'How do birth control and hormone levels affect menstrual cycle variations?'),
         })
+        self._test_queries('msmarco-document-v2/trec-dl-2023/judged', count=82, items={
+            0: GenericQuery('2001010', 'cost comparison of funerals in australia'),
+            9: GenericQuery('2003787', 'how to make linkedin private'),
+            81: GenericQuery('3100922', 'What is the meaning and origin of the name Corrin?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('msmarco-document-v2/train', count=331956, items={
@@ -131,6 +136,16 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             9: TrecQrel('2000511', 'msmarco_doc_00_928870217', 0, '0'),
             369637: TrecQrel('2056323', 'msmarco_doc_59_419476385', 1, '0'),
         })
+        self._test_qrels('msmarco-document-v2/trec-dl-2023', count=18034, items={
+            0: TrecQrel('2001010', 'msmarco_doc_00_1413647782', 0, '0'),
+            9: TrecQrel('2001010', 'msmarco_doc_01_710280219', 0, '0'),
+            18033: TrecQrel('3100922', 'msmarco_doc_58_1542021309', 0, '0'),
+        })
+        self._test_qrels('msmarco-document-v2/trec-dl-2023/judged', count=18034, items={
+            0: TrecQrel('2001010', 'msmarco_doc_00_1413647782', 0, '0'),
+            9: TrecQrel('2001010', 'msmarco_doc_01_710280219', 0, '0'),
+            18033: TrecQrel('3100922', 'msmarco_doc_58_1542021309', 0, '0'),
+        })
 
     def test_scoreddocs(self):
         self._test_scoreddocs('msmarco-document-v2/train', count=32218809, items={
@@ -167,6 +182,11 @@ class TestMsMarcoDocumentV2(DatasetIntegrationTest):
             0: GenericScoredDoc('2000138', 'msmarco_doc_15_421173917', 14.1515),
             9: GenericScoredDoc('2000138', 'msmarco_doc_50_2209372409', 13.6826),
             69999: GenericScoredDoc('3100949', 'msmarco_doc_42_771008717', 18.752998),
+        })
+        self._test_scoreddocs('msmarco-document-v2/trec-dl-2023/judged', count=8200, items={
+            0: GenericScoredDoc('2001010', 'msmarco_doc_40_566250732', 11.2369),
+            9: GenericScoredDoc('2001010', 'msmarco_doc_41_285574609', 9.2133),
+            8199: GenericScoredDoc('3100922', 'msmarco_doc_19_2622779171', 9.289),
         })
 
     def test_anchor_text(self):

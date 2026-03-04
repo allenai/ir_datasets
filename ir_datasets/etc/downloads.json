@@ -4715,9 +4715,16 @@
       "size_hint": 902168,
       "expected_md5": "0f5d548e53afb9e319c837ad67f9046a",
       "cache_path": "trec-dl-2023/top100.txt.gz"
+    },
+    "trec-dl-2023/qrels": {
+      "url": "https://trec.nist.gov/data/deep/2023.qrels.docs.withDupes.txt",
+      "irds_mirror": true,
+      "size_hint": 675015,
+      "expected_md5": "1e9c540b3cb03bcc975a583586c04090",
+      "cache_path": "trec-dl-2023/qrels.withDupes.txt"
     }
   },
-  
+
   "msmarco-passage": {
     "collectionandqueries": {
       "url": "https://msmarco.z22.web.core.windows.net/msmarcoranking/collectionandqueries.tar.gz",
@@ -4942,6 +4949,13 @@
       "size_hint": 888898,
       "expected_md5": "c339ed75e1556cacb387899f34cadad1",
       "cache_path": "trec-dl-2023/top100.txt.gz"
+    },
+    "trec-dl-2023/qrels": {
+      "url": "https://trec.nist.gov/data/deep/2023.qrels.pass.withDupes.txt",
+      "irds_mirror": true,
+      "size_hint": 912450,
+      "expected_md5": "3a742d51ae65da2ece9c09b304b9e358",
+      "cache_path": "trec-dl-2023/qrels.withDupes.txt"
     },
     "dedup_positions": {
       "url": "https://huggingface.co/datasets/macavaney/msmarco-passage-v2-duplicate-ids/resolve/main/dedup_positions.tar.gz",
