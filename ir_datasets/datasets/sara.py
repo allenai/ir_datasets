@@ -1,7 +1,7 @@
 import ir_datasets
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
-from ir_datasets.formats import BaseDocs, TrecXmlQueries, TrecQrels, GenericQuery, GenericQrel
+from ir_datasets.formats import BaseDocs, TrecXmlQueries, TrecQrels, GenericQuery, GenericQrel, TsvQueries
 from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import DownloadConfig
 from typing import NamedTuple, Tuple
