@@ -4743,6 +4743,18 @@
       "size_hint": 19517,
       "expected_md5": "5bd6c8fa0e1300233fe139bae8288d09",
       "cache_path": "trec-rag-2024-topics-test.txt"
+    },
+    "rag-2024-test-qrels": {
+      "url": "https://trec.nist.gov/data/rag/2024-retrieval-conditions-qrels.txt",
+      "size_hint": 1201033,
+      "expected_md5": "a813a1b92b3bee1f9e4ce84b6f8887ab",
+      "cache_path": "trec-rag-2024-test-qrels.txt"
+    },
+    "rag-2025-test-topics": {
+      "url": "https://trec-rag.github.io/assets/jsonl/trec_rag_2025_queries.jsonl",
+      "size_hint": 34742,
+      "expected_md5": "a19ab9b515d848bf1eb1c1d9c3150397",
+      "cache_path": "trec_rag_2025_queries.jsonl"
     }
   },
 
