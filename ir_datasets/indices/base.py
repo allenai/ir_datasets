@@ -8,7 +8,7 @@ class FileAccess(Enum):
     MEMORY = 2
 
 
-@dataclass(kw_only=True)
+@dataclass()
 class DocstoreOptions:
     #: How to access the document content
     file_access: FileAccess = field(default=FileAccess.FILE)
