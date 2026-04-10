@@ -2,7 +2,7 @@ import io
 import tarfile
 from typing import NamedTuple
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Lazy, DownloadConfig, Migrator
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels, GenericQuery, GenericQrel, TrecQueries, TrecQrels
@@ -73,7 +73,7 @@ class NytDocs(BaseDocs):
                             full_text = full_text.get_text().strip() if full_text else ''
                             yield NytDoc(did, headline, full_text, full_xml)
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self.docs_path()}.pklz4',
             init_iter_fn=self._docs_iter,
@@ -81,6 +81,7 @@ class NytDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=ir_datasets.util.count_hint(NAME),
+            options=options
         )
 
     def docs_count(self):

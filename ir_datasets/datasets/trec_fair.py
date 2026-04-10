@@ -5,7 +5,7 @@ import ir_datasets
 from ir_datasets.util import GzipExtract, Cache, Lazy
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, Deprecated
 from ir_datasets.formats import BaseQueries, BaseDocs, BaseQrels, TrecQrel
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from itertools import chain
 
 
@@ -147,7 +147,7 @@ class FairTrecDocs(BaseDocs):
     def docs_cls(self):
         return FairTrecDoc
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()/NAME}/2021/docs.pklz4',
             init_iter_fn=self._docs_iter,
@@ -156,6 +156,7 @@ class FairTrecDocs(BaseDocs):
             size_hint=30735927055,
             index_fields=['doc_id'],
             count_hint=ir_datasets.util.count_hint(NAME),
+            options=options
         )
 
     def docs_count(self):
@@ -241,7 +242,7 @@ class JsonlDocs(BaseDocs):
     def docs_cls(self):
         return self._doc_type
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self._dlc.path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter_first,
@@ -249,6 +250,7 @@ class JsonlDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):

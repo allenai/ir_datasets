@@ -5,7 +5,7 @@ from typing import NamedTuple, Any, Optional, Dict, Tuple
 from xml.etree.ElementTree import parse, Element, ElementTree
 
 from ir_datasets.formats import BaseQueries, BaseQrels, TrecQrel, BaseDocs
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Cache, use_docstore
 
 
@@ -706,7 +706,7 @@ class TouchePassageDocs(BaseDocs):
                         chatnoir_url=json["chatNoirUrl"],
                     )
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{self.docs_path()}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -714,6 +714,7 @@ class TouchePassageDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
