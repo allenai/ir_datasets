@@ -8,7 +8,7 @@ from ir_datasets.formats import (
     GenericQuery,
     TrecQrel,
 )
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -51,7 +51,7 @@ class NanoBeirDocs(BaseDocs):
     def docs_cls(self):
         return self._doc_type
 
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{ir_datasets.util.home_path()/NAME/self._name}/docs.pklz4",
             init_iter_fn=self._docs_iter,
@@ -59,6 +59,7 @@ class NanoBeirDocs(BaseDocs):
             lookup_field=field,
             index_fields=["doc_id"],
             count_hint=ir_datasets.util.count_hint(f"{NAME}/{self._name}"),
+            options=options
         )
 
     def docs_count(self):

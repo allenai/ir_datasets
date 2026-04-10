@@ -1,4 +1,4 @@
-from .base import Docstore
+from .base import Docstore, DEFAULT_DOCSTORE_OPTIONS, DocstoreOptions, FileAccess
 from .indexed_tsv_docstore import IndexedTsvDocstore
 from .zpickle_docstore import ZPickleDocStore
 from .numpy_sorted_index import NumpySortedIndex, NumpyPosIndex

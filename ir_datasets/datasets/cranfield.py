@@ -6,7 +6,7 @@ from typing import NamedTuple
 from ir_datasets.util import DownloadConfig, TarExtract, Cache
 from ir_datasets.formats import BaseDocs, BaseQueries, BaseQrels
 from ir_datasets.formats import GenericDoc, GenericQuery, TrecQrel
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.datasets.base import Dataset, YamlDocumentation
 
 
@@ -77,7 +77,7 @@ class CranfieldDocs(BaseDocs):
     def docs_cls(self):
         return CranfieldDoc
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()/NAME}/docs.pklz4',
             init_iter_fn=self.docs_iter,
@@ -85,6 +85,7 @@ class CranfieldDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=ir_datasets.util.count_hint(NAME),
+            options=options
         )
 
     def docs_count(self):

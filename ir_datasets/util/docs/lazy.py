@@ -5,7 +5,7 @@ from typing import Iterator, Protocol, Sequence, Union
 import ir_datasets
 from ir_datasets.formats import BaseDocs, GenericDoc
 from ir_datasets.indices import PickleLz4FullStore
-from ir_datasets.indices.base import Docstore
+from ir_datasets.indices.base import DEFAULT_DOCSTORE_OPTIONS, Docstore
 
 _logger = ir_datasets.log.easy()
 
@@ -39,8 +39,8 @@ class IRDSDocuments(BaseDocs):
 
 class LazyDocs(IRDSDocuments):
     """Proxy for a IR dataset collection"""
-    def docs_store(self, field="doc_id"):
-        return self.docs.docs_store(field=field)
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
+        return self.docs.docs_store(field=field, options=options)
 
 
 class DirectAccessDocs(Protocol):
@@ -125,7 +125,7 @@ class BaseTransformedDocs(BaseDocs):
         return self._count_hint or self._docs.docs_count()
 
     @lru_cache
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{ir_datasets.util.home_path()}/{self._store_name}.pklz4",
             init_iter_fn=self.docs_iter,
@@ -133,6 +133,7 @@ class BaseTransformedDocs(BaseDocs):
             lookup_field=field,
             index_fields=[field],
             count_hint=self._count_hint,
+            options=options
         )
 
 
@@ -151,10 +152,10 @@ class TransformedDocs(BaseTransformedDocs):
         self._transform = transform or self
 
     @lru_cache
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         if self._store_name is None:
-            return TransformedDocstore(self._docs.docs_store(field), self._transform)
-        return super().docs_store()
+            return TransformedDocstore(self._docs.docs_store(field, options=options), self._transform)
+        return super().docs_store(options=options)
 
     def docs_iter(self):
         for doc in map(self._transform, self._docs.docs_iter()):
@@ -211,7 +212,7 @@ class IterDocs(BaseDocs):
         return self._docs_cls
 
     @lru_cache
-    def docs_store(self, field="doc_id"):
+    def docs_store(self, field="doc_id", options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f"{ir_datasets.util.home_path()}/{self._corpus_name}.pklz4",
             init_iter_fn=self._docs_iter,
@@ -219,6 +220,7 @@ class IterDocs(BaseDocs):
             lookup_field=field,
             index_fields=[field],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_namespace(self):

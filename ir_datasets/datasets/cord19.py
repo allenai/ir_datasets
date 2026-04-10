@@ -13,7 +13,7 @@ import ir_datasets
 from ir_datasets.util import Lazy, DownloadConfig
 from ir_datasets.datasets.base import Dataset, FilteredQueries, FilteredQrels, YamlDocumentation
 from ir_datasets.formats import BaseDocs, TrecXmlQueries, TrecQrels, GenericQuery, GenericQrel
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 
 
 NAME = 'cord19'
@@ -158,7 +158,7 @@ class Cord19Docs(BaseDocs):
                 else:
                     yield Cord19Doc(did, title, doi, date, abstract)
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{self.docs_path(force=False)}.pklz4',
             init_iter_fn=self._docs_iter,
@@ -166,6 +166,7 @@ class Cord19Docs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
