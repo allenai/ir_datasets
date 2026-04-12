@@ -1,9 +1,9 @@
 import os
 import ir_datasets
-
+from ir_datasets.indices import FileAccess
 
 class NumpySortedIndex:
-    def __init__(self, path):
+    def __init__(self, path, file_access=FileAccess.MMAP):
         self.path = path
         self.transaction = None
         self.mmap_keys = None
@@ -11,6 +11,7 @@ class NumpySortedIndex:
         self.doccount = None
         self.keylen = None
         self.np = None
+        self.file_access = file_access
 
     def add(self, key, idx):
         if self.transaction is None:
@@ -52,8 +53,13 @@ class NumpySortedIndex:
             with open(f'{self.path}.meta', 'rt') as f:
                 self.keylen, self.doccount = f.read().split()
                 self.keylen, self.doccount = int(self.keylen), int(self.doccount)
-            self.mmap_keys = self.np.memmap(f'{self.path}.key', dtype=f'S{self.keylen}', mode='r', shape=(self.doccount,))
-            self.mmap_poss = self.np.memmap(f'{self.path}.pos', dtype='int64', mode='r', shape=(self.doccount,))
+
+            if self.file_access == FileAccess.MEMORY:                
+                self.mmap_keys = self.np.fromfile(f'{self.path}.key', dtype=f'S{self.keylen}', count=self.doccount)
+                self.mmap_poss = self.np.fromfile(f'{self.path}.pos', dtype='int64', count=self.doccount)
+            else:
+                self.mmap_keys = self.np.memmap(f'{self.path}.key', dtype=f'S{self.keylen}', mode='r', shape=(self.doccount,))
+                self.mmap_poss = self.np.memmap(f'{self.path}.pos', dtype='int64', mode='r', shape=(self.doccount,))
 
     def __getitem__(self, keys):
         self._lazy_load()
@@ -102,8 +108,9 @@ class NumpySortedIndex:
 
 
 class NumpyPosIndex:
-    def __init__(self, path):
+    def __init__(self, path, file_access=FileAccess.MMAP):
         self.path = path
+        self.file_access = file_access
         self.transaction = None
         self.mmap = None
         self.np = None
@@ -137,7 +144,11 @@ class NumpyPosIndex:
             self.np = ir_datasets.lazy_libs.numpy()
         if self.mmap is None and self._exists():
             current_count = os.stat(self.path).st_size // 8
-            self.mmap = self.np.memmap(self.path, dtype='int64', mode='r', shape=(current_count,))
+            
+            if self.file_access == FileAccess.MEMORY:
+                self.mmap = self.np.fromfile(self.path, dtype='int64', count=current_count)
+            else:
+                self.mmap = self.np.memmap(self.path, dtype='int64', mode='r', shape=(current_count,))
 
     def __getitem__(self, idxs):
         self._lazy_load()

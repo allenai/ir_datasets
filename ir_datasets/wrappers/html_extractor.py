@@ -71,8 +71,8 @@ class HtmlDocExtractor:
     def docs_iter(self):
         return HtmlDocIter(self._dataset.docs_iter(), self)
 
-    def docs_store(self):
-        return HtmlDocExtractorDocStoreWrapper(self._dataset.docs_store(), self)
+    def docs_store(self, options=ir_datasets.indices.DEFAULT_DOCSTORE_OPTIONS):
+        return HtmlDocExtractorDocStoreWrapper(self._dataset.docs_store(options=options), self)
 
 
 class HtmlDocExtractorDocStoreWrapper(ir_datasets.indices.Docstore):

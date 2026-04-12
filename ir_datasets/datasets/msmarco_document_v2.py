@@ -6,7 +6,7 @@ import json
 from typing import NamedTuple, Tuple, List
 import tarfile
 import ir_datasets
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 from ir_datasets.util import Cache, DownloadConfig, GzipExtract, Lazy, Migrator, TarExtractAll
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries, FilteredScoredDocs, FilteredQrels
 from ir_datasets.formats import TsvQueries, TrecQrels, TrecScoredDocs, BaseDocs
@@ -61,7 +61,7 @@ class MsMarcoV2Docs(BaseDocs):
     def docs_cls(self):
         return MsMarcoV2Document
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         # NOTE: the MS MARCO v2 documents have this really neat quality that they contain the offset
         # position in the source file: <https://microsoft.github.io/msmarco/TREC-Deep-Learning.html>.
         # Unfortunately, it points to the position in the *uncompressed* file, so for this to work, we'd
@@ -87,6 +87,7 @@ class MsMarcoV2Docs(BaseDocs):
             key_field_prefix='msmarco_doc_', # cut down on storage by removing prefix in lookup structure
             size_hint=66500029281,
             count_hint=ir_datasets.util.count_hint(NAME),
+            options=options
         )
         # return MsMArcoV2DocStore(self)
 
@@ -129,7 +130,7 @@ class MsMarcoV2AnchorTextDocs(BaseDocs):
     def docs_cls(self):
         return MsMarcoV2AnchorTextDocument
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()}/{NAME}/anchor-text.pklz4',
             init_iter_fn=self.docs_iter,
@@ -137,6 +138,7 @@ class MsMarcoV2AnchorTextDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
@@ -222,7 +224,14 @@ def _init():
     subsets['trec-dl-2023'] = Dataset(
         collection,
         TsvQueries(dlc['trec-dl-2023/queries'], namespace='msmarco', lang='en'),
+        TrecQrels(dlc['trec-dl-2023/qrels'], TREC_DL_QRELS_DEFS),
         TrecScoredDocs(GzipExtract(dlc['trec-dl-2023/scoreddocs'])),
+    )
+    dl23_judged = Lazy(lambda: {q.query_id for q in subsets['trec-dl-2023'].qrels_iter()})
+    subsets['trec-dl-2023/judged'] = Dataset(
+        FilteredQueries(subsets['trec-dl-2023'].queries_handler(), dl23_judged),
+        FilteredScoredDocs(subsets['trec-dl-2023'].scoreddocs_handler(), dl23_judged),
+        subsets['trec-dl-2023'],
     )
 
     subsets['anchor-text'] = Dataset(

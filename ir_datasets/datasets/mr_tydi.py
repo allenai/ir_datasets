@@ -5,7 +5,7 @@ import ir_datasets
 from ir_datasets.util import TarExtractAll, RelativePath, GzipExtract, Migrator
 from ir_datasets.datasets.base import Dataset, YamlDocumentation, FilteredQueries
 from ir_datasets.formats import TsvQueries, BaseDocs, TrecQrels, GenericDoc
-from ir_datasets.indices import PickleLz4FullStore
+from ir_datasets.indices import PickleLz4FullStore, DEFAULT_DOCSTORE_OPTIONS
 
 _logger = ir_datasets.log.easy()
 
@@ -34,7 +34,7 @@ class MrTydiDocs(BaseDocs):
     def docs_cls(self):
         return GenericDoc
 
-    def docs_store(self, field='doc_id'):
+    def docs_store(self, field='doc_id', options=DEFAULT_DOCSTORE_OPTIONS):
         return PickleLz4FullStore(
             path=f'{ir_datasets.util.home_path()/NAME/self._lang}.pklz4',
             init_iter_fn=self.docs_iter,
@@ -42,6 +42,7 @@ class MrTydiDocs(BaseDocs):
             lookup_field=field,
             index_fields=['doc_id'],
             count_hint=self._count_hint,
+            options=options
         )
 
     def docs_count(self):
