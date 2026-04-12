@@ -6269,7 +6269,130 @@
       "cache_path": "test-2025-queries.jsonl"
     }
   },
-  
+
+  "ntcir-tot-2026": {
+    "corpus-en.jsonl.gz": {
+      "url": "https://zenodo.org/records/18482680/files/corpus-en.jsonl.gz",
+      "expected_md5": "3229923fdbc4151fc6911085265713f4",
+      "cache_path": "ntcir-tot-2026-corpus-en.jsonl.gz"
+    },
+    "corpus-ja.jsonl.gz": {
+      "url": "https://zenodo.org/records/18482680/files/corpus-ja.jsonl.gz",
+      "expected_md5": "f0515675e955641ffd1fcf7c000a2d9f",
+      "cache_path": "ntcir-tot-2026-corpus-ja.jsonl.gz"
+    },
+    "corpus-ko.jsonl.gz": {
+      "url": "https://zenodo.org/records/18482680/files/corpus-ko.jsonl.gz",
+      "expected_md5": "b8007b99a5b9730677cbfa4ce32389e0",
+      "cache_path": "ntcir-tot-2026-corpus-ko.jsonl.gz"
+    },
+    "corpus-zh.jsonl.gz": {
+      "url": "https://zenodo.org/records/18482680/files/corpus-zh.jsonl.gz",
+      "expected_md5": "52e7b7c6d5e21a8184bb46966a34b2cf",
+      "cache_path": "ntcir-tot-2026-corpus-zh.jsonl.gz"
+    },
+    "qrels-dev-en.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-dev-en.txt",
+      "expected_md5": "e4cf9ee4e53be21f90f154fc21cbbe20",
+      "cache_path": "ntcir-tot-2026-qrels-dev-en.txt"
+    },
+    "qrels-dev-ja.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-dev-ja.txt",
+      "expected_md5": "9cd246fd0654cae4aa1acee740dee770",
+      "cache_path": "ntcir-tot-2026-qrels-dev-ja.txt"
+    },
+    "qrels-dev-ko.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-dev-ko.txt",
+      "expected_md5": "ead40835c0b461e433948834dd27516b",
+      "cache_path": "ntcir-tot-2026-qrels-dev-ko.txt"
+    },
+    "qrels-dev-zh.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-dev-zh.txt",
+      "expected_md5": "d6199d8fc49b0c9929d5730a7693b6e2",
+      "cache_path": "ntcir-tot-2026-qrels-dev-zh.txt"
+    },
+    "qrels-train-en.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-train-en.txt",
+      "expected_md5": "bc8c154d45d6e1583d79e20f8305c449",
+      "cache_path": "ntcir-tot-2026-qrels-train-en.txt"
+    },
+    "qrels-train-ja.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-train-ja.txt",
+      "expected_md5": "a3d553ca1290f49757d4a61e697503f7",
+      "cache_path": "ntcir-tot-2026-qrels-train-ja.txt"
+    },
+    "qrels-train-ko.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-train-ko.txt",
+      "expected_md5": "46cc66a66aad9ce41c9285a47e49732f",
+      "cache_path": "ntcir-tot-2026-qrels-train-ko.txt"
+    },
+    "qrels-train-zh.txt": {
+      "url": "https://zenodo.org/records/18482680/files/qrels-train-zh.txt",
+      "expected_md5": "a1bb49385447332cff472817c5509122",
+      "cache_path": "ntcir-tot-2026-qrels-train-zh.txt"
+    },
+    "queries-dev-en.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-dev-en.jsonl",
+      "expected_md5": "a1e27e3e85b5521cd4ee76f903f594b1",
+      "cache_path": "ntcir-tot-2026-queries-dev-en.jsonl"
+    },
+    "queries-dev-ja.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-dev-ja.jsonl",
+      "expected_md5": "ca591070a075c3460f126c06e3aed04d",
+      "cache_path": "ntcir-tot-2026-queries-dev-ja.jsonl"
+    },
+    "queries-dev-ko.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-dev-ko.jsonl",
+      "expected_md5": "fa5d243756d253ac1b980ad9442f4c5e",
+      "cache_path": "ntcir-tot-2026-queries-dev-ko.jsonl"
+    },
+    "queries-dev-zh.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-dev-zh.jsonl",
+      "expected_md5": "b94b704344fa6bacb4f68f27431e9b02",
+      "cache_path": "ntcir-tot-2026-queries-dev-zh.jsonl"
+    },
+    "queries-test-en.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-test-en.jsonl",
+      "expected_md5": "b1a52f75800c17af054d63e7d9f2fa63",
+      "cache_path": "ntcir-tot-2026-queries-test-en.jsonl"
+    },
+    "queries-test-ja.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-test-ja.jsonl",
+      "expected_md5": "27949f7acb8a0012aa904d472b9e1b70",
+      "cache_path": "ntcir-tot-2026-queries-test-ja.jsonl"
+    },
+    "queries-test-ko.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-test-ko.jsonl",
+      "expected_md5": "24f5030873cb90cf837d0aed9ceef6fb",
+      "cache_path": "ntcir-tot-2026-queries-test-ko.jsonl"
+    },
+    "queries-test-zh.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-test-zh.jsonl",
+      "expected_md5": "afaba1cf77a4459a8a19c1b8d569d487",
+      "cache_path": "ntcir-tot-2026-queries-test-zh.jsonl"
+    },
+    "queries-train-en.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-train-en.jsonl",
+      "expected_md5": "f9e3c5e5acbaedb28aa112cef6306c12",
+      "cache_path": "ntcir-tot-2026-queries-train-en.jsonl"
+    },
+    "queries-train-ja.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-train-ja.jsonl",
+      "expected_md5": "2050e5a0102bfe9c9795759c0a72a113",
+      "cache_path": "ntcir-tot-2026-queries-train-ja.jsonl"
+    },
+    "queries-train-ko.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-train-ko.jsonl",
+      "expected_md5": "60e177bb7163a70ba7be3605389acdcb",
+      "cache_path": "ntcir-tot-2026-queries-train-ko.jsonl"
+    },
+    "queries-train-zh.jsonl": {
+      "url": "https://zenodo.org/records/18482680/files/queries-train-zh.jsonl",
+      "expected_md5": "060f17e55f36628935100b6256436676",
+      "cache_path": "ntcir-tot-2026-queries-train-zh.jsonl"
+    }
+  },
+
   "tripclick": {
     "benchmark": {
       "instructions": "To use this dataset, you need to request the source files from the Trip Database here: <https://tripdatabase.github.io/tripclick/#getting-the-data>.\nMore details about the procedure can be found here: <https://ir-datasets.com/tripclick.html#DataAccess>.\nTo proceed, symlink the source file here: {path}",
