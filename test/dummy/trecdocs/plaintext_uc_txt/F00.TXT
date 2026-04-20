@@ -1,0 +1,29 @@
+<DOC>
+<DOCNO>  D100A   </DOCNO>
+<PARENT> Something </PARENT>
+<HT> Some text  </HT>
+
+<HEADLINE>
+<AU>   Header Text </AU>
+Daily Report 
+
+</HEADLINE>
+
+<TEXT>
+Main body text
+on multiple lines
+
+with <F P=102> some markup
+</F> here. Also, some invalid <T> markup &amp;. 
+</TEXT>
+
+</DOC>
+
+<DOC>
+<DOCNO>  101   </DOCNO>
+
+<TEXT>
+More body text
+</TEXT>
+
+</DOC>
