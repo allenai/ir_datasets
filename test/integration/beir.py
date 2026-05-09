@@ -153,6 +153,23 @@ class TestBeir(DatasetIntegrationTest):
             9: BeirCqaDoc('19393', re.compile("^I'm using WP\\-Cufon for font replacements\\. It's adding extra cufon canvas out side of p tags in my pa.{127} it happening\\? How can I solve it\\? I'm having same kind of problem with all\\-in\\-one cufon plugin too\\.$", flags=48), 'WP-Cufon adding extra space in my paragraphs in Firefox and Chrome', ['plugins', 'javascript', 'plugin-all-in-one-cufon']),
             48604: BeirCqaDoc('38344', 'Is there a specific reason why we can find max-width:97.5% instead of 100% in common themes such as Twenty Eleven?', 'Why max-width:97.5% on content images?', ['theme-development', 'css', 'maximized-width']),
         })
+        self._test_docs('beir/bioasq', count=14914603, items={
+            0: BeirTitleDoc(
+                '31784955',
+                'Depressive disorder is one of the most widespread forms of mental disorders which lead to a significant public health concern, such as disability, suicide, and so on. Its etiology remains vague but it is believed that depressive disorder is a multifactorial disease which is induced by the interaction of social, psychological, and biological factors. Thus, there is no clear and definite pathological theory could illustrate its mechanism independently until now, involving genetics, neuroimaging, neuroinflammation, neuroendocrine, and others. Comprehensive assessment to patients with depression is the starting point for a right diagnosis. History-taking of physical condition is as important as psychiatric interview and rational usage of scales would be beneficial for screening. There are many kinds of therapeutic measures for depressive patients nowadays, including general intervention, pharmacotherapy, psychotherapy, and physical therapy. For now, anti-depressants used in clinical practice is almost monoamine-based drugs while much more progress have been made in developing new antidepressant medications, like prototypical N-methyl-D-aspartate (NMDA) receptor antagonists, opioid agonists, gamma-aminobutyric acid (GABAA) receptors, and psychedelics. Once these novel drugs are proved to be practicable, it will create a historical evolution in the field of psychiatry. In addition, we advocate that measurement-based care (MBC) should run through the whole duration of treatment and goals of MBC in every stage are different. As brain projects in many countries are conducting in inspiring ways, we believe that our understanding about depressive disorder, of course, and other neuropsychiatric disorders will be better in the future.',
+                'Introduction.',
+            ),
+            9: BeirTitleDoc(
+                '31777395',
+                'The Australian native marine fish species, silver sweep Scorpis lineolata, is susceptible to the megalocytivirus Infectious spleen and kidney necrosis virus (strain DGIV-10) obtained from a freshwater ornamental fish, dwarf gourami Trichogaster lalius. This was demonstrated by direct inoculation and through cohabitation. Transmission by cohabitation was also demonstrated from inoculated freshwater Murray cod Maccullochella peelii to euryhaline Australian bass Macquaria novemaculeata and to marine silver sweep. The virus was also transmitted from infected marine silver sweep to euryhaline Australian bass and then to freshwater Murray cod. This study is the first to demonstrate the virulence of a megalocytivirus derived from ornamental fish in an Australian marine species and the first to show a feasible pathway for the exchange of megalocytiviruses between freshwater and marine finfish hosts. These results demonstrate that megalocytiviruses from freshwater ornamental fish have the potential to spread to diverse aquatic environments.',
+                'Experimental transmission of infectious spleen and kidney necrosis virus (ISKNV) from freshwater ornamental fish to silver sweep Scorpis lineolata, an Australian marine fish.',
+            ),
+            1049: BeirTitleDoc(
+                '31717065',
+                'Limnephilus minos Malicky 1970 is a micro-endemic caddisfly restricted to the Greek island of Crete. Mesophylax impunctatus aduncus (Nav?s 1923) is known from Turkey and the southern Balkan peninsula; Greek records range from islands close to the mainland and Skiros to the northern mainland, and Attica. This paper describes the previously unknown larvae of both taxa. Information on the morphology of the 5th larval instar of each taxon is given, and the most important diagnostic characters are illustrated. A discriminatory matrix for the Greek limnephilid larvae with multifilament gills is also provided. In the context of existing identification keys, the larva of L. minos belongs to the group of Limnephilini larvae where face setae are lacking on the mid- and/or hind femora; the species keys together with L. auricula Curtis 1834 and can be separated from the latter species by setae present between the primary setae on the distal section of mid- and hind trochanters. In contrast, face setae are present on the mid- and/or hind femora in M. impunctatus aduncus. Its larva can be easily identified by the fact that 3 or more ventral-edge setae are present on the midfemur, by setae present on both sides of the anal slit, and by its grazer-type mandible lacking terminal teeth.',
+                'The larvae of Limnephilus minos Malicky 1970 and Mesophylax impunctatus aduncus (Nav?s 1923) (Trichoptera: Limnephilidae), including a discriminatory matrix for the Greek limnephilid larvae with multifilament gills.',
+            ),
+        })
 
     def test_queries(self):
         self._test_queries('beir/arguana', count=1406, items={
@@ -395,6 +412,21 @@ class TestBeir(DatasetIntegrationTest):
             9: BeirCqaQuery('23263', 'Syntax highlighting for post/page editor', ['theme-development', 'css', 'maximized-width']),
             540: BeirCqaQuery('90939', 'All-in-One Event Calendar: Custom Query - Getting each event Instance', ['theme-development', 'css', 'maximized-width']),
         })
+        self._test_queries('beir/bioasq', count=3743, items={
+            0: GenericQuery('55031181e9bde69634000014', 'Is Hirschsprung disease a mendelian or a multifactorial disorder?'),
+            22: GenericQuery('517395b98ed59a060a00001a', 'Are transcription and splicing connected?'),
+            3742: GenericQuery('5e4163b848dab47f2600000f', 'List 3 human diseases caused by  viruses in the family Paramyxoviridae.'),
+        })
+        self._test_queries('beir/bioasq/test', count=500, items={
+            0: GenericQuery('5e30f638fbd6abf43b000045', 'Does teplizumab hold promise for diabetes prevention?'),
+            1: GenericQuery('5e36dc8cb5b409ea5300000d', 'What is another name for acid sphingomyelinase deficiency (ASMD)?'),
+            499: GenericQuery('5e4163b848dab47f2600000f', 'List 3 human diseases caused by  viruses in the family Paramyxoviridae.'),
+        })
+        self._test_queries('beir/bioasq/train', count=3106, items={
+            0: GenericQuery('55031181e9bde69634000014', 'Is Hirschsprung disease a mendelian or a multifactorial disorder?'),
+            1: GenericQuery('55046d5ff8aee20f27000007', 'List signaling molecules (ligands) that interact with the receptor EGFR?'),
+            3105: GenericQuery('5c9e738decadf2e73f000037', 'Can mitochondria transfer from cell to cell?'),
+        })
 
     def test_qrels(self):
         self._test_qrels('beir/arguana', count=1406, items={
@@ -596,6 +628,16 @@ class TestBeir(DatasetIntegrationTest):
             0: TrecQrel('120122', '21561', 1, '0'),
             9: TrecQrel('114225', '78428', 1, '0'),
             743: TrecQrel('90939', '105803', 1, '0'),
+        })
+        self._test_qrels('beir/bioasq/test', count=2359, items={
+            0: TrecQrel('5e30f638fbd6abf43b000045', '25941654', 1, '0'),
+            9: TrecQrel('5e30f638fbd6abf43b000045', '31533907', 1, '0'),
+            2358: TrecQrel('5e4163b848dab47f2600000f', '25595799', 1, '0'),
+        })
+        self._test_qrels('beir/bioasq/train', count=24736, items={
+            0: TrecQrel('55031181e9bde69634000014', '15829955', 1, '0'),
+            9: TrecQrel('55046d5ff8aee20f27000007', '23821377', 1, '0'),
+            24735: TrecQrel('5c9e738decadf2e73f000037', '29357914', 1, '0'),
         })
 
 

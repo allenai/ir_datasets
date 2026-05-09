@@ -214,6 +214,10 @@
       "size_hint": 2816079,
       "expected_md5": "5f7d1de60b170fc8027bb7898e2efca1",
       "cache_path": "scifact/source.zip"
+    },
+    "bioasq": {
+      "instructions": "BioASQ dataset preprocessed in the BEIR-like style is available here: <https://drive.google.com/drive/folders/1CgDO-KmQQMpGEGeD3R20ZgTTM008xix9>.\n To proceed, symlink the source file here: {path}",
+      "cache_path": "bioasq/source.zip"
     }
   },
   
