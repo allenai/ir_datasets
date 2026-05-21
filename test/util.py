@@ -1,8 +1,63 @@
+import io
+import tarfile
+import tempfile
 import unittest
+from pathlib import Path
 import ir_datasets
 
 
 class TestUtil(unittest.TestCase):
+    def test_tar_extract_all_extracts_valid_members(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir = Path(tmpdir)
+            extract_path = tmpdir / 'extract'
+
+            archive = io.BytesIO()
+            with tarfile.open(fileobj=archive, mode='w') as tarf:
+                payload = b'valid'
+                member = tarfile.TarInfo('data/valid.txt')
+                member.size = len(payload)
+                tarf.addfile(member, io.BytesIO(payload))
+
+            extractor = ir_datasets.util.TarExtractAll(
+                ir_datasets.util.StringFile(archive.getvalue()),
+                extract_path,
+                compression=None,
+            )
+
+            self.assertEqual(extractor.path(), extract_path)
+            self.assertEqual((extract_path / 'data' / 'valid.txt').read_bytes(), b'valid')
+
+    def test_tar_extract_all_rejects_unsafe_members(self):
+        with tempfile.TemporaryDirectory() as tmpdir:
+            tmpdir = Path(tmpdir)
+            extract_path = tmpdir / 'extract'
+            escaped_path = tmpdir / 'escaped.txt'
+
+            archive = io.BytesIO()
+            with tarfile.open(fileobj=archive, mode='w') as tarf:
+                valid_payload = b'valid'
+                valid_member = tarfile.TarInfo('data/valid.txt')
+                valid_member.size = len(valid_payload)
+                tarf.addfile(valid_member, io.BytesIO(valid_payload))
+
+                escaped_payload = b'escaped'
+                escaped_member = tarfile.TarInfo(escaped_path.as_posix())
+                escaped_member.size = len(escaped_payload)
+                tarf.addfile(escaped_member, io.BytesIO(escaped_payload))
+
+            extractor = ir_datasets.util.TarExtractAll(
+                ir_datasets.util.StringFile(archive.getvalue()),
+                extract_path,
+                compression=None,
+            )
+
+            with self.assertRaisesRegex(RuntimeError, 'unsafe archive member'):
+                extractor.path()
+
+            self.assertFalse(escaped_path.exists())
+            self.assertFalse(extract_path.exists())
+
     def test_apply_sub_slice(self):
     	ass = ir_datasets.util.apply_sub_slice
     	self.assertEqual(ass(slice(0, 100), slice(0, 10)), slice(0, 10))

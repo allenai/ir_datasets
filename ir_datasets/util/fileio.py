@@ -1,7 +1,7 @@
 import os
 import contextlib
 import shutil
-from pathlib import Path
+from pathlib import Path, PureWindowsPath
 from fnmatch import fnmatch
 import tarfile
 import gzip
@@ -106,6 +106,40 @@ class TarExtract:
             yield result
 
 
+def _safe_extract_tar_member(tarf, member, extract_path):
+    _validate_tar_member(member, extract_path)
+    try:
+        tarf.extract(member, extract_path, filter='data')
+    except TypeError as exc:
+        if 'filter' not in str(exc):
+            raise
+        tarf.extract(member, extract_path)
+
+
+def _validate_tar_member(member, extract_path):
+    member_path = Path(member.name)
+    windows_path = PureWindowsPath(member.name)
+    if (
+        member_path.is_absolute()
+        or windows_path.is_absolute()
+        or windows_path.drive
+        or '..' in member_path.parts
+        or '..' in windows_path.parts
+        or not _is_relative_to((Path(extract_path) / member.name).resolve(), Path(extract_path).resolve())
+    ):
+        raise RuntimeError(f'unsafe archive member: {member.name}')
+    if not (member.isfile() or member.isdir()):
+        raise RuntimeError(f'unsupported archive member: {member.name}')
+
+
+def _is_relative_to(path, parent):
+    try:
+        path.relative_to(parent)
+    except ValueError:
+        return False
+    return True
+
+
 class TarExtractAll:
     def __init__(self, streamer, extract_path, compression='gz', path_globs=None):
         self._streamer = streamer
@@ -118,13 +152,9 @@ class TarExtractAll:
             try:
                 with self._streamer.stream() as stream, tarfile.open(fileobj=stream, mode=f'r|{self._compression or ""}') as tarf, \
                      _logger.duration('extracting from tar file'):
-                    if self._path_globs is None:
-                        # shortcut to extract everything
-                        tarf.extractall(self._extract_path)
-                    else:
-                        for member in tarf:
-                            if any(fnmatch(member.name, g) for g in self._path_globs):
-                                tarf.extract(member, self._extract_path)
+                    for member in tarf:
+                        if self._path_globs is None or any(fnmatch(member.name, g) for g in self._path_globs):
+                            _safe_extract_tar_member(tarf, member, self._extract_path)
             except:
                 if os.path.exists(self._extract_path):
                     shutil.rmtree(self._extract_path)
