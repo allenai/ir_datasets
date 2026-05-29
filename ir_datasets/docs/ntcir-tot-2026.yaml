@@ -1,0 +1,119 @@
+_:
+  pretty_name: 'NTCIR Tip-of-the-Tongue'
+  desc: '
+<p>
+Tip of the tongue: The phenomenon of failing to retrieve something from memory, combined with partial recall and the feeling that retrieval is imminent. More details <a href="https://ntcir-tot.github.io/guidelines">are available on the official page for the NTCIR Tip-of-the-Tongue (ToT) Track</a>.
+</p>
+'
+
+2026/en:
+  desc: '
+<p>
+The English corpus for the NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ko:
+  desc: '
+<p>
+The Korean corpus for the NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ja:
+  desc: '
+<p>
+The Japanese corpus for the NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/zh:
+  desc: '
+<p>
+The Chinese corpus for the NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/en/train:
+  desc: '
+<p>
+The English Train set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/en/dev:
+  desc: '
+<p>
+The English Development set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/en/test:
+  desc: '
+<p>
+The English Test set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ko/train:
+  desc: '
+<p>
+The Korean Train set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ko/dev:
+  desc: '
+<p>
+The Korean Development set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ko/test:
+  desc: '
+<p>
+The Korean Test set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ja/train:
+  desc: '
+<p>
+The Japanese Train set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ja/dev:
+  desc: '
+<p>
+The Japanese Development set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/ja/test:
+  desc: '
+<p>
+The Japanese Test set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/zh/train:
+  desc: '
+<p>
+The Chinese Train set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/zh/dev:
+  desc: '
+<p>
+The Chinese Development set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'
+
+2026/zh/test:
+  desc: '
+<p>
+The Chinese Test set for NTCIR 2026 tip-of-the-tongue search track.
+</p>
+'

@@ -36,6 +36,7 @@ from . import nano_beir
 from . import neumarco
 from . import nfcorpus
 from . import natural_questions
+from . import ntcir_tot_2026
 from . import nyt
 from . import pmc
 from . import touche_image
