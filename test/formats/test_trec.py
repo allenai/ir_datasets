@@ -1,8 +1,22 @@
 import os
 import shutil
 import unittest
+import contextlib
 from ir_datasets.formats import TrecQrel, TrecQrels, TrecQuery, TrecQueries, TrecDoc, TrecDocs
-from ir_datasets.util import StringFile
+from ir_datasets.util import StringFile, RelativePath
+
+
+class File:
+    def __init__(self, path):
+        self._path = path
+
+    def path(self, force=True):
+        return self._path
+
+    @contextlib.contextmanager
+    def stream(self):
+        yield open(self._path, 'rb')
+
 
 
 class TestTrec(unittest.TestCase):
@@ -126,6 +140,29 @@ More body text
         docs = TrecDocs(mock_file)
         self.assertEqual(docs.docs_path(), 'MOCK')
         self.assertEqual(list(docs.docs_iter()), expected_results)
+
+
+    def test_docs_formats(self):
+        expected_results = [
+            TrecDoc(doc_id='D100A', text='\n\n   Header Text \nDaily Report \n\n\n\nMain body text\non multiple lines\n\nwith  some markup\n here. Also, some invalid  markup &. \n\n', marked_up_doc='<HEADLINE>\n<AU>   Header Text </AU>\nDaily Report \n\n</HEADLINE>\n<TEXT>\nMain body text\non multiple lines\n\nwith <F P=102> some markup\n</F> here. Also, some invalid <T> markup &amp;. \n</TEXT>\n'),
+            TrecDoc(doc_id='101', text='\n\nMore body text\n\n', marked_up_doc='<TEXT>\nMore body text\n</TEXT>\n'),
+            TrecDoc(doc_id='D102', text='\n\nsome very  fun text\n markup &AMP;\n\n\n', marked_up_doc='<TEXT>\nsome very <F P=102> fun text\n<!-- commented out --> markup &AMP;\n\n</TEXT>\n'),
+        ]
+
+        for source in ['plaintext_noext', 'plaintext_txt', 'plaintext_uc_txt', 'gzip_gz', 'gzip_z', 'gzip_uc_gz', 'compress_uc_z', 'compress_uc_0z']:
+            with self.subTest(source):
+                print(source, "no paths")
+                docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}')))
+                self.assertEqual(list(docs.docs_iter()), expected_results)
+
+                print(source, "paths")
+                docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}')), path_globs=['F*'])
+                self.assertEqual(list(docs.docs_iter()), expected_results)
+
+                if source in ['plaintext_noext', 'plaintext_txt', 'plaintext_uc_txt', 'gzip_gz']:
+                    print(source, "tarfile")
+                    docs = TrecDocs(File(os.path.abspath(f'test/dummy/trecdocs/{source}.tar.gz')), path_globs=['*/F*'])
+                    self.assertEqual(list(docs.docs_iter()), expected_results)
 
     def tearDown(self):
         if os.path.exists('MOCK.pklz4'):
