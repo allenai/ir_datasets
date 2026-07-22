@@ -253,6 +253,21 @@ class BeirQrels(BaseQrels):
         return self._qrels_defs
 
 
+class _EvalQuirkNotice:
+    """Emits a one-shot notice via Registry when datasets with known evaluation quirks are loaded."""
+    def __init__(self, dataset_id):
+        self._dataset_id = dataset_id
+
+    def deprecated(self):
+        # Reuses the registry's load-time notice hook (see ir_datasets.util.Registry.__getitem__).
+        return (
+            f'{self._dataset_id}: queries also appear in the corpus. Exclude ranked docs where '
+            f'doc_id == query_id (BEIR ignore_identical_ids=True) or evaluation scores will be '
+            f'inflated. See https://github.com/allenai/ir_datasets/issues/219'
+        )
+
+
+
 def _init():
     base_path = ir_datasets.util.home_path()/NAME
     dlc = ir_datasets.util.DownloadConfig.context(NAME, base_path)
@@ -324,9 +339,14 @@ def _init():
             documentation(f'cqadupstack/{ds}')
         )
 
+    eval_quirk_ids = {'arguana', 'quora', 'quora/dev', 'quora/test'}
     ir_datasets.registry.register(NAME, base)
     for s in sorted(subsets):
-        ir_datasets.registry.register(f'{NAME}/{s}', subsets[s])
+        ds = subsets[s]
+        if s in eval_quirk_ids:
+            ds = Dataset(_EvalQuirkNotice(f'{NAME}/{s}'), ds)
+            subsets[s] = ds
+        ir_datasets.registry.register(f'{NAME}/{s}', ds)
 
     return base, subsets
 
