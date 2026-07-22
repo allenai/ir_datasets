@@ -16,6 +16,14 @@ arguana:
 <p>
 A version of the ArguAna Counterargs dataset, for argument retrieval.
 </p>
+<div class="warn">
+<strong>Evaluation quirk:</strong> ArguAna queries are also present in the corpus
+(each query argument appears as a document). When ranking, exclude results where
+<code>doc_id == query_id</code>; otherwise self-matches inflate metrics. The BEIR
+toolkit does this via <code>ignore_identical_ids=True</code>. See
+<a href="https://github.com/allenai/ir_datasets/issues/219">#219</a> and
+<a href="https://twitter.com/nandan__thakur/status/1603920955679551488">this discussion</a>.
+</div>
 <ul>
 <li><a href="https://www.aclweb.org/anthology/P18-1023.pdf">Dataset paper</a></li>
 <li><a href="http://argumentation.bplaced.net/arguana/data">Dataset website</a></li>
@@ -299,6 +307,13 @@ quora:
 A version of the Quora duplicate question detection dataset (QQP). Includes queries from
 /dev and /test sets.
 </p>
+<div class="warn">
+<strong>Evaluation quirk:</strong> Quora queries also appear in the corpus. When ranking,
+exclude results where <code>doc_id == query_id</code>; otherwise self-matches inflate
+metrics. The BEIR toolkit does this via <code>ignore_identical_ids=True</code>. See
+<a href="https://github.com/allenai/ir_datasets/issues/219">#219</a> and
+<a href="https://twitter.com/nandan__thakur/status/1603920955679551488">this discussion</a>.
+</div>
 <ul>
 <li><a href="https://www.kaggle.com/c/quora-question-pairs">Dataset website</a></li>
 </ul>
@@ -310,6 +325,10 @@ quora/dev:
 <p>
 A 5,000 question subset of the original dataset, without overlaps in the other subsets.
 </p>
+<div class="warn">
+Same evaluation quirk as <a class="ds-ref">beir/quora</a>: filter out hits where
+<code>doc_id == query_id</code> (BEIR <code>ignore_identical_ids=True</code>).
+</div>
 '
   bibtex_ids: ['Thakur2021Beir']
 
@@ -318,6 +337,10 @@ quora/test:
 <p>
 A 10,000 question subset of the original dataset, without overlaps in the other subsets.
 </p>
+<div class="warn">
+Same evaluation quirk as <a class="ds-ref">beir/quora</a>: filter out hits where
+<code>doc_id == query_id</code> (BEIR <code>ignore_identical_ids=True</code>).
+</div>
 '
   bibtex_ids: ['Thakur2021Beir']
 
