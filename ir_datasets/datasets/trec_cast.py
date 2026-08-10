@@ -636,27 +636,26 @@ def _init():
     # marco_duplicates.txt for MS-MARCO
 
     def register_docs(namespace: str, use_docs: bool, *tuples):
-        """Register all documents (sub)collections
+        """Registers documents (sub)collections
 
         Tuples: (name prefix, document ID prefix, raw documents, passage count)
         """
+        
         all_docs_spec = []
         all_passages_spec = []
         passages = []
+
         for dsid, prefix, raw, count in tuples:
             prefixed = PrefixedDocs(None, PrefixedDocsSpec(prefix, raw))
-            subsets[f"{namespace}/{dsid}"] = Dataset(prefixed)
 
             segmented = SegmentedDocs(
                 prefixed,
                 dlc[f"{namespace}/offsets/{dsid}"],
                 f"{NAME}/docs_{namespace}_{dsid}",
             )
-            subsets[f"{namespace}/{dsid}/segmented"] = Dataset(segmented)
 
             passage = CastPassageDocs(segmented, count)
             passages.append(passage)
-            subsets[f"{namespace}/{dsid}/passages"] = Dataset(passage)
 
             # Add this
             all_docs_spec.append(
@@ -670,11 +669,11 @@ def _init():
         all_docs = PrefixedDocs(f"{NAME}/docs_{namespace}", *all_docs_spec)
         subsets[f"{namespace}"] = Dataset(all_docs)
         if use_docs:
-            # Add a passage dataset
+        #     # Add a passage dataset
             subsets[f"{namespace}/passages"] = PrefixedDocs(f"{NAME}/passages_{namespace}", *all_passages_spec)
         return all_docs
 
-    """
+    
     docs_v2 = register_docs(
         "v2",
         True,
@@ -704,20 +703,20 @@ def _init():
         ),
         ("kilt", "KILT_", KiltCastDocs("kilt"), 17_124_025),
     )
-    """
+    
 
-    #subsets["v2/2021"] = Dataset(
-    #    docs_v2,
-    #    CastQueries(dlc["2021/queries"], Cast2021Query),
-    #    TrecQrels(dlc["2021/qrels"], QRELS_DEFS),
-    #)
+    subsets["v2/2021"] = Dataset(
+       docs_v2,
+       CastQueries(dlc["2021/queries"], Cast2021Query),
+       TrecQrels(dlc["2021/qrels"], QRELS_DEFS),
+    )
 
     # --- Version 3 (2022)
     # https://github.com/daltonj/treccastweb#year-4-trec-2022
     # Official documents = processed (split) WAPO 2020, KILT, MS Marco V2
 
     v3_dupes = dlc["v3/dupes"]
-    """
+    
     docs_v3 = register_docs(
         "v3",
         False,
@@ -754,13 +753,13 @@ def _init():
             17_111_488,
         ),
     )
-    """
+    
 
-    #subsets["v3/2022"] = Dataset(
-    #    docs_v3,
-    #    CastQueries(dlc["2022/queries"], Cast2022Query),
-    #    TrecQrels(dlc["2022/qrels"], QRELS_DEFS),
-    #)
+    subsets["v3/2022"] = Dataset(
+       docs_v3,
+       CastQueries(dlc["2022/queries"], Cast2022Query),
+       TrecQrels(dlc["2022/qrels"], QRELS_DEFS),
+    )
 
     # --- Register all datasets
     ir_datasets.registry.register(NAME, base)
