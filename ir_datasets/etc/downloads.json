@@ -6504,5 +6504,13 @@
       "expected_md5": "39a24d38b4d0e352e7818abd09d6815a",
       "cache_path": "qrels.txt"
     }
+  },
+  "sr-qa": {
+    "retrieval": {
+      "url": "https://zenodo.org/records/23432598/files/SR-QA-v2.0.1-retrieval.zip?download=1",
+      "size_hint": 287753965,
+      "expected_md5": "3559f95fa1a2ba07a9f5874db288eb5b",
+      "cache_path": "SR-QA-v2.0.1-retrieval.zip"
+    }
   }
   }
