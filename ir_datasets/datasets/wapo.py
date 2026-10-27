@@ -96,7 +96,7 @@ class WapoDocs(BaseDocs):
                     if content.get('content') is not None:
                         body_paras_html.append(content['content'])
                         if content.get('mime') == 'text/html':
-                            body += BeautifulSoup(content['content'], 'lxml-xml').get_text() + '\n'
+                            body += BeautifulSoup(content['content'], 'html.parser').get_text() + '\n'
                         else:
                             body += content['content'] + '\n'
                 elif content.get('type') in ['image', 'tweet', 'video', 'gallery']:

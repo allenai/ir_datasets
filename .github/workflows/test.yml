@@ -31,13 +31,13 @@ jobs:
       if: matrix.os == 'ubuntu-latest' || matrix.os == 'macOs-latest'
       run: |
         pip install pytest
-        pytest test/util.py test/metadata.py test/integration/dummy.py test/integration/vaswani.py test/formats/ test/test_defaulttext.py
+        pytest test/util.py test/metadata.py test/integration/dummy.py test/integration/vaswani.py test/formats/ test/test_defaulttext.py test/test_wapo.py
 
     - name: Unit Test (Windows)
       if: matrix.os == 'windows-latest'
       shell: cmd
       run: |
         pip install pytest
-        pytest test\util.py test\metadata.py test\integration\dummy.py test\integration\vaswani.py test\formats\ test\test_defaulttext.py
+        pytest test\util.py test\metadata.py test\integration\dummy.py test\integration\vaswani.py test\formats\ test\test_defaulttext.py test\test_wapo.py
       env:
         PATH: 'C:/Program Files/zlib/bin/'
